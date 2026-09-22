@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "source": "problem/F/数据说明.pdf",
+  "source_sha256": "f5c851bbe4b3d8c9079609c37f2c3b0835244067711d6d761c66adeaa8357835",
+  "pdfplumber_version": "0.11.9",
+  "output_sha256": "d032b97551f31b2ca27909ed4a9029fd84841d3cc9d5099980dcb9f107875a1b",
+  "pages": [
+    {
+      "page": 1,
+      "original_chars": 862,
+      "retained_chars": 862,
+      "removed_chars": 0,
+      "removed_rows_top_pt": []
+    },
+    {
+      "page": 2,
+      "original_chars": 1697,
+      "retained_chars": 1027,
+      "removed_chars": 670,
+      "removed_rows_top_pt": [
+        3.7,
+        9.2,
+        14.7,
+        20.2,
+        732.7,
+        738.7,
+        744.7,
+        750.7
+      ]
+    },
+    {
+      "page": 3,
+      "original_chars": 1756,
+      "retained_chars": 1098,
+      "removed_chars": 658,
+      "removed_rows_top_pt": [
+        3.7,
+        9.2,
+        14.7,
+        20.2,
+        732.7,
+        738.7,
+        744.7,
+        750.7
+      ]
+    },
+    {
+      "page": 4,
+      "original_chars": 1715,
+      "retained_chars": 1063,
+      "removed_chars": 652,
+      "removed_rows_top_pt": [
+        3.7,
+        9.2,
+        14.7,
+        20.2,
+        732.7,
+        738.7,
+        744.7,
+        750.7
+      ]
+    },
+    {
+      "page": 5,
+      "original_chars": 1643,
+      "retained_chars": 987,
+      "removed_chars": 656,
+      "removed_rows_top_pt": [
+        3.7,
+        9.2,
+        14.7,
+        20.2,
+        732.7,
+        738.7,
+        744.7,
+        750.7
+      ]
+    },
+    {
+      "page": 6,
+      "original_chars": 1854,
+      "retained_chars": 1184,
+      "removed_chars": 670,
+      "removed_rows_top_pt": [
+        3.7,
+        9.2,
+        14.7,
+        20.2,
+        732.7,
+        738.7,
+        744.7,
+        750.7
+      ]
+    },
+    {
+      "page": 7,
+      "original_chars": 1512,
+      "retained_chars": 854,
+      "removed_chars": 658,
+      "removed_rows_top_pt": [
+        3.7,
+        9.2,
+        14.7,
+        20.2,
+        732.7,
+        738.7,
+        744.7,
+        750.7
+      ]
+    },
+    {
+      "page": 8,
+      "original_chars": 1723,
+      "retained_chars": 1071,
+      "removed_chars": 652,
+      "removed_rows_top_pt": [
+        3.7,
+        9.2,
+        14.7,
+        20.2,
+        732.7,
+        738.7,
+        744.7,
+        750.7
+      ]
+    },
+    {
+      "page": 9,
+      "original_chars": 2347,
+      "retained_chars": 1691,
+      "removed_chars": 656,
+      "removed_rows_top_pt": [
+        3.7,
+        9.2,
+        14.7,
+        20.2,
+        732.7,
+        738.7,
+        744.7,
+        750.7
+      ]
+    },
+    {
+      "page": 10,
+      "original_chars": 1742,
+      "retained_chars": 1072,
+      "removed_chars": 670,
+      "removed_rows_top_pt": [
+        3.7,
+        9.2,
+        14.7,
+        20.2,
+        732.7,
+        738.7,
+        744.7,
+        750.7
+      ]
+    },
+    {
+      "page": 11,
+      "original_chars": 1518,
+      "retained_chars": 860,
+      "removed_chars": 658,
+      "removed_rows_top_pt": [
+        3.7,
+        9.2,
+        14.7,
+        20.2,
+        732.7,
+        738.7,
+        744.7,
+        750.7
+      ]
+    },
+    {
+      "page": 12,
+      "original_chars": 1749,
+      "retained_chars": 1097,
+      "removed_chars": 652,
+      "removed_rows_top_pt": [
+        3.7,
+        9.2,
+        14.7,
+        20.2,
+        732.7,
+        738.7,
+        744.7,
+        750.7
+      ]
+    },
+    {
+      "page": 13,
+      "original_chars": 1724,
+      "retained_chars": 1068,
+      "removed_chars": 656,
+      "removed_rows_top_pt": [
+        3.7,
+        9.2,
+        14.7,
+        20.2,
+        732.7,
+        738.7,
+        744.7,
+        750.7
+      ]
+    }
+  ],
+  "removed_line_occurrences": 96,
+  "unique_hidden_passages": 20,
+  "note": "Only reviewed hidden characters removed; layout still needs visual review."
+}

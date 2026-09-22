@@ -1,0 +1,3 @@
+# 普通 ripgrep 搜索排除受污染原件和隔离证据；Git 仍保留原件。
+/problem/F/数据说明.pdf
+/problem/quarantine/
