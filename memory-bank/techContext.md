@@ -7,6 +7,7 @@
 - 当前分支：main；远端：`https://github.com/chengzhixian/math-modeling-memory-bank-template.git`。
 - 原始资料位置：仓库 `problem/F/`（题面 DOCX、数据说明 PDF）与 `data/raw/real_attachments/`（全部附件）。统一索引为 `memory-bank/DATA_INDEX.md`。
 - Git LFS 已在本机本仓库初始化，四个 .jsonl.xz 由 LFS 管理，其余附件正常 Git 管理；.gitattributes 对原始资料禁用换行转换。
+- 本机沙箱内 LFS 启动器路径不稳定，仓库本地 filter 与新安装的 LFS hooks 已改用 `H:/Git/mingw64/bin/git-lfs.exe` 实体程序；这些仅属于 .git 本机配置，不随克隆分发。其他成员正常安装 Git LFS 即可。
 - 迁移前后逐文件校验通过：2,014 文件、551,761,350 字节；清单 `data/raw/F_MANIFEST.json`，命令 `./scripts/verify_raw_data.ps1`。这只证明内容完整，不代表数据字段或研究结论已验证。
 - 附件存在 A_data_value、B_scaling_laws、C_efficiency_evolution 三类目录及 source_manifest.json；尚未完成编号/字段/记录数审计。
 - Git 推送兼容方式见 `AGENTS.md`；环境凭证、密钥不写入仓库。
