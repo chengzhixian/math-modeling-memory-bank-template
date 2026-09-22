@@ -1,11 +1,11 @@
 # 研究生数学建模协作模板
 
-本仓库用 Markdown 保存团队共享记忆，供不同成员、电脑和 AI 工具接力。当前只有模板，尚未录入具体比赛题目、数据或模型结论。原始设计说明见 [AI_TEAM_COLLABORATION_GUIDE.md](AI_TEAM_COLLABORATION_GUIDE.md)。
+本仓库用 Markdown 保存团队共享记忆，供不同成员、电脑和 AI 工具接力。比赛尚未开始，`memory-bank/` 中的六个文件均为空白；仓库和工具配置不写入记忆银行。原始设计说明见 [AI_TEAM_COLLABORATION_GUIDE.md](AI_TEAM_COLLABORATION_GUIDE.md)。
 
 ## 开始使用
 
-1. 在 `memory-bank/projectbrief.md` 填写比赛、题目、截止时间和交付要求；把官方题面及规则放入 `problem/`，并记录来源。规则以官方发布版本为准。
-2. 在 `memory-bank/techContext.md` 写下实际运行环境、安装命令和复现命令；在 `memory-bank/activeContext.md` 分配第一批任务。
+1. 比赛开始后，在 `memory-bank/projectbrief.md` 填写比赛、题目、截止时间和交付要求；把官方题面及规则放入 `problem/`，并记录来源。规则以官方发布版本为准。
+2. 在 `memory-bank/techContext.md` 写下实际运行环境、安装命令和复现命令；在 `memory-bank/activeContext.md` 分配第一批比赛任务。
 3. 本目录已初始化为本地 Git 仓库（`main` 分支），公共远端为 [chengzhixian/math-modeling-memory-bank-template](https://github.com/chengzhixian/math-modeling-memory-bank-template)。每人在自己的分支工作，开始前拉取最新代码，完成后把代码、实验记录和记忆一起提交。
 4. 在 AI 工具中打开项目根目录，并明确要求它先读 `AGENTS.md`。网页端模型无法直接读取本地文件，需手动上传或粘贴相关文件。
 
