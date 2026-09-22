@@ -4,15 +4,15 @@
 
 ## 开始使用
 
-1. 先读 [三人协作流程](TEAM_WORKFLOW.md) 和 [任务计划](TASK_PLAN.md)，各认领 A/B/C 一个角色。原始题面与数据来源见 `problem/SOURCES.md`，资料共享范围先核验。
-2. 成员在 `memory-bank/members/本人角色.md` 记录当前工作、环境和阻塞；公共记忆由单一集成人维护。个人环境详细说明放 `problem/a|b|c/environment.md`。
+1. 先读 [三人协作流程](TEAM_WORKFLOW.md) 和 [任务计划](TASK_PLAN.md)，按用户指定分别由 chm/cyj/zhh 负责对应工作线。原始题面与数据来源见 `problem/SOURCES.md`，资料共享范围先核验。
+2. 成员在 `memory-bank/members/本人角色.md` 记录当前工作、环境和阻塞；公共记忆由单一集成人维护。个人环境详细说明放 `problem/chm|cyj|zhh/environment.md`。
 3. 本目录已初始化为本地 Git 仓库（`main` 分支），公共远端为 [chengzhixian/math-modeling-memory-bank-template](https://github.com/chengzhixian/math-modeling-memory-bank-template)。每人在自己的分支工作，开始前拉取最新代码，完成后把代码、实验记录和记忆一起提交。
 4. 在 AI 工具中打开项目根目录，并明确要求它先读 `AGENTS.md`。网页端模型无法直接读取本地文件，需手动上传或粘贴相关文件。
 5. 题面和附件统一入口见 [F 题资料索引](memory-bank/DATA_INDEX.md)。安装 Git LFS，拉取最新分支后执行 `git lfs install --local`、`git lfs pull`，再运行 `./scripts/verify_raw_data.ps1`。完整原始资料应为 2,014 文件、551,761,350 字节；普通 LFS 指针不算完整数据。
 
 可复制的开工提示词：
 
-> 我负责角色 A（B/C 请替换）。请先读 AGENTS.md、TEAM_WORKFLOW.md、公共 memory-bank、本人成员记忆与相关 interfaces。核对当前分支和输入版本，只修改本人负责文件，然后处理我的任务。
+> 我负责角色 chm（cyj/zhh 请替换）。请先读 AGENTS.md、TEAM_WORKFLOW.md、公共 memory-bank、本人成员记忆与相关 interfaces。核对当前分支和输入版本，只修改本人负责文件，然后处理我的任务。
 
 可复制的交接提示词：
 

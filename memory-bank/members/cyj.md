@@ -1,8 +1,8 @@
-# 成员 B 当前记忆
+# 成员 cyj 当前记忆
 
 更新时间：2026-09-23。角色任务：Q2 标度律与推导；为 Q3 提供目标函数、约束和验证支持。
-成员称呼：待认领。实际电脑/环境：待填写。
-建议分支：team/b-scaling（尚未创建/认领）。
+成员称呼：cyj（用户已指定）。实际电脑/环境：待填写。
+建议分支：team/cyj-scaling（尚未创建）。
 状态：未开始。当前没有实验结果。
 
 ## 当前任务
@@ -16,11 +16,11 @@
 
 ## 依赖与阻塞
 
-接口见 interfaces/b/CONTRACT.md 和 interfaces/README.md。
+接口见 interfaces/cyj/CONTRACT.md 和 interfaces/README.md。
 官方规则、实际环境及数据编号映射仍待核对。
 
 ## 下一步和交接
 
 记录正在做什么、改哪些文件、需要谁何时交付、哪些结果待重跑。
-工作结束先更新本文件，再新增 memory-bank/handoffs/B/ 中的交接记录。
+工作结束先更新本文件，再新增 memory-bank/handoffs/cyj/ 中的交接记录。
 推送本人分支并核验远端 SHA；主分支合并状态另行记录。

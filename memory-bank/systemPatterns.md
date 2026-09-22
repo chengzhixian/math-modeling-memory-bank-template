@@ -20,7 +20,7 @@
 
 ## 三人写入隔离与记忆汇总
 
-权威流程见 TEAM_WORKFLOW.md。三台电脑各自 clone；个人分支只有本人写入，main 由唯一集成人维护。A/B/C 分别拥有 src、outputs、experiments、problem、interfaces 下对应小写子目录和各自论文章节。修改他人范围前先协调，不依赖 Git 自动阻止。
+权威流程见 TEAM_WORKFLOW.md。三台电脑各自 clone；个人分支只有本人写入，main 由唯一集成人维护。chm/cyj/zhh 分别拥有 src、outputs、experiments、problem、interfaces 下对应小写子目录和各自论文章节。修改他人范围前先协调，不依赖 Git 自动阻止。
 
 普通成员只改 memory-bank/members/本人角色.md，并在 handoffs/本人角色/ 新增不可覆盖的交接。六个公共文件由集成人验收后汇总。个人分支推送后队友 fetch/git show 可读；正式输入默认采用已集成版本，临时输入须记录精确 SHA 与未集成状态。已备份、已验收和已集成是三种不同状态。
 

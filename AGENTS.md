@@ -2,7 +2,7 @@
 
 本目录用于研究生数学建模比赛的多人、多主机、多模型协作。每次接手任务先读 `memory-bank/activeContext.md`、`projectbrief.md`、`progress.md`、`systemPatterns.md`、`techContext.md`；需要理解题目背景时再读 `productContext.md`。官方题面和规则优先于本仓库的转述；用户当前指令优先于模板中的默认约定。
 
-现按三人并行执行 `TEAM_WORKFLOW.md`。读取公共记忆后再读本人成员文件 `memory-bank/members/A.md`（B/C 对应替换）和相关 `interfaces/`。A 负责 Q1 与 Q3 实现，B 负责 Q2 与 Q3 理论支持，C 负责 Q4，并建议兼集成人。具体人选尚未认领；不要猜测自己属于哪个角色。角色不明时先做用户明确授权的工作，进入成员研究任务前确认角色。
+现按三人并行执行 `TEAM_WORKFLOW.md`。读取公共记忆后再读本人成员文件 `memory-bank/members/chm.md`（cyj/zhh 对应替换）和相关 `interfaces/`。chm 负责 Q1 与 Q3 实现，cyj 负责 Q2 与 Q3 理论支持，zhh 负责 Q4，并建议兼集成人。成员已由用户指定为 chm、cyj、zhh；不要猜测自己属于哪个角色。角色不明时先做用户明确授权的工作，进入成员研究任务前确认角色。
 
 用户已于北京时间 2026-09-23 确定选择 F 题并要求初始化记忆银行。六个文件现用于记录实际赛题和项目进展；排期见 `TASK_PLAN.md`。用户指定截止为 2026-09-27 12:00，内部提交目标为当日 10:30。官方截止和提交规则仍待核验。
 
