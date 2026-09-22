@@ -99,7 +99,7 @@ git merge origin/main
 
 ## 不同机器和模型的最小共同约定
 
-原始数据通过团队允许的方式分发，依据来源清单核对文件哈希；git clone 不包含目前保存在仓库外的全量附件。每人用本地环境变量 F_DATA_ROOT 指向 real_attachments，代码不写死盘符；该环境变量是待实现的配置约定，当前还没有分析程序读取它。
+题面和附件已按用户要求迁入仓库，入口为 memory-bank/DATA_INDEX.md。每台机器安装 Git LFS，合并最新 main 后执行 git lfs pull，再运行 scripts/verify_raw_data.ps1，确认全部 2,014 个原始文件校验通过。每人用本地环境变量 F_DATA_ROOT 指向仓库 data/raw/real_attachments，代码不写死盘符；该环境变量是待实现的配置约定，当前还没有分析程序读取它。
 
 各自维护 problem/a|b|c/environment.md，记录实际 Python/库版本、系统、CPU/GPU、复现命令和随机种子。依赖版本先在本人范围提出，由集成人维护公共最小环境；不同机器对浮点结果允许经说明的数值容差，不要求二进制完全相同。能用 CPU 完成的统计任务不强制使用 GPU。
 

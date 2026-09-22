@@ -8,6 +8,7 @@
 2. 成员在 `memory-bank/members/本人角色.md` 记录当前工作、环境和阻塞；公共记忆由单一集成人维护。个人环境详细说明放 `problem/a|b|c/environment.md`。
 3. 本目录已初始化为本地 Git 仓库（`main` 分支），公共远端为 [chengzhixian/math-modeling-memory-bank-template](https://github.com/chengzhixian/math-modeling-memory-bank-template)。每人在自己的分支工作，开始前拉取最新代码，完成后把代码、实验记录和记忆一起提交。
 4. 在 AI 工具中打开项目根目录，并明确要求它先读 `AGENTS.md`。网页端模型无法直接读取本地文件，需手动上传或粘贴相关文件。
+5. 题面和附件统一入口见 [F 题资料索引](memory-bank/DATA_INDEX.md)。安装 Git LFS，拉取最新分支后执行 `git lfs install --local`、`git lfs pull`，再运行 `./scripts/verify_raw_data.ps1`。完整原始资料应为 2,014 文件、551,761,350 字节；普通 LFS 指针不算完整数据。
 
 可复制的开工提示词：
 
@@ -26,7 +27,9 @@
 | `memory-bank/members/`、`handoffs/` | 每人独立维护的当前状态与逐次交接证据 |
 | `interfaces/` | 三条工作线交接的数据和模型约定 |
 | `problem/` | 官方题面、规则和题意拆解；注意比赛资料的使用限制 |
-| `data/raw/` | 允许共享的原始数据，不直接修改 |
+| `problem/F/` | 本次迁入的 F 题题面 DOCX 与数据说明 PDF |
+| `data/raw/real_attachments/` | 本次迁入的全部原始附件，四个压缩数据文件用 Git LFS 保存 |
+| `data/raw/F_MANIFEST.json` | 原始资料逐文件大小与 SHA256；校验脚本见 scripts/verify_raw_data.ps1 |
 | `data/processed/` | 可由代码再生的中间数据，默认不入库 |
 | `src/` | 清洗、建模、验证和绘图代码 |
 | `experiments/` | 参数、运行命令、指标和结论的实验记录 |

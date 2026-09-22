@@ -26,7 +26,7 @@
 ## 已知位置
 
 - Git 项目根目录：`H:\研究生数模\math-modeling-memory-bank-template`。
-- 题面、数据说明和附件：相邻目录 `../F题/`。源文件登记见 `problem/SOURCES.md`。
+- 题面和数据说明：`problem/F/`；原始附件：`data/raw/real_attachments/`。按用户本次明确指令迁入仓库；源文件登记见 `problem/SOURCES.md`，获取与完整性校验见 `memory-bank/DATA_INDEX.md`。
 - 详细计划：`TASK_PLAN.md`；状态总表：`memory-bank/progress.md`。
 
 ## 待确认

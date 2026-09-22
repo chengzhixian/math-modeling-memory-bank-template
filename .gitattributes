@@ -1,2 +1,7 @@
 # 保持跨系统协作时文本文件的换行一致
 * text=auto eol=lf
+
+# 原始资料逐字节保留；四个压缩附件使用 Git LFS
+problem/F/** -text
+data/raw/real_attachments/** -text
+data/raw/real_attachments/**/*.xz filter=lfs diff=lfs merge=lfs -text
