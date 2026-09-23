@@ -1,0 +1,25 @@
+{
+  "seed": 20260923,
+  "ridge_grid": [
+    0.001,
+    0.01,
+    0.1,
+    1.0,
+    10.0,
+    100.0,
+    1000.0
+  ],
+  "training_split": "A4+A5 only",
+  "validation_splits": [
+    "A6+A7",
+    "A8+A9",
+    "A10+A11"
+  ],
+  "extrapolation_only": [
+    "A12+A13",
+    "A14+A15"
+  ],
+  "primary_metric": "Spearman rank correlation",
+  "note": "Domain-wise modeling. Normalize each mixture row to the simplex; do not aggregate raw losses before fitting.",
+  "ridge_grid_source": "RegMix Appendix E: [1e-3,1e-2,1e-1,1e0,1e1,1e2,1e3]"
+}
