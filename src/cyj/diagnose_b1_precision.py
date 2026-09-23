@@ -100,18 +100,18 @@ def main() -> int:
     if fit["provenance"]["source_files"][B1_FILENAME] != source[B1_FILENAME]:
         raise ValueError("baseline fit refers to a different B1 source")
     prepared = read_rows(args.prepared.resolve())
-    if len(prepared) != 1176 or len({row["run_id"] for row in prepared}) != len(prepared):
+    if len(prepared) != 1176 or len({row["source_run_id"] for row in prepared}) != len(prepared):
         raise ValueError("unexpected prepared B1 row count or duplicate run_id")
     if sha256(args.prepared.resolve()) != fit["provenance"]["prepared_b1_sha256"]:
         raise ValueError("prepared B1 differs from baseline fit")
     raw = read_rows(args.data_root.resolve() / B1_FILENAME)
-    if {row["run_id"] for row in raw} != {row["run_id"] for row in prepared}:
+    if {row["run_id"] for row in raw} != {row["source_run_id"] for row in prepared}:
         raise ValueError("raw and prepared B1 row identities differ")
     identity = compute_identity(raw)
     if identity["rows_matching_four_decimal_rounding"] != len(raw):
         raise ValueError("some displayed compute values do not follow four-decimal rounding")
     excluded = {item["run_id"] for item in identity["relative_warning_rows"]}
-    retained = [row for row in prepared if row["run_id"] not in excluded]
+    retained = [row for row in prepared if row["source_run_id"] not in excluded]
     n_value, d_value, loss, groups = arrays(prepared)
     retained_n, retained_d, retained_loss, retained_groups = arrays(retained)
     refit = fit_classic(
