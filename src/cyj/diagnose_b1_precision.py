@@ -26,6 +26,7 @@ from scaling_provenance import verify_code_files, verify_source_files
 DEFAULT_FIT = ROOT / "outputs/cyj/classic/classic_fit.json"
 DEFAULT_PREPARED = ROOT / "outputs/cyj/classic/prepared_b1.csv"
 DEFAULT_OUTPUT = ROOT / "outputs/cyj/diagnostics/b1_precision_sensitivity.json"
+BASELINE_FIT_SHA256 = "9b0e381fbc0ea84bb37d63ccb273733f3a03a0c2a834e8ef52cdb75c45bc6ead"
 
 
 def compute_identity(rows: list[dict[str, str]]) -> dict[str, object]:
@@ -94,6 +95,8 @@ def main() -> int:
     source = verify_source_files(
         args.data_root.resolve(), args.manifest.resolve(), (B1_FILENAME,)
     )
+    if sha256(args.fit.resolve()) != BASELINE_FIT_SHA256:
+        raise ValueError("baseline fit differs from reviewed classic_fit.json")
     fit = json.loads(args.fit.read_text(encoding="utf-8"))
     if fit["input_version"] != "cf297a4ad47e235acf5a9b6e890a5df5e05b07e5":
         raise ValueError("unexpected baseline fit input version")
