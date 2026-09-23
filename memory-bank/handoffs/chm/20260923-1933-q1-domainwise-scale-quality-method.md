@@ -1,4 +1,4 @@
-# chm 交接：Q1 逐域 RegMix、尺度传递与质量方法冻结
+# [HISTORICAL SNAPSHOT — SUPERSEDED NUMBERS]\n\n> 本交接保留当时状态用于审计。当前数值和路径以 `interfaces/chm/CONTRACT.md` 与 `outputs/chm/local_recheck_v1/` 为准，禁止从本文件恢复旧 eta、alpha 或根目录输出路径。\n\n# chm 交接：Q1 逐域 RegMix、尺度传递与质量方法冻结
 
 日期：2026-09-23 19:33（北京时间）
 角色：chm
