@@ -10,10 +10,12 @@ Python 3.12.14，NumPy 2.3.5，pandas 3.0.1，SciPy 1.18.1，scikit-learn 1.9.1�
 ./scripts/verify_raw_data.ps1
 ./.venv/Scripts/python.exe src/chm/q1_quality_analysis.py
 ./.venv/Scripts/python.exe src/chm/q1_quality_delivery.py
+./.venv/Scripts/python.exe src/chm/q1_quality_sensitivity.py
 ./.venv/Scripts/python.exe src/chm/q1_regmix_domainwise.py --output-dir outputs/chm/local_recheck_v1
 ./.venv/Scripts/python.exe src/chm/q1_mixture_interface.py --output-dir outputs/chm/local_recheck_v1
 ./.venv/Scripts/python.exe src/chm/q1_mixture_scale_transfer.py --output-dir outputs/chm/local_recheck_v1
 ./.venv/Scripts/python.exe src/chm/q1_verify_local.py
+./.venv/Scripts/python.exe src/chm/q1_figures.py
 ./.venv/Scripts/python.exe -m unittest discover -s src/chm -p test_q1_quality_analysis.py
 ```
 
