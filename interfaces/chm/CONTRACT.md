@@ -1,170 +1,167 @@
-# chm 交付约定 v1.3
+# chm 交付约定 v1.4
 
-## 2026-09-23 本地交付修订 v1.3（当前有效状态）
+日期：2026-09-23  
+生产者：chm  
+消费者：cyj（Q2/Q3）、zhh（Q4/不确定性）  
+状态：Q1 producer-validated draft；跨成员接口仍需消费者验收后才能标记 joint-validated。
 
-- A1–A3 已全量实跑，outputs/chm/domain_quality.csv 是当前描述性 Q 接口，domain_quality_v0.csv 为详细统计。domain_mapping.csv 保留 A16 的 direct/near_direct/inferred 类型，11 个 inferred 无填值。
-- Q 定义为 A1 拟合的三家族等权 z 分数之域中位数；可为负，不等于 B6 Q_score。进入 Q2 前需另行定义映射；尚不标记为最终 validated 质量真值。
-- 当前配比输入统一从 outputs/chm/local_recheck_v1/ 读取，文件名与上述约定一致。旧结果已移至 outputs/chm/archive/web_v0/，仅供历史对照；四个配比脚本默认指向新版目录。
-- 新版 eta=0.14503317，bootstrap 区间 [0.10686793,0.18669841]，其余数值以新版 CSV/manifest 为准。训练五折固定不打乱；仅 A4/A5 调参。
-- Q 的 sample/extended 存在完整样本包含关系，非重叠复核在 quality_nonoverlap_validation_v0.csv 与 quality_conflict_nonoverlap_v0.csv。条件 bootstrap 不包含权重、方向及映射不确定性。
-- 缺失列表不再经 argmax 伪造为 0；分组均值使用现有非缺失指标。quality_analysis_manifest_v0.json 保存输入哈希和最终 Q 标准化参数。
-- 证据：experiments/chm/20260923-q1-local-quality.md 与 20260923-q1-local-reproduction.md。
+> 历史 v1.2 已移至 `interfaces/chm/archive/CONTRACT_v1.2.md`。该文件仅供审计，禁止作为当前输入。
 
+## 1. 质量 Q 接口
 
-# 历史 v1.2 约定（数值与路径以顶部 v1.3 为准）
+当前文件：
 
-生产者 chm；使用者 cyj（Q2）、chm（Q3）、zhh（论文/不确定性）。
-状态：Q1 配比部分已有 draft_verified_ridge；质量 Q 部分仍因 A1–A3 LFS 正文未在当前网页运行环境解压而待完成。
+- `outputs/chm/domain_quality.csv`：面向下游的 7 域描述性 Q；
+- `outputs/chm/domain_quality_v0.csv`：详细统计；
+- `outputs/chm/domain_mapping.csv`：A16 direct / near_direct / inferred 映射；
+- `outputs/chm/quality_analysis_manifest_v0.json`：输入哈希、随机种子、标准化参数与警告；
+- 后续稳健性输出：`outputs/chm/quality_review_v1/`。
 
-## 1. domain_quality.csv（待生成）
+定义：A1 上对 22 个指标做稳健标准化和方向统一，先在 RPS / DSIR / model 三家族内等权，再三家族等权，得到样本级综合分数并标准化为 `Q_z`。域级主统计量为中位数。
 
-字段至少包含：
-- `quality_domain`
-- `dataset_scope`：sample / arxiv_extended / github_extended / combined
-- `n_rows`
-- `Q`
-- `Q_scale_definition`
-- `uncertainty_low` / `uncertainty_high`
-- `missing_note`
-- `score_version`
+当前 7 域 `Q_z` 中位数：
 
-要求：A1/A2/A3 分开标识；列表型指标先压缩；22 指标方向和变换可追溯；arxiv/github 必须给抽样与扩展集对照。
+| domain | Q_z median |
+|---|---:|
+| book | 2.771089 |
+| arxiv | 2.682585 |
+| commoncrawl | 0.506149 |
+| stackexchange | 0.187411 |
+| c4 | -0.217345 |
+| wikipedia | -0.375921 |
+| github | -0.517070 |
 
-## 2. domain_mapping.csv（待质量 Q 完成后冻结）
+边界：
 
-来源：A16。
-当前已核对 17 个配方域中 3 direct、3 near_direct、11 inferred。
-字段至少包含：
-- `mixture_domain`
-- `quality_domain`
-- `mapping_type`
-- `mapping_weight_or_rule`
-- `mapping_confidence`
-- `note`
+- `Q_z` 可为负，是描述性潜在指数，不等于 B6–B8 `Q_score`；
+- A1 的 arxiv/github 被 A2/A3 包含，独立复核使用非重叠 16,104 / 193,752 条；
+- A16 有 3 direct、3 near_direct、11 inferred；禁止为 11 个 inferred 域伪造精确 Q；
+- Q 定向、权重、Qurater 与 domain-balanced 敏感性由 `src/chm/q1_quality_sensitivity.py` 生成，未实跑前不得声称这些稳健性已通过；
+- Q1→Q2 的可识别性边界见 `interfaces/chm/Q2_BRIDGE.md`。
 
-禁止对 11 个 inferred 域伪造精确质量真值；若只能给区间或情景，应显式保留不确定性。
+## 2. 配比 p→Loss 接口
 
-## 3. mixture_effect_ridge_v0.csv（已生成，draft_verified_ridge）
+**当前唯一有效目录：**
 
-路径：`outputs/chm/mixture_effect_ridge_v0.csv`
+`outputs/chm/local_recheck_v1/`
 
-这是 Q1→Q2 当前可用的配比接口。定义为 13 个目标验证域各自的 17 域配比→Loss Ridge 代理模型，而不是把 13 个原始 Loss 先平均。
+旧网页端结果已原样归档到 `outputs/chm/archive/web_v0/`，只用于差异审计，禁止与新版混用。
 
-预处理：
-1. 对输入 `p` 检查非负；
-2. 将 17 维配比重新归一化为 `p_normalized = p / \sum(p)`；
-3. 预测式为
+核心文件：
+
+- `mixture_effect_ridge_v0.csv`
+- `mixture_effect_ridge_v0_cv.csv`
+- `mixture_effect_ridge_v0_manifest.json`
+- `mixture_reference_v0.csv`
+- `q1_regmix_ridge_domainwise_metrics.csv`
+- `q1_regmix_direct_scale_rank_stability.csv`
+- `q1_regmix_composition_overlap.csv`
+
+对 13 个目标域分别拟合
 
 \[
 \widehat L_k(\mathbf p)
 =
 \beta_{0,k}
 +
-\sum_{j=1}^{17}\beta_{k,j}p_j.
+\sum_{j=1}^{17}\beta_{k,j}p_j,
+\qquad
+\sum_j p_j=1.
 \]
 
-参数采用单纯形上的零和对比表示：
+每行配比先重新归一化到单纯形。系数使用零和对比参数化，因此 `beta` 是相对配比效应，不是独立因果贡献。
+
+训练/验证边界：
+
+- A4+A5：唯一训练和 alpha 选择数据；
+- A6+A7、A8+A9、A10+A11：1M / 60M / 1B held-out 验证；
+- A12–A15：estimated/extrapolated，只作尺度外推压力测试。
+
+Pile-CC 当前 Spearman：
+
+- 1M：0.900735
+- 60M：0.891900
+- 1B：0.887592
+
+13 域中位 Spearman：
+
+- 1M：0.838053
+- 60M：0.838115
+- 1B：0.706685
+
+A12–A15 的 63 个配方全部来自 1M 训练配方，因此只能称为**已见配方上的尺度外推**，不能称新配方泛化。
+
+CV 折分敏感性代码已加入 `q1_regmix_cv_split_sensitivity.csv` 生成逻辑；完整本地重跑前当前主输出仍使用既有确定性五折。
+
+## 3. 配比效应尺度传递
+
+当前文件：
+
+- `outputs/chm/local_recheck_v1/mixture_scale_calibration_v0.csv`
+- `outputs/chm/local_recheck_v1/mixture_scale_transfer_v0_manifest.json`
+
+经验模型：
 
 \[
-\sum_{j=1}^{17}\beta_{k,j}=0.
+\log b_k(N)=c_k-\eta\log(N/10^6)+\varepsilon_{k,N}.
 \]
 
-因此各 `beta` 只能解释为“相对于平均训练域的配比对比效应”，不能写成独立因果效应。
-
-### 字段
-
-- `target`：13 个验证目标域之一；
-- `alpha`：仅用 A4+A5 训练数据 5 折 CV 选择的 Ridge 正则；
-- `cv_rmse`；
-- `intercept`；
-- 17 个训练域零和系数；
-- `test_1m_spearman/pearson`
-- `test_60m_spearman/pearson`
-- `test_1B_spearman/pearson`
-- `est_10B_spearman/pearson`
-- `est_70B_spearman/pearson`
-
-### 数据边界
-
-- 训练：A4+A5；
-- 正式检验：A6+A7、A8+A9、A10+A11；
-- 外推压力测试：A12+A13、A14+A15；
-- A12–A15 的 Loss 属于题面标记的估算/外推数据，不能称为真实大模型观测。
-
-### anchor target 策略
-
-当前**不冻结单一标量配比分数**。原因：EXP-CHM-Q1-001 已验证，先平均 13 个原始 Loss 会显著破坏跨尺度排序信号。
-
-当前推荐给 cyj：
-- 首选检查 `pile_cc` 是否与 Q2 的 Loss 口径可比。其 Ridge 在 1M/60M/1B 的 held-out Spearman 约为 0.902/0.893/0.881，并与公开 RegMix 线性基线近复现；
-- 至少再用 arxiv、pubmed_central 等不同目标域做敏感性；
-- 若 Q2 的 Loss 无法与任何单域合理对应，则保留 13 维 `mixture_effect`，不要擅自压成一个未经验证的平均值。
-
-## 4. mixture_scale_transfer_v0（已生成，draft_post_validation_calibration）
-
-路径：
-- `outputs/chm/mixture_scale_calibration_v0.csv`
-- `outputs/chm/mixture_reference_v0.csv`
-- `outputs/chm/mixture_scale_transfer_v0_manifest.json`
-
-用途：给 Q2/Q3 提供“配比效应随参数规模变化”的经验传递接口，不替代附件 B 的正式标度律。
-
-先定义参考配方 (\mathbf p_{ref}) 为 A4 中所有归一化训练配方的分量均值，并令
+当前公共估计：
 
 \[
-m_k(\mathbf p)=\boldsymbol\beta_k^\top(\mathbf p-\mathbf p_{ref}).
+\widehat\eta=0.14503317,
 \]
 
-该量在参考配方处为 0，因此可作为 Q2 基准 Loss 上的配比修正，避免重复计算截距。
-
-A6–A11 在 EXP-002 中先承担 held-out 排名验证；模型族冻结后，本接口再使用它们拟合后验尺度校准
+现有目标域 bootstrap 95% CI：
 
 \[
-L_k(N,\mathbf p)=a_k(N)+b_k(N)s_k(\mathbf p)+\varepsilon.
+[0.10686793,\;0.18669841].
 \]
 
-13 个目标域在 1M、60M、1B 三尺度的 (b_k) 均为正。目标域固定效应模型
+边界：
 
-\[
-\log b_k(N)=c_k-\eta\log(N/10^6)+\varepsilon
-\]
+- 只有 1M、60M、1B 三个真实尺度；
+- 1M/60M 使用同一组 256 配方，1B 使用另一组 64 配方，因此 eta 可能混入配方支持集变化；
+- 当前已提交代码会额外计算“目标域 + 校准样本”bootstrap，但仍条件于 A4+A5 Ridge；
+- eta 是经验尺度传递修正，不是新的普适 Scaling Law，也不是纯规模因果弹性。
 
-得到公共 (\widehat{\eta}=0.14537)，按目标域整体 bootstrap 的 95% CI 为 [0.10787, 0.18686]；域特异 $\eta_k$ 范围约 [0.04467, 0.30742]。
+## 4. Q1→Q2 联合使用
 
-解释边界：
-- 只有三个真实模型尺度，该指数只是经验传递修正，不得写成普适 Scaling Law；
-- A12–A15 未用于估计 (eta)，仍只作 estimated/extrapolated 压力测试；
-- cyj 应使用“公共 eta 主结果 + 域特异 eta/CI 敏感性”，不能把单值当作无误差常数。
+正式规则见：
 
-## 5. 可复现代码
+- `interfaces/chm/Q2_BRIDGE.md`
+- `interfaces/chm/UNCERTAINTY.md`
 
-- `src/chm/q1_regmix_domainwise.py`：逐域 RegMix/Ridge 近复现与 LightGBM 待跑框架；
-- `src/chm/q1_mixture_interface.py`：归一化单纯形 + 零和 Ridge 接口生成；
-- `src/chm/q1_mixture_scale_transfer.py`：验证后尺度幅度校准、公共 eta 与域 bootstrap；
-- `experiments/chm/20260923-q1-regmix-domainwise.md`：验证与方法决策证据。
+核心禁止项：
 
-## 6. optimization 文件（后续 Q3）
+- 不允许 `Q_z == Q_score`；
+- 不允许 `pile_cc == B1 val_loss`；
+- 不允许将 13 个原始 Loss 简单平均后当作 Q2 Loss；
+- 不允许把跨 Loss 口径桥接系数默认为 1。
 
-字段至少包括：
-- 预算；
-- 上下文情景；
-- N/D/Q/p；
-- 分项成本与总成本；
-- 预测 Loss；
-- 求解状态；
-- 约束残差；
-- 使用的 cyj/zhh 接口版本。
+在 cyj 未验收桥接前，Q3 只能做接口测试/情景分析，不发布正式最优配置。
 
-Q3 只能使用 cyj 已验证的标度律接口与 zhh 已复核的 C7 情景；不得把当前 Q1 配比代理直接当完整广义标度律。
+## 5. Q3 后续接口
 
-## 验收
+Q3 输出至少包含：
 
-- p 各分量非负、归一化后和为 1；
-- 质量聚合和跨域映射假设可追溯；
-- 训练/检验/外推不混用；
-- 配比代理按目标域分别验证；
-- 任何单一 anchor 的选择有 Loss 口径依据并做敏感性；
-- Q3 输出满足单位、边界、预算与约束，并报告未收敛。
+- 算力预算与上下文情景；
+- N / D / Q / p；
+- 分项成本和总成本；
+- cyj predictor 版本、输入单位与有效范围；
+- 使用的 Q1 target / mapping / eta 情景；
+- 预测 Loss 与不确定性；
+- 求解状态和约束残差。
 
-输出由 chm 放入 `outputs/chm/`；接口说明仅 chm 修改。cyj/zhh 的修改建议写各自交接。
+Q3 只能使用 cyj 已 validated 的预测器与 zhh 已验收的 C7 情景。
 
+## 6. 可复现入口
+
+- 质量主分析：`src/chm/q1_quality_analysis.py`
+- 质量稳健性：`src/chm/q1_quality_sensitivity.py`
+- 配比逐域 Ridge：`src/chm/q1_regmix_domainwise.py`
+- 配比接口：`src/chm/q1_mixture_interface.py`
+- 尺度传递：`src/chm/q1_mixture_scale_transfer.py`
+- 图表：`src/chm/q1_figures.py`
+
+消费者必须记录精确 commit SHA、文件 SHA、接口版本和 draft/validated/integrated 状态。
