@@ -26,3 +26,17 @@
 审查同时肯定：A1–A3 已全量读取；A1 的 arxiv/github 样本与扩展集重叠已识别并单独报告非重叠部分；Ridge 的 alpha 只在 A4/A5 内选择，未发现典型的检验集调参泄漏。这些肯定项不替代后续独立复核。
 
 历史污染规则仍以仓库 `AI_READING_RULES.md` 为准。此清单只记录审查提出的问题，不从作废提交恢复任何模型或数据。
+
+
+## 二次复核新增待办（ChatGPT，2026-09-23）
+
+以下问题仅登记，未修改当前数学模型或结论：
+
+| 编号 | 审查意见 | 后续核查或修改 | 负责人 |
+|---|---|---|---|
+| R12 | `Q_z` 的均值/标准差按 A1 全部记录估计，而七域样本量高度不均衡（book 171、arxiv 1419，其余多为约 1 万）；因此 Q 的数值尺度由大样本域主导。域排序不受最终仿射标准化影响，但跨附件映射到 B6 `Q_score` 时可能受影响 | 增加 domain-balanced 标准化或只使用未标准化 `S/Q_raw` 的敏感性，对比跨附件映射参数 | chm / cyj |
+| R13 | A1/A2/A3 重叠判断依赖字符串 `_id` 集合，但代码未把“ID 非空且唯一”作为硬断言；当前 arxiv/github 的 unique ID 数等于行数，暂未发现实际重复 | 在读取后增加空 ID、重复 ID 检查，并把结果写入 manifest | chm |
+| R14 | Ridge 当前固定 `KFold(n_splits=5, shuffle=False)`；公开来源只确认 5-fold CV，未独立确认“不打乱”这一具体折分。此前网页/本地 alpha 已因实现口径不同而变化，说明折分细节会影响选择 | 增加固定 seed 的 shuffled 5-fold 敏感性，比较 alpha、held-out Spearman 与接口系数；不利用 A6–A11 反向选方案 | chm |
+| R15 | 若干活动说明文件仍含 local_recheck_v1 之前的旧数值：`experiments/chm/20260923-q1-regmix-domainwise.md` 的 Pile-CC/总体指标、`experiments/chm/20260923-q1-mixture-scale-transfer.md` 的 eta=0.14537、`problem/chm/q1_anchor_policy.md` 的旧 Pile-CC/eta 与根目录路径；当前论文草稿和 CONTRACT 顶部使用的是新版 | 后续统一从 `outputs/chm/local_recheck_v1/` 自动生成/刷新活动说明；历史 handoff 可保留旧值但须标记历史 | chm |
+| R16 | `qurater` 的 4 个维度当前直接取原始算术平均，现有 argmax 敏感性并不会改变该聚合；公开数据卡将四维分别解释 | 增加“4 维分别标准化后等权聚合/作为四个子指标”的敏感性，检查七域排序 | chm |
+| R17 | `q1_figures.py` 已切换到新版输出，但远程树中尚无 `paper/sections/chm/figures/` 生成图文件 | 正式写作引用图前从 local_recheck_v1 重新生成并核对图表数值，不使用旧本地图缓存 | chm |
