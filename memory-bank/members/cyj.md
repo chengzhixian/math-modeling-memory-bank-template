@@ -6,11 +6,20 @@
 
 Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠排除隐藏文字影响而作废，提交 `58f4f0a` 已明确丢弃其文件内容。不得从 Git 历史恢复、cherry-pick、复用其中的模型、参数、数值、结论或输出。若后续独立论证出同名方法适用，必须依据可见题面、真实数据或独立可核验文献重新建立证据链。
 
-更新时间：2026-09-24 02:20（北京时间）。角色任务：Q2 标度律与推导；为 Q3 提供目标函数、约束和验证支持。
+更新时间：2026-09-24 02:38（北京时间）。角色任务：Q2 标度律与推导；为 Q3 提供目标函数、约束和验证支持。
 成员称呼：cyj（用户已指定）。实际电脑/环境：Windows 10.0.26200；Python 3.12.14（Codex 工作区运行时）；详见 `problem/cyj/environment.md`。
 当前分支：`team/cyj-scaling`；已包含 main `a0932fd92b3a46cef8eb0bf563df1e6abc9396ef`；复核后经典基线代码/输入提交 `cf297a4ad47e235acf5a9b6e890a5df5e05b07e5`。
-状态：进行中。Stage 1 审计已完成；B1 经典 N-D 基线已实现并完成无随机逐行泄漏的验证，但近乎精确重构的来源未查明，接口仍是 draft，`ready_for_Q3=false`。
-远端状态：上一检查点 `260e989e403100a561e478ff51cc80964fafbf86` 已推送并核对远端 SHA；约 02:00 的短暂 GitHub 443 故障已恢复。本次新检查点以实际 Git push 与 `ls-remote` 结果为准。
+状态：进行中。Stage 1 审计、B1 经典 N-D 基线及八行计算量显示精度/剔除敏感性已完成；B1 Loss 近乎精确重构的来源仍未查明，接口仍是 draft，`ready_for_Q3=false`。
+远端状态：本轮起点 `768cc7d9f4ad2f71ad5852b18f469feec211e4af` 已推送并核对远端 SHA；本次新检查点以实际 Git push 与 `ls-remote` 结果为准。
+
+## 本轮 B1 计算量显示精度与敏感性
+
+- 从已推送个人分支 `768cc7d9f4ad2f71ad5852b18f469feec211e4af` 开始，`git fetch origin --prune`、`git pull --ff-only` 后仍在 `team/cyj-scaling`，`origin/main=a0932fd92b3a46cef8eb0bf563df1e6abc9396ef` 为当前 HEAD 祖先；本轮未改公共或其他成员文件。
+- 诊断代码/输入提交 `ff0df0932850020a416e7474164d6f32a105d027`。B1、两份清单、prepared 和原 fit 的身份按提交与 SHA 核对；命令与版本见 `experiments/cyj/20260924-b1-precision-sensitivity.md`。
+- B1 全部 1,176 行显示 C 恰与 `round(0.006ND,4)` 一致；8 个相对偏差 warning 均符合该显示精度，最大绝对差 `4.994688e-05`（`1e21 FLOPs`）。这解释相对 warning，不能确认未舍入 C 的来源。
+- 剔除 8 行后重拟合收敛；其在全部 B1 行上的 RMSE `0.0001466067`（原 `0.0001465764`），最大预测变化 `7.6652e-06`。16 项测试通过；诊断 JSON 两次重跑 SHA 稳定，为 `642a4080598f4258411406260847b7d201b9d52758d7399fd3d32bd5ca643862`。
+- 原 Stage 1 审计 JSON 和 classic_fit 不改写。B1 `val_loss` 行级来源与近乎精确重构机制仍未知，不能将同源敏感性误作独立验证。
+- 本人接口仅升草案 v1.5，新增诊断附件；`ready_for_Q3=false`。正式 Q/p、13 域 Loss anchor、预测区间和 Loss–Benchmark 桥接仍缺；公共记忆由集成人验收后汇总。
 
 ## 当前任务
 
@@ -53,8 +62,8 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 ## 下一步和交接
 
-1. 审计 B1 的 Loss 生成/预处理证据，解释或限定近乎精确重构；不要先把低 RMSE 写成独立泛化结论。
-2. 核查 B1 8 个 C 恒等式离群点并做保留/排除敏感性；补充按规模分组 bootstrap 或等价不确定性。
+1. 审计 B1 的 Loss 生成/预处理证据，解释或限定近乎精确重构；不要先把低 RMSE 写成独立泛化结论。显示 C 的 8 行 warning 已完成舍入解释与剔除敏感性，但未证明未舍入 C 来源。
+2. 补充按规模分组 bootstrap 或等价不确定性；本轮八行敏感性不是预测区间。
 3. 为 B4/B5 补齐 tokenizer、评估语料、Loss 定义和单位证据；证据不足时继续禁止跨来源统一 RMSE。
 4. 在广义模型前与 chm 联合冻结 Q mapping 和 Loss/anchor/p 接法；记录实际消费的 SHA、接口版本和文件哈希。
 5. 本轮复核交接见 `memory-bank/handoffs/cyj/20260924-0220-p20-provenance-review-fixes.md`；最终推送及远端 SHA 以 Git 实际核验为准。

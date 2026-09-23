@@ -1,4 +1,4 @@
-# cyj 交付约定 草案 v1.4
+# cyj 交付约定 草案 v1.5
 
 生产者 cyj；使用者 chm（Q3）、zhh（桥接及论文）。本版为生产者侧草案，尚未取得 chm/zhh 验收，不能标记 validated。
 
@@ -41,3 +41,10 @@
 三种验证均触发 near-exact reconstruction 诊断。该现象可能来自共同的确定性构造或强预处理，不是独立真实泛化证据。B4/B5 的 tokenizer、评估语料、Loss 定义和单位等价性没有本地证据支持，因此 `absolute_loss_comparability=not_established`；`external_predictions_unvalidated.csv` 只供描述性检查，不提供 external RMSE。
 
 本版没有 Q、p、参数/预测区间、Loss–Benchmark 桥接或 Q3 可调用的 validated predictor。chm/zhh 不得把五参数点估计或 B4/B5 原始差值当作全队冻结接口；后续升级需先完成 Loss 来源审计、分组不确定性，并由 chm+cyj 联合冻结 Q mapping 与 Loss/anchor/p 接法。
+
+## B1 显示精度与敏感性补充（诊断，非预测接口）
+
+- 诊断代码/输入提交：`ff0df0932850020a416e7474164d6f32a105d027`；原经典基线仍固定于 `cf297a4ad47e235acf5a9b6e890a5df5e05b07e5`。
+- `outputs/cyj/diagnostics/b1_precision_sensitivity.json`：schema v1，SHA256 `642a4080598f4258411406260847b7d201b9d52758d7399fd3d32bd5ca643862`。输入为同一 B1 CSV、prepared B1 和原 classic_fit；验证文件身份、代码版本、已审基线哈希与 prepared 哈希后生成。
+- 1,176/1,176 行显示 C 与 `round(0.006ND,4)` 一致；8 个相对偏差 warning 均可由四位小数显示精度解释。保留原主拟合，另剔除这 8 行重拟合；全部 B1 行最大预测变化 `7.6652e-06`。
+- 该诊断未确认未舍入 FLOPs 或逐条 `val_loss` 的独立来源，也不提供预测区间、Q/p、Loss anchor 或跨来源可比性。接口状态仍为 draft，`ready_for_Q3=false`；消费者不能将该 JSON 当作 Q3 predictor。

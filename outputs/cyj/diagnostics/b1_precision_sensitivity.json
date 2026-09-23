@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "status": "diagnostic_not_independent_validation",
+  "input_version": "ff0df0932850020a416e7474164d6f32a105d027",
+  "provenance": {
+    "code_files_verified_against_input_commit": true,
+    "source_b1": {
+      "path": "data/raw/real_attachments/B_scaling_laws/pythia_training_log_existing.csv",
+      "bytes": 111459,
+      "sha256": "529a59644b0f57bf3a76037838b614bfedc35e58bb26b93052e34ffc63e454c2"
+    },
+    "prepared_b1_sha256": "2eb418f022c414db13af89d2177b2b90c62d3ad3b29300adf7fb1de570927704",
+    "baseline_fit_sha256": "9b0e381fbc0ea84bb37d63ccb273733f3a03a0c2a834e8ef52cdb75c45bc6ead",
+    "baseline_fit_input_version": "cf297a4ad47e235acf5a9b6e890a5df5e05b07e5",
+    "python_version": "3.12.14",
+    "numpy_version": "2.3.5"
+  },
+  "compute_identity": {
+    "formula": "C_FLOPs_1e21 = 0.006*N_params_B*D_tokens_B",
+    "displayed_decimal_places": 4,
+    "rows": 1176,
+    "rows_matching_four_decimal_rounding": 1176,
+    "max_absolute_error_C_FLOPs_1e21": 4.9946879999984706e-05,
+    "relative_warning_threshold": 0.05,
+    "relative_warning_rows": [
+      {
+        "run_id": "8",
+        "N_params_B": 0.070542,
+        "D_tokens_B": 0.134,
+        "displayed_C_FLOPs_1e21": 0.0001,
+        "formula_C_FLOPs_1e21": 5.6715768e-05,
+        "relative_error_displayed_minus_formula": 0.7631780989018786,
+        "absolute_error_C_FLOPs_1e21": 4.3284232e-05,
+        "matches_four_decimal_rounding": true
+      },
+      {
+        "run_id": "9",
+        "N_params_B": 0.070542,
+        "D_tokens_B": 0.268,
+        "displayed_C_FLOPs_1e21": 0.0001,
+        "formula_C_FLOPs_1e21": 0.000113431536,
+        "relative_error_displayed_minus_formula": -0.11841095054906071,
+        "absolute_error_C_FLOPs_1e21": 1.3431536e-05,
+        "matches_four_decimal_rounding": true
+      },
+      {
+        "run_id": "10",
+        "N_params_B": 0.070542,
+        "D_tokens_B": 0.537,
+        "displayed_C_FLOPs_1e21": 0.0002,
+        "formula_C_FLOPs_1e21": 0.000227286324,
+        "relative_error_displayed_minus_formula": -0.12005264337857824,
+        "absolute_error_C_FLOPs_1e21": 2.728632399999999e-05,
+        "matches_four_decimal_rounding": true
+      },
+      {
+        "run_id": "11",
+        "N_params_B": 0.070542,
+        "D_tokens_B": 1.074,
+        "displayed_C_FLOPs_1e21": 0.0005,
+        "formula_C_FLOPs_1e21": 0.000454572648,
+        "relative_error_displayed_minus_formula": 0.09993419577677717,
+        "absolute_error_C_FLOPs_1e21": 4.5427352000000014e-05,
+        "matches_four_decimal_rounding": true
+      },
+      {
+        "run_id": "162",
+        "N_params_B": 0.162405,
+        "D_tokens_B": 0.134,
+        "displayed_C_FLOPs_1e21": 0.0001,
+        "formula_C_FLOPs_1e21": 0.00013057362,
+        "relative_error_displayed_minus_formula": -0.2341485209646481,
+        "absolute_error_C_FLOPs_1e21": 3.0573619999999996e-05,
+        "matches_four_decimal_rounding": true
+      },
+      {
+        "run_id": "163",
+        "N_params_B": 0.162405,
+        "D_tokens_B": 0.268,
+        "displayed_C_FLOPs_1e21": 0.0003,
+        "formula_C_FLOPs_1e21": 0.00026114724,
+        "relative_error_displayed_minus_formula": 0.14877721855302767,
+        "absolute_error_C_FLOPs_1e21": 3.885275999999997e-05,
+        "matches_four_decimal_rounding": true
+      },
+      {
+        "run_id": "316",
+        "N_params_B": 0.409009,
+        "D_tokens_B": 0.134,
+        "displayed_C_FLOPs_1e21": 0.0003,
+        "formula_C_FLOPs_1e21": 0.00032884323600000003,
+        "relative_error_displayed_minus_formula": -0.08771120352312813,
+        "absolute_error_C_FLOPs_1e21": 2.8843236000000055e-05,
+        "matches_four_decimal_rounding": true
+      },
+      {
+        "run_id": "317",
+        "N_params_B": 0.409009,
+        "D_tokens_B": 0.268,
+        "displayed_C_FLOPs_1e21": 0.0007,
+        "formula_C_FLOPs_1e21": 0.0006576864720000001,
+        "relative_error_displayed_minus_formula": 0.06433692922301727,
+        "absolute_error_C_FLOPs_1e21": 4.2313527999999936e-05,
+        "matches_four_decimal_rounding": true
+      }
+    ],
+    "interpretation": "Four-decimal display explains these relative warnings; underlying unrounded compute provenance is not independently established."
+  },
+  "sensitivity": {
+    "policy": "exclude only eight rows whose displayed C has >5% relative deviation from 0.006*N*D; no rows removed from the baseline artifact",
+    "excluded_run_ids": [
+      "8",
+      "9",
+      "10",
+      "11",
+      "162",
+      "163",
+      "316",
+      "317"
+    ],
+    "retained_rows": 1168,
+    "baseline_parameters": {
+      "E": 1.6898377713152422,
+      "A": 0.3539687193311042,
+      "B": 1.2402746295202214,
+      "alpha": 0.33998542577775076,
+      "beta": 0.2798924656094203
+    },
+    "refit": {
+      "parameters": {
+        "E": 1.68984229155134,
+        "A": 0.3539707573994075,
+        "B": 1.2402678702316716,
+        "alpha": 0.3399834754447069,
+        "beta": 0.27989543013949386
+      },
+      "objective": 1.433128238073156e-09,
+      "iterations": 1235,
+      "converged": true,
+      "starts": 24,
+      "seed": 20260924,
+      "huber_delta": 0.05,
+      "best_start_index": 2,
+      "candidate_objectives": [
+        1.433128238073156e-09,
+        1.4331282380769509e-09,
+        1.4331282380769637e-09,
+        1.433128238079737e-09,
+        1.4331282380814385e-09,
+        1.4331282380820955e-09,
+        1.43312823808844e-09,
+        1.4331282380909857e-09,
+        1.4331282380992713e-09,
+        1.4331282381006335e-09,
+        3.5935503311503515e-08,
+        7.37461856197365e-05,
+        0.000991537678345228,
+        0.001057890440000399,
+        0.0010942754154265899,
+        0.0010958072321984396,
+        0.001959067030804542,
+        0.0026519906864569363,
+        0.002731372697911697,
+        0.002800748825107255,
+        0.00298259668285441,
+        0.0033521907631309145,
+        0.003446425413960571,
+        0.003448084610445705
+      ]
+    },
+    "baseline_metrics_all_rows": {
+      "rmse": 0.00014657641916440922,
+      "mae": 0.00010515475149067427,
+      "mape": 4.089407127758357e-05,
+      "r2": 0.9999998163808995,
+      "log_rmse": 5.3733629664363505e-05
+    },
+    "refit_metrics_all_rows": {
+      "rmse": 0.00014660674807335687,
+      "mae": 0.00010515544924619883,
+      "mape": 4.089393843666114e-05,
+      "r2": 0.9999998163049044,
+      "log_rmse": 5.3734755474004966e-05
+    },
+    "refit_metrics_retained_rows": {
+      "rmse": 0.00014420042906256885,
+      "mae": 0.00010400780040857423,
+      "mape": 4.073290243383574e-05,
+      "r2": 0.9999997831584246,
+      "log_rmse": 5.3475333833726605e-05
+    },
+    "maximum_absolute_prediction_change_all_rows": 7.665195294492833e-06,
+    "interpretation": "This is an in-sample sensitivity check, not an external or Q3 validation."
+  },
+  "unverified": [
+    "row-level original Pythia val_loss evaluation records and preprocessing",
+    "underlying unrounded compute measurements",
+    "Q/p mapping and Q1 domain Loss to B1 val_loss anchor"
+  ]
+}
