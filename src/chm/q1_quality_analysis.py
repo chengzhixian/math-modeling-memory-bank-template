@@ -320,6 +320,27 @@ def missingness_audit(df, scope):
     return pd.DataFrame(rows)
 
 
+def assert_domain_id_integrity(df, label):
+    rows = []
+    for domain, g in df.groupby("_source_domain", dropna=False):
+        ids = g["_id"].fillna("").astype(str).str.strip()
+        blank = int((ids == "").sum())
+        duplicate = int(ids.duplicated().sum())
+        rows.append({
+            "dataset": label,
+            "quality_domain": domain,
+            "n_rows": int(len(g)),
+            "blank_ids": blank,
+            "duplicate_ids": duplicate,
+            "unique_nonblank_ids": int(ids[ids != ""].nunique()),
+        })
+        if blank or duplicate:
+            raise ValueError(
+                f"{label}/{domain}: blank_ids={blank}, duplicate_ids={duplicate}"
+            )
+    return rows
+
+
 def resolve_default_paths():
     root = Path(os.environ.get("F_DATA_ROOT", "data/raw/real_attachments"))
     base = root / "A_data_value"
@@ -352,6 +373,11 @@ def main():
     a2 = read_jsonl_xz(args.a2, source_domain="arxiv", list_mode="expectation")
     a3 = read_jsonl_xz(args.a3, source_domain="github", list_mode="expectation")
     print("Loaded all A1-A3 records", flush=True)
+
+    id_integrity_rows = []
+    id_integrity_rows.extend(assert_domain_id_integrity(a1, "A1"))
+    id_integrity_rows.extend(assert_domain_id_integrity(a2, "A2"))
+    id_integrity_rows.extend(assert_domain_id_integrity(a3, "A3"))
 
     actual = {"A1": len(a1), "A2": len(a2), "A3": len(a3)}
     for key, expected in EXPECTED_ROWS.items():
@@ -438,6 +464,10 @@ def main():
         args.output_dir / "quality_data_audit_v0.csv", index=False
     )
 
+    pd.DataFrame(id_integrity_rows).to_csv(
+        args.output_dir / "quality_id_integrity_v0.csv", index=False
+    )
+
     sample_ext = []
     for d, ext, label in [("arxiv", s2, "arxiv_extended"), ("github", s3, "github_extended")]:
         sample = s1[s1["_source_domain"] == d]["Q_z"].to_numpy(float)
@@ -491,6 +521,7 @@ def main():
         "input_sha256": {key: hashlib.sha256(path.read_bytes()).hexdigest()
                          for key, path in [("A1", args.a1), ("A2", args.a2), ("A3", args.a3)]},
         "inputs": {"A1": str(args.a1), "A2": str(args.a2), "A3": str(args.a3)},
+        "id_integrity": id_integrity_rows,
         "warning": "Descriptive quality index, not causal utility or B6 Q_score. Bootstrap CIs condition on fitted A1 preprocessing and assume iid rows; overlapping sample/extended data are not independent validation.",
     }
     (args.output_dir / "quality_analysis_manifest_v0.json").write_text(
