@@ -123,17 +123,26 @@ def bootstrap_eta(calibration, reps=10000):
 
 
 def bootstrap_eta_calibration_samples(calibration_samples, reps=2000):
-    """Resample target domains and rows within each observed scale.
+    """Resample target domains and shared mixture rows across targets.
 
     This still conditions on the A4+A5 Ridge surrogate and therefore is not a
     full end-to-end uncertainty interval. It expands the old domain-only
-    bootstrap by propagating finite calibration-sample uncertainty.
+    bootstrap by propagating finite calibration-sample uncertainty. The 1M and
+    60M calibration sets contain identical ordered mixtures, so their rows are
+    drawn as pairs. Each draw is shared across the target domains as well.
     """
     rng = np.random.default_rng(SEED + 1)
     vals = []
     n_targets = len(calibration_samples)
+    n_paired = len(calibration_samples[0]["1M"]["y"])
+    n_1b = len(calibration_samples[0]["1B"]["y"])
+    if any(len(item["1M"]["y"]) != n_paired or len(item["60M"]["y"]) != n_paired
+           or len(item["1B"]["y"]) != n_1b for item in calibration_samples):
+        raise ValueError("Calibration sample lengths differ across target domains.")
     for _ in range(reps):
         target_idx = rng.integers(0, n_targets, size=n_targets)
+        paired_idx = rng.integers(0, n_paired, size=n_paired)
+        one_b_idx = rng.integers(0, n_1b, size=n_1b)
         sampled_rows = []
         valid = True
         for j in target_idx:
@@ -142,8 +151,12 @@ def bootstrap_eta_calibration_samples(calibration_samples, reps=2000):
             for label in ["1M", "60M", "1B"]:
                 pred = np.asarray(item[label]["pred"], dtype=float)
                 y = np.asarray(item[label]["y"], dtype=float)
-                idx = rng.integers(0, len(y), size=len(y))
-                _, b, _, _ = ols_calibration(pred[idx], y[idx])
+                idx = one_b_idx if label == "1B" else paired_idx
+                try:
+                    _, b, _, _ = ols_calibration(pred[idx], y[idx])
+                except ValueError:
+                    valid = False
+                    break
                 if not np.isfinite(b) or b <= 0:
                     valid = False
                     break
@@ -175,6 +188,14 @@ def main():
     datasets = {}
     for mf, lf, name in PAIR_FILES:
         datasets[name] = load_pair(args.data_root, mf, lf)
+
+    paired_1m = datasets["test_1m"][0]
+    paired_60m = datasets["test_60m"][0]
+    if not paired_1m["index"].equals(paired_60m["index"]) or not np.array_equal(
+        paired_1m.drop(columns="index").to_numpy(),
+        paired_60m.drop(columns="index").to_numpy(),
+    ):
+        raise ValueError("1M and 60M calibration mixtures are not row-aligned; paired bootstrap is invalid.")
 
     train = datasets["train_1m"]
     mix_cols = train[3]
@@ -256,7 +277,7 @@ def main():
         "calibration_sample_domain_bootstrap_median": float(ci_cal[1]),
         "calibration_sample_domain_bootstrap_requested_reps": args.calibration_bootstrap,
         "calibration_sample_domain_bootstrap_valid_reps": ci_cal_valid,
-        "calibration_bootstrap_scope": "resamples target domains and rows within 1M/60M/1B calibration sets; conditions on the fitted A4+A5 Ridge surrogate",
+        "calibration_bootstrap_scope": "resamples target domains; shared mixture-row indices across targets; paired 1M/60M rows and independent 1B rows; conditions on the fitted A4+A5 Ridge surrogate",
         "seed": SEED,
         "within_domain_log_slope_R2": within_r2,
         "eta_domain_min": float(min(r["eta_domain"] for r in valid)),

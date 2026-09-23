@@ -1,5 +1,7 @@
 # chm 交付约定 v1.4
 
+> 2026-09-24 本机复核：以下“未实跑前”“完整本地重跑前”等句子是 09-23 网页提交时状态。现已完成真实 A1–A3 敏感性、RegMix 折分、eta 配对重抽样与图表复跑；输出与边界见 `problem/chm/20260924_cross_branch_delta_review.md`。Q/p 仍为 producer-validated draft，跨成员尺度与 Loss 桥接未联合冻结。
+
 日期：2026-09-23  
 生产者：chm  
 消费者：cyj（Q2/Q3）、zhh（Q4/不确定性）  

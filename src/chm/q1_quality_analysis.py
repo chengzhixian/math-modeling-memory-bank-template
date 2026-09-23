@@ -520,7 +520,8 @@ def main():
         "versions": {"python": platform.python_version(), "numpy": np.__version__, "pandas": pd.__version__},
         "input_sha256": {key: hashlib.sha256(path.read_bytes()).hexdigest()
                          for key, path in [("A1", args.a1), ("A2", args.a2), ("A3", args.a3)]},
-        "inputs": {"A1": str(args.a1), "A2": str(args.a2), "A3": str(args.a3)},
+        "inputs": {key: "data/raw/real_attachments/" + "/".join(path.parts[path.parts.index("real_attachments") + 1:])
+                   for key, path in [("A1", args.a1), ("A2", args.a2), ("A3", args.a3)]},
         "id_integrity": id_integrity_rows,
         "warning": "Descriptive quality index, not causal utility or B6 Q_score. Bootstrap CIs condition on fitted A1 preprocessing and assume iid rows; overlapping sample/extended data are not independent validation.",
     }

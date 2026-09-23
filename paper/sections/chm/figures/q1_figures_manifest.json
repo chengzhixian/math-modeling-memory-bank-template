@@ -1,0 +1,16 @@
+{
+  "output_root": "outputs\\chm\\local_recheck_v1",
+  "input_sha256": {
+    "outputs\\chm\\local_recheck_v1\\q1_regmix_ridge_domainwise_metrics.csv": "784e8b04caf0d648d24068f3e5c5913d3003cede57b95a545400ef9b4b4aafc2",
+    "outputs\\chm\\local_recheck_v1\\q1_regmix_direct_scale_rank_stability.csv": "12105c7a4691dcc28e5292cce2498dac578d500516648864a78ff78d7c024e41",
+    "outputs\\chm\\local_recheck_v1\\mixture_scale_calibration_v0.csv": "cf01b6bd6f771e64271a26c3eb647977e6c18c8cd17c4dc36c266a22d879d27d",
+    "outputs\\chm\\local_recheck_v1\\mixture_scale_transfer_v0_manifest.json": "2f0412cb1e12d2bfa2d00954361c0cc3a88aafa65158ba36307bcdf0031fb2bd"
+  },
+  "figures": {
+    "paper\\sections\\chm\\figures\\q1_domainwise_spearman_box.png": "2fb238d51875aa3eb1a8ab0beccac79f6d31eaf15580e26e0655ac4d8251ac58",
+    "paper\\sections\\chm\\figures\\q1_domainwise_spearman_lines.png": "545f67dc8ec559972826a007b6f4b822a7352e8ca64199b946ba8d8ff90a67c6",
+    "paper\\sections\\chm\\figures\\q1_direct_rank_stability_1m_60m.png": "0898ac2c9fcf90e1596bbe3fa712c90ef37e7228597882ae32c6a4ea668f69f8",
+    "paper\\sections\\chm\\figures\\q1_mixture_effect_scale_decay.png": "b6a950e14024cfc9d5e338104cdbe1299acd0dec0163e732b92eaab91fd0bce5"
+  },
+  "warning": "Figures are valid only for the recorded local_recheck_v1 input hashes."
+}

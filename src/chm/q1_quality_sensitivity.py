@@ -50,10 +50,13 @@ def score_subset(oriented, included, label):
         "dsir": [c for c in qa.DSIR_FIELDS if c in included],
         "model": [c for c in qa.MODEL_FIELDS if c in included],
     }
-    if any(len(v) == 0 for v in families.values()):
-        raise ValueError(f"{label}: at least one family became empty: {families}")
+    dropped_families = [name for name, cols in families.items() if not cols]
+    if len(dropped_families) == len(families):
+        raise ValueError(f"{label}: no quality metrics survive the filter")
     fam_cols = []
     for fam, cols in families.items():
+        if not cols:
+            continue
         name = f"_{label}_{fam}"
         out[name] = out[cols].mean(axis=1, skipna=True)
         fam_cols.append(name)
@@ -63,7 +66,12 @@ def score_subset(oriented, included, label):
     if not np.isfinite(sd) or sd <= 1e-12:
         sd = 1.0
     out[f"Q_{label}"] = (raw - mu) / sd
-    return out, {"mean": mu, "std": sd, "included_metrics": sorted(included)}
+    return out, {
+        "mean": mu, "std": sd, "included_metrics": sorted(included),
+        "included_families": [name for name, cols in families.items() if cols],
+        "dropped_families": dropped_families,
+        "warning": "Family weights are rebalanced over surviving families; this is a stress test, not the primary Q definition." if dropped_families else "",
+    }
 
 
 def orientation_stability(z, primary_orientation):

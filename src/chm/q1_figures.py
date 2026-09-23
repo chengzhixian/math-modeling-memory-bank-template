@@ -1,6 +1,10 @@
 from pathlib import Path
 import argparse
+import hashlib
+import json
 
+import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -35,7 +39,7 @@ def fig_domainwise_box(df, out):
     vals = [pd.to_numeric(df[c], errors="coerce").dropna().to_numpy() for c, _ in SCALE_ORDER]
     labels = [label for _, label in SCALE_ORDER]
     fig, ax = plt.subplots(figsize=(6.2, 4.3))
-    ax.boxplot(vals, labels=labels, showmeans=True)
+    ax.boxplot(vals, tick_labels=labels, showmeans=True)
     ax.set_xlabel("Model scale")
     ax.set_ylabel("Spearman rank correlation")
     ax.set_title("Cross-scale transfer of data-mixture ranking")

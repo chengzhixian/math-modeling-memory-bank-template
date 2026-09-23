@@ -2,9 +2,27 @@ import unittest
 import numpy as np
 import pandas as pd
 from q1_quality_analysis import compress_list, conflict_pairs, QUALITY_FIELDS, add_quality_scores, assert_domain_id_integrity
+from q1_quality_sensitivity import score_subset
+from q1_mixture_scale_transfer import bootstrap_eta_calibration_samples
 
 
 class QualityRegressionTests(unittest.TestCase):
+    def test_subset_with_empty_family_is_labeled_stress_test(self):
+        from q1_quality_analysis import RPS_FIELDS, DSIR_FIELDS, MODEL_FIELDS
+        included = {RPS_FIELDS[0], MODEL_FIELDS[0]}
+        data = pd.DataFrame({RPS_FIELDS[0]: [0., 1.], MODEL_FIELDS[0]: [0., 1.]})
+        scored, meta = score_subset(data, included, 'two_family')
+        self.assertEqual(meta['dropped_families'], ['dsir'])
+        self.assertTrue(meta['warning'])
+        self.assertTrue(np.isfinite(scored['Q_two_family']).all())
+
+    def test_calibration_bootstrap_rejects_unpaired_rows(self):
+        item = {'target': 'example', '1M': {'y': [1., 2.], 'pred': [1., 2.]},
+                '60M': {'y': [1.], 'pred': [1.]},
+                '1B': {'y': [1., 2.], 'pred': [1., 2.]}}
+        with self.assertRaises(ValueError):
+            bootstrap_eta_calibration_samples([item], reps=1)
+
     def test_missing_logits_never_become_zero_class(self):
         for mode in ['expectation', 'argmax']:
             for value in [[None, None], [0.0, None], [np.inf, 0.0]]:

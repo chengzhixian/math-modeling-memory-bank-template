@@ -15,6 +15,14 @@
   "pooled_eta_bootstrap_median": 0.14469681156059333,
   "bootstrap_unit": "target domain",
   "bootstrap_reps": 10000,
+  "calibration_sample_domain_bootstrap_95": [
+    0.09756179967187481,
+    0.20097672162197266
+  ],
+  "calibration_sample_domain_bootstrap_median": 0.14363312196049455,
+  "calibration_sample_domain_bootstrap_requested_reps": 2000,
+  "calibration_sample_domain_bootstrap_valid_reps": 2000,
+  "calibration_bootstrap_scope": "resamples target domains; shared mixture-row indices across targets; paired 1M/60M rows and independent 1B rows; conditions on the fitted A4+A5 Ridge surrogate",
   "seed": 20260923,
   "within_domain_log_slope_R2": 0.6477163621231024,
   "eta_domain_min": 0.04116096476616058,
@@ -22,5 +30,5 @@
   "reference_composition": "mean normalized A4 training composition",
   "centered_effect": "m_k(p)=beta_k dot (p-p_ref)",
   "extrapolation_policy": "A12-A15 not used to fit eta",
-  "warning": "Only three observed model scales; empirical transfer correction, not a universal scaling law."
+  "warning": "Only three observed model scales; empirical transfer correction, not a universal scaling law. The 1B calibration uses a different mixture support from 1M/60M. Both reported bootstrap intervals still condition on the fitted A4+A5 Ridge surrogate."
 }

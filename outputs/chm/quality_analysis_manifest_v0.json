@@ -26,9 +26,83 @@
     "A3": "7af069c71c6027a10f2013cc14dd9d5d17855c264734f69c955544ff6cff7382"
   },
   "inputs": {
-    "A1": "data\\raw\\real_attachments\\A_data_value\\slimpajama_quality_signal_sample.jsonl.xz",
-    "A2": "data\\raw\\real_attachments\\A_data_value\\slimpajama_quality_extended\\arxiv_part-6777d8857c6e-000486.jsonl.xz",
-    "A3": "data\\raw\\real_attachments\\A_data_value\\slimpajama_quality_extended\\github_part-6777d8857c6e-000275.jsonl.xz"
+    "A1": "data/raw/real_attachments/A_data_value/slimpajama_quality_signal_sample.jsonl.xz",
+    "A2": "data/raw/real_attachments/A_data_value/slimpajama_quality_extended/arxiv_part-6777d8857c6e-000486.jsonl.xz",
+    "A3": "data/raw/real_attachments/A_data_value/slimpajama_quality_extended/github_part-6777d8857c6e-000275.jsonl.xz"
   },
+  "id_integrity": [
+    {
+      "dataset": "A1",
+      "quality_domain": "arxiv",
+      "n_rows": 1419,
+      "blank_ids": 0,
+      "duplicate_ids": 0,
+      "unique_nonblank_ids": 1419
+    },
+    {
+      "dataset": "A1",
+      "quality_domain": "book",
+      "n_rows": 171,
+      "blank_ids": 0,
+      "duplicate_ids": 0,
+      "unique_nonblank_ids": 171
+    },
+    {
+      "dataset": "A1",
+      "quality_domain": "c4",
+      "n_rows": 10000,
+      "blank_ids": 0,
+      "duplicate_ids": 0,
+      "unique_nonblank_ids": 10000
+    },
+    {
+      "dataset": "A1",
+      "quality_domain": "commoncrawl",
+      "n_rows": 9640,
+      "blank_ids": 0,
+      "duplicate_ids": 0,
+      "unique_nonblank_ids": 9640
+    },
+    {
+      "dataset": "A1",
+      "quality_domain": "github",
+      "n_rows": 10000,
+      "blank_ids": 0,
+      "duplicate_ids": 0,
+      "unique_nonblank_ids": 10000
+    },
+    {
+      "dataset": "A1",
+      "quality_domain": "stackexchange",
+      "n_rows": 10000,
+      "blank_ids": 0,
+      "duplicate_ids": 0,
+      "unique_nonblank_ids": 10000
+    },
+    {
+      "dataset": "A1",
+      "quality_domain": "wikipedia",
+      "n_rows": 10000,
+      "blank_ids": 0,
+      "duplicate_ids": 0,
+      "unique_nonblank_ids": 10000
+    },
+    {
+      "dataset": "A2",
+      "quality_domain": "arxiv",
+      "n_rows": 17523,
+      "blank_ids": 0,
+      "duplicate_ids": 0,
+      "unique_nonblank_ids": 17523
+    },
+    {
+      "dataset": "A3",
+      "quality_domain": "github",
+      "n_rows": 203752,
+      "blank_ids": 0,
+      "duplicate_ids": 0,
+      "unique_nonblank_ids": 203752
+    }
+  ],
   "warning": "Descriptive quality index, not causal utility or B6 Q_score. Bootstrap CIs condition on fitted A1 preprocessing and assume iid rows; overlapping sample/extended data are not independent validation."
 }

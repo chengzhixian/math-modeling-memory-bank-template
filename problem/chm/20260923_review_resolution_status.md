@@ -1,5 +1,7 @@
 # chm Q1 审查问题处理状态
 
+> 2026-09-24 本机实跑复核：下文“LFS-RUN-PENDING / RECOMPUTE-PENDING / LOCAL-RUN-PENDING”为网页版提交时的历史状态，现均已执行；结果、局限和新分支增量见 `20260924_cross_branch_delta_review.md`。R05 的严格筛选导致 DSIR 家族空缺，只能作为两家族压力测试；R09 的二层抽样已修正配对索引；R17 图表已生成。跨成员接口 R10/R11 仍待共同验收。
+
 日期：2026-09-23  
 工作分支：`integration/chm-q1-clean-20260923`  
 原则：按“会影响当前结论/下游接口 > 统计稳健性 > 复现与协作”排序处理。
