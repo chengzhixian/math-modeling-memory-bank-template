@@ -10,3 +10,5 @@
 8. 参考文献、附录与代码说明
 
 题目和官方模板确定后调整章节。图表和关键数值应标注对应的实验记录及生成脚本。
+
+2026-09-24 起的整体 LaTeX 协作初稿见 [`latex/main.tex`](latex/main.tex)，文件归属、模板来源和编译说明见 [`latex/README.md`](latex/README.md)。

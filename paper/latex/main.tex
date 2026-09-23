@@ -1,0 +1,32 @@
+% !TEX program = xelatex
+% Integration owner: zhh. Members edit only their own sections/* files.
+% Draft uses withoutpreface because 2026 cover/identity fields need official check.
+\documentclass[bwprint,withoutpreface]{gmcmthesis}
+\hypersetup{hidelinks}
+\usepackage{float}
+\usepackage{siunitx}
+\graphicspath{{figures/}{figures/chm/}}
+\title{算力约束下提升大语言模型能力的资源配置建模}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+\input{sections/zhh/abstract.tex}
+\keywords{数据质量\quad 数据配比\quad 标度律\quad 资源配置\quad 能力预测}
+\end{abstract}
+\maketoc
+\clearpage
+
+\input{sections/zhh/problem_statement.tex}
+\input{sections/zhh/assumptions_symbols.tex}
+\input{sections/chm/q1.tex}
+\input{sections/cyj/q2.tex}
+\section{问题三：给定算力预算的配置优化}
+\input{sections/cyj/q3_theory.tex}
+\input{sections/chm/q3_numerical.tex}
+\input{sections/zhh/q4.tex}
+\input{sections/zhh/discussion.tex}
+
+\bibliographystyle{gmcm}
+\bibliography{references}
+\end{document}
