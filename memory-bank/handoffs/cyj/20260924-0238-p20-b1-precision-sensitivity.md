@@ -1,6 +1,6 @@
 # cyj / P20 B1 显示计算量精度与拟合敏感性交接
 
-状态：已运行、待集成人验收；Q2 未完成，Q3 预测接口仍不可用。当前分支 `team/cyj-scaling`，工作起点/已核远端 SHA `768cc7d9f4ad2f71ad5852b18f469feec211e4af`，已包含 `origin/main=a0932fd92b3a46cef8eb0bf563df1e6abc9396ef`；本轮诊断代码/输入 SHA `ff0df0932850020a416e7474164d6f32a105d027`。本交接所含最终提交及推送 SHA 以 Git 历史和远端核验为准。
+状态：已运行、待集成人验收；Q2 未完成，Q3 预测接口仍不可用。当前分支 `team/cyj-scaling`，工作起点/已核远端 SHA `768cc7d9f4ad2f71ad5852b18f469feec211e4af`，已包含 `origin/main=a0932fd92b3a46cef8eb0bf563df1e6abc9396ef`；本轮诊断代码/输入 SHA `351ea0e0eaeab0226550311d8fcb9a855cebcc2d`。本交接所含最终提交及推送 SHA 以 Git 历史和远端核验为准。
 
 ## 本次变更与范围
 
@@ -20,7 +20,7 @@ git rev-parse origin/main
 $py = 'C:\Users\muyehuangyi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe'
 & $py -m py_compile src/cyj/diagnose_b1_precision.py src/cyj/tests/test_b1_precision.py
 & $py -m unittest discover -s src/cyj/tests -p 'test_*.py' -q
-& $py src/cyj/diagnose_b1_precision.py --input-version ff0df0932850020a416e7474164d6f32a105d027
+& $py src/cyj/diagnose_b1_precision.py --input-version 351ea0e0eaeab0226550311d8fcb9a855cebcc2d
 Get-FileHash outputs/cyj/diagnostics/b1_precision_sensitivity.json -Algorithm SHA256
 ```
 
@@ -30,7 +30,7 @@ Get-FileHash outputs/cyj/diagnostics/b1_precision_sensitivity.json -Algorithm SH
 
 - 16/16 单元测试 PASS，Python 编译 PASS；B1 1,176/1,176 行显示 C 与 `round(0.006*N*D,4)` 相同。8 个相对偏差 >5% 的 run_id：8、9、10、11、162、163、316、317；最大绝对差 `4.994688e-05`，落在四位小数半单位内。
 - 剔除这 8 行重拟合（seed 20260924、24 starts、1600 最大迭代）收敛；原全部样本 RMSE `0.0001465764192`，重拟合在全部行 RMSE `0.0001466067481`，最大绝对预测变化 `7.6651953e-06`。这是同源敏感性，不是独立验证。
-- 机器结果 JSON schema v1，7,210 bytes，SHA256 `642a4080598f4258411406260847b7d201b9d52758d7399fd3d32bd5ca643862`。解释与运行环境见 cyj 实验记录和 `problem/cyj/environment.md`。
+- 机器结果 JSON schema v1，7,010 bytes，SHA256 `c7c8b346e4cdbec6034aead4f959ea7f60aa14b52ad6cd00169ea98033356fd7`，固定 LF 换行。解释与运行环境见 cyj 实验记录和 `problem/cyj/environment.md`。
 
 ## 未验证项、接口变化与下一步
 

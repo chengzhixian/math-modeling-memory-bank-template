@@ -44,7 +44,7 @@
 
 ## B1 显示精度与敏感性补充（诊断，非预测接口）
 
-- 诊断代码/输入提交：`ff0df0932850020a416e7474164d6f32a105d027`；原经典基线仍固定于 `cf297a4ad47e235acf5a9b6e890a5df5e05b07e5`。
-- `outputs/cyj/diagnostics/b1_precision_sensitivity.json`：schema v1，SHA256 `642a4080598f4258411406260847b7d201b9d52758d7399fd3d32bd5ca643862`。输入为同一 B1 CSV、prepared B1 和原 classic_fit；验证文件身份、代码版本、已审基线哈希与 prepared 哈希后生成。
+- 诊断代码/输入提交：`351ea0e0eaeab0226550311d8fcb9a855cebcc2d`；原经典基线仍固定于 `cf297a4ad47e235acf5a9b6e890a5df5e05b07e5`。
+- `outputs/cyj/diagnostics/b1_precision_sensitivity.json`：schema v1，SHA256 `c7c8b346e4cdbec6034aead4f959ea7f60aa14b52ad6cd00169ea98033356fd7`。输入为同一 B1 CSV、prepared B1 和原 classic_fit；验证文件身份、代码版本、已审基线哈希与 prepared 哈希后生成。
 - 1,176/1,176 行显示 C 与 `round(0.006ND,4)` 一致；8 个相对偏差 warning 均可由四位小数显示精度解释。保留原主拟合，另剔除这 8 行重拟合；全部 B1 行最大预测变化 `7.6652e-06`。
 - 该诊断未确认未舍入 FLOPs 或逐条 `val_loss` 的独立来源，也不提供预测区间、Q/p、Loss anchor 或跨来源可比性。接口状态仍为 draft，`ready_for_Q3=false`；消费者不能将该 JSON 当作 Q3 predictor。

@@ -15,9 +15,9 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 ## 本轮 B1 计算量显示精度与敏感性
 
 - 从已推送个人分支 `768cc7d9f4ad2f71ad5852b18f469feec211e4af` 开始，`git fetch origin --prune`、`git pull --ff-only` 后仍在 `team/cyj-scaling`，`origin/main=a0932fd92b3a46cef8eb0bf563df1e6abc9396ef` 为当前 HEAD 祖先；本轮未改公共或其他成员文件。
-- 诊断代码/输入提交 `ff0df0932850020a416e7474164d6f32a105d027`。B1、两份清单、prepared 和原 fit 的身份按提交与 SHA 核对；命令与版本见 `experiments/cyj/20260924-b1-precision-sensitivity.md`。
+- 诊断代码/输入提交 `351ea0e0eaeab0226550311d8fcb9a855cebcc2d`。B1、两份清单、prepared 和原 fit 的身份按提交与 SHA 核对；命令与版本见 `experiments/cyj/20260924-b1-precision-sensitivity.md`。
 - B1 全部 1,176 行显示 C 恰与 `round(0.006ND,4)` 一致；8 个相对偏差 warning 均符合该显示精度，最大绝对差 `4.994688e-05`（`1e21 FLOPs`）。这解释相对 warning，不能确认未舍入 C 的来源。
-- 剔除 8 行后重拟合收敛；其在全部 B1 行上的 RMSE `0.0001466067`（原 `0.0001465764`），最大预测变化 `7.6652e-06`。16 项测试通过；诊断 JSON 两次重跑 SHA 稳定，为 `642a4080598f4258411406260847b7d201b9d52758d7399fd3d32bd5ca643862`。
+- 剔除 8 行后重拟合收敛；其在全部 B1 行上的 RMSE `0.0001466067`（原 `0.0001465764`），最大预测变化 `7.6652e-06`。16 项测试通过；诊断 JSON 两次重跑 SHA 稳定，为 `c7c8b346e4cdbec6034aead4f959ea7f60aa14b52ad6cd00169ea98033356fd7`。
 - 原 Stage 1 审计 JSON 和 classic_fit 不改写。B1 `val_loss` 行级来源与近乎精确重构机制仍未知，不能将同源敏感性误作独立验证。
 - 本人接口仅升草案 v1.5，新增诊断附件；`ready_for_Q3=false`。正式 Q/p、13 域 Loss anchor、预测区间和 Loss–Benchmark 桥接仍缺；公共记忆由集成人验收后汇总。
 
