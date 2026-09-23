@@ -71,4 +71,4 @@ Q1 质量全量初版已运行，网页端 LFS 阻塞解除。Q1 配比已本地
 
 - 用户指定优先解决受污染祖先不能直接并入 main，以及配比旧结果与新版目录混用。审查其他数学、代码问题逐项登记于 problem/chm/20260923_web_review_open_issues.md，暂不修改模型。
 - 三个配比生成脚本与 q1_figures.py 默认输入/输出均改为 outputs/chm/local_recheck_v1/；旧根目录配比表原样归档至 outputs/chm/archive/web_v0/。q1_verify_local.py 已同步新归档路径，默认命令复跑通过。
-- clean integration 分支须从最新 origin/main 单独创建，只导入 chm 归属文件快照；不得将本分支直接 merge 进 main。该分支尚待建立与远端核验，成功后以交接追加实证。
+- clean integration 已建立并远端核验：`integration/chm-q1-clean-20260923`，首个干净提交 `c57ec6916a03dce53734a1c5254f3f53d4f7b9f2`，唯一父提交为当前 main `a0932fd92b...`；相对 main ahead 1 / behind 0，69 个变更文件全部属于 chm 归属范围。后续集成人应从该 clean integration 分支验收，禁止直接 merge `team/chm-data`。
