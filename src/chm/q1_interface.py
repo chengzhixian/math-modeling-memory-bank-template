@@ -89,7 +89,8 @@ class Q1Interface:
         row = self.quality_rows[domain]
         return {"domain": domain, "Q_z_median": float(row["Q"]),
                 "conditional_95": [float(row["uncertainty_low"]), float(row["uncertainty_high"])],
-                "n_rows": int(row["n_rows"]), "coordinate": "A_native_Q_z"}
+                "n_rows": int(row["n_rows"]), "coordinate": "A_native_Q_z",
+                "B_Q_score_mapping": "unidentified", "direct_B_predictor_input_allowed": False}
 
     def mapped_quality(self, mixture_domain):
         """Return observed/proxy A-side Q; inferred domains remain null."""
@@ -126,9 +127,10 @@ class Q1Interface:
         return {"target": target, "delta_target_loss": delta_1m * factor,
                 "n_params": n_params, "eta": eta, "scale_factor": factor,
                 "scale_status": "observed_model_scale" if n_params in (1e6, 60e6, 1e9) else "extrapolated_model_scale",
+                "evidence_status": "A4_A5_fitted_1M_effect" if n_params == 1e6 else "conditional_eta_scale_scenario",
                 "mixture_support_status": "not_checked",
                 "loss_coordinate": "A_target_cross_entropy_delta",
-                "bridge_to_B1_val_loss": "unidentified"}
+                "bridge_to_B1_val_loss": "unidentified", "direct_B1_addition_allowed": False}
 
 
 def main():

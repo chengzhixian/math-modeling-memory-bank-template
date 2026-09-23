@@ -69,6 +69,8 @@ Q1 质量全量初版已运行，网页端 LFS 阻塞解除。Q1 配比已本地
 
 ## 2026-09-23 网页审查工程修复与待办
 
+> 2026-09-24 官方字段再审：`Q_z` 是 A1–A3 22 信号的 chm 派生量，B6–B8 `Q_score` 是赛题文件自带字段但三文件均为半合成。B 侧建模应优先用原生 `Q_score`，A 分数仅供域描述/排序，不直接进入 B 预测器；A16 仅 6/17 域 direct/near_direct，不能补全 17 维 Q。接口已增机器可读禁止直接对接标志；证据和限制见 `interfaces/chm/OFFICIAL_DATA_REVIEW.md`。
+
 > 2026-09-24 用户确定接口归属：chm 负责定义并发布 A 侧 Q/p，cyj 直接消费；cyj 负责 B 侧 Loss/标度律/Q3 理论，chm 直接消费。chm 已准备 `chm.q1.v1`（`interfaces/chm/CONTRACT.md`、`USAGE.md`、`q1_interface_v1.json`、`src/chm/q1_interface.py`），以及交给 cyj 的 `CYJ_REQUIRED_INTERFACE.md`。验收和剩余限制见 `memory-bank/handoffs/chm/20260924-q1-producer-interface-v1.md`。跨附件未识别映射不因职责划分而自动成立。
 
 > 2026-09-24 消融/收敛：`src/chm/q1_ablation.py` 已复算 3 家族去一与配比输入去除；结果见 `experiments/chm/20260924-q1-ablation-and-cleanup.md`、`outputs/chm/ablation_v1/`。RPS 去除引起 4/7 域排序变化；无配比模型在 1M/60M 各 13/13 域较差，1B 完整模型仅 4/13 域 RMSE 改善。已删除旧网页输出副本和被替代的过程脚本；保留 Git `44e8db4` 审计快照。主 Q/p 定义不变，跨成员桥接待办不变。
