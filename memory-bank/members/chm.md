@@ -64,6 +64,8 @@ Q1 质量全量初版已运行，网页端 LFS 阻塞解除。Q1 配比已本地
 
 开始任何跨成员工作前重新读取 `TEAM_COLLABORATION_DEPENDENCIES.md` 和 `interfaces/README.md`。
 
+> 2026-09-24 图文与范文复盘：第一问初稿已嵌入 5 张自有数据图，并新增非重叠扩展集的冲突实例表；新图由 `src/chm/q1_paper_figures.py` 生成。依往届公开作品的论证与排版方式复盘 P0/P1 建模不足，记录在 `problem/chm/20260924_q1_paper_comparison_and_improvements.md`。全队参考入口在 `main` 的 `references/award_papers/README.md`，已核验国一索引与未核验奖项的 2023 版式样本分列。
+
 > 2026-09-24 第一问初稿就绪：复核 A1–A15 质量、配比、敏感性和消融证据，修正论文草稿中过期的“待复跑”状态及未独立证实的公开基线数值对照；加入 1B 绝对 Loss 消融限制和双层 bootstrap 区间。结论与待办见 `problem/chm/20260924_q1_readiness_review.md`，可供集成人整合的初稿见 `paper/sections/chm/q1_draft.md`。Q1 的描述性结论已可写，Q/Loss 跨附件数值桥接仍待 cyj 接口与证据。
 
 
