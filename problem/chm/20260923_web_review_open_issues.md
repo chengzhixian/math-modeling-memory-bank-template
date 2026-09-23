@@ -4,7 +4,7 @@
 
 ## 已处理的工程问题
 
-1. **Git 历史**：`team/chm-data` 祖先可达已作废的 `6086964` 等提交，不能直接合并到 `main`。本轮另从干净 `origin/main` 建立 `integration/chm-q1-clean-20260923`，只导入 chm 归属路径的最终文件快照；独立检查其祖先与文件范围。集成人仍须验收后决定是否进入 `main`，不得从旧 chm 分支做普通 merge。
+1. **Git 历史**：`team/chm-data` 祖先可达已作废的 `6086964` 等提交，不能直接合并到 `main`。已从干净 `origin/main` 建立 `integration/chm-q1-clean-20260923`，首个干净提交为 `c57ec6916a03dce53734a1c5254f3f53d4f7b9f2`，唯一父提交是当前 main `a0932fd92b...`。远端比较为 ahead 1 / behind 0，69 个变更文件全部位于 chm 归属范围，且文件树与 `team/chm-data@c6aca3bdbe` 最终树一致。集成人仍须验收后决定是否进入 `main`，不得从旧 chm 分支做普通 merge。
 2. **配比输出双版本**：三个配比生成脚本与绘图脚本默认使用 `outputs/chm/local_recheck_v1/`；旧根目录配比输出移到 `outputs/chm/archive/web_v0/`。重新运行默认命令并核对根目录没有混入旧版配比文件。
 
 ## 尚待处理，当前不改模型、代码或结论
