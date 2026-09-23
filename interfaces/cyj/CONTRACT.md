@@ -1,16 +1,17 @@
-# cyj 交付约定 草案 v1.1
+# cyj 交付约定 草案 v1.2
 
 生产者 cyj；使用者 chm（Q3）、zhh（桥接及论文）。本版为生产者侧草案，尚未取得 chm/zhh 验收，不能标记 validated。
 
 ## 已有审计交付
 
-- `outputs/cyj/b_data_audit.json`，schema_version=1，状态为 audit-only。
-- 输入版本：`e85956fe7cd3ce7e6a6c8b930ae444b1ee93184d`。
+- `outputs/cyj/b_data_audit.json`，schema_version=2，状态为 audit-only。
+- 输入/代码版本：`6880af29f2a1fc089e5fc601d0df873c0be042a3`。
+- 输出 SHA256：`120b97a4089c3272fd121a8d7ae4867d0c65754d4953a4ec74723d67c2b7bed7`，138,365 bytes，LF 换行。
 - 生成命令：`python src/cyj/audit_b_scaling_laws.py --input-version <SHA>`；实际 Python 路径和版本见 `problem/cyj/environment.md`。
-- 输出字段：逐文件 path/bytes/SHA256/rows/columns/header/missing/duplicate/numeric summary/source metadata，以及 check_id/status/evidence/note。
+- 输出字段：逐文件 path/bytes/SHA256/rows/columns/header/missing/duplicate/row-width/numeric/positivity/source metadata，以及 check_id/status/evidence/note；provenance 记录 commit、脚本/清单 SHA、Python 版本和生成时间。
 - 该文件不包含拟合参数或预测，不得作为 Q3 的预测接口。
 
-数据使用边界：B1 为主拟合候选；B2/B3、B4/B5 分别保留作验证；B6–B8 保持半合成标记；B9/B10 只用于外推讨论并先处理非正 D、缺失 FLOPs 与键换行。完整限制见 `problem/cyj/b_data_audit.md`。
+数据使用边界：B1 为主拟合候选并按模型规模/轨迹分组；B2 只作半合成稳健性；B3 只作插值轨迹形状检查；B4/B5 经 Loss 可比性核对后作外部验证候选；B6–B8 保持半合成标记且 B8 extrapolated 不进入拟合；B9 为大模型元数据，B10 只作附件估计一致性参考而非 ground truth。完整限制见 `problem/cyj/b_data_audit.md`。
 
 ## 计划中的模型交付
 
