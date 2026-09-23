@@ -41,6 +41,7 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 | `experiments/` | 参数、运行命令、指标和结论的实验记录 |
 | `outputs/` | 需要交付或供论文引用的图表、结果 |
 | `paper/` | 论文草稿、图表说明与最终稿 |
+| [`references/award_papers/`](references/award_papers/README.md) | 已核验的往届国一作品索引、近年优秀论文版式样本与阅读笔记 |
 
 目录里的 `.gitkeep` 仅用于保留空目录。请按实际题目增删代码和文件；不要把没有运行过的结果写进记忆或论文。
 
