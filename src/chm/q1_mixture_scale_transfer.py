@@ -122,6 +122,44 @@ def bootstrap_eta(calibration, reps=10000):
     return np.quantile(vals, [0.025, 0.5, 0.975])
 
 
+def bootstrap_eta_calibration_samples(calibration_samples, reps=2000):
+    """Resample target domains and rows within each observed scale.
+
+    This still conditions on the A4+A5 Ridge surrogate and therefore is not a
+    full end-to-end uncertainty interval. It expands the old domain-only
+    bootstrap by propagating finite calibration-sample uncertainty.
+    """
+    rng = np.random.default_rng(SEED + 1)
+    vals = []
+    n_targets = len(calibration_samples)
+    for _ in range(reps):
+        target_idx = rng.integers(0, n_targets, size=n_targets)
+        sampled_rows = []
+        valid = True
+        for j in target_idx:
+            item = calibration_samples[j]
+            row = {"target": item["target"]}
+            for label in ["1M", "60M", "1B"]:
+                pred = np.asarray(item[label]["pred"], dtype=float)
+                y = np.asarray(item[label]["y"], dtype=float)
+                idx = rng.integers(0, len(y), size=len(y))
+                _, b, _, _ = ols_calibration(pred[idx], y[idx])
+                if not np.isfinite(b) or b <= 0:
+                    valid = False
+                    break
+                row[f"b_{label}"] = b
+            if not valid:
+                break
+            sampled_rows.append(row)
+        if valid:
+            vals.append(pooled_fixed_effect_eta(sampled_rows)[0])
+    if len(vals) < max(100, reps // 2):
+        raise RuntimeError(
+            f"Too few valid calibration bootstraps: {len(vals)} / {reps}"
+        )
+    return np.quantile(np.asarray(vals), [0.025, 0.5, 0.975]), len(vals)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -131,6 +169,7 @@ def main():
     )
     parser.add_argument("--output-dir", type=Path, default=Path("outputs/chm/local_recheck_v1"))
     parser.add_argument("--bootstrap", type=int, default=10000)
+    parser.add_argument("--calibration-bootstrap", type=int, default=2000)
     args = parser.parse_args()
 
     datasets = {}
@@ -144,6 +183,7 @@ def main():
     p_ref = x_train.mean(axis=0)
 
     calibration = []
+    calibration_samples = []
     for loss_col in loss_cols:
         y_train = train[2][loss_col].to_numpy(float)
         alpha, cv_rmse = select_alpha(x_train, y_train)
@@ -155,6 +195,7 @@ def main():
             "cv_rmse": cv_rmse,
         }
         slopes = []
+        sample_record = {"target": target_name(loss_col)}
         for dataset_name, n_params in OBSERVED_SCALES.items():
             item = datasets[dataset_name]
             x = normalize_mix(item[0], mix_cols)
@@ -167,6 +208,10 @@ def main():
             row[f"pearson_{label}"] = r
             row[f"rmse_{label}"] = rmse
             slopes.append(b)
+            sample_record[label] = {
+                "pred": s.copy(),
+                "y": y.copy(),
+            }
 
         if any(b <= 0 for b in slopes):
             row["eta_domain"] = np.nan
@@ -176,6 +221,7 @@ def main():
                 slopes,
             )
         calibration.append(row)
+        calibration_samples.append(sample_record)
 
     valid = [r for r in calibration if np.isfinite(r["eta_domain"])]
     if len(valid) != len(calibration):
@@ -183,6 +229,9 @@ def main():
 
     pooled_eta, within_r2 = pooled_fixed_effect_eta(valid)
     ci = bootstrap_eta(valid, reps=args.bootstrap)
+    ci_cal, ci_cal_valid = bootstrap_eta_calibration_samples(
+        calibration_samples, reps=args.calibration_bootstrap
+    )
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     pd.DataFrame(calibration).to_csv(
@@ -203,6 +252,11 @@ def main():
         "pooled_eta_bootstrap_median": float(ci[1]),
         "bootstrap_unit": "target domain",
         "bootstrap_reps": args.bootstrap,
+        "calibration_sample_domain_bootstrap_95": [float(ci_cal[0]), float(ci_cal[2])],
+        "calibration_sample_domain_bootstrap_median": float(ci_cal[1]),
+        "calibration_sample_domain_bootstrap_requested_reps": args.calibration_bootstrap,
+        "calibration_sample_domain_bootstrap_valid_reps": ci_cal_valid,
+        "calibration_bootstrap_scope": "resamples target domains and rows within 1M/60M/1B calibration sets; conditions on the fitted A4+A5 Ridge surrogate",
         "seed": SEED,
         "within_domain_log_slope_R2": within_r2,
         "eta_domain_min": float(min(r["eta_domain"] for r in valid)),
@@ -210,7 +264,7 @@ def main():
         "reference_composition": "mean normalized A4 training composition",
         "centered_effect": "m_k(p)=beta_k dot (p-p_ref)",
         "extrapolation_policy": "A12-A15 not used to fit eta",
-        "warning": "Only three observed model scales; empirical transfer correction, not a universal scaling law.",
+        "warning": "Only three observed model scales; empirical transfer correction, not a universal scaling law. The 1B calibration uses a different mixture support from 1M/60M. Both reported bootstrap intervals still condition on the fitted A4+A5 Ridge surrogate.",
     }
     (args.output_dir / "mixture_scale_transfer_v0_manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8"
