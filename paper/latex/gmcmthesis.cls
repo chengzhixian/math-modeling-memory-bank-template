@@ -285,10 +285,13 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
     \setCJKsansfont[AutoFakeBold=2.15]{SimHei}
     \setCJKfamilyfont{zhsong}[AutoFakeBold=2.15]{SimSun}
     \setCJKfamilyfont{zhhei}[AutoFakeBold=2.15]{SimHei}
-    \ifx\lishu\undefined%
-      \setCJKfamilyfont{zhli}{LiSu}
-      \newcommand*\lishu{\CJKfamily{zhli}} %% Do this if it is undefined
-    \fi
+    \providecommand*\lishu{}%
+    \IfFontExistsTF{LiSu}{%
+      \setCJKfamilyfont{zhli}{LiSu}%
+      \renewcommand*\lishu{\CJKfamily{zhli}}%
+    }{%
+      \renewcommand*\lishu{\kaishu}% Use KaiTi only if LiSu is absent.
+    }%
   \else
     \ifmcm@fandol
       % \setCJKfamilyfont{zhli}{LiSu} % 需要隶书字体 最好更换其他相似字体
