@@ -1,0 +1,22 @@
+% Owner: zhh. Integrate assumptions from three members only after review.
+\section{模型假设、数据与符号}
+当前已核实的基础约定是：训练配比满足 $p_j\geq0$ 且 $\sum_{j=1}^{17}p_j=1$；附件 A 的 10B、70B Loss 属于估计/外推值；跨附件 Loss 和质量坐标需单独检验可比性。
+
+\begin{table}[htbp]
+\centering
+\caption{本文核心符号（待各负责人补齐单位和有效范围）}
+\begin{tabular}{lll}
+\toprule
+符号 & 含义 & 当前状态 \\
+\midrule
+$N$ & 模型参数规模 & B 侧定义待 cyj 整合 \\
+$D$ & 训练数据量 & B 侧定义待 cyj 整合 \\
+$Q_z$ & A 侧派生质量评分 & chm 的描述性指标 \\
+$Q_{\mathrm{score}}$ & B 附件原生质量字段 & 半合成实验字段 \\
+$\boldsymbol p$ & 17 域训练配比 & chm 接口已定义 \\
+$L$ & 交叉熵损失 & 各附件目标需核对 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% TODO(zhh): 汇总正式模型假设、单位、数据来源表和符号表。

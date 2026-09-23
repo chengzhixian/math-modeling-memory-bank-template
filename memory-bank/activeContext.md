@@ -8,6 +8,8 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 更新时间：2026-09-23（北京时间）。阶段：F 题启动、三人并行协作初始化。
 
+> 2026-09-24 论文入口更新：`paper/latex/main.tex` 是第二十二届华为杯模板基础上的整体协作初稿，Q1 已迁入 `sections/chm/q1.tex` 并附五图，其余问保持清晰占位；写入权按 `paper/latex/README.md` 和 `TEAM_WORKFLOW.md` 分配。2026 年官方格式及本机缺少 XeLaTeX 导致的 PDF 编译均尚待核验。
+
 ## 已完成
 
 - 已按用户决定将 F 题设为唯一当前赛题。
@@ -68,4 +70,3 @@ Gemini 历史建模结果已作废并由 `58f4f0a` 丢弃文件内容；当前�
 ### main 同步要求
 
 所有成员在接收跨成员接口、开始当天工作或公共规则更新后，先执行 `git fetch origin --prune`，再在本人分支合并 `origin/main`。若暂不合并，至少用 `git show origin/main:TEAM_COLLABORATION_DEPENDENCIES.md` 阅读最新公共规则。个人分支成果只有经过验收并进入 main 后才成为正式公共输入。
-
