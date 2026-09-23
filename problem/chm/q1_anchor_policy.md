@@ -18,11 +18,11 @@
 
 | target | min rho | mean rho | 说明 |
 |---|---:|---:|---|
-| pile_cc | 0.8811 | 0.8920 | 三尺度最稳；A16 为 near-direct → commoncrawl |
+| pile_cc | 0.8876 | 0.8934 | 三尺度最稳；A16 为 near-direct → commoncrawl |
+| wikipedia_en | 0.8385 | 0.8679 | 高稳定；A16 near-direct → wikipedia |
 | pubmed_central | 0.7996 | 0.8283 | 高稳定，但质量侧为 inferred |
-| wikipedia_en | 0.7913 | 0.8503 | 高稳定；A16 near-direct/direct-like → wikipedia |
-| stackexchange | 0.7718 | 0.8078 | 稳定且 A16 direct |
 | uspto_backgrounds | 0.7587 | 0.8141 | 稳定，但质量侧 inferred |
+| arxiv | 0.7446 | 0.7905 | A16 direct，且 A2 有扩展质量数据 |
 
 若只考虑 p 的跨尺度代理能力，Pile-CC 是首选候选。
 
@@ -36,7 +36,7 @@ A16 direct：
 对应三尺度最小 Spearman：
 - arxiv ≈ 0.7446；
 - github ≈ 0.6721；
-- stackexchange ≈ 0.7718。
+- stackexchange ≈ 0.7323。
 
 其中 stackexchange 在“直接映射 + 跨尺度稳定”两方面最均衡。
 
@@ -68,11 +68,17 @@ A16 near-direct 中：
 
 ## E. cyj 接口使用方式
 
-1. 先用 `mixture_effect_ridge_v0.csv` 读取目标域 k 的零和系数；
-2. 用 `mixture_reference_v0.csv` 构造中心化效应
+1. 先用 `outputs/chm/local_recheck_v1/mixture_effect_ridge_v0.csv` 读取目标域 k 的零和系数；
+2. 用 `outputs/chm/local_recheck_v1/mixture_reference_v0.csv` 构造中心化效应
    [
    m_k(p)=\beta_k^\top(p-p_{ref});
    ]
-3. 若需要规模传递，使用 `mixture_scale_calibration_v0.csv` 和公共 eta=0.14537（CI 0.10787–0.18686）；
+3. 若需要规模传递，统一从 `outputs/chm/local_recheck_v1/mixture_scale_calibration_v0.csv` 与 `mixture_scale_transfer_v0_manifest.json` 读取公共 eta=0.14503317（条件 bootstrap 95% CI [0.10686793, 0.18669841]）；
 4. 主结果与上述敏感性面板至少 3 个 target 比较；
 5. 最终论文说明 anchor 选择依据和目标域敏感性。
+
+
+## F. 使用边界
+
+- anchor 选择只解决“Q1 配比代理用哪个目标 Loss”问题，不代表该 Loss 与 B1 `val_loss` 已经可比；在 cyj 正式确认 Loss 口径前，本文件仍是候选面板而非最终 Q2 接口。
+- 公共 eta 不是纯规模弹性，且其现有区间是条件 bootstrap；Q2/Q3 必须传播这一限制。
