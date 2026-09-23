@@ -17,6 +17,7 @@ from audit_b_scaling_laws import (
     DEFAULT_MANIFEST,
     DEFAULT_SOURCE_MANIFEST,
     ROOT,
+    display_path,
     git_stdout,
     sha256,
     validate_input_version,
@@ -166,6 +167,10 @@ def main() -> int:
                 **metrics,
                 "optimizer_converged": result["converged"],
                 "optimizer_objective": result["objective"],
+                **{
+                    f"parameter_{name}": value
+                    for name, value in result["parameters"].items()
+                },
             }
         )
         for row, prediction in zip(test_rows, predictions, strict=True):
@@ -204,6 +209,10 @@ def main() -> int:
             **tail_metrics,
             "optimizer_converged": tail_result["converged"],
             "optimizer_objective": tail_result["objective"],
+            **{
+                f"parameter_{name}": value
+                for name, value in tail_result["parameters"].items()
+            },
         }
     )
     tail_prediction_rows = [
@@ -293,6 +302,40 @@ def main() -> int:
         }
         for metric in ("rmse", "mae", "mape", "r2", "log_rmse")
     }
+    near_exact_threshold = 0.001
+    near_exact_reconstruction = bool(
+        full_metrics["rmse"] < near_exact_threshold
+        and loso_metrics["rmse"]["mean"] < near_exact_threshold
+        and tail_metrics["rmse"] < near_exact_threshold
+    )
+    external_descriptive_summary = {
+        dataset: {
+            "rows": len(dataset_rows),
+            "ND_extrapolation_rows": sum(
+                row["is_ND_extrapolation"] for row in dataset_rows
+            ),
+            "raw_difference_min": float(
+                min(
+                    row["raw_difference_not_a_validated_error"]
+                    for row in dataset_rows
+                )
+            ),
+            "raw_difference_max": float(
+                max(
+                    row["raw_difference_not_a_validated_error"]
+                    for row in dataset_rows
+                )
+            ),
+            "raw_absolute_difference_max": float(
+                max(
+                    abs(row["raw_difference_not_a_validated_error"])
+                    for row in dataset_rows
+                )
+            ),
+        }
+        for dataset in ("B4", "B5")
+        if (dataset_rows := [row for row in external_rows if row["dataset"] == dataset])
+    }
     script_path = Path(__file__).resolve()
     code_paths_dirty = bool(
         git_stdout(
@@ -357,11 +400,23 @@ def main() -> int:
                 "absolute_loss_comparability": "not_established",
                 "aggregate_error_metrics_reported": False,
                 "predictions_status": "descriptive_only",
+                "descriptive_summary_not_error_metrics": external_descriptive_summary,
             },
+        },
+        "diagnostics": {
+            "near_exact_reconstruction_threshold_rmse": near_exact_threshold,
+            "near_exact_reconstruction_triggered": near_exact_reconstruction,
+            "interpretation": (
+                "Near-exact B1 reconstruction across in-sample, leave-one-size-out, and token-tail checks may indicate shared deterministic construction or strong preprocessing. It is not evidence of independent real-world generalization."
+                if near_exact_reconstruction
+                else "Near-exact reconstruction diagnostic not triggered."
+            ),
+            "ready_for_Q3": False,
+            "ready_for_Q3_reason": "Classic B1-only draft lacks evidenced B4/B5 absolute Loss comparability, Q/p calibration, and uncertainty intervals.",
         },
         "outputs": {
             name: {
-                "path": path.relative_to(ROOT).as_posix(),
+                "path": display_path(path),
                 "bytes": path.stat().st_size,
                 "sha256": sha256(path),
             }
