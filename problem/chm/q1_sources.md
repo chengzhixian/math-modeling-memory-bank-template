@@ -35,6 +35,7 @@ https://arxiv.org/html/2407.01492
   - Ridge 使用 5-fold CV；
   - L2 网格为 [1e-3, 1e-2, 1e-1, 1e0, 1e1, 1e2, 1e3]；
   - LightGBM iterations=1000，learning rate=1e-2，其余为默认参数。
+- 公开官方仓库 `sail-sg/regmix/regression_fitting/regression.ipynb` 当前主要展示 LightGBM 拟合，并未独立固定 Ridge 的 KFold 行顺序/是否 shuffle。因此本项目不再把 `shuffle=False` 描述成论文精确实现，而将其作为可复现主协议，并额外计算固定 seed 的 shuffled 5-fold 敏感性。
 
 本项目的差异：
 - 附件 CSV 的配比因十进制舍入使 sum(p) 偏离 1 最多约 0.002–0.004，因此本项目先严格归一化 p；
