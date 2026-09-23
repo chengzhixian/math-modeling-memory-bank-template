@@ -42,13 +42,13 @@ DATASETS = {
     "B2": {
         "paths": ["cerebras_training_log.csv"],
         "nature": "semi_synthetic",
-        "role": "out_of_family_validation",
+        "role": "semi_synthetic_robustness",
         "documented_rows": 1029,
     },
     "B3": {
         "glob": "training_trajectories/*.csv",
         "nature": "interpolated",
-        "role": "trajectory_validation",
+        "role": "trajectory_shape_check",
         "documented_files": 8,
         "documented_rows_per_file": 500,
         "documented_rows": 4000,
@@ -92,7 +92,7 @@ DATASETS = {
     "B10": {
         "paths": ["supplementary_large_baseline.csv"],
         "nature": "estimated",
-        "role": "large_model_extrapolation",
+        "role": "large_model_reference_estimate",
         "documented_rows": 128,
     },
     "B11": {
@@ -741,6 +741,36 @@ def main() -> int:
             "Checks ppl against exp(val_loss), allowing source rounding",
         )
 
+    b1_rows = rows_by_relative.get("pythia_training_log_existing.csv", [])
+    b1_group_counts = Counter(row.get("N_params_B", "") for row in b1_rows)
+    b1_group_steps = {
+        group: [row.get("steps", "") for row in b1_rows if row.get("N_params_B") == group]
+        for group in b1_group_counts
+    }
+    b1_repeated_measurement_ok = bool(b1_rows) and all(
+        group
+        and count > 1
+        and len(b1_group_steps[group]) == len(set(b1_group_steps[group]))
+        for group, count in b1_group_counts.items()
+    )
+    add_check(
+        checks,
+        "B1_repeated_measurement_group_structure",
+        "pass" if b1_repeated_measurement_ok else "fail",
+        {
+            "group_key": "N_params_B",
+            "group_count": len(b1_group_counts),
+            "rows_per_group": dict(
+                sorted(b1_group_counts.items(), key=lambda item: float(item[0]))
+            ),
+            "unique_run_id_count": len(
+                {row.get("run_id", "") for row in b1_rows}
+            ),
+            "row_count": len(b1_rows),
+        },
+        "B1 contains repeated checkpoints by model size; row-wise random splitting would leak trajectories, and run_id is row-unique here",
+    )
+
     trajectory_results = []
     for relative, rows in rows_by_relative.items():
         if not relative.startswith("training_trajectories/"):
@@ -941,7 +971,15 @@ def main() -> int:
     status_counts = Counter(check["status"] for check in checks)
     script_path = Path(__file__).resolve()
     git_head = git_stdout("rev-parse", "HEAD")
-    git_worktree_dirty_at_start = bool(git_stdout("status", "--porcelain"))
+    git_code_paths_dirty_at_start = bool(
+        git_stdout(
+            "status",
+            "--porcelain",
+            "--",
+            "src/cyj/audit_b_scaling_laws.py",
+            "src/cyj/tests",
+        )
+    )
     output = {
         "schema_version": 2,
         "role": "cyj",
@@ -949,7 +987,7 @@ def main() -> int:
         "input_version": resolved_input_version,
         "provenance": {
             "git_commit": git_head,
-            "git_worktree_dirty_at_generation_start": git_worktree_dirty_at_start,
+            "git_code_paths_dirty_at_generation_start": git_code_paths_dirty_at_start,
             "script_path": script_path.relative_to(ROOT).as_posix(),
             "script_sha256": sha256(script_path),
             "input_manifest_path": manifest_path.relative_to(ROOT).as_posix(),
