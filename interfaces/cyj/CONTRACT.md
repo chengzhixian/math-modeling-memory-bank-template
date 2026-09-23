@@ -1,4 +1,4 @@
-# cyj 交付约定 草案 v1.3
+# cyj 交付约定 草案 v1.4
 
 生产者 cyj；使用者 chm（Q3）、zhh（桥接及论文）。本版为生产者侧草案，尚未取得 chm/zhh 验收，不能标记 validated。
 
@@ -28,12 +28,13 @@
 
 ## 经典 N-D 基线交付（draft，不可启动 Q3）
 
-- 代码/输入提交：`3b9cbff1362349bd9dc9d94d56c409f7d93654be`。
+- 代码/输入提交：`cf297a4ad47e235acf5a9b6e890a5df5e05b07e5`；两个结果 JSON 为 schema v2。
 - 模型：`L(N,D)=E+A*N^(-alpha)+B*D^(-beta)`；N=十亿参数，D=十亿 token，L=B1 `val_loss`。
 - 有效拟合范围：N 0.070542–11.965825 B，D 0.134–299.893 B token；范围外必须标注外推。
 - 参数：E=1.6898377713，A=0.3539687193，B=1.2402746295，alpha=0.3399854258，beta=0.2798924656。
-- 主结果：`outputs/cyj/classic/classic_fit.json`，7,759 bytes，SHA256 `b3706500bf79c191b7b05bf7af3dd963d1fb149fe47e304edb30cc9ad023893e`。
-- 数据 manifest：`outputs/cyj/classic/classic_data_manifest.json`，4,109 bytes，SHA256 `2fd70f2f174e5398a21cafa423309be68f6f3c702d1e22a0331c6547b0e2bc9a`。
+- 主结果：`outputs/cyj/classic/classic_fit.json`，8,461 bytes，SHA256 `9b0e381fbc0ea84bb37d63ccb273733f3a03a0c2a834e8ef52cdb75c45bc6ead`。
+- 数据 manifest：`outputs/cyj/classic/classic_data_manifest.json`，4,719 bytes，SHA256 `5edf56694d63b74ab715c50c8ce2bf1ebb510f40fcd184d58ae714788e8e067e`。
+- 原始输入身份：运行前按提交中 `F_MANIFEST.json` 的字节数与 SHA256 核对 B1/B4/B5；B1 为 `pythia_training_log_existing.csv`。代码也须与输入提交一致。固定环境下两次完整运行的 9 个输出哈希相同。
 - 验证：全样本 RMSE 0.0001465764；按规模留组 8 折 RMSE 均值 0.0001461277；每组 token-tail 70/30 RMSE 0.0001160041；没有随机逐行拆分。
 - 状态：`draft_classic_baseline_not_validated_predictor`，`ready_for_Q3=false`。
 

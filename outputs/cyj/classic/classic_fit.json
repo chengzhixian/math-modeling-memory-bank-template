@@ -1,18 +1,34 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "status": "draft_classic_baseline_not_validated_predictor",
-  "input_version": "3b9cbff1362349bd9dc9d94d56c409f7d93654be",
+  "input_version": "cf297a4ad47e235acf5a9b6e890a5df5e05b07e5",
   "model": "L(N,D) = E + A*N^(-alpha) + B*D^(-beta)",
   "fit_loss": "group-equal weighted Huber loss on log(predicted_loss)-log(actual_loss)",
   "provenance": {
-    "git_commit": "3b9cbff1362349bd9dc9d94d56c409f7d93654be",
-    "git_code_paths_dirty_at_generation_start": false,
-    "script_sha256": "8fa1e199786d5cc9140a39833713b23cebae2dff6b62c25a99e1e33b4125296a",
+    "git_commit": "cf297a4ad47e235acf5a9b6e890a5df5e05b07e5",
+    "code_files_verified_against_input_commit": true,
+    "script_sha256": "549471fd71a83040e02d0c29ab3a30e9f16f1be373095dfff7e4ba55a01f8ef9",
     "prepared_b1_sha256": "2eb418f022c414db13af89d2177b2b90c62d3ad3b29300adf7fb1de570927704",
-    "classic_data_manifest_sha256": "2fd70f2f174e5398a21cafa423309be68f6f3c702d1e22a0331c6547b0e2bc9a",
+    "classic_data_manifest_sha256": "5edf56694d63b74ab715c50c8ce2bf1ebb510f40fcd184d58ae714788e8e067e",
+    "source_files": {
+      "pythia_training_log_existing.csv": {
+        "path": "data/raw/real_attachments/B_scaling_laws/pythia_training_log_existing.csv",
+        "bytes": 111459,
+        "sha256": "529a59644b0f57bf3a76037838b614bfedc35e58bb26b93052e34ffc63e454c2"
+      },
+      "scaling_baseline.csv": {
+        "path": "data/raw/real_attachments/B_scaling_laws/scaling_baseline.csv",
+        "bytes": 1421,
+        "sha256": "2272983ded93de35e05f9acbf95ebceedf43f283345e4be72b54fee94080391e"
+      },
+      "published_scaling_data.csv": {
+        "path": "data/raw/real_attachments/B_scaling_laws/published_scaling_data.csv",
+        "bytes": 1967,
+        "sha256": "dd858c5e48610e28589340d5db023d6abfb31df597506789ccdfc6a546731bbd"
+      }
+    },
     "python_version": "3.12.14",
-    "numpy_version": "2.3.5",
-    "generated_at_utc": "2026-09-23T17:49:53+00:00"
+    "numpy_version": "2.3.5"
   },
   "data_scope": {
     "rows": 1176,

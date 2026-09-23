@@ -10,7 +10,7 @@
 
 ## 输入版本与边界
 
-- B1 输入：`data/raw/real_attachments/B_scaling_laws/B1_neural_scaling_law.csv`，1,176 行、8 个 N 规模组、每组 147 行。
+- B1 输入：`data/raw/real_attachments/B_scaling_laws/pythia_training_log_existing.csv`，1,176 行、8 个 N 规模组、每组 147 行。（2026-09-24 复核纠正历史笔误；原实验输出未使用错名文件。）
 - B4/B5：仅作 Loss 可比性审查和描述性预测；未建立绝对 Loss 等价性。
 - `data/raw/F_MANIFEST.json` SHA256 `3377a36c5f6fcabb79abca5fe5621047a3abd9be6dffd9491bc8c651b19f903f`。
 - `data/raw/real_attachments/source_manifest.json` SHA256 `34e81dabf46302eebaac8551fa18d2e72acd0833b1cf0276690bee897f1323db`。
@@ -81,6 +81,8 @@ Python 3.12.14、NumPy 2.3.5、pandas 3.0.1。pytest、SciPy、scikit-learn、st
 - 本轮实际执行多次 `ls-remote`、`fetch` 和非强制 `push`；均因 `github.com:443` 连接重置或超时失败。DNS 可解析到 `20.205.243.166`，但 `Test-NetConnection` 的 TCP 443 检查失败。
 - 仓库规则中记录的 `H:\Git\cmd\git.exe` 在本机会话中不存在；改用系统 Git 的 Schannel/OpenSSL 及 HTTP/1.1 均未恢复连接。
 - 因此此时不能声明推送成功或远端 SHA 一致。网络恢复后的第一步是重新 `git fetch origin --prune`，确认远端无新增提交，再非强制推送，并比较 `git rev-parse HEAD` 与 `git ls-remote origin refs/heads/team/cyj-scaling`。禁止强推。
+
+事后状态补记：本轮稍后网络恢复，最终检查点 `260e989e403100a561e478ff51cc80964fafbf86` 已非强制推送，且 `ls-remote` 与本地 HEAD 一致。以上故障记录保留为发生时的真实过程，不代表当前仍未备份。
 
 ## 接口变化
 

@@ -1,16 +1,31 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "status": "prepared_no_model_fit",
-  "input_version": "3b9cbff1362349bd9dc9d94d56c409f7d93654be",
+  "input_version": "cf297a4ad47e235acf5a9b6e890a5df5e05b07e5",
   "provenance": {
-    "git_commit": "3b9cbff1362349bd9dc9d94d56c409f7d93654be",
-    "git_code_paths_dirty_at_generation_start": false,
-    "script_sha256": "127f581474be09e6fc5ee8613b5688d7a73cd9b02cd91439687e65a40406ed48",
-    "source_b1_sha256": "529a59644b0f57bf3a76037838b614bfedc35e58bb26b93052e34ffc63e454c2",
+    "git_commit": "cf297a4ad47e235acf5a9b6e890a5df5e05b07e5",
+    "code_files_verified_against_input_commit": true,
+    "script_sha256": "c4f6ffce2030a1c6bc98c5d22b07d9dfa40901324349ec69fe4a6818ba272fbc",
+    "source_files": {
+      "pythia_training_log_existing.csv": {
+        "path": "data/raw/real_attachments/B_scaling_laws/pythia_training_log_existing.csv",
+        "bytes": 111459,
+        "sha256": "529a59644b0f57bf3a76037838b614bfedc35e58bb26b93052e34ffc63e454c2"
+      },
+      "scaling_baseline.csv": {
+        "path": "data/raw/real_attachments/B_scaling_laws/scaling_baseline.csv",
+        "bytes": 1421,
+        "sha256": "2272983ded93de35e05f9acbf95ebceedf43f283345e4be72b54fee94080391e"
+      },
+      "published_scaling_data.csv": {
+        "path": "data/raw/real_attachments/B_scaling_laws/published_scaling_data.csv",
+        "bytes": 1967,
+        "sha256": "dd858c5e48610e28589340d5db023d6abfb31df597506789ccdfc6a546731bbd"
+      }
+    },
     "input_manifest_sha256": "3377a36c5f6fcabb79abca5fe5621047a3abd9be6dffd9491bc8c651b19f903f",
     "source_manifest_sha256": "34e81dabf46302eebaac8551fa18d2e72acd0833b1cf0276690bee897f1323db",
-    "python_version": "3.12.14",
-    "generated_at_utc": "2026-09-23T17:49:41+00:00"
+    "python_version": "3.12.14"
   },
   "split_policy": {
     "group_key": "N_params_B",

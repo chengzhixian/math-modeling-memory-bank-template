@@ -1,12 +1,12 @@
 # cyj 运行环境
 
-记录时间：2026-09-24 01:50（Asia/Shanghai）。
+记录时间：2026-09-24 02:20（Asia/Shanghai）。
 
 ## 已验证
 
 - 操作系统：Microsoft Windows NT 10.0.26200.0。
 - 分支：`team/cyj-scaling`。
-- 本次经典基线正式代码/输入版本：`3b9cbff1362349bd9dc9d94d56c409f7d93654be`；此前正式审计版本为 `6880af29f2a1fc089e5fc601d0df873c0be042a3`。
+- 本次经典基线复核后代码/输入版本：`cf297a4ad47e235acf5a9b6e890a5df5e05b07e5`；此前审计版本为 `6880af29f2a1fc089e5fc601d0df873c0be042a3`。
 - Python：3.12.14，来自 Codex 工作区依赖运行时。
 - pandas：3.0.1；NumPy：2.3.5。
 - Git：2.55.0.windows.1；Git LFS：3.7.1。
@@ -29,8 +29,8 @@ $py = 'C:\Users\muyehuangyi\.cache\codex-runtimes\codex-primary-runtime\dependen
 & .\scripts\verify_raw_data.ps1
 & $py -m unittest discover -s src\cyj\tests -p 'test_*.py' -v
 & $py src\cyj\audit_b_scaling_laws.py --input-version 6880af29f2a1fc089e5fc601d0df873c0be042a3
-& $py src\cyj\prepare_scaling_data.py --input-version 3b9cbff1362349bd9dc9d94d56c409f7d93654be
-& $py src\cyj\fit_classic_scaling.py --input-version 3b9cbff1362349bd9dc9d94d56c409f7d93654be
+& $py src\cyj\prepare_scaling_data.py --input-version cf297a4ad47e235acf5a9b6e890a5df5e05b07e5
+& $py src\cyj\fit_classic_scaling.py --input-version cf297a4ad47e235acf5a9b6e890a5df5e05b07e5
 ```
 
 经典 B1 基线已运行；未运行绘图、bootstrap、Q/p 广义拟合，也未固定公共依赖文件。

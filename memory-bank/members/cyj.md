@@ -6,11 +6,11 @@
 
 Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠排除隐藏文字影响而作废，提交 `58f4f0a` 已明确丢弃其文件内容。不得从 Git 历史恢复、cherry-pick、复用其中的模型、参数、数值、结论或输出。若后续独立论证出同名方法适用，必须依据可见题面、真实数据或独立可核验文献重新建立证据链。
 
-更新时间：2026-09-24 01:50（北京时间）。角色任务：Q2 标度律与推导；为 Q3 提供目标函数、约束和验证支持。
+更新时间：2026-09-24 02:20（北京时间）。角色任务：Q2 标度律与推导；为 Q3 提供目标函数、约束和验证支持。
 成员称呼：cyj（用户已指定）。实际电脑/环境：Windows 10.0.26200；Python 3.12.14（Codex 工作区运行时）；详见 `problem/cyj/environment.md`。
-当前分支：`team/cyj-scaling`；已合并 main `a0932fd92b3a46cef8eb0bf563df1e6abc9396ef`；经典基线正式代码/输入提交 `3b9cbff1362349bd9dc9d94d56c409f7d93654be`。
+当前分支：`team/cyj-scaling`；已包含 main `a0932fd92b3a46cef8eb0bf563df1e6abc9396ef`；复核后经典基线代码/输入提交 `cf297a4ad47e235acf5a9b6e890a5df5e05b07e5`。
 状态：进行中。Stage 1 审计已完成；B1 经典 N-D 基线已实现并完成无随机逐行泄漏的验证，但近乎精确重构的来源未查明，接口仍是 draft，`ready_for_Q3=false`。
-远端状态：本轮本地提交已完成、工作树已清洁；2026-09-24 约 02:00 因 `github.com:443` TCP 不可达，尚未推送，不能视为远端备份完成。网络恢复后须优先非强制 push 并用 `ls-remote` 核对 SHA。
+远端状态：上一检查点 `260e989e403100a561e478ff51cc80964fafbf86` 已推送并核对远端 SHA；约 02:00 的短暂 GitHub 443 故障已恢复。本次新检查点以实际 Git push 与 `ls-remote` 结果为准。
 
 ## 当前任务
 
@@ -29,17 +29,18 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 ## 经典 N-D 基线（本轮）
 
-- 已新增统一数据准备、经典拟合和共享数学工具；Python 编译通过，标准库 `unittest` 13/13 通过。
+- 已新增统一数据准备、经典拟合和共享数学工具；复核后 Python 编译通过，标准库 `unittest` 14/14 通过。
 - B1 固定 8 个 N 组；token-tail 每组 102/45 行、合计 816/360 行；另做 8 折 Leave-One-Model-Size-Out，未使用随机逐行拆分。
-- 模型 `L=E+A*N^-alpha+B*D^-beta` 的正式输入/代码 SHA 为 `3b9cbff1362349bd9dc9d94d56c409f7d93654be`。参数为 E=1.6898377713、A=0.3539687193、B=1.2402746295、alpha=0.3399854258、beta=0.2798924656。
+- 模型 `L=E+A*N^-alpha+B*D^-beta` 的复核后输入/代码 SHA 为 `cf297a4ad47e235acf5a9b6e890a5df5e05b07e5`。参数为 E=1.6898377713、A=0.3539687193、B=1.2402746295、alpha=0.3399854258、beta=0.2798924656。
 - 全样本 RMSE 0.0001465764；8 折 LOSO RMSE 均值 0.0001461277；token-tail RMSE 0.0001160041。三者均低于 0.001，已触发 near-exact reconstruction 警报；该现象可能来自共同确定性构造或强预处理，不能作为独立真实泛化证据。
 - B4/B5 的绝对 Loss 可比性缺少本地证据，状态为 `not_established`；只输出描述性预测，不报告 external RMSE。
-- 主结果 `outputs/cyj/classic/classic_fit.json` SHA256 `b3706500bf79c191b7b05bf7af3dd963d1fb149fe47e304edb30cc9ad023893e`；数据 manifest SHA256 `2fd70f2f174e5398a21cafa423309be68f6f3c702d1e22a0331c6547b0e2bc9a`。
-- 接口已升为生产者侧 draft v1.3，显式 `ready_for_Q3=false`；没有 Q/p、不确定性区间或 Loss–Benchmark 桥接。
+- B1/B4/B5 在读取前逐文件按提交内清单核对 bytes/SHA256；代码文件与输入提交逐一核对；拟合前重建并核对 prepared B1。9 个输出连续两次重跑哈希相同。
+- 主结果 `outputs/cyj/classic/classic_fit.json` schema v2，SHA256 `9b0e381fbc0ea84bb37d63ccb273733f3a03a0c2a834e8ef52cdb75c45bc6ead`；数据 manifest schema v2，SHA256 `5edf56694d63b74ab715c50c8ce2bf1ebb510f40fcd184d58ae714788e8e067e`。
+- 接口已升为生产者侧 draft v1.4，显式 `ready_for_Q3=false`；没有 Q/p、不确定性区间或 Loss–Benchmark 桥接。
 
 ## 依赖与阻塞
 
-接口见 `interfaces/cyj/CONTRACT.md` v1.3 和 `interfaces/README.md`。v1.3 加入经典基线，但仍是生产者侧 draft，尚未由 chm/zhh 验收；当前没有 validated predictor，chm 不得据此生成 Q3 正式最优配置。
+接口见 `interfaces/cyj/CONTRACT.md` v1.4 和 `interfaces/README.md`。v1.4 仍是生产者侧 draft，尚未由 chm/zhh 验收；当前没有 validated predictor，chm 不得据此生成 Q3 正式最优配置。2026-09-24 fetch 所见 chm 清洁集成分支 `7a958d7b5760bce4e7136a5c80e6b9275de60eaf` 提出 Q/p 跨附件不可识别边界，尚未由 cyj 联合验收；`team/chm-data` 明示不可直接并入 main。zhh 的当前远端合同仍为 v1 草案。
 全库校验被附件 A 的 4 个 LFS 指针阻塞；附件 B 已单独按清单核验。最终 `L(N,D,Q,p)` 依赖 chm 的正式 Q/p 接口；zhh 的 C7 2048/8192/131072 Token 情景须作为外生敏感性输入，正式采用前仍需其更新合同并通过集成验收。官方规则仍待集成人核对。
 
 ## 2026-09-23 main 协作规则同步影响
@@ -56,4 +57,4 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 2. 核查 B1 8 个 C 恒等式离群点并做保留/排除敏感性；补充按规模分组 bootstrap 或等价不确定性。
 3. 为 B4/B5 补齐 tokenizer、评估语料、Loss 定义和单位证据；证据不足时继续禁止跨来源统一 RMSE。
 4. 在广义模型前与 chm 联合冻结 Q mapping 和 Loss/anchor/p 接法；记录实际消费的 SHA、接口版本和文件哈希。
-5. 本轮交接见 `memory-bank/handoffs/cyj/20260924-0150-p20-classic-baseline.md`；最终推送及远端 SHA 以 Git 实际核验为准。
+5. 本轮复核交接见 `memory-bank/handoffs/cyj/20260924-0220-p20-provenance-review-fixes.md`；最终推送及远端 SHA 以 Git 实际核验为准。
