@@ -164,6 +164,32 @@ def main():
         args.figure_dir / "q1_mixture_effect_scale_decay.png",
     )
 
+    inputs = [
+        args.output_root / "q1_regmix_ridge_domainwise_metrics.csv",
+        args.output_root / "q1_regmix_direct_scale_rank_stability.csv",
+        args.output_root / "mixture_scale_calibration_v0.csv",
+        args.output_root / "mixture_scale_transfer_v0_manifest.json",
+    ]
+    figure_paths = [
+        args.figure_dir / "q1_domainwise_spearman_box.png",
+        args.figure_dir / "q1_domainwise_spearman_lines.png",
+        args.figure_dir / "q1_direct_rank_stability_1m_60m.png",
+        args.figure_dir / "q1_mixture_effect_scale_decay.png",
+    ]
+    provenance = {
+        "output_root": str(args.output_root),
+        "input_sha256": {
+            str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs
+        },
+        "figures": {
+            str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in figure_paths
+        },
+        "warning": "Figures are valid only for the recorded local_recheck_v1 input hashes.",
+    }
+    (args.figure_dir / "q1_figures_manifest.json").write_text(
+        json.dumps(provenance, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+
 
 if __name__ == "__main__":
     main()
