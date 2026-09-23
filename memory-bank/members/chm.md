@@ -64,6 +64,8 @@ Q1 质量全量初版已运行，网页端 LFS 阻塞解除。Q1 配比已本地
 
 开始任何跨成员工作前重新读取 `TEAM_COLLABORATION_DEPENDENCIES.md` 和 `interfaces/README.md`。
 
+> 2026-09-24 第一问初稿就绪：复核 A1–A15 质量、配比、敏感性和消融证据，修正论文草稿中过期的“待复跑”状态及未独立证实的公开基线数值对照；加入 1B 绝对 Loss 消融限制和双层 bootstrap 区间。结论与待办见 `problem/chm/20260924_q1_readiness_review.md`，可供集成人整合的初稿见 `paper/sections/chm/q1_draft.md`。Q1 的描述性结论已可写，Q/Loss 跨附件数值桥接仍待 cyj 接口与证据。
+
 
 本地接力补记：已阅读并整合 cdffdd1 公共规则同步；保留本轮全量运行后的当前状态，取代远端此前尚在运行的描述。
 

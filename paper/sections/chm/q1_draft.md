@@ -1,6 +1,6 @@
 # 问题一章节草稿：数据质量评价与训练数据配比效应
 
-> 状态：本地接力工作稿。A1–A3 已全量实跑；配比结果更新为 local_recheck_v1。质量指数仍为描述性初版，定向敏感性和 Q2 跨数据集映射待复核。
+> 状态：可供整合的第一问论文初稿。A1–A15 的相关计算及主要敏感性检验已在本地复跑；质量指数仍是描述性量，跨附件数值桥接尚无可识别的标定数据。
 
 ## 1 问题分析
 
@@ -149,7 +149,7 @@ Ridge 正则参数只使用 A4+A5 内部 5 折交叉验证选择，A6–A11 不�
 0.9007,\qquad 0.8919,\qquad 0.8876,
 \]
 
-与 RegMix 公开论文线性基线的 0.901、0.893、0.880 几乎一致，表明当前附件读取、配对和建模口径与原公开实验相符。
+这组数值来自本题附件上的本地复跑，表明 Ridge 对该目标域的配方排序有较高保持度。RegMix 原论文提供了采用小模型和回归代理探索配比的方法依据；本文不将本地数值直接等同于论文的公开基线。
 
 对全部 13 个目标域，逐域 Spearman 的中位数为：
 
@@ -212,7 +212,7 @@ c_k-\eta\log(N/10^6)+\varepsilon_{k,N}.
 
 域特异 $\eta_k$ 的范围约为 0.0412–0.3074，因此问题二、三应同时报告公共指数主模型和域特异敏感性结果。
 
-需要强调的是，该关系只有三个真实模型规模支撑。1M 与 60M 校准使用相同的 256 个配方，而 1B 使用另一组 64 个未见配方，因此公共 $\eta$ 可能同时吸收模型规模变化和配方支持集变化，不能解释成纯参数规模弹性。现有区间只按目标域整体重采样，条件于 A4+A5 Ridge、当前配方样本与校准口径；代码已增加对校准样本的二层重抽样，但在完整本地重跑前不能把它写成已有数值结果。本文将 $\eta$ 定位为“配比效应的经验尺度传递接口”，而不是新的普适标度律。参数规模和数据量的主体 Scaling Law 仍由问题二使用附件 B 独立估计。
+进一步对目标域和校准配方同时重抽样，2000 次有效 bootstrap 的 95% 区间为 $[0.0976,0.2010]$。需要强调的是，该关系只有三个真实模型规模支撑。1M 与 60M 校准使用相同的 256 个配方，而 1B 使用另一组 64 个未见配方，因此公共 $\eta$ 可能同时吸收模型规模变化和配方支持集变化，不能解释成纯参数规模弹性。两个区间均条件于 A4+A5 的既定 Ridge 代理，没有覆盖代理拟合误差。本文将 $\eta$ 定位为“配比效应的经验尺度传递接口”，而不是新的普适标度律。参数规模和数据量的主体 Scaling Law 仍由问题二使用附件 B 独立估计。
 
 ## 7 外推数据的使用边界
 
@@ -231,20 +231,23 @@ A16 中只有 3 个 direct 映射、3 个 near-direct 映射，另有 11 个 inf
 当前已经完成的验证包括：
 
 1. A4–A15 数据行数、index、配比闭合性和 Loss 缺失审计；
-2. Pile-CC Ridge 对公开 RegMix 线性结果的独立近复现；
+2. Pile-CC Ridge 的附件内跨规模排名检验；
 3. 13 目标域的 held-out 1M/60M/1B 排名验证；
 4. 相同 256 配方在 1M/60M 的直接 Loss 排名稳定性验证；
 5. 组成闭合约束下的零和参数化；
-6. 配比效应幅度的三尺度后验校准和域 bootstrap。
+6. 配比效应幅度的三尺度后验校准、域 bootstrap 与域—配方双层 bootstrap；
+7. 质量指标定向、标准化和家族删除敏感性检验，以及配比代理的无配比消融。
 
 当前限制包括：
 
-- 质量 Q 是经验描述性指数，可为负；不能直接替代 B6 的 Q_score。指标方向、截断和权重敏感性仍需继续复核；
+- 质量 Q 是经验描述性指数，可为负；不能直接替代 B6–B8 的 Q_score。现有定向和标准化替代方案的七域排序稳定，但删除 RPS 家族时排序 Spearman 降至 0.8214，说明结论依赖指标家族选择；
 - 非线性 LightGBM 代理尚待本地环境正式复跑，不能提前声称优于 Ridge；
 - 17 配方域到 7 质量域存在明显映射缺口；
 - 配比 Ridge 系数是统计对比，不具有独立因果含义；
 - 配比幅度衰减只有 3 个真实参数规模，外推必须保守；
 - A12–A15 不是实测大模型结果。
+
+消融检验中，删除全部配比变量并仅用训练集目标域常数均值预测，1M、60M、1B 的 13 域 RMSE 中位数分别为 0.6759、1.4724、3.2514；完整 Ridge 分别为 0.4478、1.4450、3.2079。完整模型在前两个规模均改善 13/13 个目标域，在 1B 仅改善 4/13 个。因此本文关于跨规模迁移的主要证据是排序相关，而不是 1B 的绝对 Loss 预测精度。
 
 ## 10 Q1→Q2 的数值桥接边界
 
@@ -263,13 +266,16 @@ A16 中只有 3 个 direct 映射、3 个 near-direct 映射，另有 11 个 inf
 - 质量运行脚本：`src/chm/q1_quality_analysis.py`
 - 配比脚本：`src/chm/q1_regmix_domainwise.py`
 - 尺度校准脚本：`src/chm/q1_mixture_scale_transfer.py`
+- 敏感性检验：`outputs/chm/quality_review_v1/`
+- 代码消融：`outputs/chm/ablation_v1/`
+- 第一问就绪复核：`problem/chm/20260924_q1_readiness_review.md`
 
 外部方法依据建议在正式参考文献中列入：
-- Liu et al., *RegMix: Data Mixture as Regression for Language Model Pre-training*, ICLR 2025 / arXiv:2407.01492；
-- SlimPajama-Meta-rater 数据集与 Meta-rater 论文（arXiv:2504.14194）。
+- Liu et al., *RegMix: Data Mixture as Regression for Language Model Pre-training*, ICLR 2025，https://proceedings.iclr.cc/paper_files/paper/2025/file/5f67d864aae6115374fed7beddd119e0-Paper-Conference.pdf；
+- SlimPajama-Meta-rater 官方数据卡，https://huggingface.co/datasets/opendatalab/SlimPajama-Meta-rater/blob/main/README.md；Meta-rater 论文，https://aclanthology.org/2025.acl-long.533.pdf。
 
-上述外部资料只用于独立方法依据和公开实验交叉验证，不替代本题附件上的实际计算。
+上述外部资料只用于指标结构与方法依据，不替代本题附件上的实际计算。公开数据卡对应完整数据集，本题 A 附件只提供其中 22 个质量指标。
 
 ## 本地复跑修订说明
 
-原网页表与仓库当前确定性五折脚本不完全一致，四个目标域 alpha 改变；已保留旧表，当前采用 local_recheck_v1，不能混用两版系数和尺度校准。详见 experiments/chm/20260923-q1-local-reproduction.md。质量证据见 experiments/chm/20260923-q1-local-quality.md。
+原网页表与仓库当前确定性五折脚本不完全一致，四个目标域 alpha 改变；当前统一采用 local_recheck_v1，不能混用两版系数和尺度校准。详见 experiments/chm/20260923-q1-local-reproduction.md。质量证据见 experiments/chm/20260923-q1-local-quality.md。
