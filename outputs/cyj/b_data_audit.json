@@ -1,0 +1,2344 @@
+{
+  "schema_version": 1,
+  "role": "cyj",
+  "task": "P01 attachment B audit",
+  "input_version": "e85956fe7cd3ce7e6a6c8b930ae444b1ee93184d",
+  "data_root": "data/raw/real_attachments/B_scaling_laws",
+  "source_policy": {
+    "observed_and_reported": [
+      "B1",
+      "B4",
+      "B5",
+      "B9",
+      "B11",
+      "B12"
+    ],
+    "semi_synthetic": [
+      "B2",
+      "B6",
+      "B7",
+      "B8"
+    ],
+    "estimated": [
+      "B10"
+    ],
+    "interpolated": [
+      "B3"
+    ],
+    "note": "Labels follow the visible data description; the audit does not upgrade evidence classes."
+  },
+  "summary": {
+    "csv_files": 19,
+    "rows": 10484,
+    "bytes": 566719,
+    "dataset_rows": {
+      "B1": 1176,
+      "B10": 128,
+      "B11": 18,
+      "B12": 1386,
+      "B2": 1029,
+      "B3": 4000,
+      "B4": 57,
+      "B5": 44,
+      "B6": 360,
+      "B7": 450,
+      "B8": 1704,
+      "B9": 132
+    },
+    "check_status_counts": {
+      "pass": 97,
+      "warn": 3
+    }
+  },
+  "files": [
+    {
+      "dataset_id": "B1",
+      "nature": "observed",
+      "role": "main_fit",
+      "path": "data/raw/real_attachments/B_scaling_laws/pythia_training_log_existing.csv",
+      "bytes": 111459,
+      "sha256": "529a59644b0f57bf3a76037838b614bfedc35e58bb26b93052e34ffc63e454c2",
+      "manifest_identity_match": true,
+      "rows": 1176,
+      "columns": 15,
+      "header": [
+        "run_id",
+        "N_params_B",
+        "D_tokens_B",
+        "C_FLOPs_1e21",
+        "steps",
+        "batch_tokens_M",
+        "lr",
+        "wd",
+        "precision",
+        "gpu_days",
+        "step_time_ms",
+        "train_loss",
+        "val_loss",
+        "ppl",
+        "grad_norm_avg"
+      ],
+      "missing_by_column": {
+        "run_id": 0,
+        "N_params_B": 0,
+        "D_tokens_B": 0,
+        "C_FLOPs_1e21": 0,
+        "steps": 0,
+        "batch_tokens_M": 0,
+        "lr": 0,
+        "wd": 0,
+        "precision": 0,
+        "gpu_days": 0,
+        "step_time_ms": 0,
+        "train_loss": 0,
+        "val_loss": 0,
+        "ppl": 0,
+        "grad_norm_avg": 0
+      },
+      "duplicate_rows": 0,
+      "required_numeric": {
+        "N_params_B": {
+          "count": 1176,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.070542,
+          "max": 11.965825,
+          "unique": 8
+        },
+        "D_tokens_B": {
+          "count": 1176,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.134,
+          "max": 299.893,
+          "unique": 147
+        },
+        "C_FLOPs_1e21": {
+          "count": 1176,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.0001,
+          "max": 21.5308,
+          "unique": 1151
+        },
+        "steps": {
+          "count": 1176,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 64.0,
+          "max": 143000.0,
+          "unique": 147
+        },
+        "train_loss": {
+          "count": 1176,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 1.943,
+          "max": 4.4729,
+          "unique": 1098
+        },
+        "val_loss": {
+          "count": 1176,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 2.0933,
+          "max": 4.7388,
+          "unique": 1132
+        },
+        "ppl": {
+          "count": 1176,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 8.11,
+          "max": 114.3,
+          "unique": 735
+        }
+      },
+      "missing_required_columns": [],
+      "source_metadata": {
+        "source": "EleutherAI Pythia Scaling Suite; retained from current contest data"
+      }
+    },
+    {
+      "dataset_id": "B2",
+      "nature": "semi_synthetic",
+      "role": "out_of_family_validation",
+      "path": "data/raw/real_attachments/B_scaling_laws/cerebras_training_log.csv",
+      "bytes": 89643,
+      "sha256": "178f878cad2cb31e4ec104c670553de23818197876d824a113fdb911125951a6",
+      "manifest_identity_match": true,
+      "rows": 1029,
+      "columns": 15,
+      "header": [
+        "run_id",
+        "N_params_B",
+        "D_tokens_B",
+        "C_FLOPs_1e21",
+        "steps",
+        "batch_tokens_M",
+        "lr",
+        "wd",
+        "precision",
+        "gpu_days",
+        "step_time_ms",
+        "train_loss",
+        "val_loss",
+        "ppl",
+        "grad_norm_avg"
+      ],
+      "missing_by_column": {
+        "run_id": 0,
+        "N_params_B": 0,
+        "D_tokens_B": 0,
+        "C_FLOPs_1e21": 0,
+        "steps": 0,
+        "batch_tokens_M": 0,
+        "lr": 0,
+        "wd": 0,
+        "precision": 0,
+        "gpu_days": 1029,
+        "step_time_ms": 1029,
+        "train_loss": 0,
+        "val_loss": 0,
+        "ppl": 0,
+        "grad_norm_avg": 1029
+      },
+      "duplicate_rows": 0,
+      "required_numeric": {
+        "N_params_B": {
+          "count": 1029,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.111,
+          "max": 13.0,
+          "unique": 7
+        },
+        "D_tokens_B": {
+          "count": 1029,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 14.0,
+          "max": 2050.0,
+          "unique": 143
+        },
+        "C_FLOPs_1e21": {
+          "count": 1029,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.009548,
+          "max": 159.9,
+          "unique": 975
+        },
+        "steps": {
+          "count": 1029,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 1000.0,
+          "max": 147000.0,
+          "unique": 147
+        },
+        "train_loss": {
+          "count": 1029,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 2.8505,
+          "max": 6.504,
+          "unique": 985
+        },
+        "val_loss": {
+          "count": 1029,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 2.8354,
+          "max": 6.4979,
+          "unique": 995
+        },
+        "ppl": {
+          "count": 1029,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 17.04,
+          "max": 663.77,
+          "unique": 878
+        }
+      },
+      "missing_required_columns": [],
+      "source_metadata": {
+        "source": "Semi-synthetic, calibrated from Pythia scaling law; Cerebras-GPT trained on Pile 2.05T tokens",
+        "note": "V5.29: Cerebras-GPT 7个模型的半合成训练轨迹，1029条记录，D_tokens_B范围约14-2050B tokens；D_tokens_B单位已统一为十亿tokens。"
+      }
+    },
+    {
+      "dataset_id": "B3",
+      "nature": "interpolated",
+      "role": "trajectory_validation",
+      "path": "data/raw/real_attachments/B_scaling_laws/training_trajectories/pythia_0.070542B_trajectory.csv",
+      "bytes": 14040,
+      "sha256": "19663f2f14d62af377377962ec8f794148450bfb278fdbeb2452f4641fe6a440",
+      "manifest_identity_match": true,
+      "rows": 500,
+      "columns": 5,
+      "header": [
+        "N_params_B",
+        "D_tokens_B",
+        "val_loss",
+        "step",
+        "interpolated"
+      ],
+      "missing_by_column": {
+        "N_params_B": 0,
+        "D_tokens_B": 0,
+        "val_loss": 0,
+        "step": 0,
+        "interpolated": 0
+      },
+      "duplicate_rows": 0,
+      "required_numeric": {
+        "N_params_B": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.070542,
+          "max": 0.070542,
+          "unique": 1
+        },
+        "D_tokens_B": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.134,
+          "max": 299.893,
+          "unique": 500
+        },
+        "val_loss": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 2.8127,
+          "max": 4.7385,
+          "unique": 499
+        },
+        "step": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.0,
+          "max": 143.0,
+          "unique": 117
+        },
+        "interpolated": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 1.0,
+          "max": 1.0,
+          "unique": 1
+        }
+      },
+      "missing_required_columns": [],
+      "source_metadata": {}
+    },
+    {
+      "dataset_id": "B3",
+      "nature": "interpolated",
+      "role": "trajectory_validation",
+      "path": "data/raw/real_attachments/B_scaling_laws/training_trajectories/pythia_0.162405B_trajectory.csv",
+      "bytes": 14040,
+      "sha256": "8e2b78cde966b0a3e8b6272935c3f3dcccc5a54e94bb7db79ded2fd8fdf5a124",
+      "manifest_identity_match": true,
+      "rows": 500,
+      "columns": 5,
+      "header": [
+        "N_params_B",
+        "D_tokens_B",
+        "val_loss",
+        "step",
+        "interpolated"
+      ],
+      "missing_by_column": {
+        "N_params_B": 0,
+        "D_tokens_B": 0,
+        "val_loss": 0,
+        "step": 0,
+        "interpolated": 0
+      },
+      "duplicate_rows": 0,
+      "required_numeric": {
+        "N_params_B": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.162405,
+          "max": 0.162405,
+          "unique": 1
+        },
+        "D_tokens_B": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.134,
+          "max": 299.893,
+          "unique": 500
+        },
+        "val_loss": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 2.5959,
+          "max": 4.5229,
+          "unique": 492
+        },
+        "step": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.0,
+          "max": 143.0,
+          "unique": 117
+        },
+        "interpolated": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 1.0,
+          "max": 1.0,
+          "unique": 1
+        }
+      },
+      "missing_required_columns": [],
+      "source_metadata": {}
+    },
+    {
+      "dataset_id": "B3",
+      "nature": "interpolated",
+      "role": "trajectory_validation",
+      "path": "data/raw/real_attachments/B_scaling_laws/training_trajectories/pythia_0.409009B_trajectory.csv",
+      "bytes": 14040,
+      "sha256": "8c803195d475d8ff320afd90887ae48cec6463f4d01a2264c6680611ed9db170",
+      "manifest_identity_match": true,
+      "rows": 500,
+      "columns": 5,
+      "header": [
+        "N_params_B",
+        "D_tokens_B",
+        "val_loss",
+        "step",
+        "interpolated"
+      ],
+      "missing_by_column": {
+        "N_params_B": 0,
+        "D_tokens_B": 0,
+        "val_loss": 0,
+        "step": 0,
+        "interpolated": 0
+      },
+      "duplicate_rows": 0,
+      "required_numeric": {
+        "N_params_B": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.409009,
+          "max": 0.409009,
+          "unique": 1
+        },
+        "D_tokens_B": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.134,
+          "max": 299.893,
+          "unique": 500
+        },
+        "val_loss": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 2.4196,
+          "max": 4.3484,
+          "unique": 496
+        },
+        "step": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.0,
+          "max": 143.0,
+          "unique": 117
+        },
+        "interpolated": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 1.0,
+          "max": 1.0,
+          "unique": 1
+        }
+      },
+      "missing_required_columns": [],
+      "source_metadata": {}
+    },
+    {
+      "dataset_id": "B3",
+      "nature": "interpolated",
+      "role": "trajectory_validation",
+      "path": "data/raw/real_attachments/B_scaling_laws/training_trajectories/pythia_1.040867B_trajectory.csv",
+      "bytes": 14040,
+      "sha256": "bb73b2852db183bee3d76c76f55e2bdcc292d7ed0881cb27966525b56afcafc0",
+      "manifest_identity_match": true,
+      "rows": 500,
+      "columns": 5,
+      "header": [
+        "N_params_B",
+        "D_tokens_B",
+        "val_loss",
+        "step",
+        "interpolated"
+      ],
+      "missing_by_column": {
+        "N_params_B": 0,
+        "D_tokens_B": 0,
+        "val_loss": 0,
+        "step": 0,
+        "interpolated": 0
+      },
+      "duplicate_rows": 0,
+      "required_numeric": {
+        "N_params_B": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 1.040867,
+          "max": 1.040867,
+          "unique": 1
+        },
+        "D_tokens_B": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.134,
+          "max": 299.893,
+          "unique": 500
+        },
+        "val_loss": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 2.2923,
+          "max": 4.2162,
+          "unique": 496
+        },
+        "step": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.0,
+          "max": 143.0,
+          "unique": 117
+        },
+        "interpolated": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 1.0,
+          "max": 1.0,
+          "unique": 1
+        }
+      },
+      "missing_required_columns": [],
+      "source_metadata": {}
+    },
+    {
+      "dataset_id": "B3",
+      "nature": "interpolated",
+      "role": "trajectory_validation",
+      "path": "data/raw/real_attachments/B_scaling_laws/training_trajectories/pythia_1.416184B_trajectory.csv",
+      "bytes": 14040,
+      "sha256": "cd0d718747fb6048cb474066dbf35f64ef852f59cba2886484cbdf14bc68a02f",
+      "manifest_identity_match": true,
+      "rows": 500,
+      "columns": 5,
+      "header": [
+        "N_params_B",
+        "D_tokens_B",
+        "val_loss",
+        "step",
+        "interpolated"
+      ],
+      "missing_by_column": {
+        "N_params_B": 0,
+        "D_tokens_B": 0,
+        "val_loss": 0,
+        "step": 0,
+        "interpolated": 0
+      },
+      "duplicate_rows": 0,
+      "required_numeric": {
+        "N_params_B": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 1.416184,
+          "max": 1.416184,
+          "unique": 1
+        },
+        "D_tokens_B": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.134,
+          "max": 299.893,
+          "unique": 500
+        },
+        "val_loss": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 2.2523,
+          "max": 4.1845,
+          "unique": 496
+        },
+        "step": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.0,
+          "max": 143.0,
+          "unique": 117
+        },
+        "interpolated": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 1.0,
+          "max": 1.0,
+          "unique": 1
+        }
+      },
+      "missing_required_columns": [],
+      "source_metadata": {}
+    },
+    {
+      "dataset_id": "B3",
+      "nature": "interpolated",
+      "role": "trajectory_validation",
+      "path": "data/raw/real_attachments/B_scaling_laws/training_trajectories/pythia_11.965825B_trajectory.csv",
+      "bytes": 14540,
+      "sha256": "e223b3d48bc4fef3cbc03fd583ff7aef87e474903d829f6c417310cb99fa7b5e",
+      "manifest_identity_match": true,
+      "rows": 500,
+      "columns": 5,
+      "header": [
+        "N_params_B",
+        "D_tokens_B",
+        "val_loss",
+        "step",
+        "interpolated"
+      ],
+      "missing_by_column": {
+        "N_params_B": 0,
+        "D_tokens_B": 0,
+        "val_loss": 0,
+        "step": 0,
+        "interpolated": 0
+      },
+      "duplicate_rows": 0,
+      "required_numeric": {
+        "N_params_B": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 11.965825,
+          "max": 11.965825,
+          "unique": 1
+        },
+        "D_tokens_B": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.134,
+          "max": 299.893,
+          "unique": 500
+        },
+        "val_loss": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 2.0936,
+          "max": 4.0229,
+          "unique": 492
+        },
+        "step": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.0,
+          "max": 143.0,
+          "unique": 117
+        },
+        "interpolated": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 1.0,
+          "max": 1.0,
+          "unique": 1
+        }
+      },
+      "missing_required_columns": [],
+      "source_metadata": {}
+    },
+    {
+      "dataset_id": "B3",
+      "nature": "interpolated",
+      "role": "trajectory_validation",
+      "path": "data/raw/real_attachments/B_scaling_laws/training_trajectories/pythia_2.782831B_trajectory.csv",
+      "bytes": 14040,
+      "sha256": "552f03249b69234009eb028b3296d6bd1b1cb3a52c0d3a84a669baa0e3179482",
+      "manifest_identity_match": true,
+      "rows": 500,
+      "columns": 5,
+      "header": [
+        "N_params_B",
+        "D_tokens_B",
+        "val_loss",
+        "step",
+        "interpolated"
+      ],
+      "missing_by_column": {
+        "N_params_B": 0,
+        "D_tokens_B": 0,
+        "val_loss": 0,
+        "step": 0,
+        "interpolated": 0
+      },
+      "duplicate_rows": 0,
+      "required_numeric": {
+        "N_params_B": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 2.782831,
+          "max": 2.782831,
+          "unique": 1
+        },
+        "D_tokens_B": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.134,
+          "max": 299.893,
+          "unique": 500
+        },
+        "val_loss": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 2.1897,
+          "max": 4.1185,
+          "unique": 496
+        },
+        "step": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.0,
+          "max": 143.0,
+          "unique": 117
+        },
+        "interpolated": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 1.0,
+          "max": 1.0,
+          "unique": 1
+        }
+      },
+      "missing_required_columns": [],
+      "source_metadata": {}
+    },
+    {
+      "dataset_id": "B3",
+      "nature": "interpolated",
+      "role": "trajectory_validation",
+      "path": "data/raw/real_attachments/B_scaling_laws/training_trajectories/pythia_6.86104B_trajectory.csv",
+      "bytes": 13540,
+      "sha256": "8814c8414fddc914444c74e6cf8da02e3e156a0d7fb8acea6c5da05e438bf054",
+      "manifest_identity_match": true,
+      "rows": 500,
+      "columns": 5,
+      "header": [
+        "N_params_B",
+        "D_tokens_B",
+        "val_loss",
+        "step",
+        "interpolated"
+      ],
+      "missing_by_column": {
+        "N_params_B": 0,
+        "D_tokens_B": 0,
+        "val_loss": 0,
+        "step": 0,
+        "interpolated": 0
+      },
+      "duplicate_rows": 0,
+      "required_numeric": {
+        "N_params_B": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 6.86104,
+          "max": 6.86104,
+          "unique": 1
+        },
+        "D_tokens_B": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.134,
+          "max": 299.893,
+          "unique": 500
+        },
+        "val_loss": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 2.1224,
+          "max": 4.0498,
+          "unique": 497
+        },
+        "step": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.0,
+          "max": 143.0,
+          "unique": 117
+        },
+        "interpolated": {
+          "count": 500,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 1.0,
+          "max": 1.0,
+          "unique": 1
+        }
+      },
+      "missing_required_columns": [],
+      "source_metadata": {}
+    },
+    {
+      "dataset_id": "B4",
+      "nature": "observed",
+      "role": "cross_family_validation",
+      "path": "data/raw/real_attachments/B_scaling_laws/scaling_baseline.csv",
+      "bytes": 1421,
+      "sha256": "2272983ded93de35e05f9acbf95ebceedf43f283345e4be72b54fee94080391e",
+      "manifest_identity_match": true,
+      "rows": 57,
+      "columns": 5,
+      "header": [
+        "family",
+        "N_params_B",
+        "D_tokens_B",
+        "val_loss",
+        "is_converged"
+      ],
+      "missing_by_column": {
+        "family": 0,
+        "N_params_B": 0,
+        "D_tokens_B": 0,
+        "val_loss": 0,
+        "is_converged": 0
+      },
+      "duplicate_rows": 0,
+      "required_numeric": {
+        "N_params_B": {
+          "count": 57,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.07,
+          "max": 72.0,
+          "unique": 42
+        },
+        "D_tokens_B": {
+          "count": 57,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 6.0,
+          "max": 33739.0,
+          "unique": 30
+        },
+        "val_loss": {
+          "count": 57,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 1.71,
+          "max": 4.3629,
+          "unique": 50
+        }
+      },
+      "missing_required_columns": [],
+      "source_metadata": {
+        "source": "Curated convergence snapshots from open model family documentation and papers",
+        "note": "V5.29: 57 convergence points across 12 model families (added Cerebras-GPT 7 points)"
+      }
+    },
+    {
+      "dataset_id": "B5",
+      "nature": "observed",
+      "role": "literature_validation",
+      "path": "data/raw/real_attachments/B_scaling_laws/published_scaling_data.csv",
+      "bytes": 1967,
+      "sha256": "dd858c5e48610e28589340d5db023d6abfb31df597506789ccdfc6a546731bbd",
+      "manifest_identity_match": true,
+      "rows": 44,
+      "columns": 6,
+      "header": [
+        "family",
+        "N_params_B",
+        "D_tokens_B",
+        "val_loss",
+        "source",
+        "is_converged"
+      ],
+      "missing_by_column": {
+        "family": 0,
+        "N_params_B": 0,
+        "D_tokens_B": 0,
+        "val_loss": 0,
+        "source": 0,
+        "is_converged": 0
+      },
+      "duplicate_rows": 0,
+      "required_numeric": {
+        "N_params_B": {
+          "count": 44,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.125,
+          "max": 540.0,
+          "unique": 32
+        },
+        "D_tokens_B": {
+          "count": 44,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 5.0,
+          "max": 2000.0,
+          "unique": 15
+        },
+        "val_loss": {
+          "count": 44,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 1.473,
+          "max": 3.015,
+          "unique": 43
+        }
+      },
+      "missing_required_columns": [],
+      "source_metadata": {}
+    },
+    {
+      "dataset_id": "B6",
+      "nature": "semi_synthetic",
+      "role": "quality_base",
+      "path": "data/raw/real_attachments/B_scaling_laws/supplementary_NQ_experiment.csv",
+      "bytes": 13670,
+      "sha256": "c7450ce0d67d8692535fef4709e60e2da60b2c184738bf96df160a4be0a33a7f",
+      "manifest_identity_match": true,
+      "rows": 360,
+      "columns": 5,
+      "header": [
+        "experiment_id",
+        "N_params_B",
+        "D_tokens_B",
+        "Q_score",
+        "val_loss"
+      ],
+      "missing_by_column": {
+        "experiment_id": 0,
+        "N_params_B": 0,
+        "D_tokens_B": 0,
+        "Q_score": 0,
+        "val_loss": 0
+      },
+      "duplicate_rows": 0,
+      "required_numeric": {
+        "N_params_B": {
+          "count": 360,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.07,
+          "max": 11.97,
+          "unique": 9
+        },
+        "D_tokens_B": {
+          "count": 360,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 10.0,
+          "max": 600.0,
+          "unique": 5
+        },
+        "Q_score": {
+          "count": 360,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.1,
+          "max": 1.0,
+          "unique": 8
+        },
+        "val_loss": {
+          "count": 360,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 2.0161,
+          "max": 3.7216,
+          "unique": 357
+        }
+      },
+      "missing_required_columns": [],
+      "source_metadata": {
+        "source": "Semi-synthetic, calibrated from Pythia training log + RegMix quality signals",
+        "note": "V5.29: 360 points (9N × 5D × 8Q); semi-synthetic supplement for N-D-Q interaction analysis."
+      }
+    },
+    {
+      "dataset_id": "B7",
+      "nature": "semi_synthetic",
+      "role": "quality_expanded",
+      "path": "data/raw/real_attachments/B_scaling_laws/supplementary_NQ_experiment_expanded.csv",
+      "bytes": 17154,
+      "sha256": "880fd265ca3e1d9bc93b4559af7ed7c18f89040634266c50bae03d88486e0f3a",
+      "manifest_identity_match": true,
+      "rows": 450,
+      "columns": 5,
+      "header": [
+        "experiment_id",
+        "N_params_B",
+        "D_tokens_B",
+        "Q_score",
+        "val_loss"
+      ],
+      "missing_by_column": {
+        "experiment_id": 0,
+        "N_params_B": 0,
+        "D_tokens_B": 0,
+        "Q_score": 0,
+        "val_loss": 0
+      },
+      "duplicate_rows": 0,
+      "required_numeric": {
+        "N_params_B": {
+          "count": 450,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.07,
+          "max": 11.97,
+          "unique": 9
+        },
+        "D_tokens_B": {
+          "count": 450,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 10.0,
+          "max": 600.0,
+          "unique": 5
+        },
+        "Q_score": {
+          "count": 450,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.1,
+          "max": 1.0,
+          "unique": 10
+        },
+        "val_loss": {
+          "count": 450,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 2.0161,
+          "max": 3.7216,
+          "unique": 443
+        }
+      },
+      "missing_required_columns": [],
+      "source_metadata": {}
+    },
+    {
+      "dataset_id": "B8",
+      "nature": "semi_synthetic",
+      "role": "quality_large_and_extrapolation",
+      "path": "data/raw/real_attachments/B_scaling_laws/supplementary_NQ_experiment_large.csv",
+      "bytes": 81268,
+      "sha256": "bda0d449f75c73bbd04141e5cffbf4bea7002073e34b7fa95a638570fa095ffe",
+      "manifest_identity_match": true,
+      "rows": 1704,
+      "columns": 6,
+      "header": [
+        "experiment_id",
+        "N_params_B",
+        "D_tokens_B",
+        "Q_score",
+        "val_loss",
+        "data_type"
+      ],
+      "missing_by_column": {
+        "experiment_id": 0,
+        "N_params_B": 0,
+        "D_tokens_B": 0,
+        "Q_score": 0,
+        "val_loss": 0,
+        "data_type": 0
+      },
+      "duplicate_rows": 0,
+      "required_numeric": {
+        "N_params_B": {
+          "count": 1704,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.07,
+          "max": 700.0,
+          "unique": 15
+        },
+        "D_tokens_B": {
+          "count": 1704,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 5.0,
+          "max": 2000.0,
+          "unique": 10
+        },
+        "Q_score": {
+          "count": 1704,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.05,
+          "max": 1.0,
+          "unique": 12
+        },
+        "val_loss": {
+          "count": 1704,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.5,
+          "max": 3.3659,
+          "unique": 1298
+        }
+      },
+      "missing_required_columns": [],
+      "source_metadata": {}
+    },
+    {
+      "dataset_id": "B9",
+      "nature": "reported_metadata",
+      "role": "large_model_parameters",
+      "path": "data/raw/real_attachments/B_scaling_laws/supplementary_large_models.csv",
+      "bytes": 13400,
+      "sha256": "ee794c1c586ed33c485a9eb9a2a3d993790402b63297e9b2765a1387930e940e",
+      "manifest_identity_match": true,
+      "rows": 132,
+      "columns": 8,
+      "header": [
+        "model_name",
+        "N_params_B",
+        "D_tokens_B",
+        "FLOPs",
+        "publication_date",
+        "organization",
+        "accessibility",
+        "country"
+      ],
+      "missing_by_column": {
+        "model_name": 0,
+        "N_params_B": 0,
+        "D_tokens_B": 0,
+        "FLOPs": 11,
+        "publication_date": 0,
+        "organization": 1,
+        "accessibility": 2,
+        "country": 1
+      },
+      "duplicate_rows": 0,
+      "required_numeric": {
+        "N_params_B": {
+          "count": 132,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 100.0,
+          "max": 10000.0,
+          "unique": 71
+        },
+        "D_tokens_B": {
+          "count": 132,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.0,
+          "max": 36000.0,
+          "unique": 100
+        },
+        "FLOPs": {
+          "count": 121,
+          "missing": 11,
+          "invalid_or_nonfinite": 0,
+          "min": 1.449e+18,
+          "max": 5e+26,
+          "unique": 107
+        }
+      },
+      "missing_required_columns": [],
+      "source_metadata": {}
+    },
+    {
+      "dataset_id": "B10",
+      "nature": "estimated",
+      "role": "large_model_extrapolation",
+      "path": "data/raw/real_attachments/B_scaling_laws/supplementary_large_baseline.csv",
+      "bytes": 4744,
+      "sha256": "a240e210c5b37444356c28eea96c6cc36be79c29baae1621c2e08aff727ccfeb",
+      "manifest_identity_match": true,
+      "rows": 128,
+      "columns": 5,
+      "header": [
+        "family",
+        "N_params_B",
+        "D_tokens_B",
+        "val_loss",
+        "is_converged"
+      ],
+      "missing_by_column": {
+        "family": 0,
+        "N_params_B": 0,
+        "D_tokens_B": 0,
+        "val_loss": 0,
+        "is_converged": 0
+      },
+      "duplicate_rows": 0,
+      "required_numeric": {
+        "N_params_B": {
+          "count": 128,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 100.0,
+          "max": 10000.0,
+          "unique": 71
+        },
+        "D_tokens_B": {
+          "count": 128,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 0.1,
+          "max": 36000.0,
+          "unique": 99
+        },
+        "val_loss": {
+          "count": 128,
+          "missing": 0,
+          "invalid_or_nonfinite": 0,
+          "min": 1.7838,
+          "max": 4.0812,
+          "unique": 115
+        }
+      },
+      "missing_required_columns": [],
+      "source_metadata": {}
+    },
+    {
+      "dataset_id": "B11",
+      "nature": "reported_metadata",
+      "role": "family_metadata",
+      "path": "data/raw/real_attachments/B_scaling_laws/open_model_family_metadata.csv",
+      "bytes": 1975,
+      "sha256": "641682f0ea6c46f25a0188ac723af44e0bc2e27c760e744743a15e97e29ee064",
+      "manifest_identity_match": true,
+      "rows": 18,
+      "columns": 8,
+      "header": [
+        "family",
+        "model_repo",
+        "config_bytes",
+        "readme_bytes",
+        "weight_file_count",
+        "weight_total_bytes",
+        "source_url",
+        "error"
+      ],
+      "missing_by_column": {
+        "family": 0,
+        "model_repo": 0,
+        "config_bytes": 0,
+        "readme_bytes": 0,
+        "weight_file_count": 0,
+        "weight_total_bytes": 0,
+        "source_url": 0,
+        "error": 18
+      },
+      "duplicate_rows": 0,
+      "required_numeric": {},
+      "missing_required_columns": [],
+      "source_metadata": {
+        "source": "Hugging Face model repository APIs for Pythia, Cerebras-GPT, and OLMo"
+      }
+    },
+    {
+      "dataset_id": "B12",
+      "nature": "observed_metadata",
+      "role": "checkpoint_index",
+      "path": "data/raw/real_attachments/B_scaling_laws/pythia_checkpoint_index.csv",
+      "bytes": 117698,
+      "sha256": "0f7f63535cbc1bbef5165776562e71401af9f762cfe02aaea30c824f45fbc9ed",
+      "manifest_identity_match": true,
+      "rows": 1386,
+      "columns": 5,
+      "header": [
+        "model_repo",
+        "model_size",
+        "step",
+        "branch",
+        "commit"
+      ],
+      "missing_by_column": {
+        "model_repo": 0,
+        "model_size": 0,
+        "step": 0,
+        "branch": 0,
+        "commit": 0
+      },
+      "duplicate_rows": 0,
+      "required_numeric": {},
+      "missing_required_columns": [],
+      "source_metadata": {
+        "source": "https://huggingface.co/collections/EleutherAI/pythia-scaling-suite-64fb5dfa8c21ebb3db7ad2e1"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "check_id": "B1_pythia_training_log_existing_manifest_identity",
+      "status": "pass",
+      "evidence": {
+        "bytes": 111459,
+        "sha256": "529a59644b0f57bf3a76037838b614bfedc35e58bb26b93052e34ffc63e454c2",
+        "manifest_entry_present": true
+      },
+      "note": "Byte count and SHA256 must match data/raw/F_MANIFEST.json"
+    },
+    {
+      "check_id": "B1_pythia_training_log_existing_required_numeric",
+      "status": "pass",
+      "evidence": {
+        "missing_columns": [],
+        "invalid_or_nonfinite": {}
+      },
+      "note": "Required numeric fields must exist and contain finite values when populated"
+    },
+    {
+      "check_id": "B1_pythia_training_log_existing_exact_duplicate_rows",
+      "status": "pass",
+      "evidence": 0,
+      "note": "Exact duplicate source rows are not removed by this audit"
+    },
+    {
+      "check_id": "B1_pythia_training_log_existing_key_uniqueness",
+      "status": "pass",
+      "evidence": {
+        "key_columns": [
+          "run_id",
+          "steps"
+        ],
+        "duplicate_keys": 0
+      },
+      "note": "Candidate record keys must be unique before fitting or joining"
+    },
+    {
+      "check_id": "B2_cerebras_training_log_manifest_identity",
+      "status": "pass",
+      "evidence": {
+        "bytes": 89643,
+        "sha256": "178f878cad2cb31e4ec104c670553de23818197876d824a113fdb911125951a6",
+        "manifest_entry_present": true
+      },
+      "note": "Byte count and SHA256 must match data/raw/F_MANIFEST.json"
+    },
+    {
+      "check_id": "B2_cerebras_training_log_required_numeric",
+      "status": "pass",
+      "evidence": {
+        "missing_columns": [],
+        "invalid_or_nonfinite": {}
+      },
+      "note": "Required numeric fields must exist and contain finite values when populated"
+    },
+    {
+      "check_id": "B2_cerebras_training_log_exact_duplicate_rows",
+      "status": "pass",
+      "evidence": 0,
+      "note": "Exact duplicate source rows are not removed by this audit"
+    },
+    {
+      "check_id": "B2_cerebras_training_log_key_uniqueness",
+      "status": "pass",
+      "evidence": {
+        "key_columns": [
+          "run_id",
+          "steps"
+        ],
+        "duplicate_keys": 0
+      },
+      "note": "Candidate record keys must be unique before fitting or joining"
+    },
+    {
+      "check_id": "B3_pythia_0.070542B_trajectory_manifest_identity",
+      "status": "pass",
+      "evidence": {
+        "bytes": 14040,
+        "sha256": "19663f2f14d62af377377962ec8f794148450bfb278fdbeb2452f4641fe6a440",
+        "manifest_entry_present": true
+      },
+      "note": "Byte count and SHA256 must match data/raw/F_MANIFEST.json"
+    },
+    {
+      "check_id": "B3_pythia_0.070542B_trajectory_required_numeric",
+      "status": "pass",
+      "evidence": {
+        "missing_columns": [],
+        "invalid_or_nonfinite": {}
+      },
+      "note": "Required numeric fields must exist and contain finite values when populated"
+    },
+    {
+      "check_id": "B3_pythia_0.070542B_trajectory_exact_duplicate_rows",
+      "status": "pass",
+      "evidence": 0,
+      "note": "Exact duplicate source rows are not removed by this audit"
+    },
+    {
+      "check_id": "B3_pythia_0.070542B_trajectory_key_uniqueness",
+      "status": "pass",
+      "evidence": {
+        "key_columns": [
+          "N_params_B",
+          "D_tokens_B"
+        ],
+        "duplicate_keys": 0
+      },
+      "note": "Candidate record keys must be unique before fitting or joining"
+    },
+    {
+      "check_id": "B3_pythia_0.162405B_trajectory_manifest_identity",
+      "status": "pass",
+      "evidence": {
+        "bytes": 14040,
+        "sha256": "8e2b78cde966b0a3e8b6272935c3f3dcccc5a54e94bb7db79ded2fd8fdf5a124",
+        "manifest_entry_present": true
+      },
+      "note": "Byte count and SHA256 must match data/raw/F_MANIFEST.json"
+    },
+    {
+      "check_id": "B3_pythia_0.162405B_trajectory_required_numeric",
+      "status": "pass",
+      "evidence": {
+        "missing_columns": [],
+        "invalid_or_nonfinite": {}
+      },
+      "note": "Required numeric fields must exist and contain finite values when populated"
+    },
+    {
+      "check_id": "B3_pythia_0.162405B_trajectory_exact_duplicate_rows",
+      "status": "pass",
+      "evidence": 0,
+      "note": "Exact duplicate source rows are not removed by this audit"
+    },
+    {
+      "check_id": "B3_pythia_0.162405B_trajectory_key_uniqueness",
+      "status": "pass",
+      "evidence": {
+        "key_columns": [
+          "N_params_B",
+          "D_tokens_B"
+        ],
+        "duplicate_keys": 0
+      },
+      "note": "Candidate record keys must be unique before fitting or joining"
+    },
+    {
+      "check_id": "B3_pythia_0.409009B_trajectory_manifest_identity",
+      "status": "pass",
+      "evidence": {
+        "bytes": 14040,
+        "sha256": "8c803195d475d8ff320afd90887ae48cec6463f4d01a2264c6680611ed9db170",
+        "manifest_entry_present": true
+      },
+      "note": "Byte count and SHA256 must match data/raw/F_MANIFEST.json"
+    },
+    {
+      "check_id": "B3_pythia_0.409009B_trajectory_required_numeric",
+      "status": "pass",
+      "evidence": {
+        "missing_columns": [],
+        "invalid_or_nonfinite": {}
+      },
+      "note": "Required numeric fields must exist and contain finite values when populated"
+    },
+    {
+      "check_id": "B3_pythia_0.409009B_trajectory_exact_duplicate_rows",
+      "status": "pass",
+      "evidence": 0,
+      "note": "Exact duplicate source rows are not removed by this audit"
+    },
+    {
+      "check_id": "B3_pythia_0.409009B_trajectory_key_uniqueness",
+      "status": "pass",
+      "evidence": {
+        "key_columns": [
+          "N_params_B",
+          "D_tokens_B"
+        ],
+        "duplicate_keys": 0
+      },
+      "note": "Candidate record keys must be unique before fitting or joining"
+    },
+    {
+      "check_id": "B3_pythia_1.040867B_trajectory_manifest_identity",
+      "status": "pass",
+      "evidence": {
+        "bytes": 14040,
+        "sha256": "bb73b2852db183bee3d76c76f55e2bdcc292d7ed0881cb27966525b56afcafc0",
+        "manifest_entry_present": true
+      },
+      "note": "Byte count and SHA256 must match data/raw/F_MANIFEST.json"
+    },
+    {
+      "check_id": "B3_pythia_1.040867B_trajectory_required_numeric",
+      "status": "pass",
+      "evidence": {
+        "missing_columns": [],
+        "invalid_or_nonfinite": {}
+      },
+      "note": "Required numeric fields must exist and contain finite values when populated"
+    },
+    {
+      "check_id": "B3_pythia_1.040867B_trajectory_exact_duplicate_rows",
+      "status": "pass",
+      "evidence": 0,
+      "note": "Exact duplicate source rows are not removed by this audit"
+    },
+    {
+      "check_id": "B3_pythia_1.040867B_trajectory_key_uniqueness",
+      "status": "pass",
+      "evidence": {
+        "key_columns": [
+          "N_params_B",
+          "D_tokens_B"
+        ],
+        "duplicate_keys": 0
+      },
+      "note": "Candidate record keys must be unique before fitting or joining"
+    },
+    {
+      "check_id": "B3_pythia_1.416184B_trajectory_manifest_identity",
+      "status": "pass",
+      "evidence": {
+        "bytes": 14040,
+        "sha256": "cd0d718747fb6048cb474066dbf35f64ef852f59cba2886484cbdf14bc68a02f",
+        "manifest_entry_present": true
+      },
+      "note": "Byte count and SHA256 must match data/raw/F_MANIFEST.json"
+    },
+    {
+      "check_id": "B3_pythia_1.416184B_trajectory_required_numeric",
+      "status": "pass",
+      "evidence": {
+        "missing_columns": [],
+        "invalid_or_nonfinite": {}
+      },
+      "note": "Required numeric fields must exist and contain finite values when populated"
+    },
+    {
+      "check_id": "B3_pythia_1.416184B_trajectory_exact_duplicate_rows",
+      "status": "pass",
+      "evidence": 0,
+      "note": "Exact duplicate source rows are not removed by this audit"
+    },
+    {
+      "check_id": "B3_pythia_1.416184B_trajectory_key_uniqueness",
+      "status": "pass",
+      "evidence": {
+        "key_columns": [
+          "N_params_B",
+          "D_tokens_B"
+        ],
+        "duplicate_keys": 0
+      },
+      "note": "Candidate record keys must be unique before fitting or joining"
+    },
+    {
+      "check_id": "B3_pythia_11.965825B_trajectory_manifest_identity",
+      "status": "pass",
+      "evidence": {
+        "bytes": 14540,
+        "sha256": "e223b3d48bc4fef3cbc03fd583ff7aef87e474903d829f6c417310cb99fa7b5e",
+        "manifest_entry_present": true
+      },
+      "note": "Byte count and SHA256 must match data/raw/F_MANIFEST.json"
+    },
+    {
+      "check_id": "B3_pythia_11.965825B_trajectory_required_numeric",
+      "status": "pass",
+      "evidence": {
+        "missing_columns": [],
+        "invalid_or_nonfinite": {}
+      },
+      "note": "Required numeric fields must exist and contain finite values when populated"
+    },
+    {
+      "check_id": "B3_pythia_11.965825B_trajectory_exact_duplicate_rows",
+      "status": "pass",
+      "evidence": 0,
+      "note": "Exact duplicate source rows are not removed by this audit"
+    },
+    {
+      "check_id": "B3_pythia_11.965825B_trajectory_key_uniqueness",
+      "status": "pass",
+      "evidence": {
+        "key_columns": [
+          "N_params_B",
+          "D_tokens_B"
+        ],
+        "duplicate_keys": 0
+      },
+      "note": "Candidate record keys must be unique before fitting or joining"
+    },
+    {
+      "check_id": "B3_pythia_2.782831B_trajectory_manifest_identity",
+      "status": "pass",
+      "evidence": {
+        "bytes": 14040,
+        "sha256": "552f03249b69234009eb028b3296d6bd1b1cb3a52c0d3a84a669baa0e3179482",
+        "manifest_entry_present": true
+      },
+      "note": "Byte count and SHA256 must match data/raw/F_MANIFEST.json"
+    },
+    {
+      "check_id": "B3_pythia_2.782831B_trajectory_required_numeric",
+      "status": "pass",
+      "evidence": {
+        "missing_columns": [],
+        "invalid_or_nonfinite": {}
+      },
+      "note": "Required numeric fields must exist and contain finite values when populated"
+    },
+    {
+      "check_id": "B3_pythia_2.782831B_trajectory_exact_duplicate_rows",
+      "status": "pass",
+      "evidence": 0,
+      "note": "Exact duplicate source rows are not removed by this audit"
+    },
+    {
+      "check_id": "B3_pythia_2.782831B_trajectory_key_uniqueness",
+      "status": "pass",
+      "evidence": {
+        "key_columns": [
+          "N_params_B",
+          "D_tokens_B"
+        ],
+        "duplicate_keys": 0
+      },
+      "note": "Candidate record keys must be unique before fitting or joining"
+    },
+    {
+      "check_id": "B3_pythia_6.86104B_trajectory_manifest_identity",
+      "status": "pass",
+      "evidence": {
+        "bytes": 13540,
+        "sha256": "8814c8414fddc914444c74e6cf8da02e3e156a0d7fb8acea6c5da05e438bf054",
+        "manifest_entry_present": true
+      },
+      "note": "Byte count and SHA256 must match data/raw/F_MANIFEST.json"
+    },
+    {
+      "check_id": "B3_pythia_6.86104B_trajectory_required_numeric",
+      "status": "pass",
+      "evidence": {
+        "missing_columns": [],
+        "invalid_or_nonfinite": {}
+      },
+      "note": "Required numeric fields must exist and contain finite values when populated"
+    },
+    {
+      "check_id": "B3_pythia_6.86104B_trajectory_exact_duplicate_rows",
+      "status": "pass",
+      "evidence": 0,
+      "note": "Exact duplicate source rows are not removed by this audit"
+    },
+    {
+      "check_id": "B3_pythia_6.86104B_trajectory_key_uniqueness",
+      "status": "pass",
+      "evidence": {
+        "key_columns": [
+          "N_params_B",
+          "D_tokens_B"
+        ],
+        "duplicate_keys": 0
+      },
+      "note": "Candidate record keys must be unique before fitting or joining"
+    },
+    {
+      "check_id": "B4_scaling_baseline_manifest_identity",
+      "status": "pass",
+      "evidence": {
+        "bytes": 1421,
+        "sha256": "2272983ded93de35e05f9acbf95ebceedf43f283345e4be72b54fee94080391e",
+        "manifest_entry_present": true
+      },
+      "note": "Byte count and SHA256 must match data/raw/F_MANIFEST.json"
+    },
+    {
+      "check_id": "B4_scaling_baseline_required_numeric",
+      "status": "pass",
+      "evidence": {
+        "missing_columns": [],
+        "invalid_or_nonfinite": {}
+      },
+      "note": "Required numeric fields must exist and contain finite values when populated"
+    },
+    {
+      "check_id": "B4_scaling_baseline_exact_duplicate_rows",
+      "status": "pass",
+      "evidence": 0,
+      "note": "Exact duplicate source rows are not removed by this audit"
+    },
+    {
+      "check_id": "B4_scaling_baseline_key_uniqueness",
+      "status": "pass",
+      "evidence": {
+        "key_columns": [
+          "family",
+          "N_params_B",
+          "D_tokens_B"
+        ],
+        "duplicate_keys": 0
+      },
+      "note": "Candidate record keys must be unique before fitting or joining"
+    },
+    {
+      "check_id": "B5_published_scaling_data_manifest_identity",
+      "status": "pass",
+      "evidence": {
+        "bytes": 1967,
+        "sha256": "dd858c5e48610e28589340d5db023d6abfb31df597506789ccdfc6a546731bbd",
+        "manifest_entry_present": true
+      },
+      "note": "Byte count and SHA256 must match data/raw/F_MANIFEST.json"
+    },
+    {
+      "check_id": "B5_published_scaling_data_required_numeric",
+      "status": "pass",
+      "evidence": {
+        "missing_columns": [],
+        "invalid_or_nonfinite": {}
+      },
+      "note": "Required numeric fields must exist and contain finite values when populated"
+    },
+    {
+      "check_id": "B5_published_scaling_data_exact_duplicate_rows",
+      "status": "pass",
+      "evidence": 0,
+      "note": "Exact duplicate source rows are not removed by this audit"
+    },
+    {
+      "check_id": "B5_published_scaling_data_key_uniqueness",
+      "status": "pass",
+      "evidence": {
+        "key_columns": [
+          "family",
+          "N_params_B",
+          "D_tokens_B",
+          "source"
+        ],
+        "duplicate_keys": 0
+      },
+      "note": "Candidate record keys must be unique before fitting or joining"
+    },
+    {
+      "check_id": "B6_supplementary_NQ_experiment_manifest_identity",
+      "status": "pass",
+      "evidence": {
+        "bytes": 13670,
+        "sha256": "c7450ce0d67d8692535fef4709e60e2da60b2c184738bf96df160a4be0a33a7f",
+        "manifest_entry_present": true
+      },
+      "note": "Byte count and SHA256 must match data/raw/F_MANIFEST.json"
+    },
+    {
+      "check_id": "B6_supplementary_NQ_experiment_required_numeric",
+      "status": "pass",
+      "evidence": {
+        "missing_columns": [],
+        "invalid_or_nonfinite": {}
+      },
+      "note": "Required numeric fields must exist and contain finite values when populated"
+    },
+    {
+      "check_id": "B6_supplementary_NQ_experiment_exact_duplicate_rows",
+      "status": "pass",
+      "evidence": 0,
+      "note": "Exact duplicate source rows are not removed by this audit"
+    },
+    {
+      "check_id": "B6_supplementary_NQ_experiment_key_uniqueness",
+      "status": "pass",
+      "evidence": {
+        "key_columns": [
+          "experiment_id"
+        ],
+        "duplicate_keys": 0
+      },
+      "note": "Candidate record keys must be unique before fitting or joining"
+    },
+    {
+      "check_id": "B7_supplementary_NQ_experiment_expanded_manifest_identity",
+      "status": "pass",
+      "evidence": {
+        "bytes": 17154,
+        "sha256": "880fd265ca3e1d9bc93b4559af7ed7c18f89040634266c50bae03d88486e0f3a",
+        "manifest_entry_present": true
+      },
+      "note": "Byte count and SHA256 must match data/raw/F_MANIFEST.json"
+    },
+    {
+      "check_id": "B7_supplementary_NQ_experiment_expanded_required_numeric",
+      "status": "pass",
+      "evidence": {
+        "missing_columns": [],
+        "invalid_or_nonfinite": {}
+      },
+      "note": "Required numeric fields must exist and contain finite values when populated"
+    },
+    {
+      "check_id": "B7_supplementary_NQ_experiment_expanded_exact_duplicate_rows",
+      "status": "pass",
+      "evidence": 0,
+      "note": "Exact duplicate source rows are not removed by this audit"
+    },
+    {
+      "check_id": "B7_supplementary_NQ_experiment_expanded_key_uniqueness",
+      "status": "pass",
+      "evidence": {
+        "key_columns": [
+          "experiment_id"
+        ],
+        "duplicate_keys": 0
+      },
+      "note": "Candidate record keys must be unique before fitting or joining"
+    },
+    {
+      "check_id": "B8_supplementary_NQ_experiment_large_manifest_identity",
+      "status": "pass",
+      "evidence": {
+        "bytes": 81268,
+        "sha256": "bda0d449f75c73bbd04141e5cffbf4bea7002073e34b7fa95a638570fa095ffe",
+        "manifest_entry_present": true
+      },
+      "note": "Byte count and SHA256 must match data/raw/F_MANIFEST.json"
+    },
+    {
+      "check_id": "B8_supplementary_NQ_experiment_large_required_numeric",
+      "status": "pass",
+      "evidence": {
+        "missing_columns": [],
+        "invalid_or_nonfinite": {}
+      },
+      "note": "Required numeric fields must exist and contain finite values when populated"
+    },
+    {
+      "check_id": "B8_supplementary_NQ_experiment_large_exact_duplicate_rows",
+      "status": "pass",
+      "evidence": 0,
+      "note": "Exact duplicate source rows are not removed by this audit"
+    },
+    {
+      "check_id": "B8_supplementary_NQ_experiment_large_key_uniqueness",
+      "status": "pass",
+      "evidence": {
+        "key_columns": [
+          "experiment_id"
+        ],
+        "duplicate_keys": 0
+      },
+      "note": "Candidate record keys must be unique before fitting or joining"
+    },
+    {
+      "check_id": "B9_supplementary_large_models_manifest_identity",
+      "status": "pass",
+      "evidence": {
+        "bytes": 13400,
+        "sha256": "ee794c1c586ed33c485a9eb9a2a3d993790402b63297e9b2765a1387930e940e",
+        "manifest_entry_present": true
+      },
+      "note": "Byte count and SHA256 must match data/raw/F_MANIFEST.json"
+    },
+    {
+      "check_id": "B9_supplementary_large_models_required_numeric",
+      "status": "pass",
+      "evidence": {
+        "missing_columns": [],
+        "invalid_or_nonfinite": {}
+      },
+      "note": "Required numeric fields must exist and contain finite values when populated"
+    },
+    {
+      "check_id": "B9_supplementary_large_models_exact_duplicate_rows",
+      "status": "pass",
+      "evidence": 0,
+      "note": "Exact duplicate source rows are not removed by this audit"
+    },
+    {
+      "check_id": "B9_supplementary_large_models_key_uniqueness",
+      "status": "pass",
+      "evidence": {
+        "key_columns": [
+          "model_name"
+        ],
+        "duplicate_keys": 0
+      },
+      "note": "Candidate record keys must be unique before fitting or joining"
+    },
+    {
+      "check_id": "B10_supplementary_large_baseline_manifest_identity",
+      "status": "pass",
+      "evidence": {
+        "bytes": 4744,
+        "sha256": "a240e210c5b37444356c28eea96c6cc36be79c29baae1621c2e08aff727ccfeb",
+        "manifest_entry_present": true
+      },
+      "note": "Byte count and SHA256 must match data/raw/F_MANIFEST.json"
+    },
+    {
+      "check_id": "B10_supplementary_large_baseline_required_numeric",
+      "status": "pass",
+      "evidence": {
+        "missing_columns": [],
+        "invalid_or_nonfinite": {}
+      },
+      "note": "Required numeric fields must exist and contain finite values when populated"
+    },
+    {
+      "check_id": "B10_supplementary_large_baseline_exact_duplicate_rows",
+      "status": "pass",
+      "evidence": 0,
+      "note": "Exact duplicate source rows are not removed by this audit"
+    },
+    {
+      "check_id": "B10_supplementary_large_baseline_key_uniqueness",
+      "status": "pass",
+      "evidence": {
+        "key_columns": [
+          "family"
+        ],
+        "duplicate_keys": 0
+      },
+      "note": "Candidate record keys must be unique before fitting or joining"
+    },
+    {
+      "check_id": "B11_open_model_family_metadata_manifest_identity",
+      "status": "pass",
+      "evidence": {
+        "bytes": 1975,
+        "sha256": "641682f0ea6c46f25a0188ac723af44e0bc2e27c760e744743a15e97e29ee064",
+        "manifest_entry_present": true
+      },
+      "note": "Byte count and SHA256 must match data/raw/F_MANIFEST.json"
+    },
+    {
+      "check_id": "B11_open_model_family_metadata_required_numeric",
+      "status": "pass",
+      "evidence": {
+        "missing_columns": [],
+        "invalid_or_nonfinite": {}
+      },
+      "note": "Required numeric fields must exist and contain finite values when populated"
+    },
+    {
+      "check_id": "B11_open_model_family_metadata_exact_duplicate_rows",
+      "status": "pass",
+      "evidence": 0,
+      "note": "Exact duplicate source rows are not removed by this audit"
+    },
+    {
+      "check_id": "B11_open_model_family_metadata_key_uniqueness",
+      "status": "pass",
+      "evidence": {
+        "key_columns": [
+          "model_repo"
+        ],
+        "duplicate_keys": 0
+      },
+      "note": "Candidate record keys must be unique before fitting or joining"
+    },
+    {
+      "check_id": "B12_pythia_checkpoint_index_manifest_identity",
+      "status": "pass",
+      "evidence": {
+        "bytes": 117698,
+        "sha256": "0f7f63535cbc1bbef5165776562e71401af9f762cfe02aaea30c824f45fbc9ed",
+        "manifest_entry_present": true
+      },
+      "note": "Byte count and SHA256 must match data/raw/F_MANIFEST.json"
+    },
+    {
+      "check_id": "B12_pythia_checkpoint_index_required_numeric",
+      "status": "pass",
+      "evidence": {
+        "missing_columns": [],
+        "invalid_or_nonfinite": {}
+      },
+      "note": "Required numeric fields must exist and contain finite values when populated"
+    },
+    {
+      "check_id": "B12_pythia_checkpoint_index_exact_duplicate_rows",
+      "status": "pass",
+      "evidence": 0,
+      "note": "Exact duplicate source rows are not removed by this audit"
+    },
+    {
+      "check_id": "B12_pythia_checkpoint_index_key_uniqueness",
+      "status": "pass",
+      "evidence": {
+        "key_columns": [
+          "model_repo",
+          "branch"
+        ],
+        "duplicate_keys": 0
+      },
+      "note": "Candidate record keys must be unique before fitting or joining"
+    },
+    {
+      "check_id": "B1_documented_row_count",
+      "status": "pass",
+      "evidence": {
+        "actual": 1176,
+        "documented": 1176
+      },
+      "note": "A mismatch is an input-documentation issue to resolve, not an automatic data error"
+    },
+    {
+      "check_id": "B2_documented_row_count",
+      "status": "pass",
+      "evidence": {
+        "actual": 1029,
+        "documented": 1029
+      },
+      "note": "A mismatch is an input-documentation issue to resolve, not an automatic data error"
+    },
+    {
+      "check_id": "B3_documented_row_count",
+      "status": "pass",
+      "evidence": {
+        "actual": 4000,
+        "documented": 4000
+      },
+      "note": "A mismatch is an input-documentation issue to resolve, not an automatic data error"
+    },
+    {
+      "check_id": "B3_file_and_per_file_counts",
+      "status": "pass",
+      "evidence": {
+        "files": 8,
+        "rows_per_file": [
+          500,
+          500,
+          500,
+          500,
+          500,
+          500,
+          500,
+          500
+        ]
+      },
+      "note": "Data description states 8 trajectory files with 500 rows each"
+    },
+    {
+      "check_id": "B4_documented_row_count",
+      "status": "pass",
+      "evidence": {
+        "actual": 57,
+        "documented": 57
+      },
+      "note": "A mismatch is an input-documentation issue to resolve, not an automatic data error"
+    },
+    {
+      "check_id": "B5_documented_row_count",
+      "status": "pass",
+      "evidence": {
+        "actual": 44,
+        "documented": 44
+      },
+      "note": "A mismatch is an input-documentation issue to resolve, not an automatic data error"
+    },
+    {
+      "check_id": "B6_documented_row_count",
+      "status": "pass",
+      "evidence": {
+        "actual": 360,
+        "documented": 360
+      },
+      "note": "A mismatch is an input-documentation issue to resolve, not an automatic data error"
+    },
+    {
+      "check_id": "B7_documented_row_count",
+      "status": "pass",
+      "evidence": {
+        "actual": 450,
+        "documented": 450
+      },
+      "note": "A mismatch is an input-documentation issue to resolve, not an automatic data error"
+    },
+    {
+      "check_id": "B8_documented_row_count",
+      "status": "pass",
+      "evidence": {
+        "actual": 1704,
+        "documented": 1704
+      },
+      "note": "A mismatch is an input-documentation issue to resolve, not an automatic data error"
+    },
+    {
+      "check_id": "B9_documented_row_count",
+      "status": "pass",
+      "evidence": {
+        "actual": 132,
+        "documented": 132
+      },
+      "note": "A mismatch is an input-documentation issue to resolve, not an automatic data error"
+    },
+    {
+      "check_id": "B10_documented_row_count",
+      "status": "pass",
+      "evidence": {
+        "actual": 128,
+        "documented": 128
+      },
+      "note": "A mismatch is an input-documentation issue to resolve, not an automatic data error"
+    },
+    {
+      "check_id": "B11_documented_row_count",
+      "status": "pass",
+      "evidence": {
+        "actual": 18,
+        "documented": 18
+      },
+      "note": "A mismatch is an input-documentation issue to resolve, not an automatic data error"
+    },
+    {
+      "check_id": "B12_documented_row_count",
+      "status": "pass",
+      "evidence": {
+        "actual": 1386,
+        "documented": 1386
+      },
+      "note": "A mismatch is an input-documentation issue to resolve, not an automatic data error"
+    },
+    {
+      "check_id": "pythia_training_log_existing_compute_identity",
+      "status": "pass",
+      "evidence": {
+        "median_C_over_6ND": 0.9999995935179582,
+        "min": 0.7658514790353519,
+        "max": 1.7631780989018786,
+        "formula": "C_FLOPs_1e21 / (0.006 * N_params_B * D_tokens_B)"
+      },
+      "note": "N and D are in billions; C is in 1e21 FLOPs"
+    },
+    {
+      "check_id": "pythia_training_log_existing_ppl_exp_loss",
+      "status": "pass",
+      "evidence": {
+        "median_relative_error": 0.00021141657680843332,
+        "max_relative_error": 0.0006108249740539809
+      },
+      "note": "Checks ppl against exp(val_loss), allowing source rounding"
+    },
+    {
+      "check_id": "cerebras_training_log_compute_identity",
+      "status": "pass",
+      "evidence": {
+        "median_C_over_6ND": 1.0,
+        "min": 0.9886610748679714,
+        "max": 1.024024024024024,
+        "formula": "C_FLOPs_1e21 / (0.006 * N_params_B * D_tokens_B)"
+      },
+      "note": "N and D are in billions; C is in 1e21 FLOPs"
+    },
+    {
+      "check_id": "cerebras_training_log_ppl_exp_loss",
+      "status": "pass",
+      "evidence": {
+        "median_relative_error": 8.229192701426436e-05,
+        "max_relative_error": 0.0003071449603509615
+      },
+      "note": "Checks ppl against exp(val_loss), allowing source rounding"
+    },
+    {
+      "check_id": "B3_trajectory_structure",
+      "status": "pass",
+      "evidence": [
+        {
+          "path": "training_trajectories/pythia_0.070542B_trajectory.csv",
+          "constant_N": true,
+          "nondecreasing_D": true,
+          "nondecreasing_step": true,
+          "interpolated_values": [
+            "1"
+          ]
+        },
+        {
+          "path": "training_trajectories/pythia_0.162405B_trajectory.csv",
+          "constant_N": true,
+          "nondecreasing_D": true,
+          "nondecreasing_step": true,
+          "interpolated_values": [
+            "1"
+          ]
+        },
+        {
+          "path": "training_trajectories/pythia_0.409009B_trajectory.csv",
+          "constant_N": true,
+          "nondecreasing_D": true,
+          "nondecreasing_step": true,
+          "interpolated_values": [
+            "1"
+          ]
+        },
+        {
+          "path": "training_trajectories/pythia_1.040867B_trajectory.csv",
+          "constant_N": true,
+          "nondecreasing_D": true,
+          "nondecreasing_step": true,
+          "interpolated_values": [
+            "1"
+          ]
+        },
+        {
+          "path": "training_trajectories/pythia_1.416184B_trajectory.csv",
+          "constant_N": true,
+          "nondecreasing_D": true,
+          "nondecreasing_step": true,
+          "interpolated_values": [
+            "1"
+          ]
+        },
+        {
+          "path": "training_trajectories/pythia_11.965825B_trajectory.csv",
+          "constant_N": true,
+          "nondecreasing_D": true,
+          "nondecreasing_step": true,
+          "interpolated_values": [
+            "1"
+          ]
+        },
+        {
+          "path": "training_trajectories/pythia_2.782831B_trajectory.csv",
+          "constant_N": true,
+          "nondecreasing_D": true,
+          "nondecreasing_step": true,
+          "interpolated_values": [
+            "1"
+          ]
+        },
+        {
+          "path": "training_trajectories/pythia_6.86104B_trajectory.csv",
+          "constant_N": true,
+          "nondecreasing_D": true,
+          "nondecreasing_step": true,
+          "interpolated_values": [
+            "1"
+          ]
+        }
+      ],
+      "note": "Each interpolated trajectory keeps N fixed and orders D and step monotonically"
+    },
+    {
+      "check_id": "B6_subset_B7_experiment_ids",
+      "status": "pass",
+      "evidence": {
+        "B6_ids": 360,
+        "B7_ids": 450,
+        "B6_not_in_B7": []
+      },
+      "note": "Checks whether the expanded N-Q table retains all base experiment IDs"
+    },
+    {
+      "check_id": "B8_data_type_counts",
+      "status": "pass",
+      "evidence": {
+        "calibrated": 984,
+        "extrapolated": 720
+      },
+      "note": "Reported as labels only; these categories are not reclassified by the audit"
+    },
+    {
+      "check_id": "B9_B10_model_key_coverage",
+      "status": "pass",
+      "evidence": {
+        "B9_unique_model_names": 132,
+        "B10_unique_families": 128,
+        "B10_not_in_B9": [],
+        "B9_without_B10": [
+          "DLRM-2020",
+          "InstructGPT 175B",
+          "LMSI-Palm",
+          "Med-PaLM 2"
+        ]
+      },
+      "note": "Compares B10 estimated-loss keys with B9 reported model metadata"
+    },
+    {
+      "check_id": "B2_optional_operational_columns",
+      "status": "warn",
+      "evidence": {
+        "gpu_days": 1029,
+        "step_time_ms": 1029,
+        "grad_norm_avg": 1029
+      },
+      "note": "These columns are not required for N-D-Loss fitting but cannot support runtime diagnostics"
+    },
+    {
+      "check_id": "B9_modeling_readiness",
+      "status": "warn",
+      "evidence": {
+        "nonpositive_D_tokens_B_models": [
+          "DLRM-2020",
+          "InstructGPT 175B",
+          "LMSI-Palm",
+          "Med-PaLM 2"
+        ],
+        "missing_FLOPs_models": [
+          "BLOOMZ-176B",
+          "BLUUMI",
+          "FaXin",
+          "Hermes 3 405B",
+          "LMSI-Palm",
+          "MEB",
+          "Med-PaLM 2",
+          "QMoE: compressed SwitchTransformer",
+          "SenseChat 5.0",
+          "Solar Open 100B\n",
+          "XuanYuan 2.0"
+        ]
+      },
+      "note": "Nonpositive D is not treated as a measured zero; incomplete rows need exclusion or sourced repair"
+    },
+    {
+      "check_id": "B9_model_name_control_whitespace",
+      "status": "warn",
+      "evidence": [
+        "'Solar Open 100B\\n'"
+      ],
+      "note": "Model keys are reported verbatim; normalization must be explicit before joins"
+    }
+  ]
+}
