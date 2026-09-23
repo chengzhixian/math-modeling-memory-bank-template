@@ -6,27 +6,36 @@
 
 Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠排除隐藏文字影响而作废，提交 `58f4f0a` 已明确丢弃其文件内容。不得从 Git 历史恢复、cherry-pick、复用其中的模型、参数、数值、结论或输出。若后续独立论证出同名方法适用，必须依据可见题面、真实数据或独立可核验文献重新建立证据链。
 
-更新时间：2026-09-23。角色任务：Q4 评测桥接与预测；建议兼任集成人和论文统稿。
-成员称呼：zhh（用户已指定）。实际电脑/环境：待填写。
-建议分支：team/zhh-frontier（尚未创建）。
-状态：未开始。当前没有实验结果。
+更新时间：2026-09-23 16:30（北京时间）。角色任务：Q4 评测桥接与预测；建议兼任集成人和论文统稿。
+成员称呼：zhh（用户已指定）。
+实际电脑/环境：Windows；项目位于 `E:\研数模\math-modeling-memory-bank-template`；Node.js v24.19.0。
+当前分支：`team/zhh-frontier`。
+状态：Q4 可复现基线已完成并本地提交；远程尚未创建 `team/zhh-frontier`，未完成备份。
 
 ## 当前任务
 
-按 TASK_PLAN.md 的三人并行表推进；先审计本人附件并确认接口。
-zhh 兼集成人目前只是建议；团队确认前不要与其他人同时修改公共文件。
+已完成 C 附件审计、C8 逐任务聚合、规模/非规模关联分解、分级 Loss–Benchmark 桥接、C7 情景和 12 个月算力放缓预测。等待 chm/cyj 正式接口后传播不确定性。
+zhh 兼集成人目前仍只是建议；团队确认前不修改公共六文件或 `main`。
 
 ## 本次已验证与证据
 
-待实际运行后填写：命令、结果路径、代码与输入版本。不能预写完成状态。
+- 运行命令：`node src/zhh/q4_analysis.js`。
+- 输入版本：GitHub `main` 快照 `ddbdb634f10ade5251334ae0a35dcf401f98d857`。
+- C8：1,863 个目录中 1,860 个成功聚合 24 个 BBH 子任务；扫描识别 4 个损坏 JSON。
+- 贡献分解：样本内 `R²=0.503`；早末窗口贡献为规模 -6.470、时间 +7.807、类型 +0.463 分；绝对贡献归一后非规模约 56.1%。这是关联分解，不是严格因果份额。
+- 桥接：高可比仅 7 条；分级模型 Loss 留出 RMSE=7.060、`R²=-1.376`，判定为弱识别，不能直接把 Loss 改善等同于 Benchmark 增益。
+- 预测：以 2025-03-13 为锚点，12 个月极强/中度算力放缓情景分别为 47.86 [45.63,49.65] 和 49.33 [47.22,51.47]。
+- 输出：`outputs/zhh/q4_results.json`、`c8_bbh_task_aggregation.csv`、`frontier_forecast.csv`、`context_scenarios.csv`。
+- 论文：`paper/sections/zhh/q4.md`；实验记录：`experiments/zhh/q4-baseline.md`。
 
 ## 依赖与阻塞
 
-接口见 interfaces/zhh/CONTRACT.md 和 interfaces/README.md。
-官方规则、实际环境及数据编号映射仍待核对。
+接口见 `interfaces/zhh/CONTRACT.md` 与 `interfaces/zhh/RESULTS.md`。
+阻塞：Git 智能协议连接 GitHub 超时，无法 fetch/push。API 显示远端 `main` 已从工作起点前进到 `55743caab9bb89e6925942c244403943dbf4a49a`，必须先合并新 `main` 再推送；远端目前只有 `main` 和 `team/chm-data`，尚无 `team/zhh-frontier`。chm/cyj 的正式 Loss 与优化接口尚未交付。
 
 ## 下一步和交接
 
-记录正在做什么、改哪些文件、需要谁何时交付、哪些结果待重跑。
-工作结束先更新本文件，再新增 memory-bank/handoffs/zhh/ 中的交接记录。
-推送本人分支并核验远端 SHA；主分支合并状态另行记录。
+1. 网络恢复后先 fetch 并合并最新 `origin/main`，解决冲突后推送 `team/zhh-frontier`，再核验远端 SHA。
+2. 接收 chm/cyj 输出后，按桥接适用范围传播 Loss、优化与映射不确定性。
+3. 独立复核开放许可证口径、贡献识别和预测稳健性。
+4. 团队明确唯一集成人后，再处理公共文件与 `main` 集成。
