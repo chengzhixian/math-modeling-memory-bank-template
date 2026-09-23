@@ -136,7 +136,6 @@ def main():
     cal = pd.read_csv(args.output_root / "mixture_scale_calibration_v0.csv")
 
     manifest_path = args.output_root / "mixture_scale_transfer_v0_manifest.json"
-    import json
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     eta = float(manifest["pooled_eta"])
 

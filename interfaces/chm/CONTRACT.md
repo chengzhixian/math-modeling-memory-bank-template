@@ -47,7 +47,7 @@
 
 `outputs/chm/local_recheck_v1/`
 
-旧网页端结果已原样归档到 `outputs/chm/archive/web_v0/`，只用于差异审计，禁止与新版混用。
+旧网页端结果只在 Git 历史提交 `44e8db4` 中保留，差异摘要见 `outputs/chm/q1_local_reproduction_check.json`；当前文件树不保留旧系数，避免误用。
 
 核心文件：
 
@@ -165,5 +165,6 @@ Q3 只能使用 cyj 已 validated 的预测器与 zhh 已验收的 C7 情景。
 - 配比接口：`src/chm/q1_mixture_interface.py`
 - 尺度传递：`src/chm/q1_mixture_scale_transfer.py`
 - 图表：`src/chm/q1_figures.py`
+- 消融及边界：`src/chm/q1_ablation.py`、`outputs/chm/ablation_v1/`；仅作稳健性证据，不更改主接口。
 
 消费者必须记录精确 commit SHA、文件 SHA、接口版本和 draft/validated/integrated 状态。

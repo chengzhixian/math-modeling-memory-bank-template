@@ -1,6 +1,7 @@
 # chm Q1 审查问题处理状态
 
 > 2026-09-24 本机实跑复核：下文“LFS-RUN-PENDING / RECOMPUTE-PENDING / LOCAL-RUN-PENDING”为网页版提交时的历史状态，现均已执行；结果、局限和新分支增量见 `20260924_cross_branch_delta_review.md`。R05 的严格筛选导致 DSIR 家族空缺，只能作为两家族压力测试；R09 的二层抽样已修正配对索引；R17 图表已生成。跨成员接口 R10/R11 仍待共同验收。
+> 同日后续消融及文件收敛见 `experiments/chm/20260924-q1-ablation-and-cleanup.md`；下面原“完整本地验收”命令清单是当时记录，不再包含已删除的一次性旧版对照脚本。
 
 日期：2026-09-23  
 工作分支：`integration/chm-q1-clean-20260923`  
@@ -49,7 +50,6 @@
 ./.venv/Scripts/python.exe src/chm/q1_regmix_domainwise.py
 ./.venv/Scripts/python.exe src/chm/q1_mixture_interface.py
 ./.venv/Scripts/python.exe src/chm/q1_mixture_scale_transfer.py
-./.venv/Scripts/python.exe src/chm/q1_verify_local.py
 ./.venv/Scripts/python.exe src/chm/q1_figures.py
 ./.venv/Scripts/python.exe -m unittest discover -s src/chm -p test_q1_quality_analysis.py
 ```
