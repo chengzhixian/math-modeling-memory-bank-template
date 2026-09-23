@@ -44,6 +44,9 @@ $py = 'C:\Users\muyehuangyi\.cache\codex-runtimes\codex-primary-runtime\dependen
 & $py -m unittest discover -s src\cyj\tests -p 'test_*.py' -v
 & $py src\cyj\prepare_scaling_data.py --input-version 3b9cbff1362349bd9dc9d94d56c409f7d93654be
 & $py src\cyj\fit_classic_scaling.py --input-version 3b9cbff1362349bd9dc9d94d56c409f7d93654be
+git -c http.sslBackend=schannel ls-remote origin refs/heads/main refs/heads/team/cyj-scaling
+git fetch origin --prune
+git -c http.sslBackend=schannel push origin team/cyj-scaling
 ```
 
 Python 3.12.14、NumPy 2.3.5、pandas 3.0.1。pytest、SciPy、scikit-learn、statsmodels、JAX、PyTorch 未安装；测试使用 `unittest`，拟合使用纯 NumPy 固定种子多起点 Nelder-Mead，没有把未运行工具写成已验证。
@@ -71,6 +74,13 @@ Python 3.12.14、NumPy 2.3.5、pandas 3.0.1。pytest、SciPy、scikit-learn、st
 4. B4/B5 的 tokenizer、评估语料、Loss 定义和单位可比性未建立；未报告 external RMSE。
 5. 没有 Q/p、Q mapping、Loss anchor、广义 `L(N,D,Q,p)` 或 Loss–Benchmark 桥接。
 6. 附件 A 的 4 个 LFS 文件在此前全库校验中仍是指针；本轮只消费已按清单核验的附件 B。
+
+## 远端检查点状态
+
+- 本地证据提交 `6f88239bb48426a83bf143f77824c882c6b802b3` 已创建，工作树随后检查为 clean；本地 `origin/team/cyj-scaling` 仍指向此前已核验的 `35a777e76ef37261ee4c3f37ee96bea58994d394`。
+- 本轮实际执行多次 `ls-remote`、`fetch` 和非强制 `push`；均因 `github.com:443` 连接重置或超时失败。DNS 可解析到 `20.205.243.166`，但 `Test-NetConnection` 的 TCP 443 检查失败。
+- 仓库规则中记录的 `H:\Git\cmd\git.exe` 在本机会话中不存在；改用系统 Git 的 Schannel/OpenSSL 及 HTTP/1.1 均未恢复连接。
+- 因此此时不能声明推送成功或远端 SHA 一致。网络恢复后的第一步是重新 `git fetch origin --prune`，确认远端无新增提交，再非强制推送，并比较 `git rev-parse HEAD` 与 `git ls-remote origin refs/heads/team/cyj-scaling`。禁止强推。
 
 ## 接口变化
 

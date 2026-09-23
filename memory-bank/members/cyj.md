@@ -10,6 +10,7 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 成员称呼：cyj（用户已指定）。实际电脑/环境：Windows 10.0.26200；Python 3.12.14（Codex 工作区运行时）；详见 `problem/cyj/environment.md`。
 当前分支：`team/cyj-scaling`；已合并 main `a0932fd92b3a46cef8eb0bf563df1e6abc9396ef`；经典基线正式代码/输入提交 `3b9cbff1362349bd9dc9d94d56c409f7d93654be`。
 状态：进行中。Stage 1 审计已完成；B1 经典 N-D 基线已实现并完成无随机逐行泄漏的验证，但近乎精确重构的来源未查明，接口仍是 draft，`ready_for_Q3=false`。
+远端状态：本轮本地提交已完成、工作树已清洁；2026-09-24 约 02:00 因 `github.com:443` TCP 不可达，尚未推送，不能视为远端备份完成。网络恢复后须优先非强制 push 并用 `ls-remote` 核对 SHA。
 
 ## 当前任务
 
