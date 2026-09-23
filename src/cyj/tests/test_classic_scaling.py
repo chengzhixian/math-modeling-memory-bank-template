@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+import hashlib
+import json
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -18,9 +21,45 @@ from scaling_common import (  # noqa: E402
     predict_classic,
     regression_metrics,
 )
+from scaling_provenance import verify_source_files  # noqa: E402
 
 
 class ClassicScalingHelpersTest(unittest.TestCase):
+    def test_source_file_identity_rejects_changed_csv(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_dir:
+            temporary = Path(temporary_dir)
+            data_root = temporary / "B_scaling_laws"
+            data_root.mkdir()
+            source_path = data_root / "pythia_training_log_existing.csv"
+            original = b"N_params_B,val_loss\n1,2\n"
+            source_path.write_bytes(original)
+            manifest_path = temporary / "F_MANIFEST.json"
+            manifest_path.write_text(
+                json.dumps(
+                    {
+                        "files": [
+                            {
+                                "path": "data/raw/real_attachments/B_scaling_laws/pythia_training_log_existing.csv",
+                                "bytes": len(original),
+                                "sha256": hashlib.sha256(original).hexdigest(),
+                            }
+                        ]
+                    }
+                ),
+                encoding="utf-8",
+            )
+            verified = verify_source_files(
+                data_root, manifest_path, ("pythia_training_log_existing.csv",)
+            )
+            self.assertEqual(
+                verified["pythia_training_log_existing.csv"]["bytes"], len(original)
+            )
+            source_path.write_bytes(b"N_params_B,val_loss\n1,3\n")
+            with self.assertRaisesRegex(ValueError, "source differs from F_MANIFEST"):
+                verify_source_files(
+                    data_root, manifest_path, ("pythia_training_log_existing.csv",)
+                )
+
     def test_group_equal_weights_give_each_group_equal_mass(self) -> None:
         groups = ["small", "small", "large"]
         weights = group_equal_weights(groups)

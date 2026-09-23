@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import argparse
 import csv
-import datetime as dt
 import json
 import platform
 from pathlib import Path
@@ -18,9 +17,15 @@ from audit_b_scaling_laws import (
     DEFAULT_SOURCE_MANIFEST,
     ROOT,
     display_path,
-    git_stdout,
     sha256,
     validate_input_version,
+)
+from prepare_scaling_data import (
+    B1_FILENAME,
+    B4_FILENAME,
+    B5_FILENAME,
+    prepare_b1_rows,
+    read_dict_rows,
 )
 from scaling_common import (
     extrapolation_distance,
@@ -29,6 +34,7 @@ from scaling_common import (
     predict_classic,
     regression_metrics,
 )
+from scaling_provenance import verify_code_files, verify_source_files
 
 
 DEFAULT_PREPARED = ROOT / "outputs/cyj/classic/prepared_b1.csv"
@@ -101,6 +107,21 @@ def main() -> int:
     resolved_input_version = validate_input_version(
         args.input_version, args.manifest.resolve(), args.source_manifest.resolve()
     )
+    verify_code_files(
+        resolved_input_version,
+        (
+            "src/cyj/audit_b_scaling_laws.py",
+            "src/cyj/scaling_provenance.py",
+            "src/cyj/prepare_scaling_data.py",
+            "src/cyj/scaling_common.py",
+            "src/cyj/fit_classic_scaling.py",
+        ),
+    )
+    source_files = verify_source_files(
+        args.data_root.resolve(),
+        args.manifest.resolve(),
+        (B1_FILENAME, B4_FILENAME, B5_FILENAME),
+    )
     prepared_path = args.prepared.resolve()
     data_manifest_path = args.data_manifest.resolve()
     data_manifest = json.loads(data_manifest_path.read_text(encoding="utf-8"))
@@ -109,8 +130,19 @@ def main() -> int:
     expected_prepared_hash = data_manifest["outputs"]["prepared_b1"]["sha256"]
     if sha256(prepared_path) != expected_prepared_hash:
         raise ValueError("prepared B1 hash does not match classic_data_manifest.json")
+    if data_manifest["provenance"]["source_files"] != source_files:
+        raise ValueError("prepared-data source files do not match current verified sources")
 
     rows = read_rows(prepared_path)
+    expected_rows, _ = prepare_b1_rows(
+        read_dict_rows(args.data_root.resolve() / B1_FILENAME),
+        tail_fraction=data_manifest["split_policy"]["token_tail_fraction_requested"],
+    )
+    if len(rows) != len(expected_rows) or any(
+        actual != {key: str(value) for key, value in expected.items()}
+        for actual, expected in zip(rows, expected_rows, strict=True)
+    ):
+        raise ValueError("prepared B1 rows do not match verified B1 source and split policy")
     n_values, d_values, losses, groups = arrays(rows)
     group_names = sorted(set(groups), key=lambda value: float(value[2:-1]))
 
@@ -236,8 +268,8 @@ def main() -> int:
     d_min, d_max = float(d_values.min()), float(d_values.max())
     external_rows: list[dict[str, Any]] = []
     for dataset, filename in (
-        ("B4", "scaling_baseline.csv"),
-        ("B5", "published_scaling_data.csv"),
+        ("B4", B4_FILENAME),
+        ("B5", B5_FILENAME),
     ):
         source_rows = read_rows(data_root / filename)
         external_n = np.array([float(row["N_params_B"]) for row in source_rows])
@@ -337,33 +369,21 @@ def main() -> int:
         if (dataset_rows := [row for row in external_rows if row["dataset"] == dataset])
     }
     script_path = Path(__file__).resolve()
-    code_paths_dirty = bool(
-        git_stdout(
-            "status",
-            "--porcelain",
-            "--",
-            "src/cyj/fit_classic_scaling.py",
-            "src/cyj/scaling_common.py",
-            "src/cyj/tests",
-        )
-    )
     result_document = {
-        "schema_version": 1,
+        "schema_version": 2,
         "status": "draft_classic_baseline_not_validated_predictor",
         "input_version": resolved_input_version,
         "model": "L(N,D) = E + A*N^(-alpha) + B*D^(-beta)",
         "fit_loss": "group-equal weighted Huber loss on log(predicted_loss)-log(actual_loss)",
         "provenance": {
-            "git_commit": git_stdout("rev-parse", "HEAD"),
-            "git_code_paths_dirty_at_generation_start": code_paths_dirty,
+            "git_commit": resolved_input_version,
+            "code_files_verified_against_input_commit": True,
             "script_sha256": sha256(script_path),
             "prepared_b1_sha256": sha256(prepared_path),
             "classic_data_manifest_sha256": sha256(data_manifest_path),
+            "source_files": source_files,
             "python_version": platform.python_version(),
             "numpy_version": np.__version__,
-            "generated_at_utc": dt.datetime.now(dt.timezone.utc)
-            .replace(microsecond=0)
-            .isoformat(),
         },
         "data_scope": {
             "rows": len(rows),

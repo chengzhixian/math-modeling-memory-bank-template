@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import argparse
 import csv
-import datetime as dt
 import json
 import math
 import platform
@@ -17,10 +16,10 @@ from audit_b_scaling_laws import (
     DEFAULT_MANIFEST,
     DEFAULT_SOURCE_MANIFEST,
     ROOT,
-    git_stdout,
     sha256,
     validate_input_version,
 )
+from scaling_provenance import verify_code_files, verify_source_files
 
 
 DEFAULT_OUTPUT_DIR = ROOT / "outputs/cyj/classic"
@@ -161,6 +160,19 @@ def main() -> int:
     resolved_input_version = validate_input_version(
         args.input_version, manifest_path, source_manifest_path
     )
+    verify_code_files(
+        resolved_input_version,
+        (
+            "src/cyj/audit_b_scaling_laws.py",
+            "src/cyj/scaling_provenance.py",
+            "src/cyj/prepare_scaling_data.py",
+        ),
+    )
+    source_files = verify_source_files(
+        data_root,
+        manifest_path,
+        (B1_FILENAME, B4_FILENAME, B5_FILENAME),
+    )
     output_dir = args.output_dir.resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -177,32 +189,19 @@ def main() -> int:
     write_csv(comparability_path, list(comparison_rows[0]), comparison_rows)
 
     script_path = Path(__file__).resolve()
-    code_paths_dirty = bool(
-        git_stdout(
-            "status",
-            "--porcelain",
-            "--",
-            "src/cyj/prepare_scaling_data.py",
-            "src/cyj/scaling_common.py",
-            "src/cyj/tests",
-        )
-    )
     split_counts = Counter(row["token_tail_split"] for row in prepared_rows)
     manifest = {
-        "schema_version": 1,
+        "schema_version": 2,
         "status": "prepared_no_model_fit",
         "input_version": resolved_input_version,
         "provenance": {
-            "git_commit": git_stdout("rev-parse", "HEAD"),
-            "git_code_paths_dirty_at_generation_start": code_paths_dirty,
+            "git_commit": resolved_input_version,
+            "code_files_verified_against_input_commit": True,
             "script_sha256": sha256(script_path),
-            "source_b1_sha256": sha256(b1_path),
+            "source_files": source_files,
             "input_manifest_sha256": sha256(manifest_path),
             "source_manifest_sha256": sha256(source_manifest_path),
             "python_version": platform.python_version(),
-            "generated_at_utc": dt.datetime.now(dt.timezone.utc)
-            .replace(microsecond=0)
-            .isoformat(),
         },
         "split_policy": {
             "group_key": "N_params_B",
