@@ -18,3 +18,11 @@ Python 3.12.14，NumPy 2.3.5，pandas 3.0.1，SciPy 1.18.1，scikit-learn 1.9.1�
 ```
 
 质量 bootstrap=1000、尺度 bootstrap=10000、随机种子=20260923；配比 CV 为五折不打乱。当前路径从仓库根执行；质量脚本支持 F_DATA_ROOT，配比脚本用 --data-root。原始资料只读。
+
+
+## Git 时间与同步口径
+
+- 团队审计统一使用父提交关系、完整 SHA 和远端 ref 判断先后，不再用 GitHub 页面显示的时钟时间判定因果顺序；此前两台环境存在约 8 小时显示差异。
+- 本机/脚本记录的人类可读时间统一注明 `Asia/Shanghai`。查看提交建议使用 `git log --date=iso-strict-local`。
+- 个人研究工作后续以 `integration/chm-q1-clean-20260923` 的干净血缘为可集成起点；接收公共规则必须执行 `git fetch origin` 后 `git merge origin/main`，禁止再次通过逐文件复制伪造“已同步 main”的提交历史。
+- 提交顺序审计示例：`git rev-list --parents --topo-order <ref>`；冲突时以拓扑而非时间戳为准。
