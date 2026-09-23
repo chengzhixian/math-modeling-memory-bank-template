@@ -13,7 +13,9 @@ import csv
 import hashlib
 import json
 import math
+import re
 import statistics
+import subprocess
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -24,6 +26,8 @@ DEFAULT_DATA_ROOT = ROOT / "data/raw/real_attachments/B_scaling_laws"
 DEFAULT_MANIFEST = ROOT / "data/raw/F_MANIFEST.json"
 DEFAULT_SOURCE_MANIFEST = ROOT / "data/raw/real_attachments/source_manifest.json"
 DEFAULT_OUTPUT = ROOT / "outputs/cyj/b_data_audit.json"
+B_DATA_PREFIX = Path("data/raw/real_attachments/B_scaling_laws")
+FULL_COMMIT_RE = re.compile(r"[0-9a-fA-F]{40}")
 
 
 DATASETS = {
@@ -169,6 +173,57 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def git_stdout(*args: str) -> str:
+    result = subprocess.run(
+        ["git", "-C", str(ROOT), *args],
+        check=False,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+    )
+    if result.returncode != 0:
+        detail = result.stderr.strip() or result.stdout.strip() or "unknown Git error"
+        raise ValueError(f"Git command failed ({' '.join(args)}): {detail}")
+    return result.stdout.strip()
+
+
+def validate_input_version(
+    input_version: str, manifest: Path, source_manifest: Path
+) -> str:
+    if not FULL_COMMIT_RE.fullmatch(input_version):
+        raise ValueError("--input-version must be a full 40-hex Git commit SHA")
+    resolved = git_stdout("rev-parse", "--verify", f"{input_version}^{{commit}}")
+    if resolved.lower() != input_version.lower():
+        raise ValueError(
+            f"--input-version did not resolve exactly: requested {input_version}, got {resolved}"
+        )
+
+    for label, path in (("manifest", manifest), ("source manifest", source_manifest)):
+        resolved_path = path.resolve()
+        try:
+            repository_path = resolved_path.relative_to(ROOT).as_posix()
+        except ValueError as exc:
+            raise ValueError(
+                f"{label} must be inside the repository to verify input provenance: {path}"
+            ) from exc
+        committed_blob = git_stdout("rev-parse", f"{resolved}:{repository_path}")
+        working_blob = git_stdout(
+            "hash-object", f"--path={repository_path}", str(resolved_path)
+        )
+        if committed_blob != working_blob:
+            raise ValueError(
+                f"{label} does not match input commit {resolved}: {repository_path}"
+            )
+    return resolved.lower()
+
+
+def display_path(path: Path) -> str:
+    try:
+        return path.relative_to(ROOT).as_posix()
+    except ValueError:
+        return str(path)
+
+
 def read_csv(path: Path) -> tuple[list[str], list[dict[str, str]], list[list[str]]]:
     with path.open("r", encoding="utf-8-sig", newline="") as handle:
         reader = csv.reader(handle)
@@ -231,9 +286,18 @@ def main() -> int:
     args = parser.parse_args()
 
     data_root = args.data_root.resolve()
-    expected_manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
+    manifest_path = args.manifest.resolve()
+    source_manifest_path = args.source_manifest.resolve()
+    try:
+        resolved_input_version = validate_input_version(
+            args.input_version, manifest_path, source_manifest_path
+        )
+    except (OSError, ValueError) as exc:
+        parser.error(str(exc))
+
+    expected_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     manifest_by_path = {entry["path"]: entry for entry in expected_manifest["files"]}
-    source_manifest = json.loads(args.source_manifest.read_text(encoding="utf-8"))
+    source_manifest = json.loads(source_manifest_path.read_text(encoding="utf-8"))
     source_by_file = {
         entry["file"]: entry for entry in source_manifest if entry.get("problem") == "B"
     }
@@ -243,6 +307,32 @@ def main() -> int:
     rows_by_relative: dict[str, list[dict[str, str]]] = {}
     dataset_rows: Counter[str] = Counter()
     dataset_files: Counter[str] = Counter()
+
+    expected_csv_paths = {
+        Path(entry["path"]).relative_to(B_DATA_PREFIX).as_posix()
+        for entry in expected_manifest["files"]
+        if Path(entry["path"]).is_relative_to(B_DATA_PREFIX)
+        and Path(entry["path"]).suffix.lower() == ".csv"
+    }
+    actual_csv_paths = {
+        path.relative_to(data_root).as_posix()
+        for path in data_root.rglob("*.csv")
+        if path.is_file()
+    }
+    missing_csv_paths = sorted(expected_csv_paths - actual_csv_paths)
+    unexpected_csv_paths = sorted(actual_csv_paths - expected_csv_paths)
+    add_check(
+        checks,
+        "B_manifest_csv_inventory",
+        "pass" if not missing_csv_paths and not unexpected_csv_paths else "fail",
+        {
+            "expected_files": len(expected_csv_paths),
+            "actual_files": len(actual_csv_paths),
+            "missing": missing_csv_paths,
+            "unexpected": unexpected_csv_paths,
+        },
+        "The complete attachment B CSV path set must match F_MANIFEST.json",
+    )
 
     for dataset_id, spec in DATASETS.items():
         if "glob" in spec:
@@ -406,7 +496,24 @@ def main() -> int:
             )
 
     for relative in ("pythia_training_log_existing.csv", "cerebras_training_log.csv"):
-        rows = rows_by_relative[relative]
+        rows = rows_by_relative.get(relative, [])
+        stem = Path(relative).stem
+        if not rows:
+            add_check(
+                checks,
+                f"{stem}_compute_identity",
+                "fail",
+                {"rows": 0},
+                "Cannot check C=6ND without source rows",
+            )
+            add_check(
+                checks,
+                f"{stem}_ppl_exp_loss",
+                "fail",
+                {"rows": 0},
+                "Cannot check ppl against exp(val_loss) without source rows",
+            )
+            continue
         ratios = []
         ppl_errors = []
         for row in rows:
@@ -415,11 +522,20 @@ def main() -> int:
             c_value = parse_finite(row["C_FLOPs_1e21"])
             loss = parse_finite(row["val_loss"])
             ppl = parse_finite(row["ppl"])
-            if n_value and d_value and c_value is not None:
+            if (
+                n_value is not None
+                and n_value > 0
+                and d_value is not None
+                and d_value > 0
+                and c_value is not None
+            ):
                 ratios.append(c_value / (0.006 * n_value * d_value))
             if loss is not None and ppl not in (None, 0):
-                ppl_errors.append(abs(math.exp(loss) - ppl) / ppl)
-        stem = Path(relative).stem
+                try:
+                    expected_ppl = math.exp(loss)
+                except OverflowError:
+                    expected_ppl = math.inf
+                ppl_errors.append(abs(expected_ppl - ppl) / ppl)
         add_check(
             checks,
             f"{stem}_compute_identity",
@@ -447,19 +563,22 @@ def main() -> int:
     for relative, rows in rows_by_relative.items():
         if not relative.startswith("training_trajectories/"):
             continue
-        n_values = [float(row["N_params_B"]) for row in rows]
-        d_values = [float(row["D_tokens_B"]) for row in rows]
-        steps = [float(row["step"]) for row in rows]
+        n_values = [parse_finite(row.get("N_params_B", "")) for row in rows]
+        d_values = [parse_finite(row.get("D_tokens_B", "")) for row in rows]
+        steps = [parse_finite(row.get("step", "")) for row in rows]
+        numeric_ok = all(value is not None for value in n_values + d_values + steps)
         trajectory_results.append(
             {
                 "path": relative,
-                "constant_N": len(set(n_values)) == 1,
-                "nondecreasing_D": monotone(d_values),
-                "nondecreasing_step": monotone(steps),
-                "interpolated_values": sorted({row["interpolated"] for row in rows}),
+                "constant_N": numeric_ok and len(set(n_values)) == 1,
+                "nondecreasing_D": numeric_ok and monotone(d_values),
+                "nondecreasing_step": numeric_ok and monotone(steps),
+                "interpolated_values": sorted(
+                    {row.get("interpolated", "") for row in rows}
+                ),
             }
         )
-    trajectory_ok = all(
+    trajectory_ok = bool(trajectory_results) and all(
         item["constant_N"]
         and item["nondecreasing_D"]
         and item["nondecreasing_step"]
@@ -498,25 +617,34 @@ def main() -> int:
         },
         "Checks whether the expanded N-Q table retains all base experiment IDs",
     )
-    b8_rows = rows_by_relative["supplementary_NQ_experiment_large.csv"]
+    b8_rows = rows_by_relative.get("supplementary_NQ_experiment_large.csv", [])
+    b8_labels_present = bool(b8_rows) and all("data_type" in row for row in b8_rows)
     add_check(
         checks,
         "B8_data_type_counts",
-        "pass",
-        dict(sorted(Counter(row["data_type"] for row in b8_rows).items())),
+        "pass" if b8_labels_present else "fail",
+        dict(
+            sorted(Counter(row.get("data_type", "") for row in b8_rows).items())
+        ),
         "Reported as labels only; these categories are not reclassified by the audit",
     )
 
     large_models = {
-        row["model_name"] for row in rows_by_relative["supplementary_large_models.csv"]
+        row["model_name"]
+        for row in rows_by_relative.get("supplementary_large_models.csv", [])
+        if "model_name" in row
     }
     large_baseline = {
-        row["family"] for row in rows_by_relative["supplementary_large_baseline.csv"]
+        row["family"]
+        for row in rows_by_relative.get("supplementary_large_baseline.csv", [])
+        if "family" in row
     }
     add_check(
         checks,
         "B9_B10_model_key_coverage",
-        "pass" if large_baseline <= large_models else "warn",
+        "pass"
+        if large_models and large_baseline and large_baseline <= large_models
+        else "fail",
         {
             "B9_unique_model_names": len(large_models),
             "B10_unique_families": len(large_baseline),
@@ -525,24 +653,44 @@ def main() -> int:
         },
         "Compares B10 estimated-loss keys with B9 reported model metadata",
     )
-    b2_rows = rows_by_relative["cerebras_training_log.csv"]
+    b2_rows = rows_by_relative.get("cerebras_training_log.csv", [])
+    operational_columns = ("gpu_days", "step_time_ms", "grad_norm_avg")
+    b2_missing_operational_columns = [
+        column
+        for column in operational_columns
+        if not b2_rows or any(column not in row for row in b2_rows)
+    ]
     b2_empty_operational = {
-        column: sum(row[column].strip() == "" for row in b2_rows)
-        for column in ("gpu_days", "step_time_ms", "grad_norm_avg")
+        column: sum(row.get(column, "").strip() == "" for row in b2_rows)
+        for column in operational_columns
+        if column not in b2_missing_operational_columns
     }
     add_check(
         checks,
         "B2_optional_operational_columns",
-        "warn" if any(b2_empty_operational.values()) else "pass",
-        b2_empty_operational,
+        "fail"
+        if b2_missing_operational_columns
+        else ("warn" if any(b2_empty_operational.values()) else "pass"),
+        {
+            **b2_empty_operational,
+            **(
+                {"missing_columns": b2_missing_operational_columns}
+                if b2_missing_operational_columns
+                else {}
+            ),
+        },
         "These columns are not required for N-D-Loss fitting but cannot support runtime diagnostics",
     )
-    b9_rows = rows_by_relative["supplementary_large_models.csv"]
+    b9_rows = rows_by_relative.get("supplementary_large_models.csv", [])
     b9_zero_d = sorted(
-        row["model_name"] for row in b9_rows if float(row["D_tokens_B"]) <= 0
+        row.get("model_name", "")
+        for row in b9_rows
+        if (parse_finite(row.get("D_tokens_B", "")) or math.inf) <= 0
     )
     b9_missing_flops = sorted(
-        row["model_name"] for row in b9_rows if row["FLOPs"].strip() == ""
+        row.get("model_name", "")
+        for row in b9_rows
+        if row.get("FLOPs", "").strip() == ""
     )
     add_check(
         checks,
@@ -555,9 +703,12 @@ def main() -> int:
         "Nonpositive D is not treated as a measured zero; incomplete rows need exclusion or sourced repair",
     )
     b9_control_whitespace = sorted(
-        repr(row["model_name"])
+        repr(row.get("model_name", ""))
         for row in b9_rows
-        if any(character in row["model_name"] for character in ("\n", "\r", "\t"))
+        if any(
+            character in row.get("model_name", "")
+            for character in ("\n", "\r", "\t")
+        )
     )
     add_check(
         checks,
