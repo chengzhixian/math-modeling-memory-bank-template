@@ -66,3 +66,23 @@ P01–P03 三人按附件 A/B/C 并行；P10=chm；P20=cyj；P30=chm 实现、cy
 - Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 已作废；`58f4f0a` 丢弃其文件树内容，不得作为后续成果来源。
 - 当前 main 与 team/chm-data 文件树一致；team/chm-data 仅额外保留上述作废历史的可追溯合并记录。
 - 隐藏文字全文已从当前 quarantine 工作树移除，只保留审计元数据。
+
+## 2026-09-23 公共协作规则集成记录
+
+状态：已完成。
+
+- main 已新增 `TEAM_COLLABORATION_DEPENDENCIES.md`，用于冻结三人当前分工、跨问依赖、接口冲突、合作流程和个人分支同步规则。
+- 本次公共规则更新不等于把三个个人分支的研究结果合并进 main；个人成果仍按“个人分支已备份 / 团队已验收 / main 已集成”三种状态区分。
+- 当前观察到的个人分支 HEAD：
+  - chm：`462713303b0db1be47d7260699ada3e12692c105`
+  - cyj：`932e22baff62c9349b8d82f354f4641901abfa4a`
+  - zhh：`d47cd2dc921333caecfcb95f09eb5a2f2714d0db`
+- 当前跨分支关键依赖已公开：
+  1. chm+cyj 冻结 Q 跨附件尺度；
+  2. chm+cyj 冻结 Q1 domain Loss 与 B1 val_loss 的桥接口径；
+  3. cyj 向 chm 交付验证版 `L(N,D,Q,p)` 后，chm 才能产生 Q3 正式优化结果；
+  4. zhh 提供 C7 外生上下文情景，并在最终能力解释中传播 Loss–Benchmark 映射误差。
+- 现阶段不得因为个人分支已有结果就把 P10/P20/P30/P40 在公共表中整体改成“已完成”；应等待对应接口和结果通过集成验收。
+
+后续集成人验收个人分支时，必须同步更新本文件、`activeContext.md` 和 `interfaces/README.md`，并记录采用的接口版本和来源 SHA。
+
