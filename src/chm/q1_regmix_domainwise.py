@@ -42,8 +42,12 @@ def normalize_composition(df, mix_cols):
     return x / row_sum
 
 
-def cv_ridge(x, y):
-    kf = KFold(n_splits=5, shuffle=False)
+def cv_ridge_split(x, y, shuffle=False):
+    kf = KFold(
+        n_splits=5,
+        shuffle=shuffle,
+        random_state=SEED if shuffle else None,
+    )
     rows = []
     for alpha in RIDGE_GRID:
         rmses = []
@@ -56,6 +60,12 @@ def cv_ridge(x, y):
     rows.sort(key=lambda z: z[1])
     model = Ridge(alpha=rows[0][0]).fit(x, y)
     return model, rows
+
+
+def cv_ridge(x, y):
+    # Primary protocol retained for backward reproducibility. A shuffled,
+    # fixed-seed 5-fold variant is always computed as a sensitivity check.
+    return cv_ridge_split(x, y, shuffle=False)
 
 
 def eval_regression(y, pred):
@@ -111,12 +121,36 @@ def main():
 
     ridge_rows = []
     cv_rows = []
+    cv_split_rows = []
     for target in loss_cols:
         y_train = train[2][target].to_numpy(float)
         model, cv = cv_ridge(x_train, y_train)
+        shuffled_model, shuffled_cv = cv_ridge_split(x_train, y_train, shuffle=True)
         for alpha, cv_rmse in cv:
             cv_rows.append({"target": metric_name(target), "alpha": alpha, "cv_rmse": cv_rmse})
         row = {"target": metric_name(target), "alpha": model.alpha}
+
+        split_row = {
+            "target": metric_name(target),
+            "alpha_unshuffled": float(model.alpha),
+            "cv_rmse_unshuffled": float(cv[0][1]),
+            "alpha_shuffled_seed20260923": float(shuffled_model.alpha),
+            "cv_rmse_shuffled_seed20260923": float(shuffled_cv[0][1]),
+        }
+        for eval_name in ["test_1m", "test_60m", "test_1B"]:
+            item = datasets[eval_name]
+            x_eval = normalize_composition(item[0], mix_cols)
+            y_eval = item[2][target].to_numpy(float)
+            pred_primary = model.predict(x_eval)
+            pred_shuffled = shuffled_model.predict(x_eval)
+            split_row[f"{eval_name}_spearman_unshuffled"] = float(
+                spearmanr(y_eval, pred_primary).statistic
+            )
+            split_row[f"{eval_name}_spearman_shuffled"] = float(
+                spearmanr(y_eval, pred_shuffled).statistic
+            )
+        cv_split_rows.append(split_row)
+
         for name, item in datasets.items():
             if name == "train_1m":
                 continue
@@ -130,6 +164,9 @@ def main():
     args.output_dir.mkdir(parents=True, exist_ok=True)
     pd.DataFrame(ridge_rows).to_csv(args.output_dir / "q1_regmix_ridge_domainwise_metrics.csv", index=False)
     pd.DataFrame(cv_rows).to_csv(args.output_dir / "q1_regmix_ridge_domainwise_cv.csv", index=False)
+    pd.DataFrame(cv_split_rows).to_csv(
+        args.output_dir / "q1_regmix_cv_split_sensitivity.csv", index=False
+    )
 
     # Exact mixture overlap checks.
     overlap_rows = []
@@ -159,6 +196,9 @@ def main():
         "primary_metric": "Spearman rank correlation",
         "note": "Domain-wise modeling. Normalize each mixture row to the simplex; do not aggregate raw losses before fitting.",
         "ridge_grid_source": "RegMix Appendix E: [1e-3,1e-2,1e-1,1e0,1e1,1e2,1e3]",
+        "cv_primary": "5-fold, shuffle=False; retained for backward reproducibility",
+        "cv_sensitivity": "5-fold, shuffle=True, random_state=20260923",
+        "cv_source_note": "The public RegMix regression notebook exposes LightGBM fitting but does not independently fix the Ridge fold-order implementation; therefore split choice is treated as a sensitivity rather than a claimed paper-exact detail.",
     }
 
     if args.run_lightgbm:
