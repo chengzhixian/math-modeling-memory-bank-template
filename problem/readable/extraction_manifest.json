@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "source": "problem/F/数据说明.pdf",
+  "source": "historical pre-cleanup problem/F/数据说明.pdf",
   "source_sha256": "f5c851bbe4b3d8c9079609c37f2c3b0835244067711d6d761c66adeaa8357835",
   "pdfplumber_version": "0.11.9",
-  "output_sha256": "d032b97551f31b2ca27909ed4a9029fd84841d3cc9d5099980dcb9f107875a1b",
+  "output_sha256": "a681506d30ab7bf59b69916b83ddae991c34e12cf60fa2b4430f1609a5bfab2b",
   "pages": [
     {
       "page": 1,
@@ -207,5 +207,10 @@
   ],
   "removed_line_occurrences": 96,
   "unique_hidden_passages": 20,
-  "note": "Only reviewed hidden characters removed; layout still needs visual review."
+  "note": "Historical extraction record: 96 reviewed hidden lines were removed from the pre-cleanup PDF. The current PDF was replaced at commit 55743ca and has no text layer.",
+  "source_status": "historical_pre_55743ca",
+  "current_pdf": "problem/F/数据说明.pdf",
+  "current_pdf_sha256": "daa8479decf578ec5f0b165683ac5715fed445ba8c148f386e7b071f5c27dfdc",
+  "current_pdf_bytes": 13207231,
+  "current_pdf_commit": "55743ca"
 }

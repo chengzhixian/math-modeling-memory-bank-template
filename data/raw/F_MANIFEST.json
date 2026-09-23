@@ -3,7 +3,7 @@
   "created_at": "2026-09-23",
   "hash_algorithm": "SHA256",
   "file_count": 2014,
-  "total_bytes": 551761350.0,
+  "total_bytes": 564436312,
   "files": [
     {
       "path": "data/raw/real_attachments/A_data_value/domain_mapping_guide.csv",
@@ -10067,8 +10067,8 @@
     },
     {
       "path": "problem/F/数据说明.pdf",
-      "bytes": 532269,
-      "sha256": "f5c851bbe4b3d8c9079609c37f2c3b0835244067711d6d761c66adeaa8357835"
+      "bytes": 13207231,
+      "sha256": "daa8479decf578ec5f0b165683ac5715fed445ba8c148f386e7b071f5c27dfdc"
     },
     {
       "path": "problem/F/算力约束下提升大语言模型能力的资源配置建模.docx",
