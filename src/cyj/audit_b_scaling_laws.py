@@ -10,9 +10,11 @@ from __future__ import annotations
 
 import argparse
 import csv
+import datetime as dt
 import hashlib
 import json
 import math
+import platform
 import re
 import statistics
 import subprocess
@@ -107,7 +109,7 @@ DATASETS = {
     },
 }
 
-REQUIRED_NUMERIC = {
+NUMERIC_FIELDS = {
     "pythia_training_log_existing.csv": [
         "N_params_B",
         "D_tokens_B",
@@ -149,6 +151,25 @@ REQUIRED_NUMERIC = {
     "supplementary_large_models.csv": ["N_params_B", "D_tokens_B", "FLOPs"],
     "supplementary_large_baseline.csv": ["N_params_B", "D_tokens_B", "val_loss"],
 }
+
+# B9 is reported metadata rather than a fitting table.  Its D/FLOPs gaps are
+# audited as modeling-readiness warnings below, while N remains mandatory.
+STRICT_REQUIRED_NUMERIC = {
+    name: fields
+    for name, fields in NUMERIC_FIELDS.items()
+    if name != "supplementary_large_models.csv"
+}
+STRICT_REQUIRED_NUMERIC["supplementary_large_models.csv"] = ["N_params_B"]
+
+POSITIVE_NUMERIC_FIELDS = {
+    "N_params_B",
+    "D_tokens_B",
+    "C_FLOPs_1e21",
+    "FLOPs",
+    "val_loss",
+}
+B8_ALLOWED_DATA_TYPES = {"calibrated", "extrapolated"}
+COMPUTE_IDENTITY_REL_TOL = 0.05
 
 KEY_COLUMNS = {
     "pythia_training_log_existing.csv": ["run_id", "steps"],
@@ -224,16 +245,23 @@ def display_path(path: Path) -> str:
         return str(path)
 
 
-def read_csv(path: Path) -> tuple[list[str], list[dict[str, str]], list[list[str]]]:
+def read_csv(
+    path: Path,
+) -> tuple[list[str], list[dict[str, str]], list[list[str]], list[dict[str, int]]]:
     with path.open("r", encoding="utf-8-sig", newline="") as handle:
         reader = csv.reader(handle)
         try:
             header = next(reader)
         except StopIteration:
-            return [], [], []
+            return [], [], [], []
         raw_rows = [row for row in reader]
+    row_width_mismatches = [
+        {"line": line_number, "expected": len(header), "actual": len(row)}
+        for line_number, row in enumerate(raw_rows, start=2)
+        if len(row) != len(header)
+    ]
     rows = [dict(zip(header, row, strict=False)) for row in raw_rows]
-    return header, rows, raw_rows
+    return header, rows, raw_rows, row_width_mismatches
 
 
 def parse_finite(value: str) -> float | None:
@@ -257,6 +285,84 @@ def numeric_summary(rows: list[dict[str, str]], column: str) -> dict[str, Any]:
         "max": max(finite) if finite else None,
         "unique": len(set(finite)),
     }
+
+
+def required_numeric_issues(
+    rows: list[dict[str, str]], columns: list[str]
+) -> dict[str, dict[str, int]]:
+    missing: dict[str, int] = {}
+    invalid: dict[str, int] = {}
+    for column in columns:
+        values = [row.get(column, "").strip() for row in rows]
+        missing_count = sum(value == "" for value in values)
+        invalid_count = sum(
+            value != "" and parse_finite(value) is None for value in values
+        )
+        if missing_count:
+            missing[column] = missing_count
+        if invalid_count:
+            invalid[column] = invalid_count
+    return {"missing": missing, "invalid_or_nonfinite": invalid}
+
+
+def nonpositive_numeric_values(
+    rows: list[dict[str, str]], columns: list[str]
+) -> list[dict[str, Any]]:
+    violations: list[dict[str, Any]] = []
+    for row_number, row in enumerate(rows, start=2):
+        for column in columns:
+            raw_value = row.get(column, "").strip()
+            parsed = parse_finite(raw_value)
+            if parsed is not None and parsed <= 0:
+                violations.append(
+                    {"line": row_number, "column": column, "value": raw_value}
+                )
+    return violations
+
+
+def enum_violations(
+    rows: list[dict[str, str]], column: str, allowed: set[str]
+) -> list[dict[str, Any]]:
+    return [
+        {"line": row_number, "value": row.get(column, "")}
+        for row_number, row in enumerate(rows, start=2)
+        if row.get(column, "") not in allowed
+    ]
+
+
+def percentile(values: list[float], quantile: float) -> float:
+    if not values:
+        raise ValueError("percentile requires at least one value")
+    ordered = sorted(values)
+    position = (len(ordered) - 1) * quantile
+    lower = math.floor(position)
+    upper = math.ceil(position)
+    if lower == upper:
+        return ordered[lower]
+    fraction = position - lower
+    return ordered[lower] * (1 - fraction) + ordered[upper] * fraction
+
+
+def compute_identity_stats(ratios: list[float]) -> dict[str, float]:
+    deviations = [abs(value - 1.0) for value in ratios]
+    return {
+        "median_C_over_6ND": statistics.median(ratios),
+        "min": min(ratios),
+        "max": max(ratios),
+        "max_absolute_deviation": max(deviations),
+        "p95_absolute_deviation": percentile(deviations, 0.95),
+        "p99_absolute_deviation": percentile(deviations, 0.99),
+    }
+
+
+def split_b8_rows(
+    rows: list[dict[str, str]],
+) -> tuple[list[dict[str, str]], list[dict[str, str]], set[str]]:
+    calibrated = [row for row in rows if row.get("data_type") == "calibrated"]
+    extrapolated = [row for row in rows if row.get("data_type") == "extrapolated"]
+    calibrated_ids = {row.get("experiment_id", "") for row in calibrated}
+    extrapolated_ids = {row.get("experiment_id", "") for row in extrapolated}
+    return calibrated, extrapolated, calibrated_ids & extrapolated_ids
 
 
 def monotone(values: list[float], *, strict: bool = False) -> bool:
@@ -358,30 +464,43 @@ def main() -> int:
                 )
                 continue
 
-            header, rows, raw_rows = read_csv(path)
+            header, rows, raw_rows, row_width_mismatches = read_csv(path)
             rows_by_relative[relative] = rows
             missing = {
                 column: sum(row.get(column, "").strip() == "" for row in rows)
                 for column in header
             }
             duplicate_rows = len(raw_rows) - len({tuple(row) for row in raw_rows})
-            required_numeric = REQUIRED_NUMERIC.get(Path(relative).name, [])
+            filename = Path(relative).name
+            numeric_fields = NUMERIC_FIELDS.get(filename, [])
+            strict_required_numeric = STRICT_REQUIRED_NUMERIC.get(
+                filename, numeric_fields
+            )
             if dataset_id == "B3":
-                required_numeric = [
+                numeric_fields = [
                     "N_params_B",
                     "D_tokens_B",
                     "val_loss",
                     "step",
                     "interpolated",
                 ]
+                strict_required_numeric = numeric_fields
             numeric = {
                 column: numeric_summary(rows, column)
-                for column in required_numeric
+                for column in numeric_fields
                 if column in header
             }
             missing_required_columns = [
-                column for column in required_numeric if column not in header
+                column for column in numeric_fields if column not in header
             ]
+            required_issues = required_numeric_issues(
+                rows,
+                [column for column in strict_required_numeric if column in header],
+            )
+            positive_columns = sorted(
+                set(numeric_fields) & POSITIVE_NUMERIC_FIELDS
+            )
+            nonpositive_values = nonpositive_numeric_values(rows, positive_columns)
             actual_hash = sha256(path)
             expected = manifest_by_path.get(repository_path)
             identity_ok = bool(
@@ -407,6 +526,8 @@ def main() -> int:
                 "duplicate_rows": duplicate_rows,
                 "required_numeric": numeric,
                 "missing_required_columns": missing_required_columns,
+                "row_width_mismatches": row_width_mismatches,
+                "nonpositive_numeric_values": nonpositive_values,
                 "source_metadata": {
                     key: source_entry[key]
                     for key in ("source", "note")
@@ -428,20 +549,56 @@ def main() -> int:
                 },
                 "Byte count and SHA256 must match data/raw/F_MANIFEST.json",
             )
-            numeric_invalid = {
+            add_check(
+                checks,
+                f"{dataset_id}_{Path(relative).stem}_required_numeric",
+                "pass"
+                if not missing_required_columns
+                and not required_issues["missing"]
+                and not required_issues["invalid_or_nonfinite"]
+                else "fail",
+                {
+                    "missing_columns": missing_required_columns,
+                    **required_issues,
+                },
+                "Strict required numeric fields must exist, be populated, and be finite",
+            )
+            populated_numeric_invalid = {
                 column: stats["invalid_or_nonfinite"]
                 for column, stats in numeric.items()
                 if stats["invalid_or_nonfinite"]
             }
             add_check(
                 checks,
-                f"{dataset_id}_{Path(relative).stem}_required_numeric",
-                "pass" if not missing_required_columns and not numeric_invalid else "fail",
+                f"{dataset_id}_{Path(relative).stem}_populated_numeric_finite",
+                "pass" if not populated_numeric_invalid else "fail",
+                populated_numeric_invalid,
+                "Every populated audited numeric value must be finite",
+            )
+            add_check(
+                checks,
+                f"{dataset_id}_{Path(relative).stem}_positive_scaling_fields",
+                (
+                    "pass"
+                    if not nonpositive_values
+                    else ("warn" if dataset_id == "B9" else "fail")
+                ),
                 {
-                    "missing_columns": missing_required_columns,
-                    "invalid_or_nonfinite": numeric_invalid,
+                    "columns": positive_columns,
+                    "violation_count": len(nonpositive_values),
+                    "violations": nonpositive_values,
                 },
-                "Required numeric fields must exist and contain finite values when populated",
+                "N, D, C/FLOPs, and Loss must be positive when present; B9 metadata gaps are modeling-readiness warnings",
+            )
+            add_check(
+                checks,
+                f"{dataset_id}_{Path(relative).stem}_csv_row_width",
+                "pass" if not row_width_mismatches else "fail",
+                {
+                    "mismatch_count": len(row_width_mismatches),
+                    "mismatches": row_width_mismatches,
+                },
+                "Every CSV record must have exactly the header width",
             )
             add_check(
                 checks,
@@ -515,8 +672,9 @@ def main() -> int:
             )
             continue
         ratios = []
+        ratio_records: list[dict[str, Any]] = []
         ppl_errors = []
-        for row in rows:
+        for row_number, row in enumerate(rows, start=2):
             n_value = parse_finite(row["N_params_B"])
             d_value = parse_finite(row["D_tokens_B"])
             c_value = parse_finite(row["C_FLOPs_1e21"])
@@ -529,24 +687,48 @@ def main() -> int:
                 and d_value > 0
                 and c_value is not None
             ):
-                ratios.append(c_value / (0.006 * n_value * d_value))
+                ratio = c_value / (0.006 * n_value * d_value)
+                ratios.append(ratio)
+                ratio_records.append(
+                    {
+                        "line": row_number,
+                        "run_id": row.get("run_id", ""),
+                        "steps": row.get("steps", ""),
+                        "ratio": ratio,
+                        "absolute_deviation": abs(ratio - 1.0),
+                    }
+                )
             if loss is not None and ppl not in (None, 0):
                 try:
                     expected_ppl = math.exp(loss)
                 except OverflowError:
                     expected_ppl = math.inf
                 ppl_errors.append(abs(expected_ppl - ppl) / ppl)
+        identity_stats = compute_identity_stats(ratios) if ratios else {}
         add_check(
             checks,
             f"{stem}_compute_identity",
-            "pass" if ratios and 0.95 <= statistics.median(ratios) <= 1.05 else "warn",
+            "pass"
+            if ratios
+            and identity_stats["max_absolute_deviation"]
+            <= COMPUTE_IDENTITY_REL_TOL
+            else "warn",
             {
-                "median_C_over_6ND": statistics.median(ratios),
-                "min": min(ratios),
-                "max": max(ratios),
+                **identity_stats,
                 "formula": "C_FLOPs_1e21 / (0.006 * N_params_B * D_tokens_B)",
+                "relative_tolerance": COMPUTE_IDENTITY_REL_TOL,
+                "outlier_rows": sorted(
+                    (
+                        record
+                        for record in ratio_records
+                        if record["absolute_deviation"]
+                        > COMPUTE_IDENTITY_REL_TOL
+                    ),
+                    key=lambda record: record["absolute_deviation"],
+                    reverse=True,
+                ),
             },
-            "N and D are in billions; C is in 1e21 FLOPs",
+            "N and D are in billions; C is in 1e21 FLOPs; every row, not only the median, is checked",
         )
         add_check(
             checks,
@@ -619,14 +801,49 @@ def main() -> int:
     )
     b8_rows = rows_by_relative.get("supplementary_NQ_experiment_large.csv", [])
     b8_labels_present = bool(b8_rows) and all("data_type" in row for row in b8_rows)
+    b8_invalid_labels = (
+        enum_violations(b8_rows, "data_type", B8_ALLOWED_DATA_TYPES)
+        if b8_labels_present
+        else []
+    )
     add_check(
         checks,
-        "B8_data_type_counts",
-        "pass" if b8_labels_present else "fail",
-        dict(
-            sorted(Counter(row.get("data_type", "") for row in b8_rows).items())
-        ),
-        "Reported as labels only; these categories are not reclassified by the audit",
+        "B8_data_type_enum",
+        "pass" if b8_labels_present and not b8_invalid_labels else "fail",
+        {
+            "allowed": sorted(B8_ALLOWED_DATA_TYPES),
+            "counts": dict(
+                sorted(Counter(row.get("data_type", "") for row in b8_rows).items())
+            ),
+            "invalid": b8_invalid_labels,
+        },
+        "Only calibrated and extrapolated are accepted; source labels are not reclassified",
+    )
+    b8_calibrated, b8_extrapolated, b8_overlap = split_b8_rows(b8_rows)
+    add_check(
+        checks,
+        "B8_calibrated_extrapolated_isolation",
+        "pass"
+        if b8_labels_present
+        and not b8_invalid_labels
+        and b8_calibrated
+        and b8_extrapolated
+        and not b8_overlap
+        else "fail",
+        {
+            "fit_eligible_label": "calibrated",
+            "evaluation_only_label": "extrapolated",
+            "fit_eligible_count": len(b8_calibrated),
+            "evaluation_only_count": len(b8_extrapolated),
+            "overlapping_experiment_ids": sorted(b8_overlap),
+            "fit_eligible_experiment_ids": sorted(
+                row.get("experiment_id", "") for row in b8_calibrated
+            ),
+            "evaluation_only_experiment_ids": sorted(
+                row.get("experiment_id", "") for row in b8_extrapolated
+            ),
+        },
+        "Only calibrated rows may be used for fitting; extrapolated rows are evaluation-only",
     )
 
     large_models = {
@@ -685,7 +902,10 @@ def main() -> int:
     b9_zero_d = sorted(
         row.get("model_name", "")
         for row in b9_rows
-        if (parse_finite(row.get("D_tokens_B", "")) or math.inf) <= 0
+        if (
+            (d_value := parse_finite(row.get("D_tokens_B", ""))) is not None
+            and d_value <= 0
+        )
     )
     b9_missing_flops = sorted(
         row.get("model_name", "")
@@ -719,11 +939,28 @@ def main() -> int:
     )
 
     status_counts = Counter(check["status"] for check in checks)
+    script_path = Path(__file__).resolve()
+    git_head = git_stdout("rev-parse", "HEAD")
+    git_worktree_dirty_at_start = bool(git_stdout("status", "--porcelain"))
     output = {
-        "schema_version": 1,
+        "schema_version": 2,
         "role": "cyj",
         "task": "P01 attachment B audit",
-        "input_version": args.input_version,
+        "input_version": resolved_input_version,
+        "provenance": {
+            "git_commit": git_head,
+            "git_worktree_dirty_at_generation_start": git_worktree_dirty_at_start,
+            "script_path": script_path.relative_to(ROOT).as_posix(),
+            "script_sha256": sha256(script_path),
+            "input_manifest_path": manifest_path.relative_to(ROOT).as_posix(),
+            "input_manifest_sha256": sha256(manifest_path),
+            "source_manifest_path": source_manifest_path.relative_to(ROOT).as_posix(),
+            "source_manifest_sha256": sha256(source_manifest_path),
+            "generated_at_utc": dt.datetime.now(dt.timezone.utc)
+            .replace(microsecond=0)
+            .isoformat(),
+            "python_version": platform.python_version(),
+        },
         "data_root": data_root.relative_to(ROOT).as_posix(),
         "source_policy": {
             "observed_and_reported": ["B1", "B4", "B5", "B9", "B11", "B12"],
@@ -743,9 +980,8 @@ def main() -> int:
         "checks": checks,
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(
-        json.dumps(output, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
-    )
+    with args.output.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(json.dumps(output, ensure_ascii=False, indent=2) + "\n")
     outcome = "FAIL" if status_counts.get("fail", 0) else "PASS"
     print(
         f"{outcome}: audited "
