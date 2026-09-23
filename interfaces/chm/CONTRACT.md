@@ -1,170 +1,19 @@
-# chm 交付约定 v1.4
+# chm → cyj Q1 生产者接口 v1.5
 
-> 2026-09-24 本机复核：以下“未实跑前”“完整本地重跑前”等句子是 09-23 网页提交时状态。现已完成真实 A1–A3 敏感性、RegMix 折分、eta 配对重抽样与图表复跑；输出与边界见 `problem/chm/20260924_cross_branch_delta_review.md`。Q/p 仍为 producer-validated draft，跨成员尺度与 Loss 桥接未联合冻结。
+日期：2026-09-24；版本：`chm.q1.v1`；生产者：chm；消费者：cyj（Q2/Q3）、zhh（需要 Q1 证据时）。状态：**chm 侧已在真实附件上复跑并校验，可直接消费的 A 侧接口**；跨 A/B 桥接尚未识别，也尚非 cyj 预测器或 `main` 集成成果。
 
-日期：2026-09-23  
-生产者：chm  
-消费者：cyj（Q2/Q3）、zhh（Q4/不确定性）  
-状态：Q1 producer-validated draft；跨成员接口仍需消费者验收后才能标记 joint-validated。
+唯一机器入口：`interfaces/chm/q1_interface_v1.json`，指向已审核的六个文件及 SHA256/行数。可调用入口：`src/chm/q1_interface.py` 的 `Q1Interface`。消费者用法、输入校验、返回字段、单位与示例见 [USAGE.md](USAGE.md)；需 cyj 定义的 B 侧接口见 [CYJ_REQUIRED_INTERFACE.md](CYJ_REQUIRED_INTERFACE.md)。
 
-> 历史 v1.2 已移至 `interfaces/chm/archive/CONTRACT_v1.2.md`。该文件仅供审计，禁止作为当前输入。
+| chm 交付 | 数据/算法 | 状态与边界 |
+|---|---|---|
+| 质量 Q | A1 的 22 指标稳健定向，RPS/DSIR/model 家族内和家族间等权；7 域 `Q_z` 中位数及条件 bootstrap 95% 区间 | A 原生描述性坐标，可为负；不等于 B6–B8 `Q_score`；质量定义敏感性见 `outputs/chm/quality_review_v1/` |
+| 17 域映射 | `direct` 3、`near_direct` 3、`inferred` 11 | `inferred` 不填 Q；`near_direct` 是代理，不是同总体观测 |
+| 配比 p | 17 个命名非负权重，和为 1；A4 平均归一化配比作 `p_ref` | 调用时拒绝缺维/多维/非法和；系数是 Ridge 相对效应，不作因果解释 |
+| 逐目标域效应 | 13 个目标域各有 `m_k(p)=Σβ_kj(p_j-p_ref,j)`，单位为 A 侧目标域交叉熵变化 | 不是绝对 Loss、B1 `val_loss` 或唯一总体 Loss；A6–A11 验证和逐域结果见清单 |
+| 跨规模情景 | `(N/10^6)^(-η)`，`N` 是参数个数；η 点估计 0.14503317 | 1M/60M/1B 是已见规模；其他规模外推。1B 配方支持集不同，η 与区间均条件于固定 A4+A5 Ridge |
 
-## 1. 质量 Q 接口
+η 的目标域 bootstrap 95% 区间为 `[0.10686793, 0.18669841]`；目标域加校准行配对重抽样区间为 `[0.09756180, 0.20097672]`。质量域排序、CV、消融和图表证据分别见 `outputs/chm/quality_review_v1/`、`outputs/chm/local_recheck_v1/q1_regmix_cv_split_sensitivity.csv`、`outputs/chm/ablation_v1/` 和 `paper/sections/chm/figures/`。
 
-当前文件：
+**职责边界：**chm 定义和维护上述 A 侧数值、配比域顺序、目标域面板、参考配比及其验证范围。cyj 消费这套固定输入，并负责定义 B 侧 `Q_score` 的使用或跨坐标映射、B1 Loss 口径和 target anchor、跨 Loss 系数、最终 `N,D,Q,p→Loss` 预测器及 Q3 成本理论。无成对数据时这些映射应明确为情景或未识别，不能以讨论结论替代实测标定。完整限制见 [Q2_BRIDGE.md](Q2_BRIDGE.md) 与 [UNCERTAINTY.md](UNCERTAINTY.md)。
 
-- `outputs/chm/domain_quality.csv`：面向下游的 7 域描述性 Q；
-- `outputs/chm/domain_quality_v0.csv`：详细统计；
-- `outputs/chm/domain_mapping.csv`：A16 direct / near_direct / inferred 映射；
-- `outputs/chm/quality_analysis_manifest_v0.json`：输入哈希、随机种子、标准化参数与警告；
-- 后续稳健性输出：`outputs/chm/quality_review_v1/`。
-
-定义：A1 上对 22 个指标做稳健标准化和方向统一，先在 RPS / DSIR / model 三家族内等权，再三家族等权，得到样本级综合分数并标准化为 `Q_z`。域级主统计量为中位数。
-
-当前 7 域 `Q_z` 中位数：
-
-| domain | Q_z median |
-|---|---:|
-| book | 2.771089 |
-| arxiv | 2.682585 |
-| commoncrawl | 0.506149 |
-| stackexchange | 0.187411 |
-| c4 | -0.217345 |
-| wikipedia | -0.375921 |
-| github | -0.517070 |
-
-边界：
-
-- `Q_z` 可为负，是描述性潜在指数，不等于 B6–B8 `Q_score`；
-- A1 的 arxiv/github 被 A2/A3 包含，独立复核使用非重叠 16,104 / 193,752 条；
-- A16 有 3 direct、3 near_direct、11 inferred；禁止为 11 个 inferred 域伪造精确 Q；
-- Q 定向、权重、Qurater 与 domain-balanced 敏感性由 `src/chm/q1_quality_sensitivity.py` 生成，未实跑前不得声称这些稳健性已通过；
-- Q1→Q2 的可识别性边界见 `interfaces/chm/Q2_BRIDGE.md`。
-
-## 2. 配比 p→Loss 接口
-
-**当前唯一有效目录：**
-
-`outputs/chm/local_recheck_v1/`
-
-旧网页端结果只在 Git 历史提交 `44e8db4` 中保留，差异摘要见 `outputs/chm/q1_local_reproduction_check.json`；当前文件树不保留旧系数，避免误用。
-
-核心文件：
-
-- `mixture_effect_ridge_v0.csv`
-- `mixture_effect_ridge_v0_cv.csv`
-- `mixture_effect_ridge_v0_manifest.json`
-- `mixture_reference_v0.csv`
-- `q1_regmix_ridge_domainwise_metrics.csv`
-- `q1_regmix_direct_scale_rank_stability.csv`
-- `q1_regmix_composition_overlap.csv`
-
-对 13 个目标域分别拟合
-
-\[
-\widehat L_k(\mathbf p)
-=
-\beta_{0,k}
-+
-\sum_{j=1}^{17}\beta_{k,j}p_j,
-\qquad
-\sum_j p_j=1.
-\]
-
-每行配比先重新归一化到单纯形。系数使用零和对比参数化，因此 `beta` 是相对配比效应，不是独立因果贡献。
-
-训练/验证边界：
-
-- A4+A5：唯一训练和 alpha 选择数据；
-- A6+A7、A8+A9、A10+A11：1M / 60M / 1B held-out 验证；
-- A12–A15：estimated/extrapolated，只作尺度外推压力测试。
-
-Pile-CC 当前 Spearman：
-
-- 1M：0.900735
-- 60M：0.891900
-- 1B：0.887592
-
-13 域中位 Spearman：
-
-- 1M：0.838053
-- 60M：0.838115
-- 1B：0.706685
-
-A12–A15 的 63 个配方全部来自 1M 训练配方，因此只能称为**已见配方上的尺度外推**，不能称新配方泛化。
-
-CV 折分敏感性代码已加入 `q1_regmix_cv_split_sensitivity.csv` 生成逻辑；完整本地重跑前当前主输出仍使用既有确定性五折。
-
-## 3. 配比效应尺度传递
-
-当前文件：
-
-- `outputs/chm/local_recheck_v1/mixture_scale_calibration_v0.csv`
-- `outputs/chm/local_recheck_v1/mixture_scale_transfer_v0_manifest.json`
-
-经验模型：
-
-\[
-\log b_k(N)=c_k-\eta\log(N/10^6)+\varepsilon_{k,N}.
-\]
-
-当前公共估计：
-
-\[
-\widehat\eta=0.14503317,
-\]
-
-现有目标域 bootstrap 95% CI：
-
-\[
-[0.10686793,\;0.18669841].
-\]
-
-边界：
-
-- 只有 1M、60M、1B 三个真实尺度；
-- 1M/60M 使用同一组 256 配方，1B 使用另一组 64 配方，因此 eta 可能混入配方支持集变化；
-- 当前已提交代码会额外计算“目标域 + 校准样本”bootstrap，但仍条件于 A4+A5 Ridge；
-- eta 是经验尺度传递修正，不是新的普适 Scaling Law，也不是纯规模因果弹性。
-
-## 4. Q1→Q2 联合使用
-
-正式规则见：
-
-- `interfaces/chm/Q2_BRIDGE.md`
-- `interfaces/chm/UNCERTAINTY.md`
-
-核心禁止项：
-
-- 不允许 `Q_z == Q_score`；
-- 不允许 `pile_cc == B1 val_loss`；
-- 不允许将 13 个原始 Loss 简单平均后当作 Q2 Loss；
-- 不允许把跨 Loss 口径桥接系数默认为 1。
-
-在 cyj 未验收桥接前，Q3 只能做接口测试/情景分析，不发布正式最优配置。
-
-## 5. Q3 后续接口
-
-Q3 输出至少包含：
-
-- 算力预算与上下文情景；
-- N / D / Q / p；
-- 分项成本和总成本；
-- cyj predictor 版本、输入单位与有效范围；
-- 使用的 Q1 target / mapping / eta 情景；
-- 预测 Loss 与不确定性；
-- 求解状态和约束残差。
-
-Q3 只能使用 cyj 已 validated 的预测器与 zhh 已验收的 C7 情景。
-
-## 6. 可复现入口
-
-- 质量主分析：`src/chm/q1_quality_analysis.py`
-- 质量稳健性：`src/chm/q1_quality_sensitivity.py`
-- 配比逐域 Ridge：`src/chm/q1_regmix_domainwise.py`
-- 配比接口：`src/chm/q1_mixture_interface.py`
-- 尺度传递：`src/chm/q1_mixture_scale_transfer.py`
-- 图表：`src/chm/q1_figures.py`
-- 消融及边界：`src/chm/q1_ablation.py`、`outputs/chm/ablation_v1/`；仅作稳健性证据，不更改主接口。
-
-消费者必须记录精确 commit SHA、文件 SHA、接口版本和 draft/validated/integrated 状态。
+消费者应记录精确分支/提交 SHA、接口版本、manifest SHA、target、η 情景及是否外推。旧 `team/chm-data` 带有作废祖先，不得直接合并；只读取 clean integration 分支。历史 v1.2 在 `archive/` 仅供审计，不能作当前接口。

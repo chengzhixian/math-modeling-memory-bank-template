@@ -1,5 +1,7 @@
 # chm→cyj Q2 桥接边界 v1.0
 
+> 2026-09-24 职责决定：用户已指定 A 侧强相关接口由 chm 定义、cyj 直接消费；B 侧强相关接口由 cyj 定义、chm 直接消费。chm 的机器接口和用法见 `CONTRACT.md`、`USAGE.md`；cyj 需交付的 B 侧清单见 `CYJ_REQUIRED_INTERFACE.md`。下文的不可识别边界继续有效，协作分工不生成新的标定证据。
+
 日期：2026-09-23  
 状态：chm 生产者侧已冻结的**可识别性边界**；等待 cyj 在其接口中接受后才可标记 joint-validated。
 

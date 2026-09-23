@@ -69,6 +69,8 @@ Q1 质量全量初版已运行，网页端 LFS 阻塞解除。Q1 配比已本地
 
 ## 2026-09-23 网页审查工程修复与待办
 
+> 2026-09-24 用户确定接口归属：chm 负责定义并发布 A 侧 Q/p，cyj 直接消费；cyj 负责 B 侧 Loss/标度律/Q3 理论，chm 直接消费。chm 已准备 `chm.q1.v1`（`interfaces/chm/CONTRACT.md`、`USAGE.md`、`q1_interface_v1.json`、`src/chm/q1_interface.py`），以及交给 cyj 的 `CYJ_REQUIRED_INTERFACE.md`。验收和剩余限制见 `memory-bank/handoffs/chm/20260924-q1-producer-interface-v1.md`。跨附件未识别映射不因职责划分而自动成立。
+
 > 2026-09-24 消融/收敛：`src/chm/q1_ablation.py` 已复算 3 家族去一与配比输入去除；结果见 `experiments/chm/20260924-q1-ablation-and-cleanup.md`、`outputs/chm/ablation_v1/`。RPS 去除引起 4/7 域排序变化；无配比模型在 1M/60M 各 13/13 域较差，1B 完整模型仅 4/13 域 RMSE 改善。已删除旧网页输出副本和被替代的过程脚本；保留 Git `44e8db4` 审计快照。主 Q/p 定义不变，跨成员桥接待办不变。
 
 > 2026-09-24 接续：已从远程拉取 clean integration 到独立 worktree，复核真实 A1–A3 与 Q1 代码、敏感性和图表。修复筛选后 DSIR 空家族中断、eta bootstrap 配方行未配对、图表脚本运行错误；新增产物和 cyj/zhh 增量接口判断见 `problem/chm/20260924_cross_branch_delta_review.md`。跨成员 Q/Loss 桥接仍待联合冻结；本轮仅推进 chm producer draft。
