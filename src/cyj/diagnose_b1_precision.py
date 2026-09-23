@@ -162,9 +162,8 @@ def main() -> int:
         ],
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(
-        json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
-    )
+    with args.output.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
     print(f"wrote {args.output} ({len(raw)} B1 rows, {len(excluded)} warnings)")
     return 0
 
