@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "status": "prepared_no_model_fit",
+  "input_version": "3b9cbff1362349bd9dc9d94d56c409f7d93654be",
+  "provenance": {
+    "git_commit": "3b9cbff1362349bd9dc9d94d56c409f7d93654be",
+    "git_code_paths_dirty_at_generation_start": false,
+    "script_sha256": "127f581474be09e6fc5ee8613b5688d7a73cd9b02cd91439687e65a40406ed48",
+    "source_b1_sha256": "529a59644b0f57bf3a76037838b614bfedc35e58bb26b93052e34ffc63e454c2",
+    "input_manifest_sha256": "3377a36c5f6fcabb79abca5fe5621047a3abd9be6dffd9491bc8c651b19f903f",
+    "source_manifest_sha256": "34e81dabf46302eebaac8551fa18d2e72acd0833b1cf0276690bee897f1323db",
+    "python_version": "3.12.14",
+    "generated_at_utc": "2026-09-23T17:49:41+00:00"
+  },
+  "split_policy": {
+    "group_key": "N_params_B",
+    "group_rationale": "B1 has 1176 row-unique run_id values; model size is the evidenced repeated-trajectory grouping key.",
+    "random_row_split_allowed": false,
+    "token_tail_fraction_requested": 0.3,
+    "token_tail_rule": "within each N group, sort by D then steps; floor((1-tail_fraction)*n) rows train, remaining rows test"
+  },
+  "summary": {
+    "rows": 1176,
+    "groups": 8,
+    "token_tail_split_counts": {
+      "test": 360,
+      "train": 816
+    },
+    "compute_identity_outliers": 8
+  },
+  "groups": [
+    {
+      "group_index": 1,
+      "group_id": "N=0.070542B",
+      "N_params_B": 0.070542,
+      "rows": 147,
+      "token_tail_train_rows": 102,
+      "token_tail_test_rows": 45,
+      "token_tail_last_train_D_tokens_B": 205.521,
+      "token_tail_first_test_D_tokens_B": 207.618
+    },
+    {
+      "group_index": 2,
+      "group_id": "N=0.162405B",
+      "N_params_B": 0.162405,
+      "rows": 147,
+      "token_tail_train_rows": 102,
+      "token_tail_test_rows": 45,
+      "token_tail_last_train_D_tokens_B": 205.521,
+      "token_tail_first_test_D_tokens_B": 207.618
+    },
+    {
+      "group_index": 3,
+      "group_id": "N=0.409009B",
+      "N_params_B": 0.409009,
+      "rows": 147,
+      "token_tail_train_rows": 102,
+      "token_tail_test_rows": 45,
+      "token_tail_last_train_D_tokens_B": 205.521,
+      "token_tail_first_test_D_tokens_B": 207.618
+    },
+    {
+      "group_index": 4,
+      "group_id": "N=1.040867B",
+      "N_params_B": 1.040867,
+      "rows": 147,
+      "token_tail_train_rows": 102,
+      "token_tail_test_rows": 45,
+      "token_tail_last_train_D_tokens_B": 205.521,
+      "token_tail_first_test_D_tokens_B": 207.618
+    },
+    {
+      "group_index": 5,
+      "group_id": "N=1.416184B",
+      "N_params_B": 1.416184,
+      "rows": 147,
+      "token_tail_train_rows": 102,
+      "token_tail_test_rows": 45,
+      "token_tail_last_train_D_tokens_B": 205.521,
+      "token_tail_first_test_D_tokens_B": 207.618
+    },
+    {
+      "group_index": 6,
+      "group_id": "N=2.782831B",
+      "N_params_B": 2.782831,
+      "rows": 147,
+      "token_tail_train_rows": 102,
+      "token_tail_test_rows": 45,
+      "token_tail_last_train_D_tokens_B": 205.521,
+      "token_tail_first_test_D_tokens_B": 207.618
+    },
+    {
+      "group_index": 7,
+      "group_id": "N=6.86104B",
+      "N_params_B": 6.86104,
+      "rows": 147,
+      "token_tail_train_rows": 102,
+      "token_tail_test_rows": 45,
+      "token_tail_last_train_D_tokens_B": 205.521,
+      "token_tail_first_test_D_tokens_B": 207.618
+    },
+    {
+      "group_index": 8,
+      "group_id": "N=11.965825B",
+      "N_params_B": 11.965825,
+      "rows": 147,
+      "token_tail_train_rows": 102,
+      "token_tail_test_rows": 45,
+      "token_tail_last_train_D_tokens_B": 205.521,
+      "token_tail_first_test_D_tokens_B": 207.618
+    }
+  ],
+  "outputs": {
+    "prepared_b1": {
+      "path": "outputs/cyj/classic/prepared_b1.csv",
+      "bytes": 125664,
+      "sha256": "2eb418f022c414db13af89d2177b2b90c62d3ad3b29300adf7fb1de570927704"
+    },
+    "b4_b5_loss_comparability": {
+      "path": "outputs/cyj/classic/b4_b5_loss_comparability.csv",
+      "bytes": 6701,
+      "sha256": "ae14ab7dad80f65a3df9a7f0fd29d58518b669cb8d2ca63308dc271b59444af5",
+      "rows": 18,
+      "absolute_comparability": "not_established"
+    }
+  }
+}

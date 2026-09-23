@@ -6,14 +6,14 @@
 
 Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠排除隐藏文字影响而作废，提交 `58f4f0a` 已明确丢弃其文件内容。不得从 Git 历史恢复、cherry-pick、复用其中的模型、参数、数值、结论或输出。若后续独立论证出同名方法适用，必须依据可见题面、真实数据或独立可核验文献重新建立证据链。
 
-更新时间：2026-09-24 00:15（北京时间）。角色任务：Q2 标度律与推导；为 Q3 提供目标函数、约束和验证支持。
+更新时间：2026-09-24 01:50（北京时间）。角色任务：Q2 标度律与推导；为 Q3 提供目标函数、约束和验证支持。
 成员称呼：cyj（用户已指定）。实际电脑/环境：Windows 10.0.26200；Python 3.12.14（Codex 工作区运行时）；详见 `problem/cyj/environment.md`。
-当前分支：`team/cyj-scaling`；已合并 main `a0932fd92b3a46cef8eb0bf563df1e6abc9396ef`；本轮正式审计代码/输入提交 `6880af29f2a1fc089e5fc601d0df873c0be042a3`。
-状态：进行中。Stage 1 审计加固已完成、已测试并全量重跑；尚无拟合或预测结果，当前接口仍是 audit-only draft。
+当前分支：`team/cyj-scaling`；已合并 main `a0932fd92b3a46cef8eb0bf563df1e6abc9396ef`；经典基线正式代码/输入提交 `3b9cbff1362349bd9dc9d94d56c409f7d93654be`。
+状态：进行中。Stage 1 审计已完成；B1 经典 N-D 基线已实现并完成无随机逐行泄漏的验证，但近乎精确重构的来源未查明，接口仍是 draft，`ready_for_Q3=false`。
 
 ## 当前任务
 
-按 TASK_PLAN.md 推进 P01/P20。下一工作块是建立无泄漏的数据准备与经典 N-D 标度律基线：B1 按模型规模留组并按 D 做尾部外推；B4/B5 先建立 Loss 可比性表。Q1 的 Q/p 未形成正式接口前不拟合最终广义模型。
+按 TASK_PLAN.md 推进 P20。当前先审计 B1/B4/B5 的 Loss 构造与口径，并对经典基线做分组不确定性和计算恒等式离群敏感性；Q1 的 Q/p 未形成正式接口前不拟合最终广义模型。
 公共记忆由集成人维护；本次仅修改 cyj 归属文件。
 
 ## 本次已验证与证据
@@ -26,9 +26,19 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 - B1 的计算恒等式新增逐行检查，发现 8 行偏差超过 5%；原因尚未判定，保留 warning。
 - 证据与限制见 `problem/cyj/b_data_audit.md` 和 `experiments/cyj/20260924-b-data-audit-stage1.md`。
 
+## 经典 N-D 基线（本轮）
+
+- 已新增统一数据准备、经典拟合和共享数学工具；Python 编译通过，标准库 `unittest` 13/13 通过。
+- B1 固定 8 个 N 组；token-tail 每组 102/45 行、合计 816/360 行；另做 8 折 Leave-One-Model-Size-Out，未使用随机逐行拆分。
+- 模型 `L=E+A*N^-alpha+B*D^-beta` 的正式输入/代码 SHA 为 `3b9cbff1362349bd9dc9d94d56c409f7d93654be`。参数为 E=1.6898377713、A=0.3539687193、B=1.2402746295、alpha=0.3399854258、beta=0.2798924656。
+- 全样本 RMSE 0.0001465764；8 折 LOSO RMSE 均值 0.0001461277；token-tail RMSE 0.0001160041。三者均低于 0.001，已触发 near-exact reconstruction 警报；该现象可能来自共同确定性构造或强预处理，不能作为独立真实泛化证据。
+- B4/B5 的绝对 Loss 可比性缺少本地证据，状态为 `not_established`；只输出描述性预测，不报告 external RMSE。
+- 主结果 `outputs/cyj/classic/classic_fit.json` SHA256 `b3706500bf79c191b7b05bf7af3dd963d1fb149fe47e304edb30cc9ad023893e`；数据 manifest SHA256 `2fd70f2f174e5398a21cafa423309be68f6f3c702d1e22a0331c6547b0e2bc9a`。
+- 接口已升为生产者侧 draft v1.3，显式 `ready_for_Q3=false`；没有 Q/p、不确定性区间或 Loss–Benchmark 桥接。
+
 ## 依赖与阻塞
 
-接口见 `interfaces/cyj/CONTRACT.md` v1.2 和 `interfaces/README.md`。v1.2 仍是生产者侧 audit-only draft，尚未由 chm/zhh 验收；当前没有 validated predictor，chm 不得据此生成 Q3 正式最优配置。
+接口见 `interfaces/cyj/CONTRACT.md` v1.3 和 `interfaces/README.md`。v1.3 加入经典基线，但仍是生产者侧 draft，尚未由 chm/zhh 验收；当前没有 validated predictor，chm 不得据此生成 Q3 正式最优配置。
 全库校验被附件 A 的 4 个 LFS 指针阻塞；附件 B 已单独按清单核验。最终 `L(N,D,Q,p)` 依赖 chm 的正式 Q/p 接口；zhh 的 C7 2048/8192/131072 Token 情景须作为外生敏感性输入，正式采用前仍需其更新合同并通过集成验收。官方规则仍待集成人核对。
 
 ## 2026-09-23 main 协作规则同步影响
@@ -41,8 +51,8 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 ## 下一步和交接
 
-1. 建立 `prepare_scaling_data.py` 或等价数据入口，固定 B1 规模组、token-tail 划分与 ID 清单；不使用随机逐行切分。
-2. 建立 B4/B5 Loss 可比性证据表；不可比来源不合并计算统一 RMSE。
-3. 实现经典 N-D-Loss 基线、多起点稳健拟合、按规模留组验证和残差诊断；B2/B3/B10 不作独立真实验证。
+1. 审计 B1 的 Loss 生成/预处理证据，解释或限定近乎精确重构；不要先把低 RMSE 写成独立泛化结论。
+2. 核查 B1 8 个 C 恒等式离群点并做保留/排除敏感性；补充按规模分组 bootstrap 或等价不确定性。
+3. 为 B4/B5 补齐 tokenizer、评估语料、Loss 定义和单位证据；证据不足时继续禁止跨来源统一 RMSE。
 4. 在广义模型前与 chm 联合冻结 Q mapping 和 Loss/anchor/p 接法；记录实际消费的 SHA、接口版本和文件哈希。
-5. 本轮交接见 `memory-bank/handoffs/cyj/20260924-0015-p01-audit-hardening.md`；最终推送及远端 SHA 以 Git 实际核验为准。
+5. 本轮交接见 `memory-bank/handoffs/cyj/20260924-0150-p20-classic-baseline.md`；最终推送及远端 SHA 以 Git 实际核验为准。
