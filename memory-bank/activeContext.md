@@ -40,3 +40,32 @@ Gemini 历史建模结果已作废并由 `58f4f0a` 丢弃文件内容；当前�
 ## 交接与备份
 
 普通成员每次只更新本人成员记忆与新增交接，再提交推送本人分支并核验 SHA；本文件与 progress.md 由集成人验收合并后维护。此前初始化提交 `3d0e0b1` 已推送并核验；本次新增协作方案的推送状态以实际 Git 与远端核验为准。失败时下次优先恢复同步。
+
+## 2026-09-23 跨分支依赖与协作规则同步
+
+公共协作规范已新增：`TEAM_COLLABORATION_DEPENDENCIES.md`。本节是该规范在 Memory Bank 中的公共入口；成员开工时除 `AGENTS.md`、`TEAM_WORKFLOW.md` 外必须同时读取该文件。
+
+### 当前个人分支状态（仅作未集成观察）
+
+以下内容已存在于个人远端分支，但尚未因本次公共规则更新而自动视为 main 已验收成果：
+
+- `team/chm-data` @ `462713303b0db1be47d7260699ada3e12692c105`：Q1 配比侧已有逐目标域 Ridge、跨尺度验证、p 的经验尺度传递和 Q1 草稿；A1–A3 质量 Q 代码已准备，但 LFS 正文尚待完整环境实跑。
+- `team/cyj-scaling` @ `932e22baff62c9349b8d82f354f4641901abfa4a`：附件 B 结构/身份审计已完成；正式 N-D-Q-p 标度律尚未拟合，当前没有可供 Q3 调用的验证版 predictor。
+- `team/zhh-frontier` @ `d47cd2dc921333caecfcb95f09eb5a2f2714d0db`：Q4 基线、C7 上下文情景和 Loss–Benchmark 桥接已有个人分支结果；其 `interfaces/zhh/CONTRACT.md` 与成员记忆存在状态滞后，正式集成前需由 zhh 自己同步。
+
+### 当前必须联合冻结的接口
+
+1. **Q 的共同尺度**：chm 的 Q1 评分尺度与 B6–B8 的 `Q_score` 不是天然同一坐标，chm+cyj 必须明确跨附件 mapping，并做敏感性。
+2. **p 对 Q2 Loss 的接法**：chm 的 p 接口对应 13 个具体验证域 Loss，而 B1 只有泛化 `val_loss`；不得未经验证把 Pile-CC 或其他单域直接当成 B1 Loss。chm+cyj 必须共同冻结 Loss 定义、anchor 与敏感性面板。
+3. **Loss → Benchmark**：zhh 的个人分支桥接留出结果显示外推较弱，因此 Q1–Q3 的 Loss 不能直接等同于 Benchmark 增益；最终必须传播桥接不确定性。
+
+### 当前跨题硬依赖
+
+- Q2 的经典 N-D 基线可以不等 Q1；但最终 `L(N,D,Q,p)` 必须等待 chm 的正式 Q/p 接口。
+- Q3 可先搭框架，但真实优化结果必须等待 cyj 的验证版 predictor；上下文长度使用 zhh 的 C7 外生情景。
+- Q4 的历史/评测部分可独立推进；对 Q3 结果做能力解释时必须接收 chm/cyj 的正式 Loss 输出并传播桥接误差。
+
+### main 同步要求
+
+所有成员在接收跨成员接口、开始当天工作或公共规则更新后，先执行 `git fetch origin --prune`，再在本人分支合并 `origin/main`。若暂不合并，至少用 `git show origin/main:TEAM_COLLABORATION_DEPENDENCIES.md` 阅读最新公共规则。个人分支成果只有经过验收并进入 main 后才成为正式公共输入。
+
