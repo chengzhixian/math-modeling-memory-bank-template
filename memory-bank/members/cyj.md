@@ -6,11 +6,17 @@
 
 Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠排除隐藏文字影响而作废，提交 `58f4f0a` 已明确丢弃其文件内容。不得从 Git 历史恢复、cherry-pick、复用其中的模型、参数、数值、结论或输出。若后续独立论证出同名方法适用，必须依据可见题面、真实数据或独立可核验文献重新建立证据链。
 
-更新时间：2026-09-24 08:10（北京时间）。角色任务：Q2 标度律与推导；为 Q3 提供目标函数、约束和验证支持。
+更新时间：2026-09-24 09:42（北京时间）。角色任务：Q2 标度律与推导；为 Q3 提供目标函数、约束和验证支持。
 成员称呼：cyj（用户已指定）。实际电脑/环境：Windows 10.0.26200；Python 3.12.14（Codex 工作区运行时）；详见 `problem/cyj/environment.md`。
 当前分支：`team/cyj-scaling`；已包含 main `a0932fd92b3a46cef8eb0bf563df1e6abc9396ef`；复核后经典基线代码/输入提交 `cf297a4ad47e235acf5a9b6e890a5df5e05b07e5`。
 状态：进行中。Stage 1 审计、B1 经典 N-D 基线、八行计算量显示精度/剔除敏感性，以及 B2/B3 轨迹形状诊断已完成；B1 Loss 近乎精确重构的来源仍未查明，接口仍是 draft，`ready_for_Q3=false`。
-远端状态：B1 诊断检查点 `4a68df4f0967046581bbd80d03d6259d6f42b375` 已推送并核对远端 SHA；B2/B3 新检查点以实际 Git push 与 `ls-remote` 结果为准。
+远端状态：B2/B3 检查点 `3e20b3eeca2594b9311adf89442828d468fec026` 已推送并核对远端 SHA；PR 交接记忆的新检查点以实际 Git push 与 `ls-remote` 结果为准。
+
+## Draft PR 交接状态
+
+- 已创建 [PR #3](https://github.com/chengzhixian/math-modeling-memory-bank-template/pull/3)，标题 `cyj：附件 B 审计、经典基线及 B1–B3 诊断`，状态 Draft，`team/cyj-scaling` → `main`；创建时分支 HEAD 为 `3e20b3eeca2594b9311adf89442828d468fec026`，GitHub 页面显示 23 commits、40 个变更文件。40 个文件的本地比较均在 cyj 自有目录或本人成员记忆/交接范围。
+- PR 描述标明 Q2 未完成、`ready_for_Q3=false`、B2/B3 非独立验证、Q/p 和 Loss anchor 未冻结，并请求集成人复现验收后再合入；创建 PR 不等于完成验收或合并 main。
+- 交接详情见 `memory-bank/handoffs/cyj/20260924-0942-p20-draft-pr.md`。09:42 的首次 `git ls-remote` 临时遇到 GitHub 443 连接失败；不据此推断已发生分支变化，最终推送以再次实际核验为准。
 
 ## 本轮 B2/B3 形状诊断
 
