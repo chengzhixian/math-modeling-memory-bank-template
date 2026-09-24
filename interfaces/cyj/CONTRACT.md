@@ -2,13 +2,15 @@
 
 角色：cyj 负责 Q2 标度律与 Q3 理论；chm/zhh 消费。当前 `ready_for_Q3=false`，未获联合验收或 main 集成。可调用接口、公式、字段、单位、成本与约束详见 [Q3_API.md](Q3_API.md)，此处只保留当前入口与证据索引。
 
-**当前 chm 入口：**[CHM_API_V2.md](CHM_API_V2.md)，`src/cyj/chm_adapter_v2.py::CHMAdapter(mode="diagnostic")`。`cyj.chm.v2` 提供 B7 原生 NDQ `value_grad`、JSON 批量求值、三成本/预算残差与独立 Q1 v1.2 13-target 配比向量，p_policy=sensitivity_only，无旧 eta/B Loss 加法。固定 chm `a552593` 与 B7 fit，44 项测试通过。科学状态仍 diagnostic_only；兼容迁移已交付，formal 验证尚未完成。chm 求解器须读取 v2 的 B7 N/D/Q 边界，不能沿用 B1 D 下界。
+**当前 chm 入口：**[CHM_API_V2.md](CHM_API_V2.md)，`src/cyj/chm_adapter_v2.py::CHMAdapter(mode="diagnostic")`。不可变代码发布提交为 `c71807d01b66744f3a6ca45147d9173bc2704a27`，固定 chm Q1 v1.2 生产者 `a5525935b37f873235d2f650e4810a787b9a8788`。`cyj.chm.v2` 提供 B7 原生 NDQ `value_grad`、JSON 批量求值、三成本/预算残差与独立 Q1 v1.2 13-target 配比向量，`p_policy=sensitivity_only`，无旧 eta/B Loss 加法。发布消费测试与 44/44 CYJ 单测通过。科学状态仍 `diagnostic_only`、`ready_for_Q3=false`；chm 本人分支的真实消费验收尚未完成。chm 求解器须读取 v2 的 B7 N/D/Q 边界，不能沿用 B1 D 下界。
 
 旧 `cyj.q3.v1`：`deprecated=true`，`historical_only=true`，`formal_use_allowed=false`；当前推荐机器入口为 `outputs/cyj/interfaces/chm_v2_manifest.json`，不消费旧 `q3_bundle.json`。
 
-**2026-09-24 接口审查结论：** `cyj.q3.v1` 的 B1 `diagnostic` 仍可作旧版软件复现；其 p/eta `scenario` 固定 chm `q1.v1` 的历史跨规模接口，已与 chm 当前推荐的 `q1.v1.2` 科学合同不兼容。chm v1.2 明确撤回附件 A 对连续跨规模 eta 的识别，旧 bundle 中的 `eta_producer_estimate` 和条件区间只能作历史审计，不能用于正式 Q2/Q3，旧 scenario 输出不得作为当前推荐情景。B7 原生接口保持独立诊断。详细证据和升级门槛见 `problem/cyj/20260924-current-interface-review.md`。本次只修订使用状态，未更改旧代码、机器包或其 SHA；兼容 v1.2 须另发版本。
+**2026-09-24 接口审查结论：** `cyj.q3.v1` 的 B1 `diagnostic` 仍可作旧版软件复现；其 p/eta `scenario` 固定 chm `q1.v1` 的历史跨规模接口，已与 chm 当前推荐的 `q1.v1.2` 科学合同不兼容。chm v1.2 明确撤回附件 A 对连续跨规模 eta 的识别，旧 bundle 中的 `eta_producer_estimate` 和条件区间只能作历史审计，不能用于正式 Q2/Q3。新版 v2 已替代旧接口用于诊断性联调，但完整联合预测器仍不可识别。详细证据和升级门槛见 `problem/cyj/20260924-current-interface-review.md`、`problem/cyj/20260924-q2-q3-identifiability-review.md` 和 `problem/cyj/20260924-q3-final-gate-review.md`。
 
-## 旧版 API 与独立 B7 诊断入口
+**新增来源审查：** B1 Loss 生成/评估口径仍未知；B4/B5 与 B1 的同一 Loss 坐标未建立；B7 的 Q 交互比较只达半合成同源探索；B8 与 B7 在共有 NDQ 坐标上冲突，保持隔离。v2 条件均值区间不等于总预测区间，`prediction_interval=null`。证据分别见 `problem/cyj/20260924-{b1-loss-provenance,b4-b5-loss-comparability,b8-conflict-source,uncertainty-scope}.md`，机器结果见 `outputs/cyj/`。B9/B10 仅外推压力参考。正式门槛为 `NOT READY`。
+
+## 旧版 API 与独立 B7 诊断入口（以下历史数值/测试数只对应旧发布）
 
 - 新增独立 `cyj.b7_quality.v1`：`src/cyj/quality_scaling.py::QualityPredictor`，详见 [QUALITY_API.md](QUALITY_API.md)。已拟合去重 B7 原生 N-D-Q，返回梯度及 50 个同编号条件 Loss 样本；不接 p，不接 B1/Benchmark，不改变既有 B1/p API 的 Q 拒绝规则。参数文件 SHA256 `e676bfb06da81c02ad968591aa9ae09da5c7cd6b56def49d59a82c371465b025`。
 
