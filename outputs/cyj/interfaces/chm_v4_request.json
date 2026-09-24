@@ -59,6 +59,16 @@
         "pubmed_abstracts": 0.06618116611257162,
         "uspto_backgrounds": 0.07556475309333588
       }
+    },
+    {
+      "request_id": "context-32768",
+      "N_params_B": 0.7,
+      "D_tokens_B": 150.0,
+      "Q_score": 0.5,
+      "Q0": 0.5,
+      "context_tokens": 32768,
+      "quality_family": "exponential",
+      "budget_FLOPs": 1e+22
     }
   ]
 }

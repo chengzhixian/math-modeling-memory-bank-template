@@ -1,12 +1,14 @@
-# cyj 交付约定 v1.12（chm v2 可调用交付）
+# cyj 交付约定 v1.13（joint B7 条件交付）
 
 角色：cyj 负责 Q2 标度律与 Q3 理论；chm/zhh 消费。当前 `ready_for_Q3=false`，未获联合验收或 main 集成。可调用接口、公式、字段、单位、成本与约束详见 [Q3_API.md](Q3_API.md)，此处只保留当前入口与证据索引。
 
-**当前 chm 条件入口：**[CHM_API_V3.md](CHM_API_V3.md)，`src/cyj/chm_adapter_v3.py::CHMAdapterV3(mode="conditional_diagnostic")`，不可变代码发布 `e36aa23143bda9f027853f5af825728625750c5b`。v3 固定 B7 双交互候选，提供 NDQ 值/梯度、弹性、替代率和同源经验区间；A 侧仍为独立的 Q1 v1.2 13-target `p_policy=sensitivity_only`，无旧 eta、默认 lambda 或 B Loss 加法。51/51 CYJ 测试和精确发布 smoke 通过；CYJ 本机用 CHM `92e0592` 原版求解器完成 27 场景软件联调。由于 B7 族选择和区间覆盖没有未触碰样本检验，`ready_for_Q3=false`；CHM 本人消费验收仍待。CHM 的 `Support` 包装和 D_min=10 见 v3 文档。
+**当前 chm 条件候选入口：**[CHM_API_V4.md](CHM_API_V4.md)，`src/cyj/chm_adapter_v4.py::CHMAdapterV4(mode="conditional_diagnostic")`，精确发布 `c11629a032fdca8c0a366b732227711410b305d9`，manifest SHA256 `14ca8049ddf2ab9bd24e804f7bfcb223426ec38882c8814187127162ee128e2c`。本版是 B7 八参数联合拟合、嵌套 N/D/Q 留级、200 次簇 bootstrap 的独立条件候选；N/D/Q 值与梯度、弹性、替代率、同源经验区间可调用。A 侧仍是 Q1 v1.2 13-target `p_policy=sensitivity_only`，不加进 B Loss。56 项当时本人测试与 v4 精确 Git 对象 consumer smoke 通过；CYJ 用 CHM pinned `92e0592` 求解器独立完成 330 个条件场景。B7 半合成、区间方法差异、函数族历史探索和 A/B 桥接缺失使 `ready_for_Q3=false`；CHM 本人消费验收仍待。后续 Q3 诊断脚本演进不改此 v4 精确发布。
 
-旧 [CHM_API_V2.md](CHM_API_V2.md) 与 `cyj.q3.v1` 只保留历史诊断复现，`deprecated_for_formal_Q3=true`；不得以旧接口的 fixed constant-G 参数或缺失总预测区间替代 v3，也不得把 v3 条件状态提升为正式准入。
+**历史 v3 发布：**[CHM_API_V3.md](CHM_API_V3.md) 与 `e36aa23143bda9f027853f5af825728625750c5b` 保留旧两阶段参数的精确复现。该发布的 51 项测试和 27 场景联调只对应 v3，不应替代 joint v4 数值，也不因 v4 发布而提升为正式准入。
 
-旧 `cyj.q3.v1`：`deprecated=true`，`historical_only=true`，`formal_use_allowed=false`；当前推荐机器入口为 `outputs/cyj/interfaces/chm_v2_manifest.json`，不消费旧 `q3_bundle.json`。
+旧 [CHM_API_V2.md](CHM_API_V2.md) 与 `cyj.q3.v1` 只保留历史诊断复现，`deprecated_for_formal_Q3=true`；不得以旧接口的 fixed constant-G 参数或缺失总预测区间替代 v4，也不得把任一条件状态提升为正式准入。
+
+旧 `cyj.q3.v1`：`deprecated=true`，`historical_only=true`，`formal_use_allowed=false`；当前条件机器入口为 `outputs/cyj/interfaces/chm_v4_manifest.json`，不消费旧 `q3_bundle.json`。
 
 **2026-09-24 接口审查结论：** `cyj.q3.v1` 的 B1 `diagnostic` 仍可作旧版软件复现；其 p/eta `scenario` 固定 chm `q1.v1` 的历史跨规模接口，已与 chm 当前推荐的 `q1.v1.2` 科学合同不兼容。chm v1.2 明确撤回附件 A 对连续跨规模 eta 的识别，旧 bundle 中的 `eta_producer_estimate` 和条件区间只能作历史审计，不能用于正式 Q2/Q3。新版 v2 已替代旧接口用于诊断性联调，但完整联合预测器仍不可识别。详细证据和升级门槛见 `problem/cyj/20260924-current-interface-review.md`、`problem/cyj/20260924-q2-q3-identifiability-review.md` 和 `problem/cyj/20260924-q3-final-gate-review.md`。
 

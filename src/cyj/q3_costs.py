@@ -23,12 +23,12 @@ def quality_cost(q, family):
 
 
 def costs(*, N_params_B, D_tokens_B, Q_score, Q0, L_ctx, quality_family,
-          budget_FLOPs=None):
+          budget_FLOPs=None, allowed_contexts=CONTEXT_SCENARIOS):
     """All three terms consume the same D; Q0 is caller-defined, never inferred."""
     n, d = finite(N_params_B, "N_params_B"), finite(D_tokens_B, "D_tokens_B")
     context = finite(L_ctx, "L_ctx")
-    if n <= 0 or d <= 0 or context not in CONTEXT_SCENARIOS:
-        raise ValueError("N,D must be positive; L_ctx must be a published C7 scenario")
+    if n <= 0 or d <= 0 or context not in allowed_contexts:
+        raise ValueError("N,D must be positive; L_ctx must be an explicit supported scenario")
     q, q0 = finite(Q_score, "Q_score"), finite(Q0, "Q0")
     g, derivative = quality_cost(q, quality_family)
     g0, _ = quality_cost(q0, quality_family)
@@ -56,7 +56,8 @@ def costs(*, N_params_B, D_tokens_B, Q_score, Q0, L_ctx, quality_family,
         "context_critical_tokens": 6 / ATTENTION_COEFFICIENT,
         "attention_over_training": ATTENTION_COEFFICIENT * context / 6,
         "Q0": q0, "Q0_status": "explicit_scenario", "quality_family": quality_family,
-        "context_source_status": "zhh_C7_candidate_not_joint_accepted",
+        "context_source_status": ("zhh_C7_candidate_not_joint_accepted" if context in CONTEXT_SCENARIOS
+                                  else "CYJ_external_sensitivity_not_C7_observation"),
         "ready_for_Q3": False,
     }
 

@@ -11,14 +11,16 @@ from pathlib import Path
 import numpy as np
 
 from audit_b_scaling_laws import ROOT,sha256
-from chm_adapter_v3 import CHMAdapterV3,checked_point,unique_object
+from chm_adapter_v3 import AXES,BOUNDS,CHMAdapterV3,checked_point,number,unique_object
 from fit_b7_joint_nonlinear import OUTPUT as JOINT_OUTPUT,predict
+from q3_costs import costs
 from quality_substitution import derivatives
 
 VERSION="cyj.chm.v4"
 STATUS="conditional_joint_B7_semi_synthetic"
 ID_PATH=ROOT/"outputs/cyj/quality/b7_identifiability.json"
 NESTED_PATH=ROOT/"outputs/cyj/quality/b7_nested_cv_predictions.csv"
+CONTEXTS_V4=(2048,4096,8192,16384,24576,30000,32768,49152,65536,131072)
 
 
 class CHMAdapterV4(CHMAdapterV3):
@@ -90,6 +92,10 @@ class CHMAdapterV4(CHMAdapterV3):
                                        "semi-synthetic B7 and no real-training external validation",
                                        "joint bootstrap+residual interval not independently calibrated",
                                        "CHM owner acceptance pending"])
+        result["context_tokens"]=list(CONTEXTS_V4)
+        result["context_policy"]={"C7_candidate_scenarios":[2048,8192,131072],
+                                  "CYJ_external_sensitivity_scenarios":[4096,16384,24576,30000,32768,49152,65536],
+                                  "external_scenarios_are_C7_observations":False}
         result["uncertainty_policy"]={"U1_parameter_estimation":"200 ND-cluster joint fits",
                                       "U2_model_form":"five-family inner CV, no model probability",
                                       "U3_prediction_residual":"N-axis nested OOF empirical residuals",
@@ -98,13 +104,42 @@ class CHMAdapterV4(CHMAdapterV3):
         return result
 
     def evaluate(self,**kwargs):
-        result=super().evaluate(**kwargs)
+        required={"N_params_B","D_tokens_B","Q_score","Q0","context_tokens",
+                  "quality_family","budget_FLOPs"}
+        if not required<=set(kwargs) or set(kwargs)-required-{"p"}:
+            raise ValueError("incorrect evaluate fields")
+        n,d,q=checked_point(kwargs["N_params_B"],kwargs["D_tokens_B"],kwargs["Q_score"])
+        q0,context,budget=(number(kwargs["Q0"],"Q0"),number(kwargs["context_tokens"],"context_tokens"),
+                           number(kwargs["budget_FLOPs"],"budget_FLOPs"))
+        if not BOUNDS[2][0]<=q0<=BOUNDS[2][1] or q<q0 or budget<=0:
+            raise ValueError("invalid Q0, Q<Q0 or nonpositive budget")
+        value,gradient=self.value_grad(n,d,q)
+        cost=costs(N_params_B=n,D_tokens_B=d,Q_score=q,Q0=q0,L_ctx=context,
+                   quality_family=kwargs["quality_family"],budget_FLOPs=budget,
+                   allowed_contexts=CONTEXTS_V4)
+        minimum=costs(N_params_B=BOUNDS[0][0],D_tokens_B=BOUNDS[1][0],Q_score=q0,Q0=q0,
+                      L_ctx=context,quality_family=kwargs["quality_family"],
+                      allowed_contexts=CONTEXTS_V4)["total"]
+        p=kwargs.get("p")
+        result={"schema_version":VERSION,"status":STATUS,"ready_for_Q3":False,
+                "inputs":dict(zip(AXES,(n,d,q))),
+                "prediction":{"loss_value":value,"gradient":dict(zip(AXES,gradient)),
+                              "elasticities":self.elasticities(n,d,q),
+                              "substitution_rates":self.substitution_rates(n,d,q),
+                              "uncertainty":self.prediction_interval(n,d,q),
+                              "loss_coordinate":"attachment_B7_native_val_loss"},
+                "cost":cost,
+                "constraints":{"NDQ_support_satisfied":True,"Q_ge_Q0":True,
+                               "budget_feasible":cost["budget_feasible"],
+                               "minimum_supported_cost_FLOPs":minimum,
+                               "budget_support_nonempty":budget>=minimum},
+                "p_sensitivity":None if p is None else self.p_sensitivity(p),
+                "cross_source_uncertainty":None,"benchmark_bridge_uncertainty":None}
         result.update(schema_version=VERSION,status=STATUS,scientific_status=STATUS,
                       candidate_result_scope="NDQ_with_p_sensitivity",formal_result_scope=None,
                       support=self.capabilities()["support"],source_dataset="official_attachment_B7_semi_synthetic",
                       source_hash=self.joint["source_hash"],model_hash=sha256(JOINT_OUTPUT),ready_for_Q3=False)
-        result["prediction"]["improvement_elasticities"]=self.improvement_elasticities(**{
-            "N_B":kwargs["N_params_B"],"D_B":kwargs["D_tokens_B"],"Q":kwargs["Q_score"]})
+        result["prediction"]["improvement_elasticities"]=self.improvement_elasticities(n,d,q)
         return result
 
 

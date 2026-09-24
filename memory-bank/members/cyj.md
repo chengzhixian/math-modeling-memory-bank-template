@@ -10,6 +10,8 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 ## 当前状态
 
+2026-09-25 独立 red-team 补充：四个 B7 质量项消融 ×36 个 Q3 情景形成 144 行，132 可行；no-Q 全部回到 Q0，跨模型 regret 数值非负。恒定 G 与双交互在 `1e22` FLOPs、30000 token 指数成本下给出 N/D=6.30/125.90 对 4.52/172.29，而双交互条件 Loss 只差 0.002827，故单一最优配比解释需降级。嵌套区间聚合 95% 覆盖虽约 0.95，最弱 N/D/Q 组为 0.84/0.88/0.89。v4 条件 API 现支持 10 个明确上下文并标注 7 个 CYJ 外生情景；非有限值求解点 fail-fast，30000 token 成本偏导/等成本点验证。15/15 总审计通过、60/60 本人单测通过，科学统一状态仍 `PASS_WITH_LIMITATIONS`、`ready_for_Q3=false`。详见 `20260925-q3-form-sensitivity-results.md` 和新 handoff；新 v4 精确发布 SHA 以后续 Git 验证为准。
+
 2026-09-25 独立任务第三批：joint B7 条件 Q3 扫描 330 网格点，321 可行并通过可行性/KKT 数值检查、9 支持域最低成本不可行；81 个高预算上界饱和点属于支持域截断。180 个活跃集转变括区、上下文 30000/32768 邻域已输出，三成本族均覆盖。v4 joint 条件接口和 immutable manifest、本地 CHM 求解器回归、56/56 本人测试通过；14 项总审计 `PASS_WITH_LIMITATIONS`，XeLaTeX 8 页无 overfull。Q2/Q3 论文、结论强度表、外部依赖登记已更新。B7 半合成与 A/B 桥接缺失仍使 `ready_for_Q3=false`，CHM owner 消费验收仍待；证据见 `20260925-q3-joint-conditional-sweep.md`、`20260925-claim-strength-and-dependencies.md` 和 `outputs/cyj/audit/full_audit.json`。
 
 2026-09-25 独立 Q2 第二批：joint 五族嵌套外层24折完成，双交互23折、单logN一折；N/D/Q pooled RMSE 0.050070/0.050039/0.049697。内层残差估宽的外层95%覆盖为0.96/0.95/0.95，仍只限同源半合成。有限替代273行及四图已生成；B1规则网格/近并行轨迹审计、B7/B8共224坐标全异和斜率方向冲突审计已完成。证据见20260925 nested、quality-substitution、b1-data-generation、b7-b8-conflict实验记录；`ready_for_Q3=false`。下一步 Q3 稠密诊断与审计总脚本。

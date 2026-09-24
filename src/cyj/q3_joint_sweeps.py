@@ -31,6 +31,20 @@ Q0=.5
 OUTPUT=ROOT/"outputs/cyj/q3/q3_budget_sweep.csv"
 
 
+def checked_supported_point(values):
+    if len(values)!=3:raise ValueError("three optimizer coordinates required")
+    bounds=((.07,11.97),(10.,600.),(.1,1.))
+    adjusted=[]
+    for value,(lower,upper) in zip(values,bounds):
+        if isinstance(value,(bool,str)) or not isinstance(value,(int,float,np.integer,np.floating)):
+            raise ValueError("numeric optimizer point required")
+        value=float(value)
+        if not math.isfinite(value) or value<lower-1e-12*upper or value>upper+1e-12*upper:
+            raise ValueError("solver outside B7 support")
+        adjusted.append(min(upper,max(lower,value)))
+    return adjusted
+
+
 def load_chm(directory):
     hashes={}
     for name in MODULES:
@@ -60,12 +74,7 @@ def run(starts=20,transition_points=30):
         class JointModel:
             support=solver.Support((.07,11.97),(10.,600.),(.1,1.))
             def value_grad(self,n,d,q):
-                values=(n,d,q);bounds=(self.support.N,self.support.D,self.support.Q)
-                adjusted=[]
-                for v,(lo,hi) in zip(values,bounds):
-                    if v<lo-1e-12*hi or v>hi+1e-12*hi:raise ValueError("solver outside B7 support")
-                    adjusted.append(min(hi,max(lo,v)))
-                L,g=derivatives(t,*adjusted)
+                L,g=derivatives(t,*checked_supported_point((n,d,q)))
                 return L,tuple(map(float,g))
         model=JointModel();cache={}
         def solve(budget,context,family):
@@ -91,7 +100,7 @@ def run(starts=20,transition_points=30):
                 cache[key]=row;return row
             n,d,q=sol["N_params_B"],sol["D_tokens_B"],sol["Q"]
             # CHM transforms log bounds back with exp; clamp only sub-ulp boundary drift.
-            x=np.array([[min(11.97,max(.07,n)),min(600.,max(10.,d)),min(1.,max(.1,q))]])
+            x=np.array([checked_supported_point((n,d,q))])
             means=np.array([predict(s,x)[0] for s in samples]);draws=means+selected_residual
             active=set(sol["active_set"])
             near=lambda v,b: abs(v-b)<=1e-6*max(abs(b),1e-12)

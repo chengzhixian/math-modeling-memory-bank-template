@@ -195,6 +195,24 @@ def q3_support():
     return f"{evaluated} solutions satisfy support, budget and recorded KKT check"
 
 
+def q3_model_form():
+    report = document("outputs/cyj/q3/q3_form_sensitivity.json")
+    data = rows("outputs/cyj/q3/q3_form_sensitivity.csv")
+    require(report["model_hash"] == sha(ROOT / "outputs/cyj/quality/b7_joint_fit.json"), "model-form base model drift")
+    require(report["csv_sha256"] == sha(ROOT / "outputs/cyj/q3/q3_form_sensitivity.csv"), "model-form CSV drift")
+    require(len(data) == 144 and {r["model_family"] for r in data} ==
+            {"no_Q", "constant_G", "Q_x_logN", "Q_x_logD"}, "ablation grid incomplete")
+    feasible = [r for r in data if r["candidate_status"] == "converged_feasible"]
+    require(len(feasible) == 132, "ablation feasibility count drift")
+    for row in feasible:
+        require(row["candidate_KKT_pass"] == "True", "ablation KKT check failed")
+        require(float(row["joint_model_regret"]) >= -1e-5 and
+                float(row["candidate_model_regret"]) >= -1e-5, "negative cross-model regret")
+        if row["model_family"] == "no_Q":
+            require(near(row["candidate_Q"], .5, 1e-6), "no-Q negative control spent on Q")
+    return "144 model-form cases, 132 feasible; all cross-model regrets nonnegative within 1e-5"
+
+
 def manifest_reproducibility():
     from build_chm_release_v4 import run
     path = ROOT / "outputs/cyj/interfaces/chm_v4_manifest.json"
@@ -233,7 +251,8 @@ def run():
              ("B7_joint_fit", joint_fit), ("nested_CV", nested_cv), ("monotonicity", monotonicity),
              ("gradient", gradient_check), ("interval_coverage", interval_coverage),
              ("Q3_budget_sweep", q3_sweep), ("Q3_context_sweep", q3_context),
-             ("Q3_support_KKT", q3_support), ("manifest_reproducibility", manifest_reproducibility),
+             ("Q3_support_KKT", q3_support), ("Q3_model_form", q3_model_form),
+             ("manifest_reproducibility", manifest_reproducibility),
              ("unit_tests", unit_tests), ("LaTeX_compile", latex_compile))
     for name, operation in tasks:
         assess(name, operation, checks)
@@ -244,14 +263,20 @@ def run():
     failed = any(item["status"] == "FAIL" for item in checks)
     blocked = any(item["status"] == "BLOCKED_BY_EXTERNAL_DEPENDENCY" for item in checks)
     status = "FAIL" if failed else "BLOCKED_BY_EXTERNAL_DEPENDENCY" if blocked else "PASS_WITH_LIMITATIONS"
+    joint = document("outputs/cyj/quality/b7_joint_fit.json")
     report = {"status": status, "checks": checks, "scientific_status": "conditional_B7_semi_synthetic",
               "candidate_result_scope": "B7_NDQ_plus_conditional_Q3", "formal_result_scope": None,
-              "ready_for_Q3": False,
+              "support": joint["support"], "source_dataset": joint["source_dataset"],
+              "source_hash": joint["source_hash"], "ready_for_Q3": False,
               "limitations": ["B7 semi-synthetic with no real-training external test",
                               "B7 function family was explored before nested evaluation",
+                              "Q3 N/D allocation changes across plausible B7 quality terms even when modeled loss regret is small",
                               "bootstrap-plus-residual v4 interval lacks direct held-out coverage calibration",
                               "A/B loss or quality bridge and team acceptance absent"],
-              "model_hash": sha(ROOT / "outputs/cyj/quality/b7_joint_fit.json")}
+              "model_hash": sha(ROOT / "outputs/cyj/quality/b7_joint_fit.json"),
+              "current_code_sha256": {name: sha(ROOT / "src/cyj" / name) for name in
+                                      ("q3_joint_sweeps.py", "q3_form_sensitivity.py",
+                                       "chm_adapter_v4.py", "q3_costs.py")}}
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "full_audit.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     lines = ["# CYJ full audit", "", f"Status: **{status}**", "", "| Check | Status | Detail |", "|---|---|---|"]

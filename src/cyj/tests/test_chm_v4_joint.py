@@ -32,6 +32,13 @@ class JointInterfaceTests(unittest.TestCase):
         self.assertEqual(a["prediction"],b["prediction"])
         self.assertNotEqual(a["p_sensitivity"],b["p_sensitivity"])
         self.assertFalse(a["prediction"]["uncertainty"]["calibrated_coverage_claim"])
+        external=m.evaluate(**{**request,"context_tokens":32768})
+        self.assertEqual(external["cost"]["context_source_status"],
+                         "CYJ_external_sensitivity_not_C7_observation")
+        self.assertEqual(external["constraints"]["minimum_supported_cost_FLOPs"],
+                         m.evaluate(**{**request,"context_tokens":32768,"N_params_B":.07,
+                                       "D_tokens_B":10.,"Q_score":.5})["cost"]["total"])
+        with self.assertRaises(ValueError):m.evaluate(**{**request,"context_tokens":4097})
 
     def test_gradient_and_invalid_support(self):
         m=self.model;point=(.7,150.,.5);_,gradient=m.value_grad(*point)

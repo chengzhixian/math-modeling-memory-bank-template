@@ -19,7 +19,7 @@
   "source_dataset": "official_attachment_B7",
   "source_hash": "880fd265ca3e1d9bc93b4559af7ed7c18f89040634266c50bae03d88486e0f3a",
   "ready_for_Q3": false,
-  "code_commit": "e7b60795c5c00704e2494ebd54e2a9d0df9aef65",
+  "code_commit": "c11629a032fdca8c0a366b732227711410b305d9",
   "model_hash": "c7426036164238d41b92ca08e9ca9087224aeb0c74554478b66093774a5b5b1a",
   "CHM_commit": "92e0592000cba58fca355a881dc59caadbd446b2",
   "CHM_module_sha256": {

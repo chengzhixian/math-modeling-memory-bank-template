@@ -27,3 +27,5 @@ MAJOR：旧 `base_exponents` 用 no-quality 族估计 alpha/beta，再固定指�
 - [x] P7 本人 Q2/Q3 论文与 `20260925-claim-strength-and-dependencies.md`
 - [x] P8 14 项总审计，结果 `PASS_WITH_LIMITATIONS`；审计只校验冻结的重拟合和扫描产物，不将其冒充重新计算
 - [x] P9 外部依赖登记（CHM owner acceptance、ZHH Benchmark bridge、原附件来源和真实外测）
+
+补充数值 red-team：用同一 B7 四个质量项消融对 36 个成本情景交叉优化，144 行中 132 可行；发现 N/D 配置对族选择显著敏感而条件 Loss regret 较小，见 `20260925-q3-form-sensitivity-{protocol,results}.md`。增强 Q3 求解边界的非有限值拒绝；v4 条件 API 明示支持 10 个上下文，并将 7 个新增情景标为 CYJ 外生敏感性。此补充不打开正式科学准入。

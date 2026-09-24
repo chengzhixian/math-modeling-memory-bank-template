@@ -1,4 +1,4 @@
-"""Deterministic joint-candidate v4 manifest and two consumer fixtures."""
+"""Deterministic joint-candidate v4 manifest and three consumer fixtures."""
 import hashlib
 import json
 from audit_b_scaling_laws import ROOT
@@ -16,7 +16,8 @@ def run():
     common=dict(N_params_B=.7,D_tokens_B=150.,Q_score=.5,Q0=.5,context_tokens=2048,
                 quality_family="exponential",budget_FLOPs=1e22)
     requests=[{"request_id":"reference",**common,"p":reference},
-              {"request_id":"p-sensitivity",**common,"p":changed}]
+              {"request_id":"p-sensitivity",**common,"p":changed},
+              {"request_id":"context-32768",**{**common,"context_tokens":32768}}]
     response={"schema_version":VERSION,"scientific_status":STATUS,"ready_for_Q3":False,
               "results":[{"request_id":r["request_id"],**model.evaluate(**{k:v for k,v in r.items() if k!="request_id"})} for r in requests]}
     if response["results"][0]["prediction"]!=response["results"][1]["prediction"]:
@@ -26,7 +27,7 @@ def run():
                       ("chm_v4_expected.json",response)):
         (directory/name).write_text(json.dumps(data,ensure_ascii=False,indent=2,allow_nan=False)+"\n",encoding="utf-8",newline="\n")
     files=["src/cyj/chm_adapter_v4.py","src/cyj/build_chm_release_v4.py","src/cyj/chm_consumer_smoke_v4.py",
-           "src/cyj/fit_b7_joint_nonlinear.py","src/cyj/quality_substitution.py",
+           "src/cyj/fit_b7_joint_nonlinear.py","src/cyj/quality_substitution.py","src/cyj/q3_costs.py",
            "outputs/cyj/quality/b7_joint_fit.json","outputs/cyj/quality/b7_identifiability.json",
            "outputs/cyj/quality/b7_nested_cv_predictions.csv","outputs/cyj/quality/b7_nested_cv_summary.json",
            "outputs/cyj/quality/b7_interval_calibration.json",

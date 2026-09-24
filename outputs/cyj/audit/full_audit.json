@@ -57,14 +57,19 @@
       "detail": "321 solutions satisfy support, budget and recorded KKT check"
     },
     {
+      "name": "Q3_model_form",
+      "status": "PASS",
+      "detail": "144 model-form cases, 132 feasible; all cross-model regrets nonnegative within 1e-5"
+    },
+    {
       "name": "manifest_reproducibility",
       "status": "PASS",
-      "detail": "manifest reproduced; 12 file hashes agree"
+      "detail": "manifest reproduced; 13 file hashes agree"
     },
     {
       "name": "unit_tests",
       "status": "PASS",
-      "detail": "----------------------------------------------------------------------\nRan 56 tests in 3.961s\n\nOK"
+      "detail": "----------------------------------------------------------------------\nRan 60 tests in 3.835s\n\nOK"
     },
     {
       "name": "LaTeX_compile",
@@ -75,12 +80,35 @@
   "scientific_status": "conditional_B7_semi_synthetic",
   "candidate_result_scope": "B7_NDQ_plus_conditional_Q3",
   "formal_result_scope": null,
+  "support": {
+    "N_params_B": [
+      0.07,
+      11.97
+    ],
+    "D_tokens_B": [
+      10.0,
+      600.0
+    ],
+    "Q_score": [
+      0.1,
+      1.0
+    ]
+  },
+  "source_dataset": "official_attachment_B7",
+  "source_hash": "880fd265ca3e1d9bc93b4559af7ed7c18f89040634266c50bae03d88486e0f3a",
   "ready_for_Q3": false,
   "limitations": [
     "B7 semi-synthetic with no real-training external test",
     "B7 function family was explored before nested evaluation",
+    "Q3 N/D allocation changes across plausible B7 quality terms even when modeled loss regret is small",
     "bootstrap-plus-residual v4 interval lacks direct held-out coverage calibration",
     "A/B loss or quality bridge and team acceptance absent"
   ],
-  "model_hash": "c7426036164238d41b92ca08e9ca9087224aeb0c74554478b66093774a5b5b1a"
+  "model_hash": "c7426036164238d41b92ca08e9ca9087224aeb0c74554478b66093774a5b5b1a",
+  "current_code_sha256": {
+    "q3_joint_sweeps.py": "37dd17f04086bfad4073dce1d1dea95395db96f0da61e442a47d8c87002dd958",
+    "q3_form_sensitivity.py": "5045483f6e2202bb153e9b8e01bce16515d342ea52de75c96d23efe87c755f9b",
+    "chm_adapter_v4.py": "2ac91ae6ba86162217c8798f9668bcaa2c3e44a3a58c7c6857c5f8acdbe5e1e7",
+    "q3_costs.py": "035b0c792a3b216fed811436df1449ed0bcd1761cc66444b7b55e9ea6ecbb187"
+  }
 }

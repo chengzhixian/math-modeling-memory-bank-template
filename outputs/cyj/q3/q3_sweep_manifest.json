@@ -19,7 +19,7 @@
   "source_dataset": "official_attachment_B7",
   "source_hash": "880fd265ca3e1d9bc93b4559af7ed7c18f89040634266c50bae03d88486e0f3a",
   "ready_for_Q3": false,
-  "code_commit": "e7b60795c5c00704e2494ebd54e2a9d0df9aef65",
+  "code_commit": "c11629a032fdca8c0a366b732227711410b305d9",
   "model_hash": "c7426036164238d41b92ca08e9ca9087224aeb0c74554478b66093774a5b5b1a",
   "CHM_commit": "92e0592000cba58fca355a881dc59caadbd446b2",
   "CHM_module_sha256": {
@@ -65,7 +65,7 @@
   "budget_sweep_sha256": "baa0ce59ddf5e69b603c4f07fcc15bf5da0076ea0a931c1e51c568162d586ce2",
   "context_sweep_sha256": "6a58c5af9b39387f2b74cdaf6e8195d78227b52d37c88d843e4b71aecfd1f2a1",
   "regime_map_sha256": "baa0ce59ddf5e69b603c4f07fcc15bf5da0076ea0a931c1e51c568162d586ce2",
-  "transitions_sha256": "c69a585fc8017f2ac7a6da2c82edb7e4dc6171124fa40b0cc409031a5588237e",
+  "transitions_sha256": "795f41180b67af81c840b59d4a2b7ae042e38c338a038a2a890e712023c6101a",
   "interval_scope": "B7 conditional bootstrap plus leave-N nested OOF empirical residual; coverage not directly calibrated for this construction",
   "Q0_scenario": 0.5,
   "context_provenance": "2048/8192/131072 are prior C7 scenarios; extra contexts are CYJ external sensitivity grid"

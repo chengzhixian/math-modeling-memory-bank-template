@@ -59,7 +59,14 @@
   },
   "context_tokens": [
     2048,
+    4096,
     8192,
+    16384,
+    24576,
+    30000,
+    32768,
+    49152,
+    65536,
     131072
   ],
   "reference_p": {
@@ -123,18 +130,36 @@
   "nested_predictions_sha256": "75a09ad6349523cd1dd55404c2bee505a59ccecd88ca1ff02bc88a6903c9fce6",
   "formula": "E+A*N^-alpha+B*D^-beta+(1-Q)*(G0+GN*ln(N)+GD*ln(D/100))",
   "estimator": "8-parameter joint constrained SSE; 12 full-data starts",
+  "context_policy": {
+    "C7_candidate_scenarios": [
+      2048,
+      8192,
+      131072
+    ],
+    "CYJ_external_sensitivity_scenarios": [
+      4096,
+      16384,
+      24576,
+      30000,
+      32768,
+      49152,
+      65536
+    ],
+    "external_scenarios_are_C7_observations": false
+  },
   "files_sha256_utf8_lf": {
-    "src/cyj/chm_adapter_v4.py": "7a698d99fc1584883c9c6af7b2d7a7f5bf537ac2d9f9034dec415e79cf8e7b52",
-    "src/cyj/build_chm_release_v4.py": "20f643bb940fd4a1d47c25f30eeabdb21cb445b723e33404dda5529af1de9d9d",
+    "src/cyj/chm_adapter_v4.py": "2ac91ae6ba86162217c8798f9668bcaa2c3e44a3a58c7c6857c5f8acdbe5e1e7",
+    "src/cyj/build_chm_release_v4.py": "41acb16d1e5f08a205666907530076fde8172229ffec5f4cc8a7494ca1000bd7",
     "src/cyj/chm_consumer_smoke_v4.py": "3a379246e3bfc93c4e9cb30d658daa25dfa7080645e2a83b88217ccc29775447",
     "src/cyj/fit_b7_joint_nonlinear.py": "92b4c1d48aa00c9bba8af58b873ce29adf32c737583054459aced5d5bd745d17",
     "src/cyj/quality_substitution.py": "4c8a8caeea9b45193c9399e5e5a1a7833c1090392fde4e5a3298614ec38b4ee1",
+    "src/cyj/q3_costs.py": "035b0c792a3b216fed811436df1449ed0bcd1761cc66444b7b55e9ea6ecbb187",
     "outputs/cyj/quality/b7_joint_fit.json": "c7426036164238d41b92ca08e9ca9087224aeb0c74554478b66093774a5b5b1a",
     "outputs/cyj/quality/b7_identifiability.json": "fc967abb1bca5f6ad8a5e44120ee926fbbcaa453a2025b8e9885cecf30b95739",
     "outputs/cyj/quality/b7_nested_cv_predictions.csv": "139d5c01f0fc9fa469eb00ac9d3a5ab8114cf0ee60014184e7b3e0bf0ae8b25f",
     "outputs/cyj/quality/b7_nested_cv_summary.json": "6415f73031c853e2749afe535128b1075fed91e114606ce54c62aab7097a6087",
     "outputs/cyj/quality/b7_interval_calibration.json": "2c5136b54a55c2b39ed0c12e49b80967fe7f93d39c0c7c002e91601f67b0e77e",
-    "outputs/cyj/interfaces/chm_v4_request.json": "992f1ea36a5717df32c3ab287c526256c8a2776d223901dc30eb027a2d1ca2dd",
-    "outputs/cyj/interfaces/chm_v4_expected.json": "3676c1f72e682a2da6b1137a07d249b0ba1aacf26d2c79e998ddfeb2d495265f"
+    "outputs/cyj/interfaces/chm_v4_request.json": "48a5e7feb303b4d9d4e4f777ef931a75fc0b389164aa069d54df1e678e9a6278",
+    "outputs/cyj/interfaces/chm_v4_expected.json": "578b663b4c8c6e82078794bb7b7a94f92cb5cdd127dde909f5d953220f03c6e2"
   }
 }

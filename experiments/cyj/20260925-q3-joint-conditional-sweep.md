@@ -14,4 +14,4 @@
 
 ## 可复核文件与限制
 
-`outputs/cyj/q3/q3_budget_sweep.csv` SHA256 `baa0ce59ddf5e69b603c4f07fcc15bf5da0076ea0a931c1e51c568162d586ce2`；`q3_transition_points.json` SHA256 `c69a585fc8017f2ac7a6da2c82edb7e4dc6171124fa40b0cc409031a5588237e`。`q3_context_sweep.csv` 与 `q3_regime_map.csv` 是同一网格的视图，图见 `figures/cyj/q3_*`，不是新增独立数据。条件实验没有跨 A/B Loss 桥接，也没有新真实训练外测；`ready_for_Q3=false`。成本/偏导/KKT 证明见本人论文 `q3_theory.tex`，求解器数值 KKT 是必要条件检查，不是全局最优证明。
+`outputs/cyj/q3/q3_budget_sweep.csv` SHA256 `baa0ce59ddf5e69b603c4f07fcc15bf5da0076ea0a931c1e51c568162d586ce2`；带非有限值拒绝与机器精度级边界处理的重跑 `q3_transition_points.json` SHA256 `795f41180b67af81c840b59d4a2b7ae042e38c338a038a2a890e712023c6101a`，诊断脚本 SHA256 `37dd17f04086bfad4073dce1d1dea95395db96f0da61e442a47d8c87002dd958`。运行时仓库基线 commit 为 `c11629a032fdca8c0a366b732227711410b305d9`；本轮脚本增量由该 SHA256 和本轮后续 Git 提交共同固定。`q3_context_sweep.csv` 与 `q3_regime_map.csv` 是同一网格的视图，图见 `figures/cyj/q3_*`，不是新增独立数据。条件实验没有跨 A/B Loss 桥接，也没有新真实训练外测；`ready_for_Q3=false`。成本/偏导/KKT 证明见本人论文 `q3_theory.tex`，求解器数值 KKT 是必要条件检查，不是全局最优证明。
