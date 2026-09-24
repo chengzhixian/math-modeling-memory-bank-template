@@ -18,6 +18,7 @@ $L_B=E+AN^{-\alpha}+BD^{-\beta}+(1-Q)[G_0+G_N\ln N+G_D\ln(D/100)]$。完整 B7 �
 - CYJ 本机从 CHM 精确 Git 对象导入原版 `q3_generic_solver.py`，经 `CHMAdapterV3.value_grad → Support → solve_generic` 跑 27 场景：24 可行收敛、KKT 必要条件检查通过；3 个预算 1e19、上下文 131072 的场景明确 `infeasible_by_supported_domain`。输出 SHA256 `0a6dc8e9696dabf70cf625d26d8f98ee1b063fedd674df4eb9b529e6b8daf839`。这是本机软件联调，不是 CHM 所有者 acceptance，数值最优点不作正式论文结论。
 - CHM 拉取精确发布后，按 `interfaces/cyj/CHM_API_V3.md` 运行 builder、release smoke、`CHMAdapterV3(mode="conditional_diagnostic")`，把 `bounds` 映射为本人求解器的 `Support(N,D,Q)`，D 下界必须为 10。`value_grad` 可直接消费；SLSQP 边界浮点容差须由 CHM 包装明确处理，不能放宽科学域。`evaluate` 返回点预测、梯度、弹性、替代率、经验区间、成本和分开的 p 敏感性。低预算应明确报支持域不可行。
 - CHM 需在本人分支验收并记录：精确 CYJ release 与 CHM commit、release smoke、1 个可行 solver case、27 场景状态、`bounds → Support` 包装及是否承认仅条件诊断。集成人验收后才可更新公共记忆和正式 Q3 状态。
+- 随后的接口目录清理已把 `CONTRACT.md` 当前入口改为条件 v3，并在 `CHM_API_V2.md` 标明 `deprecated_for_formal_Q3=true`；v2 旧 solver 边界描述仅作当时发布历史。此文档清理不改 v3 不可变代码发布及 manifest。
 
 ## 分支合并检查
 
