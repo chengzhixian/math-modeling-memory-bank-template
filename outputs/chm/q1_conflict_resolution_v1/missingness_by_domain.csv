@@ -1,0 +1,8 @@
+_source_domain,n,missing_q,missing_d,median_available_signals,median_usable_edges,missing_d_rate
+arxiv,1419,0,0,22.0,55.0,0.0
+book,171,0,0,22.0,55.0,0.0
+c4,10000,0,0,22.0,55.0,0.0
+commoncrawl,9640,0,0,22.0,55.0,0.0
+github,10000,0,0,22.0,55.0,0.0
+stackexchange,10000,0,0,22.0,55.0,0.0
+wikipedia,10000,0,0,22.0,55.0,0.0
