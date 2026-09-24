@@ -338,7 +338,7 @@ m_1(\boldsymbol p),\ldots,m_{13}(\boldsymbol p)
 \end{equation}
 其解集按 Pareto 支配关系定义。改变式\eqref{eq:q1_scalarization}中的 $\boldsymbol s$，或改变式\eqref{eq:q1_protected_domain}中的保护集合与阈值，可以扫描不同能力偏好下的可接受配方。BiMix 的约束配比求解提供了“先建立逐域 Loss，再在 $\sum_jp_j=1$ 下数值优化”的文献范式；但 BiMix 还显式依赖训练步数/数据量，而附件 A 没有相应 $D$ 字段，因此本文只借鉴其向量约束优化思想，不采用其双变量 Loss 律。
 
-上述几种决策口径互不替代：式\eqref{eq:q1_scalarization}回答“平均偏好”，式\eqref{eq:q1_minimax}回答“最坏能力保护”，式\eqref{eq:q1_protected_domain}回答“重点能力提升且不破坏保护域”，式\eqref{eq:q1_pareto}则保留全部多目标折衷。由于题目附件没有给出唯一的验证域权重或能力保护阈值，第一问不宣称存在一个由 A 数据唯一确定的“全局最优配比”。
+上述几种决策口径互不替代：式\eqref{eq:q1_scalarization}回答“平均偏好”，式\eqref{eq:q1_minimax}回答“最坏能力保护”，式\eqref{eq:q1_protected_domain}回答“重点能力提升且不破坏保护域”，式\eqref{eq:q1_pareto}则保留全部多目标折衷。由于题目附件没有给出唯一的验证域权重或能力保护阈值，第一问不宣称存在一个由 A 数据唯一确定的“全局最优配比”。上述三个可标量化问题在 \(\mathcal P_A\) 的凸组合坐标中均可写成线性规划，本文将对应可复现求解器实现于 \texttt{src/chm/q1\_multiloss\_decision.py}；权重与保护阈值均要求调用者显式提供，程序不自动生成。
 
 \subsubsection{文献函数形式与本题主代理的关系}
 
