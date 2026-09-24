@@ -29,3 +29,5 @@ MAJOR：旧 `base_exponents` 用 no-quality 族估计 alpha/beta，再固定指�
 - [x] P9 外部依赖登记（CHM owner acceptance、ZHH Benchmark bridge、原附件来源和真实外测）
 
 补充数值 red-team：用同一 B7 四个质量项消融对 36 个成本情景交叉优化，144 行中 132 可行；发现 N/D 配置对族选择显著敏感而条件 Loss regret 较小，见 `20260925-q3-form-sensitivity-{protocol,results}.md`。增强 Q3 求解边界的非有限值拒绝；v4 条件 API 明示支持 10 个上下文，并将 7 个新增情景标为 CYJ 外生敏感性。此补充不打开正式科学准入。
+
+再用独立的二维微分进化算法抽检 36 个 Q3 情景，33 个可行场景相对 CHM 求解器的 B7 Loss 差最大 `8.03e-9`、3 个最低支持成本不可行判据一致，见 `20260925-q3-independent-optimizer-{protocol,results}.md`。总审计现 16 项 PASS、62 项单测 PASS；两数值算法一致不证明全局最优，更不构成真实训练验证。

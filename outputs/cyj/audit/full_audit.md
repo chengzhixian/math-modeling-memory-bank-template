@@ -16,8 +16,9 @@ Status: **PASS_WITH_LIMITATIONS**
 | Q3_context_sweep | PASS | 10 contexts including 30000 and 32768 |
 | Q3_support_KKT | PASS | 321 solutions satisfy support, budget and recorded KKT check |
 | Q3_model_form | PASS | 144 model-form cases, 132 feasible; all cross-model regrets nonnegative within 1e-5 |
+| Q3_independent_optimizer | PASS | 33 feasible independent solutions agree with CHM within 1e-4 Loss; 3 support-infeasible |
 | manifest_reproducibility | PASS | manifest reproduced; 13 file hashes agree |
-| unit_tests | PASS | ---------------------------------------------------------------------- Ran 60 tests in 3.835s  OK |
+| unit_tests | PASS | ---------------------------------------------------------------------- Ran 62 tests in 3.857s  OK |
 | LaTeX_compile | PASS | XeLaTeX built 8-page team draft; no overfull boxes |
 
 ## Scientific limits
@@ -25,5 +26,6 @@ Status: **PASS_WITH_LIMITATIONS**
 - B7 semi-synthetic with no real-training external test
 - B7 function family was explored before nested evaluation
 - Q3 N/D allocation changes across plausible B7 quality terms even when modeled loss regret is small
+- Derivative-free Q3 agreement on 36 scenarios does not prove global optimality
 - bootstrap-plus-residual v4 interval lacks direct held-out coverage calibration
 - A/B loss or quality bridge and team acceptance absent

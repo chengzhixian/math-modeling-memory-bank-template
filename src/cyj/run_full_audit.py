@@ -213,6 +213,22 @@ def q3_model_form():
     return "144 model-form cases, 132 feasible; all cross-model regrets nonnegative within 1e-5"
 
 
+def q3_independent_optimizer():
+    report = document("outputs/cyj/q3/q3_independent_optimizer_check.json")
+    path = ROOT / "outputs/cyj/q3/q3_independent_optimizer_check.csv"
+    data = rows("outputs/cyj/q3/q3_independent_optimizer_check.csv")
+    require(report["model_hash"] == sha(ROOT / "outputs/cyj/quality/b7_joint_fit.json"), "independent optimizer model drift")
+    require(report["result_csv_hash"] == sha(path), "independent optimizer CSV drift")
+    require(len(data) == 36 and report["rows"] == 36, "independent optimizer scenario count drift")
+    feasible = [r for r in data if r["independent_status"] == "feasible"]
+    require(len(feasible) == 33 and all(r["solver_success"] == "True" and
+                                       r["support_feasible"] == "True" for r in feasible),
+            "independent optimizer feasibility or convergence failed")
+    require(max(abs(float(r["independent_minus_CHM_loss"])) for r in feasible) < 1e-4,
+            "independent optimizer disagrees with CHM objective")
+    return "33 feasible independent solutions agree with CHM within 1e-4 Loss; 3 support-infeasible"
+
+
 def manifest_reproducibility():
     from build_chm_release_v4 import run
     path = ROOT / "outputs/cyj/interfaces/chm_v4_manifest.json"
@@ -252,6 +268,7 @@ def run():
              ("gradient", gradient_check), ("interval_coverage", interval_coverage),
              ("Q3_budget_sweep", q3_sweep), ("Q3_context_sweep", q3_context),
              ("Q3_support_KKT", q3_support), ("Q3_model_form", q3_model_form),
+             ("Q3_independent_optimizer", q3_independent_optimizer),
              ("manifest_reproducibility", manifest_reproducibility),
              ("unit_tests", unit_tests), ("LaTeX_compile", latex_compile))
     for name, operation in tasks:
@@ -271,12 +288,14 @@ def run():
               "limitations": ["B7 semi-synthetic with no real-training external test",
                               "B7 function family was explored before nested evaluation",
                               "Q3 N/D allocation changes across plausible B7 quality terms even when modeled loss regret is small",
+                              "Derivative-free Q3 agreement on 36 scenarios does not prove global optimality",
                               "bootstrap-plus-residual v4 interval lacks direct held-out coverage calibration",
                               "A/B loss or quality bridge and team acceptance absent"],
               "model_hash": sha(ROOT / "outputs/cyj/quality/b7_joint_fit.json"),
               "current_code_sha256": {name: sha(ROOT / "src/cyj" / name) for name in
                                       ("q3_joint_sweeps.py", "q3_form_sensitivity.py",
-                                       "chm_adapter_v4.py", "q3_costs.py")}}
+                                       "q3_independent_optimizer_check.py", "chm_adapter_v4.py",
+                                       "q3_costs.py")}}
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "full_audit.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     lines = ["# CYJ full audit", "", f"Status: **{status}**", "", "| Check | Status | Detail |", "|---|---|---|"]
