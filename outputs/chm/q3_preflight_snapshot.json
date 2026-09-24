@@ -1,0 +1,50 @@
+{
+  "schema_version": "chm.q3.preflight.snapshot.v1",
+  "observed_at": "2026-09-24T16:51+08:00",
+  "main_ref": "968ef7a36f1503aa222a0b09c8a8cb5d0f535ecd",
+  "cyj_ref": "6c17cb4e387e1ac047f8fe0e9ecb6fe42fc5ef3b",
+  "zhh_ref": "d47cd2dc921333caecfcb95f09eb5a2f2714d0db",
+  "formal_ready": false,
+  "cyj": {
+    "schema_version": "cyj.q3.v1",
+    "ready_for_Q3": false,
+    "B1_diagnostic": true,
+    "p_scenario": true,
+    "Q_mapping_status": "unidentified",
+    "primary_anchor": null,
+    "lambda_status": "explicit_scenario_only",
+    "B7_quality_code_present": true,
+    "B7_quality_result_present": false
+  },
+  "zhh": {
+    "C7_contexts": [
+      2048,
+      8192,
+      131072
+    ],
+    "C7_csv_present": true,
+    "contract_status": "stale_draft_says_no_results",
+    "formal_joint_validation": false
+  },
+  "blockers": [
+    "cyj ready_for_Q3 is false",
+    "B7 native quality experiment has code/protocol but no published fit result",
+    "B1 vs B7 loss-coordinate bridge is not established",
+    "primary p anchor is null",
+    "lambda_loss is scenario-only",
+    "zhh C7 contract/member status is stale and not jointly validated"
+  ],
+  "allowed_now": [
+    "Q3 solver engineering",
+    "B1 N-D diagnostic baseline",
+    "explicit p/target/lambda/eta scenario analysis",
+    "cost/context sensitivity",
+    "support-domain checks"
+  ],
+  "forbidden_as_final": [
+    "formal Q3 optimum",
+    "validated continuous Q optimization",
+    "single best p on B1 loss without scenario label",
+    "deterministic Loss-to-Benchmark claim"
+  ]
+}
