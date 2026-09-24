@@ -338,3 +338,7 @@ Q1 曾把 1M/60M/1B 三个实验组上的经验配比幅度差异进一步解释
 ## 2026-09-24 Q1 LaTeX 编译快照同步
 
 Q1 LaTeX 源文已按可识别性修正撤出连续配比尺度律；本次重新运行 XeLaTeX/BibTeX/XeLaTeX 两次，形成 18 页 paper/latex/output/chm-q1-draft-20260924.pdf。PDF 已核对包含可识别性边界、冻结 1M 代理排序验证与跨实验组限制；旧 10 页快照从 Git 移除。main 仍只保留空白模板。
+
+## 2026-09-24 cyj 接口复核与 Q3 推进
+
+cyj 远端 ad1d312 已将旧 p/eta 情景降级，正式 ready_for_Q3=false；B7 原生 N-D-Q 只允许半合成条件诊断。本轮新增 B7 三预算、三上下文、三成本族扫描及实验记录，27 组合中 24 个在声明支持域可行；不把结果接到附件 A 配比或 B1 Loss。Q1 论文遗漏的 13x17 作用热力图已补，Q1 接口八项测试、B7 诊断三项测试及 LaTeX 静态检查通过，19 页 PDF 重新编译。完整交接见 memory-bank/handoffs/chm/20260924-q3-b7-interface-diagnostic.md。

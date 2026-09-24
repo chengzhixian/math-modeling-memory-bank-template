@@ -267,14 +267,12 @@ m_k(\boldsymbol p')-m_k(\boldsymbol p)
 \end{equation}
 该归一化只用于可视化，不进入任何预测或优化计算。参照 Data Mixing Laws 对训练域--验证域作用矩阵的展示方式\cite{datamixinglaws2025}，本文的 $\widetilde{\boldsymbol B}$ 只用于比较同一验证域内各训练域的相对作用模式；其数值来自本题 A4+A5 的 Ridge，而不是该文的指数混合律。
 
-\IfFileExists{q1_interaction_heatmap.png}{
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=.98\linewidth]{q1_interaction_heatmap.png}
 \caption{13 个验证域 $\times$ 17 个训练域的行归一化作用矩阵。颜色表示 Ridge 相对对比系数的方向与相对强度；不能将单个格点解释为独立因果效应。}
 \label{fig:q1_interaction}
 \end{figure}
-}{}
 
 \subsubsection{多维 Loss 的决策层：标量化、鲁棒性与能力保护}
 

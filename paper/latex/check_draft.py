@@ -47,7 +47,8 @@ refs = re.findall(r"\\ref\{([^}]+)\}", q1)
 assert set(refs) <= set(labels), f"Undefined Q1 references: {set(refs) - set(labels)}"
 
 bib = (ROOT / "references.bib").read_text(encoding="utf-8")
-cites = set(re.findall(r"\\cite\{([^}]+)\}", q1))
+cites = {key.strip() for group in re.findall(r"\\cite\{([^}]+)\}", q1)
+         for key in group.split(",")}
 bibkeys = set(re.findall(r"@\w+\{([^,]+),", bib))
 assert cites <= bibkeys, f"Undefined citations: {cites - bibkeys}"
 

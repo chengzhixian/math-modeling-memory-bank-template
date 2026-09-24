@@ -104,6 +104,38 @@ Context & 指数型 & 幂函数型 & 对数型 \\
 \end{tabular}
 \end{table}
 
+\subsubsection{B7 原生质量模型的条件联调}
+cyj 分支另行交付的 B7 原生预测器在其半合成 \texttt{val\_loss} 坐标内使用
+$L_7=E+AN^{-\alpha}+BD^{-\beta}+G(1-Q_{\mathrm{score}})$，
+并明确不与 B1 Loss 或附件 A 的配比效应相加。本文固定该发布的参数文件 SHA256，
+取仅用于诊断的 $Q_0=0.5$，在 B7 声明的矩形支持域内对
+$N,D,Q_{\mathrm{score}}$ 做条件寻优。对于固定 $N,Q$，Loss 随 $D$ 单调下降，
+故可先取预算允许的最大 $D$，再对 $N,Q$ 做有界搜索。三个预算、三个 C7
+上下文和三类质量成本共构成 27 个条件情景，其中 24 个可行。
+
+\begin{table}[htbp]
+\centering\small
+\caption{B7 半合成质量模型与幂函数成本的条件联调示例；不是正式 Q3 配置}
+\label{tab:q3_b7_diagnostic}
+\begin{tabular}{rrrrrr}
+\toprule
+预算/FLOPs & Context & $N$/B & $D$/B & $Q_{\rm score}$ & B7 Loss \\
+\midrule
+$10^{19}$ & 8192 & 0.1309 & 10.00 & 0.50 & 3.3103 \\
+$10^{22}$ & 8192 & 8.1688 & 149.07 & 1.00 & 2.1102 \\
+$10^{24}$ & 8192 & 11.9700 & 600.00 & 1.00 & 1.9791 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+在 131072 Token、$10^{19}$ FLOPs 下，B7 支持域左下角仅基础训练与注意力
+成本就需 $2.255008\times10^{19}$ FLOPs，故三种质量成本情景均不可行。
+在 8192 Token、$10^{24}$ FLOPs 下，表中解已到 B7 支持域上界，实际预算使用率
+仅约 $5.77\%$；这表示数据支持域限制，而不是额外算力没有价值。
+上述数值仅检验新接口与成本几何的联调能力：B7 是半合成数据，尚缺独立
+验证、完整预测区间及 $p$ 到同一 Loss 坐标的桥接，不能把表中配置当作最终
+$N$--$D$--$Q$--$\boldsymbol p$ 最优方案。
+
 \subsubsection{配比代理的优化选择验证}
 为检验第一问配比代理是否可用于候选选择，严格保持 A4/A5 为拟合集，对 A6/A8/A10 的 held-out 配方选择预测 Loss 最低者，再由 A7/A9/A11 的真实目标域 Loss 评价其实际名次。表\ref{tab:q3_p_selection}给出全部 13 个目标域结果。
 
