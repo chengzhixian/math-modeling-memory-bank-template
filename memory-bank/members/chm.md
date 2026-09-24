@@ -147,3 +147,25 @@ cyj 指出的 CRLF/LF manifest 问题已修为新生产者版本 `chm.q1.v1.1`�
 - 在线性 m_k(p) 且 lambda_loss>0 的当前模型中，固定 target 的 p 排序不随预算、上下文、N、lambda 或 eta 改变；当前 p 模型本身不能识别预算驱动的 p 结构切换。
 
 正式 Q3 仍等待 cyj ready_for_Q3=true、B-native Q 性能项、B1/B7 Loss 处理、p anchor/lambda 正式状态及 zhh versioned C7。当前结果只用于 solver 验证、支持域判断和 scenario 设计。
+
+
+## 2026-09-24 Q3 质量成本几何
+
+在不假设任何 Q 性能收益的前提下，完成题面三种质量成本函数的纯成本分析与测试。
+
+关键恒等式：
+- attention/train = L_ctx / 30000；
+- C_Q / (C_train + C_attn) = [g(Q)-g(Q0)] / {N_B [6e9 + 2e5 L_ctx]}。
+因此质量成本相对基础计算的比例与 D 无关，随 N 增大按 1/N 下降。
+
+曲率：
+- exponential、power 为凸成本；
+- logarithmic 为凹成本；
+- Q=Q0 处因 max(.,0) 存在拐点，正式 KKT 必须使用右导数/次梯度，不能把双侧导数写成 0。
+
+诊断 Q0=0.5→Q=1：
+- 2048 Token、N=1B 时 exponential/power/logarithmic 的 C_Q/(train+attn) 约 0.598/0.731/0.189；
+- N=10B 时约 0.0598/0.0731/0.0189。
+这些只描述成本，不代表提高 Q 的净收益或正式最优 Q。
+
+正式 Q 优化继续等待 cyj 的 B-native Q 性能模型和 ready_for_Q3=true。

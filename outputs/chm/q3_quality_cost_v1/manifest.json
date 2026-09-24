@@ -1,0 +1,21 @@
+{
+  "schema_version": "chm.q3.quality_cost_geometry.v1",
+  "status": "cost_geometry_only",
+  "ready_for_Q3": false,
+  "Q0_scenarios_for_diagnostics": [
+    0.25,
+    0.5,
+    0.75
+  ],
+  "identities": {
+    "attention_train_ratio": "L_ctx/30000",
+    "quality_base_ratio": "[g(Q)-g(Q0)]/[N_B*(6e9+2e5*L_ctx)]",
+    "critical_N": "[g(Q)-g(Q0)]/[6e9+2e5*L_ctx]"
+  },
+  "limitations": [
+    "No Q-performance effect is assumed or fitted",
+    "Q0 values are illustrative scenarios, not problem defaults",
+    "C_Q has a kink at Q=Q0; use one-sided derivative/subgradient",
+    "formal Q optimization waits for cyj validated B-native quality predictor"
+  ]
+}
