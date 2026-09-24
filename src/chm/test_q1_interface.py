@@ -13,7 +13,14 @@ class Q1InterfaceTests(unittest.TestCase):
         cls.q1 = Q1Interface(ROOT)
 
     def test_manifest_matches_current_files(self):
-        self.assertEqual(build_manifest(ROOT), self.q1.manifest)
+        built = build_manifest(ROOT)
+        self.assertEqual(built["schema_version"], self.q1.manifest["schema_version"])
+        self.assertEqual(built["hash_mode"], "sha256_utf8_lf_normalized")
+        self.assertEqual(built["files"], self.q1.manifest["files"])
+
+    def test_manifest_is_cross_platform_text_hash(self):
+        self.assertEqual(self.q1.manifest["schema_version"], "chm.q1.v1.1")
+        self.assertEqual(self.q1.manifest["hash_mode"], "sha256_utf8_lf_normalized")
 
     def test_quality_mapping_preserves_unknown(self):
         self.assertEqual(self.q1.mapped_quality("arxiv")["quality"]["coordinate"], "A_native_Q_z")
