@@ -1,3 +1,461 @@
-% Owner: chm. Q1 draft lives only in the chm branch.
-\section{问题一}
-本节由 chm 填写。
+% Owner: chm. Rigorous Q1 restructure based only on visible problem/data description and current Attachment A results.
+% Numeric evidence: outputs/chm/domain_quality.csv, outputs/chm/local_recheck_v1,
+% outputs/chm/ablation_v1. Continuous mixture-scale transfer is intentionally excluded.
+\section{问题一：数据质量评价与训练数据配比效应}
+\label{sec:q1}
+
+\subsection{问题分析与可识别性边界}
+
+问题一包含两类由附件 A 直接支持的任务：一是利用 A1--A3 的 22 维质量信号评价七个语料域并分析指标冲突；二是利用 A4--A15 的 17 维训练配比与 13 个目标验证域交叉熵 Loss，分析训练配方与目标域 Loss 的关系。两类数据的域体系并不一一对应，因此本文分别建立 A 侧综合质量代理与逐目标域配比代理，再通过 A16 的映射类型和显式接口向后续问题传递结果，不人为补造跨附件数值关系。
+
+A1 含 51,230 条质量记录；A2、A3 分别给出 arxiv 的 17,523 条和 github 的 203,752 条扩展记录。A4+A5 是 512 组 1M 配方及对应的 13 维 Loss；A6+A7、A8+A9、A10+A11 分别为 1M、60M、1B 检验组；A12--A15 在数据说明中明确属于 estimated/extrapolated，只用于压力测试。配比表和 Loss 表均按 \texttt{index} 一一对应。
+
+需要特别限定的是，A4--A15 的配比表只给出 17 个比例，Loss 表只给出 13 个目标域 Loss；与这些配方实验相对应的训练数据量 $D$ 并未作为字段提供。模型规模 $1\mathrm{M}$、$60\mathrm{M}$、$1\mathrm{B}$ 仅由不同实验文件组标识。因此第一问可以检验“小模型配比代理在不同实验组上的排序是否保持”，但不能仅凭附件 A 识别连续的 $N$--$D$ 标度律，也不能把三个离散实验组拟合成普适的配比尺度衰减函数。基于这一可识别性边界，A6--A11 在本问中只承担冻结模型后的 held-out 验证，不再用于拟合额外的跨规模参数。
+
+\subsection{A 侧综合质量代理}
+
+A1--A3 为每条文本提供 22 个量纲和含义不同的质量信号，却没有综合质量真值。本文先把列表压缩为标量，再在 A1 建立统一尺度和方向，形成可复现的描述性质量代理；由样本评分聚合为领域评分，最后用 A2/A3 全量扩展记录检验其迁移表现。该代理表示相对于 A1 的质量坐标，不能解释为客观质量标签。
+
+\subsubsection{列表字段压缩与稳健标准化}
+
+A1--A3 提供 22 个质量信号，其中 14 个为标量，8 个为列表字段。根据 SlimPajama-Meta-rater 公开数据卡\cite{metaraterdata}，二分类字段 \texttt{ad\_en} 与 \texttt{fluency\_en} 的两个元素为 logits，本文以 softmax 后的正类概率保留连续置信信息；四个 ModernBERT 字段是 $0$--$5$ 六等级 logits，以期望等级压缩；\texttt{qurater} 的四个评分分量取均值；\texttt{fineweb\_edu} 取唯一元素。argmax 压缩保留为敏感性方案，而不与主方案混用。
+
+计数型指标先作 $\log(1+x)$ 变换，DSIR 三项作 signed-log 变换。不同指标量纲和尾部分布差异较大，因此仅用 A1 估计中心与尺度，采用 median--MAD 稳健标准化：
+\begin{equation}
+z_{ij}
+=
+\operatorname{clip}\!\left(
+\frac{x_{ij}-\operatorname{median}(x_j)}
+{1.4826\,\operatorname{MAD}(x_j)},
+-5,5
+\right).
+\label{eq:q1_robust_z}
+\end{equation}
+其中 $x_{ij}$ 指经过必要变换后的数值，$i$ 表示记录，$j$ 表示指标。中位数和 MAD 比均值和标准差更不易受极端文本影响；常数 1.4826 将正态分布下的 MAD 调整到近似标准差尺度，并非本题拟合参数。截断到 $[-5,5]$ 避免极值主导后续均值；MAD 退化时依次回退到标准差和 1。A2、A3 完全复用 A1 的变换、中心和尺度，使三个数据集处于同一评价坐标。
+
+\subsubsection{指标方向的确定}
+
+八个模型型字段按其评分语义固定为正向。为给其余指标提供共同的方向参考，本文将这八项稳健标准化值在每条记录上的可用项均值定义为语义锚点：
+\begin{equation}
+A_i=\frac{1}{|\mathcal M_i|}\sum_{j\in\mathcal M_i}z_{ij}.
+\label{eq:q1_quality_anchor}
+\end{equation}
+其中 $\mathcal M_i$ 为记录 $i$ 上非缺失的模型型评分字段集合。$A_i$ 是本文构造的方向参考，不是附件提供的真实质量标签。列表的元素结构来自公开数据卡；softmax 正类概率、期望等级及 qurater 四维均值均属于本文的压缩选择。
+
+对其余 14 个统计型字段，较大的原始数值未必代表较好质量；这里只需识别单调方向，因此在 A1 全部有效记录上计算秩相关，而不要求线性关系：
+\begin{equation}
+\rho_j=\rho_{\mathrm S}(z_{ij},A_i)
+=\operatorname{Corr}(\operatorname{rank}z_j,\operatorname{rank}A).
+\label{eq:q1_orientation_rho}
+\end{equation}
+若 $\rho_j\ge0$，较大指标值通常对应较大语义锚点，取 $d_j=+1$；否则取 $d_j=-1$。统一后的值为
+\begin{equation}
+d_j=\begin{cases}+1,&j\text{ 为模型型字段，或 }\rho_j\ge0,\\-1,&\rho_j<0,\end{cases}
+\qquad z^+_{ij}=d_jz_{ij}.
+\label{eq:q1_orientation_freeze}
+\end{equation}
+相关系数只决定方向，不是指标权重或因果效应。即使 $|\rho_j|$ 接近零，主模型仍保留该质量信号；方向证据弱的问题由后文的稳健性诊断揭示。
+
+\subsubsection{由 22 个指标到样本和领域质量}
+
+22 个字段分属 RPS/Natural（11 项）、DSIR（3 项）和 model-based（8 项）。若直接对 22 项等权平均，RPS 会仅因字段较多而取得较大总权重。本文选择家族内等权、三个家族等权。令 $\mathcal J_{ig}$ 表示记录 $i$ 在家族 $g$ 中非缺失的指标集合，定义
+\begin{equation}
+G_{ig}=\frac{1}{|\mathcal J_{ig}|}\sum_{j\in\mathcal J_{ig}}z^+_{ij},
+\qquad S_i=\frac13\sum_{g\in\{\mathrm{RPS,DSIR,MODEL}\}}G_{ig}.
+\label{eq:q1_family_score}
+\end{equation}
+集合 $\mathcal J_{ig}$ 仅处理原始缺失值，不使用方向稳定性筛选。用 A1 全体 $S_i$ 的均值 $\mu_{S,A1}$ 和标准差 $\sigma_{S,A1}$ 固定坐标：
+\begin{equation}
+Q_{A,i}=\frac{S_i-\mu_{S,A1}}{\sigma_{S,A1}}.
+\label{eq:q1_QA}
+\end{equation}
+$Q_{A,i}$ 是一条文本的相对评分。题目还要求领域质量，因此对每个领域 $d$ 的全部样本评分取中位数 $Q_{A,d}=\operatorname{median}_{i\in d}Q_{A,i}$。中位数较少受长尾文本影响；10\% 截尾均值为辅助统计。域内 bootstrap 95\% 区间仅衡量固定评分规则下的样本抽样波动，不能覆盖方向和权重选择的不确定性。
+
+\subsubsection{指标方向的跨领域稳健性}
+
+主方向由全 A1 Spearman 决定。为判断它是否过度依赖某一领域，另算七个领域各自的 $\rho_{jd}$、方向一致率，以及每次去掉一个领域后在其余全部记录上重算的 $\rho_j^{(-d)}$。若 LOO 翻号，该指标仍留在主 $Q_A$ 中，但标注为方向脆弱。另设仅供压力测试的删除脆弱指标、22 项完全等权和列表 argmax 压缩方案，比较七域排序。上述诊断不改变主模型准入规则。
+
+\subsubsection{A2/A3 扩展集对照}
+
+A2/A3 的用途是检验 A1 评分规则能否迁移到更大的 arxiv/github 样本。两者复用 A1 的列表压缩、变换、median/MAD、方向及 $Q_A$ 标准化参数，不重新拟合评价尺子。主结果使用 A2/A3 全部记录；剔除与 A1 重叠的记录只作为额外稳健性复核。表\ref{tab:q1_quality} 和图\ref{fig:q1_quality} 给出固定规则下的域级结果。
+
+\begin{table}[htbp]
+\centering\small
+\caption{A1 七域质量评分；区间为固定评分规则下的条件 bootstrap 95\% 区间}
+\label{tab:q1_quality}
+\begin{tabular}{lrrrrl}
+\toprule
+领域 & 样本数 & $Q_{A,d}$ & 10\% 截尾均值 & 排名 & 条件区间 \\
+\midrule
+book & 171 & 2.9183 & 2.8308 & 1 & [2.7879, 2.9606] \\
+arxiv & 1419 & 2.6887 & 2.7013 & 2 & [2.6621, 2.7262] \\
+commoncrawl & 9640 & 0.4367 & 0.4576 & 3 & [0.4224, 0.4543] \\
+stackexchange & 10000 & 0.2517 & 0.2550 & 4 & [0.2370, 0.2660] \\
+wikipedia & 10000 & $-0.2944$ & $-0.3216$ & 5 & [$-0.3194$, $-0.2706$] \\
+c4 & 10000 & $-0.3040$ & $-0.2999$ & 6 & [$-0.3193$, $-0.2840$] \\
+github & 10000 & $-0.4854$ & $-0.5195$ & 7 & [$-0.5117$, $-0.4602$] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.84\linewidth]{q1_quality_domain_intervals.png}
+\caption{七域质量评分及条件区间；横轴为 A1 内部标准化坐标。}
+\label{fig:q1_quality}
+\end{figure}
+
+完整 A2 arxiv 的 $Q_{A,d}$ 为 2.7253，A3 github 为 $-0.5055$；去重后的对应中位数为 2.7279 与 $-0.5063$。主评分保留全部 22 项。五个统计指标在 LOO 中出现方向翻转，其中全局 $|\rho|$ 最小的是大写字母行占比（0.0283）和高频三元字符占比（0.0406）；这只说明相对于本文锚点的单调方向证据较弱。删除全部五个翻号指标的压力测试使七域排序 Spearman 降到 0.8929；22 项完全等权为 0.9643，argmax 压缩为 1.0000。固定规则下的窄区间因此不能代替方法选择的稳健性检验。
+
+本轮另对 A1 按域固定分为 70\% 方向训练集和 30\% 排名评估集；前者分层重抽 100 次并重估 14 个统计字段的符号，后者始终不用于该次符号拟合。100 次中七域排序及各字段符号均未变；但留一领域已有五字段翻号，且八种合理评分规则的排名范围为 book/arxiv 第 1--2、c4/github 第 5--7。因此将固定规则下的抽样区间与方法选择导致的排名包络分别报告，后者不称为 95\% 置信区间。book 仅 171 条，尤其不能将评分当作外部质量真值。
+\subsubsection{指标冲突与扩展集复核}
+
+指标冲突不再引入额外的人造“冲突强度函数”，而直接使用标准的 Spearman 秩相关。对方向统一后的任意两指标 $j$、$r$，在质量域 $d$ 内计算
+\begin{equation}
+\rho_{jr,d}
+=
+\rho_{\mathrm S}(z^+_{ij},z^+_{ir}\mid i\in d).
+\label{eq:q1_pair_spearman}
+\end{equation}
+若 $\rho_{jr,d}<0$，表示在该域中两指标对样本的相对排序方向相反。进一步在 A1 总体及各域、去重扩展集分别对 231 个指标对做 Spearman 检验，各检验家族分别以 Benjamini--Hochberg 法控制 FDR 为 0.05。将 A1 总体显著负相关且在 arxiv 或 github 去重扩展集也显著负相关的指标对定义为复制性显著冲突边；阈值和规则在计算前固定。
+
+A1 的 1419 条 arxiv 和 10000 条 github 记录均包含于对应扩展集，故 A2/A3 不能直接称为独立验证。剔除重叠后，另有 arxiv 16104 条和 github 193752 条记录可用于复核。按冻结规则得到的非重叠中位数分别为 2.7279 和 $-0.5063$，与 A1 的 2.6887 和 $-0.4854$ 接近。
+
+进一步对全部 $22\choose2=231$ 个指标对做复制性核对：arxiv 在 A1 有 108 个负相关对，其中 102 个在完整 A2 与去重 A2 中仍为负；github 的 85 个 A1 负相关对全部在完整 A3 与去重 A3 中保持负向。两域共有 59 个指标对在 sample、extended、non-overlap 三层均为负。这些是描述性同号计数；按上述显著性规则，A1 总体有 66 对显著负相关，其中 55 对在去重扩展集复现。代表性结果见表\ref{tab:q1_conflict}。
+
+\begin{table}[htbp]
+\centering\small
+\caption{A2/A3 非重叠记录中的代表性指标冲突}
+\label{tab:q1_conflict}
+\begin{tabular}{llr}
+\toprule
+域 & 方向统一后的指标对（简写） & Spearman \\
+\midrule
+arxiv & DSIR wiki / 非字母词占比 & $-0.6303$ \\
+arxiv & DSIR books / 非字母词占比 & $-0.6280$ \\
+github & 高频二元字符占比 / 高频三元字符占比 & $-0.5648$ \\
+github & DSIR wiki / 大写字母行占比 & $-0.3908$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{冲突成因与冲突感知评价。} 对复制性冲突边，比较总体与七个 A1 域内的相关系数及校正后的显著性。若多个域内仍显著负相关，记为跨域重复模式；若仅总体负相关，记为领域混合模式；仅少数域显著则记为领域依赖模式。这是观测数据的模式分类，不能证明因果取舍。专业性评分与平均词长的总体相关为 $-0.4994$，七个域内均显著负相关；高频二元、三元字符占比的总体相关为 $-0.4844$，七域内也均显著负相关。指标语义和定向仍需谨慎解释。对最强冲突边另比较去除双侧各 1\% 极端值前后的相关，详见可复现结果表。
+
+最强的 10 条边在同时去除两指标两侧各 1\% 极端记录后仍全部为负；例如专业性评分与平均词长由 $-0.4994$ 变为 $-0.4990$，主要负相关不能归因于少数极端值。原 $Q_{A,i}$ 仍是质量代理。令 $\mathcal E_c$ 为 55 条复制性冲突边，以总体相关绝对值为权重，定义同一样本的指标分歧度
+\begin{equation}
+D_i=\frac{\sum_{(j,k)\in\mathcal E_c(i)}|\rho_{jk}|\,|z^+_{ij}-z^+_{ik}|}{\sum_{(j,k)\in\mathcal E_c(i)}|\rho_{jk}|},
+\qquad \mathcal E_c(i)=\{(j,k)\in\mathcal E_c:z^+_{ij},z^+_{ik}\text{均可用}\}.
+\end{equation}
+无可用边时 $D_i$ 记为缺失；主要评价结果是二维 $(Q_{A,i},D_i)$，不将高分歧直接扣为低质量。A1 的 book、arxiv、github、c4、commoncrawl、wikipedia、stackexchange 七域 $D$ 中位数分别为 2.580、2.292、1.999、1.903、1.512、1.471、1.202；去重扩展集中的 arxiv 和 github 分别为 2.332 和 2.003。四象限以 A1 的 $Q_A$ 与 $D$ 中位数划分，全指标标准差作为敏感性对照。$Q_A$ 和 $D$ 均为附件 A 坐标中的代理，不直接等同于 B 侧质量评分。
+
+\paragraph{冲突后的处理与原文核查。} 冻结 A1 的 $Q_A$ 中位数 0.0273 和 $D$ 第 75 百分位 2.0423。$D$ 高于阈值的记录进入复核标记，不直接减去质量分；低 $Q_A$ 只标记低优先级，不自动剔除。无可用冲突边时 $D$ 记缺失并触发复核，不伪装为零。A1 的保留、保留并复核、低优先级、低优先级并复核分别有 20384、5231、18038、7577 条；冻结阈值在去重 arxiv/github 扩展集的复核触发率分别为 69.04\% 和 47.08\%，说明阈值跨域触发率有明显变化。按域及 $(Q,D)$ 四象限固定哈希抽取 27 条，逐条以 ID、原始行号和内容 SHA 回读原文而不发布全文。arxiv 的一条低 $Q$ 高 $D$ 记录主要含 \TeX{} 宏定义，提示格式冲突；book 的一条高 $Q$ 高 $D$ 记录以版权信息开头且极长，提示高评分也需结构审查；c4 的低 $Q$ 低 $D$ 公告文本有明确事务信息，提示低分歧、低综合分不等于无使用价值。这些只是可复核案例，不是独立人工标签，也不能给出分类准确率。55 条边在 A1 选择并在去重 A2/A3 复制；各范围分别做 FDR 校正，不声称最终边集具有联合 5\% FDR 保证。
+
+\subsection{17 域配比与目标域 Loss 的关系}
+
+\subsubsection{组成约束与逐目标域 Ridge}
+
+A4 的每一行是 17 个训练域比例。由于原始 CSV 的三位小数舍入会使行和轻微偏离 1，建模前按行归一化，记
+\begin{equation}
+\boldsymbol p_i=(p_{i1},\ldots,p_{i,17})^\top,
+\qquad
+p_{ij}\ge 0,\qquad
+\boldsymbol 1^\top\boldsymbol p_i=1.
+\label{eq:q1_simplex}
+\end{equation}
+A5 提供同一 \texttt{index} 下的 13 个目标验证域 Loss。不同目标域的 Loss 水平和波动尺度不同，因此不把 13 个原始 Loss 先求算术平均，而对每个目标域 $k$ 单独拟合。
+
+以 A4 归一化配方的均值为参考配方
+\begin{equation}
+\boldsymbol p_{\mathrm{ref}}
+=
+\frac{1}{512}\sum_{i=1}^{512}\boldsymbol p_i,
+\label{eq:q1_pref}
+\end{equation}
+则 $\boldsymbol q_i=\boldsymbol p_i-\boldsymbol p_{\mathrm{ref}}$ 满足 $\boldsymbol 1^\top\boldsymbol q_i=0$。在该 16 维单纯形切空间内，使用 L2 正则线性回归\cite{regmix2025}：
+\begin{equation}
+(\widehat\alpha_k,\widehat{\boldsymbol\beta}_k)
+=
+\arg\min_{\alpha,\boldsymbol\beta}
+\left\{
+\sum_{i=1}^{512}
+\left[
+L_{ik}-\alpha-\boldsymbol\beta^\top
+(\boldsymbol p_i-\boldsymbol p_{\mathrm{ref}})
+\right]^2
++
+\lambda_k\|\boldsymbol\beta\|_2^2
+\right\},
+\quad
+\text{s.t. }\boldsymbol 1^\top\boldsymbol\beta=0.
+\label{eq:q1_constrained_ridge}
+\end{equation}
+$\lambda_k$ 仅在 A4+A5 的 512 条记录内通过 5 折交叉验证，从既定网格中选择；A6--A15 均不参与调参。
+
+约束 $\boldsymbol 1^\top\boldsymbol\beta=0$ 不是额外经验假设，而是组成数据的规范化表示。因为对任意常数 $c$，
+\[
+(\boldsymbol\beta+c\boldsymbol 1)^\top
+(\boldsymbol p-\boldsymbol p_{\mathrm{ref}})
+=
+\boldsymbol\beta^\top
+(\boldsymbol p-\boldsymbol p_{\mathrm{ref}}),
+\]
+故只有系数之间的对比可识别；零和约束选取其中唯一的最小范数表示。当前实现先在精确归一化单纯形上拟合 Ridge，再将等价系数表示平移为零和形式，预测值保持不变。
+
+由式\eqref{eq:q1_constrained_ridge}得到 1M 配比代理
+\begin{equation}
+\widehat L_{k,1M}(\boldsymbol p)
+=
+\widehat\alpha_k
++
+\widehat{\boldsymbol\beta}_k^\top
+(\boldsymbol p-\boldsymbol p_{\mathrm{ref}}).
+\label{eq:q1_1m_surrogate}
+\end{equation}
+定义相对参考配方的配比效应
+\begin{equation}
+m_k(\boldsymbol p)
+=
+\widehat L_{k,1M}(\boldsymbol p)
+-
+\widehat L_{k,1M}(\boldsymbol p_{\mathrm{ref}})
+=
+\widehat{\boldsymbol\beta}_k^\top
+(\boldsymbol p-\boldsymbol p_{\mathrm{ref}}).
+\label{eq:q1_centered_effect}
+\end{equation}
+因此 $m_k<0$ 表示在 A4+A5 的 1M 目标域坐标上，代理预测的 Loss 低于参考配方；$m_k>0$ 则相反。该量只属于 A 侧 1M 目标域 Loss 坐标，不自动具有 60M、1B 或附件 B 的 Loss 单位。
+
+组成约束也给出系数的正确解释。若从训练域 $r$ 向训练域 $j$ 转移比例 $\delta$，即
+$\boldsymbol p'=\boldsymbol p+\delta\boldsymbol e_j-\delta\boldsymbol e_r$，
+则线性代理给出
+\begin{equation}
+m_k(\boldsymbol p')-m_k(\boldsymbol p)
+=
+\delta(\widehat\beta_{k,j}-\widehat\beta_{k,r}).
+\label{eq:q1_reallocation}
+\end{equation}
+因此可解释的是“两个域之间重新分配”的系数差，而不是单独提高某一域比例的因果效应。
+
+\subsubsection{13 维 Loss 向量与训练域--验证域作用矩阵}
+
+已有文献对多域 Loss 的标准处理并不是先把各域 Loss 压缩成一个标量，而是先逐验证域建模，再在决策层按任务需求聚合。Data Mixing Laws 将第 $k$ 个验证域 Loss 写为训练配比的函数，并以训练域--验证域系数刻画跨域作用；BiMix 同样先保留逐域 Loss，再在配比约束下求解整体目标；DoReMi 则从最坏域 excess loss 出发构造鲁棒目标\cite{datamixinglaws2025,bimix2025,doremi2023}。本文不直接照搬这些论文的函数形式，而只采用与附件 A 数据结构一致的“逐维建模--向量决策”框架。
+
+将 13 个逐域 Ridge 联立，定义
+\begin{equation}
+\widehat{\boldsymbol L}_{1M}(\boldsymbol p)
+=
+\widehat{\boldsymbol\alpha}
++
+\boldsymbol B
+(\boldsymbol p-\boldsymbol p_{\mathrm{ref}}),
+\qquad
+\boldsymbol B=
+[\widehat\beta_{k,j}]
+\in\mathbb R^{13\times17},
+\label{eq:q1_vector_loss}
+\end{equation}
+其中第 $k$ 行对应一个验证域，第 $j$ 列对应一个训练域。相对于参考配方的 13 维效应向量为
+\begin{equation}
+\boldsymbol m(\boldsymbol p)
+=
+\widehat{\boldsymbol L}_{1M}(\boldsymbol p)
+-
+\widehat{\boldsymbol L}_{1M}(\boldsymbol p_{\mathrm{ref}})
+=
+\boldsymbol B
+(\boldsymbol p-\boldsymbol p_{\mathrm{ref}}).
+\label{eq:q1_vector_effect}
+\end{equation}
+因此 $\boldsymbol B$ 是本文线性代理下的训练域--验证域作用矩阵。需要强调的是，$\widehat\beta_{k,j}$ 本身仍是组成数据上的相对对比系数；严格可识别的两域重新分配效应仍由式\eqref{eq:q1_reallocation}中的系数差给出。
+
+为比较不同验证域的作用模式而不改变模型本身，热力图只对每一行作显示归一化
+\begin{equation}
+\widetilde B_{k,j}
+=
+\frac{\widehat\beta_{k,j}}
+{\max_r|\widehat\beta_{k,r}|}.
+\label{eq:q1_interaction_norm}
+\end{equation}
+该归一化只用于可视化，不进入任何预测或优化计算。参照 Data Mixing Laws 对训练域--验证域作用矩阵的展示方式\cite{datamixinglaws2025}，本文的 $\widetilde{\boldsymbol B}$ 只用于比较同一验证域内各训练域的相对作用模式；其数值来自本题 A4+A5 的 Ridge，而不是该文的指数混合律。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.98\linewidth]{q1_interaction_heatmap.png}
+\caption{13 个验证域 $\times$ 17 个训练域的行归一化作用矩阵。颜色表示 Ridge 相对对比系数的方向与相对强度；不能将单个格点解释为独立因果效应。}
+\label{fig:q1_interaction}
+\end{figure}
+
+\subsubsection{多维 Loss 的决策层：标量化、鲁棒性与能力保护}
+
+式\eqref{eq:q1_vector_effect}保留了 13 个目标域的信息，因此“怎样得到一个配比方案”应由决策目标决定，而不是预先把 13 个原始 Loss 强行平均。为避免线性代理在未观测的单纯形顶点上外推，本文将第一问的配比决策限制在 A4 已观测配方的凸包
+\begin{equation}
+\mathcal P_A
+=
+\operatorname{conv}
+\{\boldsymbol p_1,\ldots,\boldsymbol p_{512}\}.
+\label{eq:q1_observed_hull}
+\end{equation}
+任意 $\boldsymbol p\in\mathcal P_A$ 均可写为
+$\boldsymbol p=\sum_{i=1}^{512}\omega_i\boldsymbol p_i$，
+其中 $\omega_i\ge0$、$\sum_i\omega_i=1$。这一定义只使用题目已给的 A4 配方支持域，不额外规定人为上下界。
+
+若后续任务给出 13 个验证域的重要性权重
+$\boldsymbol s\in\Delta^{12}$，则可按 Data Mixing Laws 的域聚合思想定义
+\begin{equation}
+J_{\boldsymbol s}(\boldsymbol p)
+=
+\sum_{k=1}^{13}s_k m_k(\boldsymbol p)
+=
+\boldsymbol s^\top
+\boldsymbol B(\boldsymbol p-\boldsymbol p_{\mathrm{ref}}).
+\label{eq:q1_scalarization}
+\end{equation}
+权重的来源严格分三种情况：若题目或下游任务给出验证域组成，直接采用已知权重；若没有任何偏好信息，可令 $s_k=1/13$ 作为“各能力等权”的对称情景；只有在另有总体 validation Loss 与 13 个域 Loss 的成对观测时，才有数据基础学习 $\boldsymbol s$。附件 A 没有总体 Loss 字段，因此本文不从 A1--A16 中反推一组所谓“最优权重”。
+
+若目标是避免某一能力域成为短板，可借鉴 DoReMi 的 worst-case excess-loss 思想，在本文参考配方坐标下定义
+\begin{equation}
+\min_{\boldsymbol p\in\mathcal P_A}
+\max_{k=1,\ldots,13}
+m_k(\boldsymbol p).
+\label{eq:q1_minimax}
+\end{equation}
+这里使用的是相对于同一参考配方的 Loss 增量，而非直接比较 13 个域的原始 Loss 绝对值；该式是本文基于已拟合代理构造的鲁棒决策准则，并不等同于重新实现 DoReMi 的在线 Group DRO 训练算法。
+
+若任务更强调某个目标域 $q$，同时要求其他能力不明显退化，则写成
+\begin{equation}
+\begin{aligned}
+\min_{\boldsymbol p\in\mathcal P_A}\quad
+& m_q(\boldsymbol p),\\
+\text{s.t.}\quad
+& m_k(\boldsymbol p)\le\varepsilon_k,
+\qquad k\in\mathcal K_{\mathrm{protect}}.
+\end{aligned}
+\label{eq:q1_protected_domain}
+\end{equation}
+阈值 $\varepsilon_k$ 必须由题目要求、业务容忍度或独立估计的不确定性给出；附件 A 本身没有这些阈值，因此第一问只给出约束形式，不人为指定数值。
+
+更一般地，问题可保留为 13 目标向量优化
+\begin{equation}
+\min_{\boldsymbol p\in\mathcal P_A}
+\boldsymbol m(\boldsymbol p)
+=
+\min_{\boldsymbol p\in\mathcal P_A}
+\left(
+m_1(\boldsymbol p),\ldots,m_{13}(\boldsymbol p)
+\right)^\top ,
+\label{eq:q1_pareto}
+\end{equation}
+其解集按 Pareto 支配关系定义。改变式\eqref{eq:q1_scalarization}中的 $\boldsymbol s$，或改变式\eqref{eq:q1_protected_domain}中的保护集合与阈值，可以扫描不同能力偏好下的可接受配方。BiMix 的约束配比求解提供了“先建立逐域 Loss，再在 $\sum_jp_j=1$ 下数值优化”的文献范式；但 BiMix 还显式依赖训练步数/数据量，而附件 A 没有相应 $D$ 字段，因此本文只借鉴其向量约束优化思想，不采用其双变量 Loss 律。
+
+上述几种决策口径互不替代：式\eqref{eq:q1_scalarization}回答“平均偏好”，式\eqref{eq:q1_minimax}回答“最坏能力保护”，式\eqref{eq:q1_protected_domain}回答“重点能力提升且不破坏保护域”，式\eqref{eq:q1_pareto}则保留全部多目标折衷。由于题目附件没有给出唯一的验证域权重或能力保护阈值，第一问不宣称存在一个由 A 数据唯一确定的“全局最优配比”。上述三个可标量化问题在 \(\mathcal P_A\) 的凸组合坐标中均可写成线性规划，本文将对应可复现求解器实现于 \texttt{src/chm/q1\_multiloss\_decision.py}；权重与保护阈值均要求调用者显式提供，程序不自动生成。
+
+\subsubsection{文献函数形式与本题主代理的关系}
+
+Data Mixing Laws 在固定模型规模与训练步数下采用
+\begin{equation}
+L_k(\boldsymbol p)
+=
+c_k+a_k
+\exp\left(
+\sum_{j=1}^{17}t_{k,j}p_j
+\right)
+\label{eq:q1_dml_candidate}
+\end{equation}
+描述逐验证域 Loss\cite{datamixinglaws2025}。该式与本文 Ridge 的共同结构是“13 个验证域分别建模、共享同一 17 维配比输入”，但函数族不同。当前仓库中已完成并经过 A6--A11 检验的是 Ridge；尚未在相同五折协议和 held-out 集上完成式\eqref{eq:q1_dml_candidate}的独立拟合比较。因此本文不因文献中存在指数形式就未经本题数据验证地替换主模型。后续若比较两种函数，必须固定同一 A4+A5 训练/调参划分，并仅用 A6--A11 比较泛化误差和排序相关后再决定主模型。
+
+\subsubsection{冻结代理后的跨实验组排序验证}
+
+问题一需要判断 A4+A5 学到的配方关系在附件提供的其他实验组中是否仍有信息。由于不同规模的绝对 Loss 水平明显变化，且附件 A 不提供与配方实验对应的 $D$，验证指标采用只依赖排序的 Spearman 相关，而不拟合额外的尺度函数。对实验组
+$\ell\in\{1\mathrm{M},60\mathrm{M},1\mathrm{B}\}$，定义
+\begin{equation}
+\rho_{k,\ell}^{\mathrm{pred}}
+=
+\rho_{\mathrm S}
+\left(
+\widehat L_{k,1M}(\boldsymbol p_i^{(\ell)}),
+L_{ik}^{(\ell)}
+\right).
+\label{eq:q1_rank_validation}
+\end{equation}
+这里的 $\widehat L_{k,1M}$ 始终是由 A4+A5 冻结得到的同一代理；A6--A11 只用于一次性检验。
+
+13 个目标域的结果见表\ref{tab:q1_rank}。
+
+\begin{table}[htbp]
+\centering
+\caption{13 个目标域的 held-out 配方排序相关}
+\label{tab:q1_rank}
+\begin{tabular}{lrrrr}
+\toprule
+实验组 & 中位 Spearman & 均值 & 最小值 & 最大值 \\
+\midrule
+1M & 0.8381 & 0.8328 & 0.7446 & 0.9227 \\
+60M & 0.8381 & 0.8314 & 0.7521 & 0.9202 \\
+1B & 0.7067 & 0.7285 & 0.5691 & 0.8876 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.82\linewidth]{q1_domainwise_spearman_box.png}
+\caption{冻结的 1M Ridge 代理在三个真实检验组上的逐目标域排序表现。1B 使用不同的配方集合，因此其变化不能解释为纯参数规模效应。}
+\label{fig:q1_rank}
+\end{figure}
+
+A6 与 A8 使用完全相同的 256 条配方，因此还可以不依赖任何代理，直接比较两个实验组的真实 Loss 排序：
+\begin{equation}
+\rho_{k}^{1M\leftrightarrow 60M}
+=
+\rho_{\mathrm S}
+\left(
+L_{k}^{1M}(\boldsymbol p_i),
+L_{k}^{60M}(\boldsymbol p_i)
+\right).
+\label{eq:q1_direct_rank}
+\end{equation}
+13 个目标域的相关范围为 0.9801--0.9980，中位数为 0.9944，见图\ref{fig:q1_direct_rank}。这只能说明在题目给定的这两组实验条件下，同一批配方的相对优劣高度稳定；由于 A 数据没有对应的 $D$ 等训练控制变量，本文不把这种差异单独归因于参数量 $N$。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.82\linewidth]{q1_direct_rank_stability_1m_60m.png}
+\caption{相同 256 条配方在 1M 与 60M 两个真实实验组中的 Loss 排序稳定性。}
+\label{fig:q1_direct_rank}
+\end{figure}
+
+A10 的 64 个 1B 配方与 A4/A6 的配方集合没有完全重复，因此 1B 的式\eqref{eq:q1_rank_validation}属于未见配方集合上的外部排序检验。它可以支持“1M 学到的配比排序仍保留部分信息”，但不能支持连续的 $N$ 尺度传递。
+
+\subsubsection{绝对 Loss 迁移的反证性诊断}
+
+若直接把 A4+A5 的 1M 代理当作其他实验组的绝对 Loss 预测器，则尺度平移会显著影响 RMSE。删除全部配比变量、只使用 A4+A5 中该目标域的常数均值作为基线时，1M、60M、1B 的 13 域 RMSE 中位数分别为 0.6759、1.4724、3.2514；完整 Ridge 分别为 0.4478、1.4450、3.2079。完整模型在 1M 和 60M 上分别有 13/13 个目标域的 RMSE 下降，但到 1B 只有 4/13 个目标域下降。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.82\linewidth]{q1_mixture_ablation.png}
+\caption{冻结 1M 配比代理相对于无配比常数基线的 RMSE 诊断。该图用于说明绝对 Loss 不能由附件 A 直接跨规模搬运，而非构造尺度律。}
+\label{fig:q1_ablation}
+\end{figure}
+
+因此第一问的主要可验证结论是“配方排序具有迁移信息”，而不是“1M Loss 幅度可以按某个 $N$ 的函数外推”。原先利用三个离散实验组拟合 $b_k(N)$ 和公共衰减指数 $\eta$ 的做法不再进入主模型：A 数据既没有与配方实验对应的 $D$，又只有三个模型规模位置，且 1B 的配方支持集与 1M/60M 不同，无法把斜率变化唯一归因于 $N$。
+
+\subsubsection{A12--A15 的使用边界}
+
+A12--A15 的 10B/70B Loss 在数据说明中明确标记为 estimated/extrapolated，因此既不参与 Ridge 拟合，也不参与模型选择。两组使用相同的 63 个配方，且这 63 个配方均已出现在 A4 的 1M 训练配方集合中。附件给出的 10B 与 70B estimated Loss 在 13 个目标域中的直接 Spearman 范围为 0.9754--0.9965，中位数 0.9907；但冻结的 1M Ridge 在这两组 estimated Loss 上的 13 域 Spearman 中位数仅为 0.5136 和 0.4148。故 A12--A15 只作为附件内部的外推压力测试，不能作为真实大模型训练验证，也不能补足连续尺度识别。
+
+\subsection{Q1 向后续问题的严格接口}
+
+A16 中仅有 3 个 direct、3 个 near-direct 域映射，其余 11 个为 inferred，因此本文不生成 17 个看似精确的质量真值。第一问正式交付如下：
+
+\begin{enumerate}
+  \item 七个质量域的 A 侧综合质量代理 $Q_A$、条件抽样区间及评分规则敏感性。$Q_A$ 是描述性复合指标，不等于附件 B6--B8 的原生 $Q_{\mathrm{score}}$。
+  \item 17 维配比的 13 个目标域 1M Ridge 代理，以及式\eqref{eq:q1_centered_effect}定义的 target-specific 相对配比效应 $m_k(\boldsymbol p)$。
+  \item A6--A11 给出的跨实验组排序验证和 A12--A15 的 estimated/extrapolated 压力测试。
+\end{enumerate}
+
+附件 A 没有提供 $Q_A\leftrightarrow Q_{\mathrm{score}}$ 的成对标定样本，也没有证明任一 Q1 目标域 Loss 与 B1 的 \texttt{val\_loss} 属于同一数值坐标。因此第一问不提供 $Q_A\to Q_{\mathrm{score}}$ 的数值映射，不把 $m_k(\boldsymbol p)$ 直接加到 B1 Loss，也不提供由 A 数据拟合的 $\eta$、$b_k(N)$ 或其他连续尺度传递参数。$N$、$D$、B-native $Q$ 与 Loss 的统一关系由问题二依据附件 B 独立建立；若后续需要把 $m_k(\boldsymbol p)$ 映射到 B 侧 Loss，必须额外给出可验证的 Loss 坐标桥接证据。
+
+\subsection{本问结论与局限}
+
+在题目附件能够直接识别的范围内，问题一得到三点结论。第一，22 维质量信号可以构造透明的 A 侧综合质量代理，但其数值依赖明确的方向和权重假设，不能解释为客观质量真值；A2/A3 的非重叠记录支持 arxiv/github 域级结论在扩展样本上的稳定性，且多数负相关指标对在完整扩展与去重扩展中保持同号。第二，A4+A5 的逐目标域 Ridge 能在 held-out 1M、60M 和 1B 配方上保持明显的排序信息，其中 1M/60M 同配方真实 Loss 的中位 Spearman 为 0.9944。第三，绝对 Loss 的跨实验组误差和 1B 支持集变化表明，附件 A 不足以单独建立连续的配比尺度律。
+
+因此，本问只输出“质量代理、配比相对效应、排序验证和映射边界”，把 $N$、$D$ 与 B-native 质量坐标上的广义 Loss 建模严格留给问题二，从而使四问之间的递进关系与题目提供的数据保持一致。
