@@ -1,0 +1,116 @@
+{
+  "schema_version": "cyj.chm.v3",
+  "status": "conditional_within_B7_pending_independent_test",
+  "ready_for_Q3": false,
+  "formal_result_scope": null,
+  "candidate_result_scope": "NDQ_with_p_sensitivity",
+  "quality_policy": {
+    "coordinate": "B_native_Q_score",
+    "performance_status": "conditional_within_B7",
+    "joint_NDQ_status": "conditional_within_B7",
+    "validation_scope": "within_official_attachment_B7_semi_synthetic",
+    "loss_coordinate_id": "attachment_B7_native_val_loss",
+    "A_Q_mapping_status": "unidentified"
+  },
+  "p_policy": {
+    "mode": "sensitivity_only",
+    "target_panel": [
+      "arxiv",
+      "freelaw",
+      "pubmed_central",
+      "wikipedia_en",
+      "dm_mathematics",
+      "github",
+      "stackexchange",
+      "gutenberg_pg_19",
+      "pile_cc",
+      "ubuntu_irc",
+      "hackernews",
+      "pubmed_abstracts",
+      "uspto_backgrounds"
+    ],
+    "unique_p_claim_allowed": false,
+    "B_loss_addition_allowed": false,
+    "cross_scale_transfer": "not_identified_from_attachment_A"
+  },
+  "bounds": {
+    "N_params_B": [
+      0.07,
+      11.97
+    ],
+    "D_tokens_B": [
+      10.0,
+      600.0
+    ],
+    "Q_score": [
+      0.1,
+      1.0
+    ]
+  },
+  "units": {
+    "N_params_B": "1e9 parameters",
+    "D_tokens_B": "1e9 tokens",
+    "Q_score": "B-native unitless",
+    "loss": "B7 native val_loss",
+    "gradient_N": "loss per 1e9 parameters",
+    "gradient_D": "loss per 1e9 tokens",
+    "gradient_Q": "loss per Q unit",
+    "cost": "FLOPs"
+  },
+  "context_tokens": [
+    2048,
+    8192,
+    131072
+  ],
+  "reference_p": {
+    "arxiv": 0.11302252583269279,
+    "freelaw": 0.0968248321520278,
+    "nih_exporter": 0.00588968021709595,
+    "pubmed_central": 0.11375419105058357,
+    "wikipedia_en": 0.07507775607983627,
+    "dm_mathematics": 0.0254628540970504,
+    "github": 0.11070066007050916,
+    "philpapers": 0.005487697351193036,
+    "stackexchange": 0.09943242344413017,
+    "enron_emails": 0.002211033043406226,
+    "gutenberg_pg_19": 0.04691494424753537,
+    "pile_cc": 0.11948759779188561,
+    "ubuntu_irc": 0.019599998284005892,
+    "europarl": 0.012737064754031531,
+    "hackernews": 0.011650822378108678,
+    "pubmed_abstracts": 0.06618116611257162,
+    "uspto_backgrounds": 0.07556475309333588
+  },
+  "B7_source_sha256": "880fd265ca3e1d9bc93b4559af7ed7c18f89040634266c50bae03d88486e0f3a",
+  "frozen_model_sha256": "ed6b01b113110b90b25c5f6cc01d7686cb77602f29464bc068843b36d881c9bf",
+  "validation_sha256": "cae1c827587c49d6484d2fcdb7686f9202f522aacdb39d5f63f74085d422491d",
+  "uncertainty_sha256": "54c2ceb24472aa1bc53f3207d0064529545fa37385f6f5845114b88657121608",
+  "q1_schema": "chm.q1.v1.2",
+  "q1_manifest_sha256": "5885317d072739b02cdbb434fc730dde07510eb284dc857e35863adc877e914d",
+  "uncertainty_policy": {
+    "U1_parameter_estimation": "500 ND-cluster bootstrap fits",
+    "U2_model_form": "pointwise difference from constant-G baseline",
+    "U3_prediction_residual": "leave-N OOF empirical residual draw",
+    "U4_cross_source": null,
+    "U5_benchmark_bridge": null,
+    "coverage_calibrated": false
+  },
+  "formal_blockers": [
+    "B7 family proposed after full-source inspection; no untouched test",
+    "empirical interval has no independent coverage calibration",
+    "CHM owner consumer acceptance pending"
+  ],
+  "files_sha256_utf8_lf": {
+    "src/cyj/chm_adapter_v3.py": "c80372c0f2fe7f9702e2024db5f48bc77d6681995d558e182b8706920c8efc74",
+    "src/cyj/build_chm_release_v3.py": "a81d77b21d444beb2614f0a2c1daf523009c909bb04db1b08561b4ff3aa8aea1",
+    "src/cyj/chm_consumer_smoke_v3.py": "7f0cafc88ce096d5cd694fa766b2027078468a7f0769b74f2afc915a5a5a167e",
+    "src/cyj/b7_formal_model.py": "4f47c10b1edb3e8a3c644fc7e61f1be2da53fee6137cd9cb1a4877849a63769c",
+    "src/cyj/build_b7_frozen_uncertainty.py": "5072136940873d8ee4c0a5e7b5b7ac394fd114bb0114916156fbf7d132b055ba",
+    "src/cyj/validate_b7_frozen_model.py": "fd78dfa9bde2aaf7c0ec25699d409744af25b2c6357c3fb7f42f970dc744b404",
+    "outputs/cyj/quality/b7_frozen_model.json": "ed6b01b113110b90b25c5f6cc01d7686cb77602f29464bc068843b36d881c9bf",
+    "outputs/cyj/quality/b7_frozen_validation.json": "cae1c827587c49d6484d2fcdb7686f9202f522aacdb39d5f63f74085d422491d",
+    "outputs/cyj/quality/b7_frozen_uncertainty.json": "54c2ceb24472aa1bc53f3207d0064529545fa37385f6f5845114b88657121608",
+    "outputs/cyj/interfaces/chm_v3_request.json": "188dbec83f014362aa9592176b3f035c82b1ce0d307fde92125e86c813569c41",
+    "outputs/cyj/interfaces/chm_v3_expected.json": "38b36f20704c1d2af02089db4b6a64eab614216fb23e5a65274cf8c655171a39"
+  }
+}

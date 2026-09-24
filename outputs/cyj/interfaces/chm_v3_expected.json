@@ -1,0 +1,209 @@
+{
+  "schema_version": "cyj.chm.v3",
+  "status": "conditional_within_B7_pending_independent_test",
+  "ready_for_Q3": false,
+  "results": [
+    {
+      "request_id": "reference",
+      "schema_version": "cyj.chm.v3",
+      "status": "conditional_within_B7_pending_independent_test",
+      "ready_for_Q3": false,
+      "inputs": {
+        "N_params_B": 0.7,
+        "D_tokens_B": 150.0,
+        "Q_score": 0.5
+      },
+      "prediction": {
+        "loss_value": 2.5959730638903467,
+        "gradient": {
+          "N_params_B": -0.24145488944882942,
+          "D_tokens_B": -0.0006075623718736974,
+          "Q_score": -0.3826834341083279
+        },
+        "elasticities": {
+          "N_params_B": -0.06510792618197979,
+          "D_tokens_B": -0.03510604830563223,
+          "Q_score": -0.07370712728714438
+        },
+        "substitution_rates": {
+          "dD_dN_at_LQ": -397.4158055644435,
+          "dQ_dN_at_LD": -0.6309520296101444,
+          "dQ_dD_at_LN": -0.0015876369806530795
+        },
+        "uncertainty": {
+          "central_estimate": 2.5959730638903467,
+          "conditional_mean_percentile_95": [
+            2.5872152887611395,
+            2.6056377008794582
+          ],
+          "empirical_prediction_percentile_95": [
+            2.493072419858868,
+            2.7046218778602045
+          ],
+          "median_predictive_draw": 2.59750142169627,
+          "model_form_difference_primary_minus_constant_G": 0.011806336634538006,
+          "scope": "empirical_conditional_within_B7_not_independent_calibration",
+          "calibrated_coverage_claim": false
+        },
+        "loss_coordinate": "attachment_B7_native_val_loss"
+      },
+      "cost": {
+        "cost_coordinate": "FLOPs",
+        "training": 6.299999999999999e+20,
+        "quality": 0.0,
+        "attention": 4.300799999999999e+19,
+        "total": 6.730079999999999e+20,
+        "budget_residual": -9.326992000000001e+21,
+        "relative_budget_residual": -0.9326992000000001,
+        "budget_feasible": true,
+        "gradient": {
+          "N_params_B": 9.6144e+20,
+          "D_tokens_B": 4.4867199999999995e+18,
+          "Q_score_left": 0.0,
+          "Q_score_right": 1.80769832308689e+20
+        },
+        "context_critical_tokens": 30000.0,
+        "attention_over_training": 0.06826666666666667,
+        "Q0": 0.5,
+        "Q0_status": "explicit_scenario",
+        "quality_family": "exponential",
+        "context_source_status": "zhh_C7_candidate_not_joint_accepted",
+        "ready_for_Q3": false
+      },
+      "constraints": {
+        "NDQ_support_satisfied": true,
+        "Q_ge_Q0": true,
+        "budget_feasible": true,
+        "minimum_supported_cost_FLOPs": 4.4867200000000005e+18,
+        "budget_support_nonempty": true
+      },
+      "p_sensitivity": {
+        "schema_version": "chm.q1.v1.2",
+        "loss_coordinate": "A4_A5_1M_target_cross_entropy_contrast",
+        "cross_scale_transfer": "not_identified_from_attachment_A",
+        "effects": {
+          "arxiv": 0.0,
+          "freelaw": 0.0,
+          "pubmed_central": 0.0,
+          "wikipedia_en": 0.0,
+          "dm_mathematics": 0.0,
+          "github": 0.0,
+          "stackexchange": 0.0,
+          "gutenberg_pg_19": 0.0,
+          "pile_cc": 0.0,
+          "ubuntu_irc": 0.0,
+          "hackernews": 0.0,
+          "pubmed_abstracts": 0.0,
+          "uspto_backgrounds": 0.0
+        },
+        "mode": "sensitivity_only",
+        "unique_p_claim_allowed": false,
+        "B_loss_addition_allowed": false,
+        "mixture_support_status": "simplex_checked_training_convex_hull_not_checked"
+      },
+      "cross_source_uncertainty": null,
+      "benchmark_bridge_uncertainty": null
+    },
+    {
+      "request_id": "p-sensitivity",
+      "schema_version": "cyj.chm.v3",
+      "status": "conditional_within_B7_pending_independent_test",
+      "ready_for_Q3": false,
+      "inputs": {
+        "N_params_B": 0.7,
+        "D_tokens_B": 150.0,
+        "Q_score": 0.5
+      },
+      "prediction": {
+        "loss_value": 2.5959730638903467,
+        "gradient": {
+          "N_params_B": -0.24145488944882942,
+          "D_tokens_B": -0.0006075623718736974,
+          "Q_score": -0.3826834341083279
+        },
+        "elasticities": {
+          "N_params_B": -0.06510792618197979,
+          "D_tokens_B": -0.03510604830563223,
+          "Q_score": -0.07370712728714438
+        },
+        "substitution_rates": {
+          "dD_dN_at_LQ": -397.4158055644435,
+          "dQ_dN_at_LD": -0.6309520296101444,
+          "dQ_dD_at_LN": -0.0015876369806530795
+        },
+        "uncertainty": {
+          "central_estimate": 2.5959730638903467,
+          "conditional_mean_percentile_95": [
+            2.5872152887611395,
+            2.6056377008794582
+          ],
+          "empirical_prediction_percentile_95": [
+            2.493072419858868,
+            2.7046218778602045
+          ],
+          "median_predictive_draw": 2.59750142169627,
+          "model_form_difference_primary_minus_constant_G": 0.011806336634538006,
+          "scope": "empirical_conditional_within_B7_not_independent_calibration",
+          "calibrated_coverage_claim": false
+        },
+        "loss_coordinate": "attachment_B7_native_val_loss"
+      },
+      "cost": {
+        "cost_coordinate": "FLOPs",
+        "training": 6.299999999999999e+20,
+        "quality": 0.0,
+        "attention": 4.300799999999999e+19,
+        "total": 6.730079999999999e+20,
+        "budget_residual": -9.326992000000001e+21,
+        "relative_budget_residual": -0.9326992000000001,
+        "budget_feasible": true,
+        "gradient": {
+          "N_params_B": 9.6144e+20,
+          "D_tokens_B": 4.4867199999999995e+18,
+          "Q_score_left": 0.0,
+          "Q_score_right": 1.80769832308689e+20
+        },
+        "context_critical_tokens": 30000.0,
+        "attention_over_training": 0.06826666666666667,
+        "Q0": 0.5,
+        "Q0_status": "explicit_scenario",
+        "quality_family": "exponential",
+        "context_source_status": "zhh_C7_candidate_not_joint_accepted",
+        "ready_for_Q3": false
+      },
+      "constraints": {
+        "NDQ_support_satisfied": true,
+        "Q_ge_Q0": true,
+        "budget_feasible": true,
+        "minimum_supported_cost_FLOPs": 4.4867200000000005e+18,
+        "budget_support_nonempty": true
+      },
+      "p_sensitivity": {
+        "schema_version": "chm.q1.v1.2",
+        "loss_coordinate": "A4_A5_1M_target_cross_entropy_contrast",
+        "cross_scale_transfer": "not_identified_from_attachment_A",
+        "effects": {
+          "arxiv": -0.03788388499240095,
+          "freelaw": 0.032184289223150586,
+          "pubmed_central": -0.007325428597803155,
+          "wikipedia_en": 0.0006571206599579969,
+          "dm_mathematics": 0.0014591334518431684,
+          "github": -0.0023849032387789765,
+          "stackexchange": -0.0029463039358225574,
+          "gutenberg_pg_19": 0.004800469055260032,
+          "pile_cc": 0.002371904510480526,
+          "ubuntu_irc": -0.0024107076304255605,
+          "hackernews": 0.0030037283060022884,
+          "pubmed_abstracts": -0.0019518692061328124,
+          "uspto_backgrounds": 5.346193326512608e-06
+        },
+        "mode": "sensitivity_only",
+        "unique_p_claim_allowed": false,
+        "B_loss_addition_allowed": false,
+        "mixture_support_status": "simplex_checked_training_convex_hull_not_checked"
+      },
+      "cross_source_uncertainty": null,
+      "benchmark_bridge_uncertainty": null
+    }
+  ]
+}
