@@ -31,6 +31,16 @@ def finite(value, name):
     return value
 
 
+def producer_bytes(raw, expected_sha):
+    """Recover only an exactly hash-matching producer newline representation."""
+    if hashlib.sha256(raw).hexdigest() == expected_sha:
+        return raw, "git_blob_unchanged"
+    crlf = raw.replace(b"\r\n", b"\n").replace(b"\n", b"\r\n")
+    if hashlib.sha256(crlf).hexdigest() != expected_sha:
+        raise ValueError("producer bytes mismatch; newline recovery does not match published SHA")
+    return crlf, "LF_to_CRLF_exact_published_SHA"
+
+
 @lru_cache(maxsize=4)
 def load_chm(commit):
     """Load the reviewed producer reader from exact Git blobs, without a copy in the repo."""
@@ -47,6 +57,7 @@ def load_chm(commit):
     manifest = json.loads(manifest_bytes)
     if manifest.get("schema_version") != "chm.q1.v1":
         raise ValueError("unsupported CHM manifest")
+    expected_by_path = {item["path"]: item["sha256"] for item in manifest["files"].values()}
     with tempfile.TemporaryDirectory(prefix="cyj-chm-interface-") as temporary:
         root = Path(temporary)
         paths = [MANIFEST, "src/chm/q1_interface.py"] + [item["path"] for item in manifest["files"].values()]
@@ -55,7 +66,12 @@ def load_chm(commit):
                 raise ValueError("unexpected producer path")
             path = root / relative
             path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_bytes(manifest_bytes if relative == MANIFEST else blob(relative))
+            raw = manifest_bytes if relative == MANIFEST else blob(relative)
+            if relative in expected_by_path:
+                raw, recovery = producer_bytes(raw, expected_by_path[relative])
+                identities[relative].update(producer_sha256=expected_by_path[relative],
+                                            producer_bytes=len(raw), materialization=recovery)
+            path.write_bytes(raw)
         spec = importlib.util.spec_from_file_location("cyj_pinned_chm_q1", root / "src/chm/q1_interface.py")
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
@@ -73,6 +89,11 @@ class Predictor:
         self.q1, identities = load_chm(self.bundle["provenance"]["chm_commit"])
         if identities != self.bundle["provenance"]["chm_files"]:
             raise ValueError("pinned CHM identities do not match bundle")
+        if sha256(FIT) != self.bundle["provenance"]["baseline_fit_sha256"]:
+            raise ValueError("baseline artifact hash mismatch")
+        original = json.loads(FIT.read_text(encoding="utf-8"))
+        if original["full_fit"]["parameters"] != self.bundle["baseline"]["parameters"]:
+            raise ValueError("baseline parameter bundle mismatch")
 
     def predict(self, *, N_params_B, D_tokens_B, mode="formal", Q_score=None,
                 p=None, target=None, lambda_loss=None, eta=None, allow_extrapolation=False):
@@ -128,6 +149,7 @@ class Predictor:
 
 
 def build_bundle(chm_commit, input_version):
+    input_version = subprocess.check_output(["git", "rev-parse", f"{input_version}^{{commit}}"], cwd=ROOT, text=True).strip()
     verify_code_files(input_version, ("src/cyj/q3_interface.py", "src/cyj/scaling_provenance.py", "src/cyj/audit_b_scaling_laws.py"))
     q1, identities = load_chm(chm_commit)
     if sha256(FIT) != FIT_SHA:
