@@ -6,11 +6,11 @@
 
 Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠排除隐藏文字影响而作废，提交 `58f4f0a` 已明确丢弃其文件内容。不得从 Git 历史恢复、cherry-pick、复用其中的模型、参数、数值、结论或输出。若后续独立论证出同名方法适用，必须依据可见题面、真实数据或独立可核验文献重新建立证据链。
 
-更新时间：2026-09-24 13:27（北京时间）。角色 cyj，负责 Q2 与 Q3 理论；分支 `team/cyj-scaling`。Python 3.12.14 / Windows，环境见 `problem/cyj/environment.md`。
+更新时间：2026-09-24 16:30（北京时间）。角色 cyj，负责 Q2 与 Q3 理论；分支 `team/cyj-scaling`。Python 3.12.14 / Windows，环境见 `problem/cyj/environment.md`。
 
 ## 当前状态
 
-本轮采用 chm `chm.q1.v1` 的原生读取器和六文件清单，定义 `cyj.q3.v1` 预测/成本/约束调用，完成 B1 E/N/D 消融。本人合同 v1.8；软件测试 26/26 PASS，科学接口仍 draft，`ready_for_Q3=false`。完整 Q2、质量性能项和跨来源验证尚未完成。
+本轮采用 chm `chm.q1.v1` 的原生读取器和六文件清单，定义 `cyj.q3.v1` 预测/成本/约束调用，完成 B1 E/N/D 消融及 B6–B8 质量方向/重复审计。本人合同 v1.9；软件测试 29/29 PASS，科学接口仍 draft，`ready_for_Q3=false`。完整 Q2、质量性能项和跨来源验证尚未完成。
 
 已无冲突合并 main `7d8081fbf50cd380904505759c116580356f102d`，merge `5ada51f9a29877dd2ee98a9b4d1b0760e1f5b818`；重新读取协作规则/公共记忆/接口。论文入口迁为 `paper/latex/`，本人只负责其中 `sections/cyj/`，本轮未编辑论文及公共文件。上轮两份因网络待推送的提交已包含在成功核验的远端检查点 `6e3fa70` 中，最新运行前已核远端 `9c4dcc12ece2b38d12a9d8b33e4e17c82ef943f5`；本轮最终结果的推送 SHA 以收尾 Git 实际核验为准。
 
@@ -37,10 +37,10 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 ## 未验证项与下一步
 
-1. cyj：拟合 B6–B8 原生 Q_score 的质量项并核验与 B1 的 Loss 关系；保留半合成标签，B8 extrapolated 不参与独立拟合/验证。当前未交付完整 N-D-Q-p validated predictor。
+1. cyj：先用去重 B7 比较原生 Q_score 候选模型并组级留出。新审计确认 B6 360 行全部重复于 B7，合并只得 450 坐标；B7/B8 224 同坐标 Loss 全异；固定 N,D 时 B8 calibrated 的 90/90 组 Q 两端 Loss 上升，B6/B7 各 45/45 下降。B8 calibrated 暂隔离，extrapolated 不拟合/独立验证；不能直接反转 Q。B8 最小 Loss=0.5 堆积 362 行，是否人为截断尚未知。详见 `experiments/cyj/20260924-b8-quality-audit.md`，JSON SHA256 `1d9576dc63bdc078b72f0dd530e8b568bed68ca3ad905c49543ee0d3c734684d`。当前未交付完整 N-D-Q-p validated predictor。
 2. cyj：继续 B1 逐行 Loss 来源和 tokenizer/评估语料/对数底，B4/B5 可比性及 B9/B10 外推。近乎精确重构、bootstrap 窄区间和本轮消融不能替代这些证据。
 3. chm+cyj：按已经采用的定义联调；主 anchor 与 lambda 未识别时保留多 target 情景，不将 Q_z 等同 Q_score 或将 13 域原 Loss 平均。lambda 不默认 1，eta 不充当跨 Loss 换算。
 4. chm：验收本文接口和样例并修复发布换行规范；zhh：正式确认 C7/桥接接口并传播 Loss–Benchmark 误差；集成人：验收后汇总公共记忆，cyj 不直接编辑公共状态。
 5. 全库 A 附件 LFS 完整性本机仍未重新验证（B 输入已单独按清单核验）；官方规则/当年模板符合性仍需团队确认。
 
-最新交接：`memory-bank/handoffs/cyj/20260924-1327-p20-interface-ablation-cleanup.md`。已有 Draft [PR #3](https://github.com/chengzhixian/math-modeling-memory-bank-template/pull/3) 面向 main，尚未合并；分支已备份不等于已验收。需要公共记忆变更的建议由集成人处理。
+最新交接：`memory-bank/handoffs/cyj/20260924-1630-b8-quality-gate.md`。本次输入提交 `cebd51bd0116ef3194728cfbeed9569239e085db`，该提交此前推送因 GitHub 连接重置失败；不能称最新结果已备份，最终以收尾 SHA 核验为准。已有 Draft [PR #3](https://github.com/chengzhixian/math-modeling-memory-bank-template/pull/3) 面向 main，尚未合并；分支备份不等于验收。公共状态交集成人更新。main 优秀论文目前仅阅读参考索引，未独立读原 PDF。

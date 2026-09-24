@@ -1,0 +1,645 @@
+{
+  "schema_version": "cyj.b_quality_audit.v1",
+  "source_files": {
+    "supplementary_NQ_experiment.csv": {
+      "path": "data/raw/real_attachments/B_scaling_laws/supplementary_NQ_experiment.csv",
+      "bytes": 13670,
+      "sha256": "c7450ce0d67d8692535fef4709e60e2da60b2c184738bf96df160a4be0a33a7f"
+    },
+    "supplementary_NQ_experiment_expanded.csv": {
+      "path": "data/raw/real_attachments/B_scaling_laws/supplementary_NQ_experiment_expanded.csv",
+      "bytes": 17154,
+      "sha256": "880fd265ca3e1d9bc93b4559af7ed7c18f89040634266c50bae03d88486e0f3a"
+    },
+    "supplementary_NQ_experiment_large.csv": {
+      "path": "data/raw/real_attachments/B_scaling_laws/supplementary_NQ_experiment_large.csv",
+      "bytes": 81268,
+      "sha256": "bda0d449f75c73bbd04141e5cffbf4bea7002073e34b7fa95a638570fa095ffe"
+    }
+  },
+  "method": "Exact N,D,Q keys; adjacent differences at fixed other inputs; no tolerance, transformation, fit or causal claim.",
+  "datasets": {
+    "B6": {
+      "rows": 360,
+      "minimum_loss": 2.0161,
+      "rows_at_minimum_loss": 1,
+      "range": {
+        "N_params_B": [
+          0.07,
+          11.97
+        ],
+        "D_tokens_B": [
+          10.0,
+          600.0
+        ],
+        "Q_score": [
+          0.1,
+          1.0
+        ]
+      },
+      "trends": {
+        "N_params_B": {
+          "groups": 40,
+          "group_types": {
+            "increasing": 0,
+            "decreasing": 11,
+            "tied": 0,
+            "mixed": 29,
+            "singleton": 0
+          },
+          "endpoint_directions": {
+            "increasing": 0,
+            "decreasing": 40,
+            "tied": 0
+          },
+          "adjacent_pairs": {
+            "increasing": 43,
+            "decreasing": 277,
+            "tied": 0
+          },
+          "slope_min": -4.807777777777779,
+          "slope_max": 0.1910000000000004
+        },
+        "D_tokens_B": {
+          "groups": 72,
+          "group_types": {
+            "increasing": 0,
+            "decreasing": 37,
+            "tied": 0,
+            "mixed": 35,
+            "singleton": 0
+          },
+          "endpoint_directions": {
+            "increasing": 0,
+            "decreasing": 72,
+            "tied": 0
+          },
+          "adjacent_pairs": {
+            "increasing": 36,
+            "decreasing": 252,
+            "tied": 0
+          },
+          "slope_min": -0.011649999999999994,
+          "slope_max": 0.0008833333333333322
+        },
+        "Q_score": {
+          "groups": 45,
+          "group_types": {
+            "increasing": 0,
+            "decreasing": 2,
+            "tied": 0,
+            "mixed": 43,
+            "singleton": 0
+          },
+          "endpoint_directions": {
+            "increasing": 0,
+            "decreasing": 45,
+            "tied": 0
+          },
+          "adjacent_pairs": {
+            "increasing": 80,
+            "decreasing": 235,
+            "tied": 0
+          },
+          "slope_min": -2.614000000000001,
+          "slope_max": 1.9950000000000006
+        }
+      }
+    },
+    "B7": {
+      "rows": 450,
+      "minimum_loss": 2.0161,
+      "rows_at_minimum_loss": 1,
+      "range": {
+        "N_params_B": [
+          0.07,
+          11.97
+        ],
+        "D_tokens_B": [
+          10.0,
+          600.0
+        ],
+        "Q_score": [
+          0.1,
+          1.0
+        ]
+      },
+      "trends": {
+        "N_params_B": {
+          "groups": 50,
+          "group_types": {
+            "increasing": 0,
+            "decreasing": 17,
+            "tied": 0,
+            "mixed": 33,
+            "singleton": 0
+          },
+          "endpoint_directions": {
+            "increasing": 0,
+            "decreasing": 50,
+            "tied": 0
+          },
+          "adjacent_pairs": {
+            "increasing": 48,
+            "decreasing": 352,
+            "tied": 0
+          },
+          "slope_min": -4.807777777777779,
+          "slope_max": 0.1910000000000004
+        },
+        "D_tokens_B": {
+          "groups": 90,
+          "group_types": {
+            "increasing": 0,
+            "decreasing": 49,
+            "tied": 0,
+            "mixed": 41,
+            "singleton": 0
+          },
+          "endpoint_directions": {
+            "increasing": 0,
+            "decreasing": 90,
+            "tied": 0
+          },
+          "adjacent_pairs": {
+            "increasing": 42,
+            "decreasing": 318,
+            "tied": 0
+          },
+          "slope_min": -0.011649999999999994,
+          "slope_max": 0.0008833333333333322
+        },
+        "Q_score": {
+          "groups": 45,
+          "group_types": {
+            "increasing": 0,
+            "decreasing": 1,
+            "tied": 0,
+            "mixed": 44,
+            "singleton": 0
+          },
+          "endpoint_directions": {
+            "increasing": 0,
+            "decreasing": 45,
+            "tied": 0
+          },
+          "adjacent_pairs": {
+            "increasing": 102,
+            "decreasing": 303,
+            "tied": 0
+          },
+          "slope_min": -2.614000000000001,
+          "slope_max": 1.9950000000000006
+        }
+      }
+    },
+    "B8": {
+      "rows": 1704,
+      "minimum_loss": 0.5,
+      "rows_at_minimum_loss": 362,
+      "range": {
+        "N_params_B": [
+          0.07,
+          700.0
+        ],
+        "D_tokens_B": [
+          5.0,
+          2000.0
+        ],
+        "Q_score": [
+          0.05,
+          1.0
+        ]
+      },
+      "trends": {
+        "N_params_B": {
+          "groups": 120,
+          "group_types": {
+            "increasing": 0,
+            "decreasing": 29,
+            "tied": 0,
+            "mixed": 91,
+            "singleton": 0
+          },
+          "endpoint_directions": {
+            "increasing": 0,
+            "decreasing": 120,
+            "tied": 0
+          },
+          "adjacent_pairs": {
+            "increasing": 121,
+            "decreasing": 1147,
+            "tied": 316
+          },
+          "slope_min": -3.165555555555555,
+          "slope_max": 0.31666666666666654
+        },
+        "D_tokens_B": {
+          "groups": 180,
+          "group_types": {
+            "increasing": 0,
+            "decreasing": 33,
+            "tied": 31,
+            "mixed": 116,
+            "singleton": 0
+          },
+          "endpoint_directions": {
+            "increasing": 0,
+            "decreasing": 149,
+            "tied": 31
+          },
+          "adjacent_pairs": {
+            "increasing": 143,
+            "decreasing": 1060,
+            "tied": 321
+          },
+          "slope_min": -0.04855999999999998,
+          "slope_max": 0.0013160000000000016
+        },
+        "Q_score": {
+          "groups": 150,
+          "group_types": {
+            "increasing": 43,
+            "decreasing": 0,
+            "tied": 0,
+            "mixed": 107,
+            "singleton": 0
+          },
+          "endpoint_directions": {
+            "increasing": 150,
+            "decreasing": 0,
+            "tied": 0
+          },
+          "adjacent_pairs": {
+            "increasing": 1311,
+            "decreasing": 2,
+            "tied": 241
+          },
+          "slope_min": -0.13200000000000311,
+          "slope_max": 4.851999999999994
+        }
+      }
+    },
+    "B8_calibrated": {
+      "rows": 984,
+      "minimum_loss": 0.5,
+      "rows_at_minimum_loss": 129,
+      "range": {
+        "N_params_B": [
+          0.07,
+          12.0
+        ],
+        "D_tokens_B": [
+          5.0,
+          2000.0
+        ],
+        "Q_score": [
+          0.05,
+          1.0
+        ]
+      },
+      "trends": {
+        "N_params_B": {
+          "groups": 120,
+          "group_types": {
+            "increasing": 0,
+            "decreasing": 56,
+            "tied": 0,
+            "mixed": 64,
+            "singleton": 0
+          },
+          "endpoint_directions": {
+            "increasing": 0,
+            "decreasing": 120,
+            "tied": 0
+          },
+          "adjacent_pairs": {
+            "increasing": 46,
+            "decreasing": 719,
+            "tied": 99
+          },
+          "slope_min": -3.165555555555555,
+          "slope_max": 0.31666666666666654
+        },
+        "D_tokens_B": {
+          "groups": 108,
+          "group_types": {
+            "increasing": 0,
+            "decreasing": 24,
+            "tied": 10,
+            "mixed": 74,
+            "singleton": 0
+          },
+          "endpoint_directions": {
+            "increasing": 0,
+            "decreasing": 98,
+            "tied": 10
+          },
+          "adjacent_pairs": {
+            "increasing": 91,
+            "decreasing": 671,
+            "tied": 114
+          },
+          "slope_min": -0.04855999999999998,
+          "slope_max": 0.0013160000000000016
+        },
+        "Q_score": {
+          "groups": 90,
+          "group_types": {
+            "increasing": 43,
+            "decreasing": 0,
+            "tied": 0,
+            "mixed": 47,
+            "singleton": 0
+          },
+          "endpoint_directions": {
+            "increasing": 90,
+            "decreasing": 0,
+            "tied": 0
+          },
+          "adjacent_pairs": {
+            "increasing": 825,
+            "decreasing": 1,
+            "tied": 68
+          },
+          "slope_min": -0.13200000000000311,
+          "slope_max": 4.769999999999999
+        }
+      }
+    },
+    "B8_extrapolated": {
+      "rows": 720,
+      "minimum_loss": 0.5,
+      "rows_at_minimum_loss": 233,
+      "range": {
+        "N_params_B": [
+          20.0,
+          700.0
+        ],
+        "D_tokens_B": [
+          5.0,
+          2000.0
+        ],
+        "Q_score": [
+          0.05,
+          1.0
+        ]
+      },
+      "trends": {
+        "N_params_B": {
+          "groups": 120,
+          "group_types": {
+            "increasing": 0,
+            "decreasing": 44,
+            "tied": 31,
+            "mixed": 45,
+            "singleton": 0
+          },
+          "endpoint_directions": {
+            "increasing": 0,
+            "decreasing": 89,
+            "tied": 31
+          },
+          "adjacent_pairs": {
+            "increasing": 60,
+            "decreasing": 353,
+            "tied": 187
+          },
+          "slope_min": -0.006820000000000004,
+          "slope_max": 0.0022766666666666677
+        },
+        "D_tokens_B": {
+          "groups": 72,
+          "group_types": {
+            "increasing": 0,
+            "decreasing": 9,
+            "tied": 21,
+            "mixed": 42,
+            "singleton": 0
+          },
+          "endpoint_directions": {
+            "increasing": 0,
+            "decreasing": 51,
+            "tied": 21
+          },
+          "adjacent_pairs": {
+            "increasing": 52,
+            "decreasing": 389,
+            "tied": 207
+          },
+          "slope_min": -0.03932000000000002,
+          "slope_max": 0.001286000000000005
+        },
+        "Q_score": {
+          "groups": 60,
+          "group_types": {
+            "increasing": 0,
+            "decreasing": 0,
+            "tied": 0,
+            "mixed": 60,
+            "singleton": 0
+          },
+          "endpoint_directions": {
+            "increasing": 60,
+            "decreasing": 0,
+            "tied": 0
+          },
+          "adjacent_pairs": {
+            "increasing": 486,
+            "decreasing": 1,
+            "tied": 173
+          },
+          "slope_min": -0.12000000000000027,
+          "slope_max": 4.851999999999994
+        }
+      }
+    }
+  },
+  "overlap": {
+    "B6_vs_B7": {
+      "shared_coordinates": 360,
+      "identical_loss": 360,
+      "different_loss": 0,
+      "right_minus_left_min": 0.0,
+      "right_minus_left_max": 0.0,
+      "examples": []
+    },
+    "B6_vs_B8": {
+      "shared_coordinates": 160,
+      "identical_loss": 0,
+      "different_loss": 160,
+      "right_minus_left_min": -2.5769,
+      "right_minus_left_max": 0.05690000000000017,
+      "examples": [
+        {
+          "coordinate": {
+            "N_params_B": 0.7,
+            "D_tokens_B": 10.0,
+            "Q_score": 0.1
+          },
+          "left": {
+            "experiment_id": "N0.70_D0010_Q0.1",
+            "N_params_B": 0.7,
+            "D_tokens_B": 10.0,
+            "Q_score": 0.1,
+            "val_loss": 3.1919,
+            "source_line": 122
+          },
+          "right": {
+            "experiment_id": "N0.7_D0010_Q0.1",
+            "N_params_B": 0.7,
+            "D_tokens_B": 10.0,
+            "Q_score": 0.1,
+            "val_loss": 0.615,
+            "data_type": "calibrated",
+            "source_line": 279
+          }
+        },
+        {
+          "coordinate": {
+            "N_params_B": 0.7,
+            "D_tokens_B": 10.0,
+            "Q_score": 0.2
+          },
+          "left": {
+            "experiment_id": "N0.70_D0010_Q0.2",
+            "N_params_B": 0.7,
+            "D_tokens_B": 10.0,
+            "Q_score": 0.2,
+            "val_loss": 3.1552,
+            "source_line": 123
+          },
+          "right": {
+            "experiment_id": "N0.7_D0010_Q0.2",
+            "N_params_B": 0.7,
+            "D_tokens_B": 10.0,
+            "Q_score": 0.2,
+            "val_loss": 0.8685,
+            "data_type": "calibrated",
+            "source_line": 280
+          }
+        },
+        {
+          "coordinate": {
+            "N_params_B": 0.7,
+            "D_tokens_B": 10.0,
+            "Q_score": 0.3
+          },
+          "left": {
+            "experiment_id": "N0.70_D0010_Q0.3",
+            "N_params_B": 0.7,
+            "D_tokens_B": 10.0,
+            "Q_score": 0.3,
+            "val_loss": 3.0155,
+            "source_line": 124
+          },
+          "right": {
+            "experiment_id": "N0.7_D0010_Q0.3",
+            "N_params_B": 0.7,
+            "D_tokens_B": 10.0,
+            "Q_score": 0.3,
+            "val_loss": 1.081,
+            "data_type": "calibrated",
+            "source_line": 281
+          }
+        }
+      ]
+    },
+    "B7_vs_B8": {
+      "shared_coordinates": 224,
+      "identical_loss": 0,
+      "different_loss": 224,
+      "right_minus_left_min": -2.5769,
+      "right_minus_left_max": 0.05690000000000017,
+      "examples": [
+        {
+          "coordinate": {
+            "N_params_B": 0.07,
+            "D_tokens_B": 10.0,
+            "Q_score": 0.5
+          },
+          "left": {
+            "experiment_id": "N0.07_D0010_Q0.5",
+            "N_params_B": 0.07,
+            "D_tokens_B": 10.0,
+            "Q_score": 0.5,
+            "val_loss": 3.568,
+            "source_line": 362
+          },
+          "right": {
+            "experiment_id": "N0.07_D0010_Q0.5",
+            "N_params_B": 0.07,
+            "D_tokens_B": 10.0,
+            "Q_score": 0.5,
+            "val_loss": 2.0372,
+            "data_type": "calibrated",
+            "source_line": 15
+          }
+        },
+        {
+          "coordinate": {
+            "N_params_B": 0.07,
+            "D_tokens_B": 10.0,
+            "Q_score": 0.7
+          },
+          "left": {
+            "experiment_id": "N0.07_D0010_Q0.7",
+            "N_params_B": 0.07,
+            "D_tokens_B": 10.0,
+            "Q_score": 0.7,
+            "val_loss": 3.4466,
+            "source_line": 363
+          },
+          "right": {
+            "experiment_id": "N0.07_D0010_Q0.7",
+            "N_params_B": 0.07,
+            "D_tokens_B": 10.0,
+            "Q_score": 0.7,
+            "val_loss": 2.5538,
+            "data_type": "calibrated",
+            "source_line": 16
+          }
+        },
+        {
+          "coordinate": {
+            "N_params_B": 0.07,
+            "D_tokens_B": 50.0,
+            "Q_score": 0.5
+          },
+          "left": {
+            "experiment_id": "N0.07_D0050_Q0.5",
+            "N_params_B": 0.07,
+            "D_tokens_B": 50.0,
+            "Q_score": 0.5,
+            "val_loss": 3.1892,
+            "source_line": 364
+          },
+          "right": {
+            "experiment_id": "N0.07_D0050_Q0.5",
+            "N_params_B": 0.07,
+            "D_tokens_B": 50.0,
+            "Q_score": 0.5,
+            "val_loss": 1.8871,
+            "data_type": "calibrated",
+            "source_line": 31
+          }
+        }
+      ]
+    }
+  },
+  "ready_for_Q3": false,
+  "usage_policy": {
+    "B6_B7": "deduplicate shared coordinates before exploratory quality fitting; not independent validation",
+    "B8_calibrated": "quarantine from common B6/B7 fit pending Q direction and Loss coordinate provenance",
+    "B8_extrapolated": "scenario audit only; never fit or independent validation",
+    "Q_transform": null,
+    "B1_loss_bridge": "not_established",
+    "A_Q_to_B_Q_bridge": "not_identified"
+  },
+  "input_version": "cebd51bd0116ef3194728cfbeed9569239e085db",
+  "code_sha256": {
+    "src/cyj/diagnose_b_quality.py": "404e35b488d0145bc695f7ee03345e9bae91a290fde2909dc82c17090f26deda",
+    "src/cyj/scaling_provenance.py": "74e7ecec36ca8d85af8aea9291849323b37699292cebf1c7c097cb2da0086064",
+    "src/cyj/audit_b_scaling_laws.py": "8fb3859344405af81664346ad80b156c6a459a30465d1a50d4e7a7d827d5880a"
+  }
+}
