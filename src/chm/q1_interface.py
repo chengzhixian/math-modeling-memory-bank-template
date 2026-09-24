@@ -223,6 +223,32 @@ class Q1Interface:
             "direct_B1_addition_allowed": False,
         }
 
+    def effect_vector(self, mixture):
+        """Return all 13 centered 1M target-loss contrasts for one mixture."""
+        return {
+            "schema_version": VERSION,
+            "loss_coordinate": "A4_A5_1M_target_cross_entropy_contrast",
+            "cross_scale_transfer": "not_identified_from_attachment_A",
+            "effects": {
+                target: self.relative_effect(mixture, target)["delta_target_loss_1m"]
+                for target in self.coefficients
+            },
+        }
+
+    def interaction_matrix(self):
+        """Return the 13 x 17 zero-sum Ridge coefficient matrix B."""
+        return {
+            "targets": list(self.coefficients),
+            "domains": list(self.reference),
+            "matrix": [
+                [float(self.coefficients[target][domain]) for domain in self.reference]
+                for target in self.coefficients
+            ],
+            "coefficient_interpretation": (
+                "simplex contrast coefficients; reallocation effects use beta_j-beta_r"
+            ),
+        }
+
     def ranking_validation(self, target):
         """Return held-out ranking evidence for the frozen 1M Ridge surrogate."""
         if target not in self.validation_rows:
