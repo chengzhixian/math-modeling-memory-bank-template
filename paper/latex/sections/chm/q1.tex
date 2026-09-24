@@ -35,7 +35,14 @@ z_{ij}
 
 \subsubsection{指标方向的确定}
 
-八个模型型字段按其评分语义固定为正向。其逐记录均值 $A_i$ 已由式\eqref{eq:q1_quality_anchor} 定义为方向参考。对其余 14 个统计型字段，较大的原始数值未必代表较好质量；这里只需识别单调方向，因此在 A1 全部有效记录上计算秩相关，而不要求线性关系：
+八个模型型字段按其评分语义固定为正向。为给其余指标提供共同的方向参考，本文将这八项稳健标准化值在每条记录上的可用项均值定义为语义锚点：
+\begin{equation}
+A_i=\frac{1}{|\mathcal M_i|}\sum_{j\in\mathcal M_i}z_{ij}.
+\label{eq:q1_quality_anchor}
+\end{equation}
+其中 $\mathcal M_i$ 为记录 $i$ 上非缺失的模型型评分字段集合。$A_i$ 是本文构造的方向参考，不是附件提供的真实质量标签。列表的元素结构来自公开数据卡；softmax 正类概率、期望等级及 qurater 四维均值均属于本文的压缩选择。
+
+对其余 14 个统计型字段，较大的原始数值未必代表较好质量；这里只需识别单调方向，因此在 A1 全部有效记录上计算秩相关，而不要求线性关系：
 \begin{equation}
 \rho_j=\rho_{\mathrm S}(z_{ij},A_i)
 =\operatorname{Corr}(\operatorname{rank}z_j,\operatorname{rank}A).

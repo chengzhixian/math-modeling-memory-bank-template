@@ -43,7 +43,7 @@ for name in figures:
 
 labels = re.findall(r"\\label\{([^}]+)\}", q1)
 assert len(labels) == len(set(labels)), "Duplicate Q1 labels"
-refs = re.findall(r"\\ref\{([^}]+)\}", q1)
+refs = re.findall(r"\\(?:ref|eqref|autoref)\{([^}]+)\}", q1)
 assert set(refs) <= set(labels), f"Undefined Q1 references: {set(refs) - set(labels)}"
 
 bib = (ROOT / "references.bib").read_text(encoding="utf-8")

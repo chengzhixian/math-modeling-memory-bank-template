@@ -360,3 +360,7 @@ cyj 远端 ad1d312 已将旧 p/eta 情景降级，正式 ready_for_Q3=false；B7
 ## 2026-09-24 Q1 22 信号主模型修正
 
 根据用户提供的讨论稿复核后，撤销上述 stable-LOO 主准入设计。A1 全量 Spearman 符号用于 14 个统计字段定向，8 个模型字段固定正向，全部 22 项进入主 Q。七域和 LOO 只作诊断；本机 A1--A3 实体全量重跑并刷新 canonical 输出、图表、第一问正文及 `chm.q1.v1.3` 接口。旧 20 项口径和旧评分数值仅为历史，不得继续作为当前 Q1 结论。复现和风险见 `memory-bank/handoffs/chm/20260924-q1-all22-global-orientation.md`。
+
+## 2026-09-24 Q1 全量 22 信号论文编译验收
+
+已找到并获准执行本机 MiKTeX；修复语义锚点公式的悬空引用，新增自动构建脚本和包含公式引用的静态检查。当前工作树生成 `paper/latex/output/chm-q1-all22-latest.pdf`，21 页，全部页面渲染检查通过；新方法与质量结果位于第 5--8 页。构建清单保存源文件和 PDF 哈希。详见 `memory-bank/handoffs/chm/20260924-q1-all22-pdf-build.md`；Q2/Q4 占位和 Q3 尚未提交的来源边界已注明。

@@ -10,4 +10,5 @@
 main.pdf
 build-*.txt
 qa/
+.build/
 output/chm-q1-draft.pdf
