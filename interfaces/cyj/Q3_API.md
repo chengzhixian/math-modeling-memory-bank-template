@@ -22,6 +22,8 @@ import sys
 sys.path.insert(0, 'src/cyj')
 from q3_interface import Predictor
 model = Predictor()  # 校验固定上游及 B1 参数文件
+book = model.q1.quality('book')  # A-native 描述性 Q
+unknown = model.q1.mapped_quality('freelaw')  # inferred -> quality=None
 out = model.predict(N_params_B=0.070542, D_tokens_B=0.134, mode='diagnostic')
 ```
 

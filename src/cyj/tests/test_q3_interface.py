@@ -1,13 +1,11 @@
 """Producer example, fail-closed boundaries and numerical derivative checks."""
 import hashlib
-import json
 import sys
-import tempfile
 import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from q3_interface import BUNDLE, Predictor, load_chm, producer_bytes
+from q3_interface import Predictor, load_chm, producer_bytes
 from q3_costs import costs, constraint_residuals
 
 CHM_COMMIT = "7c14a0c894072048d09f04bd03653be1301f7257"
