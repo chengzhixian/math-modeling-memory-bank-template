@@ -223,6 +223,135 @@ m_k(\boldsymbol p')-m_k(\boldsymbol p)
 \end{equation}
 因此可解释的是“两个域之间重新分配”的系数差，而不是单独提高某一域比例的因果效应。
 
+\subsubsection{13 维 Loss 向量与训练域--验证域作用矩阵}
+
+已有文献对多域 Loss 的标准处理并不是先把各域 Loss 压缩成一个标量，而是先逐验证域建模，再在决策层按任务需求聚合。Data Mixing Laws 将第 $k$ 个验证域 Loss 写为训练配比的函数，并以训练域--验证域系数刻画跨域作用；BiMix 同样先保留逐域 Loss，再在配比约束下求解整体目标；DoReMi 则从最坏域 excess loss 出发构造鲁棒目标\cite{datamixinglaws2025,bimix2025,doremi2023}。本文不直接照搬这些论文的函数形式，而只采用与附件 A 数据结构一致的“逐维建模--向量决策”框架。
+
+将 13 个逐域 Ridge 联立，定义
+\begin{equation}
+\widehat{\boldsymbol L}_{1M}(\boldsymbol p)
+=
+\widehat{\boldsymbol\alpha}
++
+\boldsymbol B
+(\boldsymbol p-\boldsymbol p_{\mathrm{ref}}),
+\qquad
+\boldsymbol B=
+[\widehat\beta_{k,j}]
+\in\mathbb R^{13\times17},
+\label{eq:q1_vector_loss}
+\end{equation}
+其中第 $k$ 行对应一个验证域，第 $j$ 列对应一个训练域。相对于参考配方的 13 维效应向量为
+\begin{equation}
+\boldsymbol m(\boldsymbol p)
+=
+\widehat{\boldsymbol L}_{1M}(\boldsymbol p)
+-
+\widehat{\boldsymbol L}_{1M}(\boldsymbol p_{\mathrm{ref}})
+=
+\boldsymbol B
+(\boldsymbol p-\boldsymbol p_{\mathrm{ref}}).
+\label{eq:q1_vector_effect}
+\end{equation}
+因此 $\boldsymbol B$ 是本文线性代理下的训练域--验证域作用矩阵。需要强调的是，$\widehat\beta_{k,j}$ 本身仍是组成数据上的相对对比系数；严格可识别的两域重新分配效应仍由式\eqref{eq:q1_reallocation}中的系数差给出。
+
+为比较不同验证域的作用模式而不改变模型本身，热力图只对每一行作显示归一化
+\begin{equation}
+\widetilde B_{k,j}
+=
+\frac{\widehat\beta_{k,j}}
+{\max_r|\widehat\beta_{k,r}|}.
+\label{eq:q1_interaction_norm}
+\end{equation}
+该归一化只用于可视化，不进入任何预测或优化计算。Data Mixing Laws 的 Fig.~4 也采用按验证域最大绝对系数归一化的方式展示训练域与验证域之间的作用模式；本文的 $\widetilde{\boldsymbol B}$ 与其作用矩阵思想相同，但数值来自本题 A4+A5 的 Ridge，而不是该文的指数混合律。
+
+\IfFileExists{q1_interaction_heatmap.png}{
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.98\linewidth]{q1_interaction_heatmap.png}
+\caption{13 个验证域 $\times$ 17 个训练域的行归一化作用矩阵。颜色表示 Ridge 相对对比系数的方向与相对强度；不能将单个格点解释为独立因果效应。}
+\label{fig:q1_interaction}
+\end{figure}
+}{}
+
+\subsubsection{多维 Loss 的决策层：标量化、鲁棒性与能力保护}
+
+式\eqref{eq:q1_vector_effect}保留了 13 个目标域的信息，因此“怎样得到一个配比方案”应由决策目标决定，而不是预先把 13 个原始 Loss 强行平均。为避免线性代理在未观测的单纯形顶点上外推，本文将第一问的配比决策限制在 A4 已观测配方的凸包
+\begin{equation}
+\mathcal P_A
+=
+\operatorname{conv}
+\{\boldsymbol p_1,\ldots,\boldsymbol p_{512}\}.
+\label{eq:q1_observed_hull}
+\end{equation}
+任意 $\boldsymbol p\in\mathcal P_A$ 均可写为
+$\boldsymbol p=\sum_{i=1}^{512}\omega_i\boldsymbol p_i$，
+其中 $\omega_i\ge0$、$\sum_i\omega_i=1$。这一定义只使用题目已给的 A4 配方支持域，不额外规定人为上下界。
+
+若后续任务给出 13 个验证域的重要性权重
+$\boldsymbol s\in\Delta^{12}$，则可按 Data Mixing Laws 的域聚合思想定义
+\begin{equation}
+J_{\boldsymbol s}(\boldsymbol p)
+=
+\sum_{k=1}^{13}s_k m_k(\boldsymbol p)
+=
+\boldsymbol s^\top
+\boldsymbol B(\boldsymbol p-\boldsymbol p_{\mathrm{ref}}).
+\label{eq:q1_scalarization}
+\end{equation}
+权重的来源严格分三种情况：若题目或下游任务给出验证域组成，直接采用已知权重；若没有任何偏好信息，可令 $s_k=1/13$ 作为“各能力等权”的对称情景；只有在另有总体 validation Loss 与 13 个域 Loss 的成对观测时，才有数据基础学习 $\boldsymbol s$。附件 A 没有总体 Loss 字段，因此本文不从 A1--A16 中反推一组所谓“最优权重”。
+
+若目标是避免某一能力域成为短板，可借鉴 DoReMi 的 worst-case excess-loss 思想，在本文参考配方坐标下定义
+\begin{equation}
+\min_{\boldsymbol p\in\mathcal P_A}
+\max_{k=1,\ldots,13}
+m_k(\boldsymbol p).
+\label{eq:q1_minimax}
+\end{equation}
+这里使用的是相对于同一参考配方的 Loss 增量，而非直接比较 13 个域的原始 Loss 绝对值；该式是本文基于已拟合代理构造的鲁棒决策准则，并不等同于重新实现 DoReMi 的在线 Group DRO 训练算法。
+
+若任务更强调某个目标域 $q$，同时要求其他能力不明显退化，则写成
+\begin{equation}
+\begin{aligned}
+\min_{\boldsymbol p\in\mathcal P_A}\quad
+& m_q(\boldsymbol p),\\
+\text{s.t.}\quad
+& m_k(\boldsymbol p)\le\varepsilon_k,
+\qquad k\in\mathcal K_{\mathrm{protect}}.
+\end{aligned}
+\label{eq:q1_protected_domain}
+\end{equation}
+阈值 $\varepsilon_k$ 必须由题目要求、业务容忍度或独立估计的不确定性给出；附件 A 本身没有这些阈值，因此第一问只给出约束形式，不人为指定数值。
+
+更一般地，问题可保留为 13 目标向量优化
+\begin{equation}
+\min_{\boldsymbol p\in\mathcal P_A}
+\boldsymbol m(\boldsymbol p)
+=
+\min_{\boldsymbol p\in\mathcal P_A}
+\left(
+m_1(\boldsymbol p),\ldots,m_{13}(\boldsymbol p)
+\right)^\top ,
+\label{eq:q1_pareto}
+\end{equation}
+其解集按 Pareto 支配关系定义。改变式\eqref{eq:q1_scalarization}中的 $\boldsymbol s$，或改变式\eqref{eq:q1_protected_domain}中的保护集合与阈值，可以扫描不同能力偏好下的可接受配方。BiMix 的约束配比求解提供了“先建立逐域 Loss，再在 $\sum_jp_j=1$ 下数值优化”的文献范式；但 BiMix 还显式依赖训练步数/数据量，而附件 A 没有相应 $D$ 字段，因此本文只借鉴其向量约束优化思想，不采用其双变量 Loss 律。
+
+上述几种决策口径互不替代：式\eqref{eq:q1_scalarization}回答“平均偏好”，式\eqref{eq:q1_minimax}回答“最坏能力保护”，式\eqref{eq:q1_protected_domain}回答“重点能力提升且不破坏保护域”，式\eqref{eq:q1_pareto}则保留全部多目标折衷。由于题目附件没有给出唯一的验证域权重或能力保护阈值，第一问不宣称存在一个由 A 数据唯一确定的“全局最优配比”。
+
+\subsubsection{文献函数形式与本题主代理的关系}
+
+Data Mixing Laws 在固定模型规模与训练步数下采用
+\begin{equation}
+L_k(\boldsymbol p)
+=
+c_k+a_k
+\exp\left(
+\sum_{j=1}^{17}t_{k,j}p_j
+\right)
+\label{eq:q1_dml_candidate}
+\end{equation}
+描述逐验证域 Loss\cite{datamixinglaws2025}。该式与本文 Ridge 的共同结构是“13 个验证域分别建模、共享同一 17 维配比输入”，但函数族不同。当前仓库中已完成并经过 A6--A11 检验的是 Ridge；尚未在相同五折协议和 held-out 集上完成式\eqref{eq:q1_dml_candidate}的独立拟合比较。因此本文不因文献中存在指数形式就未经本题数据验证地替换主模型。后续若比较两种函数，必须固定同一 A4+A5 训练/调参划分，并仅用 A6--A11 比较泛化误差和排序相关后再决定主模型。
+
 \subsubsection{冻结代理后的跨实验组排序验证}
 
 问题一需要判断 A4+A5 学到的配方关系在附件提供的其他实验组中是否仍有信息。由于不同规模的绝对 Loss 水平明显变化，且附件 A 不提供与配方实验对应的 $D$，验证指标采用只依赖排序的 Spearman 相关，而不拟合额外的尺度函数。对实验组
