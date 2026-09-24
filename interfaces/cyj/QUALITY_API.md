@@ -4,6 +4,14 @@
 
 ## 调用及验收
 
+不使用 Python import 的消费者可运行批量 JSON 入口（不拟合、不改文件）：
+
+```powershell
+python -B src/cyj/predict_quality.py --request outputs/cyj/interfaces/b7_example_request.json
+```
+
+请求必须含固定 `expected_sha256` 与非空 `requests`；每条须显式给唯一 request_id、N_params_B、D_tokens_B、Q_score、mode。输出 `cyj.b7_batch.v1` JSON 到 stdout；任一请求非法则整批失败，stderr 返回错误且退出码 2，无部分成功输出。两个已提供样例对应 B7 原始第 362/363 行，响应保留 request_id 与同编号 bootstrap 样本。不接受数值字符串、额外字段或省略 mode，不进行静默转换或补值。该适配器不改变下述模型文件 SHA。
+
 ```python
 import sys
 sys.path.insert(0, "src/cyj")

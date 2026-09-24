@@ -10,6 +10,8 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 ## 当前状态
 
+2026-09-24 19:14 后接续：新增 `predict_quality.py` 批量 JSON 消费入口及双请求样例，37 项测试通过（含仓库外工作目录 CLI 调用）。模型参数/结果 SHA 不变，formal 仍拒绝。最新交接 `20260924-1914-b7-batch-consumer.md`。开工远端仍为 `6c17cb4`，上轮 `2c5e712` 尚待补推；本轮备份以最终 ls-remote 为准。
+
 2026-09-24 接续交付：已合并 main `968ef7a`（merge `55889bf2b942ca9643f49e420035a9f051f2bed3`），无冲突。已修正 API 的 B8 准入描述，完成去重 B7 三候选/72 折验证/50 次条件 bootstrap。独立 `cyj.b7_quality.v1` 提供原生 N-D-Q、梯度与同编号 Loss 样本；合同 v1.10，34/34 测试通过。代码/输入 `6c17cb4e387e1ac047f8fe0e9ecb6fe42fc5ef3b`，输出 SHA256 `e676bfb06da81c02ad968591aa9ae09da5c7cd6b56def49d59a82c371465b025`，两次运行一致。最新交接 `20260924-1651-b7-quality-delivery.md`，详细结果见 `experiments/cyj/20260924-b7-quality-results.md`。
 
 已采用 chm `chm.q1.v1` 的原生读取器和六文件清单，定义 `cyj.q3.v1` B1/p 预测/成本/约束调用，完成 B1 消融及 B8 审计。B7 原生质量项本轮已拟合，但 B1/p 接口仍不接受 Q_score；跨 Loss 桥接未识别。科学接口仍 draft，`ready_for_Q3=false`，完整 Q2/跨来源验证尚未完成。

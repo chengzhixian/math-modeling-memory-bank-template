@@ -1,0 +1,7 @@
+{
+  "expected_sha256": "e676bfb06da81c02ad968591aa9ae09da5c7cd6b56def49d59a82c371465b025",
+  "requests": [
+    {"request_id": "B7-line-362", "N_params_B": 0.07, "D_tokens_B": 10, "Q_score": 0.5, "mode": "diagnostic"},
+    {"request_id": "B7-line-363", "N_params_B": 0.07, "D_tokens_B": 10, "Q_score": 0.7, "mode": "diagnostic"}
+  ]
+}
