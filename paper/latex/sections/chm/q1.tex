@@ -57,26 +57,52 @@ A_i=\frac{1}{|\mathcal M_i|}\sum_{j\in\mathcal M_i}z_{ij},
 \bar\rho_j=\tanh(\bar z_j).
 \label{eq:q1_fisher_pool}
 \end{equation}
-指标方向取 $d_j=\operatorname{sgn}(\bar\rho_j)$，再令 $z^+_{ij}=d_jz_{ij}$。该步骤的含义仅是“将统计型指标与已知语义的模型评分锚点对齐”，并不能把锚点或其方向解释成客观质量真值。域间符号一致率及 leave-one-domain-out 方向稳定性同时保留为敏感性证据。
+完整 A1 上先取原始符号 $s_j=\operatorname{sgn}(\bar\rho_j)$。为避免把接近零、依赖单个领域的相关符号误当作可靠方向，主模型进一步进行 leave-one-domain-out（LOO）稳定性筛选：依次删除每个质量域并重新计算 pooled Spearman，记为 $\bar\rho_j^{(-d)}$，定义
+\begin{equation}
+\mathcal J^\star
+=
+\left\{
+j:
+\operatorname{sgn}\!\left(\bar\rho_j^{(-d)}\right)=s_j,\ 
+\forall d
+\right\}.
+\label{eq:q1_orientation_loo}
+\end{equation}
+对非锚点指标，
+\begin{equation}
+d_j=
+\begin{cases}
+s_j,&j\in\mathcal J^\star,\\
+0,&j\notin\mathcal J^\star,
+\end{cases}
+\qquad
+z^+_{ij}=d_jz_{ij}\quad(d_j\ne0).
+\label{eq:q1_orientation_freeze}
+\end{equation}
+这里 $d_j=0$ 表示“方向证据不足并从主质量代理中排除”，而不是把该指标数值置零参与平均。八个模型型语义锚点始终固定为正向。已有 A1 稳定性审查中，\texttt{rps\_lines\_numerical\_chars\_fraction} 的 pooled $\rho$ 约为 $8.03\times10^{-5}$，LOO 区间跨过 0；\texttt{rps\_doc\_frac\_chars\_top\_3gram} 的 pooled $\rho$ 约为 $-0.0181$，LOO 结果同样跨过 0，因此二者不进入主 $Q_A$。该步骤仅表示与语义锚点的稳定方向对齐，不能把锚点或其方向解释成客观质量真值。
 
 \subsubsection{综合代理的定义与边界}
 
-题目附件没有提供样本级“真实质量”标签，因此质量标量不能由监督学习唯一识别。本文采用最小附加假设的分组等权复合指标：RPS/Natural、DSIR、model-based 三个指标家族先在组内对可用项等权，再在三组之间等权。对记录 $i$，令
+题目附件没有提供样本级“真实质量”标签，因此质量标量不能由监督学习唯一识别。本文采用最小附加假设的分组等权复合指标：RPS/Natural、DSIR、model-based 三个指标家族先在组内对**通过 LOO 方向稳定性准入且当前记录非缺失**的指标等权，再在三组之间等权。对记录 $i$，令
 \begin{equation}
 G_{ig}
 =
-\frac{1}{|\mathcal J_{ig}|}
-\sum_{j\in\mathcal J_{ig}}z^+_{ij},
+\frac{1}{|\mathcal J^\star_{ig}|}
+\sum_{j\in\mathcal J^\star_{ig}}z^+_{ij},
 \qquad
 S_i=\frac{1}{3}\sum_{g\in\{\mathrm{RPS,DSIR,MODEL}\}}G_{ig},
 \label{eq:q1_family_score}
 \end{equation}
-其中 $\mathcal J_{ig}$ 是记录 $i$ 在家族 $g$ 中的非缺失指标集合。进一步用 A1 全体记录的均值和标准差定义 A 侧综合质量代理
+其中 $\mathcal J^\star_{ig}$ 是记录 $i$ 在家族 $g$ 中同时满足方向稳定和非缺失的指标集合。现有审查下保留 9 个 RPS、3 个 DSIR 和 8 个 model-based 指标，共 20 个；更严格的跨域一致率阈值会删除全部 DSIR，因此只保留为压力测试，不作为主规则。进一步用 A1 全体记录的均值和标准差定义 A 侧综合质量代理
 \begin{equation}
 Q_{A,i}=\frac{S_i-\mu_{S,A1}}{\sigma_{S,A1}}.
 \label{eq:q1_QA}
 \end{equation}
 式\eqref{eq:q1_family_score}--\eqref{eq:q1_QA}是透明的复合指标定义，而不是由附件识别出的唯一“真实质量函数”。分组等权的理由只是避免某个指标家族因字段数量更多而自动获得更大总权重，因此必须与 22 指标完全等权、列表 argmax 压缩和家族删除方案同时做敏感性检验。
+
+
+\paragraph{当前实现状态}
+主方向准入规则已在 \texttt{src/chm/q1\_quality\_analysis.py} 中切换为式\eqref{eq:q1_orientation_loo}。由于本次远端执行环境无法取得 Git LFS 中 A1--A3 的实体数据，下表及后续依赖 $Q_A$ 的既有数值仍需在完整数据环境中重跑后刷新；在刷新完成前，这些旧数值不作为新主规则下的冻结结果。
 
 域级主统计量采用 $Q_A$ 中位数；固定评分规则下的记录 bootstrap 给出条件区间。结果见表\ref{tab:q1_quality}。
 
