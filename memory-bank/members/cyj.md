@@ -6,9 +6,11 @@
 
 Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠排除隐藏文字影响而作废，提交 `58f4f0a` 已明确丢弃其文件内容。不得从 Git 历史恢复、cherry-pick、复用其中的模型、参数、数值、结论或输出。若后续独立论证出同名方法适用，必须依据可见题面、真实数据或独立可核验文献重新建立证据链。
 
-更新时间：2026-09-24（北京时间，B9/B10 外推证据审计）。角色 cyj，负责 Q2 与 Q3 理论；分支 `team/cyj-scaling`。Python 3.12.14 / Windows，环境见 `problem/cyj/environment.md`。
+更新时间：2026-09-24（北京时间，接口审查与状态降级）。角色 cyj，负责 Q2 与 Q3 理论；分支 `team/cyj-scaling`。Python 3.12.14 / Windows，环境见 `problem/cyj/environment.md`。
 
 ## 当前状态
+
+本轮按公共完整审查协议复核接口，结论 **NOT READY**。chm 当前推荐 `chm.q1.v1.2@a552593` 已撤回旧跨规模 eta，cyj 的 `q3_bundle` 仍固定 `chm.q1.v1@7c14a0c` 并暴露 eta 点估计/区间；旧 p/eta scenario 仅保留历史复现，不再推荐消费。B1 diagnostic、B7 半合成 diagnostic 和题面成本定义仍可在限定用途下运行；没有可识别的 B1/B7/A Q 与 Loss 桥接、完整 N-D-Q-p validated predictor 或总预测区间。37/37 软件测试通过不改变科学门槛。审查见 `problem/cyj/20260924-current-interface-review.md`；`interfaces/cyj/CONTRACT.md` v1.11 与 `Q3_API.md` 已标注降级，机器包/代码/输出哈希未改。下一步 cyj 另发兼容 chm v1.2 的版本，chm/zhh/集成人联合验收。
 
 2026-09-24 19:14 后接续：`predict_quality.py` 批量 JSON 入口和上轮 `2c5e712` 已补推并核对远端 SHA=`622d58a77c6eaf40da779d397de81c20819dcfd7`。随后合并最新 `origin/main@670d726`，生成 `b54310c67be84f1cac932021ebc7955e540f93c9`，读取新增 `REPOSITORY_REVIEW_PROTOCOL.md`；公共文件仅通过 main 合并进入，本人未直接编辑。最新工作见下段和新交接。
 
@@ -50,4 +52,4 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 4. chm：验收本文接口和样例并修复发布换行规范；zhh：正式确认 C7/桥接接口并传播 Loss–Benchmark 误差；集成人：验收后汇总公共记忆，cyj 不直接编辑公共状态。
 5. 本轮重跑全库校验仍因 A 附件四个 LFS 指针失败；`git lfs pull` 等待无进展后中止，B9/B10 输入已单独按清单核验。官方规则/当年模板符合性仍需团队确认。
 
-最新交接为 `memory-bank/handoffs/cyj/20260924-1936-b9-b10-extrapolation-audit.md`；审计本地提交 `b52a0d3` 已生成，但三次推送尝试均因 GitHub 连接失败，待补推并核验远端 SHA。已有 Draft [PR #3](https://github.com/chengzhixian/math-modeling-memory-bank-template/pull/3) 面向 main；本轮未改变 PR，分支备份不等于验收。公共状态交集成人更新。main 优秀论文目前仅阅读参考索引，未独立读原 PDF。
+最新交接为 `memory-bank/handoffs/cyj/20260924-1953-current-interface-review.md`。上轮待推提交已在本轮推送并核对远端 SHA=`157e340eb3310e5313ec49dd740947b701ff1841`；随后合并 `origin/main@af48570`，本轮审查提交的最终远端状态仍须收尾核验。已有 Draft [PR #3](https://github.com/chengzhixian/math-modeling-memory-bank-template/pull/3) 面向 main；分支备份不等于验收。公共状态交集成人更新。main 优秀论文目前仅阅读参考索引，未独立读原 PDF。

@@ -1,8 +1,10 @@
-# cyj 交付约定 v1.10（生产者草案）
+# cyj 交付约定 v1.11（生产者状态修订）
 
 角色：cyj 负责 Q2 标度律与 Q3 理论；chm/zhh 消费。当前 `ready_for_Q3=false`，未获联合验收或 main 集成。可调用接口、公式、字段、单位、成本与约束详见 [Q3_API.md](Q3_API.md)，此处只保留当前入口与证据索引。
 
-## 本版接口
+**2026-09-24 接口审查结论：** `cyj.q3.v1` 的 B1 `diagnostic` 仍可作旧版软件复现；其 p/eta `scenario` 固定 chm `q1.v1` 的历史跨规模接口，已与 chm 当前推荐的 `q1.v1.2` 科学合同不兼容。chm v1.2 明确撤回附件 A 对连续跨规模 eta 的识别，旧 bundle 中的 `eta_producer_estimate` 和条件区间只能作历史审计，不能用于正式 Q2/Q3，旧 scenario 输出不得作为当前推荐情景。B7 原生接口保持独立诊断。详细证据和升级门槛见 `problem/cyj/20260924-current-interface-review.md`。本次只修订使用状态，未更改旧代码、机器包或其 SHA；兼容 v1.2 须另发版本。
+
+## 旧版 API 与独立 B7 诊断入口
 
 - 新增独立 `cyj.b7_quality.v1`：`src/cyj/quality_scaling.py::QualityPredictor`，详见 [QUALITY_API.md](QUALITY_API.md)。已拟合去重 B7 原生 N-D-Q，返回梯度及 50 个同编号条件 Loss 样本；不接 p，不接 B1/Benchmark，不改变既有 B1/p API 的 Q 拒绝规则。参数文件 SHA256 `e676bfb06da81c02ad968591aa9ae09da5c7cd6b56def49d59a82c371465b025`。
 
@@ -24,6 +26,7 @@
 | B1 E/N/D 消融 | `outputs/cyj/ablation/b1_terms.json`；`experiments/cyj/20260924-interface-adoption-ablation.md` | 三删项×9 划分全部收敛未触边，三项均改善 B1 重构 |
 | B6–B8 条件趋势/重复坐标 | `outputs/cyj/diagnostics/b_quality_audit.json`；`experiments/cyj/20260924-b8-quality-audit.md` | B6 全部 360 行重复于 B7；B7/B8 224 个同坐标 Loss 全异；Q 端点方向反转 |
 | B7 原生 Q 候选/消融 | `outputs/cyj/quality/b7_quality_fit.json`；`experiments/cyj/20260924-b7-quality-results.md` | 三族×24 折均收敛未触边，选线性 Q；50/50 组 bootstrap 接受，仅半合成条件层 |
+| B9/B10 外推证据 | `outputs/cyj/diagnostics/b9_b10_extrapolation_audit.json`；`experiments/cyj/20260924-b9-b10-extrapolation-audit.md` | B10 128 行均与 B9 对应、均超出 B1 N 范围；Loss 为估算，非独立验证 |
 
 基线公式为 `E+A*N_B^(-alpha)+B*D_B^(-beta)`；N/D 单位均为十亿。拟合范围 N=[0.070542,11.965825]、D=[0.134,299.893]。五参数从 JSON 读取，不重复手抄；基线 SHA256 `9b0e381fbc0ea84bb37d63ccb273733f3a03a0c2a834e8ef52cdb75c45bc6ead`，输入版本 `cf297a4ad47e235acf5a9b6e890a5df5e05b07e5`。其他结果的完整输入/代码 SHA、数据哈希、环境、随机种子和命令见对应实验记录及 JSON。
 
@@ -33,4 +36,4 @@ B1 近乎精确重构的生成/预处理来源未明；tokenizer、评估语料�
 
 B8 calibrated 也暂不进入 B6/B7 共同质量拟合：90/90 固定 N,D 组的 Q 端点 Loss 上升，B6/B7 则分别 45/45 下降；原因未明，不反转 Q、不修改原始文件。B8 extrapolated 不参与拟合/独立验证；B6/B7 必须按 N,D,Q 去重（合并后仅 450 个坐标），不能互作独立验证。旧审计的 `fit_eligible_count=984` 仅按 calibrated 标签计数，不代表科学准入；当前以本版限制为准。
 
-B9/B10 外推讨论尚待完成。已有分组验证、bootstrap 和消融均不能绕过这些门槛。chm 可消费接口做联调和标记清楚的情景分析，正式 Q3 配置须待后续 validated predictor；zhh 必须传播独立的 Loss–Benchmark 桥接误差。机器可读使用策略在质量审计 JSON 的 `usage_policy`，B1/p 预测器 schema 和数值未变，新增独立 B7 接口后总测试为 34 项通过。
+B9/B10 已完成数据角色与重叠审计，真实外推有效性仍未验证。已有分组验证、bootstrap 和消融均不能绕过这些门槛。chm 可消费 B1/B7 diagnostic 做联调；旧 p/eta scenario 只用于历史复现，正式 Q3 配置须待后续 validated predictor；zhh 必须传播独立的 Loss–Benchmark 桥接误差。机器可读使用策略在质量审计 JSON 的 `usage_policy`，B1/p 预测器 schema 和数值未变；当前总测试 37 项通过，软件通过不代表科学门槛通过。
