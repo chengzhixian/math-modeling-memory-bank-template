@@ -637,8 +637,9 @@
     "A_Q_to_B_Q_bridge": "not_identified"
   },
   "input_version": "cebd51bd0116ef3194728cfbeed9569239e085db",
+  "code_hash_encoding": "SHA256 of UTF-8 source bytes with CRLF normalized to LF, matching repository eol=lf",
   "code_sha256": {
-    "src/cyj/diagnose_b_quality.py": "404e35b488d0145bc695f7ee03345e9bae91a290fde2909dc82c17090f26deda",
+    "src/cyj/diagnose_b_quality.py": "771bfcd6dac4b5516bbe9b7ce96a65d71c669a1ecc25a082040faf3273435d16",
     "src/cyj/scaling_provenance.py": "74e7ecec36ca8d85af8aea9291849323b37699292cebf1c7c097cb2da0086064",
     "src/cyj/audit_b_scaling_laws.py": "8fb3859344405af81664346ad80b156c6a459a30465d1a50d4e7a7d827d5880a"
   }

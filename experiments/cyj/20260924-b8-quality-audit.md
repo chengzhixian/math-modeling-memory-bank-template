@@ -6,7 +6,7 @@
 
 - 数据/清单输入提交 `cebd51bd0116ef3194728cfbeed9569239e085db`；main 已合并版本 `7d8081fbf50cd380904505759c116580356f102d`。
 - 三个原始 CSV 均通过 F_MANIFEST 的 bytes/SHA256 校验；完整身份及执行代码 SHA256 写入 `outputs/cyj/diagnostics/b_quality_audit.json`。本轮新脚本以代码内容哈希标识，不能把输入提交称为新脚本代码提交。
-- 输出 SHA256 `1d9576dc63bdc078b72f0dd530e8b568bed68ca3ad905c49543ee0d3c734684d`。
+- 输出 SHA256 `6a563849463d4c6d730d2b979b05691a4109d1b13140e7cdc076eb274653fa45`。JSON 显式使用 LF，代码哈希先规范 CRLF→LF，与仓库 `.gitattributes` 一致，避免 Windows 换行造成消费者校验失败。
 - Windows / bundled Python 3.12.14，无随机过程。以下 `$py` 为运行时路径变量。
 
 ```powershell

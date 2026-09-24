@@ -37,7 +37,7 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 ## 未验证项与下一步
 
-1. cyj：先用去重 B7 比较原生 Q_score 候选模型并组级留出。新审计确认 B6 360 行全部重复于 B7，合并只得 450 坐标；B7/B8 224 同坐标 Loss 全异；固定 N,D 时 B8 calibrated 的 90/90 组 Q 两端 Loss 上升，B6/B7 各 45/45 下降。B8 calibrated 暂隔离，extrapolated 不拟合/独立验证；不能直接反转 Q。B8 最小 Loss=0.5 堆积 362 行，是否人为截断尚未知。详见 `experiments/cyj/20260924-b8-quality-audit.md`，JSON SHA256 `1d9576dc63bdc078b72f0dd530e8b568bed68ca3ad905c49543ee0d3c734684d`。当前未交付完整 N-D-Q-p validated predictor。
+1. cyj：先用去重 B7 比较原生 Q_score 候选模型并组级留出。新审计确认 B6 360 行全部重复于 B7，合并只得 450 坐标；B7/B8 224 同坐标 Loss 全异；固定 N,D 时 B8 calibrated 的 90/90 组 Q 两端 Loss 上升，B6/B7 各 45/45 下降。B8 calibrated 暂隔离，extrapolated 不拟合/独立验证；不能直接反转 Q。B8 最小 Loss=0.5 堆积 362 行，是否人为截断尚未知。详见 `experiments/cyj/20260924-b8-quality-audit.md`，JSON SHA256 `6a563849463d4c6d730d2b979b05691a4109d1b13140e7cdc076eb274653fa45`（输出与代码哈希均规范为 LF）。当前未交付完整 N-D-Q-p validated predictor。
 2. cyj：继续 B1 逐行 Loss 来源和 tokenizer/评估语料/对数底，B4/B5 可比性及 B9/B10 外推。近乎精确重构、bootstrap 窄区间和本轮消融不能替代这些证据。
 3. chm+cyj：按已经采用的定义联调；主 anchor 与 lambda 未识别时保留多 target 情景，不将 Q_z 等同 Q_score 或将 13 域原 Loss 平均。lambda 不默认 1，eta 不充当跨 Loss 换算。
 4. chm：验收本文接口和样例并修复发布换行规范；zhh：正式确认 C7/桥接接口并传播 Loss–Benchmark 误差；集成人：验收后汇总公共记忆，cyj 不直接编辑公共状态。

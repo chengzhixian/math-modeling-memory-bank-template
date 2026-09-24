@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import itertools
 import json
 import math
@@ -139,10 +140,11 @@ def main():
     version = validate_input_version(args.input_version, DEFAULT_MANIFEST, DEFAULT_SOURCE_MANIFEST)
     result = diagnose()
     result["input_version"] = version
-    result["code_sha256"] = {p: sha256(ROOT / p) for p in (
+    result["code_hash_encoding"] = "SHA256 of UTF-8 source bytes with CRLF normalized to LF, matching repository eol=lf"
+    result["code_sha256"] = {p: hashlib.sha256((ROOT / p).read_bytes().replace(b"\r\n", b"\n")).hexdigest() for p in (
         "src/cyj/diagnose_b_quality.py", "src/cyj/scaling_provenance.py", "src/cyj/audit_b_scaling_laws.py")}
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(result, indent=2, ensure_ascii=False, allow_nan=False) + "\n", encoding="utf-8")
+    args.output.write_text(json.dumps(result, indent=2, ensure_ascii=False, allow_nan=False) + "\n", encoding="utf-8", newline="\n")
     print(json.dumps({"output": str(args.output.relative_to(ROOT)), "sha256": sha256(args.output),
                       "Q_trends": {k: v["trends"]["Q_score"] for k, v in result["datasets"].items()},
                       "overlap": {k: {f: v[f] for f in ("shared_coordinates", "identical_loss", "different_loss")}
