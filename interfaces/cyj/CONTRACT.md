@@ -1,6 +1,10 @@
-# cyj 交付约定 v1.11（生产者状态修订）
+# cyj 交付约定 v1.12（chm v2 可调用交付）
 
 角色：cyj 负责 Q2 标度律与 Q3 理论；chm/zhh 消费。当前 `ready_for_Q3=false`，未获联合验收或 main 集成。可调用接口、公式、字段、单位、成本与约束详见 [Q3_API.md](Q3_API.md)，此处只保留当前入口与证据索引。
+
+**当前 chm 入口：**[CHM_API_V2.md](CHM_API_V2.md)，`src/cyj/chm_adapter_v2.py::CHMAdapter(mode="diagnostic")`。`cyj.chm.v2` 提供 B7 原生 NDQ `value_grad`、JSON 批量求值、三成本/预算残差与独立 Q1 v1.2 13-target 配比向量，p_policy=sensitivity_only，无旧 eta/B Loss 加法。固定 chm `a552593` 与 B7 fit，44 项测试通过。科学状态仍 diagnostic_only；兼容迁移已交付，formal 验证尚未完成。chm 求解器须读取 v2 的 B7 N/D/Q 边界，不能沿用 B1 D 下界。
+
+旧 `cyj.q3.v1`：`deprecated=true`，`historical_only=true`，`formal_use_allowed=false`；当前推荐机器入口为 `outputs/cyj/interfaces/chm_v2_manifest.json`，不消费旧 `q3_bundle.json`。
 
 **2026-09-24 接口审查结论：** `cyj.q3.v1` 的 B1 `diagnostic` 仍可作旧版软件复现；其 p/eta `scenario` 固定 chm `q1.v1` 的历史跨规模接口，已与 chm 当前推荐的 `q1.v1.2` 科学合同不兼容。chm v1.2 明确撤回附件 A 对连续跨规模 eta 的识别，旧 bundle 中的 `eta_producer_estimate` 和条件区间只能作历史审计，不能用于正式 Q2/Q3，旧 scenario 输出不得作为当前推荐情景。B7 原生接口保持独立诊断。详细证据和升级门槛见 `problem/cyj/20260924-current-interface-review.md`。本次只修订使用状态，未更改旧代码、机器包或其 SHA；兼容 v1.2 须另发版本。
 

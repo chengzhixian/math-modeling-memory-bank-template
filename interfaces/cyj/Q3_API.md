@@ -1,5 +1,9 @@
 # cyj.q3.v1：给 chm 的预测、成本及约束定义
 
+当前 chm 可调用交付已迁到 [CHM_API_V2.md](CHM_API_V2.md)（`cyj.chm.v2`，Q1 v1.2 + B7 NDQ + 独立 p sensitivity）。本页继续作为旧 B1/p v1 的历史复现说明。
+
+旧 `cyj.q3.v1` 状态：`deprecated=true`，`historical_only=true`，`formal_use_allowed=false`。其旧 bundle 和 eta 数值仅供审计复现，当前推荐路径不得读取。
+
 > 2026-09-24 审查更新：本页保留旧 v1 软件与历史情景的复现说明。chm 当前推荐 `q1.v1.2` 已删除 eta 跨规模传递，因此本页第 1/3/5 节关于旧 chm v1 p/eta scenario 的描述**不再是当前推荐消费接口**；旧 bundle 的 eta 估计不具备正式可识别性。仅 B1 diagnostic 和题面成本定义仍可在各自限制下使用。审查记录：`problem/cyj/20260924-current-interface-review.md`；后续兼容实现须另发版本。
 
 状态：**可调用的诊断/情景接口；ready_for_Q3=false**。生产者 cyj；消费者 chm/zhh。采用 `chm.q1.v1`，固定 `integration/chm-q1-clean-20260923@7c14a0c894072048d09f04bd03653be1301f7257`。本文件逐项回应其 `CYJ_REQUIRED_INTERFACE.md`，字段缺证据时保留 null，不把接口可运行称作科学验证完成。

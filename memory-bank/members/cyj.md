@@ -10,6 +10,10 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 ## 当前状态
 
+2026-09-24 21:31：按新任务清单补 v2 七个上游 blob 的精确 SHA 校验、机器字段及旧 eta 拒绝；CYJ 测试 44/44。联合 `L(N,D,Q,p)` 审查结论仍为 `not_identified`，记录 `problem/cyj/20260924-q2-q3-identifiability-review.md`。B7 45 个固定 `(N,D)` 组内质量斜率诊断已运行，输出 `outputs/cyj/diagnostics/b7_quality_interaction.json` SHA256 `7977a3ed0614e896e82c316d770b9bb50a3195e4f5e790541ebee6005dc99f50`；它只支持 L1 描述，不能将交互候选的同源验证当无偏最终测试。交接 `memory-bank/handoffs/cyj/20260924-2131-identifiability-b7-diagnostic.md`。远端 fetch 两次失败，当前尚未确认本轮远程备份。
+
+2026-09-24 20:14 接续：交付 **cyj.chm.v2**，入口 `interfaces/cyj/CHM_API_V2.md` / `src/cyj/chm_adapter_v2.py`，固定 chm v1.2 `a552593` 与原 B7 fit。提供 chm `value_grad`、批量 JSON、NDQ 样本、成本/预算与独立 13-target p sensitivity，无旧 eta；manifest SHA256 `87a41a93af62ed4074569abc37a371f5c722c2bf0b9aaa7fc5896b63944537f8`，七个上游 Git blob 精确校验。44/44 测试通过；新版已完成工程迁移但仍 diagnostic_only。chm 需将求解器/active_set 改用 model.bounds（D_min=10），不能沿用 B1 .134；本机无 SciPy，未运行其优化。交接 `memory-bank/handoffs/cyj/20260924-2014-chm-v2-delivery.md`，最终远端 SHA 以收尾核验为准。
+
 本轮按公共完整审查协议复核接口，结论 **NOT READY**。chm 当前推荐 `chm.q1.v1.2@a552593` 已撤回旧跨规模 eta，cyj 的 `q3_bundle` 仍固定 `chm.q1.v1@7c14a0c` 并暴露 eta 点估计/区间；旧 p/eta scenario 仅保留历史复现，不再推荐消费。B1 diagnostic、B7 半合成 diagnostic 和题面成本定义仍可在限定用途下运行；没有可识别的 B1/B7/A Q 与 Loss 桥接、完整 N-D-Q-p validated predictor 或总预测区间。37/37 软件测试通过不改变科学门槛。审查见 `problem/cyj/20260924-current-interface-review.md`；`interfaces/cyj/CONTRACT.md` v1.11 与 `Q3_API.md` 已标注降级，机器包/代码/输出哈希未改。下一步 cyj 另发兼容 chm v1.2 的版本，chm/zhh/集成人联合验收。
 
 2026-09-24 19:14 后接续：`predict_quality.py` 批量 JSON 入口和上轮 `2c5e712` 已补推并核对远端 SHA=`622d58a77c6eaf40da779d397de81c20819dcfd7`。随后合并最新 `origin/main@670d726`，生成 `b54310c67be84f1cac932021ebc7955e540f93c9`，读取新增 `REPOSITORY_REVIEW_PROTOCOL.md`；公共文件仅通过 main 合并进入，本人未直接编辑。最新工作见下段和新交接。

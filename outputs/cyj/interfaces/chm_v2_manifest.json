@@ -1,0 +1,123 @@
+{
+  "schema_version": "cyj.chm.v2",
+  "status": "diagnostic_only",
+  "ready_for_Q3": false,
+  "quality_policy": {
+    "coordinate": "B_native_Q_score",
+    "performance_status": "diagnostic",
+    "joint_NDQ_status": "diagnostic",
+    "loss_coordinate_id": "attachment_B7_native_val_loss",
+    "A_Q_mapping_status": "unidentified"
+  },
+  "p_policy": {
+    "mode": "sensitivity_only",
+    "unique_p_claim_allowed": false,
+    "target_panel": [
+      "arxiv",
+      "freelaw",
+      "pubmed_central",
+      "wikipedia_en",
+      "dm_mathematics",
+      "github",
+      "stackexchange",
+      "gutenberg_pg_19",
+      "pile_cc",
+      "ubuntu_irc",
+      "hackernews",
+      "pubmed_abstracts",
+      "uspto_backgrounds"
+    ],
+    "coordinate": "A4_A5_1M_target_cross_entropy_contrast",
+    "cross_scale_transfer": "not_identified_from_attachment_A",
+    "B_loss_addition_allowed": false
+  },
+  "bounds": {
+    "N_params_B": [
+      0.07,
+      11.97
+    ],
+    "D_tokens_B": [
+      10.0,
+      600.0
+    ],
+    "Q_score": [
+      0.1,
+      1.0
+    ]
+  },
+  "units": {
+    "N_params_B": "1e9 parameters",
+    "D_tokens_B": "1e9 tokens",
+    "cost": "FLOPs"
+  },
+  "context_tokens": [
+    2048,
+    8192,
+    131072
+  ],
+  "domains": [
+    "arxiv",
+    "freelaw",
+    "nih_exporter",
+    "pubmed_central",
+    "wikipedia_en",
+    "dm_mathematics",
+    "github",
+    "philpapers",
+    "stackexchange",
+    "enron_emails",
+    "gutenberg_pg_19",
+    "pile_cc",
+    "ubuntu_irc",
+    "europarl",
+    "hackernews",
+    "pubmed_abstracts",
+    "uspto_backgrounds"
+  ],
+  "reference_p": {
+    "arxiv": 0.11302252583269279,
+    "freelaw": 0.0968248321520278,
+    "nih_exporter": 0.00588968021709595,
+    "pubmed_central": 0.11375419105058357,
+    "wikipedia_en": 0.07507775607983627,
+    "dm_mathematics": 0.0254628540970504,
+    "github": 0.11070066007050916,
+    "philpapers": 0.005487697351193036,
+    "stackexchange": 0.09943242344413017,
+    "enron_emails": 0.002211033043406226,
+    "gutenberg_pg_19": 0.04691494424753537,
+    "pile_cc": 0.11948759779188561,
+    "ubuntu_irc": 0.019599998284005892,
+    "europarl": 0.012737064754031531,
+    "hackernews": 0.011650822378108678,
+    "pubmed_abstracts": 0.06618116611257162,
+    "uspto_backgrounds": 0.07556475309333588
+  },
+  "B7_fit_sha256": "e676bfb06da81c02ad968591aa9ae09da5c7cd6b56def49d59a82c371465b025",
+  "chm_commit": "a5525935b37f873235d2f650e4810a787b9a8788",
+  "chm_schema": "chm.q1.v1.2",
+  "chm_manifest_sha256": "5885317d072739b02cdbb434fc730dde07510eb284dc857e35863adc877e914d",
+  "chm_consumed_files_sha256": {
+    "interfaces/chm/q1_interface_v1_2.json": "5885317d072739b02cdbb434fc730dde07510eb284dc857e35863adc877e914d",
+    "src/chm/q1_interface.py": "73f4ea5f7eaa33202634e334af6da7ed6deb90a5c1aa68dcc73943acd35cfc65",
+    "outputs/chm/domain_quality.csv": "458e42669bab460f5cc446c873e0e1275b9eb9b4304675363a4dc604a08197b7",
+    "outputs/chm/domain_mapping.csv": "960ff8094339473b0fd72c774774dbba3cae438f3fcb5b0fb4fdc8bf9e20006a",
+    "outputs/chm/local_recheck_v1/mixture_effect_ridge_v0.csv": "39e7661d1ec2b4c552715ff39d11ea32416afa3cd4013436d9f6351288a194fd",
+    "outputs/chm/local_recheck_v1/mixture_reference_v0.csv": "ee3e623419982d5cce284509d014954ca436e95445ff444c7c870bed42beafe8",
+    "outputs/chm/local_recheck_v1/q1_regmix_ridge_domainwise_metrics.csv": "2d22d5b98dfe27c643b2f8ca3a29834b68767c08e0dc91fcaa06f2efcb694b20"
+  },
+  "formal_blockers": [
+    "B7 semi-synthetic and model-selection validation incomplete",
+    "total prediction uncertainty unavailable",
+    "team acceptance pending"
+  ],
+  "solver_note": "Use these B7 bounds; CHM legacy solve_generic hardcodes B1 D_min=0.134 and is not directly compatible.",
+  "files_sha256_utf8_lf": {
+    "src/cyj/chm_adapter_v2.py": "5c3ed4909ed9c87d3b8d5b3ddd0dd634a6f145fe9b6cd537fc6c2a545b284895",
+    "src/cyj/build_chm_release_v2.py": "c0774da073431909c62b08874eeb9fc97fe730fe875104584912c444646d43ce",
+    "src/cyj/quality_scaling.py": "173c129df59dc7c3fb685d1618251b488b876fd958964d44104e7cd2f8f70393",
+    "src/cyj/q3_costs.py": "7d64c6d1870bc907ebe91f85334d343140d69cb1593a2f7cbb67a4325afddf88",
+    "outputs/cyj/interfaces/chm_v2_request.json": "e97788d1de2df48199b3910abee20159d204ce039c6a79b4d9c8de6a70348b71",
+    "outputs/cyj/interfaces/chm_v2_expected.json": "80f38e44a8aa087857cbeaa5253b32b48ed57831ba861127504dfd91535fd9c3"
+  }
+}

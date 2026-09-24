@@ -1,5 +1,7 @@
 # cyj.b7_quality.v1：B7 原生质量诊断接口
 
+chm 需要 `value_grad`、成本/预算检查与 Q1 v1.2 配比向量时，使用 [CHM_API_V2.md](CHM_API_V2.md) 的 `cyj.chm.v2` 适配器。本页 B7 模型文件、参数与 SHA 保持原发布身份。
+
 生产者 cyj；消费者 chm/zhh。状态 draft，已完成本轮组级候选验证，但未经团队验收或真实跨来源验证；`ready_for_Q3=false`、`ready_for_Q4=false`。本接口与 `cyj.q3.v1` 的 B1/p 接口并列，**不是替换 B1 Loss 的新版本**。
 
 ## 调用及验收
