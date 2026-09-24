@@ -30,17 +30,27 @@ DEFAULT_OUTPUT = ROOT / "outputs/cyj/diagnostics/b2_b3_shapes.json"
 def describe_curve(rows: list[dict[str, str]]) -> dict[str, float | int | str]:
     if len(rows) < 2:
         raise ValueError("curve must have at least two points")
-    step_field = "steps" if "steps" in rows[0] else "step"
-    ordered = sorted(rows, key=lambda row: float(row[step_field]))
+    is_b2 = "steps" in rows[0]
+    step_field = "steps" if is_b2 else "step"
+    ordered = sorted(
+        rows,
+        key=lambda row: float(row[step_field] if is_b2 else row["D_tokens_B"]),
+    )
     n_values = {float(row["N_params_B"]) for row in ordered}
     if len(n_values) != 1:
         raise ValueError("curve mixes model sizes")
     d_values = [float(row["D_tokens_B"]) for row in ordered]
     steps = [float(row[step_field]) for row in ordered]
     losses = [float(row["val_loss"]) for row in ordered]
-    if any(right <= left for left, right in zip(steps, steps[1:])):
-        raise ValueError("checkpoint step must be strictly increasing")
-    if any(right < left for left, right in zip(d_values, d_values[1:])):
+    if any(
+        right < left or (is_b2 and right == left)
+        for left, right in zip(steps, steps[1:])
+    ):
+        raise ValueError("checkpoint step order is invalid")
+    if any(
+        right < left or (not is_b2 and right == left)
+        for left, right in zip(d_values, d_values[1:])
+    ):
         raise ValueError("D must be nondecreasing within a trajectory")
     increments = [right - left for left, right in zip(losses, losses[1:])]
     return {
@@ -51,6 +61,10 @@ def describe_curve(rows: list[dict[str, str]]) -> dict[str, float | int | str]:
         "distinct_D_values": len(set(d_values)),
         "adjacent_equal_D_pairs": sum(
             right == left for left, right in zip(d_values, d_values[1:])
+        ),
+        "distinct_step_values": len(set(steps)),
+        "adjacent_equal_step_pairs": sum(
+            right == left for left, right in zip(steps, steps[1:])
         ),
         "val_loss_first": losses[0],
         "val_loss_last": losses[-1],
