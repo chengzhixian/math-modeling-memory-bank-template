@@ -50,4 +50,4 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 4. chm：验收本文接口和样例并修复发布换行规范；zhh：正式确认 C7/桥接接口并传播 Loss–Benchmark 误差；集成人：验收后汇总公共记忆，cyj 不直接编辑公共状态。
 5. 本轮重跑全库校验仍因 A 附件四个 LFS 指针失败；`git lfs pull` 等待无进展后中止，B9/B10 输入已单独按清单核验。官方规则/当年模板符合性仍需团队确认。
 
-最新交接为 `memory-bank/handoffs/cyj/20260924-1936-b9-b10-extrapolation-audit.md`；本轮最终远端 SHA 以收尾 Git 核验为准。已有 Draft [PR #3](https://github.com/chengzhixian/math-modeling-memory-bank-template/pull/3) 面向 main；本轮未改变 PR，分支备份不等于验收。公共状态交集成人更新。main 优秀论文目前仅阅读参考索引，未独立读原 PDF。
+最新交接为 `memory-bank/handoffs/cyj/20260924-1936-b9-b10-extrapolation-audit.md`；审计本地提交 `b52a0d3` 已生成，但三次推送尝试均因 GitHub 连接失败，待补推并核验远端 SHA。已有 Draft [PR #3](https://github.com/chengzhixian/math-modeling-memory-bank-template/pull/3) 面向 main；本轮未改变 PR，分支备份不等于验收。公共状态交集成人更新。main 优秀论文目前仅阅读参考索引，未独立读原 PDF。

@@ -2,6 +2,8 @@
 
 时间：2026-09-24 19:36 北京时间。状态：审计已运行，Q2 完整验证仍进行中；分支 `team/cyj-scaling`，工作起点 `622d58a77c6eaf40da779d397de81c20819dcfd7`，先合并 `origin/main@670d726` 至 `b54310c67be84f1cac932021ebc7955e540f93c9`。先前两次 cyj 提交已推送并用 `ls-remote` 核对到 `622d58a`；本交接所在提交及远端 SHA 以最终 Git 核验为准。
 
+远端状态补记：审计本地提交 `b52a0d3` 已创建；第一次推送报 github.com:443 无法连接、第二次报 connection reset、第三次 HTTP/1.1 重试仍无法连接。此时**尚未完成远端备份**，下一次网络可用时先推送并用 `ls-remote` 核验，不能把本地 commit 当作上传成功。
+
 ## 本次变更与输入版本
 
 - 新增 `src/cyj/audit_large_extrapolation.py`、`outputs/cyj/diagnostics/b9_b10_extrapolation_audit.json`、`experiments/cyj/20260924-b9-b10-extrapolation-audit.md`；更新本人记忆。未编辑其他成员目录或公共六文件，公共规则仅经 main merge 进入。
