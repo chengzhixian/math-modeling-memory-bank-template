@@ -1,3 +1,14 @@
+"""HISTORICAL DIAGNOSTIC ONLY — superseded for primary Q1 by chm.q1.v1.2.
+
+This script reproduces the earlier post-validation eta calibration for audit.
+Its outputs are NOT part of the current Q1 producer interface and MUST NOT be
+used as an identified N/D-dependent mixture scale law. Attachment A has no
+mixture-experiment D field, only three observed model-size groups, and the 1B
+mixture support differs from 1M/60M. See:
+problem/chm/20260924_q1_rigorous_restructure.md
+interfaces/chm/CONTRACT.md
+"""
+
 from pathlib import Path
 import argparse
 import json
