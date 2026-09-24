@@ -1,6 +1,6 @@
 """Versioned, read-only Q1 producer interface.
 
-v1.2 deliberately exposes only quantities identifiable from Attachment A:
+v1.3 deliberately exposes only quantities identifiable from Attachment A:
 A-side composite quality proxies, the 17-domain reference composition,
 13 target-specific 1M Ridge contrasts, and held-out ranking evidence.
 
@@ -16,8 +16,8 @@ import json
 import math
 
 
-VERSION = "chm.q1.v1.2"
-MANIFEST = Path("interfaces/chm/q1_interface_v1_2.json")
+VERSION = "chm.q1.v1.3"
+MANIFEST = Path("interfaces/chm/q1_interface_v1_3.json")
 STATUS = "producer_validated_A_side_ready_scale_transfer_removed_B_bridge_unidentified"
 FILES = {
     "quality": "outputs/chm/domain_quality.csv",
@@ -63,12 +63,11 @@ def build_manifest(root):
         "mixture_effect_coordinate": "A4_A5_1M_target_cross_entropy_contrast",
         "scale_transfer_status": "not_identified_from_attachment_A",
         "compatibility": {
-            "predecessor": "chm.q1.v1.1",
-            "scientific_values_changed": False,
+            "predecessor": "chm.q1.v1.2",
+            "scientific_values_changed": True,
             "change": (
-                "remove empirical eta-based scale transfer from primary producer "
-                "interface; retain 1M centered target-specific mixture effects and "
-                "held-out ranking evidence"
+                "recompute A-side Q from all 22 signals with global Spearman signs; "
+                "retain existing 1M mixture contrast and ranking interface"
             ),
         },
     }

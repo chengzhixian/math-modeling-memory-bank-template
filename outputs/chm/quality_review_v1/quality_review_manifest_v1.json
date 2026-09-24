@@ -1,7 +1,8 @@
 {
   "seed": 20260923,
-  "status": "review_sensitivity_not_primary",
+  "status": "review_sensitivity_against_primary_global_all22",
   "primary_quality_definition_unchanged": true,
+  "primary_orientation_policy": "global_spearman_sign_for_14_plus_semantic_positive_for_8",
   "orientation_sensitivity": {
     "stable_loo": "full pooled sign unchanged after leaving out each of 7 A1 domains",
     "stable_consensus_075": "stable_loo and sign_agreement >= 0.75",
@@ -42,8 +43,8 @@
       "rps_lines_ending_with_terminal_punctution_mark"
     ],
     "loo_standardization": {
-      "mean": -0.13706020724012463,
-      "std": 0.7310703313585285,
+      "mean": -0.12925932617084454,
+      "std": 0.720381681832208,
       "included_metrics": [
         "ad_en",
         "dsir_books",
@@ -106,13 +107,13 @@
     "simplex": "w_rps+w_dsir+w_model=1; zero weights allowed for stress testing"
   },
   "domain_balanced_standardization": {
-    "mean": 0.38052826107445425,
-    "std": 1.0535804123825663,
+    "mean": 0.4088934992765861,
+    "std": 1.039736623659713,
     "definition": "equal total weight per A1 domain"
   },
   "primary_record_weighted_standardization": {
-    "Q_raw_mean": -0.1190754449720478,
-    "Q_raw_std": 0.712275342745924
+    "Q_raw_mean": -0.08817485436104841,
+    "Q_raw_std": 0.689942114046033
   },
   "qurater_component_standardization": {
     "qurater_0": {
@@ -132,5 +133,5 @@
       "scale": 3.107089453125
     }
   },
-  "warning": "Sensitivity outputs do not replace the primary Q until reviewed and frozen."
+  "warning": "All 22 signals remain in the primary global-Spearman score; stable_loo, stable_consensus_075, family-weight grids, domain-balanced scaling, and Qurater component variants remain sensitivity/stress tests."
 }

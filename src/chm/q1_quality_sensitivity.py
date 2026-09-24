@@ -239,7 +239,11 @@ def main():
     z1 = qa.apply_robust_z(a1, params)
     raw_orientation = qa.domain_anchor_correlations(z1)
     stability = orientation_stability(z1, raw_orientation)
-    primary_orientation = qa.freeze_primary_orientation(raw_orientation, stability)
+    stability = stability.merge(raw_orientation[["metric", "sign_agreement"]], on="metric", validate="one_to_one")
+    stability["stable_consensus_075"] = stability["stable_loo"] & (
+        stability["sign_agreement"].fillna(1.0) >= 0.75
+    )
+    primary_orientation = qa.global_anchor_correlations(z1)
     oz1 = qa.orient(z1, primary_orientation)
     s1, qparams = qa.add_quality_scores(oz1)
 
@@ -291,7 +295,7 @@ def main():
         raise ValueError("Qurater component rows do not align with A1.")
     z1_q = z1.copy()
     z1_q["qurater"] = qcomp_mean.to_numpy(float)
-    orientation_q = qa.domain_anchor_correlations(z1_q)
+    orientation_q = qa.global_anchor_correlations(z1_q)
     sq, _ = qa.add_quality_scores(qa.orient(z1_q, orientation_q))
     qmed = pd.concat([
         domain_medians(s1, "Q_z"),
@@ -308,8 +312,8 @@ def main():
 
     manifest = {
         "seed": SEED,
-        "status": "review_sensitivity_against_primary_stable_loo",
-        "primary_quality_definition_unchanged": False,
+        "status": "review_sensitivity_against_primary_global_all22",
+        "primary_quality_definition_unchanged": True,
         "primary_orientation_policy": qa.PRIMARY_ORIENTATION_POLICY,
         "orientation_sensitivity": {
             "stable_loo": "full pooled sign unchanged after leaving out each of 7 A1 domains",
@@ -327,8 +331,8 @@ def main():
         "primary_record_weighted_standardization": qparams,
         "qurater_component_standardization": qcomp_params,
         "warning": (
-            "stable_loo orientation is now the primary direction-admission rule; "
-            "stable_consensus_075, family-weight grids, domain-balanced scaling, "
+            "All 22 signals remain in the primary global-Spearman score; "
+            "stable_loo, stable_consensus_075, family-weight grids, domain-balanced scaling, "
             "and Qurater component variants remain sensitivity/stress tests."
         ),
     }

@@ -356,3 +356,7 @@ cyj 远端 ad1d312 已将旧 p/eta 情景降级，正式 ready_for_Q3=false；B7
 已同步方法设计、Q1 LaTeX 方法段和审查清单；新增回归测试覆盖“不稳定指标应被排除而非乘零”。当前远端执行环境只能读取 Git LFS pointer，无法取得 A1--A3 实体，因此 canonical `domain_quality.csv`、bootstrap 区间、扩展集复核和图表尚未按新规则全量重跑。旧数值只能作为 sign-only 历史结果，不得与新主规则混写。方向 bootstrap CI 仍是 R05 未完成增强项，不能声称已经实现。
 
 历史判断：R05 原待办明确要求先做“剔除不稳定指标的 Q 敏感性版”，但没有单列“敏感性验证通过后回写主模型”的验收项；`quality_review_manifest_v1.json` 因而明确写 `review_sensitivity_not_primary` / `primary_quality_definition_unchanged=true`。该缺口现已补成显式两阶段闭环：主规则代码先升级；随后必须在有 LFS 实体的本地环境全量重跑、刷新 canonical 输出和论文数值后再冻结。
+
+## 2026-09-24 Q1 22 信号主模型修正
+
+根据用户提供的讨论稿复核后，撤销上述 stable-LOO 主准入设计。A1 全量 Spearman 符号用于 14 个统计字段定向，8 个模型字段固定正向，全部 22 项进入主 Q。七域和 LOO 只作诊断；本机 A1--A3 实体全量重跑并刷新 canonical 输出、图表、第一问正文及 `chm.q1.v1.3` 接口。旧 20 项口径和旧评分数值仅为历史，不得继续作为当前 Q1 结论。复现和风险见 `memory-bank/handoffs/chm/20260924-q1-all22-global-orientation.md`。

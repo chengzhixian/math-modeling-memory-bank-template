@@ -1,16 +1,16 @@
 # chm → cyj Q1 生产者接口 v2.0
 
 日期：2026-09-24  
-当前推荐机器版本：\`chm.q1.v1.2\`  
+当前推荐机器版本：\`chm.q1.v1.3\`
 生产者：chm  
 消费者：cyj（Q2/Q3）、zhh（需要 Q1 证据时）  
 维护分支：\`integration/chm-q1-clean-20260923\`
 
-状态：**配比相对效应与排序验证仍可消费；A 侧质量代理的方法代码已升级为 stable-LOO 方向准入，但 canonical `domain_quality.csv` 尚待完整 Git LFS 环境重跑，因此新 Q_A 暂未重新冻结。Q1 不再提供由附件 A 拟合的连续跨规模幅度参数。**
+状态：**A1--A3 全量实体数据已按 22 信号、全局 Spearman 符号重跑并更新 canonical `domain_quality.csv`；配比相对效应与排序验证继续可消费。Q1 不提供由附件 A 拟合的连续跨规模幅度参数。**
 
-> 2026-09-24 临时冻结说明：在 stable-LOO 全量重跑、刷新 `domain_quality.csv` 并重建接口哈希之前，下游不得把当前 `quality()` 返回的旧 sign-only Q_A 当作新主规则结果；配比 Ridge/排序接口不受本次质量方向修正影响。
+> 版本提示：v1.2 的质量数值为旧口径，已由 v1.3 替代。消费者须显式记录新接口 SHA，并重新检查依赖 $Q_A$ 的结论；配比 Ridge/排序证据未因本轮质量修订而改变。
 
-当前机器入口：\`interfaces/chm/q1_interface_v1_2.json\`。旧 v1/v1.1 保留审计，新消费默认使用 v1.2。
+当前机器入口：\`interfaces/chm/q1_interface_v1_3.json\`。旧版本保留审计，新消费默认使用 v1.3。
 
 ## 1. Q1 正式科学边界
 

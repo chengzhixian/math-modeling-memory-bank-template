@@ -1,4 +1,4 @@
-> **版本说明（2026-09-24）：** 本文件最初是质量侧方法设计 v0。经方向稳定性复核，主模型代码已将“pooled Spearman 只看正负号”升级为 **leave-one-domain-out (LOO) 方向稳定准入**：非锚点指标只有在删除任意一个 A1 质量域后 pooled 方向均不翻转，才进入主 $Q_A$；否则记为方向不确定并从主综合质量中排除。`stable_consensus_075` 等更激进筛选仍只作压力测试。当前远端环境无法取得 Git LFS 的 A1--A3 实体文件，因此新规则的 canonical 数值表、区间和论文结果表必须在完整 LFS 重跑后刷新，旧数值不得与新规则混写。
+> **版本说明：** 主模型在 A1 全量记录上以 Spearman 符号定向 14 个统计指标，8 个模型指标固定正向，全部 22 个信号进入综合评分。七域相关和 LOO 只用于诊断；本地 A1--A3 LFS 实体已全量重跑，结果见 `outputs/chm/quality_analysis_manifest_v0.json`。
 
 # Q1 质量评分与冲突分析方法设计 v0
 
@@ -65,50 +65,11 @@
 - 为避免极端值主导聚合，将稳健 z 截断到 [-5,5]；
 - A2/A3 必须复用 A1 的变换、median/MAD 和方向，不能在扩展集重新拟合口径。
 
-## 4. 22 指标方向统一：锚定而非拍脑袋指定
+## 4. 22 指标的主方向与独立诊断
 
-8 个模型评分经过上述压缩后均定义为“越大越好”，构成方向锚点：
+八个模型型字段经本文定义的压缩后固定正向。其标准化值的逐记录均值 $A_i$ 是语义方向参考，并非附件提供的真实质量标签。其余 14 个统计字段在 A1 全部有效记录上计算 $\rho_j=\rho_S(z_j,A)$，以 $d_j=+1$（$\rho_j\ge0$）或 $-1$（$\rho_j<0$）定向，得到 $z^+_{ij}=d_jz_{ij}$。Spearman 只决定单调方向，不作为重要性权重或因果效应。主模型全部 22 个字段的方向只能为 $-1,+1$；弱相关字段继续保留。
 
-\[
-A_i=\frac{1}{8}\sum_{jin\mathcal M} z_{ij}.
-\]
-
-对剩余 14 个标量指标，不预先武断规定高低好坏，而是在 A1 的 7 个域内分别计算
-
-\[
-\rho_{jd}=\operatorname{Spearman}(x_j,Amid d).
-\]
-
-再做 Fisher-z 加权汇总，权重使用 $(n_d-3)$，得到 pooled correlation $\bar\rho_j$。完整 A1 上先得到原始方向
-\[
-s_j=\operatorname{sgn}(\bar\rho_j).
-\]
-
-**主模型不再仅凭这个正负号直接定向。** 对每个非锚点指标，再分别删除 7 个质量域中的一个，重新计算 pooled Spearman，记为 $\bar\rho_j^{(-d)}$。定义主模型准入集合
-\[
-\mathcal J^*
-=
-\left\{
-j:
-\operatorname{sgn}\!\left(\bar\rho_j^{(-d)}\right)=s_j,
-\ \forall d
-\right\}.
-\]
-于是
-\[
-d_j=
-\begin{cases}
-s_j, & j\in\mathcal J^*,\\
-0, & j\notin\mathcal J^*.
-\end{cases}
-\]
-其中 $d_j=0$ 不表示“指标值为 0”，而表示**当前数据不足以稳定判定方向，该指标不进入主 $Q_A$ 聚合**。8 个模型型语义锚点仍固定为正向并保留。
-
-现有真实 A1 敏感性结果已经识别出两个会在 LOO 中跨过 0 的指标：\`rps_lines_numerical_chars_fraction\` 的 full pooled $\rho\approx 8.03\times10^{-5}$，LOO 范围约为 $[-0.0275,0.0274]$；\`rps_doc_frac_chars_top_3gram\` 的 full pooled $\rho\approx-0.0181$，LOO 范围约为 $[-0.0631,0.0181]$。二者因此从主质量代理中排除。其余方向稳定指标保留。
-
-同时继续记录 7 域符号一致率、pooled Spearman、LOO 最小/最大相关以及扩展集方向，作为解释和敏感性证据。更严格的 \`stable_consensus_075\` 会把全部 DSIR 指标过滤掉并改变指标家族结构，因此保留为压力测试，不作为当前主准入规则。
-
-## 5. 冲突分析
+七域内 Spearman、跨域符号一致率以及删去一个领域后在其余全部 A1 记录上重算的 LOO 相关，是独立的稳健性诊断，不改变主评分。Fisher 型 pooled 相关若用于历史对照，仅属于 Spearman 的近似敏感性汇总；不能直接套用 Pearson 的 $1/(n-3)$ 方差结论。方向脆弱的指标只在 `drop_loo_flip` 压力测试中暂时删除。
 
 ### 5.1 指标自身方向冲突
 
@@ -139,17 +100,17 @@ C_{jk,d}=\max(0,-\rho_{jk,d}).
 2. DSIR：3 个；
 3. model-based：8 个。
 
-为避免“某一类仅因指标数量多就权重更大”，主评分仍采用**先家族内等权、再三家族等权**，但家族内只聚合通过主方向准入的指标。记 $\mathcal J_{ig}^*$ 为家族 $g$ 中通过 LOO 方向稳定性检查且在记录 $i$ 上非缺失的指标集合，则
+为避免“某一类仅因指标数量多就权重更大”，主评分采用**先家族内等权、再三家族等权**。记 $\mathcal J_{ig}$ 为家族 $g$ 中在记录 $i$ 上非缺失的指标集合，则
 \[
 G_{ig}
 =
-\frac{1}{|\mathcal J_{ig}^*|}
-\sum_{j\in\mathcal J_{ig}^*} z^+_{ij},
+\frac{1}{|\mathcal J_{ig}|}
+\sum_{j\in\mathcal J_{ig}} z^+_{ij},
 \qquad
 S_i=\frac13\left(G_{i,\mathrm{RPS}}+G_{i,\mathrm{DSIR}}+G_{i,\mathrm{MODEL}}\right).
 \]
 
-按现有稳定性审查，主规则保留 9 个 RPS、3 个 DSIR 和 8 个 model-based 指标，共 20 个；两个 LOO 方向不稳定的 RPS 指标在聚合前被置为缺失而非乘成 0，因此不会稀释家族均值。
+主规则保留 11 个 RPS、3 个 DSIR 和 8 个 model-based 字段，共 22 个；LOO 翻号字段只在压力测试中删除。
 
 A1 上再把 (S_i) 标准化为 `Q_z`。域级 Q 主统计量使用中位数，同时报告 10% trimmed mean 与 bootstrap 95% CI。
 

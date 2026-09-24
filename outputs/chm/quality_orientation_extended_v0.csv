@@ -5,8 +5,8 @@ arxiv,sample,rps_doc_unigram_entropy,-0.12434723861857198
 arxiv,sample,rps_doc_frac_unique_words,0.038143952751028734
 arxiv,sample,rps_doc_frac_no_alph_words,0.09358896463782074
 arxiv,sample,rps_doc_frac_chars_top_2gram,-0.1674710790307582
-arxiv,sample,rps_doc_frac_chars_top_3gram,-0.02187324490036463
-arxiv,sample,rps_lines_uppercase_letter_fraction,0.005074793744081092
+arxiv,sample,rps_doc_frac_chars_top_3gram,0.02187324490036463
+arxiv,sample,rps_lines_uppercase_letter_fraction,-0.005074793744081092
 arxiv,sample,rps_lines_ending_with_terminal_punctution_mark,0.00531183185030011
 arxiv,sample,rps_lines_numerical_chars_fraction,0.06771842537940649
 arxiv,sample,rps_doc_mean_word_length,0.20263772725861004
@@ -19,8 +19,8 @@ arxiv,extended,rps_doc_unigram_entropy,-0.11556698388569854
 arxiv,extended,rps_doc_frac_unique_words,0.05489315338514071
 arxiv,extended,rps_doc_frac_no_alph_words,0.08824770347072469
 arxiv,extended,rps_doc_frac_chars_top_2gram,-0.16406138813747206
-arxiv,extended,rps_doc_frac_chars_top_3gram,-0.062354191981701855
-arxiv,extended,rps_lines_uppercase_letter_fraction,0.0323149625855146
+arxiv,extended,rps_doc_frac_chars_top_3gram,0.062354191981701855
+arxiv,extended,rps_lines_uppercase_letter_fraction,-0.0323149625855146
 arxiv,extended,rps_lines_ending_with_terminal_punctution_mark,-0.004584841657101717
 arxiv,extended,rps_lines_numerical_chars_fraction,0.019334933046776675
 arxiv,extended,rps_doc_mean_word_length,0.18319336471167164
@@ -33,8 +33,8 @@ github,sample,rps_doc_unigram_entropy,0.3054994271514031
 github,sample,rps_doc_frac_unique_words,0.3589380619681797
 github,sample,rps_doc_frac_no_alph_words,-0.0833354005021686
 github,sample,rps_doc_frac_chars_top_2gram,-0.11748461312306999
-github,sample,rps_doc_frac_chars_top_3gram,-0.1662112527705614
-github,sample,rps_lines_uppercase_letter_fraction,-0.0014287716079584285
+github,sample,rps_doc_frac_chars_top_3gram,0.1662112527705614
+github,sample,rps_lines_uppercase_letter_fraction,0.0014287716079584285
 github,sample,rps_lines_ending_with_terminal_punctution_mark,0.019073770836516662
 github,sample,rps_lines_numerical_chars_fraction,-0.041711246590315575
 github,sample,rps_doc_mean_word_length,0.23364691844369018
@@ -47,8 +47,8 @@ github,extended,rps_doc_unigram_entropy,0.31703300907864024
 github,extended,rps_doc_frac_unique_words,0.36441319963202473
 github,extended,rps_doc_frac_no_alph_words,-0.07840346212213076
 github,extended,rps_doc_frac_chars_top_2gram,-0.11720726343596469
-github,extended,rps_doc_frac_chars_top_3gram,-0.17408831873916694
-github,extended,rps_lines_uppercase_letter_fraction,0.007606886528258079
+github,extended,rps_doc_frac_chars_top_3gram,0.17408831873916694
+github,extended,rps_lines_uppercase_letter_fraction,-0.007606886528258079
 github,extended,rps_lines_ending_with_terminal_punctution_mark,0.014491471415942148
 github,extended,rps_lines_numerical_chars_fraction,-0.031192528653498156
 github,extended,rps_doc_mean_word_length,0.2384182344727194

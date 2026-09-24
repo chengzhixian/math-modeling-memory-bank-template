@@ -54,7 +54,7 @@ DSIR_FIELDS = ["dsir_books", "dsir_wiki", "dsir_math"]
 RPS_FIELDS = [x for x in QUALITY_FIELDS if x not in MODEL_FIELDS + DSIR_FIELDS]
 COUNT_FIELDS = {"rps_doc_word_count", "rps_doc_num_sentences"}
 SIGNED_LOG_FIELDS = set(DSIR_FIELDS)
-PRIMARY_ORIENTATION_POLICY = "stable_loo"
+PRIMARY_ORIENTATION_POLICY = "global_spearman_sign_for_14_plus_semantic_positive_for_8"
 
 
 def softmax(v):
@@ -218,6 +218,64 @@ def domain_anchor_correlations(z):
     return pd.DataFrame(records)
 
 
+def global_anchor_correlations(z):
+    anchor = z[MODEL_FIELDS].mean(axis=1, skipna=True)
+    rows = []
+    for metric in QUALITY_FIELDS:
+        family = "model" if metric in MODEL_FIELDS else ("dsir" if metric in DSIR_FIELDS else "rps")
+        valid = np.isfinite(z[metric].to_numpy(float)) & np.isfinite(anchor.to_numpy(float))
+        n = int(valid.sum())
+        if metric in MODEL_FIELDS:
+            rho, direction, source = np.nan, 1, "semantic_model_field"
+        else:
+            if n < 4 or z.loc[valid, metric].nunique() < 2 or anchor.loc[valid].nunique() < 2:
+                raise ValueError(f"Cannot determine global Spearman direction for {metric}: n={n}")
+            rho = float(spearmanr(z.loc[valid, metric], anchor.loc[valid]).statistic)
+            if not np.isfinite(rho):
+                raise ValueError(f"Nonfinite global Spearman direction for {metric}")
+            direction, source = (1 if rho >= 0 else -1), "global_spearman_sign"
+        rows.append({"metric": metric, "family": family, "global_rho": rho,
+                     "abs_global_rho": abs(rho), "orientation": direction,
+                     "orientation_source": source, "n_valid": n})
+    return pd.DataFrame(rows)
+
+
+def orientation_diagnostics(z, primary):
+    anchor = z[MODEL_FIELDS].mean(axis=1, skipna=True)
+    domains = sorted(z["_source_domain"].dropna().unique())
+    directions = primary.set_index("metric")["orientation"]
+    by_domain, robustness = [], []
+    for metric in QUALITY_FIELDS:
+        per = []
+        for domain in domains:
+            mask = (z["_source_domain"] == domain) & z[metric].notna() & anchor.notna()
+            n = int(mask.sum())
+            rho = (float(spearmanr(z.loc[mask, metric], anchor.loc[mask]).statistic)
+                   if n >= 4 and z.loc[mask, metric].nunique() > 1 and anchor.loc[mask].nunique() > 1 else np.nan)
+            sign = (1 if rho >= 0 else -1) if np.isfinite(rho) else np.nan
+            per.append(rho)
+            by_domain.append({"metric": metric, "domain": domain, "n_valid": n,
+                              "rho_domain": rho, "sign_domain": sign,
+                              "agrees_with_primary": bool(sign == directions[metric]) if np.isfinite(rho) else np.nan})
+        loo = []
+        for domain in domains:
+            mask = (z["_source_domain"] != domain) & z[metric].notna() & anchor.notna()
+            rho = (float(spearmanr(z.loc[mask, metric], anchor.loc[mask]).statistic)
+                   if mask.sum() >= 4 and z.loc[mask, metric].nunique() > 1 and anchor.loc[mask].nunique() > 1 else np.nan)
+            loo.append(rho)
+        finite_per = [v for v in per if np.isfinite(v)]
+        finite_loo = [v for v in loo if np.isfinite(v)]
+        flip = metric not in MODEL_FIELDS and (len(finite_loo) != len(domains) or any((1 if v >= 0 else -1) != directions[metric] for v in finite_loo))
+        robustness.append({"metric": metric, "global_rho": primary.set_index("metric").loc[metric, "global_rho"],
+                           "orientation": int(directions[metric]),
+                           "sign_agreement": np.mean([(1 if v >= 0 else -1) == directions[metric] for v in finite_per]) if finite_per else np.nan,
+                           "loo_min_rho": min(finite_loo) if finite_loo else np.nan,
+                           "loo_max_rho": max(finite_loo) if finite_loo else np.nan,
+                           "loo_sign_flip": bool(flip),
+                           "robustness_note": "direction fragile; retained in primary" if flip else "retained in primary"})
+    return pd.DataFrame(by_domain), pd.DataFrame(robustness)
+
+
 def orientation_stability(z, raw_orientation):
     """Assess whether non-anchor direction survives leave-one-domain-out refits.
 
@@ -268,10 +326,10 @@ def orientation_stability(z, raw_orientation):
     return pd.DataFrame(rows)
 
 
-def freeze_primary_orientation(raw_orientation, stability, policy=PRIMARY_ORIENTATION_POLICY):
-    """Freeze the primary direction table.
+def freeze_primary_orientation(raw_orientation, stability, policy="stable_loo"):
+    """Build a legacy sensitivity-only direction table.
 
-    Under stable_loo, a non-anchor metric enters Q_A only when deleting any
+    Under stable_loo, a non-anchor metric enters the sensitivity score only when deleting any
     single A1 domain never flips its pooled Spearman direction. Unstable
     metrics receive orientation=0 and are excluded (NaN) before family means.
     The original sign is preserved in raw_orientation for auditability.
@@ -305,12 +363,10 @@ def freeze_primary_orientation(raw_orientation, stability, policy=PRIMARY_ORIENT
 def orient(z, orientation):
     out = z.copy()
     omap = orientation.set_index("metric")["orientation"].to_dict()
+    if set(omap) != set(QUALITY_FIELDS) or any(v not in (-1, 1) for v in omap.values()):
+        raise ValueError("Primary orientation must contain all 22 fields with signs -1 or +1")
     for c in QUALITY_FIELDS:
-        direction = float(omap.get(c, 1))
-        if direction == 0:
-            out[c] = np.nan
-        else:
-            out[c] = out[c] * direction
+        out[c] = out[c] * int(omap[c])
     return out
 
 
@@ -477,9 +533,8 @@ def main():
 
     params = robust_params(a1)
     z1 = apply_robust_z(a1, params)
-    raw_orientation = domain_anchor_correlations(z1)
-    stability = orientation_stability(z1, raw_orientation)
-    orientation = freeze_primary_orientation(raw_orientation, stability)
+    orientation = global_anchor_correlations(z1)
+    by_domain, robustness = orientation_diagnostics(z1, orientation)
     oz1 = orient(z1, orientation)
     s1, qparams = add_quality_scores(oz1)
 
@@ -496,6 +551,9 @@ def main():
     )
     prep.to_csv(args.output_dir / "quality_metric_preprocessing_v0.csv", index=False)
     orientation.to_csv(args.output_dir / "quality_orientation_v0.csv", index=False)
+    orientation.to_csv(args.output_dir / "quality_orientation_primary_v1.csv", index=False)
+    by_domain.to_csv(args.output_dir / "quality_orientation_by_domain_v1.csv", index=False)
+    robustness.to_csv(args.output_dir / "quality_orientation_robustness_v1.csv", index=False)
     conflict_pairs(oz1).to_csv(args.output_dir / "quality_conflict_pairs_v0.csv", index=False)
     # Compare the same domains with frozen A1 orientations, not pooled A1 vs one domain.
     conflict_checks, drift_checks, overlap_checks, direction_checks = [], [], [], []
@@ -580,9 +638,7 @@ def main():
     a1_arg = read_jsonl_xz(args.a1, list_mode="argmax")
     p_arg = robust_params(a1_arg)
     z_arg = apply_robust_z(a1_arg, p_arg)
-    o_arg_raw = domain_anchor_correlations(z_arg)
-    o_arg_stability = orientation_stability(z_arg, o_arg_raw)
-    o_arg = freeze_primary_orientation(o_arg_raw, o_arg_stability)
+    o_arg = global_anchor_correlations(z_arg)
     s_arg, _ = add_quality_scores(orient(z_arg, o_arg))
     domain_arg = domain_summary(s_arg, "sample_argmax", rng, args.bootstrap)
     domain_arg.to_csv(args.output_dir / "domain_quality_argmax_v0.csv", index=False)
@@ -600,23 +656,37 @@ def main():
         args.output_dir / "quality_list_compression_sensitivity_v0.csv", index=False
     )
 
+    fragile = set(robustness.loc[robustness["loo_sign_flip"], "metric"])
+    sensitivity = []
+    primary_domains = domain_primary[domain_primary["dataset_scope"] == "sample"].set_index("quality_domain")["Q_z_median"]
+    variants = {"primary_all22": s1["Q_z"], "equal22": s1["Q_equal22"], "argmax_compression": s_arg["Q_z"]}
+    dropped = oz1.copy()
+    for metric in fragile:
+        dropped[metric] = np.nan
+    variants["drop_loo_flip"] = add_quality_scores(dropped, frozen_q=qparams)[0]["Q_z"]
+    for name, values in variants.items():
+        medians = pd.DataFrame({"domain": z1["_source_domain"], "value": values}).groupby("domain")["value"].median()
+        rho = float(spearmanr(primary_domains.loc[medians.index], medians).statistic)
+        for domain, median in medians.items():
+            sensitivity.append({"variant": name, "domain": domain, "Q_median": median,
+                                "rank": int(medians.rank(ascending=False, method="min").loc[domain]),
+                                "rank_spearman_vs_primary": rho})
+    pd.DataFrame(sensitivity).to_csv(args.output_dir / "quality_orientation_sensitivity_v1.csv", index=False)
+
     manifest = {
         "seed": SEED,
         "rows": actual,
         "list_compression_primary": "probability_or_expected_rating; qurater=mean4",
         "list_compression_sensitivity": "argmax for binary/PRRC logits",
         "normalization": "A1 median/MAD robust z, clip [-5,5]; A2/A3 reuse A1 parameters",
-        "orientation": (
-            "8 semantic model anchors fixed positive; remaining 14 use within-domain "
-            "Spearman + Fisher-z pooling and must keep the same pooled sign in every "
-            "leave-one-A1-domain-out refit; unstable metrics are excluded from primary Q_A"
-        ),
+        "orientation": "8 semantic model fields positive; 14 statistical fields use global A1 Spearman sign",
         "primary_orientation_policy": PRIMARY_ORIENTATION_POLICY,
-        "primary_orientation_excluded_metrics": orientation.loc[
-            ~orientation["included_in_primary"], "metric"
-        ].tolist(),
+        "primary_uses_all_22_quality_signals": True,
+        "primary_orientation_exclusion_count": 0,
+        "robustness_filters_change_primary": False,
+        "primary_orientation_excluded_metrics": [],
         "quality_aggregation": (
-            "equal within RPS/DSIR/model families over primary-included metrics, "
+            "equal within RPS/DSIR/model families over all available metrics, "
             "then equal across three families"
         ),
         "bootstrap_reps": args.bootstrap,

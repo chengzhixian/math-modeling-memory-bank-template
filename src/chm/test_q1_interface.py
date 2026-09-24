@@ -23,7 +23,7 @@ class Q1InterfaceTests(unittest.TestCase):
         )
 
     def test_manifest_is_cross_platform_text_hash(self):
-        self.assertEqual(self.q1.manifest["schema_version"], "chm.q1.v1.2")
+        self.assertEqual(self.q1.manifest["schema_version"], "chm.q1.v1.3")
         self.assertEqual(self.q1.manifest["hash_mode"], "sha256_utf8_lf_normalized")
         self.assertNotIn("scale", self.q1.manifest["files"])
 

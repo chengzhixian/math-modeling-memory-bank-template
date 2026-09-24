@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 from q1_quality_analysis import (
     compress_list, conflict_pairs, QUALITY_FIELDS, MODEL_FIELDS, RPS_FIELDS,
-    add_quality_scores, assert_domain_id_integrity, freeze_primary_orientation, orient,
+    add_quality_scores, assert_domain_id_integrity, global_anchor_correlations, orient,
 )
 from q1_quality_sensitivity import score_subset
 from q1_mixture_scale_transfer import bootstrap_eta_calibration_samples
@@ -48,32 +48,17 @@ class QualityRegressionTests(unittest.TestCase):
         self.assertAlmostEqual(float(pair.iloc[0].conflict_strength), 1.)
         self.assertFalse(((pairs.metric_a == QUALITY_FIELDS[2]) | (pairs.metric_b == QUALITY_FIELDS[2])).any())
 
-    def test_unstable_orientation_is_excluded_from_primary_score(self):
-        anchor = MODEL_FIELDS[0]
-        unstable = RPS_FIELDS[0]
-        raw = pd.DataFrame([
-            {"metric": anchor, "orientation": 1},
-            {"metric": unstable, "orientation": -1},
-        ])
-        stability = pd.DataFrame([
-            {
-                "metric": anchor, "loo_min_rho": np.nan, "loo_max_rho": np.nan,
-                "loo_sign_consistent": True, "stable_loo": True,
-            },
-            {
-                "metric": unstable, "loo_min_rho": -0.02, "loo_max_rho": 0.03,
-                "loo_sign_consistent": False, "stable_loo": False,
-            },
-        ])
-        frozen = freeze_primary_orientation(raw, stability)
-        self.assertEqual(int(frozen.loc[frozen.metric == anchor, "orientation"].iloc[0]), 1)
-        self.assertEqual(int(frozen.loc[frozen.metric == unstable, "orientation"].iloc[0]), 0)
-        self.assertFalse(bool(frozen.loc[frozen.metric == unstable, "included_in_primary"].iloc[0]))
-
-        data = pd.DataFrame({field: [1.0, 2.0] for field in QUALITY_FIELDS})
-        oriented = orient(data, frozen)
-        self.assertTrue(oriented[unstable].isna().all())
-        self.assertTrue(np.isfinite(oriented[anchor]).all())
+    def test_global_orientation_keeps_all_fields(self):
+        data = pd.DataFrame({field: [0., 1., 2., 3., 4.] for field in QUALITY_FIELDS})
+        data[RPS_FIELDS[0]] = [4., 3., 2., 1., 0.]
+        table = global_anchor_correlations(data)
+        self.assertEqual(len(table), 22)
+        self.assertEqual(set(table.orientation), {-1, 1})
+        self.assertEqual(int(table.set_index('metric').loc[RPS_FIELDS[0], 'orientation']), -1)
+        oriented = orient(data, table)
+        self.assertTrue(np.isfinite(oriented[QUALITY_FIELDS]).all().all())
+        with self.assertRaises(ValueError):
+            orient(data, table.assign(orientation=0))
 
     def test_id_integrity_rejects_blank_and_duplicate(self):
         good = pd.DataFrame({

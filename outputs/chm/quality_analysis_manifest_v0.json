@@ -8,12 +8,17 @@
   "list_compression_primary": "probability_or_expected_rating; qurater=mean4",
   "list_compression_sensitivity": "argmax for binary/PRRC logits",
   "normalization": "A1 median/MAD robust z, clip [-5,5]; A2/A3 reuse A1 parameters",
-  "orientation": "8 model metrics positive anchors; remaining 14 use within-domain Spearman + Fisher-z pooling",
-  "quality_aggregation": "equal within RPS/DSIR/model families, then equal across three families",
+  "orientation": "8 semantic model fields positive; 14 statistical fields use global A1 Spearman sign",
+  "primary_orientation_policy": "global_spearman_sign_for_14_plus_semantic_positive_for_8",
+  "primary_uses_all_22_quality_signals": true,
+  "primary_orientation_exclusion_count": 0,
+  "robustness_filters_change_primary": false,
+  "primary_orientation_excluded_metrics": [],
+  "quality_aggregation": "equal within RPS/DSIR/model families over all available metrics, then equal across three families",
   "bootstrap_reps": 1000,
   "q_standardization": {
-    "Q_raw_mean": -0.1190754449720478,
-    "Q_raw_std": 0.712275342745924
+    "Q_raw_mean": -0.08817485436104841,
+    "Q_raw_std": 0.689942114046033
   },
   "versions": {
     "python": "3.12.14",

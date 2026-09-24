@@ -14,6 +14,8 @@ A1 含 51,230 条质量记录；A2、A3 分别给出 arxiv 的 17,523 条和 git
 
 \subsection{A 侧综合质量代理}
 
+A1--A3 为每条文本提供 22 个量纲和含义不同的质量信号，却没有综合质量真值。本文先把列表压缩为标量，再在 A1 建立统一尺度和方向，形成可复现的描述性质量代理；由样本评分聚合为领域评分，最后用 A2/A3 全量扩展记录检验其迁移表现。该代理表示相对于 A1 的质量坐标，不能解释为客观质量标签。
+
 \subsubsection{列表字段压缩与稳健标准化}
 
 A1--A3 提供 22 个质量信号，其中 14 个为标量，8 个为列表字段。根据 SlimPajama-Meta-rater 公开数据卡\cite{metaraterdata}，二分类字段 \texttt{ad\_en} 与 \texttt{fluency\_en} 的两个元素为 logits，本文以 softmax 后的正类概率保留连续置信信息；四个 ModernBERT 字段是 $0$--$5$ 六等级 logits，以期望等级压缩；\texttt{qurater} 的四个评分分量取均值；\texttt{fineweb\_edu} 取唯一元素。argmax 压缩保留为敏感性方案，而不与主方案混用。
@@ -29,98 +31,62 @@ z_{ij}
 \right).
 \label{eq:q1_robust_z}
 \end{equation}
-其中 $i$ 表示记录，$j$ 表示指标。A2、A3 复用 A1 的变换、中心和尺度，避免扩展集信息反向进入评分口径。
+其中 $x_{ij}$ 指经过必要变换后的数值，$i$ 表示记录，$j$ 表示指标。中位数和 MAD 比均值和标准差更不易受极端文本影响；常数 1.4826 将正态分布下的 MAD 调整到近似标准差尺度，并非本题拟合参数。截断到 $[-5,5]$ 避免极值主导后续均值；MAD 退化时依次回退到标准差和 1。A2、A3 完全复用 A1 的变换、中心和尺度，使三个数据集处于同一评价坐标。
 
 \subsubsection{指标方向的确定}
 
-八个模型评分字段的语义可以由数据卡直接确定为“数值越大，目标质量属性越强”，因此其方向固定为正。将这八项稳健标准化值的可用项均值定义为语义锚点
+八个模型型字段按其评分语义固定为正向。其逐记录均值 $A_i$ 已由式\eqref{eq:q1_quality_anchor} 定义为方向参考。对其余 14 个统计型字段，较大的原始数值未必代表较好质量；这里只需识别单调方向，因此在 A1 全部有效记录上计算秩相关，而不要求线性关系：
 \begin{equation}
-A_i=\frac{1}{|\mathcal M_i|}\sum_{j\in\mathcal M_i}z_{ij},
-\label{eq:q1_quality_anchor}
-\end{equation}
-其中 $\mathcal M_i$ 为记录 $i$ 上非缺失的模型评分字段集合。
-
-对于其余 14 个统计型指标，数据本身并不给出统一的“越大越好/越小越好”真值，因此不依据字段名称主观设定符号，而是在 A1 的每个质量域 $d$ 内计算
-\begin{equation}
-\rho_{jd}
-=
-\rho_{\mathrm S}(z_{ij},A_i\mid i\in d),
+\rho_j=\rho_{\mathrm S}(z_{ij},A_i)
+=\operatorname{Corr}(\operatorname{rank}z_j,\operatorname{rank}A).
 \label{eq:q1_orientation_rho}
 \end{equation}
-并用 Fisher 变换汇总域内相关：
+若 $\rho_j\ge0$，较大指标值通常对应较大语义锚点，取 $d_j=+1$；否则取 $d_j=-1$。统一后的值为
 \begin{equation}
-\bar z_j
-=
-\frac{\sum_{d}(n_{jd}-3)\operatorname{arctanh}(\rho_{jd})}
-{\sum_d(n_{jd}-3)},
-\qquad
-\bar\rho_j=\tanh(\bar z_j).
-\label{eq:q1_fisher_pool}
-\end{equation}
-完整 A1 上先取原始符号 $s_j=\operatorname{sgn}(\bar\rho_j)$。为避免把接近零、依赖单个领域的相关符号误当作可靠方向，主模型进一步进行 leave-one-domain-out（LOO）稳定性筛选：依次删除每个质量域并重新计算 pooled Spearman，记为 $\bar\rho_j^{(-d)}$，定义
-\begin{equation}
-\mathcal J^\star
-=
-\left\{
-j:
-\operatorname{sgn}\!\left(\bar\rho_j^{(-d)}\right)=s_j,\ 
-\forall d
-\right\}.
-\label{eq:q1_orientation_loo}
-\end{equation}
-对非锚点指标，
-\begin{equation}
-d_j=
-\begin{cases}
-s_j,&j\in\mathcal J^\star,\\
-0,&j\notin\mathcal J^\star,
-\end{cases}
-\qquad
-z^+_{ij}=d_jz_{ij}\quad(d_j\ne0).
+d_j=\begin{cases}+1,&j\text{ 为模型型字段，或 }\rho_j\ge0,\\-1,&\rho_j<0,\end{cases}
+\qquad z^+_{ij}=d_jz_{ij}.
 \label{eq:q1_orientation_freeze}
 \end{equation}
-这里 $d_j=0$ 表示“方向证据不足并从主质量代理中排除”，而不是把该指标数值置零参与平均。八个模型型语义锚点始终固定为正向。已有 A1 稳定性审查中，\texttt{rps\_lines\_numerical\_chars\_fraction} 的 pooled $\rho$ 约为 $8.03\times10^{-5}$，LOO 区间跨过 0；\texttt{rps\_doc\_frac\_chars\_top\_3gram} 的 pooled $\rho$ 约为 $-0.0181$，LOO 结果同样跨过 0，因此二者不进入主 $Q_A$。该步骤仅表示与语义锚点的稳定方向对齐，不能把锚点或其方向解释成客观质量真值。
+相关系数只决定方向，不是指标权重或因果效应。即使 $|\rho_j|$ 接近零，主模型仍保留该质量信号；方向证据弱的问题由后文的稳健性诊断揭示。
 
-\subsubsection{综合代理的定义与边界}
+\subsubsection{由 22 个指标到样本和领域质量}
 
-题目附件没有提供样本级“真实质量”标签，因此质量标量不能由监督学习唯一识别。本文采用最小附加假设的分组等权复合指标：RPS/Natural、DSIR、model-based 三个指标家族先在组内对**通过 LOO 方向稳定性准入且当前记录非缺失**的指标等权，再在三组之间等权。对记录 $i$，令
+22 个字段分属 RPS/Natural（11 项）、DSIR（3 项）和 model-based（8 项）。若直接对 22 项等权平均，RPS 会仅因字段较多而取得较大总权重。本文选择家族内等权、三个家族等权。令 $\mathcal J_{ig}$ 表示记录 $i$ 在家族 $g$ 中非缺失的指标集合，定义
 \begin{equation}
-G_{ig}
-=
-\frac{1}{|\mathcal J^\star_{ig}|}
-\sum_{j\in\mathcal J^\star_{ig}}z^+_{ij},
-\qquad
-S_i=\frac{1}{3}\sum_{g\in\{\mathrm{RPS,DSIR,MODEL}\}}G_{ig},
+G_{ig}=\frac{1}{|\mathcal J_{ig}|}\sum_{j\in\mathcal J_{ig}}z^+_{ij},
+\qquad S_i=\frac13\sum_{g\in\{\mathrm{RPS,DSIR,MODEL}\}}G_{ig}.
 \label{eq:q1_family_score}
 \end{equation}
-其中 $\mathcal J^\star_{ig}$ 是记录 $i$ 在家族 $g$ 中同时满足方向稳定和非缺失的指标集合。现有审查下保留 9 个 RPS、3 个 DSIR 和 8 个 model-based 指标，共 20 个；更严格的跨域一致率阈值会删除全部 DSIR，因此只保留为压力测试，不作为主规则。进一步用 A1 全体记录的均值和标准差定义 A 侧综合质量代理
+集合 $\mathcal J_{ig}$ 仅处理原始缺失值，不使用方向稳定性筛选。用 A1 全体 $S_i$ 的均值 $\mu_{S,A1}$ 和标准差 $\sigma_{S,A1}$ 固定坐标：
 \begin{equation}
 Q_{A,i}=\frac{S_i-\mu_{S,A1}}{\sigma_{S,A1}}.
 \label{eq:q1_QA}
 \end{equation}
-式\eqref{eq:q1_family_score}--\eqref{eq:q1_QA}是透明的复合指标定义，而不是由附件识别出的唯一“真实质量函数”。分组等权的理由只是避免某个指标家族因字段数量更多而自动获得更大总权重，因此必须与 22 指标完全等权、列表 argmax 压缩和家族删除方案同时做敏感性检验。
+$Q_{A,i}$ 是一条文本的相对评分。题目还要求领域质量，因此对每个领域 $d$ 的全部样本评分取中位数 $Q_{A,d}=\operatorname{median}_{i\in d}Q_{A,i}$。中位数较少受长尾文本影响；10\% 截尾均值为辅助统计。域内 bootstrap 95\% 区间仅衡量固定评分规则下的样本抽样波动，不能覆盖方向和权重选择的不确定性。
 
+\subsubsection{指标方向的跨领域稳健性}
 
-\paragraph{当前实现状态}
-主方向准入规则已在 \texttt{src/chm/q1\_quality\_analysis.py} 中切换为式\eqref{eq:q1_orientation_loo}。由于本次远端执行环境无法取得 Git LFS 中 A1--A3 的实体数据，下表及后续依赖 $Q_A$ 的既有数值仍需在完整数据环境中重跑后刷新；在刷新完成前，这些旧数值不作为新主规则下的冻结结果。
+主方向由全 A1 Spearman 决定。为判断它是否过度依赖某一领域，另算七个领域各自的 $\rho_{jd}$、方向一致率，以及每次去掉一个领域后在其余全部记录上重算的 $\rho_j^{(-d)}$。若 LOO 翻号，该指标仍留在主 $Q_A$ 中，但标注为方向脆弱。另设仅供压力测试的删除脆弱指标、22 项完全等权和列表 argmax 压缩方案，比较七域排序。上述诊断不改变主模型准入规则。
 
-域级主统计量采用 $Q_A$ 中位数；固定评分规则下的记录 bootstrap 给出条件区间。结果见表\ref{tab:q1_quality}。
+\subsubsection{A2/A3 扩展集对照}
+
+A2/A3 的用途是检验 A1 评分规则能否迁移到更大的 arxiv/github 样本。两者复用 A1 的列表压缩、变换、median/MAD、方向及 $Q_A$ 标准化参数，不重新拟合评价尺子。主结果使用 A2/A3 全部记录；剔除与 A1 重叠的记录只作为额外稳健性复核。表\ref{tab:q1_quality} 和图\ref{fig:q1_quality} 给出固定规则下的域级结果。
 
 \begin{table}[htbp]
 \centering\small
-\caption{A1 七个质量域的综合质量代理}
+\caption{A1 七域质量评分；区间为固定评分规则下的条件 bootstrap 95\% 区间}
 \label{tab:q1_quality}
-\begin{tabular}{lrrl}
+\begin{tabular}{lrrrrl}
 \toprule
-质量域 & 样本数 & $Q_A$ 中位数 & 条件 95\% 区间 \\
+领域 & 样本数 & $Q_{A,d}$ & 10\% 截尾均值 & 排名 & 条件区间 \\
 \midrule
-arxiv & 1419 & 2.6826 & [2.6518, 2.7084] \\
-book & 171 & 2.7711 & [2.6735, 2.8086] \\
-c4 & 10000 & $-0.2173$ & [$-0.2376$, $-0.1997$] \\
-commoncrawl & 9640 & 0.5061 & [0.4923, 0.5224] \\
-github & 10000 & $-0.5171$ & [$-0.5438$, $-0.4886$] \\
-stackexchange & 10000 & 0.1874 & [0.1723, 0.2025] \\
-wikipedia & 10000 & $-0.3759$ & [$-0.4003$, $-0.3473$] \\
+book & 171 & 2.9183 & 2.8308 & 1 & [2.7879, 2.9606] \\
+arxiv & 1419 & 2.6887 & 2.7013 & 2 & [2.6621, 2.7262] \\
+commoncrawl & 9640 & 0.4367 & 0.4576 & 3 & [0.4224, 0.4543] \\
+stackexchange & 10000 & 0.2517 & 0.2550 & 4 & [0.2370, 0.2660] \\
+wikipedia & 10000 & $-0.2944$ & $-0.3216$ & 5 & [$-0.3194$, $-0.2706$] \\
+c4 & 10000 & $-0.3040$ & $-0.2999$ & 6 & [$-0.3193$, $-0.2840$] \\
+github & 10000 & $-0.4854$ & $-0.5195$ & 7 & [$-0.5117$, $-0.4602$] \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -128,12 +94,11 @@ wikipedia & 10000 & $-0.3759$ & [$-0.4003$, $-0.3473$] \\
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=.84\linewidth]{q1_quality_domain_intervals.png}
-\caption{七域综合质量代理的中位数与条件区间。横轴为 A1 内部标准化坐标，不是附件 B 的原生 $Q_{\mathrm{score}}$。}
+\caption{七域质量评分及条件区间；横轴为 A1 内部标准化坐标。}
 \label{fig:q1_quality}
 \end{figure}
 
-主方案与 argmax 压缩、22 指标完全等权方案的七域排名 Spearman 均为 0.9643，但分别发生 github/wikipedia 与 book/arxiv 的相邻次序交换。进一步删除 RPS 家族后，七域排名 Spearman 降至 0.8214，且 4 个域改变名次。因此图\ref{fig:q1_quality}中的窄 bootstrap 区间只量化固定评分规则下的记录抽样误差，不能替代评分规则不确定性。
-
+完整 A2 arxiv 的 $Q_{A,d}$ 为 2.7253，A3 github 为 $-0.5055$；去重后的对应中位数为 2.7279 与 $-0.5063$。主评分保留全部 22 项。五个统计指标在 LOO 中出现方向翻转，其中全局 $|\rho|$ 最小的是大写字母行占比（0.0283）和高频三元字符占比（0.0406）；这只说明相对于本文锚点的单调方向证据较弱。删除全部五个翻号指标的压力测试使七域排序 Spearman 降到 0.8929；22 项完全等权为 0.9643，argmax 压缩为 1.0000。固定规则下的窄区间因此不能代替方法选择的稳健性检验。
 \subsubsection{指标冲突与扩展集复核}
 
 指标冲突不再引入额外的人造“冲突强度函数”，而直接使用标准的 Spearman 秩相关。对方向统一后的任意两指标 $j$、$r$，在质量域 $d$ 内计算
@@ -145,9 +110,9 @@ wikipedia & 10000 & $-0.3759$ & [$-0.4003$, $-0.3473$] \\
 \end{equation}
 若 $\rho_{jr,d}<0$，表示在该域中两指标对样本的相对排序方向相反；只有在多个域或扩展数据中重复出现时，才将其视为稳定的描述性冲突。当前尚未完成全部相关系数的区间估计和多重比较校正，因此论文不使用“显著冲突”这一表述。
 
-A1 的 1419 条 arxiv 和 10000 条 github 记录均包含于对应扩展集，故 A2/A3 不能直接称为独立验证。剔除重叠后，另有 arxiv 16104 条和 github 193752 条记录可用于复核。冻结 A1 的全部处理参数后，非重叠记录的 $Q_A$ 中位数分别为 2.7146 和 $-0.5363$，与 A1 的 2.6826 和 $-0.5171$ 接近。
+A1 的 1419 条 arxiv 和 10000 条 github 记录均包含于对应扩展集，故 A2/A3 不能直接称为独立验证。剔除重叠后，另有 arxiv 16104 条和 github 193752 条记录可用于复核。按冻结规则得到的非重叠中位数分别为 2.7279 和 $-0.5063$，与 A1 的 2.6887 和 $-0.4854$ 接近。
 
-进一步对全部 $22\choose2=231$ 个指标对做复制性核对：arxiv 在 A1 中有 96 个负相关指标对，其中 92 个在完整 A2 与去重 A2 中仍保持负相关，复制率为 95.83\%；github 在 A1 中有 91 个负相关指标对，91 个在完整 A3 与去重 A3 中均保持负相关，复制率为 100\%。两域共有 56 个指标对同时满足“sample / extended / non-overlap 三层均为负”。最稳定的共同冲突为大写字母行占比与终止标点行占比，其六个相关系数中最小绝对值仍为 0.7393。该结果说明若干负相关不是由 A1 与扩展集样本重叠单独造成，但由于尚未补充逐指标对 bootstrap 区间与多重比较校正，本文仍只将其称为“稳定复现的负相关”，而不使用“统计显著冲突”的表述。代表性结果见表\ref{tab:q1_conflict}。
+进一步对全部 $22\choose2=231$ 个指标对做复制性核对：arxiv 在 A1 有 108 个负相关对，其中 102 个在完整 A2 与去重 A2 中仍为负；github 的 85 个 A1 负相关对全部在完整 A3 与去重 A3 中保持负向。两域共有 59 个指标对在 sample、extended、non-overlap 三层均为负。上述计数是全局定向后的描述性复核，不宣称完成多重比较校正。代表性结果见表\ref{tab:q1_conflict}。
 
 \begin{table}[htbp]
 \centering\small
@@ -157,10 +122,10 @@ A1 的 1419 条 arxiv 和 10000 条 github 记录均包含于对应扩展集，�
 \toprule
 域 & 方向统一后的指标对（简写） & Spearman \\
 \midrule
-arxiv & 大写字母行占比 / 终止标点行占比 & $-0.8195$ \\
 arxiv & DSIR wiki / 非字母词占比 & $-0.6303$ \\
-github & 大写字母行占比 / 终止标点行占比 & $-0.7442$ \\
-github & 词汇唯一率 / 高频三元字符占比 & $-0.4902$ \\
+arxiv & DSIR books / 非字母词占比 & $-0.6280$ \\
+github & 高频二元字符占比 / 高频三元字符占比 & $-0.5648$ \\
+github & DSIR wiki / 大写字母行占比 & $-0.3908$ \\
 \bottomrule
 \end{tabular}
 \end{table}
