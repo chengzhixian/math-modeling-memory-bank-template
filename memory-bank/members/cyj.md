@@ -12,7 +12,7 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 2026-09-25 续办发布：`cyj.chm.v3` 条件接口及 CYJ 本机真实 CHM solver 联调已落到不可变发布 `e36aa23143bda9f027853f5af825728625750c5b`；精确 release smoke PASS，51/51 测试 PASS，XeLaTeX 7 页 PASS。CHM `92e0592` 原版求解器 27 场景中 24 可行收敛/KKT 检查过、3 个低预算支持域不可行；同源 B7 族选择与区间覆盖未独立校准，`ready_for_Q3=false`，CHM owner acceptance 仍待。与 CHM 精确提交 dry merge 仅两份本人论文稿冲突。GitHub 443 超时后已补推并核实远端 `team/cyj-scaling` 与发布同 SHA。交接 `memory-bank/handoffs/cyj/20260925-q2-v3-conditional-and-chm-integration.md`。
 
-2026-09-25 接口目录清理：`CONTRACT.md` 指向条件 v3，`CHM_API_V2.md` 标注历史诊断和 `deprecated_for_formal_Q3=true`；不改变精确 v3 发布提交。该文档提交 `17c4d84` 的首次两次远端推送因 GitHub 443 连接失败，需连同此记忆更新补推，远端状态以最后核验为准。
+2026-09-25 接口目录清理：`CONTRACT.md` 指向条件 v3，`CHM_API_V2.md` 标注历史诊断和 `deprecated_for_formal_Q3=true`；不改变精确 v3 发布提交。GitHub 443 短暂故障后，文档与交接已补推；`ls-remote` 和 GitHub PR head 均核实检查点 `33a214a89c7cf2e2cd535fe20b71697c2c83b63b`。PR #3 已更新为当前科学状态并保持 Draft。
 
 2026-09-25 续办：冻结 B7 双交互族重做 N/D/Q 共 24 折留级、1350 条 OOF；三轴平均 RMSE 0.051936/0.050207/0.050061，均低于恒定 G。45 个 N-D 组 bootstrap 500/500 成功，形成同源条件经验预测区间；输出 SHA256 `cae1c827...` 与 `54c2ceb2...`，48/48 测试通过。由于族选择之前已查看全 B7，重复 CV 和区间不能当独立最终验证，`ready_for_Q3=false`。证据见 `experiments/cyj/20260925-b7-frozen-validation-uncertainty.md`，交接见 `memory-bank/handoffs/cyj/20260925-b7-frozen-validation-uncertainty.md`。CHM 求解器实测与 v3 接口仍待完成。
 

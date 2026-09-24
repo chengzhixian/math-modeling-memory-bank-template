@@ -19,6 +19,7 @@ $L_B=E+AN^{-\alpha}+BD^{-\beta}+(1-Q)[G_0+G_N\ln N+G_D\ln(D/100)]$。完整 B7 �
 - CHM 拉取精确发布后，按 `interfaces/cyj/CHM_API_V3.md` 运行 builder、release smoke、`CHMAdapterV3(mode="conditional_diagnostic")`，把 `bounds` 映射为本人求解器的 `Support(N,D,Q)`，D 下界必须为 10。`value_grad` 可直接消费；SLSQP 边界浮点容差须由 CHM 包装明确处理，不能放宽科学域。`evaluate` 返回点预测、梯度、弹性、替代率、经验区间、成本和分开的 p 敏感性。低预算应明确报支持域不可行。
 - CHM 需在本人分支验收并记录：精确 CYJ release 与 CHM commit、release smoke、1 个可行 solver case、27 场景状态、`bounds → Support` 包装及是否承认仅条件诊断。集成人验收后才可更新公共记忆和正式 Q3 状态。
 - 随后的接口目录清理已把 `CONTRACT.md` 当前入口改为条件 v3，并在 `CHM_API_V2.md` 标明 `deprecated_for_formal_Q3=true`；v2 旧 solver 边界描述仅作当时发布历史。此文档清理不改 v3 不可变代码发布及 manifest。
+- 此清理及交接的远端检查点已核实为 `33a214a89c7cf2e2cd535fe20b71697c2c83b63b`（`ls-remote` 与 PR head 一致）；PR #3 已更新并保持 Draft。
 
 ## 分支合并检查
 
