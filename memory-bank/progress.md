@@ -52,6 +52,16 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 - 本机默认 Git 无 HTTPS helper；`H:\Git\cmd\git.exe` 配合仅命令级 `http.sslBackend=openssl` 已成功读取远端。
 - 本次改动的 commit/push 结果需用 Git 实际记录核验；本文件不预写未执行的成功状态。
 
+## 2026-09-24 公共完整审查协议
+
+状态：已完成公共规则落盘。
+
+- main 新增 `REPOSITORY_REVIEW_PROTOCOL.md`，由用户明确授权为全团队强制审查流程。
+- 审查触发范围包括远程分支、本地仓库、代码、数学模型、题目理解、结果和论文结论。
+- 协议新增 variable provenance、identifiability、数据角色冻结、overlap/leakage/support shift、claim ladder 和从零 red-team 等 Gate。
+- 团队以后不得把“测试通过/结果稳定/文献常用”当成模型科学有效性的充分证据。
+- Q1 的三规模经验幅度→公共 \(\eta\) 被记录为永久反例：可估计不等于可识别。
+
 ## 未解决问题
 
 官方规则和题目版本未独立核验；数据说明及全量附件未审计；计算环境未确定；无模型或实验结果。三人角色已确定，远端个人分支未创建，权限未配置；当前规则是文件约定而非强制访问控制。
