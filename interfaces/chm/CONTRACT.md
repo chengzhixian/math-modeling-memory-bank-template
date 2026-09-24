@@ -6,7 +6,9 @@
 消费者：cyj（Q2/Q3）、zhh（需要 Q1 证据时）  
 维护分支：\`integration/chm-q1-clean-20260923\`
 
-状态：**A 侧质量代理、13-target 配比相对效应与排序验证可消费；Q1 不再提供由附件 A 拟合的连续跨规模幅度参数。**
+状态：**配比相对效应与排序验证仍可消费；A 侧质量代理的方法代码已升级为 stable-LOO 方向准入，但 canonical `domain_quality.csv` 尚待完整 Git LFS 环境重跑，因此新 Q_A 暂未重新冻结。Q1 不再提供由附件 A 拟合的连续跨规模幅度参数。**
+
+> 2026-09-24 临时冻结说明：在 stable-LOO 全量重跑、刷新 `domain_quality.csv` 并重建接口哈希之前，下游不得把当前 `quality()` 返回的旧 sign-only Q_A 当作新主规则结果；配比 Ridge/排序接口不受本次质量方向修正影响。
 
 当前机器入口：\`interfaces/chm/q1_interface_v1_2.json\`。旧 v1/v1.1 保留审计，新消费默认使用 v1.2。
 
