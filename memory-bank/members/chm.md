@@ -320,3 +320,17 @@ synthetic quality 模型只用于软件验证，其数值最优解不得进入�
 - clean 分支新增的 Q1 冲突复制性证据同时保留：arxiv 92/96、github 91/91 个样本负相关在完整扩展与 non-overlap 扩展中继续为负；两域共有 56 个三层稳定负相关指标对。该证据仍不宣称 bootstrap/FDR 显著性。
 
 当前正式 Q1 论文源以 \`paper/latex/sections/chm/q1.tex\` 为准；机器接口升级为 \`chm.q1.v1.2\`，明确 \`scale_transfer_status=not_identified_from_attachment_A\`。
+
+## 2026-09-24 可识别性错误复盘与审查规则升级
+
+Q1 曾把 1M/60M/1B 三个实验组上的经验配比幅度差异进一步解释为纯模型规模 \(N\) 的连续衰减律，并拟合公共 \(\eta\)。该结果数值可算、代码可复现，但附件 A 没有与配方实验对应的 \(D\)，真实规模位置只有三个，且 1B 配方支持集与 1M/60M 不同，因此该结构解释不可识别。
+
+本次将此错误明确归类为 identifiability error，而不是一般计算错误。以后任何公式进入代码或论文前，必须先通过 variable provenance、identifiability、dataset-role、support/leakage、claim-level 五类 gate。必须永久记住：
+
+\[
+\text{参数可估计}\neq\text{参数可识别},
+\qquad
+\text{拟合稳定}\neq\text{科学解释成立}.
+\]
+
+完整复盘见 problem/chm/20260924_q1_identifiability_failure_postmortem.md。用户要求把完整仓库审查流程同步到 main，作为所有成员和 AI 的公共强制规则：以后收到“审查远程分支/本地仓库/代码/数学模型/问题”等请求时，必须执行全流程，不能只做代码 lint、diff 或数值复算。
