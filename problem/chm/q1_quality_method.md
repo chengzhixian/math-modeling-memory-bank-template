@@ -1,4 +1,4 @@
-> **版本说明（2026-09-24）：** 本文件是质量侧早期方法设计 v0。当前论文把该复合量统一称为 A 侧综合质量代理 (Q_A)，强调“语义锚点方向对齐 + 显式家族等权”是可复核的构造规则而非客观质量真值；主文的指标冲突直接报告域内 Spearman，不再把下文自定义的 (H_j)、(C_{jk,d}) 作为必要主模型公式。当前正式表述与边界以 `problem/chm/20260924_q1_rigorous_restructure.md` 和 `paper/latex/sections/chm/q1.tex` 为准。
+> **版本说明（2026-09-24）：** 本文件最初是质量侧方法设计 v0。经方向稳定性复核，主模型代码已将“pooled Spearman 只看正负号”升级为 **leave-one-domain-out (LOO) 方向稳定准入**：非锚点指标只有在删除任意一个 A1 质量域后 pooled 方向均不翻转，才进入主 $Q_A$；否则记为方向不确定并从主综合质量中排除。`stable_consensus_075` 等更激进筛选仍只作压力测试。当前远端环境无法取得 Git LFS 的 A1--A3 实体文件，因此新规则的 canonical 数值表、区间和论文结果表必须在完整 LFS 重跑后刷新，旧数值不得与新规则混写。
 
 # Q1 质量评分与冲突分析方法设计 v0
 
@@ -79,15 +79,34 @@ A_i=\frac{1}{8}\sum_{jin\mathcal M} z_{ij}.
 \rho_{jd}=\operatorname{Spearman}(x_j,Amid d).
 \]
 
-再做 Fisher-z 加权汇总，权重使用 (n_d-3)，得到 pooled correlation。指标方向取 pooled correlation 的符号。
+再做 Fisher-z 加权汇总，权重使用 $(n_d-3)$，得到 pooled correlation $\bar\rho_j$。完整 A1 上先得到原始方向
+\[
+s_j=\operatorname{sgn}(\bar\rho_j).
+\]
 
-同时记录：
-- 7 域符号一致率；
-- pooled Spearman；
-- 域间最大/最小相关；
-- 是否在 arxiv/github 扩展集保持同号。
+**主模型不再仅凭这个正负号直接定向。** 对每个非锚点指标，再分别删除 7 个质量域中的一个，重新计算 pooled Spearman，记为 $\bar\rho_j^{(-d)}$。定义主模型准入集合
+\[
+\mathcal J^*
+=
+\left\{
+j:
+\operatorname{sgn}\!\left(\bar\rho_j^{(-d)}\right)=s_j,
+\ \forall d
+\right\}.
+\]
+于是
+\[
+d_j=
+\begin{cases}
+s_j, & j\in\mathcal J^*,\\
+0, & j\notin\mathcal J^*.
+\end{cases}
+\]
+其中 $d_j=0$ 不表示“指标值为 0”，而表示**当前数据不足以稳定判定方向，该指标不进入主 $Q_A$ 聚合**。8 个模型型语义锚点仍固定为正向并保留。
 
-这样“方向统一”和“指标冲突”由真实样本关系共同决定，而不是仅依据字段名称。
+现有真实 A1 敏感性结果已经识别出两个会在 LOO 中跨过 0 的指标：\`rps_lines_numerical_chars_fraction\` 的 full pooled $\rho\approx 8.03\times10^{-5}$，LOO 范围约为 $[-0.0275,0.0274]$；\`rps_doc_frac_chars_top_3gram\` 的 full pooled $\rho\approx-0.0181$，LOO 范围约为 $[-0.0631,0.0181]$。二者因此从主质量代理中排除。其余方向稳定指标保留。
+
+同时继续记录 7 域符号一致率、pooled Spearman、LOO 最小/最大相关以及扩展集方向，作为解释和敏感性证据。更严格的 \`stable_consensus_075\` 会把全部 DSIR 指标过滤掉并改变指标家族结构，因此保留为压力测试，不作为当前主准入规则。
 
 ## 5. 冲突分析
 
@@ -120,21 +139,17 @@ C_{jk,d}=\max(0,-\rho_{jk,d}).
 2. DSIR：3 个；
 3. model-based：8 个。
 
-为避免“某一类仅因指标数量多就权重更大”，主评分先在组内等权，再三组等权：
-
+为避免“某一类仅因指标数量多就权重更大”，主评分仍采用**先家族内等权、再三家族等权**，但家族内只聚合通过主方向准入的指标。记 $\mathcal J_{ig}^*$ 为家族 $g$ 中通过 LOO 方向稳定性检查且在记录 $i$ 上非缺失的指标集合，则
 \[
-S_i=
-\frac13
-\left[
-\frac1{11}\sum_{j\in RPS}z^+_{ij}
-+
-\frac1{3}\sum_{j\in DSIR}z^+_{ij}
-+
-\frac1{8}\sum_{j\in MODEL}z^+_{ij}
-\right].
+G_{ig}
+=
+\frac{1}{|\mathcal J_{ig}^*|}
+\sum_{j\in\mathcal J_{ig}^*} z^+_{ij},
+\qquad
+S_i=\frac13\left(G_{i,\mathrm{RPS}}+G_{i,\mathrm{DSIR}}+G_{i,\mathrm{MODEL}}\right).
 \]
 
-其中 (z^+) 已按统一方向翻转。
+按现有稳定性审查，主规则保留 9 个 RPS、3 个 DSIR 和 8 个 model-based 指标，共 20 个；两个 LOO 方向不稳定的 RPS 指标在聚合前被置为缺失而非乘成 0，因此不会稀释家族均值。
 
 A1 上再把 (S_i) 标准化为 `Q_z`。域级 Q 主统计量使用中位数，同时报告 10% trimmed mean 与 bootstrap 95% CI。
 
