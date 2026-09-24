@@ -188,3 +188,48 @@ readiness 规则修订：
 - 当前 cyj.q3.v1 仍不满足，formal_ready 保持 false。
 
 synthetic quality 模型只用于软件验证，其数值最优解不得进入论文结果。
+
+## 2026-09-24 Q1 可识别性重构
+
+用户要求重新审查并直接修正第一问中不受附件支持的数学链条。本轮从 `integration/chm-q1-clean-20260923@87680947d16c9b8a486aea9b997c367e250ea0e4` 建立独立分支 `integration/chm-q1-rigorous-20260924`，只依据当前清理后的可见数据说明、附件 A 实际字段/结果和已独立核验的方法资料。
+
+### 正式科学修订
+
+- 第一问不再把 A6--A11 的 1M/60M/1B 三个离散实验组拟合为连续 `b_k(N)` 或公共衰减 `eta`。
+- 原 `eta=0.14503317` 及 bootstrap 区间仅保留历史审计，不再属于 Q1 主模型、论文结论或生产者接口。
+- 原因：A4--A15 配方实验没有对应 (D) 字段；真实 (N) 位置只有三个；1B 配方支持集与 1M/60M 不同；A6--A11 应保持 held-out 验证身份。
+- Q1 的配比主模型冻结为 A4+A5 的 13-target Ridge，并只交付
+  [
+  m_k(mathbf p)=hat{eta}_k^	op(mathbf p-mathbf p_{m ref}),
+  ]
+  坐标为 `A4_A5_1M_target_cross_entropy_contrast`。
+- 跨实验组只报告排序证据：13-target median Spearman 1M/60M/1B = 0.8381/0.8381/0.7067；A6/A8 同 256 配方真实 Loss 的 1M↔60M median Spearman = 0.9944。
+- 绝对 Loss 诊断继续保留：1B 完整 Ridge 只在 4/13 target 上优于无配比常数基线，因此不将 1M Loss 幅度跨规模搬运。
+- A12--A15 仍只作 estimated/extrapolated 压力测试。
+
+### 质量项修订
+
+- 论文统一将原 `Q_z` 科学含义写为 A 侧综合质量代理 (Q_A)，不称客观质量真值。
+- 22 信号的列表压缩、稳健标准化和语义锚点方向对齐保留，但明确属于可复核的构造规则。
+- 三家族等权明确为“防止指标数量自动决定家族权重”的透明定义，不声称由附件唯一识别。
+- 主文冲突分析改为直接报告方向统一后的域内 Spearman；旧自定义 (H_j)/(C_{jk,d}) 不再作为必要主公式。
+- 已有敏感性仍必须披露：argmax/22 等权排名 Spearman 0.9643；去 RPS 后 0.8214、4/7 域换位。
+
+### 新接口
+
+发布 `chm.q1.v1.2`：
+- `interfaces/chm/q1_interface_v1_2.json`
+- `src/chm/q1_interface.py`
+- `interfaces/chm/CONTRACT.md` v2.0
+- `interfaces/chm/USAGE.md`
+- `interfaces/chm/Q2_BRIDGE.md`
+
+v1.2 不再包含 `scale` 文件，也不允许 `relative_effect(..., n_params, eta)`；`relative_effect(mixture,target)` 只返回 1M target contrast。Q3 scenario scaffold 已同步去掉对 Q1 eta 的依赖。
+
+### 需要集成人处理的公共规则冲突
+
+公共 `TEAM_COLLABORATION_DEPENDENCIES.md` 仍要求 chm 交“p 效应的跨规模传递及不确定性”，并列 `mixture_scale_transfer*` 为正式交付。该条款与本轮附件可识别性复核冲突。按照目录归属规则，本分支不直接修改公共文件；已在新 handoff 中请求集成人改为：
+
+> chm 交付 1M target-specific (m_k(p)) + A6--A11 排序迁移证据；任何跨规模幅度或跨 Loss 坐标桥接由 cyj 在 Q2 侧识别，无法识别时采用 sensitivity-only。
+
+
