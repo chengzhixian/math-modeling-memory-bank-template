@@ -188,3 +188,12 @@ readiness 规则修订：
 - 当前 cyj.q3.v1 仍不满足，formal_ready 保持 false。
 
 synthetic quality 模型只用于软件验证，其数值最优解不得进入论文结果。
+
+
+## 2026-09-24 Q3 数值章节阶段初稿
+
+已补齐 `paper/latex/sections/chm/q3_numerical.tex`，修复 main.tex 已引用但文件缺失的 chm Q3 数值章节入口。章节只写已验证的 diagnostic/scenario 方法和结果，不填 formal 最优配置。
+
+内容覆盖 N-D 连续预算相位、质量成本几何、p held-out 选择验证、generic solver/KKT 软件验证，并在末尾保留 cyj formal predictor 到位后的正式结果 TODO。
+
+章节自身静态检查：10 label 无重复、3 ref 全部有定义、无额外 input/citation。完整 XeLaTeX 编译待本地或集成人执行。

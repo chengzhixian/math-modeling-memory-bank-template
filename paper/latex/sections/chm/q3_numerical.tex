@@ -1,4 +1,153 @@
-% Owner: chm. Q3 solver and numerical results; no placeholder optimum values.
-\subsection{数值求解与情景检验}
-本小节预留给 chm 的预算优化求解、约束核验及敏感性结果；正式数值依赖 cyj 已验收的预测接口。
-% TODO(chm): 接口冻结后补可复现求解和结果。
+% Owner: chm. Numerical Q3 section.
+% Current state: diagnostic/scenario evidence only until cyj ready_for_Q3=true.
+\subsection{数值求解、支持域与结构转移诊断}
+\label{sec:q3_numerical}
+
+\subsubsection{求解流程与上游门禁}
+第三问的数值求解不手工复制第二问参数，而通过版本化预测器调用。正式运行前检查预测器的 Loss 坐标、$N/D/Q$ 适用域、质量变量状态、配比策略和不确定性。附件 A 的派生 $Q_z$ 不要求被人为映射到附件 B 的 $Q_{\mathrm{score}}$；若使用连续质量变量，则正式预测器必须在同一 B-native Loss 坐标上验证 $N,D,Q$。配比若无法建立跨 Loss 标定，则只作多目标域敏感性，不输出唯一配比。当前上游接口仍未满足正式门禁，因此本小节先报告求解器和支持域诊断，正式配置表在接口验收后统一生成。
+
+\subsubsection{$N$--$D$ 解析诊断与连续预算相位}
+固定 $Q=Q_0$、$\boldsymbol p=\boldsymbol p_{\rm ref}$ 时，质量额外成本为零，题面成本化为
+\begin{equation}
+C_0(N,D;L_c)=
+\left(6\times10^{18}+2\times10^{14}L_c\right)ND.
+\label{eq:q3_nd_cost}
+\end{equation}
+以第二问 B1 diagnostic 的
+\begin{equation}
+L_0(N,D)=E+AN^{-\alpha}+BD^{-\beta}
+\label{eq:q3_nd_loss}
+\end{equation}
+检查数值求解器。令
+\begin{equation}
+P=\frac{C_{\max}}{6\times10^{18}+2\times10^{14}L_c},
+\qquad ND=P,
+\end{equation}
+在不触边界时得到
+\begin{equation}
+N^\star=
+\left(\frac{\alpha A}{\beta B}P^\beta\right)^{1/(\alpha+\beta)},
+\qquad
+D^\star=\frac{P}{N^\star}.
+\label{eq:q3_nd_inner}
+\end{equation}
+
+结合 B1 声明的 $N\in[0.070542,11.965825]$ B、$D\in[0.134,299.893]$ B token，连续增加预算时依次出现
+\[
+N_{\min}\ {\rm bound}
+\rightarrow {\rm interior}
+\rightarrow D_{\max}\ {\rm bound}
+\rightarrow (N_{\max},D_{\max})\ {\rm support\ corner}.
+\]
+表\ref{tab:q3_regime}给出三个 C7 上下文情景的临界预算。
+
+\begin{table}[htbp]
+\centering\small
+\caption{$N$--$D$ 诊断模型的预算相位临界点}
+\label{tab:q3_regime}
+\begin{tabular}{rrrr}
+\toprule
+Context & $N_{\min}$ 释放 & $D_{\max}$ 激活 & 支持域饱和 \\
+\midrule
+2048 & $7.95\times10^{17}$ & $9.33\times10^{21}$ & $2.30\times10^{22}$ \\
+8192 & $9.47\times10^{17}$ & $1.11\times10^{22}$ & $2.74\times10^{22}$ \\
+131072 & $3.99\times10^{18}$ & $4.69\times10^{22}$ & $1.16\times10^{23}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+注意力成本与基础训练成本之比具有简单形式
+\begin{equation}
+\frac{C_{\rm attn}}{C_{\rm train}}=\frac{L_c}{30000}.
+\label{eq:q3_attn_ratio}
+\end{equation}
+因此 2048、8192、131072 Token 对应约 0.0683、0.2731、4.3691。题面三档预算中，$10^{19}$ FLOPs 的三个上下文均为内点；$10^{22}$ FLOPs、2048 Token 已触及 $D_{\max}$；$10^{24}$ FLOPs 的三个情景均到达 $N_{\max},D_{\max}$。后者存在大量预算剩余，只能解释为 B1 支持域不足，不能解释为额外算力无效。
+
+在解析临界点和三档预算上使用 25 起点数值优化交叉验证，最佳数值解与解析解的 Loss 最大绝对差约 $4.44\times10^{-16}$，$N/D$ 最大相对误差约 $4.23\times10^{-8}$，说明相位变化来自活跃约束切换而非局部最优。
+
+\subsubsection{质量成本函数的几何性质}
+题面质量成本为
+\begin{equation}
+C_Q=10^9D\,[g(Q)-g(Q_0)]_+.
+\end{equation}
+将其与训练和注意力成本比较，$D$ 可约去：
+\begin{equation}
+\frac{C_Q}{C_{\rm train}+C_{\rm attn}}
+=
+\frac{g(Q)-g(Q_0)}
+{N\left(6\times10^9+2\times10^5L_c\right)}.
+\label{eq:q3_quality_ratio}
+\end{equation}
+故相同质量升级的相对成本随 $N$ 按 $1/N$ 下降。等成本临界规模为
+\begin{equation}
+N_{\rm crit}
+=
+\frac{g(Q)-g(Q_0)}
+{6\times10^9+2\times10^5L_c}.
+\end{equation}
+指数型和幂函数型 $g(Q)$ 为凸成本，而对数型为凹成本。又因正部函数存在，$Q=Q_0$ 处不光滑，左导数为 0，右导数为 $10^9Dg'(Q_0)$，数值求解中采用单侧 KKT 条件。
+
+为比较量级，取诊断场景 $Q_0=0.5\rightarrow Q=1$、$N=1$ B，得到表\ref{tab:q3_quality_cost}。这些比例只描述成本侧价格，并不代表提高质量后的净收益。
+
+\begin{table}[htbp]
+\centering\small
+\caption{诊断场景下质量升级成本与基础计算成本之比}
+\label{tab:q3_quality_cost}
+\begin{tabular}{rrrr}
+\toprule
+Context & 指数型 & 幂函数型 & 对数型 \\
+\midrule
+2048 & 0.598 & 0.731 & 0.189 \\
+8192 & 0.502 & 0.614 & 0.159 \\
+131072 & 0.119 & 0.146 & 0.0376 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{配比代理的优化选择验证}
+为检验第一问配比代理是否可用于候选选择，严格保持 A4/A5 为拟合集，对 A6/A8/A10 的 held-out 配方选择预测 Loss 最低者，再由 A7/A9/A11 的真实目标域 Loss 评价其实际名次。表\ref{tab:q3_p_selection}给出全部 13 个目标域结果。
+
+\begin{table}[htbp]
+\centering\small
+\caption{逐目标域配比代理的 held-out 选择能力}
+\label{tab:q3_p_selection}
+\begin{tabular}{lrr}
+\toprule
+规模 & 精确选中真实最优 & 落入真实前 10\% \\
+\midrule
+1M & 10/13 & 13/13 \\
+60M & 8/13 & 13/13 \\
+1B & 7/13 & 8/13 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+对 pile\_cc、wikipedia\_en、arxiv、stackexchange、github 五个主敏感性目标，共 15 次检验中 11 次精确选中真实最优，14 次进入真实前 10\%。明显偏离发生在 1B pile\_cc，其预测选择为实际第 10/64，相对最优 regret 约 2.63\%。因此配比代理可用于受支持候选筛选，但 1B 已出现明显的目标域依赖失效风险。
+
+同时，A4 训练支持内五个主目标域的最低预测候选最大单域占比中位数约 0.954，4/5 超过 0.9，存在极端化选择倾向。由于
+\begin{equation}
+m_k(\boldsymbol p)
+=
+\boldsymbol\beta_k^\top(\boldsymbol p-\boldsymbol p_{\rm ref})
+\end{equation}
+是线性函数，当目标域固定且跨 Loss 系数为正时，正的尺度因子不会改变 $\boldsymbol p$ 的排序。故当前代理本身不能识别“预算增加引起最优配比支持集切换”，正式求解不采用无约束连续单纯形最优，而采用已观测/受支持候选与多目标域敏感性。
+
+\subsubsection{多起点求解与 KKT 验证}
+正式数值求解器将上游 Loss 抽象为 $L(N,D,Q)$ 及其梯度，并定义单位额外算力的边际收益
+\begin{equation}
+r_x=-\frac{\partial L/\partial x}{\partial C/\partial x}.
+\end{equation}
+预算约束活跃且变量均为内点时，有
+\begin{equation}
+r_N=r_D=r_Q=\mu.
+\label{eq:q3_kkt_ratio}
+\end{equation}
+变量位于下界时要求 $r_x\le\mu$，位于上界时要求 $r_x\ge\mu$；$Q=Q_0$ 使用质量成本右导数，预算未用满时由互补松弛得 $\mu=0$。
+
+当前仅以人工构造的单调质量收益进行软件验证，不将其最优配置作为赛题证据。generic solver 与 readiness policy 共 8 个单元测试通过；三类成本函数与 5 个测试预算组成的 15 个 KKT 点全部通过，自由变量边际比最大相对离散约 $3.83\times10^{-7}$。
+
+% TODO(chm): cyj 发布 ready_for_Q3=true 的同一 B-native Loss 坐标 N-D-Q predictor 后：
+% 1) 生成三预算×三上下文×三质量成本正式配置表；
+% 2) p_policy=validated_bridge 时加入唯一 p，否则只给多 target p 敏感性；
+% 3) 写入总不确定性、KKT 残差、支持域/外推标志与结构转移临界预算；
+% 4) 交 zhh 做 Loss--Benchmark 不确定性传播。
