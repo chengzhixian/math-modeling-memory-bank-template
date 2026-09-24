@@ -253,3 +253,27 @@ synthetic quality 模型只用于软件验证，其数值最优解不得进入�
 - Q=0.8 时，使质量成本=训练成本的 N_B 阈值分别约 exp 0.169、power 0.289、log 0.135。
 
 输出见 `outputs/chm/q3_quality_cost_sensitivity_q0_0p5.csv` 与 `outputs/chm/q3_quality_cost_crossings_q0_0p5.json`。该示例的 Q0=0.5 来自 cyj 接口算例，不代表官方固定基准；正式 Q3 必须使用上游定义的 Q0。
+
+
+## 2026-09-24 Q3 配比支持域与稳健候选
+
+完成 p 的 A4 训练支持域诊断。当前 Ridge 的 target-specific 配比效应对 p 线性，因此在 A4 配方凸包内优化与在 512 个观测配方上取最小值等价；lambda>=0 且 eta 固定时，单 target 最优 p 的排序不随 N、预算或上下文变化。
+
+单 target 最优观测配方高度极端：
+- pile_cc best index 291，约 98.8% pile_cc；
+- wikipedia_en best index 171，约 70.9% wikipedia；
+- arxiv best index 300，约 90.2% arxiv；
+- stackexchange best index 389，约 99.8% stackexchange；
+- github best index 292，约 95.4% github。
+
+因此单 target p 不宜直接当总体最优配比。
+
+对五 target 面板分别按 A4 横截面标准差归一化后：
+- standardized minimax 最佳为 index 139；
+- standardized mean 最佳为 index 326；
+- mean-rank 最佳为 index 177。
+其中 index 139 有 14 个非零域，有效域数约 8.824，最大权重仅 0.201，五个 target 的 m_k 均为负。
+
+512 个 A4 配方中只有 3 个（35、99、139）在五 target 上都严格优于 p_ref；index 139 位于五目标 Pareto 前沿。该“全改善”只是当前五个 A-side Ridge 代理的预测，不是 B1 Loss 的已验证改善。
+
+正式 Q3 若 cyj 仍无法识别 primary anchor/lambda，应优先把这些稳健候选作为 p 情景面板，而不是伪造唯一 B1 最优配比。
