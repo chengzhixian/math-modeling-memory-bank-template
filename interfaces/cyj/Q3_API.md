@@ -2,6 +2,8 @@
 
 状态：**可调用的诊断/情景接口；ready_for_Q3=false**。生产者 cyj；消费者 chm/zhh。采用 `chm.q1.v1`，固定 `integration/chm-q1-clean-20260923@7c14a0c894072048d09f04bd03653be1301f7257`。本文件逐项回应其 `CYJ_REQUIRED_INTERFACE.md`，字段缺证据时保留 null，不把接口可运行称作科学验证完成。
 
+新增 B7 原生质量模型见 [QUALITY_API.md](QUALITY_API.md)：已有 N-D-Q 拟合、梯度和配对条件样本，但坐标不同，不自动接入本页的 B1/p 模型。
+
 ## 1. 已采用的 A 侧定义
 
 直接调用该提交的 `src/chm/q1_interface.py::Q1Interface`，不重新拟合 A 数据。`load_chm()` 从本地 Git 对象读取生产者代码、manifest 及六个小型交付文件，在临时目录实例化原接口后立即清理，进程内复用对象；没有第二套永久系数表。队友首次使用先 `git fetch origin integration/chm-q1-clean-20260923`。

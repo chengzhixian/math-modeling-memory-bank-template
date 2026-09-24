@@ -6,10 +6,41 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from quality_scaling import design, evaluate, fit, folds
+from quality_scaling import QualityPredictor, design, evaluate, fit, folds
+
+RELEASE_SHA = "e676bfb06da81c02ad968591aa9ae09da5c7cd6b56def49d59a82c371465b025"
 
 
 class QualityScalingTests(unittest.TestCase):
+    def test_release_example_and_fail_closed(self):
+        model = QualityPredictor(expected_sha256=RELEASE_SHA)
+        result = model.predict(.07, 10, .5, mode="diagnostic")
+        self.assertAlmostEqual(result["loss_value"], 3.492870995028143, places=10)
+        self.assertFalse(result["ready_for_Q3"])
+        self.assertFalse(result["ready_for_Q4"])
+        self.assertIsNone(result["uncertainty"]["total_prediction_interval"])
+        self.assertEqual(result["uncertainty"]["sample_ids"], list(range(50)))
+        for values in ((0, 10, .5), (.07, 10, 1.1), (.07, 10, float("nan")), (True, 10, .5), (20, 10, .5)):
+            with self.assertRaises(ValueError):
+                model.predict(*values, mode="diagnostic")
+        with self.assertRaises(ValueError):
+            model.predict(.07, 10, .5)
+        with self.assertRaises(ValueError):
+            QualityPredictor(expected_sha256="0" * 64)
+
+    def test_release_gradients_and_paired_samples(self):
+        model = QualityPredictor(expected_sha256=RELEASE_SHA)
+        point = np.array([1., 100., .5])
+        result = model.predict(*point, mode="diagnostic")
+        for i, axis in enumerate(("N_params_B", "D_tokens_B", "Q_score")):
+            step = np.zeros(3)
+            step[i] = 1e-5
+            upper = model.predict(*(point + step), mode="diagnostic")
+            lower = model.predict(*(point - step), mode="diagnostic")
+            difference = (upper["loss_value"] - lower["loss_value"]) / 2e-5
+            self.assertAlmostEqual(difference, result["gradient"][axis], places=7)
+            self.assertEqual(upper["uncertainty"]["sample_ids"], lower["uncertainty"]["sample_ids"])
+
     def test_quality_basis_and_prediction(self):
         x = np.array([[1, 10, .5], [1, 10, 1.]])
         self.assertTrue(np.allclose(design(x, [.3, .2], "linear_quality")[:, -1], [.5, 0]))
