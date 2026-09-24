@@ -1,6 +1,12 @@
-# chm Q1 接口使用说明（当前 `chm.q1.v1.1`）
+# chm Q1 接口使用说明（当前 `chm.q1.v1.2`）
 
-这是 chm 定义、cyj 直接消费的 A 侧接口。当前有效清单为 `interfaces/chm/q1_interface_v1_1.json`；其中列出六个现有结果文件的规范化 SHA256 与行数，`hash_mode=sha256_utf8_lf_normalized`，**不复制一套新数据**。读取时先将文本行尾统一为 LF 后校验清单；文件更新后须发布新接口版本，不能静默覆盖。
+这是 chm 发布给 cyj/zhh 的 A 侧只读接口。v1.2 的核心变化是：**不再提供由附件 A 拟合的跨规模 `eta` 缩放。**
+
+当前 manifest：
+
+`interfaces/chm/q1_interface_v1_2.json`
+
+其文本身份规则仍为 `sha256_utf8_lf_normalized`。
 
 ## 快速验收
 
@@ -11,7 +17,12 @@ python src/chm/q1_interface.py
 python -m unittest discover -s src/chm -p 'test_q1_interface.py'
 ```
 
-第一条成功时报告 7 个 Q 域、17 个配比域、13 个 Loss 目标及哈希校验结果。需要从当前已审核输出重建清单时，仅由 chm 执行 `python src/chm/q1_interface.py --build-manifest` 并复核 Git diff；消费者不要自行重建清单以掩盖文件变化。
+成功时应报告：
+
+```text
+chm.q1.v1.2: 7 Q domains, 17 mixture domains, 13 loss targets;
+1M contrasts + ranking evidence; no scale transfer
+```
 
 ## Python 调用
 
@@ -19,31 +30,142 @@ python -m unittest discover -s src/chm -p 'test_q1_interface.py'
 from pathlib import Path
 from src.chm.q1_interface import Q1Interface
 
-q1 = Q1Interface(Path('.'))  # 自动验 SHA256、行数、域数与参考配比
-book = q1.quality('book')
-mapped = q1.mapped_quality('gutenberg_pg_19')  # near_direct；A 侧 book 代理
-unknown = q1.mapped_quality('freelaw')         # inferred；quality 为 None
+q1 = Q1Interface(Path("."))
 
-p = q1.reference.copy()                       # 17 维，和为 1
-effect_at_reference = q1.relative_effect(p, 'pile_cc', n_params=1_000_000)
-p['arxiv'] += 0.01
-p['freelaw'] -= 0.01
-effect = q1.relative_effect(p, 'pile_cc', n_params=60_000_000)
+book = q1.quality("book")
+mapped = q1.mapped_quality("gutenberg_pg_19")  # near_direct -> book proxy
+unknown = q1.mapped_quality("freelaw")         # inferred -> None
+
+p = q1.reference.copy()
+zero = q1.relative_effect(p, "pile_cc")
+
+p["arxiv"] += 0.01
+p["freelaw"] -= 0.01
+effect = q1.relative_effect(p, "pile_cc")
+
+validation = q1.ranking_validation("pile_cc")
 ```
 
-在当前 manifest 下，上例 `effect['delta_target_loss'] ≈ 0.001309803924525102`，`effect['bridge_to_B1_val_loss'] == 'unidentified'`。这是文件及公式的最小验收样例，不是推荐的最优配比。
+当前固定文件下：
 
-`quality()` 返回从 A1 官方质量信号**计算**的 `Q_z` 域中位数、条件 bootstrap 95% 区间及样本数；可为负，仅描述 A1 样本，不是 B6–B8 文件自带的 `Q_score`。返回 `direct_B_predictor_input_allowed=False`，表明不得把该数值直接送入 B 侧公式。`mapped_quality()` 的 `direct` 仅名称直接对应，不保证总体相同；`near_direct` 是语义代理，需敏感性；`inferred` 不填数值。
+[
+m_{m pile_cc}(mathbf p)
+approx 0.002371904510480527
+]
 
-`relative_effect()` 输入**按名称给出的 17 维非负配比**，和须在 `1±1e-6` 内；缺列、多列、负值及非法和均报错，不静默归一化。目标 `target` 必须是 13 个 A 侧验证域之一。输出 `delta_target_loss = Σ_j β_{k,j}(p_j-p_ref,j) × (N/10^6)^(-η)`，其中 `N` 为**参数个数**，默认 η 来自清单中的尺度 manifest；在参考配比处恒为 0。此量是目标域交叉熵的**相对变化**，不是绝对 Loss，也不是 B1 `val_loss`；返回 `direct_B1_addition_allowed=False`。1M、60M、1B 是已见模型规模，**60M/1B 的函数返回值仍为条件 η 情景**，其他规模另标外推；配比是否在训练支持集内尚未自动检验。1B 的配方支持集也与前两者不同。
+对应上述“arxiv 增加 0.01、freelaw 减少 0.01”的配比转移。这个数值的含义仅是：
 
-η 默认点估计 0.14503317；两个已有 95% 区间分别为仅重抽目标域 `[0.10686793, 0.18669841]` 与目标域加校准配方行的 `[0.09756180, 0.20097672]`，均条件于固定 A4+A5 Ridge，不是完整预测区间。可通过 `eta=` 做情景扫描，但不得把 η 当成 A→B Loss 单位转换。验证与稳健性文件位置见清单、`interfaces/chm/UNCERTAINTY.md` 及 `experiments/chm/20260924-q1-ablation-and-cleanup.md`。
+> 在 A4+A5 拟合得到的 1M Pile-CC target cross-entropy 代理坐标中，相对于 A4 平均参考配方的预测 Loss 对比。
+
+它**不是** 60M/1B 的 Loss 修正，也不是 B1 `val_loss` 修正。
+
+## `quality()`
+
+返回：
+
+- `Q_A_median`；
+- 固定评分规则下的条件 95% 区间；
+- 样本数；
+- `coordinate=A_composite_quality_proxy_z`；
+- `interpretation=descriptive_composite_proxy_not_ground_truth`；
+- `B_Q_score_mapping=unidentified`；
+- `direct_B_predictor_input_allowed=False`。
+
+(Q_A) 是从 A1–A3 质量信号构造的描述性复合代理，可为负。它不是 B6–B8 文件自带的 `Q_score`。
+
+## `mapped_quality()`
+
+A16 当前为：
+
+- direct：3；
+- near_direct：3；
+- inferred：11。
+
+`inferred` 不填数值。即使是 `direct`，也只表示名称/域映射直接，不代表 A 与 B 的质量总体已经数值标定。
+
+## `relative_effect()`
+
+输入必须包含恰好 17 个命名配比域，全部非负，且和为 (1pm10^{-6})。函数不做静默归一化。
+
+定义：
+
+[
+m_k(mathbf p)
+=
+sum_jhateta_{k,j}
+(p_j-p_{{m ref},j}).
+]
+
+返回字段包括：
+
+```text
+delta_target_loss_1m
+reference = A4_mean_normalized_composition
+loss_coordinate = A4_A5_1M_target_cross_entropy_contrast
+cross_scale_transfer = not_identified_from_attachment_A
+bridge_to_B1_val_loss = unidentified
+direct_B1_addition_allowed = false
+```
+
+### v1.2 明确禁止的调用
+
+旧版本曾允许：
+
+```python
+q1.relative_effect(p, target, n_params=..., eta=...)
+```
+
+v1.2 已删除这种接口。原因不是 API 风格变化，而是附件 A 不足以识别连续的 (N,D)-dependent 配比幅度。
+
+如果 downstream 需要某种跨规模配比情景，必须在 downstream 自己的接口中显式给出：
+
+- 数学形式；
+- 参数来源；
+- Loss 坐标；
+- 是否 `validated`；
+- 有效范围。
+
+不能再把 Q1 历史 `eta` 作为默认科学参数。
+
+## `ranking_validation()`
+
+对冻结的 A4+A5 1M Ridge 返回：
+
+- A6+A7：`test_1m_spearman`；
+- A8+A9：`test_60m_spearman`；
+- A10+A11：`test_1B_spearman`；
+- A12+A13：`est_10B_spearman`；
+- A14+A15：`est_70B_spearman`。
+
+其中前三组是真实检验组；10B/70B 是 estimated/extrapolated 压力测试。
+
+例如 Pile-CC：
+
+```text
+1M  = 0.9007345788509955
+60M = 0.8918996051728083
+1B  = 0.8875915750915748
+```
+
+这些值说明排序迁移，不说明绝对 Loss 尺度已校准。
 
 ## cyj 的消费边界
 
-cyj 应直接读取 B6–B8 文件自带的 `Q_score` 来拟合 B 侧质量项，并记录三文件的半合成/外推分层；可将 `quality()` 用于 A 侧域相对排序与情景标签，将 `relative_effect()` 用于逐 target 的配比敏感性。**B1 Loss anchor、跨 Loss 系数和最终预测器由 cyj 定义**，要求清单见 `interfaces/chm/CYJ_REQUIRED_INTERFACE.md`。在 cyj 的模型把这些量定义并验收前，不能把本接口返回值直接加到 B1 Loss 或产出正式 Q3 最优配置。消费记录须写入实际分支、完整 Git SHA、接口版本、清单 SHA、使用 target 与 eta 情景。
+cyj 可直接使用：
 
+- A 侧质量域排序/区间作为描述性证据；
+- A16 mapping type；
+- 13-target (m_k(mathbf p)) 做配比敏感性；
+- held-out Spearman 选择/比较 target 的排序稳定性。
 
-## 版本兼容说明
+cyj 不能直接使用：
 
-旧 `chm.q1.v1` 的三个 CSV manifest 哈希受 Windows CRLF 影响。科学数值未变，但跨平台消费者需要特殊恢复逻辑。新 `chm.q1.v1.1` 只修复文本身份协议，不改变 Q/p/eta 数值。新消费者不要自行重建旧 v1 manifest；应改用 v1.1，并记录当前生产者 commit 和 manifest SHA。
+- (Q_A) 数值作为 B-native `Q_score`；
+- (m_k(mathbf p)) 作为 B1 Loss 的单位系数修正；
+- 历史 `eta` 作为 Q2/Q3 的默认跨规模参数。
+
+B1 Loss anchor、B-native Q、A→B Loss bridge 以及任何 (N,D)-dependent 配比幅度，均由 cyj 的 B 侧接口负责识别和验证。
+
+## 版本说明
+
+`chm.q1.v1.2` 没有重算 A1/A4 的科学数值；它修订的是**接口能声称什么**。底层 Q、Ridge 系数、参考配比和 validation 表不变；自动尺度传递被删除。
