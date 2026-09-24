@@ -2,7 +2,7 @@
 
 角色：cyj 负责 Q2 标度律与 Q3 理论；chm/zhh 消费。当前 `ready_for_Q3=false`，未获联合验收或 main 集成。可调用接口、公式、字段、单位、成本与约束详见 [Q3_API.md](Q3_API.md)，此处只保留当前入口与证据索引。
 
-**当前 chm 条件候选入口：**[CHM_API_V4.md](CHM_API_V4.md)，`src/cyj/chm_adapter_v4.py::CHMAdapterV4(mode="conditional_diagnostic")`，精确发布 `c11629a032fdca8c0a366b732227711410b305d9`，manifest SHA256 `14ca8049ddf2ab9bd24e804f7bfcb223426ec38882c8814187127162ee128e2c`。本版是 B7 八参数联合拟合、嵌套 N/D/Q 留级、200 次簇 bootstrap 的独立条件候选；N/D/Q 值与梯度、弹性、替代率、同源经验区间可调用。A 侧仍是 Q1 v1.2 13-target `p_policy=sensitivity_only`，不加进 B Loss。56 项当时本人测试与 v4 精确 Git 对象 consumer smoke 通过；CYJ 用 CHM pinned `92e0592` 求解器独立完成 330 个条件场景。B7 半合成、区间方法差异、函数族历史探索和 A/B 桥接缺失使 `ready_for_Q3=false`；CHM 本人消费验收仍待。后续 Q3 诊断脚本演进不改此 v4 精确发布。
+**当前 chm 条件候选入口：**[CHM_API_V4.md](CHM_API_V4.md)，`src/cyj/chm_adapter_v4.py::CHMAdapterV4(mode="conditional_diagnostic")`，本地精确发布 `3471530d91c8ee7eb709e5cd6c824eb9c423e0df`，manifest SHA256 `dcd50430b88cc754e1d8f43a3890013bcc45b07f877b315e9a812d2978fd41f7`。本版是 B7 八参数联合拟合、嵌套 N/D/Q 留级、200 次簇 bootstrap 的独立条件候选；N/D/Q 值与梯度、弹性、替代率、同源经验区间可调用。10 个上下文中 7 个为 CYJ 外生敏感性，机器字段明确标记。A 侧仍是 Q1 v1.2 13-target `p_policy=sensitivity_only`，不加进 B Loss。60/60 本人测试与 v4 精确 Git 对象 3 请求 consumer smoke 通过；CYJ 用 CHM pinned `92e0592` 求解器独立完成 330 个条件场景。B7 半合成、区间方法差异、函数族历史探索和 A/B 桥接缺失使 `ready_for_Q3=false`；CHM 本人消费验收仍待。远端发布状态需以实际 `ls-remote` 核验。
 
 **历史 v3 发布：**[CHM_API_V3.md](CHM_API_V3.md) 与 `e36aa23143bda9f027853f5af825728625750c5b` 保留旧两阶段参数的精确复现。该发布的 51 项测试和 27 场景联调只对应 v3，不应替代 joint v4 数值，也不因 v4 发布而提升为正式准入。
 

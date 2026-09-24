@@ -1,6 +1,6 @@
 # CYJ → CHM joint B7 条件接口 v4
 
-本地精确发布检查点为 `team/cyj-scaling@c11629a032fdca8c0a366b732227711410b305d9`；远端同 SHA 已核对。manifest SHA256 `14ca8049ddf2ab9bd24e804f7bfcb223426ec38882c8814187127162ee128e2c`，exact-object consumer smoke 对 2 个批量请求 PASS。后续 CYJ Q3 诊断脚本的演进不改变这个不可变接口发布身份。
+当前扩展上下文版的本地精确发布为 `team/cyj-scaling@3471530d91c8ee7eb709e5cd6c824eb9c423e0df`；manifest SHA256 `dcd50430b88cc754e1d8f43a3890013bcc45b07f877b315e9a812d2978fd41f7`，exact-object consumer smoke 对含 32768 token 的 3 个批量请求 PASS。前一版 `c11629a032fdca8c0a366b732227711410b305d9` 保留原三上下文接口复现；后续诊断脚本演进不改变各自的不可变提交身份。远端同步状态需以实际 `ls-remote` 核验。
 
 入口 `src/cyj/chm_adapter_v4.py::CHMAdapterV4(mode="conditional_diagnostic")`。本版把八参数联合约束最小二乘、200 次 N-D 簇 bootstrap 与嵌套留级残差接入接口；v3 精确发布保持历史两阶段参数，不在原位改写。
 
@@ -16,7 +16,7 @@
 python -B src/cyj/build_chm_release_v4.py
 python -B src/cyj/chm_adapter_v4.py --describe
 python -B src/cyj/chm_adapter_v4.py --request outputs/cyj/interfaces/chm_v4_request.json
-python -B src/cyj/chm_consumer_smoke_v4.py --release-commit c11629a032fdca8c0a366b732227711410b305d9
+python -B src/cyj/chm_consumer_smoke_v4.py --release-commit 3471530d91c8ee7eb709e5cd6c824eb9c423e0df
 ```
 
 CHM `92e0592` 的 `solve_generic` 需要本人模块 `Support` 对象。消费者沿用 v3 文档中的 `bounds → Support` 包装，但内部上游改为 `CHMAdapterV4`，并把 B7 D 下界固定为 10。SLSQP 对数变换的数值边界误差只允许机器精度级处理；越界输入直接拒绝。CYJ 自己的稠密条件扫描记录在 `outputs/cyj/q3/`，仍须 CHM 所有者在本人分支消费并记录验收。

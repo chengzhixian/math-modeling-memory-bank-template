@@ -8,7 +8,7 @@
 
 ## 证据和复现
 
-运行 `python -B src/cyj/q3_form_sensitivity.py`，seed `20260925`，替代模型 12 起点、优化 20 起点；B7 SHA256 `880fd265ca3e1d9bc93b4559af7ed7c18f89040634266c50bae03d88486e0f3a`，双交互模型 SHA256 `c7426036164238d41b92ca08e9ca9087224aeb0c74554478b66093774a5b5b1a`，Q3 敏感性 CSV SHA256 `6a265880611a3e5bd47d0a53d00e1ca7c6553e5a9d711697dc30c87bf4252107`。Q3 主网格重新运行后 330 场景/321 可行/180 括区不变，主 CSV SHA256 `baa0ce59ddf5e69b603c4f07fcc15bf5da0076ea0a931c1e51c568162d586ce2`。`python -B -m src.cyj.run_full_audit`：15/15 检查 PASS、60/60 CYJ 单测、XeLaTeX 8 页无 overfull；统一 `PASS_WITH_LIMITATIONS`。v4 发布及远端精确 SHA 以后续 Git 检查点为准。
+运行 `python -B src/cyj/q3_form_sensitivity.py`，seed `20260925`，替代模型 12 起点、优化 20 起点；B7 SHA256 `880fd265ca3e1d9bc93b4559af7ed7c18f89040634266c50bae03d88486e0f3a`，双交互模型 SHA256 `c7426036164238d41b92ca08e9ca9087224aeb0c74554478b66093774a5b5b1a`，Q3 敏感性 CSV SHA256 `6a265880611a3e5bd47d0a53d00e1ca7c6553e5a9d711697dc30c87bf4252107`。Q3 主网格重新运行后 330 场景/321 可行/180 括区不变，主 CSV SHA256 `baa0ce59ddf5e69b603c4f07fcc15bf5da0076ea0a931c1e51c568162d586ce2`。`python -B -m src.cyj.run_full_audit`：15/15 检查 PASS、60/60 CYJ 单测、XeLaTeX 8 页无 overfull；统一 `PASS_WITH_LIMITATIONS`。v4 扩展上下文本地精确发布 `3471530d91c8ee7eb709e5cd6c824eb9c423e0df`，manifest SHA256 `dcd50430b88cc754e1d8f43a3890013bcc45b07f877b315e9a812d2978fd41f7`，3 请求 exact-object smoke PASS。首次推送两次遭 GitHub 连接重置/443 失败，当前远端同步待最终核验。
 
 ## 未解决与负责人
 
