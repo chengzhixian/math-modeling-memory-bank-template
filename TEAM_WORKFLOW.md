@@ -28,6 +28,10 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 | paper/sections/chm/（Q1、Q3） | chm |
 | paper/sections/cyj/（Q2、Q3 理论说明材料） | cyj |
 | paper/sections/zhh/（Q4、摘要和公共章节） | zhh |
+| paper/latex/sections/chm/、paper/latex/figures/chm/ | chm：Q1 与 Q3 数值章节及自有图 |
+| paper/latex/sections/cyj/ | cyj：Q2 与 Q3 理论章节 |
+| paper/latex/sections/zhh/ | zhh：摘要、问题重述、公共章节与 Q4 |
+| paper/latex/main.tex、gmcmthesis.cls、references.bib、最终 PDF | 集成人：总装、类文件、文献与编译 |
 | memory-bank/members/chm.md、cyj.md、zhh.md | 各自对应成员 |
 | memory-bank/handoffs/chm/、cyj/、zhh/ | 各自对应成员；每次新建文件，不覆盖旧交接 |
 | 六个公共记忆文件、TASK_PLAN.md、AGENTS.md、README.md、TEAM_WORKFLOW.md | 集成人 |
@@ -35,6 +39,8 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 | experiments/experiment-log.md、problem/problem-notes.md、problem/SOURCES.md 等公共索引 | 集成人 |
 
 其他成员需要修改别人目录、公共接口或依赖时，在自己的交接文件写清建议，由文件负责人实施；紧急转交需明确新负责人和时间，原负责人暂停写入。暂不创建没有用途的空目录，首次工作时按归属创建即可。
+
+2026-09-24 起统一以 `paper/latex/` 中的第二十二届华为杯模板源文件组织论文；其 2025 年封面与 2026 年正式要求的符合性须在提交前单独核验。三位成员只在本人分支修改各自 `sections/<成员>/`，不同时编辑总文件或他人的章节。集成人串行验收并合入，负责统一图号、符号、引用、摘要和最终 PDF。详细编译与模板差异见 `paper/latex/README.md`。
 
 这些是协作约定，尚未配置 GitHub 强制分支保护或目录权限。不能保证 Git 自动阻止越界写入。评审时必须检查变更范围。
 
@@ -159,4 +165,3 @@ git show origin/main:memory-bank/activeContext.md
 ```
 
 这样可先读取最新公共共识，再在合适检查点合并 main。
-
