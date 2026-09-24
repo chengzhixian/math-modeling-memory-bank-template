@@ -211,3 +211,25 @@ synthetic quality 模型只用于软件验证，其数值最优解不得进入�
 发布器强制检查 readiness、成本分项和、预算、KKT、Loss 坐标、支持/外推状态、p policy 与不确定性；5 个软件测试全部通过。
 
 至此，chm 在 cyj formal predictor 到位前能独立完成的 Q3 主工程已基本就绪。后续优先等待/验收上游，而不是继续增加无关代理模型。
+
+
+## 2026-09-24 Q3 连续预算与结构转移
+
+在 cyj 正式 `ready_for_Q3=true` 前，继续完成不依赖 Q/p 最终桥接的 Q3 诊断骨架。本阶段只使用 cyj 已交付的 B1 N-D 基线与题面成本，不发布正式最优配置。
+
+已推导并数值扫描验证固定上下文下的活跃约束转移：
+1. 预算低于最小支持成本：不可行；
+2. `N=N_min` 边界；
+3. N-D 内点；
+4. `D=D_max` 边界；
+5. `N=N_max,D=D_max` 支持域角点，继续增加预算只能产生预算松弛。
+
+内点预算弹性：
+- `d log N*/d log C = 0.451528388895`；
+- `d log D*/d log C = 0.548471611105`。
+
+上下文只通过 `6e18*(1+L_ctx/30000)` 改变有效单位成本，因此 30000 Token 是 attention/train 成本相等的解析临界长度；它不是 C7 新观测情景。
+
+精确转移阈值见 `outputs/chm/q3_budget_transitions.csv`，方法与解释见 `experiments/chm/20260924-q3-budget-transitions.md`。2001 点对数预算扫描能在网格分辨率内恢复全部解析转移，无额外伪转移。
+
+该阶段结果是 solver/结构判据验证，不解除 cyj Q、lambda、anchor 和 zhh 正式接口的阻塞。
