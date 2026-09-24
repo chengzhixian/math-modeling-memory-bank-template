@@ -53,3 +53,40 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 - 跨成员接口消费必须记录：来源分支或 main、精确 commit SHA、接口版本、文件哈希、单位、有效范围、状态（draft/validated/integrated）。
 - 正式计算默认只消费已进入 main 的 validated 接口；若因排期需要提前读取个人分支，必须明确标注“临时未集成”并在上游版本变化后重跑。
 
+## 2026-09-24：完整仓库/模型审查模式
+
+用户要求把 `REPOSITORY_REVIEW_PROTOCOL.md` 作为全团队共享审查记忆。触发条件不限于正式“audit”一词；只要成员要求检查远程分支、本地仓库、代码、数学模型、问题设置、结果或论文结论，就必须执行完整流程。
+
+核心顺序固定为：
+
+\[
+\text{题面}
+\rightarrow
+\text{可信数据字段}
+\rightarrow
+\text{变量来源}
+\rightarrow
+\text{可识别性}
+\rightarrow
+\text{模型}
+\rightarrow
+\text{验证}
+\rightarrow
+\text{结论}
+\rightarrow
+\text{跨题接口}.
+\]
+
+关键防错规则：
+
+- 先证明可识别，再允许估计；
+- 下游需求不能反向创造上游参数；
+- 文献模型先核条件，再决定是否可用；
+- validation/test 不回流拟合；
+- support shift 与目标变量同时变化时，不得做单因素机制归因；
+- estimated/半合成/插值必须与真实观测分开；
+- 结果稳定、bootstrap 窄、代码测试通过都不能替代 identifiability；
+- 每次完整审查必须做一次从零 red-team，避免“所有文件彼此一致但共同建立在错误前提上”。
+
+审查结果按 BLOCKER / MAJOR / MINOR / NOTE 分级，并明确最终状态。Q1 2026-09-24 的错误是永久反例：三组经验幅度可以拟合 \(\eta\)，但附件 A 不足以识别纯 \(N\) 连续尺度律。
+
