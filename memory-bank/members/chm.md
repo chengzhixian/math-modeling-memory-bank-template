@@ -86,3 +86,48 @@ Q1 质量全量初版已运行，网页端 LFS 阻塞解除。Q1 配比已本地
 - 用户指定优先解决受污染祖先不能直接并入 main，以及配比旧结果与新版目录混用。审查其他数学、代码问题逐项登记于 problem/chm/20260923_web_review_open_issues.md，暂不修改模型。
 - 三个配比生成脚本与 q1_figures.py 默认输入/输出均改为 outputs/chm/local_recheck_v1/；旧根目录配比表原样归档至 outputs/chm/archive/web_v0/。q1_verify_local.py 已同步新归档路径，默认命令复跑通过。
 - clean integration 已建立并远端核验：`integration/chm-q1-clean-20260923`，首个干净提交 `c57ec6916a03dce53734a1c5254f3f53d4f7b9f2`，唯一父提交为当前 main `a0932fd92b...`；相对 main ahead 1 / behind 0，69 个变更文件全部属于 chm 归属范围。后续集成人应从该 clean integration 分支验收，禁止直接 merge `team/chm-data`。
+
+
+## 2026-09-24 16:51 Q3 启动与上游复核
+
+已全面重读 main、chm clean、cyj 最新个人分支和 zhh 个人分支的公共规则/成员记忆/接口/最新交接。
+
+### 上游结论
+
+- main 最新公共 HEAD：`968ef7a36f1503aa222a0b09c8a8cb5d0f535ecd`。
+- cyj 最新 HEAD：`6c17cb4e387e1ac047f8fe0e9ecb6fe42fc5ef3b`。已经提供 `cyj.q3.v1`、B1 N-D predictor、题面三成本、约束残差和显式 p scenario；机器包仍 `ready_for_Q3=false`。最新 B7 质量提交只有代码与运行前协议，尚无真实 fit 输出。
+- zhh 最新 HEAD 仍为 `d47cd2dc921333caecfcb95f09eb5a2f2714d0db`；C7 CSV 存在，合同/成员记忆仍滞后。
+
+### 本轮 chm 新增
+
+- `src/chm/q3_preflight.py`：锁定精确 cyj/zhh ref 的 formal readiness gate。
+- `src/chm/q3_nd_baseline.py`：B1 N-D 解析诊断。
+- `src/chm/q3_solver.py`：gated solver scaffold；p 情景要求显式 target/lambda/eta，p 只从 A4 已观测 512 配方中选择。
+- `outputs/chm/q3_nd_diagnostic.csv` 及 manifest。
+- `outputs/chm/q3_preflight_snapshot.json`。
+- `experiments/chm/20260924-q3-nd-diagnostic.md`。
+- `problem/chm/20260924_q3_upstream_status.md`。
+- `src/chm/test_q3_nd_baseline.py`。
+
+诊断发现：1e19 三个上下文均内点；1e22/2048 已触 D 上界；1e24 三个上下文均 N/D 双上界且预算大量剩余。该现象只说明 B1 支持域不足，不能写成高预算正式最优结论。
+
+### Q1 接口修订
+
+cyj 指出的 CRLF/LF manifest 问题已修为新生产者版本 `chm.q1.v1.1`：
+- 新 manifest：`interfaces/chm/q1_interface_v1_1.json`；
+- `hash_mode=sha256_utf8_lf_normalized`；
+- 旧 v1 保留追溯，不静默覆盖；
+- 科学数值不变。
+
+完整本地环境仍需复跑 v1.1 接口测试后再通知 cyj 切换。
+
+### 当前正式阻塞
+
+正式 Q3 仍等待：
+1. cyj B7-native Q 模型实际运行与发布；
+2. cyj 对 B1/B7 Loss 关系的正式处理；
+3. p primary anchor / lambda_loss 的 validated 或正式 scenario-only 决策；
+4. cyj `ready_for_Q3=true`；
+5. zhh 更新 C7 合同/版本状态。
+
+在此之前只发布 diagnostic/scenario，不发布正式最优配置。
