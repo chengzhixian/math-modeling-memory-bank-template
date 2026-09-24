@@ -10,7 +10,7 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 成员称呼：cyj（用户已指定）。实际电脑/环境：Windows 10.0.26200；Python 3.12.14（Codex 工作区运行时）；详见 `problem/cyj/environment.md`。
 当前分支：`team/cyj-scaling`；已包含 main `a0932fd92b3a46cef8eb0bf563df1e6abc9396ef`；本轮 B1 组级 bootstrap 代码/输入提交 `8dd672eb53571325f27342f4e545c0fa7bf06f24`，已生成条件诊断结果。
 状态：进行中。Stage 1 审计、B1 经典 N-D 基线、八行计算量显示精度/剔除敏感性，以及 B2/B3 轨迹形状诊断已完成；B1 Loss 近乎精确重构的来源仍未查明，接口仍是 draft，`ready_for_Q3=false`。
-远端状态：运行前检查点 `65b3a722d83b7206290acec12474fd2dabafe796` 已推送，`ls-remote` 与本地 SHA 一致；本轮结果/交接仍待本次提交推送与最终核验。
+远端状态：运行前检查点 `65b3a722d83b7206290acec12474fd2dabafe796` 已推送并核验；结果提交 `472b76ebd9010ca09a5af76da134c6c96f409435` 因 GitHub 443 连接失败未能推送，本补记也只在本地。网络恢复后优先 fetch、检查分叉、push 并比对远端 SHA，不能将本地结果视为备份。
 
 ## 本轮 B1 整组 bootstrap 已验证结果
 

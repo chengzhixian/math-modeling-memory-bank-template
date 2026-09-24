@@ -24,3 +24,5 @@
 ## 提交推送检查点
 
 本交接随本人实验、结果、合同和记忆按明确文件暂存，执行 `git diff --check`、`git commit -m "cyj: record B1 group-bootstrap conditional uncertainty"`、`git push origin team/cyj-scaling`，最后比较 `git rev-parse HEAD` 与 `git ls-remote origin refs/heads/team/cyj-scaling`；未核对前不得称远端备份成功。
+
+实际执行补记：结果提交为 `472b76ebd9010ca09a5af76da134c6c96f409435`，提交前 `git diff --cached --check` 通过，工作区干净且相对 main 的改动均在 cyj 归属目录。随后的 `git fetch origin --prune` 成功、`origin/main` 仍为 `a0932fd92b3a46cef8eb0bf563df1e6abc9396ef`；多次 `git -c http.sslBackend=openssl push origin team/cyj-scaling` 因 GitHub 443 无法连接或连接重置失败，HTTP/1.1 变体也失败；一次 `ls-remote` 同样失败。最后已核远端仍只可确认运行前提交 `65b3a722d83b7206290acec12474fd2dabafe796`，**不能声称结果提交已推送或远端 SHA 一致**。网络恢复后 cyj 首先执行 `git fetch origin --prune`、检查分叉、`git push origin team/cyj-scaling`、`git rev-parse HEAD` 与 `git ls-remote origin refs/heads/team/cyj-scaling` 核对；禁止强推。
