@@ -1,0 +1,39 @@
+{
+  "schema_version": "chm.q3.quality_cost.v1",
+  "status": "diagnostic_only",
+  "ready_for_Q3": false,
+  "Q0_example": 0.5,
+  "Q0_status": "explicit example only; not a fixed official baseline",
+  "curvature": {
+    "exp": "convex",
+    "power": "convex",
+    "log": "concave"
+  },
+  "incremental_cost_crossings": {
+    "exp_vs_power": [],
+    "exp_vs_log": [
+      0.7491087845477821
+    ],
+    "power_vs_log": [
+      0.5767452673466299
+    ]
+  },
+  "marginal_cost_crossings": {
+    "exp_vs_power": [
+      0.2271765140773862,
+      0.9341099161909157
+    ],
+    "exp_vs_log": [
+      0.6356036257655661
+    ],
+    "power_vs_log": [
+      0.5389137409614086
+    ]
+  },
+  "identities": {
+    "C_Q_over_C_train": "delta_g/(6e9*N_B)",
+    "C_Q_over_C_attn": "delta_g/(2e5*N_B*L_ctx)",
+    "Q0_left_derivative": "0 because max(g(Q)-g(Q0),0)",
+    "Q0_right_derivative": "1e9*D_B*g_prime(Q0)"
+  }
+}

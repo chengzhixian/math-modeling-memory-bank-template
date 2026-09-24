@@ -233,3 +233,23 @@ synthetic quality 模型只用于软件验证，其数值最优解不得进入�
 精确转移阈值见 `outputs/chm/q3_budget_transitions.csv`，方法与解释见 `experiments/chm/20260924-q3-budget-transitions.md`。2001 点对数预算扫描能在网格分辨率内恢复全部解析转移，无额外伪转移。
 
 该阶段结果是 solver/结构判据验证，不解除 cyj Q、lambda、anchor 和 zhh 正式接口的阻塞。
+
+
+## 2026-09-24 Q3 质量成本函数敏感性
+
+继续完成不依赖 cyj 最终 Q 性能模型的成本侧分析。题面三类质量成本均按
+`C_Q=1e9*D_B*max(g(Q)-g(Q0),0)`，本阶段只研究成本曲率、单侧导数和与训练/注意力成本的量级关系，不发布最优 Q。
+
+解析结果：
+- exponential 与 power 为凸成本，log 为凹成本；
+- `Q=Q0` 处左导数为 0、右导数为 `1e9*D_B*g'(Q0)`，存在 kink；
+- `C_Q/C_train = Δg/(6e9*N_B)`，与 D 无关；
+- `C_Q/C_attn = Δg/(2e5*N_B*L_ctx)`，与 D 同样无关。
+
+仅作可复核示例的 `Q0=0.5`：
+- 增量 exp 与 log 在 `Q≈0.7491088` 交叉；
+- log 与 power 在 `Q≈0.5767453` 交叉；
+- 但 power 在整个 `0.5<Q<=1` 都不是最低增量成本族；
+- Q=0.8 时，使质量成本=训练成本的 N_B 阈值分别约 exp 0.169、power 0.289、log 0.135。
+
+输出见 `outputs/chm/q3_quality_cost_sensitivity_q0_0p5.csv` 与 `outputs/chm/q3_quality_cost_crossings_q0_0p5.json`。该示例的 Q0=0.5 来自 cyj 接口算例，不代表官方固定基准；正式 Q3 必须使用上游定义的 Q0。
