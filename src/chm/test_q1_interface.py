@@ -77,6 +77,18 @@ class Q1InterfaceTests(unittest.TestCase):
         self.assertEqual(result["bridge_to_B1_val_loss"], "unidentified")
         self.assertFalse(result["direct_B1_addition_allowed"])
 
+    def test_effect_vector_and_interaction_matrix(self):
+        vector = self.q1.effect_vector(self.q1.reference)
+        self.assertEqual(len(vector["effects"]), 13)
+        for value in vector["effects"].values():
+            self.assertAlmostEqual(value, 0.0, places=12)
+
+        matrix = self.q1.interaction_matrix()
+        self.assertEqual(len(matrix["targets"]), 13)
+        self.assertEqual(len(matrix["domains"]), 17)
+        self.assertEqual(len(matrix["matrix"]), 13)
+        self.assertTrue(all(len(row) == 17 for row in matrix["matrix"]))
+
     def test_ranking_validation_is_explicit(self):
         result = self.q1.ranking_validation("pile_cc")
         self.assertAlmostEqual(result["test_1m_spearman"], 0.9007345788509955)
