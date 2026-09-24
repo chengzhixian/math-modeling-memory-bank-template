@@ -1,6 +1,6 @@
-# chm Q1 接口使用说明（`chm.q1.v1`）
+# chm Q1 接口使用说明（当前 `chm.q1.v1.1`）
 
-这是 chm 定义、cyj 直接消费的 A 侧接口。唯一有效清单为 `interfaces/chm/q1_interface_v1.json`；其中列出六个现有结果文件的 SHA256 与行数，**不复制一套新数据**。读取时先校验清单；文件更新后须发布新接口版本，不能静默覆盖。
+这是 chm 定义、cyj 直接消费的 A 侧接口。当前有效清单为 `interfaces/chm/q1_interface_v1_1.json`；其中列出六个现有结果文件的规范化 SHA256 与行数，`hash_mode=sha256_utf8_lf_normalized`，**不复制一套新数据**。读取时先将文本行尾统一为 LF 后校验清单；文件更新后须发布新接口版本，不能静默覆盖。
 
 ## 快速验收
 
@@ -42,3 +42,8 @@ effect = q1.relative_effect(p, 'pile_cc', n_params=60_000_000)
 ## cyj 的消费边界
 
 cyj 应直接读取 B6–B8 文件自带的 `Q_score` 来拟合 B 侧质量项，并记录三文件的半合成/外推分层；可将 `quality()` 用于 A 侧域相对排序与情景标签，将 `relative_effect()` 用于逐 target 的配比敏感性。**B1 Loss anchor、跨 Loss 系数和最终预测器由 cyj 定义**，要求清单见 `interfaces/chm/CYJ_REQUIRED_INTERFACE.md`。在 cyj 的模型把这些量定义并验收前，不能把本接口返回值直接加到 B1 Loss 或产出正式 Q3 最优配置。消费记录须写入实际分支、完整 Git SHA、接口版本、清单 SHA、使用 target 与 eta 情景。
+
+
+## 版本兼容说明
+
+旧 `chm.q1.v1` 的三个 CSV manifest 哈希受 Windows CRLF 影响。科学数值未变，但跨平台消费者需要特殊恢复逻辑。新 `chm.q1.v1.1` 只修复文本身份协议，不改变 Q/p/eta 数值。新消费者不要自行重建旧 v1 manifest；应改用 v1.1，并记录当前生产者 commit 和 manifest SHA。
