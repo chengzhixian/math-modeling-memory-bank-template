@@ -146,6 +146,7 @@ function classifyType(rawType) {
 function isOpenModel(row) {
   const openWeights = String(row.Epoch_AI_Open_Weights || '').trim().toLowerCase();
   const license = String(row['Hub License'] || '').trim().toLowerCase();
+  if (openWeights === 'no') return false;
   return openWeights === 'yes' || (license && !['unknown', 'other', 'n/a', 'nan'].includes(license));
 }
 
@@ -163,6 +164,7 @@ function parseLeaderboard() {
       month: Number.isFinite(timestamp) ? (timestamp - minimumDate) / (365.25 / 12 * 24 * 3600 * 1000) : null,
       license: row['Hub License'],
       epochOpenWeights: row.Epoch_AI_Open_Weights,
+      epochOpenStatus: String(row.Epoch_AI_Open_Weights || '').trim().toLowerCase(),
       type: classifyType(row.Type),
       open: isOpenModel(row),
       score: mean(scores),
@@ -175,6 +177,7 @@ function parseLeaderboard() {
   parseLeaderboard.audit = {
     eligibleBeforeCompleteCase: eligibleRows.length,
     incompleteSixScoreRowsExcluded: eligibleRows.filter(row => !row.scores.every(Number.isFinite)).length,
+    explicitClosedLicenseConflicts: parsedRows.filter(row => row.epochOpenStatus === 'no' && String(row.license || '').trim() && !['unknown', 'other', 'n/a', 'nan'].includes(String(row.license).trim().toLowerCase()) && row.paramsB > 0 && Number.isFinite(row.timestamp) && row.scores.every(Number.isFinite)).length,
   };
   return eligibleRows.filter(row => row.scores.every(Number.isFinite));
 }
@@ -255,6 +258,43 @@ function analyzeContribution(leaderboardRows) {
       modelTypeMix: typeContribution,
       scaleShareAbsolute: absoluteTotal ? Math.abs(scaleContribution) / absoluteTotal : null,
       nonScaleShareAbsolute: absoluteTotal ? (Math.abs(timeContribution) + Math.abs(typeContribution)) / absoluteTotal : null,
+    },
+  };
+}
+
+function analyzeSensitivity(rows) {
+  const strict = rows.filter(row => row.epochOpenStatus === 'yes');
+  const summarize = subset => {
+    const contribution = analyzeContribution(subset);
+    const forecast = forecastFrontier(subset);
+    return {
+      n: subset.length,
+      coefficients: contribution.model.coefficients,
+      fitMetrics: contribution.model.metrics,
+      contributions: contribution.contributions,
+      timeHoldout: forecast.timeHoldout,
+      dateRange: [new Date(Math.min(...subset.map(row => row.timestamp))).toISOString().slice(0, 10), new Date(Math.max(...subset.map(row => row.timestamp))).toISOString().slice(0, 10)],
+    };
+  };
+  const pretrained = rows.filter(row => row.type === 'pretrained');
+  const nonPretrained = rows.filter(row => row.type === 'non_pretrained');
+  const grouped = subset => {
+    const fitted = fitOls(subset.map(row => ({ ...row, scoreValue: row.score })), ['logParams', 'month'], 'scoreValue');
+    return { n: subset.length, coefficients: fitted.coefficients, fitMetrics: fitted.metrics };
+  };
+  const interactionRows = rows.map(row => ({ ...row, scoreValue: row.score, monthByType: row.month * row.nonPretrainedIndicator, logParamsByType: row.logParams * row.nonPretrainedIndicator }));
+  const interaction = fitOls(interactionRows, ['logParams', 'month', 'nonPretrainedIndicator', 'monthByType', 'logParamsByType'], 'scoreValue');
+  const latest = new Map();
+  for (const row of rows) {
+    if (!latest.has(row.model) || row.timestamp > latest.get(row.model).timestamp) latest.set(row.model, row);
+  }
+  const latestFit = fitOls([...latest.values()].map(row => ({ ...row, scoreValue: row.score })), ['logParams', 'month', 'nonPretrainedIndicator'], 'scoreValue');
+  return {
+    openFilterSensitivity: { strictEpochYes: summarize(strict), licenseProxyExpanded: summarize(rows) },
+    typeSensitivity: {
+      pretrained: grouped(pretrained), nonPretrained: grouped(nonPretrained),
+      interaction: { n: rows.length, coefficients: interaction.coefficients, fitMetrics: interaction.metrics },
+      latestModelRecord: { n: latest.size, coefficients: latestFit.coefficients, fitMetrics: latestFit.metrics },
     },
   };
 }
@@ -392,6 +432,7 @@ function main() {
   const epochCompute = analyzeEpochCompute();
   const timeseries = analyzeTimeseries();
   const forecast = forecastFrontier(leaderboard);
+  const sensitivity = analyzeSensitivity(leaderboard);
   const contexts = contextScenarios();
 
   writeCsv('c8_bbh_task_aggregation.csv', detailed.aggregates, ['modelDirectory', 'sourceFile', 'bbhTaskCount', 'bbhMacroMean', 'bbhTaskSd', 'bbhTaskMin', 'bbhTaskMax']);
@@ -409,7 +450,7 @@ function main() {
   const result = {
     definitions: {
       capability: 'Unweighted mean of the six C1/C2 benchmark scores, defined only for complete six-score cases.',
-      openFilter: 'Epoch open weights is Yes, or a non-empty recognizable Hub license is present.',
+      openFilter: 'Epoch open weights Yes or recognizable Hub license when Epoch status is not No. A license is an availability proxy, not proof of accessible weights.',
       timeAxis: 'Leaderboard submission date; C1/C2 span is reported explicitly.',
       modelTypes: 'pretrained versus non_pretrained from the Type field; non_pretrained includes chat, domain-finetuned, merges and multimodal entries.',
       contribution: 'OLS score ~ log10(parameters in billions) + months since 2024-06 + non-pretrained indicator.',
@@ -419,6 +460,8 @@ function main() {
       leaderboardUsableOpenRows: leaderboard.length,
       leaderboardEligibleBeforeCompleteCase: parseLeaderboard.audit.eligibleBeforeCompleteCase,
       leaderboardIncompleteSixScoreRowsExcluded: parseLeaderboard.audit.incompleteSixScoreRowsExcluded,
+      explicitClosedLicenseConflicts: parseLeaderboard.audit.explicitClosedLicenseConflicts,
+      explicitClosedRowsIncluded: leaderboard.filter(row => row.epochOpenStatus === 'no').length,
       leaderboardMinDate: new Date(Math.min(...leaderboard.map(row => row.timestamp))).toISOString().slice(0, 10),
       leaderboardMaxDate: new Date(Math.max(...leaderboard.map(row => row.timestamp))).toISOString().slice(0, 10),
       pretrainedRows: leaderboard.filter(row => row.type === 'pretrained').length,
@@ -434,6 +477,8 @@ function main() {
       endProfile: contribution.endProfile,
       contributions: contribution.contributions,
     },
+    openFilterSensitivity: sensitivity.openFilterSensitivity,
+    typeSensitivity: sensitivity.typeSensitivity,
     bridge: {
       highComparability: bridge.highModel,
       comparabilityWeighted: bridge.weightedModel,

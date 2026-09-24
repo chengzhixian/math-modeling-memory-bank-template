@@ -10,11 +10,11 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 成员称呼：zhh（用户已指定）。
 实际电脑/环境：Windows；项目位于 `E:\研数模\math-modeling-memory-bank-template`；Node.js v24.19.0。
 当前分支：`team/zhh-frontier`。
-状态：Q4 可复现基线已完成；当前分支已同步远程 `team/zhh-frontier`，本轮继续补充候选接口。
+状态：Q4 基线、开放性与模型类型敏感性已复跑；本轮远端同步状态以 Git 核验为准。
 
 ## 当前任务
 
-已完成 C 附件审计、C8 逐任务聚合、规模/非规模关联分解、分级 Loss–Benchmark 桥接、C7 情景和 12 个月算力放缓预测。C7 三档已作为候选外生接口发布；Loss–Benchmark 仍为弱识别，消费者必须返回 `unidentified`。
+已完成 C 附件审计、C8 逐任务聚合、规模/非规模关联分解、分级 Loss–Benchmark 桥接、C7 情景和 Q4 敏感性分析。算力放缓能力预测因缺少算力到参数前沿映射而撤回；Loss–Benchmark 仍为弱识别，消费者必须返回 `unidentified`。
 zhh 兼集成人目前仍只是建议；团队确认前不修改公共六文件或 `main`。
 
 ## 本次已验证与证据
@@ -22,9 +22,10 @@ zhh 兼集成人目前仍只是建议；团队确认前不修改公共六文件�
 - 运行命令：`node src/zhh/q4_analysis.js`。
 - 输入版本：GitHub `main` 快照 `ddbdb634f10ade5251334ae0a35dcf401f98d857`。
 - C8：1,863 个目录中 1,860 个成功聚合 24 个 BBH 子任务；扫描识别 4 个损坏 JSON。
-- 贡献分解：样本内 `R²=0.503`；早末窗口贡献为规模 -6.470、时间 +7.807、类型 +0.463 分；绝对贡献归一后非规模约 56.1%。这是关联分解，不是严格因果份额。
+- 开放性：排除 Epoch 明确 no 且有许可证的 6 条冲突记录，扩展集 2,672 条；Epoch 明确 yes 严格集 424 条。扩展集样本内 `R²=0.504`，早末窗口规模/时间/类型关联项 -6.531/+7.894/+0.468 分；严格集规模绝对份额 48.97%，扩展集 43.85%。这不是技术因果份额。
+- 模型类型：扩展集 pretrained 254 条与 non-pretrained 2,418 条，时间斜率分别为 0.431 与 1.115 分/月；共同斜率不能直接外推。
 - 桥接：高可比仅 7 条；分级模型 Loss 留出 RMSE=7.060、`R²=-1.376`，判定为弱识别，不能直接把 Loss 改善等同于 Benchmark 增益。
-- 预测：以 2025-03-13 为锚点，12 个月极强/中度算力放缓情景分别为 47.86 [45.63,49.65] 和 49.33 [47.22,51.47]。
+- 预测：算力放缓能力效应 `not_identified_for_compute_slowdown`，点值与区间为空；固定参数前沿及类型结构的 12 个月时间关联代数值 46.63 分超出约九个月观测窗，不能作为已验证预测。
 - 输出：`outputs/zhh/q4_results.json`、`c8_bbh_task_aggregation.csv`、`frontier_forecast.csv`、`context_scenarios.csv`、`bridge_interface.json`。
 - 论文：`paper/sections/zhh/q4.md`；实验记录：`experiments/zhh/q4-baseline.md`。
 

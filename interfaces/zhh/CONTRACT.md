@@ -11,3 +11,5 @@
 结果归 outputs/zhh/，代码归 src/zhh/。主论文引用各成员已经验收的结果，不能为统稿方便更改他人的数值文件。C7 文件 `outputs/zhh/context_scenarios.csv` 的 SHA256 为 `b494a8949a74133e779b683c8a46021b5e16308970150bd18e033553c6fc8608`。Loss–Benchmark 的 Loss 排序留出 RMSE=7.060 分、按来源留出 RMSE=9.887 分，均是误差量级而非置信区间；消费者应返回 `unidentified`。
 
 算力放缓预测同样暂缓：现有 C4 只有年度算力前沿，未提供经过验证的“算力前沿到参数量前沿”映射。不能把 $\Delta\log_{10}(\mathrm{compute})$ 直接加到 $\log_{10}(N)$。当前输出只保留固定参数前沿的时间关联情景，不能解释为算力放缓下的能力预测。
+
+开放性口径：`Epoch_AI_Open_Weights=no` 优先于许可证，6 条冲突行被排除。扩展集 2,672 条仅把许可证视为可获取性代理；严格 `Epoch=yes` 集 424 条。两集及 pretrained/non-pretrained 分组、交互模型、最新模型记录敏感性见 `outputs/zhh/q4_results.json`。主模型共同时间斜率不支持跨类型的 12 个月预测；C1/C2 仅覆盖约九个月，C3 不并入同一能力时间曲线。C1/C6 跨表连接不得只用模型名。

@@ -1,19 +1,21 @@
 {
   "definitions": {
     "capability": "Unweighted mean of the six C1/C2 benchmark scores, defined only for complete six-score cases.",
-    "openFilter": "Epoch open weights is Yes, or a non-empty recognizable Hub license is present.",
+    "openFilter": "Epoch open weights Yes or recognizable Hub license when Epoch status is not No. A license is an availability proxy, not proof of accessible weights.",
     "timeAxis": "Leaderboard submission date; C1/C2 span is reported explicitly.",
     "modelTypes": "pretrained versus non_pretrained from the Type field; non_pretrained includes chat, domain-finetuned, merges and multimodal entries.",
     "contribution": "OLS score ~ log10(parameters in billions) + months since 2024-06 + non-pretrained indicator.",
     "forecast": "Compute-slowdown forecast is withheld because no validated compute-to-parameter-frontier mapping is identified; a conditional time-only association is reported separately."
   },
   "audit": {
-    "leaderboardUsableOpenRows": 2678,
-    "leaderboardEligibleBeforeCompleteCase": 2678,
+    "leaderboardUsableOpenRows": 2672,
+    "leaderboardEligibleBeforeCompleteCase": 2672,
     "leaderboardIncompleteSixScoreRowsExcluded": 0,
+    "explicitClosedLicenseConflicts": 6,
+    "explicitClosedRowsIncluded": 0,
     "leaderboardMinDate": "2024-06-08",
     "leaderboardMaxDate": "2025-03-13",
-    "pretrainedRows": 260,
+    "pretrainedRows": 254,
     "nonPretrainedRows": 2418,
     "c8Directories": 1863,
     "c8AggregatedDirectories": 1860,
@@ -21,21 +23,21 @@
   },
   "contribution": {
     "coefficients": {
-      "intercept": 1.8665173872293974,
-      "logParams": 13.589548330384687,
-      "month": 1.060159537100293,
-      "nonPretrainedIndicator": 3.4537672998062363
+      "intercept": 1.494774941724692,
+      "logParams": 13.717047332235294,
+      "month": 1.0723707530765954,
+      "nonPretrainedIndicator": 3.6482517524672002
     },
     "fitMetrics": {
-      "n": 2678,
-      "rmse": 7.686240957304289,
-      "mae": 5.928049740602902,
-      "r2": 0.5032701374227846
+      "n": 2672,
+      "rmse": 7.671204547850304,
+      "mae": 5.9118303726420915,
+      "r2": 0.5043210083595111
     },
     "startProfile": {
       "logParams": 1.8485216407506466,
-      "month": 1.0020824626119837,
-      "nonPretrainedIndicator": 0.7982300884955752
+      "month": 1.0050108525769852,
+      "nonPretrainedIndicator": 0.803921568627451
     },
     "endProfile": {
       "logParams": 1.3723964324231115,
@@ -43,11 +45,141 @@
       "nonPretrainedIndicator": 0.9322033898305084
     },
     "contributions": {
-      "scale": -6.4703265298815165,
-      "nonScaleTime": 7.807473442535288,
-      "modelTypeMix": 0.4627126071976796,
-      "scaleShareAbsolute": 0.43894854367749114,
-      "nonScaleShareAbsolute": 0.5610514563225089
+      "scale": -6.5310320186991895,
+      "nonScaleTime": 7.894261799647089,
+      "modelTypeMix": 0.46800437901373826,
+      "scaleShareAbsolute": 0.43852153714728404,
+      "nonScaleShareAbsolute": 0.561478462852716
+    }
+  },
+  "openFilterSensitivity": {
+    "strictEpochYes": {
+      "n": 424,
+      "coefficients": {
+        "intercept": 0.3406405060802049,
+        "logParams": 14.492242532116952,
+        "month": 0.9711704486910758,
+        "nonPretrainedIndicator": 6.670796706151607
+      },
+      "fitMetrics": {
+        "n": 424,
+        "rmse": 8.66570415799072,
+        "mae": 6.709059939659781,
+        "r2": 0.47651046881921255
+      },
+      "contributions": {
+        "scale": -9.995179703606265,
+        "nonScaleTime": 7.353924052123905,
+        "modelTypeMix": 3.0630938280337725,
+        "scaleShareAbsolute": 0.4896670073170626,
+        "nonScaleShareAbsolute": 0.5103329926829375
+      },
+      "timeHoldout": {
+        "nTrain": 339,
+        "nTest": 85,
+        "rmse": 11.388108214028515,
+        "mae": 9.032555506350786,
+        "r2": 0.05155390474250943
+      },
+      "dateRange": [
+        "2024-06-08",
+        "2025-03-13"
+      ]
+    },
+    "licenseProxyExpanded": {
+      "n": 2672,
+      "coefficients": {
+        "intercept": 1.494774941724692,
+        "logParams": 13.717047332235294,
+        "month": 1.0723707530765954,
+        "nonPretrainedIndicator": 3.6482517524672002
+      },
+      "fitMetrics": {
+        "n": 2672,
+        "rmse": 7.671204547850304,
+        "mae": 5.9118303726420915,
+        "r2": 0.5043210083595111
+      },
+      "contributions": {
+        "scale": -6.5310320186991895,
+        "nonScaleTime": 7.894261799647089,
+        "modelTypeMix": 0.46800437901373826,
+        "scaleShareAbsolute": 0.43852153714728404,
+        "nonScaleShareAbsolute": 0.561478462852716
+      },
+      "timeHoldout": {
+        "nTrain": 2142,
+        "nTest": 530,
+        "rmse": 9.16210588678149,
+        "mae": 7.422109207992874,
+        "r2": 0.3961341671142361
+      },
+      "dateRange": [
+        "2024-06-08",
+        "2025-03-13"
+      ]
+    }
+  },
+  "typeSensitivity": {
+    "pretrained": {
+      "n": 254,
+      "coefficients": {
+        "intercept": 6.834700068584963,
+        "logParams": 7.007063880402648,
+        "month": 0.43123071935621105
+      },
+      "fitMetrics": {
+        "n": 254,
+        "rmse": 5.751914746099451,
+        "mae": 4.337078161771093,
+        "r2": 0.46562883919510667
+      }
+    },
+    "nonPretrained": {
+      "n": 2418,
+      "coefficients": {
+        "intercept": 3.1155495265797537,
+        "logParams": 15.756036421237454,
+        "month": 1.1147705179149727
+      },
+      "fitMetrics": {
+        "n": 2418,
+        "rmse": 7.615288483511443,
+        "mae": 5.859064764047688,
+        "r2": 0.4833733308255732
+      }
+    },
+    "interaction": {
+      "n": 2672,
+      "coefficients": {
+        "intercept": 6.834700068485478,
+        "logParams": 7.007063880481881,
+        "month": 0.4312307193695646,
+        "nonPretrainedIndicator": -3.7191505418929105,
+        "monthByType": 0.6835397985434234,
+        "logParamsByType": 8.74897254075613
+      },
+      "fitMetrics": {
+        "n": 2672,
+        "rmse": 7.45820743325861,
+        "mae": 5.714384899909393,
+        "r2": 0.5314647151724694
+      }
+    },
+    "latestModelRecord": {
+      "n": 2616,
+      "coefficients": {
+        "intercept": 1.4067349272830403,
+        "logParams": 13.797967493733003,
+        "month": 1.0799065948265354,
+        "nonPretrainedIndicator": 3.61027475306742
+      },
+      "fitMetrics": {
+        "n": 2616,
+        "rmse": 7.686932461486329,
+        "mae": 5.917908674271736,
+        "r2": 0.5035604351773961
+      }
     }
   },
   "bridge": {
@@ -185,29 +317,29 @@
     "statusReason": "No validated mapping from the C4 compute frontier to the C1/C2 parameter frontier is available; adding compute growth to log10 parameter count is dimensionally unsupported.",
     "model": {
       "coefficients": {
-        "intercept": 1.8665173872293974,
-        "logParams": 13.589548330384687,
-        "month": 1.060159537100293,
-        "nonPretrainedIndicator": 3.4537672998062363
+        "intercept": 1.494774941724692,
+        "logParams": 13.717047332235294,
+        "month": 1.0723707530765954,
+        "nonPretrainedIndicator": 3.6482517524672002
       },
       "metrics": {
-        "n": 2678,
-        "rmse": 7.686240957304289,
-        "mae": 5.928049740602902,
-        "r2": 0.5032701374227846
+        "n": 2672,
+        "rmse": 7.671204547850304,
+        "mae": 5.9118303726420915,
+        "r2": 0.5043210083595111
       }
     },
     "timeHoldout": {
-      "nTrain": 2148,
+      "nTrain": 2142,
       "nTest": 530,
-      "rmse": 9.172908573553789,
-      "mae": 7.446219341836708,
-      "r2": 0.3947093376579469
+      "rmse": 9.16210588678149,
+      "mae": 7.422109207992874,
+      "r2": 0.3961341671142361
     },
     "currentLogParamsFrontier": 1.3723964324231115,
     "conditionalTimeOnly": {
       "horizonMonths": 12,
-      "predictedScore": 46.38504355498334,
+      "predictedScore": 46.630453048983576,
       "interpretation": "Conditional association forecast holding the current parameter frontier and model-type mix fixed; it is not a compute-slowdown forecast."
     },
     "predictions": []
