@@ -334,3 +334,7 @@ Q1 曾把 1M/60M/1B 三个实验组上的经验配比幅度差异进一步解释
 \]
 
 完整复盘见 problem/chm/20260924_q1_identifiability_failure_postmortem.md。用户要求把完整仓库审查流程同步到 main，作为所有成员和 AI 的公共强制规则：以后收到“审查远程分支/本地仓库/代码/数学模型/问题”等请求时，必须执行全流程，不能只做代码 lint、diff 或数值复算。
+
+## 2026-09-24 Q1 LaTeX 编译快照同步
+
+Q1 LaTeX 源文已按可识别性修正撤出连续配比尺度律；本次重新运行 XeLaTeX/BibTeX/XeLaTeX 两次，形成 18 页 paper/latex/output/chm-q1-draft-20260924.pdf。PDF 已核对包含可识别性边界、冻结 1M 代理排序验证与跨实验组限制；旧 10 页快照从 Git 移除。main 仍只保留空白模板。
