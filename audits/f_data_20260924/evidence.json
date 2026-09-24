@@ -1,0 +1,4988 @@
+{
+  "inventory": {
+    "files": 2012,
+    "extensions": {
+      ".csv": 41,
+      ".xz": 4,
+      ".parquet": 1,
+      ".json": 1959,
+      ".md": 7
+    },
+    "different_or_missing": [],
+    "repo_extra": []
+  },
+  "pdf": [
+    {
+      "path": "H:\\研究生数模\\F题\\数据说明.pdf",
+      "sha256": "daa8479decf578ec5f0b165683ac5715fed445ba8c148f386e7b071f5c27dfdc",
+      "bytes": 13207231,
+      "pages": 13,
+      "text_chars": 0,
+      "annotations": 0,
+      "catalog_keys": [
+        "/Type",
+        "/Pages"
+      ],
+      "metadata": "{'/Title': '数据说明 - 干净纯图像版', '/Subject': '已移除第2-13页顶部与底部隐藏文字区域的纯图像PDF', '/CreationDate': 'D:20260923074023Z', '/ModDate': 'D:20260923074023Z'}"
+    },
+    {
+      "path": "problem\\F\\数据说明.pdf",
+      "sha256": "daa8479decf578ec5f0b165683ac5715fed445ba8c148f386e7b071f5c27dfdc",
+      "bytes": 13207231,
+      "pages": 13,
+      "text_chars": 0,
+      "annotations": 0,
+      "catalog_keys": [
+        "/Type",
+        "/Pages"
+      ],
+      "metadata": "{'/Title': '数据说明 - 干净纯图像版', '/Subject': '已移除第2-13页顶部与底部隐藏文字区域的纯图像PDF', '/CreationDate': 'D:20260923074023Z', '/ModDate': 'D:20260923074023Z'}"
+    }
+  ],
+  "docx": [
+    {
+      "file": "算力约束下提升大语言模型能力的资源配置建模.docx",
+      "hidden_runs": [],
+      "extra_parts": [
+        "word/header1.xml",
+        "word/header2.xml",
+        "word/footer1.xml",
+        "word/footer2.xml",
+        "word/header3.xml",
+        "word/footer3.xml"
+      ]
+    }
+  ],
+  "csv": {
+    "A_data_value/domain_mapping_guide.csv": {
+      "shape": [
+        17,
+        4
+      ],
+      "columns": [
+        "mixture_domain",
+        "quality_domain",
+        "mapping_type",
+        "note"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {},
+      "constant_columns": [],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "A_data_value/regmix_domain_summary.csv": {
+      "shape": [
+        17,
+        5
+      ],
+      "columns": [
+        "domain",
+        "source_path",
+        "sample_rows",
+        "sample_bytes_requested",
+        "avg_text_chars"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "sample_rows": {
+          "min": 16,
+          "max": 30378,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "sample_bytes_requested": {
+          "min": 83886080,
+          "max": 83886080,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "avg_text_chars": {
+          "min": 1330.45,
+          "max": 381179.59,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [
+        "sample_bytes_requested"
+      ],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "A_data_value/regmix_tables/est_mixture_10b.csv": {
+      "shape": [
+        63,
+        18
+      ],
+      "columns": [
+        "index",
+        "train_the_pile_arxiv",
+        "train_the_pile_freelaw",
+        "train_the_pile_nih_exporter",
+        "train_the_pile_pubmed_central",
+        "train_the_pile_wikipedia_en",
+        "train_the_pile_dm_mathematics",
+        "train_the_pile_github",
+        "train_the_pile_philpapers",
+        "train_the_pile_stackexchange",
+        "train_the_pile_enron_emails",
+        "train_the_pile_gutenberg_pg_19",
+        "train_the_pile_pile_cc",
+        "train_the_pile_ubuntu_irc",
+        "train_the_pile_europarl",
+        "train_the_pile_hackernews",
+        "train_the_pile_pubmed_abstracts",
+        "train_the_pile_uspto_backgrounds"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "index": {
+          "min": 1,
+          "max": 63,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_arxiv": {
+          "min": 0.0,
+          "max": 0.904,
+          "zeros": 22,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_freelaw": {
+          "min": 0.0,
+          "max": 0.944,
+          "zeros": 21,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_nih_exporter": {
+          "min": 0.0,
+          "max": 0.05,
+          "zeros": 34,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_pubmed_central": {
+          "min": 0.0,
+          "max": 0.828,
+          "zeros": 21,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_wikipedia_en": {
+          "min": 0.0,
+          "max": 0.59,
+          "zeros": 25,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_dm_mathematics": {
+          "min": 0.0,
+          "max": 0.222,
+          "zeros": 32,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_github": {
+          "min": 0.0,
+          "max": 0.783,
+          "zeros": 25,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_philpapers": {
+          "min": 0.0,
+          "max": 0.055,
+          "zeros": 36,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_stackexchange": {
+          "min": 0.0,
+          "max": 0.552,
+          "zeros": 23,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_enron_emails": {
+          "min": 0.0,
+          "max": 0.019,
+          "zeros": 48,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_gutenberg_pg_19": {
+          "min": 0.0,
+          "max": 0.4,
+          "zeros": 21,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_pile_cc": {
+          "min": 0.0,
+          "max": 0.86,
+          "zeros": 20,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_ubuntu_irc": {
+          "min": 0.0,
+          "max": 0.148,
+          "zeros": 38,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_europarl": {
+          "min": 0.0,
+          "max": 0.114,
+          "zeros": 31,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_hackernews": {
+          "min": 0.0,
+          "max": 0.119,
+          "zeros": 38,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_pubmed_abstracts": {
+          "min": 0.0,
+          "max": 0.546,
+          "zeros": 26,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_uspto_backgrounds": {
+          "min": 0.0,
+          "max": 0.673,
+          "zeros": 26,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "A_data_value/regmix_tables/est_mixture_70b.csv": {
+      "shape": [
+        63,
+        18
+      ],
+      "columns": [
+        "index",
+        "train_the_pile_arxiv",
+        "train_the_pile_freelaw",
+        "train_the_pile_nih_exporter",
+        "train_the_pile_pubmed_central",
+        "train_the_pile_wikipedia_en",
+        "train_the_pile_dm_mathematics",
+        "train_the_pile_github",
+        "train_the_pile_philpapers",
+        "train_the_pile_stackexchange",
+        "train_the_pile_enron_emails",
+        "train_the_pile_gutenberg_pg_19",
+        "train_the_pile_pile_cc",
+        "train_the_pile_ubuntu_irc",
+        "train_the_pile_europarl",
+        "train_the_pile_hackernews",
+        "train_the_pile_pubmed_abstracts",
+        "train_the_pile_uspto_backgrounds"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "index": {
+          "min": 1,
+          "max": 63,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_arxiv": {
+          "min": 0.0,
+          "max": 0.904,
+          "zeros": 22,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_freelaw": {
+          "min": 0.0,
+          "max": 0.944,
+          "zeros": 21,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_nih_exporter": {
+          "min": 0.0,
+          "max": 0.05,
+          "zeros": 34,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_pubmed_central": {
+          "min": 0.0,
+          "max": 0.828,
+          "zeros": 21,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_wikipedia_en": {
+          "min": 0.0,
+          "max": 0.59,
+          "zeros": 25,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_dm_mathematics": {
+          "min": 0.0,
+          "max": 0.222,
+          "zeros": 32,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_github": {
+          "min": 0.0,
+          "max": 0.783,
+          "zeros": 25,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_philpapers": {
+          "min": 0.0,
+          "max": 0.055,
+          "zeros": 36,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_stackexchange": {
+          "min": 0.0,
+          "max": 0.552,
+          "zeros": 23,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_enron_emails": {
+          "min": 0.0,
+          "max": 0.019,
+          "zeros": 48,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_gutenberg_pg_19": {
+          "min": 0.0,
+          "max": 0.4,
+          "zeros": 21,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_pile_cc": {
+          "min": 0.0,
+          "max": 0.86,
+          "zeros": 20,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_ubuntu_irc": {
+          "min": 0.0,
+          "max": 0.148,
+          "zeros": 38,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_europarl": {
+          "min": 0.0,
+          "max": 0.114,
+          "zeros": 31,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_hackernews": {
+          "min": 0.0,
+          "max": 0.119,
+          "zeros": 38,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_pubmed_abstracts": {
+          "min": 0.0,
+          "max": 0.546,
+          "zeros": 26,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_uspto_backgrounds": {
+          "min": 0.0,
+          "max": 0.673,
+          "zeros": 26,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "A_data_value/regmix_tables/est_pile_loss_10b.csv": {
+      "shape": [
+        63,
+        14
+      ],
+      "columns": [
+        "index",
+        "metric/the_pile_arxiv_val_loss",
+        "metric/the_pile_freelaw_val_loss",
+        "metric/the_pile_pubmed_central_val_loss",
+        "metric/the_pile_wikipedia_en_val_loss",
+        "metric/the_pile_dm_mathematics_val_loss",
+        "metric/the_pile_github_val_loss",
+        "metric/the_pile_stackexchange_val_loss",
+        "metric/the_pile_gutenberg_pg_19_val_loss",
+        "metric/the_pile_pile_cc_val_loss",
+        "metric/the_pile_ubuntu_irc_val_loss",
+        "metric/the_pile_hackernews_val_loss",
+        "metric/the_pile_pubmed_abstracts_val_loss",
+        "metric/the_pile_uspto_backgrounds_val_loss"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "index": {
+          "min": 1,
+          "max": 63,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_arxiv_val_loss": {
+          "min": 1.0486,
+          "max": 2.3615,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_freelaw_val_loss": {
+          "min": 0.9749,
+          "max": 2.4423,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_pubmed_central_val_loss": {
+          "min": 1.0114,
+          "max": 2.1906,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_wikipedia_en_val_loss": {
+          "min": 1.3918,
+          "max": 2.5116,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_dm_mathematics_val_loss": {
+          "min": 0.6258,
+          "max": 1.9448,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_github_val_loss": {
+          "min": 1.1153,
+          "max": 2.2485,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_stackexchange_val_loss": {
+          "min": 1.3223,
+          "max": 2.0749,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_gutenberg_pg_19_val_loss": {
+          "min": 1.3043,
+          "max": 2.2052,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_pile_cc_val_loss": {
+          "min": 1.4675,
+          "max": 2.4014,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_ubuntu_irc_val_loss": {
+          "min": 1.6397,
+          "max": 2.9153,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_hackernews_val_loss": {
+          "min": 1.4418,
+          "max": 2.2718,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_pubmed_abstracts_val_loss": {
+          "min": 1.2101,
+          "max": 2.2223,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_uspto_backgrounds_val_loss": {
+          "min": 1.1278,
+          "max": 2.1819,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "A_data_value/regmix_tables/est_pile_loss_70b.csv": {
+      "shape": [
+        63,
+        14
+      ],
+      "columns": [
+        "index",
+        "metric/the_pile_arxiv_val_loss",
+        "metric/the_pile_freelaw_val_loss",
+        "metric/the_pile_pubmed_central_val_loss",
+        "metric/the_pile_wikipedia_en_val_loss",
+        "metric/the_pile_dm_mathematics_val_loss",
+        "metric/the_pile_github_val_loss",
+        "metric/the_pile_stackexchange_val_loss",
+        "metric/the_pile_gutenberg_pg_19_val_loss",
+        "metric/the_pile_pile_cc_val_loss",
+        "metric/the_pile_ubuntu_irc_val_loss",
+        "metric/the_pile_hackernews_val_loss",
+        "metric/the_pile_pubmed_abstracts_val_loss",
+        "metric/the_pile_uspto_backgrounds_val_loss"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "index": {
+          "min": 1,
+          "max": 63,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_arxiv_val_loss": {
+          "min": 0.8006,
+          "max": 1.7909,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_freelaw_val_loss": {
+          "min": 0.7261,
+          "max": 1.9874,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_pubmed_central_val_loss": {
+          "min": 0.7569,
+          "max": 1.7529,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_wikipedia_en_val_loss": {
+          "min": 1.0555,
+          "max": 2.0438,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_dm_mathematics_val_loss": {
+          "min": 0.4964,
+          "max": 1.5436,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_github_val_loss": {
+          "min": 0.8524,
+          "max": 1.8061,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_stackexchange_val_loss": {
+          "min": 1.0106,
+          "max": 1.6667,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_gutenberg_pg_19_val_loss": {
+          "min": 0.981,
+          "max": 1.7654,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_pile_cc_val_loss": {
+          "min": 1.0931,
+          "max": 1.9606,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_ubuntu_irc_val_loss": {
+          "min": 1.2435,
+          "max": 2.353,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_hackernews_val_loss": {
+          "min": 1.0934,
+          "max": 1.8547,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_pubmed_abstracts_val_loss": {
+          "min": 0.9056,
+          "max": 1.7891,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_uspto_backgrounds_val_loss": {
+          "min": 0.8482,
+          "max": 1.7756,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "A_data_value/regmix_tables/test_mixture_1B.csv": {
+      "shape": [
+        64,
+        18
+      ],
+      "columns": [
+        "index",
+        "train_the_pile_arxiv",
+        "train_the_pile_freelaw",
+        "train_the_pile_nih_exporter",
+        "train_the_pile_pubmed_central",
+        "train_the_pile_wikipedia_en",
+        "train_the_pile_dm_mathematics",
+        "train_the_pile_github",
+        "train_the_pile_philpapers",
+        "train_the_pile_stackexchange",
+        "train_the_pile_enron_emails",
+        "train_the_pile_gutenberg_pg_19",
+        "train_the_pile_pile_cc",
+        "train_the_pile_ubuntu_irc",
+        "train_the_pile_europarl",
+        "train_the_pile_hackernews",
+        "train_the_pile_pubmed_abstracts",
+        "train_the_pile_uspto_backgrounds"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "index": {
+          "min": 0,
+          "max": 63,
+          "zeros": 1,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_arxiv": {
+          "min": 0.0,
+          "max": 0.501,
+          "zeros": 1,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_freelaw": {
+          "min": 0.002,
+          "max": 0.276,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_nih_exporter": {
+          "min": 0.0,
+          "max": 0.253,
+          "zeros": 53,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_pubmed_central": {
+          "min": 0.039,
+          "max": 0.501,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_wikipedia_en": {
+          "min": 0.0,
+          "max": 0.287,
+          "zeros": 5,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_dm_mathematics": {
+          "min": 0.0,
+          "max": 0.174,
+          "zeros": 26,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_github": {
+          "min": 0.006,
+          "max": 0.482,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_philpapers": {
+          "min": 0.0,
+          "max": 0.069,
+          "zeros": 53,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_stackexchange": {
+          "min": 0.0,
+          "max": 0.408,
+          "zeros": 1,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_enron_emails": {
+          "min": 0.0,
+          "max": 0.009,
+          "zeros": 62,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_gutenberg_pg_19": {
+          "min": 0.0,
+          "max": 0.265,
+          "zeros": 22,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_pile_cc": {
+          "min": 0.006,
+          "max": 0.618,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_ubuntu_irc": {
+          "min": 0.0,
+          "max": 0.296,
+          "zeros": 34,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_europarl": {
+          "min": 0.0,
+          "max": 0.117,
+          "zeros": 42,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_hackernews": {
+          "min": 0.0,
+          "max": 0.034,
+          "zeros": 46,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_pubmed_abstracts": {
+          "min": 0.0,
+          "max": 0.351,
+          "zeros": 10,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_uspto_backgrounds": {
+          "min": 0.0,
+          "max": 0.307,
+          "zeros": 5,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "A_data_value/regmix_tables/test_mixture_1m.csv": {
+      "shape": [
+        256,
+        18
+      ],
+      "columns": [
+        "index",
+        "train_the_pile_arxiv",
+        "train_the_pile_freelaw",
+        "train_the_pile_nih_exporter",
+        "train_the_pile_pubmed_central",
+        "train_the_pile_wikipedia_en",
+        "train_the_pile_dm_mathematics",
+        "train_the_pile_github",
+        "train_the_pile_philpapers",
+        "train_the_pile_stackexchange",
+        "train_the_pile_enron_emails",
+        "train_the_pile_gutenberg_pg_19",
+        "train_the_pile_pile_cc",
+        "train_the_pile_ubuntu_irc",
+        "train_the_pile_europarl",
+        "train_the_pile_hackernews",
+        "train_the_pile_pubmed_abstracts",
+        "train_the_pile_uspto_backgrounds"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "index": {
+          "min": 1,
+          "max": 256,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_arxiv": {
+          "min": 0.0,
+          "max": 0.961,
+          "zeros": 78,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_freelaw": {
+          "min": 0.0,
+          "max": 0.955,
+          "zeros": 91,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_nih_exporter": {
+          "min": 0.0,
+          "max": 0.055,
+          "zeros": 150,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_pubmed_central": {
+          "min": 0.0,
+          "max": 0.901,
+          "zeros": 75,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_wikipedia_en": {
+          "min": 0.0,
+          "max": 0.762,
+          "zeros": 100,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_dm_mathematics": {
+          "min": 0.0,
+          "max": 0.239,
+          "zeros": 117,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_github": {
+          "min": 0.0,
+          "max": 0.988,
+          "zeros": 70,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_philpapers": {
+          "min": 0.0,
+          "max": 0.055,
+          "zeros": 153,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_stackexchange": {
+          "min": 0.0,
+          "max": 0.9,
+          "zeros": 87,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_enron_emails": {
+          "min": 0.0,
+          "max": 0.025,
+          "zeros": 161,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_gutenberg_pg_19": {
+          "min": 0.0,
+          "max": 0.403,
+          "zeros": 104,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_pile_cc": {
+          "min": 0.0,
+          "max": 0.956,
+          "zeros": 84,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_ubuntu_irc": {
+          "min": 0.0,
+          "max": 0.177,
+          "zeros": 126,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_europarl": {
+          "min": 0.0,
+          "max": 0.117,
+          "zeros": 124,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_hackernews": {
+          "min": 0.0,
+          "max": 0.116,
+          "zeros": 139,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_pubmed_abstracts": {
+          "min": 0.0,
+          "max": 0.561,
+          "zeros": 112,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_uspto_backgrounds": {
+          "min": 0.0,
+          "max": 0.695,
+          "zeros": 100,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "A_data_value/regmix_tables/test_mixture_60m.csv": {
+      "shape": [
+        256,
+        18
+      ],
+      "columns": [
+        "index",
+        "train_the_pile_arxiv",
+        "train_the_pile_freelaw",
+        "train_the_pile_nih_exporter",
+        "train_the_pile_pubmed_central",
+        "train_the_pile_wikipedia_en",
+        "train_the_pile_dm_mathematics",
+        "train_the_pile_github",
+        "train_the_pile_philpapers",
+        "train_the_pile_stackexchange",
+        "train_the_pile_enron_emails",
+        "train_the_pile_gutenberg_pg_19",
+        "train_the_pile_pile_cc",
+        "train_the_pile_ubuntu_irc",
+        "train_the_pile_europarl",
+        "train_the_pile_hackernews",
+        "train_the_pile_pubmed_abstracts",
+        "train_the_pile_uspto_backgrounds"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "index": {
+          "min": 1,
+          "max": 256,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_arxiv": {
+          "min": 0.0,
+          "max": 0.961,
+          "zeros": 78,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_freelaw": {
+          "min": 0.0,
+          "max": 0.955,
+          "zeros": 91,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_nih_exporter": {
+          "min": 0.0,
+          "max": 0.055,
+          "zeros": 150,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_pubmed_central": {
+          "min": 0.0,
+          "max": 0.901,
+          "zeros": 75,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_wikipedia_en": {
+          "min": 0.0,
+          "max": 0.762,
+          "zeros": 100,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_dm_mathematics": {
+          "min": 0.0,
+          "max": 0.239,
+          "zeros": 117,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_github": {
+          "min": 0.0,
+          "max": 0.988,
+          "zeros": 70,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_philpapers": {
+          "min": 0.0,
+          "max": 0.055,
+          "zeros": 153,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_stackexchange": {
+          "min": 0.0,
+          "max": 0.9,
+          "zeros": 87,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_enron_emails": {
+          "min": 0.0,
+          "max": 0.025,
+          "zeros": 161,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_gutenberg_pg_19": {
+          "min": 0.0,
+          "max": 0.403,
+          "zeros": 104,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_pile_cc": {
+          "min": 0.0,
+          "max": 0.956,
+          "zeros": 84,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_ubuntu_irc": {
+          "min": 0.0,
+          "max": 0.177,
+          "zeros": 126,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_europarl": {
+          "min": 0.0,
+          "max": 0.117,
+          "zeros": 124,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_hackernews": {
+          "min": 0.0,
+          "max": 0.116,
+          "zeros": 139,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_pubmed_abstracts": {
+          "min": 0.0,
+          "max": 0.561,
+          "zeros": 112,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_uspto_backgrounds": {
+          "min": 0.0,
+          "max": 0.695,
+          "zeros": 100,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "A_data_value/regmix_tables/test_pile_loss_1B.csv": {
+      "shape": [
+        64,
+        14
+      ],
+      "columns": [
+        "index",
+        "metric/the_pile_arxiv_val_loss",
+        "metric/the_pile_freelaw_val_loss",
+        "metric/the_pile_pubmed_central_val_loss",
+        "metric/the_pile_wikipedia_en_val_loss",
+        "metric/the_pile_dm_mathematics_val_loss",
+        "metric/the_pile_github_val_loss",
+        "metric/the_pile_stackexchange_val_loss",
+        "metric/the_pile_gutenberg_pg_19_val_loss",
+        "metric/the_pile_pile_cc_val_loss",
+        "metric/the_pile_ubuntu_irc_val_loss",
+        "metric/the_pile_hackernews_val_loss",
+        "metric/the_pile_pubmed_abstracts_val_loss",
+        "metric/the_pile_uspto_backgrounds_val_loss"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "index": {
+          "min": 0,
+          "max": 63,
+          "zeros": 1,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_arxiv_val_loss": {
+          "min": 1.618142962,
+          "max": 2.271117926,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_freelaw_val_loss": {
+          "min": 1.744507432,
+          "max": 2.378318071,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_pubmed_central_val_loss": {
+          "min": 1.646798015,
+          "max": 1.865561604,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_wikipedia_en_val_loss": {
+          "min": 2.235873461,
+          "max": 2.944387674,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_dm_mathematics_val_loss": {
+          "min": 1.180990467,
+          "max": 2.182944706,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_github_val_loss": {
+          "min": 0.831067204,
+          "max": 1.39827621,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_stackexchange_val_loss": {
+          "min": 1.6276443,
+          "max": 2.149958134,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_gutenberg_pg_19_val_loss": {
+          "min": 2.299435777,
+          "max": 3.447351329,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_pile_cc_val_loss": {
+          "min": 2.817120314,
+          "max": 3.340331554,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_ubuntu_irc_val_loss": {
+          "min": 1.765116104,
+          "max": 3.225806486,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_hackernews_val_loss": {
+          "min": 2.675413838,
+          "max": 3.457481465,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_pubmed_abstracts_val_loss": {
+          "min": 2.18347252,
+          "max": 2.663124948,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_uspto_backgrounds_val_loss": {
+          "min": 2.050786957,
+          "max": 2.662802867,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "A_data_value/regmix_tables/test_pile_loss_1m.csv": {
+      "shape": [
+        256,
+        14
+      ],
+      "columns": [
+        "index",
+        "metric/the_pile_arxiv_val_loss",
+        "metric/the_pile_freelaw_val_loss",
+        "metric/the_pile_pubmed_central_val_loss",
+        "metric/the_pile_wikipedia_en_val_loss",
+        "metric/the_pile_dm_mathematics_val_loss",
+        "metric/the_pile_github_val_loss",
+        "metric/the_pile_stackexchange_val_loss",
+        "metric/the_pile_gutenberg_pg_19_val_loss",
+        "metric/the_pile_pile_cc_val_loss",
+        "metric/the_pile_ubuntu_irc_val_loss",
+        "metric/the_pile_hackernews_val_loss",
+        "metric/the_pile_pubmed_abstracts_val_loss",
+        "metric/the_pile_uspto_backgrounds_val_loss"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "index": {
+          "min": 1,
+          "max": 256,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_arxiv_val_loss": {
+          "min": 3.63838243484497,
+          "max": 7.142473220825195,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_freelaw_val_loss": {
+          "min": 3.86080002784729,
+          "max": 6.862546443939209,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_pubmed_central_val_loss": {
+          "min": 3.862565755844116,
+          "max": 6.957304000854492,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_wikipedia_en_val_loss": {
+          "min": 4.7230305671691895,
+          "max": 7.166999340057373,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_dm_mathematics_val_loss": {
+          "min": 1.834458470344544,
+          "max": 6.2641472816467285,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_github_val_loss": {
+          "min": 3.6935882568359375,
+          "max": 7.509933948516846,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_stackexchange_val_loss": {
+          "min": 3.9877002239227295,
+          "max": 6.952165603637695,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_gutenberg_pg_19_val_loss": {
+          "min": 4.6640167236328125,
+          "max": 6.7244133949279785,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_pile_cc_val_loss": {
+          "min": 5.127173900604248,
+          "max": 6.680059432983398,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_ubuntu_irc_val_loss": {
+          "min": 4.698722839355469,
+          "max": 8.19113540649414,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_hackernews_val_loss": {
+          "min": 4.698311805725098,
+          "max": 6.307061195373535,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_pubmed_abstracts_val_loss": {
+          "min": 4.4454193115234375,
+          "max": 7.118744850158691,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_uspto_backgrounds_val_loss": {
+          "min": 4.11890172958374,
+          "max": 6.433174133300781,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "A_data_value/regmix_tables/test_pile_loss_60m.csv": {
+      "shape": [
+        256,
+        14
+      ],
+      "columns": [
+        "index",
+        "metric/the_pile_arxiv_val_loss",
+        "metric/the_pile_freelaw_val_loss",
+        "metric/the_pile_pubmed_central_val_loss",
+        "metric/the_pile_wikipedia_en_val_loss",
+        "metric/the_pile_dm_mathematics_val_loss",
+        "metric/the_pile_github_val_loss",
+        "metric/the_pile_stackexchange_val_loss",
+        "metric/the_pile_gutenberg_pg_19_val_loss",
+        "metric/the_pile_pile_cc_val_loss",
+        "metric/the_pile_ubuntu_irc_val_loss",
+        "metric/the_pile_hackernews_val_loss",
+        "metric/the_pile_pubmed_abstracts_val_loss",
+        "metric/the_pile_uspto_backgrounds_val_loss"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "index": {
+          "min": 1,
+          "max": 256,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_arxiv_val_loss": {
+          "min": 2.428633213043213,
+          "max": 5.253716468811035,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_freelaw_val_loss": {
+          "min": 2.740884304046631,
+          "max": 5.408122539520264,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_pubmed_central_val_loss": {
+          "min": 2.594552516937256,
+          "max": 5.100874423980713,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_wikipedia_en_val_loss": {
+          "min": 3.49935245513916,
+          "max": 5.70850944519043,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_dm_mathematics_val_loss": {
+          "min": 1.4979498386383057,
+          "max": 4.700700759887695,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_github_val_loss": {
+          "min": 1.6727877855300903,
+          "max": 5.617336273193359,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_stackexchange_val_loss": {
+          "min": 2.620208740234375,
+          "max": 5.571836948394775,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_gutenberg_pg_19_val_loss": {
+          "min": 3.780369997024536,
+          "max": 5.580061912536621,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_pile_cc_val_loss": {
+          "min": 4.100112915039063,
+          "max": 5.616564750671387,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_ubuntu_irc_val_loss": {
+          "min": 3.29723858833313,
+          "max": 6.663201808929443,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_hackernews_val_loss": {
+          "min": 3.797587394714356,
+          "max": 5.303886413574219,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_pubmed_abstracts_val_loss": {
+          "min": 3.1979644298553467,
+          "max": 5.789244651794434,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_uspto_backgrounds_val_loss": {
+          "min": 2.943828582763672,
+          "max": 5.011646747589111,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "A_data_value/regmix_tables/train_mixture_1m.csv": {
+      "shape": [
+        512,
+        18
+      ],
+      "columns": [
+        "index",
+        "train_the_pile_arxiv",
+        "train_the_pile_freelaw",
+        "train_the_pile_nih_exporter",
+        "train_the_pile_pubmed_central",
+        "train_the_pile_wikipedia_en",
+        "train_the_pile_dm_mathematics",
+        "train_the_pile_github",
+        "train_the_pile_philpapers",
+        "train_the_pile_stackexchange",
+        "train_the_pile_enron_emails",
+        "train_the_pile_gutenberg_pg_19",
+        "train_the_pile_pile_cc",
+        "train_the_pile_ubuntu_irc",
+        "train_the_pile_europarl",
+        "train_the_pile_hackernews",
+        "train_the_pile_pubmed_abstracts",
+        "train_the_pile_uspto_backgrounds"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "index": {
+          "min": 1,
+          "max": 512,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_arxiv": {
+          "min": 0.0,
+          "max": 0.904,
+          "zeros": 187,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_freelaw": {
+          "min": 0.0,
+          "max": 0.993,
+          "zeros": 190,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_nih_exporter": {
+          "min": 0.0,
+          "max": 0.058,
+          "zeros": 297,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_pubmed_central": {
+          "min": 0.0,
+          "max": 0.999,
+          "zeros": 156,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_wikipedia_en": {
+          "min": 0.0,
+          "max": 0.708,
+          "zeros": 207,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_dm_mathematics": {
+          "min": 0.0,
+          "max": 0.235,
+          "zeros": 242,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_github": {
+          "min": 0.0,
+          "max": 0.991,
+          "zeros": 189,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_philpapers": {
+          "min": 0.0,
+          "max": 0.055,
+          "zeros": 306,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_stackexchange": {
+          "min": 0.0,
+          "max": 0.998,
+          "zeros": 195,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_enron_emails": {
+          "min": 0.0,
+          "max": 0.026,
+          "zeros": 352,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_gutenberg_pg_19": {
+          "min": 0.0,
+          "max": 0.404,
+          "zeros": 229,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_pile_cc": {
+          "min": 0.0,
+          "max": 0.995,
+          "zeros": 157,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_ubuntu_irc": {
+          "min": 0.0,
+          "max": 0.176,
+          "zeros": 252,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_europarl": {
+          "min": 0.0,
+          "max": 0.117,
+          "zeros": 264,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_hackernews": {
+          "min": 0.0,
+          "max": 0.12,
+          "zeros": 269,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_pubmed_abstracts": {
+          "min": 0.0,
+          "max": 0.576,
+          "zeros": 228,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_the_pile_uspto_backgrounds": {
+          "min": 0.0,
+          "max": 0.678,
+          "zeros": 208,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "A_data_value/regmix_tables/train_pile_loss_1m.csv": {
+      "shape": [
+        512,
+        14
+      ],
+      "columns": [
+        "index",
+        "metric/the_pile_arxiv_val_loss",
+        "metric/the_pile_freelaw_val_loss",
+        "metric/the_pile_pubmed_central_val_loss",
+        "metric/the_pile_wikipedia_en_val_loss",
+        "metric/the_pile_dm_mathematics_val_loss",
+        "metric/the_pile_github_val_loss",
+        "metric/the_pile_stackexchange_val_loss",
+        "metric/the_pile_gutenberg_pg_19_val_loss",
+        "metric/the_pile_pile_cc_val_loss",
+        "metric/the_pile_ubuntu_irc_val_loss",
+        "metric/the_pile_hackernews_val_loss",
+        "metric/the_pile_pubmed_abstracts_val_loss",
+        "metric/the_pile_uspto_backgrounds_val_loss"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "index": {
+          "min": 1,
+          "max": 512,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_arxiv_val_loss": {
+          "min": 3.638108968734741,
+          "max": 8.6060152053833,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_freelaw_val_loss": {
+          "min": 3.8528454303741455,
+          "max": 6.986804008483887,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_pubmed_central_val_loss": {
+          "min": 3.839930534362793,
+          "max": 7.713242053985596,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_wikipedia_en_val_loss": {
+          "min": 4.753479957580566,
+          "max": 7.345041751861572,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_dm_mathematics_val_loss": {
+          "min": 1.8064392805099487,
+          "max": 6.514107704162598,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_github_val_loss": {
+          "min": 3.687921762466431,
+          "max": 8.633968353271484,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_stackexchange_val_loss": {
+          "min": 3.9462523460388175,
+          "max": 7.5593180656433105,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_gutenberg_pg_19_val_loss": {
+          "min": 4.639332294464111,
+          "max": 6.6837358474731445,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_pile_cc_val_loss": {
+          "min": 5.08212947845459,
+          "max": 6.644932746887207,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_ubuntu_irc_val_loss": {
+          "min": 4.756647109985352,
+          "max": 8.715591430664062,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_hackernews_val_loss": {
+          "min": 4.725355625152588,
+          "max": 6.505864143371582,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_pubmed_abstracts_val_loss": {
+          "min": 4.422640323638916,
+          "max": 7.743064880371094,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "metric/the_pile_uspto_backgrounds_val_loss": {
+          "min": 4.122546195983887,
+          "max": 6.911014080047607,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "attachment_size_summary.csv": {
+      "shape": [
+        2012,
+        4
+      ],
+      "columns": [
+        "file",
+        "bytes",
+        "MB",
+        "GB"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "bytes": {
+          "min": 1265,
+          "max": 550913965,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "MB": {
+          "min": 0.001,
+          "max": 550.914,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "GB": {
+          "min": 1e-06,
+          "max": 0.550914,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "B_scaling_laws/cerebras_training_log.csv": {
+      "shape": [
+        1029,
+        15
+      ],
+      "columns": [
+        "run_id",
+        "N_params_B",
+        "D_tokens_B",
+        "C_FLOPs_1e21",
+        "steps",
+        "batch_tokens_M",
+        "lr",
+        "wd",
+        "precision",
+        "gpu_days",
+        "step_time_ms",
+        "train_loss",
+        "val_loss",
+        "ppl",
+        "grad_norm_avg"
+      ],
+      "missing": {
+        "gpu_days": 1029,
+        "step_time_ms": 1029,
+        "grad_norm_avg": 1029
+      },
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "N_params_B": {
+          "min": 0.111,
+          "max": 13.0,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "D_tokens_B": {
+          "min": 14.0,
+          "max": 2050.0,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "C_FLOPs_1e21": {
+          "min": 0.009548,
+          "max": 159.9,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "steps": {
+          "min": 1000,
+          "max": 147000,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "batch_tokens_M": {
+          "min": 14.3,
+          "max": 14.3,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "lr": {
+          "min": 0.0006,
+          "max": 0.0006,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "wd": {
+          "min": 0.1,
+          "max": 0.1,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "gpu_days": {
+          "min": null,
+          "max": null,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "step_time_ms": {
+          "min": null,
+          "max": null,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_loss": {
+          "min": 2.8505,
+          "max": 6.504,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "val_loss": {
+          "min": 2.8354,
+          "max": 6.4979,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "ppl": {
+          "min": 17.04,
+          "max": 663.77,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "grad_norm_avg": {
+          "min": null,
+          "max": null,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [
+        "batch_tokens_M",
+        "lr",
+        "wd",
+        "precision",
+        "gpu_days",
+        "step_time_ms",
+        "grad_norm_avg"
+      ],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "B_scaling_laws/open_model_family_metadata.csv": {
+      "shape": [
+        18,
+        8
+      ],
+      "columns": [
+        "family",
+        "model_repo",
+        "config_bytes",
+        "readme_bytes",
+        "weight_file_count",
+        "weight_total_bytes",
+        "source_url",
+        "error"
+      ],
+      "missing": {
+        "error": 18
+      },
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "config_bytes": {
+          "min": 359,
+          "max": 1322,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "readme_bytes": {
+          "min": 10560,
+          "max": 17697,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "weight_file_count": {
+          "min": 1,
+          "max": 6,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "weight_total_bytes": {
+          "min": 56303938,
+          "max": 55104826062,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "error": {
+          "min": null,
+          "max": null,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [
+        "error"
+      ],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "B_scaling_laws/published_scaling_data.csv": {
+      "shape": [
+        44,
+        6
+      ],
+      "columns": [
+        "family",
+        "N_params_B",
+        "D_tokens_B",
+        "val_loss",
+        "source",
+        "is_converged"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "N_params_B": {
+          "min": 0.125,
+          "max": 540.0,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "D_tokens_B": {
+          "min": 5,
+          "max": 2000,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "val_loss": {
+          "min": 1.473,
+          "max": 3.015,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "is_converged": {
+          "min": 1,
+          "max": 1,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [
+        "is_converged"
+      ],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "B_scaling_laws/pythia_checkpoint_index.csv": {
+      "shape": [
+        1386,
+        5
+      ],
+      "columns": [
+        "model_repo",
+        "model_size",
+        "step",
+        "branch",
+        "commit"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "step": {
+          "min": 0,
+          "max": 143000,
+          "zeros": 9,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "B_scaling_laws/pythia_training_log_existing.csv": {
+      "shape": [
+        1176,
+        15
+      ],
+      "columns": [
+        "run_id",
+        "N_params_B",
+        "D_tokens_B",
+        "C_FLOPs_1e21",
+        "steps",
+        "batch_tokens_M",
+        "lr",
+        "wd",
+        "precision",
+        "gpu_days",
+        "step_time_ms",
+        "train_loss",
+        "val_loss",
+        "ppl",
+        "grad_norm_avg"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "run_id": {
+          "min": 8,
+          "max": 1232,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "N_params_B": {
+          "min": 0.070542,
+          "max": 11.965825,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "D_tokens_B": {
+          "min": 0.134,
+          "max": 299.893,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "C_FLOPs_1e21": {
+          "min": 0.0001,
+          "max": 21.5308,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "steps": {
+          "min": 64,
+          "max": 143000,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "batch_tokens_M": {
+          "min": 2.09,
+          "max": 2.1,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "lr": {
+          "min": 0.00019,
+          "max": 0.000318,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "wd": {
+          "min": 0.01,
+          "max": 0.1,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "gpu_days": {
+          "min": 0.0,
+          "max": 798.7,
+          "zeros": 14,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "step_time_ms": {
+          "min": 100.4,
+          "max": 1307.4,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "train_loss": {
+          "min": 1.943,
+          "max": 4.4729,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "val_loss": {
+          "min": 2.0933,
+          "max": 4.7388,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "ppl": {
+          "min": 8.11,
+          "max": 114.3,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "grad_norm_avg": {
+          "min": 0.392,
+          "max": 25.788,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "B_scaling_laws/scaling_baseline.csv": {
+      "shape": [
+        57,
+        5
+      ],
+      "columns": [
+        "family",
+        "N_params_B",
+        "D_tokens_B",
+        "val_loss",
+        "is_converged"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "N_params_B": {
+          "min": 0.07,
+          "max": 72.0,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "D_tokens_B": {
+          "min": 6,
+          "max": 33739,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "val_loss": {
+          "min": 1.71,
+          "max": 4.3629,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "is_converged": {
+          "min": 1,
+          "max": 1,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [
+        "is_converged"
+      ],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "B_scaling_laws/supplementary_large_baseline.csv": {
+      "shape": [
+        128,
+        5
+      ],
+      "columns": [
+        "family",
+        "N_params_B",
+        "D_tokens_B",
+        "val_loss",
+        "is_converged"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "N_params_B": {
+          "min": 100.0,
+          "max": 10000.0,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "D_tokens_B": {
+          "min": 0.1,
+          "max": 36000.0,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "val_loss": {
+          "min": 1.7838,
+          "max": 4.0812,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "is_converged": {
+          "min": 1,
+          "max": 1,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [
+        "is_converged"
+      ],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "B_scaling_laws/supplementary_large_models.csv": {
+      "shape": [
+        132,
+        8
+      ],
+      "columns": [
+        "model_name",
+        "N_params_B",
+        "D_tokens_B",
+        "FLOPs",
+        "publication_date",
+        "organization",
+        "accessibility",
+        "country"
+      ],
+      "missing": {
+        "FLOPs": 11,
+        "organization": 1,
+        "accessibility": 2,
+        "country": 1
+      },
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "N_params_B": {
+          "min": 100.0,
+          "max": 10000.0,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "D_tokens_B": {
+          "min": 0.0,
+          "max": 36000.0,
+          "zeros": 4,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "FLOPs": {
+          "min": 1.449e+18,
+          "max": 4.9999999999999994e+26,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "B_scaling_laws/supplementary_NQ_experiment.csv": {
+      "shape": [
+        360,
+        5
+      ],
+      "columns": [
+        "experiment_id",
+        "N_params_B",
+        "D_tokens_B",
+        "Q_score",
+        "val_loss"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "N_params_B": {
+          "min": 0.07,
+          "max": 11.97,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "D_tokens_B": {
+          "min": 10,
+          "max": 600,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "Q_score": {
+          "min": 0.1,
+          "max": 1.0,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "val_loss": {
+          "min": 2.0161,
+          "max": 3.7216,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "B_scaling_laws/supplementary_NQ_experiment_expanded.csv": {
+      "shape": [
+        450,
+        5
+      ],
+      "columns": [
+        "experiment_id",
+        "N_params_B",
+        "D_tokens_B",
+        "Q_score",
+        "val_loss"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "N_params_B": {
+          "min": 0.07,
+          "max": 11.97,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "D_tokens_B": {
+          "min": 10.0,
+          "max": 600.0,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "Q_score": {
+          "min": 0.1,
+          "max": 1.0,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "val_loss": {
+          "min": 2.0161,
+          "max": 3.7216,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "B_scaling_laws/supplementary_NQ_experiment_large.csv": {
+      "shape": [
+        1704,
+        6
+      ],
+      "columns": [
+        "experiment_id",
+        "N_params_B",
+        "D_tokens_B",
+        "Q_score",
+        "val_loss",
+        "data_type"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "N_params_B": {
+          "min": 0.07,
+          "max": 700.0,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "D_tokens_B": {
+          "min": 5,
+          "max": 2000,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "Q_score": {
+          "min": 0.05,
+          "max": 1.0,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "val_loss": {
+          "min": 0.5,
+          "max": 3.3659,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "B_scaling_laws/training_trajectories/pythia_0.070542B_trajectory.csv": {
+      "shape": [
+        500,
+        5
+      ],
+      "columns": [
+        "N_params_B",
+        "D_tokens_B",
+        "val_loss",
+        "step",
+        "interpolated"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "N_params_B": {
+          "min": 0.070542,
+          "max": 0.070542,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "D_tokens_B": {
+          "min": 0.134,
+          "max": 299.893,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "val_loss": {
+          "min": 2.8127,
+          "max": 4.7385,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "step": {
+          "min": 0,
+          "max": 143,
+          "zeros": 178,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "interpolated": {
+          "min": 1,
+          "max": 1,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [
+        "N_params_B",
+        "interpolated"
+      ],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "B_scaling_laws/training_trajectories/pythia_0.162405B_trajectory.csv": {
+      "shape": [
+        500,
+        5
+      ],
+      "columns": [
+        "N_params_B",
+        "D_tokens_B",
+        "val_loss",
+        "step",
+        "interpolated"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "N_params_B": {
+          "min": 0.162405,
+          "max": 0.162405,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "D_tokens_B": {
+          "min": 0.134,
+          "max": 299.893,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "val_loss": {
+          "min": 2.5959,
+          "max": 4.5229,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "step": {
+          "min": 0,
+          "max": 143,
+          "zeros": 178,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "interpolated": {
+          "min": 1,
+          "max": 1,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [
+        "N_params_B",
+        "interpolated"
+      ],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "B_scaling_laws/training_trajectories/pythia_0.409009B_trajectory.csv": {
+      "shape": [
+        500,
+        5
+      ],
+      "columns": [
+        "N_params_B",
+        "D_tokens_B",
+        "val_loss",
+        "step",
+        "interpolated"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "N_params_B": {
+          "min": 0.409009,
+          "max": 0.409009,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "D_tokens_B": {
+          "min": 0.134,
+          "max": 299.893,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "val_loss": {
+          "min": 2.4196,
+          "max": 4.3484,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "step": {
+          "min": 0,
+          "max": 143,
+          "zeros": 178,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "interpolated": {
+          "min": 1,
+          "max": 1,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [
+        "N_params_B",
+        "interpolated"
+      ],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "B_scaling_laws/training_trajectories/pythia_1.040867B_trajectory.csv": {
+      "shape": [
+        500,
+        5
+      ],
+      "columns": [
+        "N_params_B",
+        "D_tokens_B",
+        "val_loss",
+        "step",
+        "interpolated"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "N_params_B": {
+          "min": 1.040867,
+          "max": 1.040867,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "D_tokens_B": {
+          "min": 0.134,
+          "max": 299.893,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "val_loss": {
+          "min": 2.2923,
+          "max": 4.2162,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "step": {
+          "min": 0,
+          "max": 143,
+          "zeros": 178,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "interpolated": {
+          "min": 1,
+          "max": 1,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [
+        "N_params_B",
+        "interpolated"
+      ],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "B_scaling_laws/training_trajectories/pythia_1.416184B_trajectory.csv": {
+      "shape": [
+        500,
+        5
+      ],
+      "columns": [
+        "N_params_B",
+        "D_tokens_B",
+        "val_loss",
+        "step",
+        "interpolated"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "N_params_B": {
+          "min": 1.416184,
+          "max": 1.416184,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "D_tokens_B": {
+          "min": 0.134,
+          "max": 299.893,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "val_loss": {
+          "min": 2.2523,
+          "max": 4.1845,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "step": {
+          "min": 0,
+          "max": 143,
+          "zeros": 178,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "interpolated": {
+          "min": 1,
+          "max": 1,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [
+        "N_params_B",
+        "interpolated"
+      ],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "B_scaling_laws/training_trajectories/pythia_11.965825B_trajectory.csv": {
+      "shape": [
+        500,
+        5
+      ],
+      "columns": [
+        "N_params_B",
+        "D_tokens_B",
+        "val_loss",
+        "step",
+        "interpolated"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "N_params_B": {
+          "min": 11.965825,
+          "max": 11.965825,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "D_tokens_B": {
+          "min": 0.134,
+          "max": 299.893,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "val_loss": {
+          "min": 2.0936,
+          "max": 4.0229,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "step": {
+          "min": 0,
+          "max": 143,
+          "zeros": 178,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "interpolated": {
+          "min": 1,
+          "max": 1,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [
+        "N_params_B",
+        "interpolated"
+      ],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "B_scaling_laws/training_trajectories/pythia_2.782831B_trajectory.csv": {
+      "shape": [
+        500,
+        5
+      ],
+      "columns": [
+        "N_params_B",
+        "D_tokens_B",
+        "val_loss",
+        "step",
+        "interpolated"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "N_params_B": {
+          "min": 2.782831,
+          "max": 2.782831,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "D_tokens_B": {
+          "min": 0.134,
+          "max": 299.893,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "val_loss": {
+          "min": 2.1897,
+          "max": 4.1185,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "step": {
+          "min": 0,
+          "max": 143,
+          "zeros": 178,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "interpolated": {
+          "min": 1,
+          "max": 1,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [
+        "N_params_B",
+        "interpolated"
+      ],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "B_scaling_laws/training_trajectories/pythia_6.86104B_trajectory.csv": {
+      "shape": [
+        500,
+        5
+      ],
+      "columns": [
+        "N_params_B",
+        "D_tokens_B",
+        "val_loss",
+        "step",
+        "interpolated"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "N_params_B": {
+          "min": 6.86104,
+          "max": 6.86104,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "D_tokens_B": {
+          "min": 0.134,
+          "max": 299.893,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "val_loss": {
+          "min": 2.1224,
+          "max": 4.0498,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "step": {
+          "min": 0,
+          "max": 143,
+          "zeros": 178,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "interpolated": {
+          "min": 1,
+          "max": 1,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [
+        "N_params_B",
+        "interpolated"
+      ],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "C_efficiency_evolution/epoch_all_ai_models.csv": {
+      "shape": [
+        3523,
+        57
+      ],
+      "columns": [
+        "Model",
+        "Domain",
+        "Task",
+        "Organization",
+        "Authors",
+        "Publication date",
+        "Reference",
+        "Link",
+        "Citations",
+        "Notability criteria",
+        "Notability criteria notes",
+        "Parameters",
+        "Parameters notes",
+        "Training compute (FLOP)",
+        "Training compute notes",
+        "Training dataset size (total)",
+        "Dataset size notes",
+        "Training time (hours)",
+        "Training time notes",
+        "Training hardware",
+        "Approach",
+        "Confidence",
+        "Abstract",
+        "Epochs",
+        "WikiText and Penn Treebank data",
+        "Model accessibility",
+        "Country (of organization)",
+        "Base model",
+        "Finetune compute (FLOP)",
+        "Finetune compute notes",
+        "Hardware quantity",
+        "Hardware utilization (MFU)",
+        "Last modified",
+        "Training cloud compute vendor",
+        "Training data center",
+        "Archived links",
+        "Batch size",
+        "Batch size notes",
+        "Organization categorization",
+        "Foundation model",
+        "Training compute lower bound",
+        "Training compute upper bound",
+        "Training chip-hours",
+        "Training code accessibility",
+        "Accessibility notes",
+        "Possibly over 1e23 FLOP",
+        "Training compute cost (2023 USD)",
+        "Utilization notes",
+        "Numerical format",
+        "Frontier model",
+        "Training power draw (W)",
+        "Training compute estimation method",
+        "Hugging Face developer id",
+        "Post-training compute (FLOP)",
+        "Post-training compute notes",
+        "Hardware utilization (HFU)",
+        "Open model weights?"
+      ],
+      "missing": {
+        "Domain": 92,
+        "Task": 122,
+        "Organization": 88,
+        "Authors": 842,
+        "Publication date": 23,
+        "Reference": 174,
+        "Link": 44,
+        "Citations": 2060,
+        "Notability criteria": 2481,
+        "Notability criteria notes": 2682,
+        "Parameters": 1226,
+        "Parameters notes": 1662,
+        "Training compute (FLOP)": 2133,
+        "Training compute notes": 1886,
+        "Training dataset size (total)": 2099,
+        "Dataset size notes": 1804,
+        "Training time (hours)": 2973,
+        "Training time notes": 2918,
+        "Training hardware": 2343,
+        "Approach": 3211,
+        "Confidence": 197,
+        "Abstract": 540,
+        "Epochs": 2720,
+        "WikiText and Penn Treebank data": 3118,
+        "Model accessibility": 870,
+        "Country (of organization)": 95,
+        "Base model": 2839,
+        "Finetune compute (FLOP)": 3263,
+        "Finetune compute notes": 3218,
+        "Hardware quantity": 2680,
+        "Hardware utilization (MFU)": 3462,
+        "Training cloud compute vendor": 3470,
+        "Training data center": 3457,
+        "Archived links": 3498,
+        "Batch size": 3272,
+        "Batch size notes": 3326,
+        "Organization categorization": 107,
+        "Foundation model": 3445,
+        "Training compute lower bound": 3497,
+        "Training compute upper bound": 3482,
+        "Training chip-hours": 3308,
+        "Training code accessibility": 1120,
+        "Accessibility notes": 1773,
+        "Possibly over 1e23 FLOP": 3002,
+        "Training compute cost (2023 USD)": 3299,
+        "Utilization notes": 3435,
+        "Numerical format": 3161,
+        "Frontier model": 3386,
+        "Training power draw (W)": 2752,
+        "Training compute estimation method": 2083,
+        "Hugging Face developer id": 2888,
+        "Post-training compute (FLOP)": 3522,
+        "Post-training compute notes": 3522,
+        "Hardware utilization (HFU)": 3498,
+        "Open model weights?": 870
+      },
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "Citations": {
+          "min": 0.0,
+          "max": 215518.0,
+          "zeros": 40,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "Parameters": {
+          "min": 10.0,
+          "max": 173900000000000.0,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "Training compute (FLOP)": {
+          "min": 40.0,
+          "max": 5.0000000000001e+26,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "Training time (hours)": {
+          "min": 0.1,
+          "max": 9022.8,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "Epochs": {
+          "min": 0.0,
+          "max": 191400.0,
+          "zeros": 3,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "Finetune compute (FLOP)": {
+          "min": 0.0,
+          "max": 2.78256e+24,
+          "zeros": 2,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "Hardware quantity": {
+          "min": 1.0,
+          "max": 200000.0,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "Hardware utilization (MFU)": {
+          "min": 0.171,
+          "max": 0.56,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "Batch size": {
+          "min": 1.0,
+          "max": 128000000.0,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "Training compute lower bound": {
+          "min": 5.423,
+          "max": 2.1e+26,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "Training compute upper bound": {
+          "min": 1.35e+18,
+          "max": 1.1300000000000001e+27,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "Training chip-hours": {
+          "min": 1.0,
+          "max": 132000000.0,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "Training compute cost (2023 USD)": {
+          "min": 3.9045853984413377,
+          "max": 387842678.0863615,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "Training power draw (W)": {
+          "min": 75.82593457631364,
+          "max": 109948656.20196916,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "Post-training compute (FLOP)": {
+          "min": 9.4e+22,
+          "max": 9.4e+22,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "Hardware utilization (HFU)": {
+          "min": 0.2359,
+          "max": 0.927,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [],
+      "zero_width_cells": {
+        "Reference": 1,
+        "Notability criteria notes": 2,
+        "Dataset size notes": 1,
+        "Abstract": 5,
+        "Accessibility notes": 1
+      },
+      "formula_like_cells": {
+        "Training compute notes": 9,
+        "Finetune compute notes": 3
+      }
+    },
+    "C_efficiency_evolution/leaderboard_cleaned.csv": {
+      "shape": [
+        4576,
+        12
+      ],
+      "columns": [
+        "Model",
+        "#Params (B)",
+        "Submission Date",
+        "Hub License",
+        "Type",
+        "Average ⬆️",
+        "IFEval",
+        "BBH",
+        "MATH Lvl 5",
+        "GPQA",
+        "MUSR",
+        "MMLU-PRO"
+      ],
+      "missing": {
+        "#Params (B)": 3,
+        "Submission Date": 12,
+        "Hub License": 1753
+      },
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "#Params (B)": {
+          "min": 0.0,
+          "max": 140.63,
+          "zeros": 7,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "Average ⬆️": {
+          "min": 0.7378506308720487,
+          "max": 52.08138397879168,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "IFEval": {
+          "min": 0.0,
+          "max": 89.97581971391463,
+          "zeros": 7,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "BBH": {
+          "min": 0.2515270350564467,
+          "max": 76.69996850001888,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "MATH Lvl 5": {
+          "min": 0.0,
+          "max": 71.45015105740181,
+          "zeros": 134,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "GPQA": {
+          "min": 0.0,
+          "max": 29.418344519015665,
+          "zeros": 241,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "MUSR": {
+          "min": 0.0,
+          "max": 38.688020833333326,
+          "zeros": 1,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "MMLU-PRO": {
+          "min": 0.0,
+          "max": 70.03361406619385,
+          "zeros": 1,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "C_efficiency_evolution/leaderboard_enhanced.csv": {
+      "shape": [
+        4576,
+        15
+      ],
+      "columns": [
+        "Model",
+        "#Params (B)",
+        "Submission Date",
+        "Hub License",
+        "Type",
+        "Average ⬆️",
+        "IFEval",
+        "BBH",
+        "MATH Lvl 5",
+        "GPQA",
+        "MUSR",
+        "MMLU-PRO",
+        "Epoch_AI_Publication_Date",
+        "Epoch_AI_Organization",
+        "Epoch_AI_Open_Weights"
+      ],
+      "missing": {
+        "#Params (B)": 3,
+        "Submission Date": 12,
+        "Hub License": 1753,
+        "Epoch_AI_Publication_Date": 4129,
+        "Epoch_AI_Organization": 4133,
+        "Epoch_AI_Open_Weights": 4133
+      },
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "#Params (B)": {
+          "min": 0.0,
+          "max": 140.63,
+          "zeros": 7,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "Average ⬆️": {
+          "min": 0.7378506308720487,
+          "max": 52.08138397879168,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "IFEval": {
+          "min": 0.0,
+          "max": 89.97581971391463,
+          "zeros": 7,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "BBH": {
+          "min": 0.2515270350564467,
+          "max": 76.69996850001888,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "MATH Lvl 5": {
+          "min": 0.0,
+          "max": 71.45015105740181,
+          "zeros": 134,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "GPQA": {
+          "min": 0.0,
+          "max": 29.418344519015665,
+          "zeros": 241,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "MUSR": {
+          "min": 0.0,
+          "max": 38.688020833333326,
+          "zeros": 1,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "MMLU-PRO": {
+          "min": 0.0,
+          "max": 70.03361406619385,
+          "zeros": 1,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "C_efficiency_evolution/leaderboard_extended_timeseries.csv": {
+      "shape": [
+        4599,
+        11
+      ],
+      "columns": [
+        "Model",
+        "Year",
+        "Params_B",
+        "Average",
+        "IFEval",
+        "BBH",
+        "MATH_Lvl5",
+        "GPQA",
+        "MUSR",
+        "MMLU_PRO",
+        "Source"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "Year": {
+          "min": 2019,
+          "max": 2025,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "Params_B": {
+          "min": 0.0,
+          "max": 176.0,
+          "zeros": 7,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "Average": {
+          "min": 0.74,
+          "max": 52.08,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "IFEval": {
+          "min": 0.0,
+          "max": 89.97581971391463,
+          "zeros": 7,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "BBH": {
+          "min": 0.0,
+          "max": 76.69996850001888,
+          "zeros": 17,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "MATH_Lvl5": {
+          "min": 0.0,
+          "max": 71.45015105740181,
+          "zeros": 152,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "GPQA": {
+          "min": 0.0,
+          "max": 29.418344519015665,
+          "zeros": 264,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "MUSR": {
+          "min": 0.0,
+          "max": 38.688020833333326,
+          "zeros": 19,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "MMLU_PRO": {
+          "min": 0.0,
+          "max": 70.03361406619385,
+          "zeros": 21,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "C_efficiency_evolution/loss_benchmark_bridge.csv": {
+      "shape": [
+        43,
+        13
+      ],
+      "columns": [
+        "Model",
+        "N_params_B",
+        "D_tokens_B",
+        "Val_Loss",
+        "LB_Average",
+        "LB_IFEval",
+        "LB_BBH",
+        "LB_MATH",
+        "LB_GPQA",
+        "LB_MUSR",
+        "LB_MMLU_PRO",
+        "Loss_Source",
+        "Loss_Comparability"
+      ],
+      "missing": {
+        "D_tokens_B": 36
+      },
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "N_params_B": {
+          "min": 0.162405,
+          "max": 72.706,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "D_tokens_B": {
+          "min": 299.893,
+          "max": 299.893,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "Val_Loss": {
+          "min": 1.65,
+          "max": 2.84,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "LB_Average": {
+          "min": 5.07026822083096,
+          "max": 38.441143572535815,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "LB_IFEval": {
+          "min": 12.459828809780271,
+          "max": 64.96651107949131,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "LB_BBH": {
+          "min": 2.198832279508135,
+          "max": 54.61505780163693,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "LB_MATH": {
+          "min": 0.906344410876133,
+          "max": 39.12386706948641,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "LB_GPQA": {
+          "min": 0.0,
+          "max": 21.588366890380318,
+          "zeros": 5,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "LB_MUSR": {
+          "min": 2.024479166666666,
+          "max": 22.69583333333333,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "LB_MMLU_PRO": {
+          "min": 1.1894208037825047,
+          "max": 55.20279255319149,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "C_efficiency_evolution/loss_benchmark_bridge_expanded.csv": {
+      "shape": [
+        75,
+        13
+      ],
+      "columns": [
+        "Model",
+        "N_params_B",
+        "D_tokens_B",
+        "Val_Loss",
+        "LB_Average",
+        "LB_IFEval",
+        "LB_BBH",
+        "LB_MATH",
+        "LB_GPQA",
+        "LB_MUSR",
+        "LB_MMLU_PRO",
+        "Loss_Source",
+        "Loss_Comparability"
+      ],
+      "missing": {
+        "D_tokens_B": 68
+      },
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "N_params_B": {
+          "min": 0.162405,
+          "max": 72.706,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "D_tokens_B": {
+          "min": 299.893,
+          "max": 299.893,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "Val_Loss": {
+          "min": 1.65,
+          "max": 2.84,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "LB_Average": {
+          "min": 3.795510241848182,
+          "max": 47.98045991216864,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "LB_IFEval": {
+          "min": 8.433068702154728,
+          "max": 86.3837949972739,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "LB_BBH": {
+          "min": 2.198832279508135,
+          "max": 61.87325566878789,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "LB_MATH": {
+          "min": 0.0755287009063444,
+          "max": 62.53776435045317,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "LB_GPQA": {
+          "min": 0.0,
+          "max": 21.588366890380318,
+          "zeros": 9,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "LB_MUSR": {
+          "min": 1.3734374999999996,
+          "max": 22.69583333333333,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "LB_MMLU_PRO": {
+          "min": 1.1617169030732852,
+          "max": 55.20279255319149,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    },
+    "C_efficiency_evolution/model_architecture_metadata.csv": {
+      "shape": [
+        45,
+        7
+      ],
+      "columns": [
+        "model_name",
+        "n_layers",
+        "n_heads",
+        "d_model",
+        "vocab_size",
+        "max_position_embeddings",
+        "training_data_TB"
+      ],
+      "missing": {},
+      "duplicate_rows": 0,
+      "numeric_ranges": {
+        "n_layers": {
+          "min": 6,
+          "max": 80,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "n_heads": {
+          "min": 8,
+          "max": 232,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "d_model": {
+          "min": 512,
+          "max": 8192,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "vocab_size": {
+          "min": 32000,
+          "max": 256128,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "max_position_embeddings": {
+          "min": 2048,
+          "max": 131072,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        },
+        "training_data_TB": {
+          "min": 0.3,
+          "max": 18.0,
+          "zeros": 0,
+          "negative": 0,
+          "nonfinite_not_missing": 0
+        }
+      },
+      "constant_columns": [],
+      "zero_width_cells": {},
+      "formula_like_cells": {}
+    }
+  },
+  "instruction_candidates": [
+    {
+      "file": "C_efficiency_evolution/epoch_all_ai_models.csv",
+      "offset": 111601,
+      "matched_rule": "system prompt"
+    },
+    {
+      "file": "C_efficiency_evolution/epoch_all_ai_models.csv",
+      "offset": 280247,
+      "matched_rule": "system prompt"
+    },
+    {
+      "file": "C_efficiency_evolution/epoch_all_ai_models.csv",
+      "offset": 280595,
+      "matched_rule": "system prompt"
+    },
+    {
+      "file": "C_efficiency_evolution/epoch_all_ai_models.csv",
+      "offset": 302333,
+      "matched_rule": "system prompt"
+    },
+    {
+      "file": "C_efficiency_evolution/epoch_all_ai_models.csv",
+      "offset": 304174,
+      "matched_rule": "system prompt"
+    },
+    {
+      "file": "C_efficiency_evolution/epoch_all_ai_models.csv",
+      "offset": 763708,
+      "matched_rule": "system prompt"
+    },
+    {
+      "file": "C_efficiency_evolution/epoch_all_ai_models.csv",
+      "offset": 998806,
+      "matched_rule": "system prompt"
+    },
+    {
+      "file": "C_efficiency_evolution/epoch_all_ai_models.csv",
+      "offset": 1351773,
+      "matched_rule": "System Prompt"
+    },
+    {
+      "file": "C_efficiency_evolution/epoch_all_ai_models.csv",
+      "offset": 1352537,
+      "matched_rule": "System Prompt"
+    },
+    {
+      "file": "C_efficiency_evolution/epoch_all_ai_models.csv",
+      "offset": 1352609,
+      "matched_rule": "system prompt"
+    },
+    {
+      "file": "C_efficiency_evolution/epoch_all_ai_models.csv",
+      "offset": 1695090,
+      "matched_rule": "system prompt"
+    },
+    {
+      "file": "C_efficiency_evolution/epoch_all_ai_models.csv",
+      "offset": 1696730,
+      "matched_rule": "system prompt"
+    },
+    {
+      "file": "C_efficiency_evolution/epoch_all_ai_models.csv",
+      "offset": 1709773,
+      "matched_rule": "system prompt"
+    },
+    {
+      "file": "C_efficiency_evolution/epoch_all_ai_models.csv",
+      "offset": 2127001,
+      "matched_rule": "system prompt"
+    },
+    {
+      "file": "C_efficiency_evolution/epoch_all_ai_models.csv",
+      "offset": 3107224,
+      "matched_rule": "system prompt"
+    }
+  ],
+  "mixture": {
+    "A_data_value/regmix_tables/est_mixture_10b.csv": {
+      "index_unique": true,
+      "paired_index_order_equal": true,
+      "sum_min": 0.998,
+      "sum_max": 1.0020000000000002,
+      "sum_error_max": 0.002000000000000224,
+      "negative_cells": 0,
+      "duplicate_recipes": 0
+    },
+    "A_data_value/regmix_tables/est_mixture_70b.csv": {
+      "index_unique": true,
+      "paired_index_order_equal": true,
+      "sum_min": 0.998,
+      "sum_max": 1.0020000000000002,
+      "sum_error_max": 0.002000000000000224,
+      "negative_cells": 0,
+      "duplicate_recipes": 0
+    },
+    "A_data_value/regmix_tables/test_mixture_1B.csv": {
+      "index_unique": true,
+      "paired_index_order_equal": true,
+      "sum_min": 0.998,
+      "sum_max": 1.002,
+      "sum_error_max": 0.0020000000000000018,
+      "negative_cells": 0,
+      "duplicate_recipes": 0
+    },
+    "A_data_value/regmix_tables/test_mixture_1m.csv": {
+      "index_unique": true,
+      "paired_index_order_equal": true,
+      "sum_min": 0.9970000000000001,
+      "sum_max": 1.0030000000000001,
+      "sum_error_max": 0.0030000000000001137,
+      "negative_cells": 0,
+      "duplicate_recipes": 0
+    },
+    "A_data_value/regmix_tables/test_mixture_60m.csv": {
+      "index_unique": true,
+      "paired_index_order_equal": true,
+      "sum_min": 0.9970000000000001,
+      "sum_max": 1.0030000000000001,
+      "sum_error_max": 0.0030000000000001137,
+      "negative_cells": 0,
+      "duplicate_recipes": 0
+    },
+    "A_data_value/regmix_tables/train_mixture_1m.csv": {
+      "index_unique": true,
+      "paired_index_order_equal": true,
+      "sum_min": 0.9960000000000001,
+      "sum_max": 1.0030000000000001,
+      "sum_error_max": 0.0039999999999998925,
+      "negative_cells": 0,
+      "duplicate_recipes": 0
+    }
+  },
+  "recipe_overlaps": [
+    {
+      "a": "est_mixture_10b.csv",
+      "b": "est_mixture_70b.csv",
+      "exact_rounded10_overlap": 63
+    },
+    {
+      "a": "est_mixture_10b.csv",
+      "b": "test_mixture_1B.csv",
+      "exact_rounded10_overlap": 0
+    },
+    {
+      "a": "est_mixture_10b.csv",
+      "b": "test_mixture_1m.csv",
+      "exact_rounded10_overlap": 0
+    },
+    {
+      "a": "est_mixture_10b.csv",
+      "b": "test_mixture_60m.csv",
+      "exact_rounded10_overlap": 0
+    },
+    {
+      "a": "est_mixture_10b.csv",
+      "b": "train_mixture_1m.csv",
+      "exact_rounded10_overlap": 63
+    },
+    {
+      "a": "est_mixture_70b.csv",
+      "b": "test_mixture_1B.csv",
+      "exact_rounded10_overlap": 0
+    },
+    {
+      "a": "est_mixture_70b.csv",
+      "b": "test_mixture_1m.csv",
+      "exact_rounded10_overlap": 0
+    },
+    {
+      "a": "est_mixture_70b.csv",
+      "b": "test_mixture_60m.csv",
+      "exact_rounded10_overlap": 0
+    },
+    {
+      "a": "est_mixture_70b.csv",
+      "b": "train_mixture_1m.csv",
+      "exact_rounded10_overlap": 63
+    },
+    {
+      "a": "test_mixture_1B.csv",
+      "b": "test_mixture_1m.csv",
+      "exact_rounded10_overlap": 0
+    },
+    {
+      "a": "test_mixture_1B.csv",
+      "b": "test_mixture_60m.csv",
+      "exact_rounded10_overlap": 0
+    },
+    {
+      "a": "test_mixture_1B.csv",
+      "b": "train_mixture_1m.csv",
+      "exact_rounded10_overlap": 0
+    },
+    {
+      "a": "test_mixture_1m.csv",
+      "b": "test_mixture_60m.csv",
+      "exact_rounded10_overlap": 256
+    },
+    {
+      "a": "test_mixture_1m.csv",
+      "b": "train_mixture_1m.csv",
+      "exact_rounded10_overlap": 0
+    },
+    {
+      "a": "test_mixture_60m.csv",
+      "b": "train_mixture_1m.csv",
+      "exact_rounded10_overlap": 0
+    }
+  ],
+  "compute": {
+    "B_scaling_laws/cerebras_training_log.csv": {
+      "positive_rows": 1029,
+      "ratio_quantiles": {
+        "0.0": 0.9886610748679714,
+        "0.01": 0.9955324074074074,
+        "0.5": 1.0,
+        "0.99": 1.006011476983056,
+        "1.0": 1.024024024024024
+      },
+      "absolute_error_max": 0.038727000000008616,
+      "error_over_rounding_5e_5": 962
+    },
+    "B_scaling_laws/pythia_training_log_existing.csv": {
+      "positive_rows": 1176,
+      "ratio_quantiles": {
+        "0.0": 0.7658514790353519,
+        "0.01": 0.9898920266074563,
+        "0.5": 0.9999995935179582,
+        "0.99": 1.006255180388069,
+        "1.0": 1.7631780989018786
+      },
+      "absolute_error_max": 4.9946879999984706e-05,
+      "error_over_rounding_5e_5": 0
+    }
+  },
+  "json": {
+    "parsed": 1955,
+    "errors": [
+      {
+        "file": "C_efficiency_evolution/detailed_results/DreadPoor_Winter_Dawn-8B-TIES/results_2025-02-13T18-27-04.338360.json",
+        "error": "Unterminated string starting at: line 1453 column 22 (char 65388)"
+      },
+      {
+        "file": "C_efficiency_evolution/detailed_results/FINGU-AI_Chocolatine-Fusion-14B/results_2025-02-13T18-27-04.338360.json",
+        "error": "Unterminated string starting at: line 1162 column 22 (char 48159)"
+      },
+      {
+        "file": "C_efficiency_evolution/detailed_results/Intel_neural-chat-7b-v3-3/results_2025-02-13T18-27-04.338360.json",
+        "error": "Unterminated string starting at: line 1194 column 11 (char 49140)"
+      },
+      {
+        "file": "C_efficiency_evolution/detailed_results/L-RAGE_3_PRYMMAL-ECE-7B-SLERP-V1/results_2025-02-13T18-27-04.338360.json",
+        "error": "Expecting property name enclosed in double quotes: line 1090 column 4 (char 45805)"
+      }
+    ],
+    "top_level_keys": {
+      "results": 1954,
+      "groups": 1952,
+      "group_subtasks": 1954,
+      "configs": 1954,
+      "versions": 1954,
+      "n-shot": 1954,
+      "higher_is_better": 1954,
+      "n-samples": 1954,
+      "config": 1954,
+      "git_hash": 1954,
+      "date": 1954,
+      "pretty_env_info": 1954,
+      "transformers_version": 1954,
+      "upper_git_hash": 1954,
+      "tokenizer_pad_token": 1857,
+      "tokenizer_eos_token": 1857,
+      "tokenizer_bos_token": 1857,
+      "eot_token_id": 1857,
+      "max_length": 1857,
+      "task_hashes": 1954,
+      "model_source": 1954,
+      "model_name": 1954,
+      "model_name_sanitized": 1954,
+      "system_instruction": 1954,
+      "system_instruction_sha": 1954,
+      "fewshot_as_multiturn": 1857,
+      "chat_template": 1954,
+      "chat_template_sha": 1954,
+      "start_time": 1954,
+      "end_time": 1954,
+      "total_evaluation_time_seconds": 1954
+    },
+    "instruction_candidates": []
+  },
+  "manifest_mismatches": [],
+  "xz": {
+    "A_data_value/regmix_domain_sample.jsonl.xz": {
+      "rows": 138034,
+      "bad_json": 0,
+      "schema_counts": {
+        "_source_domain,_source_path,text": 138034
+      },
+      "domains": {
+        "arxiv": 1719,
+        "dm_mathematics": 1922,
+        "enron_emails": 1010,
+        "europarl": 157,
+        "freelaw": 5100,
+        "github": 15117,
+        "gutenberg_pg_19": 79,
+        "hackernews": 944,
+        "nih_exporter": 1884,
+        "philpapers": 67,
+        "pile_cc": 18191,
+        "pubmed_abstracts": 29895,
+        "pubmed_central": 2629,
+        "stackexchange": 30378,
+        "ubuntu_irc": 16,
+        "uspto_backgrounds": 11415,
+        "wikipedia_en": 17511
+      },
+      "duplicate_id": 0,
+      "quality": {},
+      "instruction_matches_in_corpus": 2,
+      "instruction_matches_outside_corpus": 0,
+      "outside_corpus_locations": []
+    },
+    "A_data_value/slimpajama_quality_extended/arxiv_part-6777d8857c6e-000486.jsonl.xz": {
+      "rows": 17523,
+      "bad_json": 0,
+      "schema_counts": {
+        "ad_en,dsir_books,dsir_math,dsir_wiki,fineweb_edu,fluency_en,id,modernbert_cleanliness,modernbert_professionalism,modernbert_readability,modernbert_reasoning,qurater,rps_doc_frac_chars_top_2gram,rps_doc_frac_chars_top_3gram,rps_doc_frac_no_alph_words,rps_doc_frac_unique_words,rps_doc_mean_word_length,rps_doc_num_sentences,rps_doc_unigram_entropy,rps_doc_word_count,rps_lines_ending_with_terminal_punctution_mark,rps_lines_numerical_chars_fraction,rps_lines_uppercase_letter_fraction,sub_path": 17523
+      },
+      "domains": {
+        "from_filename": 17523
+      },
+      "duplicate_id": 0,
+      "quality": {
+        "dsir_books": {
+          "types": {
+            "float": 17523
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -2026325.80102772,
+          "max": -316.68028944,
+          "lengths": {}
+        },
+        "fluency_en": {
+          "types": {
+            "list": 17523
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -3.783203125,
+          "max": 3.44921875,
+          "lengths": {
+            "2": 17523
+          }
+        },
+        "rps_lines_ending_with_terminal_punctution_mark": {
+          "types": {
+            "float": 17523
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 0.20883054892601433,
+          "max": 100.0,
+          "lengths": {}
+        },
+        "modernbert_cleanliness": {
+          "types": {
+            "list": 17523
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -16.8125,
+          "max": 16.71875,
+          "lengths": {
+            "6": 17523
+          }
+        },
+        "qurater": {
+          "types": {
+            "list": 17523
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -5.296875,
+          "max": 12.53125,
+          "lengths": {
+            "4": 17523
+          }
+        },
+        "rps_doc_num_sentences": {
+          "types": {
+            "int": 17523
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 1,
+          "max": 30449,
+          "lengths": {}
+        },
+        "rps_doc_word_count": {
+          "types": {
+            "float": 17523
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 10.0,
+          "max": 217176.0,
+          "lengths": {}
+        },
+        "ad_en": {
+          "types": {
+            "list": 17523
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -3.9296875,
+          "max": 4.53515625,
+          "lengths": {
+            "2": 17523
+          }
+        },
+        "rps_doc_frac_no_alph_words": {
+          "types": {
+            "float": 17523
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 15.985130111524157,
+          "max": 91.47592509058103,
+          "lengths": {}
+        },
+        "modernbert_reasoning": {
+          "types": {
+            "list": 17523
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -8.375,
+          "max": 15.703125,
+          "lengths": {
+            "6": 17523
+          }
+        },
+        "rps_doc_frac_chars_top_2gram": {
+          "types": {
+            "float": 17523
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 0.0,
+          "max": 21.883763659220577,
+          "lengths": {}
+        },
+        "rps_lines_uppercase_letter_fraction": {
+          "types": {
+            "float": 17523
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 0.5336562412395783,
+          "max": 87.8054690204223,
+          "lengths": {}
+        },
+        "rps_doc_frac_unique_words": {
+          "types": {
+            "float": 17523
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 2.720757022773438,
+          "max": 100.0,
+          "lengths": {}
+        },
+        "rps_lines_numerical_chars_fraction": {
+          "types": {
+            "float": 17523
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 0.0,
+          "max": 85.67810452791292,
+          "lengths": {}
+        },
+        "fineweb_edu": {
+          "types": {
+            "list": 17523
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -0.13706642389297485,
+          "max": 4.345012187957764,
+          "lengths": {
+            "1": 17523
+          }
+        },
+        "dsir_math": {
+          "types": {
+            "float": 17523
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -1508740.10117446,
+          "max": -306.94026452,
+          "lengths": {}
+        },
+        "rps_doc_mean_word_length": {
+          "types": {
+            "float": 17523
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 2.986633821449751,
+          "max": 39.0,
+          "lengths": {}
+        },
+        "dsir_wiki": {
+          "types": {
+            "float": 17523
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -1966147.71309439,
+          "max": -313.93355077,
+          "lengths": {}
+        },
+        "rps_doc_frac_chars_top_3gram": {
+          "types": {
+            "float": 17523
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 0.0,
+          "max": 35.37375495600038,
+          "lengths": {}
+        },
+        "rps_doc_unigram_entropy": {
+          "types": {
+            "float": 17523
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 2.30258509,
+          "max": 7.80240899,
+          "lengths": {}
+        },
+        "modernbert_professionalism": {
+          "types": {
+            "list": 17523
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -6.75390625,
+          "max": 13.953125,
+          "lengths": {
+            "6": 17523
+          }
+        },
+        "modernbert_readability": {
+          "types": {
+            "list": 17523
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -10.109375,
+          "max": 12.5390625,
+          "lengths": {
+            "6": 17523
+          }
+        }
+      },
+      "instruction_matches_in_corpus": 0,
+      "instruction_matches_outside_corpus": 0,
+      "outside_corpus_locations": []
+    },
+    "A_data_value/slimpajama_quality_extended/github_part-6777d8857c6e-000275.jsonl.xz": {
+      "rows": 203752,
+      "bad_json": 0,
+      "schema_counts": {
+        "ad_en,dsir_books,dsir_math,dsir_wiki,fineweb_edu,fluency_en,id,modernbert_cleanliness,modernbert_professionalism,modernbert_readability,modernbert_reasoning,qurater,rps_doc_frac_chars_top_2gram,rps_doc_frac_chars_top_3gram,rps_doc_frac_no_alph_words,rps_doc_frac_unique_words,rps_doc_mean_word_length,rps_doc_num_sentences,rps_doc_unigram_entropy,rps_doc_word_count,rps_lines_ending_with_terminal_punctution_mark,rps_lines_numerical_chars_fraction,rps_lines_uppercase_letter_fraction,sub_path": 203752
+      },
+      "domains": {
+        "from_filename": 203752
+      },
+      "duplicate_id": 0,
+      "quality": {
+        "modernbert_reasoning": {
+          "types": {
+            "list": 203752
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -9.4296875,
+          "max": 18.421875,
+          "lengths": {
+            "6": 203752
+          }
+        },
+        "dsir_books": {
+          "types": {
+            "float": 203752
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -1875504.79852465,
+          "max": -16.82294988,
+          "lengths": {}
+        },
+        "modernbert_readability": {
+          "types": {
+            "list": 203752
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -12.1015625,
+          "max": 14.546875,
+          "lengths": {
+            "6": 203752
+          }
+        },
+        "fineweb_edu": {
+          "types": {
+            "list": 203752
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -0.652137815952301,
+          "max": 4.694155216217041,
+          "lengths": {
+            "1": 203752
+          }
+        },
+        "rps_doc_unigram_entropy": {
+          "types": {
+            "float": 203752
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 0.0,
+          "max": 7.40034161,
+          "lengths": {}
+        },
+        "modernbert_cleanliness": {
+          "types": {
+            "list": 203752
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -19.8125,
+          "max": 21.65625,
+          "lengths": {
+            "6": 203752
+          }
+        },
+        "rps_doc_frac_chars_top_3gram": {
+          "types": {
+            "int": 203752
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 0,
+          "max": 284,
+          "lengths": {}
+        },
+        "rps_doc_frac_chars_top_2gram": {
+          "types": {
+            "int": 203752
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 0,
+          "max": 194,
+          "lengths": {}
+        },
+        "rps_doc_frac_no_alph_words": {
+          "types": {
+            "float": 203752
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 4.347826086956516,
+          "max": 99.58013873676525,
+          "lengths": {}
+        },
+        "modernbert_professionalism": {
+          "types": {
+            "list": 203752
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 6,
+          "min": -8.7890625,
+          "max": 16.09375,
+          "lengths": {
+            "6": 203752
+          }
+        },
+        "rps_lines_ending_with_terminal_punctution_mark": {
+          "types": {
+            "float": 203752
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 0.0,
+          "max": 100.0,
+          "lengths": {}
+        },
+        "dsir_math": {
+          "types": {
+            "float": 203752
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -1754034.28491041,
+          "max": -15.05893869,
+          "lengths": {}
+        },
+        "rps_doc_frac_unique_words": {
+          "types": {
+            "float": 203752
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 1.2174256383258752,
+          "max": 100.0,
+          "lengths": {}
+        },
+        "rps_doc_num_sentences": {
+          "types": {
+            "int": 203752
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 1,
+          "max": 26727,
+          "lengths": {}
+        },
+        "rps_lines_numerical_chars_fraction": {
+          "types": {
+            "float": 203752
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 0.0,
+          "max": 63.01441377528455,
+          "lengths": {}
+        },
+        "ad_en": {
+          "types": {
+            "list": 203752
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -3.91015625,
+          "max": 4.61328125,
+          "lengths": {
+            "2": 203752
+          }
+        },
+        "dsir_wiki": {
+          "types": {
+            "float": 203752
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -1906833.36424408,
+          "max": -17.66218046,
+          "lengths": {}
+        },
+        "rps_doc_word_count": {
+          "types": {
+            "float": 203752
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 1.0,
+          "max": 93541.0,
+          "lengths": {}
+        },
+        "rps_doc_mean_word_length": {
+          "types": {
+            "float": 203752
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 2.5,
+          "max": 87.0,
+          "lengths": {}
+        },
+        "rps_lines_uppercase_letter_fraction": {
+          "types": {
+            "float": 203752
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 0.0,
+          "max": 96.49122807017544,
+          "lengths": {}
+        },
+        "qurater": {
+          "types": {
+            "list": 203752
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -7.66796875,
+          "max": 11.1796875,
+          "lengths": {
+            "4": 203752
+          }
+        },
+        "fluency_en": {
+          "types": {
+            "list": 203752
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -3.650390625,
+          "max": 3.392578125,
+          "lengths": {
+            "2": 203752
+          }
+        }
+      },
+      "instruction_matches_in_corpus": 0,
+      "instruction_matches_outside_corpus": 0,
+      "outside_corpus_locations": []
+    },
+    "A_data_value/slimpajama_quality_signal_sample.jsonl.xz": {
+      "rows": 51230,
+      "bad_json": 0,
+      "schema_counts": {
+        "_source_domain,_source_path,ad_en,content,dsir_books,dsir_math,dsir_wiki,fineweb_edu,fluency_en,id,modernbert_cleanliness,modernbert_professionalism,modernbert_readability,modernbert_reasoning,qurater,rps_doc_frac_chars_top_2gram,rps_doc_frac_chars_top_3gram,rps_doc_frac_no_alph_words,rps_doc_frac_unique_words,rps_doc_mean_word_length,rps_doc_num_sentences,rps_doc_unigram_entropy,rps_doc_word_count,rps_lines_ending_with_terminal_punctution_mark,rps_lines_numerical_chars_fraction,rps_lines_uppercase_letter_fraction,sub_path": 51230
+      },
+      "domains": {
+        "arxiv": 1419,
+        "book": 171,
+        "c4": 10000,
+        "commoncrawl": 9640,
+        "github": 10000,
+        "stackexchange": 10000,
+        "wikipedia": 10000
+      },
+      "duplicate_id": 0,
+      "quality": {
+        "dsir_books": {
+          "types": {
+            "float": 51230
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -1242823.60370116,
+          "max": -24.02237722,
+          "lengths": {}
+        },
+        "fluency_en": {
+          "types": {
+            "list": 51230
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -3.921875,
+          "max": 3.716796875,
+          "lengths": {
+            "2": 51230
+          }
+        },
+        "rps_lines_ending_with_terminal_punctution_mark": {
+          "types": {
+            "float": 51230
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 0.0,
+          "max": 100.0,
+          "lengths": {}
+        },
+        "modernbert_cleanliness": {
+          "types": {
+            "list": 51230
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -21.015625,
+          "max": 20.8125,
+          "lengths": {
+            "6": 51230
+          }
+        },
+        "qurater": {
+          "types": {
+            "list": 51230
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -8.375,
+          "max": 12.8203125,
+          "lengths": {
+            "4": 51230
+          }
+        },
+        "rps_doc_num_sentences": {
+          "types": {
+            "int": 51230
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 1,
+          "max": 25078,
+          "lengths": {}
+        },
+        "rps_doc_word_count": {
+          "types": {
+            "float": 51230
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 1.0,
+          "max": 552671.0,
+          "lengths": {}
+        },
+        "ad_en": {
+          "types": {
+            "list": 51230
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -3.97265625,
+          "max": 4.6796875,
+          "lengths": {
+            "2": 51230
+          }
+        },
+        "rps_doc_frac_no_alph_words": {
+          "types": {
+            "float": 51230
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 4.347826086956516,
+          "max": 100.0,
+          "lengths": {}
+        },
+        "modernbert_reasoning": {
+          "types": {
+            "list": 51230
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 78,
+          "min": -10.3515625,
+          "max": 17.953125,
+          "lengths": {
+            "6": 51230
+          }
+        },
+        "rps_doc_frac_chars_top_2gram": {
+          "types": {
+            "float": 41230,
+            "int": 10000
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 0.0,
+          "max": 135.13338722716247,
+          "lengths": {}
+        },
+        "rps_lines_uppercase_letter_fraction": {
+          "types": {
+            "float": 51230
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 0.0,
+          "max": 86.95652173913044,
+          "lengths": {}
+        },
+        "rps_doc_frac_unique_words": {
+          "types": {
+            "float": 51230
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 5.088363331179848,
+          "max": 100.0,
+          "lengths": {}
+        },
+        "rps_lines_numerical_chars_fraction": {
+          "types": {
+            "float": 51230
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 0.0,
+          "max": 72.34424037417816,
+          "lengths": {}
+        },
+        "fineweb_edu": {
+          "types": {
+            "list": 51230
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -0.652137815952301,
+          "max": 4.375569820404053,
+          "lengths": {
+            "1": 51230
+          }
+        },
+        "dsir_math": {
+          "types": {
+            "float": 51230
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -1668348.05111975,
+          "max": -22.86740911,
+          "lengths": {}
+        },
+        "rps_doc_mean_word_length": {
+          "types": {
+            "float": 51230
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 1.9272030651340997,
+          "max": 83.0,
+          "lengths": {}
+        },
+        "dsir_wiki": {
+          "types": {
+            "float": 51230
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -1561611.03426511,
+          "max": -25.0120389,
+          "lengths": {}
+        },
+        "rps_doc_frac_chars_top_3gram": {
+          "types": {
+            "float": 31230,
+            "int": 20000
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 0.0,
+          "max": 201.6814874696847,
+          "lengths": {}
+        },
+        "rps_doc_unigram_entropy": {
+          "types": {
+            "float": 51230
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": 0.0,
+          "max": 7.84673154,
+          "lengths": {}
+        },
+        "modernbert_professionalism": {
+          "types": {
+            "list": 51230
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 30,
+          "min": -11.0,
+          "max": 18.484375,
+          "lengths": {
+            "6": 51230
+          }
+        },
+        "modernbert_readability": {
+          "types": {
+            "list": 51230
+          },
+          "null": 0,
+          "empty_list": 0,
+          "nonfinite": 0,
+          "min": -13.296875,
+          "max": 16.234375,
+          "lengths": {
+            "6": 51230
+          }
+        }
+      },
+      "instruction_matches_in_corpus": 2,
+      "instruction_matches_outside_corpus": 0,
+      "outside_corpus_locations": []
+    }
+  },
+  "quality_id_overlap": [
+    {
+      "a": "A_data_value/slimpajama_quality_extended/arxiv_part-6777d8857c6e-000486.jsonl.xz",
+      "b": "A_data_value/slimpajama_quality_extended/github_part-6777d8857c6e-000275.jsonl.xz",
+      "overlap": 0
+    },
+    {
+      "a": "A_data_value/slimpajama_quality_extended/arxiv_part-6777d8857c6e-000486.jsonl.xz",
+      "b": "A_data_value/slimpajama_quality_signal_sample.jsonl.xz",
+      "overlap": 1419
+    },
+    {
+      "a": "A_data_value/slimpajama_quality_extended/github_part-6777d8857c6e-000275.jsonl.xz",
+      "b": "A_data_value/slimpajama_quality_signal_sample.jsonl.xz",
+      "overlap": 10000
+    }
+  ]
+}
