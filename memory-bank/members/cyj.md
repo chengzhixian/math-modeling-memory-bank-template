@@ -10,6 +10,10 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 ## 当前状态
 
+2026-09-24 22:30：Task 4 的预注册两阶段候选比较已运行，24 个 B7 同源嵌套留级中双 log 交互 22 折被内层选中，单 logN 2 折；双交互比恒定 G 的各轴 RMSE 低约 .006–.007。由于候选形式受全 B7 诊断启发，只能作半合成同源探索；原 `cyj.chm.v2` constant-G 诊断接口不改，`ready_for_Q3=false`。输出 SHA256 `1d28169ce10f5bc274a82037320fdf003f7e3d2148eff2be91d3c3618708925b`，证据见 `experiments/cyj/20260924-b7-interaction-results.md`，交接 `memory-bank/handoffs/cyj/20260924-2230-b7-interaction-comparison.md`。
+
+2026-09-24 22:00：`cyj.chm.v2` 已发布于 `CYJ_RELEASE_COMMIT=587bbb505b730ba8654089650365191bb1493ce0`，远端 `team/cyj-scaling` SHA 与本地一致。精确发布消费测试 PASS（2 请求、`value_grad`、源文件/manifest 哈希），全部 CYJ 单测 44/44 PASS；交接 `memory-bank/handoffs/cyj/20260924-2200-chm-consumable-release.md` 含 CHM 拉取和实际验收命令。CHM 本人分支尚未 pull/验收，接口问题不可写最终解决；科学上 `ready_for_Q3=false`。
+
 2026-09-24 21:31：按新任务清单补 v2 七个上游 blob 的精确 SHA 校验、机器字段及旧 eta 拒绝；CYJ 测试 44/44。联合 `L(N,D,Q,p)` 审查结论仍为 `not_identified`，记录 `problem/cyj/20260924-q2-q3-identifiability-review.md`。B7 45 个固定 `(N,D)` 组内质量斜率诊断已运行，输出 `outputs/cyj/diagnostics/b7_quality_interaction.json` SHA256 `7977a3ed0614e896e82c316d770b9bb50a3195e4f5e790541ebee6005dc99f50`；它只支持 L1 描述，不能将交互候选的同源验证当无偏最终测试。交接 `memory-bank/handoffs/cyj/20260924-2131-identifiability-b7-diagnostic.md`。远端 fetch 两次失败，当前尚未确认本轮远程备份。
 
 2026-09-24 20:14 接续：交付 **cyj.chm.v2**，入口 `interfaces/cyj/CHM_API_V2.md` / `src/cyj/chm_adapter_v2.py`，固定 chm v1.2 `a552593` 与原 B7 fit。提供 chm `value_grad`、批量 JSON、NDQ 样本、成本/预算与独立 13-target p sensitivity，无旧 eta；manifest SHA256 `846d72b583ba5f065a6ea2f6915e49f2ce77962848dd496f23054fc3cd2a248e`，七个上游 Git blob 精确校验。44/44 测试通过；新版已完成工程迁移但仍 diagnostic_only。chm 需将求解器/active_set 改用 model.bounds（D_min=10），不能沿用 B1 D_min=.134；本机无 SciPy，未运行其优化。交接 `memory-bank/handoffs/cyj/20260924-2014-chm-v2-delivery.md`，最终远端 SHA 以收尾核验为准。
