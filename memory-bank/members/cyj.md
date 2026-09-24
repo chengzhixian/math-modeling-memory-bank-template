@@ -10,7 +10,7 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 ## 当前状态
 
-2026-09-25 独立优化器抽检：36 冻结 Q3 情景使用不依赖 CHM SLSQP 的解析消去 D + 约束微分进化；33 可行解与 CHM 条件 Loss 差 `1.31e-10` 至 `8.03e-9`，3 低预算支持域不可行判据相同。SciPy local polish 在质量边界探测时报错，正式运行关闭 polish 并记录偏离。16/16 审计项包含从原始 B1/B7 CSV 独立重算两模型 RMSE，62/62 本人单测、XeLaTeX 8 页通过；`PASS_WITH_LIMITATIONS`、`ready_for_Q3=false`。见 `20260925-q3-independent-optimizer-results.md` 与交接。上次远端已核验 `team/cyj-scaling@9403059623ea503db45f4ba41f475dc4a2441a52`；本轮新结果待另行检查点。
+2026-09-25 独立优化器抽检：36 冻结 Q3 情景使用不依赖 CHM SLSQP 的解析消去 D + 约束微分进化；33 可行解与 CHM 条件 Loss 差 `1.31e-10` 至 `8.03e-9`，3 低预算支持域不可行判据相同。SciPy local polish 在质量边界探测时报错，正式运行关闭 polish 并记录偏离。16/16 审计项包含从原始 B1/B7 CSV 独立重算两模型 RMSE，62/62 本人单测、XeLaTeX 8 页通过；`PASS_WITH_LIMITATIONS`、`ready_for_Q3=false`。见 `20260925-q3-independent-optimizer-results.md` 与交接。上次远端已核验 `team/cyj-scaling@9403059623ea503db45f4ba41f475dc4a2441a52`；之后本地 `a81ac59`、`335e4b0` 已提交但因 GitHub HTTPS 443 超时/连接重置反复推送失败，当前待推，下一轮优先补推。
 
 2026-09-25 独立 red-team 补充：四个 B7 质量项消融 ×36 个 Q3 情景形成 144 行，132 可行；no-Q 全部回到 Q0，跨模型 regret 数值非负。恒定 G 与双交互在 `1e22` FLOPs、30000 token 指数成本下给出 N/D=6.30/125.90 对 4.52/172.29，而双交互条件 Loss 只差 0.002827，故单一最优配比解释需降级。嵌套区间聚合 95% 覆盖虽约 0.95，最弱 N/D/Q 组为 0.84/0.88/0.89。v4 条件 API 现支持 10 个明确上下文并标注 7 个 CYJ 外生情景；非有限值求解点 fail-fast，30000 token 成本偏导/等成本点验证。15/15 总审计通过、60/60 本人单测通过，科学统一状态仍 `PASS_WITH_LIMITATIONS`、`ready_for_Q3=false`。详见 `20260925-q3-form-sensitivity-results.md` 和新 handoff；新 v4 精确发布 SHA 以后续 Git 验证为准。
 
