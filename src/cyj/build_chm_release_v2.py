@@ -25,7 +25,7 @@ def main():
     directory = ROOT / "outputs/cyj/interfaces"
     for name, data in files.items():
         (directory / name).write_text(json.dumps(data, ensure_ascii=False, indent=2, allow_nan=False)+"\n", encoding="utf-8", newline="\n")
-    paths = ["src/cyj/chm_adapter_v2.py", "src/cyj/build_chm_release_v2.py", "src/cyj/quality_scaling.py",
+    paths = ["src/cyj/chm_adapter_v2.py", "src/cyj/build_chm_release_v2.py", "src/cyj/chm_consumer_smoke.py", "src/cyj/quality_scaling.py",
              "src/cyj/q3_costs.py"] + [f"outputs/cyj/interfaces/{n}" for n in files]
     metadata["files_sha256_utf8_lf"] = {p: hashlib.sha256((ROOT/p).read_bytes().replace(b"\r\n", b"\n")).hexdigest() for p in paths}
     (directory/"chm_v2_manifest.json").write_text(json.dumps(metadata, ensure_ascii=False, indent=2)+"\n", encoding="utf-8", newline="\n")

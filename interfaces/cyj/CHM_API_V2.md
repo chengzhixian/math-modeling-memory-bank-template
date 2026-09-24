@@ -10,9 +10,12 @@
 git fetch origin team/cyj-scaling integration/chm-q1-clean-20260923
 python -B src/cyj/chm_adapter_v2.py --describe
 python -B src/cyj/chm_adapter_v2.py --request outputs/cyj/interfaces/chm_v2_request.json
+python -B src/cyj/chm_consumer_smoke.py --release-commit <CYJ_RELEASE_COMMIT>
 ```
 
 队友在本人分支使用独立 cyj checkout/worktree 或经集成人合并取得这些文件，不直接切换正在写入的 chm 工作区。`--describe` 给 17 域顺序、参考 p、13 target、支持域、Q/p policy 与上游 SHA。批量请求/响应样例分别为 `chm_v2_request.json`、`chm_v2_expected.json`。任一请求非法则整批退出码 2，stdout 为空，stderr 为 JSON 错误；严格拒绝重复 JSON 键、数值字符串、bool、非有限值、未知字段、formal 模式和支持域外点。
+
+`chm_consumer_smoke.py` 要求传入发布交接中的精确 40 位 `CYJ_RELEASE_COMMIT`；它将本地代码/样例/manifest 对照该 Git 对象，核对机器清单内的逐文件 SHA，并实际调用 `value_grad` 与两条示例请求。
 
 固定源：chm commit `a5525935b37f873235d2f650e4810a787b9a8788`、manifest 原始 Git SHA256 `5885317d072739b02cdbb434fc730dde07510eb284dc857e35863adc877e914d`；B7 fit SHA256 `e676bfb06da81c02ad968591aa9ae09da5c7cd6b56def49d59a82c371465b025`。Q1 通过其原生读取器核对 LF 规范化文件哈希及行数。所有源由固定 SHA 读取，不跟随浮动分支。
 
