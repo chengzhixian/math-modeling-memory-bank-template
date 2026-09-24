@@ -10,6 +10,8 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 ## 当前状态
 
+2026-09-25 独立 joint 第一批：八参数联合 SSE、12起点、24折对照、宽界及200次簇bootstrap已运行。N/D/Q留级RMSE 0.049764/0.049008/0.049352，均低于staged；A-alpha相关约-0.964，限制参数解释。后续独立候选采用joint，历史v3不改。数学推导已落盘，nested/coverage及替代图脚本尚未运行。交接 `20260925-independent-joint-results.md`；继续保持 ready=false。
+
 2026-09-25 新独立任务启动：已确认旧双交互使用两阶段指数拟合，新增八参数联合约束 SSE 与多起点代码，冻结数值界/分组验证/识别性检查协议；基础 smoke 12/12 起点同近最优、未触界，完整实验尚未运行。任务清单见 `experiments/cyj/20260925-independent-protocol.md`，启动交接 `memory-bank/handoffs/cyj/20260925-independent-start.md`。旧 v3 精确发布保持原状，`ready_for_Q3=false`。
 
 2026-09-25 续办发布：`cyj.chm.v3` 条件接口及 CYJ 本机真实 CHM solver 联调已落到不可变发布 `e36aa23143bda9f027853f5af825728625750c5b`；精确 release smoke PASS，51/51 测试 PASS，XeLaTeX 7 页 PASS。CHM `92e0592` 原版求解器 27 场景中 24 可行收敛/KKT 检查过、3 个低预算支持域不可行；同源 B7 族选择与区间覆盖未独立校准，`ready_for_Q3=false`，CHM owner acceptance 仍待。与 CHM 精确提交 dry merge 仅两份本人论文稿冲突。GitHub 443 超时后已补推并核实远端 `team/cyj-scaling` 与发布同 SHA。交接 `memory-bank/handoffs/cyj/20260925-q2-v3-conditional-and-chm-integration.md`。
