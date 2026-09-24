@@ -21,6 +21,8 @@ effect = q1.relative_effect(p, "pile_cc")
 validation = q1.ranking_validation("pile_cc")
 \`\`\`
 
+\`effect_vector(mixture)\` 一次返回全部 13 个 target 的相对效应；\`interaction_matrix()\` 返回 $13\\times17$ 零和 Ridge 系数矩阵。两者仍属于 A4+A5 的 1M target-loss 坐标，不改变跨尺度和 A→B 桥接边界。
+
 \`relative_effect()\` 定义
 \[
 m_k(\mathbf p)
