@@ -10,6 +10,8 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 ## 当前状态
 
+2026-09-25 续办：冻结 B7 双交互族重做 N/D/Q 共 24 折留级、1350 条 OOF；三轴平均 RMSE 0.051936/0.050207/0.050061，均低于恒定 G。45 个 N-D 组 bootstrap 500/500 成功，形成同源条件经验预测区间；输出 SHA256 `cae1c827...` 与 `54c2ceb2...`，48/48 测试通过。由于族选择之前已查看全 B7，重复 CV 和区间不能当独立最终验证，`ready_for_Q3=false`。证据见 `experiments/cyj/20260925-b7-frozen-validation-uncertainty.md`，交接见 `memory-bank/handoffs/cyj/20260925-b7-frozen-validation-uncertainty.md`。CHM 求解器实测与 v3 接口仍待完成。
+
 2026-09-25 00:46：接收 Q2 封板/CHM 真联调新任务单。已重新读取公共记忆、本人角色、数据索引、跨分支依赖与完整审查协议；本机 `team/cyj-scaling@35e16d6` 起点干净，远端同 SHA。先冻结 B7 双交互为**候选**，新增 `src/cyj/b7_formal_model.py`、`outputs/cyj/quality/b7_frozen_model.json` 和梯度测试。原 B7 SHA256 `880fd265...`；重拟合参数与前日候选比较一致，四角最小质量收益 `0.2090545734`，两次构建产物 SHA256 均 `ed6b01b113110b90b25c5f6cc01d7686cb77602f29464bc068843b36d881c9bf`；46/46 CYJ 测试通过。由于候选形式曾参考全 B7，后续固定族留组 CV 不能冒充未触碰的独立最终测试；目前 `ready_for_Q3=false`。新任务 P0-2/P0-3/v3/CHM solver 实测尚未完成。详见 `memory-bank/handoffs/cyj/20260925-0046-b7-frozen-candidate.md`。
 
 2026-09-24 23:04：先前待推的文档检查点已补推，远端 `team/cyj-scaling` 与当时本地均为 `47e621887fa48279a0cc60782238d2f41240477a`。Draft PR #3 的标题/正文已更新并独立 GET 验证，仍为 Draft，写明该远端 HEAD、main base、固定 chm 生产者、44/44 测试与 `ready_for_Q3=false`。CHM 当前远端分支 `20e627710f4979bbdd487e84253e5f1748c13f28` 未包含 CYJ 发布；重新 `merge-tree` 仍仅 `q2.tex`、`q3_theory.tex` 两处 CYJ 正式稿对占位稿冲突。CHM 实际消费与正式科学门槛仍待完成。续办交接 `memory-bank/handoffs/cyj/20260924-2304-pr3-remote-sync.md`；其自身后续文档提交因 Git 主机连接超时待推。
