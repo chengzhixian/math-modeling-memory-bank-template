@@ -27,3 +27,10 @@ Gemini 提交 `fd55147`、`80c7ea5`、`6086964` 已作废；`58f4f0a` 以 ours �
 每个成员、每个新模型会话或网页端上传资料前，都先提供本规则。交接须说明所用数据说明版本、当前分支和结果来源。
 
 运行 `python scripts/build_safe_pdf_context.py --check` 核验当前清理版 PDF、历史派生正文和提取清单的一致性；运行 `python scripts/check_ai_reading_rules.py` 核验入口规则与隔离状态；运行 `./scripts/verify_raw_data.ps1` 核验当前资料清单。任何一项失败，都不能宣称资料上下文安全就绪。
+
+## 2026-09-24 完整审查协议
+
+根目录 `REPOSITORY_REVIEW_PROTOCOL.md` 已由用户授权为全团队公共强制规则。任何跨成员接口验收、分支审查、模型复核或“检查能否写入论文”的任务，都必须执行该协议，尤其不能跳过 variable provenance、identifiability、数据角色冻结、support/leakage、claim ladder 和从零 red-team。
+
+跨成员依赖如果需要一个上游并未被数据识别的参数，必须把接口状态标成 unidentified / sensitivity-only，而不是要求上游为了下游方便补造参数。
+
