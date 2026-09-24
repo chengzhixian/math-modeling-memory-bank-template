@@ -9,7 +9,10 @@
     "n_total": 75,
     "loss_ordered_holdout_n": 19,
     "loss_ordered_holdout_rmse_points": 7.06003565485966,
-    "loss_ordered_holdout_r2": -1.3758200924779738
+    "loss_ordered_holdout_r2": -1.3758200924779738,
+    "source_holdout_n": 75,
+    "source_holdout_rmse_points": 9.887236986243915,
+    "source_holdout_r2": 0.2795249778932184
   },
   "prediction": null,
   "prediction_interval": null,

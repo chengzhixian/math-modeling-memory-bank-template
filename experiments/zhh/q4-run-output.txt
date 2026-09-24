@@ -1,4 +1,6 @@
 {
+  "status": "superseded_by_ZHH-Q4-AUDIT-20260924",
+  "supersededReason": "The former compute-slowdown scenarios and bootstrap bands are retained only for provenance and must not be used as current results.",
   "generatedAt": "2026-09-23T08:30:41.739Z",
   "definitions": {
     "capability": "Unweighted mean of the six C1/C2 benchmark scores.",

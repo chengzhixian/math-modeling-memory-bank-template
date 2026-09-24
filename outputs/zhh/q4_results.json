@@ -1,18 +1,20 @@
 {
   "definitions": {
-    "capability": "Unweighted mean of the six C1/C2 benchmark scores.",
+    "capability": "Unweighted mean of the six C1/C2 benchmark scores, defined only for complete six-score cases.",
     "openFilter": "Epoch open weights is Yes, or a non-empty recognizable Hub license is present.",
     "timeAxis": "Leaderboard submission date; C1/C2 span is reported explicitly.",
-    "modelTypes": "pretrained versus chat_or_finetuned from the Type field.",
-    "contribution": "OLS score ~ log10(parameters in billions) + months since 2024-06 + model-type indicator.",
-    "forecast": "12-month frontier scenario under 25% and 50% of historical open-model compute-frontier log growth."
+    "modelTypes": "pretrained versus non_pretrained from the Type field; non_pretrained includes chat, domain-finetuned, merges and multimodal entries.",
+    "contribution": "OLS score ~ log10(parameters in billions) + months since 2024-06 + non-pretrained indicator.",
+    "forecast": "Compute-slowdown forecast is withheld because no validated compute-to-parameter-frontier mapping is identified; a conditional time-only association is reported separately."
   },
   "audit": {
     "leaderboardUsableOpenRows": 2678,
+    "leaderboardEligibleBeforeCompleteCase": 2678,
+    "leaderboardIncompleteSixScoreRowsExcluded": 0,
     "leaderboardMinDate": "2024-06-08",
     "leaderboardMaxDate": "2025-03-13",
     "pretrainedRows": 260,
-    "chatOrFinetunedRows": 2418,
+    "nonPretrainedRows": 2418,
     "c8Directories": 1863,
     "c8AggregatedDirectories": 1860,
     "c8ParseFailuresEncountered": 4
@@ -22,7 +24,7 @@
       "intercept": 1.8665173872293974,
       "logParams": 13.589548330384687,
       "month": 1.060159537100293,
-      "chatIndicator": 3.4537672998062363
+      "nonPretrainedIndicator": 3.4537672998062363
     },
     "fitMetrics": {
       "n": 2678,
@@ -33,12 +35,12 @@
     "startProfile": {
       "logParams": 1.8485216407506466,
       "month": 1.0020824626119837,
-      "chatIndicator": 0.7982300884955752
+      "nonPretrainedIndicator": 0.7982300884955752
     },
     "endProfile": {
       "logParams": 1.3723964324231115,
       "month": 8.366515049701645,
-      "chatIndicator": 0.9322033898305084
+      "nonPretrainedIndicator": 0.9322033898305084
     },
     "contributions": {
       "scale": -6.4703265298815165,
@@ -81,6 +83,12 @@
       "rmse": 7.06003565485966,
       "mae": 5.915519707636628,
       "r2": -1.3758200924779738
+    },
+    "sourceHoldout": {
+      "nTest": 75,
+      "rmse": 9.887236986243915,
+      "mae": 7.833142467153212,
+      "r2": 0.2795249778932184
     },
     "nHigh": 7,
     "nMedium": 68
@@ -173,12 +181,14 @@
     ]
   },
   "forecast": {
+    "status": "not_identified_for_compute_slowdown",
+    "statusReason": "No validated mapping from the C4 compute frontier to the C1/C2 parameter frontier is available; adding compute growth to log10 parameter count is dimensionally unsupported.",
     "model": {
       "coefficients": {
         "intercept": 1.8665173872293974,
         "logParams": 13.589548330384687,
         "month": 1.060159537100293,
-        "chatIndicator": 3.4537672998062363
+        "nonPretrainedIndicator": 3.4537672998062363
       },
       "metrics": {
         "n": 2678,
@@ -195,28 +205,12 @@
       "r2": 0.3947093376579469
     },
     "currentLogParamsFrontier": 1.3723964324231115,
-    "predictions": [
-      {
-        "scenario": "slowdown_25pct",
-        "anchorDate": "2025-03-13",
-        "horizonMonths": 12,
-        "assumedAnnualLog10ComputeGrowth": 0.10819618461332547,
-        "predictedScore": 47.85538083494935,
-        "lower95": 45.625303115514996,
-        "upper95": 49.6473459575151,
-        "bootstrapSuccessful": 300
-      },
-      {
-        "scenario": "slowdown_50pct",
-        "anchorDate": "2025-03-13",
-        "horizonMonths": 12,
-        "assumedAnnualLog10ComputeGrowth": 0.21639236922665095,
-        "predictedScore": 49.32571811491537,
-        "lower95": 47.215169869942784,
-        "upper95": 51.47175947598907,
-        "bootstrapSuccessful": 300
-      }
-    ]
+    "conditionalTimeOnly": {
+      "horizonMonths": 12,
+      "predictedScore": 46.38504355498334,
+      "interpretation": "Conditional association forecast holding the current parameter frontier and model-type mix fixed; it is not a compute-slowdown forecast."
+    },
+    "predictions": []
   },
   "contexts": [
     {

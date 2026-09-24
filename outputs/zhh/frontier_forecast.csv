@@ -1,3 +1,2 @@
-scenario,anchorDate,horizonMonths,assumedAnnualLog10ComputeGrowth,predictedScore,lower95,upper95,bootstrapSuccessful
-slowdown_25pct,2025-03-13,12,0.10819618461332547,47.85538083494935,45.625303115514996,49.6473459575151,300
-slowdown_50pct,2025-03-13,12,0.21639236922665095,49.32571811491537,47.215169869942784,51.47175947598907,300
+scenario,status,predictedScore,lower95,upper95,note
+compute_slowdown,not_identified_for_compute_slowdown,,,,No validated mapping from the C4 compute frontier to the C1/C2 parameter frontier is available; adding compute growth to log10 parameter count is dimensionally unsupported.

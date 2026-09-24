@@ -138,21 +138,9 @@ function writeCsv(fileName, rows, columns) {
   fs.writeFileSync(path.join(outputRoot, fileName), `${output}\n`, 'utf8');
 }
 
-function seededRandom(seed) {
-  let state = seed >>> 0;
-  return () => {
-    state = (1664525 * state + 1013904223) >>> 0;
-    return state / 2 ** 32;
-  };
-}
-
-function sampleWithReplacement(rows, random) {
-  return Array.from({ length: rows.length }, () => rows[Math.floor(random() * rows.length)]);
-}
-
 function classifyType(rawType) {
   const value = String(rawType || '').toLowerCase();
-  return value.includes('pretrained') ? 'pretrained' : 'chat_or_finetuned';
+  return value.includes('pretrained') ? 'pretrained' : 'non_pretrained';
 }
 
 function isOpenModel(row) {
@@ -164,7 +152,7 @@ function isOpenModel(row) {
 function parseLeaderboard() {
   const rows = readCsv('leaderboard_enhanced.csv');
   const minimumDate = Date.parse('2024-06-01T00:00:00Z');
-  return rows.map(row => {
+  const parsedRows = rows.map(row => {
     const timestamp = Date.parse(row['Submission Date']);
     const scores = benchmarkColumns.map(column => number(row[column]));
     return {
@@ -180,9 +168,15 @@ function parseLeaderboard() {
       score: mean(scores),
       scores,
       logParams: number(row['#Params (B)']) > 0 ? Math.log10(number(row['#Params (B)'])) : null,
-      chatIndicator: classifyType(row.Type) === 'chat_or_finetuned' ? 1 : 0,
+      nonPretrainedIndicator: classifyType(row.Type) === 'non_pretrained' ? 1 : 0,
     };
-  }).filter(row => row.open && row.paramsB > 0 && Number.isFinite(row.timestamp) && Number.isFinite(row.score));
+  });
+  const eligibleRows = parsedRows.filter(row => row.open && row.paramsB > 0 && Number.isFinite(row.timestamp));
+  parseLeaderboard.audit = {
+    eligibleBeforeCompleteCase: eligibleRows.length,
+    incompleteSixScoreRowsExcluded: eligibleRows.filter(row => !row.scores.every(Number.isFinite)).length,
+  };
+  return eligibleRows.filter(row => row.scores.every(Number.isFinite));
 }
 
 function aggregateDetailedResults() {
@@ -230,7 +224,7 @@ function aggregateDetailedResults() {
 
 function analyzeContribution(leaderboardRows) {
   const rows = leaderboardRows.map(row => ({ ...row, scoreValue: row.score }));
-  const featureNames = ['logParams', 'month', 'chatIndicator'];
+  const featureNames = ['logParams', 'month', 'nonPretrainedIndicator'];
   const model = fitOls(rows, featureNames, 'scoreValue');
   const minMonth = Math.min(...rows.map(row => row.month));
   const maxMonth = Math.max(...rows.map(row => row.month));
@@ -239,17 +233,17 @@ function analyzeContribution(leaderboardRows) {
   const startProfile = {
     logParams: quantile(firstWindow.map(row => row.logParams), 0.95),
     month: mean(firstWindow.map(row => row.month)),
-    chatIndicator: mean(firstWindow.map(row => row.chatIndicator)),
+    nonPretrainedIndicator: mean(firstWindow.map(row => row.nonPretrainedIndicator)),
   };
   const endProfile = {
     logParams: quantile(lastWindow.map(row => row.logParams), 0.95),
     month: mean(lastWindow.map(row => row.month)),
-    chatIndicator: mean(lastWindow.map(row => row.chatIndicator)),
+    nonPretrainedIndicator: mean(lastWindow.map(row => row.nonPretrainedIndicator)),
   };
   const beta = model.coefficients;
   const scaleContribution = beta.logParams * (endProfile.logParams - startProfile.logParams);
   const timeContribution = beta.month * (endProfile.month - startProfile.month);
-  const typeContribution = beta.chatIndicator * (endProfile.chatIndicator - startProfile.chatIndicator);
+  const typeContribution = beta.nonPretrainedIndicator * (endProfile.nonPretrainedIndicator - startProfile.nonPretrainedIndicator);
   const absoluteTotal = Math.abs(scaleContribution) + Math.abs(timeContribution) + Math.abs(typeContribution);
   return {
     model,
@@ -269,11 +263,13 @@ function analyzeBridge() {
   const rawRows = readCsv('loss_benchmark_bridge_expanded.csv');
   const rows = rawRows.map(row => ({
     model: row.Model,
+    source: row.Loss_Source,
     loss: number(row.Val_Loss),
     logParams: number(row.N_params_B) > 0 ? Math.log10(number(row.N_params_B)) : null,
-    benchmark: mean(bridgeColumns.map(column => number(row[column]))),
+    benchmarkScores: bridgeColumns.map(column => number(row[column])),
     comparability: String(row.Loss_Comparability || '').toLowerCase().startsWith('high') ? 'high' : 'medium',
-  })).filter(row => Number.isFinite(row.loss) && Number.isFinite(row.logParams) && Number.isFinite(row.benchmark));
+  })).filter(row => Number.isFinite(row.loss) && Number.isFinite(row.logParams) && row.benchmarkScores.every(Number.isFinite));
+  rows.forEach(row => { row.benchmark = mean(row.benchmarkScores); });
   const highRows = rows.filter(row => row.comparability === 'high');
   const highModel = fitOls(highRows, ['loss', 'logParams'], 'benchmark');
   const weightedModel = fitOls(rows, ['loss', 'logParams'], 'benchmark', rows.map(row => row.comparability === 'high' ? 1 : 0.35));
@@ -284,11 +280,25 @@ function analyzeBridge() {
   const validationModel = fitOls(train, ['loss', 'logParams'], 'benchmark', train.map(row => row.comparability === 'high' ? 1 : 0.35));
   const actual = test.map(row => row.benchmark);
   const predicted = test.map(validationModel.predict);
+  const sources = [...new Set(rows.map(row => row.source))];
+  const groupedActual = [];
+  const groupedPredicted = [];
+  for (const source of sources) {
+    const sourceTest = rows.filter(row => row.source === source);
+    const sourceTrain = rows.filter(row => row.source !== source);
+    if (sourceTest.length === 0 || sourceTrain.length < 4) continue;
+    const sourceModel = fitOls(sourceTrain, ['loss', 'logParams'], 'benchmark', sourceTrain.map(row => row.comparability === 'high' ? 1 : 0.35));
+    sourceTest.forEach(row => {
+      groupedActual.push(row.benchmark);
+      groupedPredicted.push(sourceModel.predict(row));
+    });
+  }
   return {
     rows,
     highModel: { coefficients: highModel.coefficients, metrics: highModel.metrics },
     weightedModel: { coefficients: weightedModel.coefficients, metrics: weightedModel.metrics },
     lossHoldout: { nTrain: train.length, nTest: test.length, rmse: rmse(actual, predicted), mae: mae(actual, predicted), r2: rSquared(actual, predicted) },
+    sourceHoldout: { nTest: groupedActual.length, rmse: rmse(groupedActual, groupedPredicted), mae: mae(groupedActual, groupedPredicted), r2: rSquared(groupedActual, groupedPredicted) },
   };
 }
 
@@ -323,63 +333,36 @@ function analyzeTimeseries() {
   return { annual };
 }
 
-function forecastFrontier(leaderboardRows, epochCompute, bootstrapIterations = 300) {
+function forecastFrontier(leaderboardRows) {
   const rows = leaderboardRows.map(row => ({ ...row, scoreValue: row.score }));
   const cutoff = quantile(rows.map(row => row.timestamp), 0.8);
   const train = rows.filter(row => row.timestamp <= cutoff);
   const test = rows.filter(row => row.timestamp > cutoff);
-  const validationModel = fitOls(train, ['logParams', 'month', 'chatIndicator'], 'scoreValue');
+  const validationModel = fitOls(train, ['logParams', 'month', 'nonPretrainedIndicator'], 'scoreValue');
   const validationActual = test.map(row => row.scoreValue);
   const validationPredicted = test.map(validationModel.predict);
-  const fullModel = fitOls(rows, ['logParams', 'month', 'chatIndicator'], 'scoreValue');
+  const fullModel = fitOls(rows, ['logParams', 'month', 'nonPretrainedIndicator'], 'scoreValue');
   const finalMonth = Math.max(...rows.map(row => row.month));
   const recentRows = rows.filter(row => row.month >= finalMonth - 2);
   const currentLogParamsFrontier = quantile(recentRows.map(row => row.logParams), 0.95);
-  const chatShare = mean(recentRows.map(row => row.chatIndicator));
-  const historicalComputeGrowth = epochCompute.medianAnnualLogGrowth || 0;
-  const scenarios = [
-    { scenario: 'slowdown_25pct', logComputeGrowth: historicalComputeGrowth * 0.25 },
-    { scenario: 'slowdown_50pct', logComputeGrowth: historicalComputeGrowth * 0.5 },
-  ];
-  const random = seededRandom(20260923);
-  const predictions = [];
-  for (const scenario of scenarios) {
-    const bootstrapValues = [];
-    for (let iteration = 0; iteration < bootstrapIterations; iteration += 1) {
-      const bootstrapRows = sampleWithReplacement(rows, random);
-      try {
-        const model = fitOls(bootstrapRows, ['logParams', 'month', 'chatIndicator'], 'scoreValue');
-        const futureRow = {
-          logParams: currentLogParamsFrontier + scenario.logComputeGrowth,
-          month: finalMonth + 12,
-          chatIndicator: chatShare,
-        };
-        bootstrapValues.push(model.predict(futureRow));
-      } catch (_) {
-        // Singular bootstrap samples are discarded and counted implicitly.
-      }
-    }
-    const futureRow = {
-      logParams: currentLogParamsFrontier + scenario.logComputeGrowth,
-      month: finalMonth + 12,
-      chatIndicator: chatShare,
-    };
-    predictions.push({
-      scenario: scenario.scenario,
-      anchorDate: new Date(Math.max(...rows.map(row => row.timestamp))).toISOString().slice(0, 10),
-      horizonMonths: 12,
-      assumedAnnualLog10ComputeGrowth: scenario.logComputeGrowth,
-      predictedScore: fullModel.predict(futureRow),
-      lower95: quantile(bootstrapValues, 0.025),
-      upper95: quantile(bootstrapValues, 0.975),
-      bootstrapSuccessful: bootstrapValues.length,
-    });
-  }
+  const nonPretrainedShare = mean(recentRows.map(row => row.nonPretrainedIndicator));
+  const futureRow = {
+    logParams: currentLogParamsFrontier,
+    month: finalMonth + 12,
+    nonPretrainedIndicator: nonPretrainedShare,
+  };
   return {
+    status: 'not_identified_for_compute_slowdown',
+    statusReason: 'No validated mapping from the C4 compute frontier to the C1/C2 parameter frontier is available; adding compute growth to log10 parameter count is dimensionally unsupported.',
     model: { coefficients: fullModel.coefficients, metrics: fullModel.metrics },
     timeHoldout: { nTrain: train.length, nTest: test.length, rmse: rmse(validationActual, validationPredicted), mae: mae(validationActual, validationPredicted), r2: rSquared(validationActual, validationPredicted) },
     currentLogParamsFrontier,
-    predictions,
+    conditionalTimeOnly: {
+      horizonMonths: 12,
+      predictedScore: fullModel.predict(futureRow),
+      interpretation: 'Conditional association forecast holding the current parameter frontier and model-type mix fixed; it is not a compute-slowdown forecast.',
+    },
+    predictions: [],
   };
 }
 
@@ -408,29 +391,38 @@ function main() {
   const bridge = analyzeBridge();
   const epochCompute = analyzeEpochCompute();
   const timeseries = analyzeTimeseries();
-  const forecast = forecastFrontier(leaderboard, epochCompute);
+  const forecast = forecastFrontier(leaderboard);
   const contexts = contextScenarios();
 
   writeCsv('c8_bbh_task_aggregation.csv', detailed.aggregates, ['modelDirectory', 'sourceFile', 'bbhTaskCount', 'bbhMacroMean', 'bbhTaskSd', 'bbhTaskMin', 'bbhTaskMax']);
   writeCsv('c8_parse_failures.csv', detailed.failures, ['modelDirectory', 'file', 'reason']);
   writeCsv('context_scenarios.csv', contexts, ['scenario', 'contextTokens', 'supportingModels', 'source']);
-  writeCsv('frontier_forecast.csv', forecast.predictions, ['scenario', 'anchorDate', 'horizonMonths', 'assumedAnnualLog10ComputeGrowth', 'predictedScore', 'lower95', 'upper95', 'bootstrapSuccessful']);
+  writeCsv('frontier_forecast.csv', [{
+    scenario: 'compute_slowdown',
+    status: forecast.status,
+    predictedScore: null,
+    lower95: null,
+    upper95: null,
+    note: forecast.statusReason,
+  }], ['scenario', 'status', 'predictedScore', 'lower95', 'upper95', 'note']);
 
   const result = {
     definitions: {
-      capability: 'Unweighted mean of the six C1/C2 benchmark scores.',
+      capability: 'Unweighted mean of the six C1/C2 benchmark scores, defined only for complete six-score cases.',
       openFilter: 'Epoch open weights is Yes, or a non-empty recognizable Hub license is present.',
       timeAxis: 'Leaderboard submission date; C1/C2 span is reported explicitly.',
-      modelTypes: 'pretrained versus chat_or_finetuned from the Type field.',
-      contribution: 'OLS score ~ log10(parameters in billions) + months since 2024-06 + model-type indicator.',
-      forecast: '12-month frontier scenario under 25% and 50% of historical open-model compute-frontier log growth.',
+      modelTypes: 'pretrained versus non_pretrained from the Type field; non_pretrained includes chat, domain-finetuned, merges and multimodal entries.',
+      contribution: 'OLS score ~ log10(parameters in billions) + months since 2024-06 + non-pretrained indicator.',
+      forecast: 'Compute-slowdown forecast is withheld because no validated compute-to-parameter-frontier mapping is identified; a conditional time-only association is reported separately.',
     },
     audit: {
       leaderboardUsableOpenRows: leaderboard.length,
+      leaderboardEligibleBeforeCompleteCase: parseLeaderboard.audit.eligibleBeforeCompleteCase,
+      leaderboardIncompleteSixScoreRowsExcluded: parseLeaderboard.audit.incompleteSixScoreRowsExcluded,
       leaderboardMinDate: new Date(Math.min(...leaderboard.map(row => row.timestamp))).toISOString().slice(0, 10),
       leaderboardMaxDate: new Date(Math.max(...leaderboard.map(row => row.timestamp))).toISOString().slice(0, 10),
       pretrainedRows: leaderboard.filter(row => row.type === 'pretrained').length,
-      chatOrFinetunedRows: leaderboard.filter(row => row.type === 'chat_or_finetuned').length,
+      nonPretrainedRows: leaderboard.filter(row => row.type === 'non_pretrained').length,
       c8Directories: detailed.directoryCount,
       c8AggregatedDirectories: detailed.aggregates.length,
       c8ParseFailuresEncountered: detailed.failures.length,
@@ -446,6 +438,7 @@ function main() {
       highComparability: bridge.highModel,
       comparabilityWeighted: bridge.weightedModel,
       lossOrderedHoldout: bridge.lossHoldout,
+      sourceHoldout: bridge.sourceHoldout,
       nHigh: bridge.rows.filter(row => row.comparability === 'high').length,
       nMedium: bridge.rows.filter(row => row.comparability === 'medium').length,
     },
