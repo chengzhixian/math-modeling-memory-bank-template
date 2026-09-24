@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "status": "descriptive_extrapolation_audit_not_validation",
+  "provenance": {
+    "script_sha256": "d44ff78157aa535a3a1c334207a67deeef2566a601445b93b8d10544f88c9c16",
+    "manifest_sha256": "3377a36c5f6fcabb79abca5fe5621047a3abd9be6dffd9491bc8c651b19f903f",
+    "python_version": "3.12.14",
+    "raw_files": {
+      "B9": {
+        "path": "data/raw/real_attachments/B_scaling_laws/supplementary_large_models.csv",
+        "bytes": 13400,
+        "sha256": "ee794c1c586ed33c485a9eb9a2a3d993790402b63297e9b2765a1387930e940e"
+      },
+      "B10": {
+        "path": "data/raw/real_attachments/B_scaling_laws/supplementary_large_baseline.csv",
+        "bytes": 4744,
+        "sha256": "a240e210c5b37444356c28eea96c6cc36be79c29baae1621c2e08aff727ccfeb"
+      }
+    },
+    "b1_fit_path": "outputs/cyj/classic/classic_fit.json",
+    "b1_fit_sha256": "9b0e381fbc0ea84bb37d63ccb273733f3a03a0c2a834e8ef52cdb75c45bc6ead",
+    "b1_fit_input_version": "cf297a4ad47e235acf5a9b6e890a5df5e05b07e5"
+  },
+  "data_roles": {
+    "B9": "reported_metadata_no_observed_loss_column",
+    "B10": "estimated_loss_stress_reference_not_independent_test",
+    "B1_curve": "draft_fit_descriptive_comparison_only"
+  },
+  "checks": {
+    "B9_rows": 132,
+    "B10_rows": 128,
+    "B10_exact_name_and_coordinate_matches_B9": 128,
+    "B9_unmatched_models": [
+      "DLRM-2020",
+      "InstructGPT 175B",
+      "LMSI-Palm",
+      "Med-PaLM 2"
+    ],
+    "B9_unmatched_D_tokens_B": {
+      "DLRM-2020": 0.0,
+      "InstructGPT 175B": 0.0,
+      "LMSI-Palm": 0.0,
+      "Med-PaLM 2": 0.0
+    },
+    "B9_zero_D_count": 4,
+    "B9_missing_FLOPs_count": 11,
+    "B10_N_params_B_range": [
+      100.0,
+      10000.0
+    ],
+    "B10_D_tokens_B_range": [
+      0.1,
+      36000.0
+    ],
+    "B10_above_B1_N_max_count": 128,
+    "B10_above_B1_D_max_count": 102,
+    "B10_below_B1_D_min_count": 3,
+    "B10_unique_ND_coordinates": 119,
+    "B10_repeated_ND_coordinate_groups": 5,
+    "B10_repeated_ND_extra_rows": 9,
+    "B10_repeated_ND_groups_with_identical_estimated_loss": 5,
+    "B10_minus_B1_curve_rmse_descriptive_only": 0.0011047668055016787,
+    "B10_minus_B1_curve_mae_descriptive_only": 0.0006301262068522662,
+    "B10_minus_B1_curve_max_abs_descriptive_only": 0.005200630541517981
+  },
+  "gate": {
+    "independent_external_validation": false,
+    "reason": "B10 Loss is labelled estimated and shares B9 N/D coordinates; generation mechanism and Loss coordinate are unverified. Numerical agreement with a B1 fit is circular or otherwise non-independent until provenance is established.",
+    "allowed_use": "B9 metadata support inventory and B10 clearly labelled estimated stress scenario only"
+  }
+}

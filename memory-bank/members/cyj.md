@@ -6,11 +6,13 @@
 
 Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠排除隐藏文字影响而作废，提交 `58f4f0a` 已明确丢弃其文件内容。不得从 Git 历史恢复、cherry-pick、复用其中的模型、参数、数值、结论或输出。若后续独立论证出同名方法适用，必须依据可见题面、真实数据或独立可核验文献重新建立证据链。
 
-更新时间：2026-09-24（北京时间，B7 质量接口交付）。角色 cyj，负责 Q2 与 Q3 理论；分支 `team/cyj-scaling`。Python 3.12.14 / Windows，环境见 `problem/cyj/environment.md`。
+更新时间：2026-09-24（北京时间，B9/B10 外推证据审计）。角色 cyj，负责 Q2 与 Q3 理论；分支 `team/cyj-scaling`。Python 3.12.14 / Windows，环境见 `problem/cyj/environment.md`。
 
 ## 当前状态
 
-2026-09-24 19:14 后接续：新增 `predict_quality.py` 批量 JSON 消费入口及双请求样例，37 项测试通过（含仓库外工作目录 CLI 调用）。模型参数/结果 SHA 不变，formal 仍拒绝。最新交接 `20260924-1914-b7-batch-consumer.md`。开工远端仍为 `6c17cb4`，上轮 `2c5e712` 尚待补推；本轮备份以最终 ls-remote 为准。
+2026-09-24 19:14 后接续：`predict_quality.py` 批量 JSON 入口和上轮 `2c5e712` 已补推并核对远端 SHA=`622d58a77c6eaf40da779d397de81c20819dcfd7`。随后合并最新 `origin/main@670d726`，生成 `b54310c67be84f1cac932021ebc7955e540f93c9`，读取新增 `REPOSITORY_REVIEW_PROTOCOL.md`；公共文件仅通过 main 合并进入，本人未直接编辑。最新工作见下段和新交接。
+
+本轮新增 B9/B10 外推证据审计：B9 132 元数据行、B10 128 估算 Loss 行全部精确按模型名/N/D 对应；B9 独有 4 行 D=0。B10 128/128 的 N 超出 B1 支持域，102 行 D 高于 B1 上界、3 行低于下界；119 个唯一 N/D 坐标，5 组重复坐标的估算 Loss 均一致。与 B1 draft 曲线的数值差 RMSE 0.0011047668 仅作描述，绝非独立外推误差。证据 `experiments/cyj/20260924-b9-b10-extrapolation-audit.md` 与 `outputs/cyj/diagnostics/b9_b10_extrapolation_audit.json`（SHA256 `53977e436fed3afabd5cb6ba908ff6d1f90a4cd42873209c5ba0d888db311068`）；接口未变、正式 Q3 仍未就绪。本轮 37/37 现有测试通过。全库校验仍因 A 侧 4 个 LFS 指针失败，B9/B10 已单独按清单核验。
 
 2026-09-24 接续交付：已合并 main `968ef7a`（merge `55889bf2b942ca9643f49e420035a9f051f2bed3`），无冲突。已修正 API 的 B8 准入描述，完成去重 B7 三候选/72 折验证/50 次条件 bootstrap。独立 `cyj.b7_quality.v1` 提供原生 N-D-Q、梯度与同编号 Loss 样本；合同 v1.10，34/34 测试通过。代码/输入 `6c17cb4e387e1ac047f8fe0e9ecb6fe42fc5ef3b`，输出 SHA256 `e676bfb06da81c02ad968591aa9ae09da5c7cd6b56def49d59a82c371465b025`，两次运行一致。最新交接 `20260924-1651-b7-quality-delivery.md`，详细结果见 `experiments/cyj/20260924-b7-quality-results.md`。
 
@@ -36,15 +38,16 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 | B2/B3 形状 | 半合成/插值的轨迹诊断，未作为独立验证；`20260924-b2-b3-shape-diagnostic.md` |
 | B1 bootstrap | 78/80 接受，两次哈希一致，仅固定模型条件波动；`20260924-b1-group-bootstrap.md` |
 | 本轮 E/N/D 消融 | 27/27 重拟合收敛未触边；LOSO RMSE full 0.0001461、no_E 0.0636845、no_N 0.2126047、no_D 0.2552875；仅支持 B1 重构保留三项 |
+| B9/B10 外推审计 | 128/128 B10 行与 B9 匹配、均在 B1 的 N 范围外；B10 为估算，不能作独立验证；`20260924-b9-b10-extrapolation-audit.md` |
 
 本轮实验集中在 `experiments/cyj/20260924-interface-adoption-ablation.md`，消融 JSON SHA256 `592c945cabd928892339b14f3008071abb5c308632e1e38367b0f333e3acfea8`。前几轮详细参数/命令/哈希以相应实验和历史 handoff 为准，不在当前记忆重复历史状态。已清除 13 个可再生 pyc（152005 bytes），复现依赖的代码、prepared/CV 和关键结果保留。
 
 ## 未验证项与下一步
 
 1. cyj：B7 已比较三候选，选线性 Q；N/D/Q 留出平均 RMSE 0.058231/0.057091/0.057617，仍需嵌套或独立验证与模型形式不确定性。B6 360 行均重复于 B7，只取 B7 450 坐标。B8 全部隔离：同坐标 Loss 不同且 Q 方向相反，最小 Loss=0.5 堆积原因未明，不反转 Q。B8 原证据见 `20260924-b8-quality-audit.md`。本轮 50 条样本只用于 B7 固定族条件均值，不是总预测区间；仍未交付完整 N-D-Q-p validated predictor。
-2. cyj：继续 B1 逐行 Loss 来源和 tokenizer/评估语料/对数底，B4/B5 可比性及 B9/B10 外推。近乎精确重构、bootstrap 窄区间和本轮消融不能替代这些证据。
+2. cyj：继续 B1 逐行 Loss 来源和 tokenizer/评估语料/对数底，B4/B5 可比性；B9/B10 已完成数据角色和重叠审计，仍需来源机制/外推有效性证据。近乎精确重构、bootstrap 窄区间和本轮消融不能替代这些证据。
 3. chm+cyj：按已经采用的定义联调；主 anchor 与 lambda 未识别时保留多 target 情景，不将 Q_z 等同 Q_score 或将 13 域原 Loss 平均。lambda 不默认 1，eta 不充当跨 Loss 换算。
 4. chm：验收本文接口和样例并修复发布换行规范；zhh：正式确认 C7/桥接接口并传播 Loss–Benchmark 误差；集成人：验收后汇总公共记忆，cyj 不直接编辑公共状态。
-5. 全库 A 附件 LFS 完整性本机仍未重新验证（B 输入已单独按清单核验）；官方规则/当年模板符合性仍需团队确认。
+5. 本轮重跑全库校验仍因 A 附件四个 LFS 指针失败；`git lfs pull` 等待无进展后中止，B9/B10 输入已单独按清单核验。官方规则/当年模板符合性仍需团队确认。
 
-最新交接见本页顶部 B7 交付；先前网络待推提交均已包含在核验通过的 `6c17cb4` 检查点，本轮最终 SHA 以收尾 Git 核验为准。已有 Draft [PR #3](https://github.com/chengzhixian/math-modeling-memory-bank-template/pull/3) 面向 main；本轮未改变 PR，分支备份不等于验收。公共状态交集成人更新。main 优秀论文目前仅阅读参考索引，未独立读原 PDF。
+最新交接为 `memory-bank/handoffs/cyj/20260924-1936-b9-b10-extrapolation-audit.md`；本轮最终远端 SHA 以收尾 Git 核验为准。已有 Draft [PR #3](https://github.com/chengzhixian/math-modeling-memory-bank-template/pull/3) 面向 main；本轮未改变 PR，分支备份不等于验收。公共状态交集成人更新。main 优秀论文目前仅阅读参考索引，未独立读原 PDF。
