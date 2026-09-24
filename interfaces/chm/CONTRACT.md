@@ -85,7 +85,9 @@ m_k(\mathbf p)(N/10^6)^{-\eta}.
 \`src/chm/q1_interface.py\` 提供：
 - \`quality(domain)\`；
 - \`mapped_quality(mixture_domain)\`；
-- \`relative_effect(mixture,target)\`，只返回 1M target contrast；
+- \`relative_effect(mixture,target)\`，返回单个 target 的 1M contrast；
+- \`effect_vector(mixture)\`，一次返回 13 维配比效应向量；
+- \`interaction_matrix()\`，返回 $13\\times17$ 零和 Ridge 作用矩阵；
 - \`ranking_validation(target)\`。
 
 manifest 状态：
