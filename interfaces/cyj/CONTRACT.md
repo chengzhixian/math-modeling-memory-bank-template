@@ -1,4 +1,4 @@
-# cyj 交付约定 草案 v1.6
+# cyj 交付约定 草案 v1.7
 
 生产者 cyj；使用者 chm（Q3）、zhh（桥接及论文）。本版为生产者侧草案，尚未取得 chm/zhh 验收，不能标记 validated。
 
@@ -40,7 +40,7 @@
 
 三种验证均触发 near-exact reconstruction 诊断。该现象可能来自共同的确定性构造或强预处理，不是独立真实泛化证据。B4/B5 的 tokenizer、评估语料、Loss 定义和单位等价性没有本地证据支持，因此 `absolute_loss_comparability=not_established`；`external_predictions_unvalidated.csv` 只供描述性检查，不提供 external RMSE。
 
-本版没有 Q、p、参数/预测区间、Loss–Benchmark 桥接或 Q3 可调用的 validated predictor。chm/zhh 不得把五参数点估计或 B4/B5 原始差值当作全队冻结接口；后续升级需先完成 Loss 来源审计、分组不确定性，并由 chm+cyj 联合冻结 Q mapping 与 Loss/anchor/p 接法。
+该经典基线交付没有 Q、p、经校准的参数/预测区间、Loss–Benchmark 桥接或 Q3 可调用的 validated predictor。后文 B1 bootstrap 仅补条件经验分位数；chm/zhh 不得把五参数点估计或 B4/B5 原始差值当作全队冻结接口。后续升级仍需完成 Loss 来源审计，并由 chm+cyj 联合冻结 Q mapping 与 Loss/anchor/p 接法。
 
 ## B1 显示精度与敏感性补充（诊断，非预测接口）
 
@@ -54,3 +54,10 @@
 - 代码/输入提交 `3cd66aeb23d9ceccc3958371bf41a212f6699658`；`outputs/cyj/diagnostics/b2_b3_shapes.json` schema v1，12,567 bytes，SHA256 `bea31afe812a68bb3d2af9c1ea1f0efcbe557e5dee8ad58f785c86cafe9d189e`。结果逐文件记录 B2 和 8 个 B3 CSV 的 bytes/SHA256。
 - B2 为半合成、B3 为插值，仅记录组内首末下降和相邻波动、重复坐标。B2 末尾显示 D 平台与 B3 重复 `step` 标签均显式保留；不得凭此报告 B1→B2 绝对 RMSE、独立真实泛化或 Q3 可调用预测。
 - v1.6 没有变更原五参数经典基线，仍无 Q/p、13 域 Loss anchor、参数/预测区间或 Loss–Benchmark 桥接；`ready_for_Q3=false`。
+
+## B1 按规模整组重抽样补充（条件诊断，非正式预测区间）
+
+- 代码/输入提交 `8dd672eb53571325f27342f4e545c0fa7bf06f24`；`outputs/cyj/diagnostics/b1_group_bootstrap.json` schema v1，94,180 bytes，SHA256 `e105dfd6b4ffc28f6d6fdf116173b0602b5d7ea5c2ec156f333be113ebeaadef`。输入 B1、prepared 和既有 classic_fit 的身份逐项验证，命令、参数与完整结果见 `experiments/cyj/20260924-b1-group-bootstrap.md`。
+- 80 次从 8 条完整 N 轨迹有放回重抽样，78 次收敛且不触边纳入经验分位数；同设置连续两次结果哈希相同，21/21 测试通过。重复抽中同轨迹以不同 draw ID 保留其权重，不对 checkpoint 随机拆分。
+- JSON 给五参数和 3×3 B1 范围网格的条件经验分位数，状态 `conditional_b1_group_bootstrap_not_validated_predictor`。只有 8 个簇、80 次抽样；B1 Loss 来源未释，不能称经校准置信/预测区间，更不覆盖 Q/p、跨 Loss、外推或 Loss–Benchmark 误差。
+- v1.7 不改原经典模型参数或 Q3 可调用接口；`ready_for_Q3=false`，chm/zhh 不得将该诊断当成正式优化/能力区间。跨分支合作与尚未冻结接口见 `problem/cyj/20260924-cross-branch-interface-review.md`。

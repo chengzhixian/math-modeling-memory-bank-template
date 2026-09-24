@@ -6,19 +6,27 @@
 
 Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠排除隐藏文字影响而作废，提交 `58f4f0a` 已明确丢弃其文件内容。不得从 Git 历史恢复、cherry-pick、复用其中的模型、参数、数值、结论或输出。若后续独立论证出同名方法适用，必须依据可见题面、真实数据或独立可核验文献重新建立证据链。
 
-更新时间：2026-09-24 09:59（北京时间）。角色任务：Q2 标度律与推导；为 Q3 提供目标函数、约束和验证支持。
+更新时间：2026-09-24 10:11（北京时间）。角色任务：Q2 标度律与推导；为 Q3 提供目标函数、约束和验证支持。
 成员称呼：cyj（用户已指定）。实际电脑/环境：Windows 10.0.26200；Python 3.12.14（Codex 工作区运行时）；详见 `problem/cyj/environment.md`。
-当前分支：`team/cyj-scaling`；已包含 main `a0932fd92b3a46cef8eb0bf563df1e6abc9396ef`；本轮 B1 组级 bootstrap 代码提交 `8dd672eb53571325f27342f4e545c0fa7bf06f24`，尚未生成正式结果。
+当前分支：`team/cyj-scaling`；已包含 main `a0932fd92b3a46cef8eb0bf563df1e6abc9396ef`；本轮 B1 组级 bootstrap 代码/输入提交 `8dd672eb53571325f27342f4e545c0fa7bf06f24`，已生成条件诊断结果。
 状态：进行中。Stage 1 审计、B1 经典 N-D 基线、八行计算量显示精度/剔除敏感性，以及 B2/B3 轨迹形状诊断已完成；B1 Loss 近乎精确重构的来源仍未查明，接口仍是 draft，`ready_for_Q3=false`。
-远端状态：上一已核检查点 `9a2d4357351afb11c59dff474cc82350a496eb7e`；本轮代码提交 `8dd672e` 尚待推送，必须以实际 Git push 与 `ls-remote` 核验，不能把本地提交视为备份。
+远端状态：运行前检查点 `65b3a722d83b7206290acec12474fd2dabafe796` 已推送，`ls-remote` 与本地 SHA 一致；本轮结果/交接仍待本次提交推送与最终核验。
+
+## 本轮 B1 整组 bootstrap 已验证结果
+
+- 对固定经典 `L(N,D)` 基线，以 8 个模型规模组为单位整条轨迹有放回抽样 80 次、每次 8 组，78 次收敛且未触边；第 5/59 次未收敛，未用于经验分位数。并未逐行随机拆分。
+- 两次相同命令结果 SHA256 均 `e105dfd6b4ffc28f6d6fdf116173b0602b5d7ea5c2ec156f333be113ebeaadef`，94,180 bytes；21/21 测试及编译通过。代码/输入版本 `8dd672eb53571325f27342f4e545c0fa7bf06f24`，原基线结果 SHA `9b0e381fbc0ea84bb37d63ccb273733f3a03a0c2a834e8ef52cdb75c45bc6ead`。
+- `outputs/cyj/diagnostics/b1_group_bootstrap.json` 的五参数及 3×3 B1 网格百分位仅为条件波动；仅 8 簇、80 次重抽样且 B1 Loss 近乎精确重构来源未明，不称校准预测区间或独立泛化。命令、输入文件身份、完整数值和限制见 `experiments/cyj/20260924-b1-group-bootstrap.md`。
+- 本人合同升 v1.7 producer draft，仅追加诊断文件，不变更经典点估计或 Q3 调用接口，`ready_for_Q3=false`。需要公共记忆更新者由集成人验收汇总；本人完成交接见 `memory-bank/handoffs/cyj/20260924-1011-p20-b1-bootstrap-complete.md`。
 
 ## 本轮跨分支审查与运行前检查点
 
 - 审查范围和精确版本见 `problem/cyj/20260924-cross-branch-interface-review.md`：chm 清洁集成分支 `7a958d7b5760bce4e7136a5c80e6b9275de60eaf`、zhh 分支 `d47cd2dc921333caecfcb95f09eb5a2f2714d0db`；两者均非已验收 main 接口。禁用受污染历史来源。
 - chm 的 `Q2_BRIDGE.md` 指出 `Q_z` 与 B6–B8 `Q_score` 无配对标定，暂不能数值映射；13 域 Loss 与 B1 `val_loss` 未同口径证实，centered p 和显式 `lambda_k(N)` 只可作结构联调。需 chm+cyj 联合决定 Q 情景、Loss anchor/p，不可单方冻结。
 - zhh `RESULTS.md` 提供 C7 2048/8192/131072 Token 外生情景，以及分级 Loss–Benchmark 桥接的留出误差量级；其同分支 `CONTRACT.md` 和成员记忆仍显过期，由 zhh 自行修订、集成人验收。cyj 不把 7.060 RMSE 误当 95% 区间。
-- 下一步已新增 B1 按 8 个 N 轨迹整组重抽样代码与测试，21/21 测试通过；输入代码版本固定为 `8dd672eb53571325f27342f4e545c0fa7bf06f24`。长运行待本检查点推送后进行，结果只能是条件于 B1 与经典模型的诊断，不能补足 Q/p、跨 Loss 或 Q4 桥接不确定性。
+- 本轮按 8 个 N 轨迹整组重抽样已执行；21/21 测试通过，结果只能是条件于 B1 与经典模型的诊断，不能补足 Q/p、跨 Loss 或 Q4 桥接不确定性。
 - 本轮未改公共记忆、他人目录或主接口；Q3 仍 `ready_for_Q3=false`。运行前交接见 `memory-bank/handoffs/cyj/20260924-0959-p20-crossbranch-bootstrap-start.md`。
+- 09:59 检查点推送后再次 fetch，发现 chm 清洁集成分支已到 `3f237910bc4b7ebfc7d4408d65572c134fed59c5`。新增真实重跑、eta 配对抽样修复及消融证据，但跨 Q/Loss 接口仍未联合冻结；新文件哈希和限定见本人审查记录增量。该变化尚未进入 main，不能当公共状态。
 
 ## Draft PR 交接状态
 
@@ -45,7 +53,7 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 ## 当前任务
 
-按 TASK_PLAN.md 推进 P20。当前先审计 B1/B4/B5 的 Loss 构造与口径，并对经典基线做分组不确定性和计算恒等式离群敏感性；Q1 的 Q/p 未形成正式接口前不拟合最终广义模型。
+按 TASK_PLAN.md 推进 P20。计算恒等式八行敏感性和 B1 分组条件不确定性已完成；接下来审计 B1/B4/B5 的 Loss 构造与口径。Q1 的 Q/p 未形成正式接口前不拟合最终广义模型。
 公共记忆由集成人维护；本次仅修改 cyj 归属文件。
 
 ## 本次已验证与证据
@@ -88,4 +96,4 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 2. 补充按规模分组 bootstrap 或等价不确定性；本轮八行敏感性不是预测区间。
 3. 为 B2 和 B4/B5 补齐生成/校准或 tokenizer、评估语料、Loss 定义和单位证据；证据不足时继续禁止跨来源统一 RMSE。B3 只做形状检查，不作独立验证。
 4. 在广义模型前与 chm 联合冻结 Q mapping 和 Loss/anchor/p 接法；记录实际消费的 SHA、接口版本和文件哈希。
-5. 最新交接见 `memory-bank/handoffs/cyj/20260924-0810-p20-b2-b3-shape-diagnostic.md`；最终推送及远端 SHA 以 Git 实际核验为准。
+5. B2/B3 历史交接见 `memory-bank/handoffs/cyj/20260924-0810-p20-b2-b3-shape-diagnostic.md`；本轮最新交接见 `memory-bank/handoffs/cyj/20260924-1011-p20-b1-bootstrap-complete.md`；最终推送及远端 SHA 以 Git 实际核验为准。

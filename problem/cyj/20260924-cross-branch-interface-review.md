@@ -31,3 +31,11 @@ chm 清洁分支审查状态中质量方向/家族权重/Qurater、CV 折分与 
 4. zhh 自行修订 `interfaces/zhh/CONTRACT.md` 与成员记忆，使 C7/桥接接口状态、版本和实际结果一致；集成人验收后更新公共记忆与 `interfaces/README.md`。cyj 不修改这些他人/公共文件。
 
 复查命令：`git fetch origin --prune`、`git rev-parse <ref>`、`git show <ref>:<path>`、`git diff --name-only origin/main...HEAD`。本文件的跨分支状态只对上述提交快照有效；新提交出现时须重读。
+
+## 10:00 再次 fetch 后的 chm 增量（仅只读审查）
+
+`origin/integration/chm-q1-clean-20260923` 已由 `7a958d7` 前进到 `3f237910bc4b7ebfc7d4408d65572c134fed59c5`（中间 `44e8db4`）；`origin/main` 未因此自动更新。本次重新读取 chm 合同 SHA256 `578ec40eafd1430917383c34806c9859abb99a4e0bf77c7e63e09675521225dd`、增量审查 `ce5aa055545617b779653a21ffad391b498df96c9dff4ea68fb4185c9a1f415a`、尺度清单 `b1e8a68ed277089cd7c5f2d72efef9097cecd614a0f70bc374392b765e08ba83`。
+
+- chm 本地修复真实 A1–A3 严格筛选缺席家族导致的运行中断、eta 二层 bootstrap 的配对抽样单位，以及 Windows 无头绘图；增量文件报告 eta 点估计 0.145033、配对条件区间约 `[0.097562, 0.200977]`。这是 chm 分支的本地复核，不是 cyj 独立复现，也不覆盖 Q/p 和跨 Loss 桥接误差。
+- 新消融报告域级排序对 RPS 家族更敏感，1B 配比对逐域 held-out RMSE 的改善仅 4/13；因此更不应将 1B 配比校准或 eta 点估计当作 B1 Loss 的现成 p 修正。主 Q/p 接口、`Q_z`↔`Q_score` 不可直接映射、13 域 Loss↔B1 `val_loss` 未证同口径等判断不变。
+- chm 合同仍 v1.4 producer-validated draft，Q3 明确等待 cyj validated predictor 与 zhh 已验收 C7；增量不要求 cyj 修改现有 v1.6 合同字段。后续联合定标应引用 `3f23791` 及上述新文件哈希，不能再仅引用 `7a958d7`。
