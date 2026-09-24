@@ -450,3 +450,10 @@ Q4
 ]
 
 任何成员不得绕过接口，直接用另一附件的变量“看起来相似”就当成同一量。
+
+## 2026-09-24 完整审查协议
+
+根目录 `REPOSITORY_REVIEW_PROTOCOL.md` 已由用户授权为全团队公共强制规则。任何跨成员接口验收、分支审查、模型复核或“检查能否写入论文”的任务，都必须执行该协议，尤其不能跳过 variable provenance、identifiability、数据角色冻结、support/leakage、claim ladder 和从零 red-team。
+
+跨成员依赖如果需要一个上游并未被数据识别的参数，必须把接口状态标成 unidentified / sensitivity-only，而不是要求上游为了下游方便补造参数。
+
