@@ -31,3 +31,10 @@ cyj 在消费旧 `chm.q1.v1` 时发现 coefficients/reference/validation 三个 
 - 科学数值、域顺序、Q 定义、p 系数和 eta 均未因此改变。
 
 新消费者应锁定 v1.1；已锁定 `integration/chm-q1-clean-20260923@7c14a0c...` 的 cyj 可继续使用旧 v1 完成当前实验，切换时应显式记录新生产者 SHA 并重跑接口验收。
+
+
+## Q3 正式结果发布接口
+
+Q3 的下游正式交付协议单列于 [Q3_RESULTS_CONTRACT.md](Q3_RESULTS_CONTRACT.md)。只有 `q3_readiness_policy.v2` 通过并由 `src/chm/q3_publish.py` 验证成功的结果，才允许写入 `outputs/chm/q3_formal_v1/` 并标记 `formal_validated`。
+
+该发布器强制检查成本守恒、预算残差、KKT、Loss 坐标、支持域/外推状态、p policy 和不确定性。diagnostic/scenario/software-validation 文件不会被 zhh 正式桥接接口消费。

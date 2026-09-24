@@ -197,3 +197,17 @@ synthetic quality 模型只用于软件验证，其数值最优解不得进入�
 内容覆盖 N-D 连续预算相位、质量成本几何、p held-out 选择验证、generic solver/KKT 软件验证，并在末尾保留 cyj formal predictor 到位后的正式结果 TODO。
 
 章节自身静态检查：10 label 无重复、3 ref 全部有定义、无额外 input/citation。完整 XeLaTeX 编译待本地或集成人执行。
+
+
+## 2026-09-24 Q3 正式结果发布接口
+
+第五阶段完成正式结果 schema 与发布器：
+- 主配置 optimization.csv；
+- sensitivity-only 的 p_sensitivity.csv；
+- uncertainty_summary.csv；
+- manifest.json；
+- 只允许 formal_validated 进入 zhh 下游。
+
+发布器强制检查 readiness、成本分项和、预算、KKT、Loss 坐标、支持/外推状态、p policy 与不确定性；5 个软件测试全部通过。
+
+至此，chm 在 cyj formal predictor 到位前能独立完成的 Q3 主工程已基本就绪。后续优先等待/验收上游，而不是继续增加无关代理模型。
