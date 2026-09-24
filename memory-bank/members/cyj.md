@@ -9,6 +9,8 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 更新时间：2026-09-24 13:08（北京时间）。角色任务：Q2 标度律与推导；为 Q3 提供目标函数、约束和验证支持。
 
 当前工作块：已读 chm `7c14a0c894072048d09f04bd03653be1301f7257` 的全部活动接口，采用 `chm.q1.v1` 的六文件 SHA 清单和原生 `Q1Interface`；正在定义本人预测/成本/约束 API 并准备 B1 项消融，尚未完成运行验收。读取上游代码与六个小型产物使用 Git 固定提交和临时目录，不保留第二套 A 数据。Git Windows TLS 后端已成功 fetch 最新 main；本轮先备份已有结果及 WIP，再合并 main，最终状态以新交接为准。
+
+13:20 进度：上轮待推送结果及新代码已推送到 `6e3fa709dbac03c224f6ba3d42f99f56ab1322f3` 并核对远端 SHA。随后无冲突合并 main `7d8081fbf50cd380904505759c116580356f102d`，合并提交 `5ada51f9a29877dd2ee98a9b4d1b0760e1f5b818`。接口已生成，26/26 测试通过；发现并以精确发布哈希验证的方式处理 chm 三 CSV 的 CRLF/LF 传输差异。Q3 定义见 `interfaces/cyj/Q3_API.md`；现准备执行 B1 E/N/D 重拟合消融，结果未生成。
 成员称呼：cyj（用户已指定）。实际电脑/环境：Windows 10.0.26200；Python 3.12.14（Codex 工作区运行时）；详见 `problem/cyj/environment.md`。
 当前分支：`team/cyj-scaling`；已包含 main `a0932fd92b3a46cef8eb0bf563df1e6abc9396ef`；本轮 B1 组级 bootstrap 代码/输入提交 `8dd672eb53571325f27342f4e545c0fa7bf06f24`，已生成条件诊断结果。
 状态：进行中。Stage 1 审计、B1 经典 N-D 基线、八行计算量显示精度/剔除敏感性，以及 B2/B3 轨迹形状诊断已完成；B1 Loss 近乎精确重构的来源仍未查明，接口仍是 draft，`ready_for_Q3=false`。

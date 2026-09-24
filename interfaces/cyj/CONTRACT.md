@@ -1,6 +1,8 @@
-# cyj 交付约定 草案 v1.7
+# cyj 交付约定 草案 v1.8
 
 生产者 cyj；使用者 chm（Q3）、zhh（桥接及论文）。本版为生产者侧草案，尚未取得 chm/zhh 验收，不能标记 validated。
+
+当前可调用入口与完整定义见 [Q3_API.md](Q3_API.md)，机器接口 `outputs/cyj/interfaces/q3_bundle.json`（`cyj.q3.v1`）。已消费 chm `7c14a0c894072048d09f04bd03653be1301f7257` 的 `chm.q1.v1`；直接调用原生读取器并校验六文件 SHA。提供 B1 诊断、显式 p/target/lambda/eta 情景、三项成本与约束残差；Q_score 效应尚未拟合，正式模式拒绝调用，`ready_for_Q3=false`。最新 chm manifest 的 CRLF/Git LF 差异、具体验收要求和剩余工作均在 Q3_API 记录。
 
 ## 已有审计交付
 
