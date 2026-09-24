@@ -29,6 +29,24 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 交接至少写明：本次变更、证据/复现方式、未解决问题、下一步及负责人（若已指定）。保持 `activeContext.md` 简短，历史细节放在实验记录或 Git 提交中。
 
+## 强制完整审查协议（2026-09-24 用户授权）
+
+根目录 `REPOSITORY_REVIEW_PROTOCOL.md` 是本项目所有成员与 AI 的**强制审查流程**。
+
+只要用户或成员提出“审查远程仓库/某分支/本地仓库/代码/数学模型/问题/结果/论文结论”等请求，就必须重新读取并执行该协议，不能只做 diff、lint、测试、数值复算或公式检查。
+
+最低要求包括：可信来源、requirement→data、variable provenance、identifiability、数据角色冻结、overlap/leakage/support shift、文献适用条件、公式↔代码一致性、单位/缺失/非有限值、baseline/ablation/sensitivity、held-out 验证、claim ladder、跨附件接口、可复现性、从零 red-team、分支差异与 legacy 清理。
+
+永久原则：
+
+\[
+\text{参数可估计}\neq\text{参数可识别},
+\qquad
+\text{拟合稳定}\neq\text{科学解释成立}.
+\]
+
+如果数据无法识别某个参数，“无法识别”就是合法结论；不得为了四问衔接或文献形式完整而补造参数。
+
 ## 额度与远程检查点
 
 - 用户明确要求每次额度耗尽前先上传远程仓库；这项要求持续有效，不必每次重复征询。

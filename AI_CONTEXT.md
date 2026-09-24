@@ -18,3 +18,10 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 4. 核对当前分支、Git SHA 和已有结果来源；历史作废提交不算已有成果。
 
 当前分工：chm 负责 Q1/Q3 求解；cyj 负责 Q2/Q3 理论支持；zhh 负责 Q4，并建议兼集成人。2026-09-27 12:00 为用户指定截止，内部目标 10:30 前提交。当前没有从 Gemini 历史工作继承的可用建模数值结论。
+
+## 强制审查入口（2026-09-24）
+
+当用户或团队成员要求“审查/review/audit”远程分支、本地仓库、代码、数学模型、问题、结果或论文结论时，必须先读取根目录 `REPOSITORY_REVIEW_PROTOCOL.md` 并执行完整流程。不得只做 diff、lint、测试或数值复算。
+
+核心要求：先做变量来源与 identifiability，再拟合；冻结 train/validation/test/extrapolated 角色；检查 overlap/leakage/support shift；核对文献适用条件、公式与代码、baseline/敏感性、结论等级和跨附件接口；最后做一次从零 red-team。若数据不能识别某参数，必须明确写 unidentified，而不是为了模型完整性补造。
+

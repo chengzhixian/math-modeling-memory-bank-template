@@ -98,6 +98,27 @@ git merge origin/main
 
 推荐通过 PR 合并；没有 PR 工具时可由集成人在干净 main 上 fetch、pull --ff-only、merge --no-ff origin/成员分支，完成同等检查和公共记忆更新后再推送。无需为备份成员工作而把未完成代码合入 main。
 
+## 全团队审查工作流（2026-09-24 起强制）
+
+公共完整流程见根目录 `REPOSITORY_REVIEW_PROTOCOL.md`。用户已明确要求：以后任何成员与 AI 收到“审查一下远程仓库/我的分支/本地内容/代码/数学模型/问题/结果”等请求时，都必须走完整协议。
+
+成员执行审查时：
+
+1. 先冻结 branch / HEAD / merge base / diff，不先静默改代码；
+2. 从题面和真实字段重新建立 requirement→data 与 variable provenance；
+3. 在拟合前先过 identifiability Gate；
+4. 固定 train / tuning / validation / test / extrapolated 角色；
+5. 实查 overlap、泄漏和 support shift；
+6. 检查文献方法条件是否真的由本题满足；
+7. 对照数学公式与实际代码；
+8. 做 baseline、消融、敏感性和 held-out 验证；
+9. 按描述/预测/结构/因果/外推五级审查结论强度；
+10. 做一次“忽略当前模型、只从题目和字段重新推导”的 red-team；
+11. 若审查分支，做双向 diff、共同修改文件与最终文件树检查；
+12. 发现按 BLOCKER / MAJOR / MINOR / NOTE 分级落盘。
+
+完整审查不是“代码能运行”或“测试通过”的同义词。若存在 BLOCKER，必须先修复或降级结论，不能继续用复杂模型覆盖问题。
+
 ## 记忆怎样共享
 
 - 公共六文件：已集成共识。由集成人维护；其他成员读取。
