@@ -10,7 +10,9 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 ## 当前状态
 
-2026-09-24 收尾检查点：当前不可变代码发布为 `c71807d01b66744f3a6ca45147d9173bc2704a27`，已推送并核对远端同 SHA；44/44 CYJ 单测与精确发布消费测试 PASS，`ready_for_Q3=false`。本机对 CHM 当前提交 `cc199fe35beb50fe40d081d3a09539d3dcb3399a` 运行 `git merge-tree`，发现仅本人论文占位文件 `q2.tex`、`q3_theory.tex` 两处内容冲突；CHM 侧仍为占位稿，合并时应保留 CYJ 发布版完整段落。CHM 实际 pull/求解器消费尚未验收，不能写 BLOCKER 已解决。Draft PR #3 的网页编辑入口连续超时，未能更新标题/正文；待更新草案与冲突处理见 `memory-bank/handoffs/cyj/20260924-2234-final-release-and-pr-draft.md`。A 侧四个 LFS 压缩件本机仍是指针，全库 2014 文件校验未过，B 侧本轮输入分别按清单校验。后续文档检查点因 GitHub HTTPS 超时仅在本地，下一轮优先补推并核对远端 SHA。
+2026-09-24 23:04：先前待推的文档检查点已补推，远端 `team/cyj-scaling` 与当时本地均为 `47e621887fa48279a0cc60782238d2f41240477a`。Draft PR #3 的标题/正文已更新并独立 GET 验证，仍为 Draft，写明该远端 HEAD、main base、固定 chm 生产者、44/44 测试与 `ready_for_Q3=false`。CHM 当前远端分支 `20e627710f4979bbdd487e84253e5f1748c13f28` 未包含 CYJ 发布；重新 `merge-tree` 仍仅 `q2.tex`、`q3_theory.tex` 两处 CYJ 正式稿对占位稿冲突。CHM 实际消费与正式科学门槛仍待完成。续办交接 `memory-bank/handoffs/cyj/20260924-2304-pr3-remote-sync.md`；其自身后续文档提交因 Git 主机连接超时待推。
+
+2026-09-24 收尾检查点：当前不可变代码发布为 `c71807d01b66744f3a6ca45147d9173bc2704a27`，已推送并核对远端同 SHA；44/44 CYJ 单测与精确发布消费测试 PASS，`ready_for_Q3=false`。本机对 CHM 提交 `cc199fe35beb50fe40d081d3a09539d3dcb3399a` 运行 `git merge-tree`，发现仅本人论文占位文件 `q2.tex`、`q3_theory.tex` 两处内容冲突；CHM 侧仍为占位稿，合并时应保留 CYJ 发布版完整段落。CHM 实际 pull/求解器消费尚未验收，不能写 BLOCKER 已解决。A 侧四个 LFS 压缩件本机仍是指针，全库 2014 文件校验未过，B 侧本轮输入分别按清单校验。此阶段 GitHub 连接曾失败，PR 与文档检查点状态以本文件上方 23:04 更新为准。
 
 2026-09-24 23:20：Task 5–8 补 B1 Loss 来源、B4/B5 同口径、B8 方向/0.5 堆积及 U1–U5 不确定性审查；B1 Loss 生成机制仍 unknown，B4/B5 `same_loss_coordinate=not_established`，B8 `unresolved_keep_isolated`，v2 总预测区间为 null。Task 9/10 已填本人 Q2 论文与 Q3 理论段，XeLaTeX 协作稿编译成功，正式门槛审查仍 `NOT READY`。各证据见 `problem/cyj/20260924-{b1-loss-provenance,b4-b5-loss-comparability,b8-conflict-source,uncertainty-scope,q3-final-gate-review}.md` 与对应 handoff。当前 v2 不确定性字段变更尚未发布为新不可变提交，需重生 manifest、测试、推送并让 CHM 真实验收。
 

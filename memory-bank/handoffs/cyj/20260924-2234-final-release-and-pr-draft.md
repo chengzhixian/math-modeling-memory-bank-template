@@ -2,7 +2,7 @@
 
 ## Task
 
-按 `CYJ_NEXT_TASKS_FOR_CODEX.md` 完成 Task 1–10 中 CYJ 可独立执行的工作；Task 1A 的 CHM 本人实际消费、Task 11 的 GitHub PR 网页更新待外部完成。此文件取代 `20260924-2200-chm-consumable-release.md` 的旧发布 SHA。
+按 `CYJ_NEXT_TASKS_FOR_CODEX.md` 完成 Task 1–10 中 CYJ 可独立执行的工作；Task 1A 的 CHM 本人实际消费仍待完成。Task 11 的 PR 元数据和远端同步已在后续 `20260924-2304-pr3-remote-sync.md` 完成。此文件取代 `20260924-2200-chm-consumable-release.md` 的旧发布 SHA。
 
 ## Input
 
@@ -52,7 +52,7 @@ python -B src/cyj/chm_adapter_v2.py --request outputs/cyj/interfaces/chm_v2_requ
 
 The consumer must use `model.bounds` (B7 D minimum is 10) and record actual solver consumption, returned schema and any adaptation in `memory-bank/handoffs/chm/`. CYJ's local smoke does not establish CHM's own acceptance. ZHH should inspect the null total/cross-source/benchmark uncertainty fields before any Q4 capability claim. The integrator should update public memory only after branch merge and acceptance.
 
-## Draft PR #3 update (not applied to GitHub)
+## Draft PR #3 update (applied to GitHub at 2026-09-24 23:04 CST)
 
 Suggested title: `cyj: Q2 evidence audit and CHM-consumable Q3 diagnostic interface (Draft)`
 
@@ -68,11 +68,11 @@ Suggested body:
 >
 > **Cross-branch merge:** dry merge with CHM `cc199fe35beb50fe40d081d3a09539d3dcb3399a` conflicts only in CYJ-owned `q2.tex` and `q3_theory.tex`: take full CYJ release content in both, replacing CHM placeholders. CHM must run its solver with `model.bounds`, record actual consumer acceptance and any fixes. ZHH reviews uncertainty/bridge fields; integrator accepts and updates public memory. Keep this PR Draft.
 
-GitHub PR #3 was **not** edited: no `gh` CLI or GitHub connector was available, and the in-app browser operation timed out twice. The body above is a concrete proposed update, not a claim that PR metadata changed.
+The first browser attempt timed out. On continuation, GitHub's authenticated API accepted the title and body update; an independent GET confirmed PR #3 remains Draft, head `47e621887fa48279a0cc60782238d2f41240477a`, and the body contains `ready_for_Q3=false`, 44/44 tests, and the updated CHM branch identity. The applied body adds the exact current HEAD and updates the CHM merge-check SHA to `20e627710f4979bbdd487e84253e5f1748c13f28` (newer than the draft block above). No PR comment or review request was sent.
 
 ## Remote checkpoint status
 
-The earlier code release `c71807d01b66744f3a6ca45147d9173bc2704a27` was pushed and its remote SHA verified. The subsequent documentation-only checkpoint is local. A new `fetch`, `ls-remote`, and three non-forced `push` attempts failed on GitHub HTTPS connection, slow-transfer, or connection-reset errors. Therefore this handoff and `CONTRACT.md` revision are **not yet backed up remotely**; the next CYJ session should retry the push and verify `ls-remote` SHA before describing the final handoff as published. No force push is authorized or needed.
+The earlier code release `c71807d01b66744f3a6ca45147d9173bc2704a27` was pushed and verified. A temporary GitHub outage interrupted the documentation checkpoint; on continuation, non-forced push succeeded and `ls-remote` exactly matched local `47e621887fa48279a0cc60782238d2f41240477a`. The remote CHM branch then advanced to `20e627710f4979bbdd487e84253e5f1748c13f28` without merging CYJ. A fresh `merge-tree` check still reports only the two CYJ paper-file conflicts. This addendum will be included in the next CYJ documentation checkpoint.
 
 ## Next and owner
 
