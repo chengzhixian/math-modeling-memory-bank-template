@@ -1,0 +1,21 @@
+{
+  "schema_version": "chm.q3.regime_diagnostic.v1",
+  "status": "diagnostic_only",
+  "ready_for_Q3": false,
+  "cyj_ref": "6c17cb4e387e1ac047f8fe0e9ecb6fe42fc5ef3b",
+  "zhh_ref": "d47cd2dc921333caecfcb95f09eb5a2f2714d0db",
+  "critical_context_tokens_equal_attention_train": 30000,
+  "transition_definition": [
+    "minimum feasible support",
+    "N_min releases",
+    "interior",
+    "D_max activates",
+    "support saturation"
+  ],
+  "validation": {
+    "method": "25-start L-BFGS-B reduced feasible problem",
+    "seed": 20260924,
+    "summary_file": "multistart_validation_summary.json"
+  },
+  "p_identifiability_note": "linear p ranking is invariant to budget/context/N for fixed target and positive lambda"
+}

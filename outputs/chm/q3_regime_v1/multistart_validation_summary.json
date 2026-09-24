@@ -1,0 +1,11 @@
+{
+  "schema_version": "chm.q3.multistart_validation.summary.v1",
+  "method": "25-start L-BFGS-B on reduced feasible one-dimensional problem",
+  "seed": 20260924,
+  "tested_points": 21,
+  "best_solution_max_abs_loss_gap": 4.440892098500626e-16,
+  "best_solution_max_N_relative_error": 4.232441201907904e-8,
+  "best_solution_max_D_relative_error": 4.232441383288736e-8,
+  "minimum_optimizer_success_count": 24,
+  "note": "some boundary starts report a non-success stopping flag; feasible best solutions match the analytic solution"
+}

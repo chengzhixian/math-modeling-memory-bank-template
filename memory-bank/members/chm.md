@@ -131,3 +131,19 @@ cyj 指出的 CRLF/LF manifest 问题已修为新生产者版本 `chm.q1.v1.1`�
 5. zhh 更新 C7 合同/版本状态。
 
 在此之前只发布 diagnostic/scenario，不发布正式最优配置。
+
+
+## 2026-09-24 Q3 连续预算与配比选择验证
+
+本阶段完成 diagnostic/scenario 层的 Q3 结构验证，不改变 formal_ready=false 的上游门禁。
+
+新增结论：
+- B1 N-D diagnostic 在每个 C7 上下文下随预算依次经历 N_min_bound、interior、D_max_bound、support_corner 四段。
+- 2048 Token 的 N_min 释放、D_max 激活、支持域饱和预算约为 7.95e17、9.33e21、2.30e22 FLOPs；8192 为 9.47e17、1.11e22、2.74e22；131072 为 3.99e18、4.69e22、1.16e23。
+- 25 起点数值验证与解析解一致，最佳 Loss 最大绝对差约 4.44e-16，N/D 相对误差约 4.23e-08。
+- A4/A5 逐 target 代理用于 held-out 候选选择：全部 39 个 scale-target 检验中 25 次选中真实最优、34 次进入真实前 10%；五 target 主面板 11/15 精确最优、14/15 前 10%。
+- 1B 的 target-dependent 风险明显：全部 13 target 仅 8/13 前 10%，hackernews 最大相对 regret 约 21.1%；主面板中 pile_cc 为第 10/64，relative regret 约 2.63%。
+- 五个主 target 的 A4 训练支持候选最大单域占比中位数约 0.954，4/5 超过 0.9；因此不发布连续单纯形无约束 p optimum。
+- 在线性 m_k(p) 且 lambda_loss>0 的当前模型中，固定 target 的 p 排序不随预算、上下文、N、lambda 或 eta 改变；当前 p 模型本身不能识别预算驱动的 p 结构切换。
+
+正式 Q3 仍等待 cyj ready_for_Q3=true、B-native Q 性能项、B1/B7 Loss 处理、p anchor/lambda 正式状态及 zhh versioned C7。当前结果只用于 solver 验证、支持域判断和 scenario 设计。
