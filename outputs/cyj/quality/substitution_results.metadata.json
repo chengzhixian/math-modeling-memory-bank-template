@@ -1,0 +1,28 @@
+{
+  "scientific_status": "conditional_B7_semi_synthetic",
+  "candidate_result_scope": "B7_NDQ",
+  "formal_result_scope": null,
+  "support": {
+    "N_params_B": [
+      0.07,
+      11.97
+    ],
+    "D_tokens_B": [
+      10.0,
+      600.0
+    ],
+    "Q_score": [
+      0.1,
+      1.0
+    ]
+  },
+  "source_dataset": "official_attachment_B7",
+  "source_hash": "880fd265ca3e1d9bc93b4559af7ed7c18f89040634266c50bae03d88486e0f3a",
+  "ready_for_Q3": false,
+  "code_commit": "e7b60795c5c00704e2494ebd54e2a9d0df9aef65",
+  "model_hash": "c7426036164238d41b92ca08e9ca9087224aeb0c74554478b66093774a5b5b1a",
+  "result_hash": "468d8df79db3aab215859006c6cca853c01be7cab822aa30b765ef692a9ef86f",
+  "derivative_units": "dN/dQ: billion parameters per Q; dD/dQ: billion tokens per Q",
+  "elasticity_policy": "positive improvement elasticity = -x*L_x/L; signed legacy v3 elasticities retain opposite sign",
+  "root_policy": "No bracket means no supported equal-loss substitute; never extrapolate"
+}

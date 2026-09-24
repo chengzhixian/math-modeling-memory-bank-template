@@ -1,0 +1,41 @@
+{
+  "scientific_status": "B1_source_structure_descriptive",
+  "candidate_result_scope": "B1_structure_only",
+  "formal_result_scope": null,
+  "support": null,
+  "source_dataset": "official_attachment_B1",
+  "source_hash": "529a59644b0f57bf3a76037838b614bfedc35e58bb26b93052e34ffc63e454c2",
+  "ready_for_Q3": false,
+  "code_commit": "e7b60795c5c00704e2494ebd54e2a9d0df9aef65",
+  "rows": 1176,
+  "N_groups": 8,
+  "rows_per_N": {
+    "0.070542": 147,
+    "0.162405": 147,
+    "0.409009": 147,
+    "1.040867": 147,
+    "1.416184": 147,
+    "2.782831": 147,
+    "6.86104": 147,
+    "11.965825": 147
+  },
+  "duplicate_ND_count": 0,
+  "unique_run_ids": 1176,
+  "common_D_grid_across_N": true,
+  "unique_D": 147,
+  "D_step_formula_max_abs_error": 0.0004959999999982756,
+  "train_validation_difference_percentiles": [
+    0.04390000000000027,
+    0.08197500000000024,
+    0.12134999999999985,
+    0.15822499999999995,
+    0.30390000000000006
+  ],
+  "train_validation_correlation": 0.9911995809931028,
+  "provenance_audit_sha256": "a36bff5075da6911b90b6d2c50ad29a64586f268542fc61e0659cdec3df582da",
+  "conclusion": "Regular shared checkpoint grid and near-formula reconstruction are warning signs, not proof of synthetic generation. val_loss generation and evaluation pipeline remain unknown.",
+  "train_validation_generation_same_process": "not_identified",
+  "explicit_loss_generator_found": false,
+  "near_duplicate_trajectory_definition": "same D grid with group-specific Loss offset; does not imply independent replicas",
+  "centered_trajectory_cross_N_std_rms": 0.00013535556054642748
+}

@@ -19,11 +19,11 @@ MAJOR：旧 `base_exponents` 用 no-quality 族估计 alpha/beta，再固定指�
 ## 任务清单（持续更新）
 
 - [x] P0 联合拟合、两阶段对照与取舍（结果见 joint-fit 记录）
-- [ ] P1 偏导、正向改善弹性、局部/有限替代和图
-- [ ] P2 嵌套五族选择、可识别性、留出覆盖检查（可识别性数值和200次bootstrap已完成）
-- [ ] P3 B1 结构、B4/B5 口径、B7/B8 冲突审计
-- [ ] P4/P5 稠密预算/上下文、约束状态/转变点、成本/KKT 推导
-- [ ] P6 metadata 与鲁棒性回归
-- [ ] P7 论文与结论强度表
-- [ ] P8 总审计
-- [ ] P9 外部依赖登记（CHM owner acceptance、ZHH Benchmark bridge）
+- [x] P1 偏导、正向改善弹性、局部/有限替代和图
+- [x] P2 嵌套五族选择、可识别性、留出覆盖检查（同源条件范围）
+- [x] P3 B1 结构、B4/B5 口径、B7/B8 冲突审计；生成机制未知和跨源同口径未建立已明确记录
+- [x] P4/P5 稠密预算/上下文、约束状态/转变点、成本/KKT 推导；见 `20260925-q3-joint-conditional-sweep.md` 和本人论文
+- [x] P6 v4 joint 接口 metadata、边界/无效输入/梯度/manifest/CLI 自测；CHM 本人验收仍待
+- [x] P7 本人 Q2/Q3 论文与 `20260925-claim-strength-and-dependencies.md`
+- [x] P8 14 项总审计，结果 `PASS_WITH_LIMITATIONS`；审计只校验冻结的重拟合和扫描产物，不将其冒充重新计算
+- [x] P9 外部依赖登记（CHM owner acceptance、ZHH Benchmark bridge、原附件来源和真实外测）

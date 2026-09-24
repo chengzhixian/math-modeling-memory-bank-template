@@ -1,0 +1,71 @@
+{
+  "scientific_status": "B7_B8_source_conflict_descriptive",
+  "candidate_result_scope": "B7_B8_noncomparability",
+  "formal_result_scope": null,
+  "support": {
+    "N_params_B": [
+      0.07,
+      11.97
+    ],
+    "D_tokens_B": [
+      10.0,
+      600.0
+    ],
+    "Q_score": [
+      0.1,
+      1.0
+    ]
+  },
+  "source_dataset": "official_attachments_B7_and_B8",
+  "source_hash": {
+    "B7": "880fd265ca3e1d9bc93b4559af7ed7c18f89040634266c50bae03d88486e0f3a",
+    "B8": "bda0d449f75c73bbd04141e5cffbf4bea7002073e34b7fa95a638570fa095ffe"
+  },
+  "ready_for_Q3": false,
+  "code_commit": "e7b60795c5c00704e2494ebd54e2a9d0df9aef65",
+  "source_files": {
+    "pythia_training_log_existing.csv": {
+      "path": "data/raw/real_attachments/B_scaling_laws/pythia_training_log_existing.csv",
+      "bytes": 111459,
+      "sha256": "529a59644b0f57bf3a76037838b614bfedc35e58bb26b93052e34ffc63e454c2"
+    },
+    "scaling_baseline.csv": {
+      "path": "data/raw/real_attachments/B_scaling_laws/scaling_baseline.csv",
+      "bytes": 1421,
+      "sha256": "2272983ded93de35e05f9acbf95ebceedf43f283345e4be72b54fee94080391e"
+    },
+    "published_scaling_data.csv": {
+      "path": "data/raw/real_attachments/B_scaling_laws/published_scaling_data.csv",
+      "bytes": 1967,
+      "sha256": "dd858c5e48610e28589340d5db023d6abfb31df597506789ccdfc6a546731bbd"
+    },
+    "supplementary_NQ_experiment_expanded.csv": {
+      "path": "data/raw/real_attachments/B_scaling_laws/supplementary_NQ_experiment_expanded.csv",
+      "bytes": 17154,
+      "sha256": "880fd265ca3e1d9bc93b4559af7ed7c18f89040634266c50bae03d88486e0f3a"
+    },
+    "supplementary_NQ_experiment_large.csv": {
+      "path": "data/raw/real_attachments/B_scaling_laws/supplementary_NQ_experiment_large.csv",
+      "bytes": 81268,
+      "sha256": "bda0d449f75c73bbd04141e5cffbf4bea7002073e34b7fa95a638570fa095ffe"
+    }
+  },
+  "shared_coordinates": 224,
+  "nonzero_loss_difference_count": 224,
+  "B8_minus_B7_quantiles": [
+    -2.5769,
+    -1.6658499999999998,
+    -1.1393,
+    -0.5391750000000002,
+    0.05690000000000017
+  ],
+  "slope_sign_counts": {
+    "B7": {
+      "negative": 45
+    },
+    "B8": {
+      "positive": 150
+    }
+  },
+  "B8_policy": "isolated_evidence_no_pooling_no_Q_reversal"
+}

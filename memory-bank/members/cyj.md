@@ -10,6 +10,10 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 ## 当前状态
 
+2026-09-25 独立任务第三批：joint B7 条件 Q3 扫描 330 网格点，321 可行并通过可行性/KKT 数值检查、9 支持域最低成本不可行；81 个高预算上界饱和点属于支持域截断。180 个活跃集转变括区、上下文 30000/32768 邻域已输出，三成本族均覆盖。v4 joint 条件接口和 immutable manifest、本地 CHM 求解器回归、56/56 本人测试通过；14 项总审计 `PASS_WITH_LIMITATIONS`，XeLaTeX 8 页无 overfull。Q2/Q3 论文、结论强度表、外部依赖登记已更新。B7 半合成与 A/B 桥接缺失仍使 `ready_for_Q3=false`，CHM owner 消费验收仍待；证据见 `20260925-q3-joint-conditional-sweep.md`、`20260925-claim-strength-and-dependencies.md` 和 `outputs/cyj/audit/full_audit.json`。
+
+2026-09-25 独立 Q2 第二批：joint 五族嵌套外层24折完成，双交互23折、单logN一折；N/D/Q pooled RMSE 0.050070/0.050039/0.049697。内层残差估宽的外层95%覆盖为0.96/0.95/0.95，仍只限同源半合成。有限替代273行及四图已生成；B1规则网格/近并行轨迹审计、B7/B8共224坐标全异和斜率方向冲突审计已完成。证据见20260925 nested、quality-substitution、b1-data-generation、b7-b8-conflict实验记录；`ready_for_Q3=false`。下一步 Q3 稠密诊断与审计总脚本。
+
 2026-09-25 独立 joint 第一批：八参数联合 SSE、12起点、24折对照、宽界及200次簇bootstrap已运行。N/D/Q留级RMSE 0.049764/0.049008/0.049352，均低于staged；A-alpha相关约-0.964，限制参数解释。后续独立候选采用joint，历史v3不改。数学推导已落盘，nested/coverage及替代图脚本尚未运行。交接 `20260925-independent-joint-results.md`；继续保持 ready=false。
 
 2026-09-25 新独立任务启动：已确认旧双交互使用两阶段指数拟合，新增八参数联合约束 SSE 与多起点代码，冻结数值界/分组验证/识别性检查协议；基础 smoke 12/12 起点同近最优、未触界，完整实验尚未运行。任务清单见 `experiments/cyj/20260925-independent-protocol.md`，启动交接 `memory-bank/handoffs/cyj/20260925-independent-start.md`。旧 v3 精确发布保持原状，`ready_for_Q3=false`。

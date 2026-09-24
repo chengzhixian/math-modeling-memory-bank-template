@@ -1,0 +1,86 @@
+{
+  "status": "PASS_WITH_LIMITATIONS",
+  "checks": [
+    {
+      "name": "data_hashes",
+      "status": "PASS",
+      "detail": "6 source files match recorded bytes and SHA256"
+    },
+    {
+      "name": "model_hashes",
+      "status": "PASS",
+      "detail": "c7426036164238d41b92ca08e9ca9087224aeb0c74554478b66093774a5b5b1a"
+    },
+    {
+      "name": "B1_fit",
+      "status": "PASS",
+      "detail": "B1 1176 rows, unknown loss generator"
+    },
+    {
+      "name": "B7_joint_fit",
+      "status": "PASS",
+      "detail": "8 parameters, 12 starts, min G=0.194145"
+    },
+    {
+      "name": "nested_CV",
+      "status": "PASS",
+      "detail": "24 outer folds; 1350 held-out predictions"
+    },
+    {
+      "name": "monotonicity",
+      "status": "PASS",
+      "detail": "all 8 support corners have negative N/D/Q derivatives; max L_Q=-0.194145"
+    },
+    {
+      "name": "gradient",
+      "status": "PASS",
+      "detail": "center-point finite differences agree with analytic N/D/Q derivatives"
+    },
+    {
+      "name": "interval_coverage",
+      "status": "PASS",
+      "detail": "18 nominal/method/axis coverage and interval-width cells independently recomputed"
+    },
+    {
+      "name": "Q3_budget_sweep",
+      "status": "PASS",
+      "detail": "330 grid cells; statuses {'converged_feasible': 321, 'infeasible_by_supported_domain': 9}"
+    },
+    {
+      "name": "Q3_context_sweep",
+      "status": "PASS",
+      "detail": "10 contexts including 30000 and 32768"
+    },
+    {
+      "name": "Q3_support_KKT",
+      "status": "PASS",
+      "detail": "321 solutions satisfy support, budget and recorded KKT check"
+    },
+    {
+      "name": "manifest_reproducibility",
+      "status": "PASS",
+      "detail": "manifest reproduced; 12 file hashes agree"
+    },
+    {
+      "name": "unit_tests",
+      "status": "PASS",
+      "detail": "----------------------------------------------------------------------\nRan 56 tests in 3.961s\n\nOK"
+    },
+    {
+      "name": "LaTeX_compile",
+      "status": "PASS",
+      "detail": "XeLaTeX built 8-page team draft; no overfull boxes"
+    }
+  ],
+  "scientific_status": "conditional_B7_semi_synthetic",
+  "candidate_result_scope": "B7_NDQ_plus_conditional_Q3",
+  "formal_result_scope": null,
+  "ready_for_Q3": false,
+  "limitations": [
+    "B7 semi-synthetic with no real-training external test",
+    "B7 function family was explored before nested evaluation",
+    "bootstrap-plus-residual v4 interval lacks direct held-out coverage calibration",
+    "A/B loss or quality bridge and team acceptance absent"
+  ],
+  "model_hash": "c7426036164238d41b92ca08e9ca9087224aeb0c74554478b66093774a5b5b1a"
+}
