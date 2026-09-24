@@ -277,3 +277,17 @@ synthetic quality 模型只用于软件验证，其数值最优解不得进入�
 512 个 A4 配方中只有 3 个（35、99、139）在五 target 上都严格优于 p_ref；index 139 位于五目标 Pareto 前沿。该“全改善”只是当前五个 A-side Ridge 代理的预测，不是 B1 Loss 的已验证改善。
 
 正式 Q3 若 cyj 仍无法识别 primary anchor/lambda，应优先把这些稳健候选作为 p 情景面板，而不是伪造唯一 B1 最优配比。
+
+
+## 2026-09-24 Q1 冲突跨扩展集复制性
+
+利用已由完整 A1–A3 本地运行生成的 `quality_conflict_extended_v0.csv` 与 `quality_conflict_nonoverlap_v0.csv`，补做不依赖原始 LFS 正文的复制性汇总。
+
+- arxiv：A1 样本中 96 个负相关指标对，其中 92 个在完整 A2 扩展集和去除 A1 重叠后的 A2 子集仍为负，复制率 95.83%。
+- github：A1 样本中 91 个负相关指标对，91 个在完整 A3 和去重 A3 子集仍为负，复制率 100%。
+- 样本与完整扩展集符号一致率：arxiv 96.10%，github 99.13%。
+- 样本与去重扩展集符号一致率：arxiv 95.67%，github 99.13%。
+- arxiv/github 两域共同存在 56 个“三层均为负”的指标对。
+- 最稳共同冲突：`rps_lines_uppercase_letter_fraction` vs `rps_lines_ending_with_terminal_punctution_mark`，六个相关系数中最弱绝对值仍为 0.73929。
+
+该结果说明部分指标冲突并非由 A1 与扩展集的样本重叠单独造成，但当前仍是复制性/效应量证据，不宣称通过 bootstrap CI 或 FDR 显著性控制。后两项需完整 LFS 环境重跑逐记录分析。

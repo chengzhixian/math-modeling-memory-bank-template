@@ -1,0 +1,28 @@
+{
+  "schema_version": "chm.q1.conflict_replication.v1",
+  "domains": {
+    "arxiv": {
+      "pairs": 231,
+      "sample_negative": 96,
+      "triple_negative": 92,
+      "triple_negative_share_of_sample_negative": 0.9583333333333334,
+      "sign_concordance_sample_extended": 0.961038961038961,
+      "sign_concordance_sample_nonoverlap": 0.9567099567099567
+    },
+    "github": {
+      "pairs": 231,
+      "sample_negative": 91,
+      "triple_negative": 91,
+      "triple_negative_share_of_sample_negative": 1,
+      "sign_concordance_sample_extended": 0.9913419913419913,
+      "sign_concordance_sample_nonoverlap": 0.9913419913419913
+    }
+  },
+  "shared_triple_negative_pairs": 56,
+  "strongest_shared_pair": {
+    "metric_a": "rps_lines_uppercase_letter_fraction",
+    "metric_b": "rps_lines_ending_with_terminal_punctution_mark",
+    "min_abs_across_domains_scopes": 0.7392901697044001
+  },
+  "interpretation": "replication/effect-size evidence only; no bootstrap CI or FDR claim"
+}
