@@ -1,0 +1,31 @@
+% !TEX program = xelatex
+% Integration owner: zhh. Members edit only their own sections/* files.
+% Draft uses withoutpreface pending the 2026 official cover and anonymity rules.
+\documentclass[bwprint,withoutpreface]{gmcmthesis}
+\hypersetup{hidelinks}
+\usepackage{float}
+\usepackage{siunitx}
+\graphicspath{{figures/}{figures/chm/}}
+\title{论文题目（待填写）}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+\input{sections/zhh/abstract.tex}
+\keywords{关键词一\quad 关键词二\quad 关键词三}
+\end{abstract}
+\maketoc
+\clearpage
+
+\input{sections/zhh/problem_statement.tex}
+\input{sections/zhh/assumptions_symbols.tex}
+\input{sections/chm/q1.tex}
+\input{sections/cyj/q2.tex}
+\section{问题三}
+\input{sections/cyj/q3_theory.tex}
+\input{sections/chm/q3_numerical.tex}
+\input{sections/zhh/q4.tex}
+\input{sections/zhh/discussion.tex}
+
+% Add citations and \bibliography{references} after references.bib is populated.
+\end{document}

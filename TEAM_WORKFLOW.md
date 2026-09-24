@@ -28,6 +28,10 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 | paper/sections/chm/（Q1、Q3） | chm |
 | paper/sections/cyj/（Q2、Q3 理论说明材料） | cyj |
 | paper/sections/zhh/（Q4、摘要和公共章节） | zhh |
+| paper/latex/sections/chm/、paper/latex/figures/chm/ | chm：Q1 与 Q3 数值章节及自有图 |
+| paper/latex/sections/cyj/ | cyj：Q2 与 Q3 理论章节 |
+| paper/latex/sections/zhh/ | zhh：摘要、问题重述、公共章节与 Q4 |
+| paper/latex/main.tex、gmcmthesis.cls、references.bib、最终 PDF | 集成人：总装、类文件、文献与编译 |
 | memory-bank/members/chm.md、cyj.md、zhh.md | 各自对应成员 |
 | memory-bank/handoffs/chm/、cyj/、zhh/ | 各自对应成员；每次新建文件，不覆盖旧交接 |
 | 六个公共记忆文件、TASK_PLAN.md、AGENTS.md、README.md、TEAM_WORKFLOW.md | 集成人 |
@@ -35,6 +39,8 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 | experiments/experiment-log.md、problem/problem-notes.md、problem/SOURCES.md 等公共索引 | 集成人 |
 
 其他成员需要修改别人目录、公共接口或依赖时，在自己的交接文件写清建议，由文件负责人实施；紧急转交需明确新负责人和时间，原负责人暂停写入。暂不创建没有用途的空目录，首次工作时按归属创建即可。
+
+2026-09-24 起统一以 `paper/latex/` 中的第二十二届华为杯模板源文件组织论文；其 2025 年封面与 2026 年正式要求的符合性须在提交前单独核验。三位成员只在本人分支修改各自 `sections/<成员>/`，不同时编辑总文件或他人的章节。集成人串行验收并合入，负责统一图号、符号、引用、摘要和最终 PDF。详细编译与模板差异见 `paper/latex/README.md`。
 
 这些是协作约定，尚未配置 GitHub 强制分支保护或目录权限。不能保证 Git 自动阻止越界写入。评审时必须检查变更范围。
 
@@ -116,3 +122,46 @@ git merge origin/main
 > 我负责角色 chm（cyj/zhh 请替换），使用本人分支。先读 AGENTS.md、TEAM_WORKFLOW.md、公共 memory-bank、memory-bank/members/chm.md 和本任务相关接口约定。先报告当前分支、使用的输入版本和待验证项，再处理分配给我的任务。只修改归我负责的文件；涉及他人目录或公共文件时，在本人交接记录提出变更。结束时更新本人记忆并新增交接记录，将代码、证据与记忆一起提交并推送本人分支，核验远端 SHA。不要把未经验证的结果写成结论。
 
 额度预留规则持续有效：任务结束和长任务开始前先备份，任一相关额度窗口剩余 ≤20% 时优先同步，≤10% 时先完成同步再开新重任务。本人分支和集成分支各自核验，不等待队友合并才备份。
+
+## 跨分支依赖规范入口（2026-09-23）
+
+三条工作线的详细依赖、当前接口冲突、合作顺序和 main 同步方式已冻结在：
+
+`TEAM_COLLABORATION_DEPENDENCIES.md`
+
+该文件属于公共协作规范，由集成人维护。成员每次开始新的跨成员工作块、接收上游接口或发现 main 有公共规则更新时，必须重新读取。
+
+当前最重要的团队接口会议只处理四件事：
+
+1. chm Q 与 B6–B8 `Q_score` 的共同尺度；
+2. Q1 的 13 个 domain Loss 与 B1 `val_loss` 的可比性；
+3. p 如何进入 cyj 的广义 Scaling Law；
+4. chm/cyj/zhh 三层不确定性如何传递到 Q3/Q4。
+
+在上述接口未冻结前：
+- cyj 可以独立完成 B1 N-D 基线及 B2–B5 验证；
+- chm 可以完成 Q1、Q3 求解器框架和接口检查，但不得发布 Q3 正式最优配置；
+- zhh 可以继续 Q4 历史分析、C7 和桥接验证，但不得把异质 Loss 直接转换成最终能力结论。
+
+### 公共规则如何进入个人分支
+
+main 更新后，成员在本人的固定分支执行：
+
+```powershell
+git status
+git fetch origin --prune
+git pull --ff-only
+git merge origin/main
+```
+
+执行前必须确认当前分支仍是本人的 `team/chm-data`、`team/cyj-scaling` 或 `team/zhh-frontier`。合并冲突时人工核对，不用 `reset --hard`、强推或整文件 ours/theirs。
+
+若成员当前正在长实验且暂时不适合合并，也必须至少：
+
+```powershell
+git fetch origin --prune
+git show origin/main:TEAM_COLLABORATION_DEPENDENCIES.md
+git show origin/main:memory-bank/activeContext.md
+```
+
+这样可先读取最新公共共识，再在合适检查点合并 main。

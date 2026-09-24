@@ -41,8 +41,12 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 | `experiments/` | 参数、运行命令、指标和结论的实验记录 |
 | `outputs/` | 需要交付或供论文引用的图表、结果 |
 | `paper/` | 论文草稿、图表说明与最终稿 |
+| [`paper/latex/`](paper/latex/README.md) | 第二十二届华为杯 LaTeX 模板归档、空白协作总稿与分工说明；个人初稿留在成员分支 |
+| [`references/award_papers/`](references/award_papers/README.md) | chm、cyj、zhh 共用的近五年公开优秀论文清单，含可直接下载的 PDF 原文链接和阅读笔记 |
 
 目录里的 `.gitkeep` 仅用于保留空目录。请按实际题目增删代码和文件；不要把没有运行过的结果写进记忆或论文。
+
+三位成员查阅优秀论文时统一使用 `main` 的 [`references/award_papers/README.md`](references/award_papers/README.md)；其中的研究生与全国大学生数模样本都可作为写作和验证方式参考。个人分支同步 `main` 后也会得到同一份清单，避免各自维护不一致的链接。
 
 ## 日常协作
 

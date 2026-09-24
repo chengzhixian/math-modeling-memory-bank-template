@@ -13,3 +13,51 @@
 每次交付附 manifest：接口名/版本、draft 或 validated、生产者、生成命令、代码版本（由交付 Git 提交或显式 SHA 定位）、输入路径/哈希、输出文件/哈希、行数/形状、字段与单位、随机种子、适用域、验证和局限。数据文件保存在 outputs/chm|cyj|zhh/；较大产物提供团队获取方式。
 
 消费者须记录实际读取的版本与哈希，检查必需字段、单位、有限值、约束和适用范围。拒绝静默用旧缓存替代缺失输入。变更列名、单位、域顺序、评分尺度或模型定义时发新版本，旧版不覆盖，交接列明受影响任务与重跑范围。占位或半合成输出显式标注来源；占位仅用于流程调试。
+
+## 2026-09-23 当前接口状态与强制协作点
+
+本节覆盖文件开头早期“均为计划接口、没有真实结果”的初始化描述；该旧描述仅代表项目启动时状态。
+
+### 个人分支当前状态（尚未自动视为 main validated）
+
+| 接口 | 当前个人分支状态 | 消费限制 |
+|---|---|---|
+| chm → cyj：Q/p | `team/chm-data` 已有 p 的逐目标域 Ridge、尺度传递 draft；质量 Q 尚待 A1–A3 LFS 实跑 | p 可用于方法联调，但 Q 未冻结；正式 Q2 必须记录精确 chm SHA |
+| cyj → chm：Scaling predictor | `team/cyj-scaling` 仅完成 B 审计；尚无验证版 predictor | Q3 只能搭框架，不得产出正式最优配置 |
+| zhh → chm/cyj：C7 | `team/zhh-frontier` 已有 2048 / 8192 / 131072 Token 情景 | 作为外生敏感性情景；正式采用前由 zhh 更新合同并通过集成验收 |
+| cyj/chm → zhh：Loss | 尚未形成统一正式 Loss 输出 | zhh 不得用异质 Loss 直接做最终能力映射 |
+| zhh：Loss→Benchmark | 个人分支已有基线，但外推较弱 | 只能作带误差映射，不得确定性转换 |
+
+### 两个必须联合冻结的接口
+
+**A. Q 坐标：chm + cyj**
+
+chm 的 Q1 评分与 B6–B8 的 `Q_score` 不在天然同一尺度。双方必须明确主 mapping、敏感性 mapping 和有效范围后，cyj 才能将 Q 接入广义标度律。
+
+**B. p→Loss：chm + cyj**
+
+chm 的 p 接口有 13 个具体 domain Loss；B1 只有泛化 `val_loss`。双方必须共同确定 Q2 Loss 定义、主 anchor、敏感性 target、p 项的函数形式和适用范围。禁止默认 `pile_cc == B1 val_loss`。
+
+详细规则见 `TEAM_COLLABORATION_DEPENDENCIES.md`。
+
+### 消费者同步规则
+
+接收任何跨成员接口前：
+
+```powershell
+git fetch origin --prune
+git switch <本人分支>
+git pull --ff-only
+git merge origin/main
+```
+
+若暂不合并 main，至少读取：
+
+```powershell
+git show origin/main:TEAM_COLLABORATION_DEPENDENCIES.md
+git show origin/main:memory-bank/activeContext.md
+git show origin/main:interfaces/README.md
+```
+
+个人分支上的 draft 接口可以提前联调，但必须记录精确 SHA；只有验收并进入 main 的版本才是默认正式输入。
+

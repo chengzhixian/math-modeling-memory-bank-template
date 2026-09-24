@@ -1,0 +1,18 @@
+{
+  "version": "zhh.bridge.candidate.v1",
+  "source_file": "data/raw/real_attachments/C_efficiency_evolution/loss_benchmark_bridge_expanded.csv",
+  "diagnostics_file": "outputs/zhh/q4_results.json",
+  "ready_for_conversion": false,
+  "target": "unweighted mean of six C1/C2 benchmark percentage scores",
+  "diagnostics": {
+    "n_high_comparability": 7,
+    "n_total": 75,
+    "loss_ordered_holdout_n": 19,
+    "loss_ordered_holdout_rmse_points": 7.06003565485966,
+    "loss_ordered_holdout_r2": -1.3758200924779738
+  },
+  "prediction": null,
+  "prediction_interval": null,
+  "consumer_action": "return unidentified; do not convert loss to benchmark",
+  "status_reason": "loss definitions are heterogeneous, holdout skill is poor, and fitted loss sign is counterintuitive"
+}
