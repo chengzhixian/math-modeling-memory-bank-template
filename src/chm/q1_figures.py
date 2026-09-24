@@ -80,35 +80,31 @@ def fig_direct_rank_stability(df, out):
     plt.close(fig)
 
 
-def fit_target_intercept(logn, logb, eta):
-    # log b = c - eta log(N/1e6)
-    x = logn
-    return float(np.mean(logb + eta * x))
+def fig_interaction_heatmap(coefficients, out, matrix_out=None):
+    meta = {
+        "target", "alpha", "cv_rmse", "intercept",
+        "test_1m_spearman", "test_1m_pearson", "test_1m_rmse",
+        "test_60m_spearman", "test_60m_pearson", "test_60m_rmse",
+        "test_1B_spearman", "test_1B_pearson", "test_1B_rmse",
+        "est_10B_spearman", "est_10B_pearson", "est_10B_rmse",
+        "est_70B_spearman", "est_70B_pearson", "est_70B_rmse",
+    }
+    domains = [c for c in coefficients.columns if c not in meta]
+    raw = coefficients.set_index("target")[domains].astype(float)
+    denom = raw.abs().max(axis=1).replace(0, 1.0)
+    norm = raw.div(denom, axis=0)
+    if matrix_out is not None:
+        norm.to_csv(matrix_out)
 
-
-def fig_scale_decay(cal, eta, out):
-    scales = np.array([1e6, 60e6, 1e9], dtype=float)
-    labels = ["b_1M", "b_60M", "b_1B"]
-    x = np.log10(scales)
-
-    fig, ax = plt.subplots(figsize=(7.2, 4.8))
-    for _, row in cal.iterrows():
-        y = np.array([row[c] for c in labels], dtype=float)
-        ax.plot(scales, y, marker="o", linewidth=1, alpha=0.55)
-
-    # Show a representative pooled-decay curve normalized to the median 1M amplitude.
-    b1 = float(pd.to_numeric(cal["b_1M"], errors="coerce").median())
-    grid = np.logspace(6, 9, 120)
-    pooled = b1 * (grid / 1e6) ** (-eta)
-    ax.plot(grid, pooled, linewidth=2.5, label=f"Pooled decay: eta={eta:.3f}")
-
-    ax.set_xscale("log")
-    ax.set_yscale("log")
-    ax.set_xlabel("Parameter scale N")
-    ax.set_ylabel("Mixture-effect amplitude b_k(N)")
-    ax.set_title("Empirical attenuation of mixture effect with model scale")
-    ax.grid(alpha=0.25)
-    ax.legend()
+    fig, ax = plt.subplots(figsize=(12.5, 6.8))
+    im = ax.imshow(norm.to_numpy(), aspect="auto", vmin=-1, vmax=1, cmap="coolwarm")
+    ax.set_xticks(np.arange(len(domains)), domains, rotation=60, ha="right", fontsize=8)
+    ax.set_yticks(np.arange(len(norm.index)), norm.index, fontsize=8)
+    ax.set_xlabel("Training domain")
+    ax.set_ylabel("Validation target")
+    ax.set_title("Row-normalized 13 x 17 Ridge interaction matrix")
+    cbar = fig.colorbar(im, ax=ax, fraction=0.03, pad=0.02)
+    cbar.set_label(r"$\\tilde{B}_{k,j}=\\beta_{k,j}/\\max_r|\\beta_{k,r}|$")
     fig.tight_layout()
     fig.savefig(out, dpi=300)
     plt.close(fig)
@@ -133,11 +129,7 @@ def main():
 
     metrics = pd.read_csv(args.output_root / "q1_regmix_ridge_domainwise_metrics.csv")
     direct = pd.read_csv(args.output_root / "q1_regmix_direct_scale_rank_stability.csv")
-    cal = pd.read_csv(args.output_root / "mixture_scale_calibration_v0.csv")
-
-    manifest_path = args.output_root / "mixture_scale_transfer_v0_manifest.json"
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    eta = float(manifest["pooled_eta"])
+    coefficients = pd.read_csv(args.output_root / "mixture_effect_ridge_v0.csv")
 
     args.figure_dir.mkdir(parents=True, exist_ok=True)
     args.output_root.mkdir(parents=True, exist_ok=True)
@@ -161,23 +153,22 @@ def main():
         direct,
         args.figure_dir / "q1_direct_rank_stability_1m_60m.png",
     )
-    fig_scale_decay(
-        cal,
-        eta,
-        args.figure_dir / "q1_mixture_effect_scale_decay.png",
+    fig_interaction_heatmap(
+        coefficients,
+        args.figure_dir / "q1_interaction_heatmap.png",
+        args.output_root / "q1_interaction_matrix_row_normalized.csv",
     )
 
     inputs = [
         args.output_root / "q1_regmix_ridge_domainwise_metrics.csv",
         args.output_root / "q1_regmix_direct_scale_rank_stability.csv",
-        args.output_root / "mixture_scale_calibration_v0.csv",
-        args.output_root / "mixture_scale_transfer_v0_manifest.json",
+        args.output_root / "mixture_effect_ridge_v0.csv",
     ]
     figure_paths = [
         args.figure_dir / "q1_domainwise_spearman_box.png",
         args.figure_dir / "q1_domainwise_spearman_lines.png",
         args.figure_dir / "q1_direct_rank_stability_1m_60m.png",
-        args.figure_dir / "q1_mixture_effect_scale_decay.png",
+        args.figure_dir / "q1_interaction_heatmap.png",
     ]
     provenance = {
         "output_root": str(args.output_root),
@@ -187,7 +178,11 @@ def main():
         "figures": {
             str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in figure_paths
         },
-        "warning": "Figures are valid only for the recorded local_recheck_v1 input hashes.",
+        "warning": (
+            "Figures are valid only for the recorded local_recheck_v1 input hashes. "
+            "The interaction heatmap is row-normalized for visualization only; "
+            "it is not an additional fitted model or causal matrix."
+        ),
     }
     (args.figure_dir / "q1_figures_manifest.json").write_text(
         json.dumps(provenance, ensure_ascii=False, indent=2), encoding="utf-8"
