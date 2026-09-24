@@ -213,7 +213,168 @@ delta(hateta_{k,j}-hateta_{k,r}).
 
 因此真正可解释的是两域重新分配时的系数差。
 
-## 4. 不拟合跨规模幅度，只验证跨实验组排序
+## 4. 13 维 Loss 向量、作用矩阵与多目标决策
+
+补充文献复核后，第一问的 13 个 target Loss 不再只被视为“13 个并列回归结果”，而是统一写成一个向量模型：
+
+\[
+\widehat{\mathbf L}_{1M}(\mathbf p)
+=
+\widehat{\boldsymbol\alpha}
++
+\mathbf B(\mathbf p-\mathbf p_{\rm ref}),
+\qquad
+\mathbf B=[\hat\beta_{k,j}]
+\in\mathbb R^{13\times17}.
+\]
+
+于是相对于参考配方的多维配比效应为
+
+\[
+\mathbf m(\mathbf p)
+=
+\widehat{\mathbf L}_{1M}(\mathbf p)
+-
+\widehat{\mathbf L}_{1M}(\mathbf p_{\rm ref})
+=
+\mathbf B(\mathbf p-\mathbf p_{\rm ref}).
+\]
+
+这里 \(\mathbf B\) 是本题 Ridge 下的“训练域 × 验证域”作用矩阵。它与 Data Mixing Laws Eq.7 中 \(t_{ij}\) 的训练域—验证域交互思想对应，但不能混同：我们的数值来自 A4+A5 的线性 Ridge，而不是指数混合律。严格可识别的两域重新分配效应仍是
+
+\[
+\delta(\hat\beta_{k,j}-\hat\beta_{k,r}).
+\]
+
+为画热力图时只做显示归一化：
+
+\[
+\widetilde B_{k,j}
+=
+\frac{\hat\beta_{k,j}}
+{\max_r|\hat\beta_{k,r}|}.
+\]
+
+这与 Data Mixing Laws Fig.4 按每个 validation domain 的最大绝对交互系数归一化的可视化方式一致，但不进入预测或优化计算。
+
+### 4.1 为什么不先把 13 个 Loss 平均
+
+Data Mixing Laws 的多域标准处理是先逐验证域建模，再在总体决策层用权重聚合。BiMix 也先保留逐域 Loss，再在配比约束下求解；DoReMi 则强调 worst-case excess loss，而不是直接盯住某个原始最高 Loss。
+
+因此本题主输出保持
+
+\[
+\mathbf m(\mathbf p)\in\mathbb R^{13},
+\]
+
+再根据任务偏好选择决策准则。
+
+### 4.2 数据支持域
+
+为了避免线性模型在未见的单纯形顶点上外推，第一问的配比决策域定义为 A4 的 512 个观测配方凸包：
+
+\[
+\mathcal P_A
+=
+\operatorname{conv}
+\{\mathbf p_1,\ldots,\mathbf p_{512}\}.
+\]
+
+任意候选配方写成
+
+\[
+\mathbf p=\sum_{i=1}^{512}\omega_i\mathbf p_i,
+\qquad
+\omega_i\ge0,
+\qquad
+\sum_i\omega_i=1.
+\]
+
+这不是额外的人为上下界，而是直接由题目已给配方支持域产生。
+
+### 4.3 标量化
+
+若有验证域权重 \(\mathbf s\in\Delta^{12}\)：
+
+\[
+J_{\mathbf s}(\mathbf p)
+=
+\sum_{k=1}^{13}s_km_k(\mathbf p)
+=
+\mathbf s^\top\mathbf B(\mathbf p-\mathbf p_{\rm ref}).
+\]
+
+权重只允许三种来源：
+
+1. 题目/下游任务给出已知验证集组成：直接使用；
+2. 没有偏好信息：\(s_k=1/13\) 只能作为“13 能力等权”的对称情景；
+3. 有总体 validation Loss 与逐域 Loss 的成对观测：才有数据基础学习 \(\mathbf s\)。
+
+附件 A 没有总体 Loss，因此第一问不学习 \(\mathbf s\)，也不把等权平均写成“真实总体 Loss”。
+
+### 4.4 极小极大：保护最差能力
+
+借鉴 DoReMi 的 worst-case excess-loss 思想，在参考配方坐标下定义
+
+\[
+\min_{\mathbf p\in\mathcal P_A}
+\max_{k=1,\ldots,13}
+m_k(\mathbf p).
+\]
+
+这是对本题已拟合代理的鲁棒决策，不等价于重新实现 DoReMi 的在线 Group DRO。使用 \(m_k\) 而不是原始 \(L_k\)，是为了把各域都放在“相对同一参考配方的变化量”上。
+
+### 4.5 重点能力 + 保护约束
+
+如果重点优化 target \(q\)，又要求一组保护域不被明显破坏：
+
+\[
+\begin{aligned}
+\min_{\mathbf p\in\mathcal P_A}\quad
+& m_q(\mathbf p),\\
+\text{s.t.}\quad
+& m_k(\mathbf p)\le\varepsilon_k,
+\quad k\in\mathcal K_{\rm protect}.
+\end{aligned}
+\]
+
+\(\varepsilon_k\) 必须来自题目要求、业务容忍度或独立不确定性，附件 A 没给就不填数值。
+
+### 4.6 向量/Pareto 优化
+
+保留完整多目标形式：
+
+\[
+\min_{\mathbf p\in\mathcal P_A}
+(m_1(\mathbf p),\ldots,m_{13}(\mathbf p))^\top.
+\]
+
+通过改变 \(\mathbf s\)、保护集合或阈值可以扫描 Pareto 折衷。BiMix 的约束优化给出了“逐域 Loss + 配比和为 1 + 数值求解”的文献范式；但 BiMix 的 Loss 律显式依赖训练步数/数据量，而附件 A 没有与配方实验对应的 \(D\)，因此我们只借鉴它的优化层，不照搬它的双变量 Loss 律。
+
+### 4.7 Data Mixing Laws Eq.7 为什么暂时只作为候选模型
+
+Data Mixing Laws 的逐验证域形式为
+
+\[
+L_k(\mathbf p)
+=
+c_k+a_k
+\exp\left(\sum_{j=1}^{17}t_{k,j}p_j\right).
+\]
+
+它与当前 Ridge 的共同点是“13 条 Loss 律共享同一个 17 维配比输入”，但函数族不同。现在仓库里真正已经用 A6–A11 held-out 验证过的是 Ridge。没有在完全相同的五折协议与 held-out 集上跑过指数形式前，不能因为文献采用 Eq.7 就直接把主模型换掉。
+
+后续若比较模型，只允许：
+
+\[
+\text{A4+A5 拟合/调参}
+\rightarrow
+\text{A6--A11 固定外部比较}
+\]
+
+然后依据 RMSE、Spearman 和稳定性选主模型。
+
+## 5. 不拟合跨规模幅度，只验证跨实验组排序
 
 对 A6–A11，不再拟合
 
