@@ -33,7 +33,7 @@ out = model.predict(N_params_B=0.070542, D_tokens_B=0.134, mode='diagnostic')
 |---|---|
 | `N_params_B,D_tokens_B` | 正有限数，单位分别 1e9 参数、1e9 token；越界须显式 `allow_extrapolation=True` |
 | `mode` | 默认 `formal` 会报错；仅显式 `diagnostic` 或 `scenario` 可调用 |
-| `Q_score` | 保留的 B-native 字段，本版必须 null；有值即报错，避免假装已有 Q 项。未来应以 B6/B7 或 B8 calibrated 拟合，不能用 Q_z 替代 |
+| `Q_score` | 本版 B1/p 接口必须 null；有值即报错。B7-native 质量模型另行发布，不自动接入 B1；B6/B7 去重，B8 calibrated 和 extrapolated 均不进入当前共同拟合，不能用 Q_z 替代 |
 | `p,target,lambda_loss,eta` | 仅 scenario 使用，四项全部显式给定；target 限上述五域，lambda、eta 在此情景族中为有限非负数，无默认值 |
 | `loss_value,loss_coordinate` | B1 `val_loss`（题面定义为验证交叉熵）；评估语料、tokenizer、对数底、聚合口径未证实，分别返回 null；模型族标签 attachment_B1_Pythia |
 | `gradient` | N_B/D_B 的解析偏导；`p_simplex_contrasts` 是单纯形配比对比导数，不是原始未归一化权重导数 |
