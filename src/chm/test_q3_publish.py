@@ -12,8 +12,8 @@ def bundle():
          "budget_residual_FLOPs":8e20-1e22,"budget_utilization":.08,"active_set":"budget",
          "kkt_check_pass":True,"support_status":"inside","extrapolation_status":"none",
          "status":"formal_validated","p_policy":"sensitivity_only","p_mixture_id":"",
-         "p_target":"","lambda_status":"scenario_only","cyj_ref":"x","chm_q1_version":"v1.1","zhh_ref":"z"}
-    p={"run_id":"r1","target":"pile_cc","lambda_scenario":"0.1","eta":"0.145","mixture_id":"291",
+         "p_target":"","lambda_status":"scenario_only","cyj_ref":"x","chm_q1_version":"v1.2","zhh_ref":"z"}
+    p={"run_id":"r1","target":"pile_cc","loss_coordinate_id":"A4_A5_1M_target_cross_entropy_contrast","scale_transfer_status":"not_identified_from_attachment_A","mixture_id":"291",
        "A_target_delta":"-0.9","selection_support":"A4 observed","large_scale_reliability_flag":"caution",
        "status":"formal_sensitivity"}
     u={"run_id":"r1","variable":"loss_value","point":"2","median":"2","p025":"1.9","p975":"2.1",
@@ -24,6 +24,14 @@ def bundle():
 class PublishTests(unittest.TestCase):
     def test_valid_bundle_publishes(self):
         with tempfile.TemporaryDirectory() as d:self.assertEqual(publish(bundle(),d)["status"],"formal_validated")
+    def test_withdrawn_eta_rejected(self):
+        b=bundle();b["p_sensitivity"][0]["eta"]=.145
+        with tempfile.TemporaryDirectory() as d:
+            with self.assertRaises(ValueError):publish(b,d)
+    def test_nonfinite_contrast_rejected(self):
+        b=bundle();b["p_sensitivity"][0]["A_target_delta"]="nan"
+        with tempfile.TemporaryDirectory() as d:
+            with self.assertRaises(ValueError):publish(b,d)
     def test_not_ready_rejected(self):
         b=bundle();b["readiness"]["formal_ready"]=False
         with tempfile.TemporaryDirectory() as d:

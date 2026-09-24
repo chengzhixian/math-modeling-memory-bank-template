@@ -69,10 +69,13 @@ def validate_uncertainty(rows,run_ids):
     return True
 
 def validate_p_sensitivity(rows,run_ids):
-    required={"run_id","target","lambda_scenario","eta","mixture_id","A_target_delta","selection_support","large_scale_reliability_flag","status"}
+    required={"run_id","target","loss_coordinate_id","scale_transfer_status","mixture_id","A_target_delta","selection_support","large_scale_reliability_flag","status"}
     for r in rows:
         if not required<=set(r):raise ValueError("p sensitivity fields missing")
         if r["run_id"] not in run_ids:raise ValueError("p sensitivity references unknown run")
+        if "eta" in r or "lambda_scenario" in r:raise ValueError("withdrawn scale/bridge fields are forbidden")
+        if r["loss_coordinate_id"]!="A4_A5_1M_target_cross_entropy_contrast" or r["scale_transfer_status"]!="not_identified_from_attachment_A":raise ValueError("p sensitivity must remain in A-native 1M coordinate")
+        if not _finite(r["A_target_delta"]):raise ValueError("invalid A contrast")
         if r["status"]!="formal_sensitivity":raise ValueError("invalid p sensitivity status")
         if not r["target"] or not r["mixture_id"] or not r["selection_support"]:raise ValueError("incomplete p sensitivity row")
     return True
@@ -94,12 +97,14 @@ def publish(bundle,out_dir):
     validate_p_sensitivity(p_rows,run_ids);validate_uncertainty(u_rows,run_ids)
     if readiness["formal_result_scope"]=="NDQ_with_p_sensitivity" and not p_rows:
         raise ValueError("sensitivity-only formal result requires p_sensitivity rows")
-    if not u_rows:raise ValueError("formal publication requires uncertainty_summary")
+    if {r["run_id"] for r in u_rows} != run_ids:raise ValueError("every run requires uncertainty_summary")
+    if readiness["formal_result_scope"]=="NDQ_with_p_sensitivity" and {r["run_id"] for r in p_rows} != run_ids:
+        raise ValueError("every run requires p sensitivity")
     out=Path(out_dir);out.mkdir(parents=True,exist_ok=True)
     write_csv(out/"optimization.csv",rows,OPT_FIELDS)
     if p_rows:write_csv(out/"p_sensitivity.csv",p_rows,list(p_rows[0]))
     write_csv(out/"uncertainty_summary.csv",u_rows,list(u_rows[0]))
-    manifest={"schema_version":"chm.q3.formal_results.v1","status":"formal_validated",
+    manifest={"schema_version":"chm.q3.formal_results.v2","status":"formal_validated",
               "readiness":readiness,"provenance":bundle.get("provenance",{}),"files":{}}
     for name in ("optimization.csv","p_sensitivity.csv","uncertainty_summary.csv"):
         p=out/name
@@ -109,7 +114,7 @@ def publish(bundle,out_dir):
 
 def main():
     ap=argparse.ArgumentParser();ap.add_argument("bundle",type=Path)
-    ap.add_argument("--output-dir",type=Path,default=Path("outputs/chm/q3_formal_v1"))
+    ap.add_argument("--output-dir",type=Path,default=Path("outputs/chm/q3_formal_v2"))
     a=ap.parse_args();data=json.loads(a.bundle.read_text(encoding="utf-8"))
     print(json.dumps(publish(data,a.output_dir),ensure_ascii=False))
 if __name__=="__main__":main()

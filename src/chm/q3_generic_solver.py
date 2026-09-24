@@ -23,9 +23,31 @@ class LossModel(Protocol):
 
 
 @dataclass(frozen=True)
+class Support:
+    N: tuple[float, float]
+    D: tuple[float, float]
+    Q: tuple[float, float]
+
+    def __post_init__(self):
+        for lo, hi in (self.N, self.D, self.Q):
+            if not all(map(math.isfinite, (lo, hi))) or lo >= hi:
+                raise ValueError("invalid model support")
+        if self.N[0] <= 0 or self.D[0] <= 0 or not 0 <= self.Q[0] < self.Q[1] <= 1:
+            raise ValueError("invalid model support units")
+
+
+def resolve_support(model, support=None):
+    result = support if support is not None else getattr(model, "support", None)
+    if not isinstance(result, Support):
+        raise ValueError("explicit model support is required; no B1 fallback")
+    return result
+
+
+@dataclass(frozen=True)
 class SyntheticLinearQualityLoss:
     """Software-test model: B1 baseline plus gamma*(1-Q). NOT scientific evidence."""
     gamma: float = 0.2
+    support = Support(N_RANGE, D_RANGE, (0., 1.))
 
     def value_grad(self, N_B, D_B, Q):
         p = DEFAULT_PARAMS
@@ -51,134 +73,118 @@ def cost_and_grad(N_B, D_B, Q, Q0, context_tokens, family):
     return float(cost), (float(dN),float(dD),float(dQ))
 
 
-def _transform(z, q0):
-    N = math.exp(z[0])
-    D = math.exp(z[1])
-    sig = 1/(1+math.exp(-z[2]))
-    Q = q0 + (1-q0)*sig
-    return N,D,Q
+def _transform(z):
+    return math.exp(z[0]), math.exp(z[1]), float(z[2])
 
 
-def solve_generic(
-    model: LossModel, *,
-    budget: float, context_tokens: int, Q0: float, family: str,
-    starts: int = 36, seed: int = 20260924,
-):
-    if budget <= 0 or not math.isfinite(budget):
-        raise ValueError("budget must be positive finite")
-    if not 0 < Q0 < 1:
-        raise ValueError("Q0 must lie in (0,1)")
-    nmin,nmax=N_RANGE; dmin,dmax=D_RANGE
+def solve_generic(model, *, budget, context_tokens, Q0, family,
+                  starts=36, seed=20260924, support=None):
+    support = resolve_support(model, support)
+    if not math.isfinite(budget) or budget <= 0 or context_tokens <= 0 or starts < 3:
+        raise ValueError("invalid budget, context or number of starts")
+    if not support.Q[0] <= Q0 < support.Q[1]:
+        raise ValueError("Q0 outside model support")
+    nmin,nmax=support.N; dmin,dmax=support.D
+    if cost_and_grad(nmin,dmin,Q0,Q0,context_tokens,family)[0] > budget*(1+1e-12):
+        raise ValueError("budget below minimum supported cost")
+    bounds=[tuple(map(math.log,support.N)),tuple(map(math.log,support.D)),(Q0,support.Q[1])]
     rng=np.random.default_rng(seed)
-    bounds=[(math.log(nmin),math.log(nmax)),(math.log(dmin),math.log(dmax)),(-16,16)]
-    seeds=[
-        [math.log(nmin),math.log(dmin),-12],
-        [math.log(nmax),math.log(dmax),12],
-        [0.5*(math.log(nmin)+math.log(nmax)),0.5*(math.log(dmin)+math.log(dmax)),0],
-    ]
-    while len(seeds)<starts:
-        seeds.append([rng.uniform(*bounds[0]),rng.uniform(*bounds[1]),rng.uniform(-6,6)])
+    seeds=[[b[0] for b in bounds],[b[1] for b in bounds],[sum(b)/2 for b in bounds]]
+    seeds += [[rng.uniform(*b) for b in bounds] for _ in range(starts-3)]
 
     def objective(z):
-        N,D,Q=_transform(z,Q0)
-        return model.value_grad(N,D,Q)[0]
+        N,D,Q=_transform(z)
+        value,grad=model.value_grad(N,D,Q)
+        return value,np.array(grad)*[N,D,1.]
 
-    def budget_constraint(z):
-        N,D,Q=_transform(z,Q0)
-        return budget-cost_and_grad(N,D,Q,Q0,context_tokens,family)[0]
+    def constraint(z):
+        N,D,Q=_transform(z)
+        value,grad=cost_and_grad(N,D,Q,Q0,context_tokens,family)
+        return 1-value/budget,-np.array(grad)*[N,D,1.]/budget
 
     trials=[]
-    for i,z0 in enumerate(seeds):
-        res=minimize(
-            objective,np.array(z0,float),method="SLSQP",bounds=bounds,
-            constraints=[{"type":"ineq","fun":budget_constraint}],
-            options={"ftol":1e-12,"maxiter":2000,"disp":False},
-        )
-        N,D,Q=_transform(res.x,Q0)
+    for i,z in enumerate(seeds):
+        res=minimize(objective,z,jac=True,method="SLSQP",bounds=bounds,
+                     constraints=[{"type":"ineq","fun":lambda z:constraint(z)[0],
+                                   "jac":lambda z:constraint(z)[1]}],
+                     options={"ftol":1e-12,"maxiter":2000})
+        N,D,Q=_transform(res.x)
         C,_=cost_and_grad(N,D,Q,Q0,context_tokens,family)
         L,_=model.value_grad(N,D,Q)
-        feasible=C <= budget*(1+1e-8)
-        trials.append({
-            "start_id":i,"success":bool(res.success),"feasible":bool(feasible),
-            "loss":float(L),"N_params_B":N,"D_tokens_B":D,"Q":Q,
-            "cost_FLOPs":C,"budget_residual":C-budget,"message":str(res.message),
-        })
-    feasible=[r for r in trials if r["feasible"]]
-    if not feasible:
-        raise RuntimeError("no feasible solution found")
-    best=min(feasible,key=lambda r:r["loss"])
-    return enrich_kkt(best,model,budget,context_tokens,Q0,family),trials
+        trials.append({"start_id":i,"success":bool(res.success),
+                       "feasible":bool(math.isfinite(L) and C <= budget*(1+1e-8)),
+                       "loss":float(L),"N_params_B":N,"D_tokens_B":D,"Q":Q,
+                       "cost_FLOPs":C,"budget_residual":C-budget,"message":str(res.message)})
+    good=[r for r in trials if r["success"] and r["feasible"]]
+    if not good:
+        raise RuntimeError("no converged feasible solution found")
+    return enrich_kkt(min(good,key=lambda r:r["loss"]),model,budget,context_tokens,Q0,family,support=support),trials
 
 
-def active_set(sol,budget,q0,tol=1e-5):
+def active_set(sol,budget,q0,tol=1e-6,*,support):
     active=[]
-    N,D,Q=sol["N_params_B"],sol["D_tokens_B"],sol["Q"]
-    nmin,nmax=N_RANGE; dmin,dmax=D_RANGE
-    if abs(N-nmin)<=tol*max(1,nmin): active.append("N_min")
-    if abs(N-nmax)<=tol*max(1,nmax): active.append("N_max")
-    if abs(D-dmin)<=tol*max(1,dmin): active.append("D_min")
-    if abs(D-dmax)<=tol*max(1,dmax): active.append("D_max")
-    if abs(Q-q0)<=tol: active.append("Q0")
-    if abs(Q-1)<=tol: active.append("Q1")
-    if abs(sol["cost_FLOPs"]-budget)<=max(1,budget)*1e-7: active.append("budget")
+    for name,x,bounds in (("N",sol["N_params_B"],support.N),
+                          ("D",sol["D_tokens_B"],support.D),
+                          ("Q",sol["Q"],(q0,support.Q[1]))):
+        for tag,bound in zip(("min","max"),bounds):
+            if abs(x-bound)<=tol*max(abs(bound),1e-12):
+                active.append(("Q0" if tag=="min" else "Q1") if name=="Q" else name+"_"+tag)
+    if abs(sol["cost_FLOPs"]/budget-1)<=1e-7:
+        active.append("budget")
     return active
 
 
-def enrich_kkt(sol,model,budget,context_tokens,q0,family):
+def enrich_kkt(sol,model,budget,context_tokens,q0,family,*,support=None):
+    support=resolve_support(model,support)
     N,D,Q=sol["N_params_B"],sol["D_tokens_B"],sol["Q"]
     L,Lg=model.value_grad(N,D,Q)
     C,Cg=cost_and_grad(N,D,Q,q0,context_tokens,family)
-    ratios={name:(-lx/cx if cx>0 else None) for name,lx,cx in zip(("N","D","Q"),Lg,Cg)}
-    active=active_set({**sol,"cost_FLOPs":C},budget,q0)
-
-    free=[]; lower=[]; upper=[]
+    if not all(math.isfinite(v) for v in (L,C,*Lg,*Cg)) or min(Cg)<=0:
+        raise ValueError("KKT requires finite gradients and positive cost derivatives")
+    ratios=dict(zip(("N","D","Q"),(-lx/cx for lx,cx in zip(Lg,Cg))))
+    active=active_set({**sol,"cost_FLOPs":C},budget,q0,support=support)
+    lower=[];upper=[];free=[]
     for name,r in ratios.items():
-        if r is None: continue
-        if name=="N" and "N_min" in active: lower.append((name,r))
-        elif name=="N" and "N_max" in active: upper.append((name,r))
-        elif name=="D" and "D_min" in active: lower.append((name,r))
-        elif name=="D" and "D_max" in active: upper.append((name,r))
-        elif name=="Q" and "Q0" in active: lower.append((name,r))
-        elif name=="Q" and "Q1" in active: upper.append((name,r))
-        else: free.append((name,r))
-
-    free_vals=[r for _,r in free]
-    spread=(max(free_vals)-min(free_vals))/max(abs(np.mean(free_vals)),1e-30) if len(free_vals)>=2 else None
+        lo="Q0" if name=="Q" else name+"_min"
+        hi="Q1" if name=="Q" else name+"_max"
+        (lower if lo in active else upper if hi in active else free).append((name,r))
+    vals=[r for _,r in free]
     if "budget" not in active:
-        mu=0.0; mu_interval=[0.0,0.0]
-    elif free_vals:
-        mu=float(np.median(free_vals)); mu_interval=[mu,mu]
+        mu=0.; interval=[0.,0.]
+    elif vals:
+        mu=max(0.,float(np.median(vals)));interval=[mu,mu]
     else:
-        lo=max([r for _,r in lower],default=0.0)
-        hi=min([r for _,r in upper],default=float("inf"))
-        mu=lo if math.isinf(hi) else 0.5*(lo+hi)
-        mu_interval=[lo,hi]
-
-    atol=1e-7*max(1.0,abs(mu))
-    inequalities=[]
-    for name,r in lower:
-        inequalities.append({"variable":name,"bound":"lower","ratio":r,"satisfied":bool(r<=mu+atol)})
-    for name,r in upper:
-        inequalities.append({"variable":name,"bound":"upper","ratio":r,"satisfied":bool(r+atol>=mu)})
-    kkt_ok=(spread is None or spread<1e-4) and all(x["satisfied"] for x in inequalities)
-    return {
-        **sol,"loss":L,"cost_FLOPs":C,"budget_utilization":C/budget,
-        "active_set":active,"marginal_benefit_per_cost":ratios,
-        "interior_ratio_relative_spread":spread,
-        "kkt_mu_estimate":mu,"kkt_mu_interval":mu_interval,
-        "boundary_kkt_inequalities":inequalities,"kkt_check_pass":bool(kkt_ok),
-        "kkt_note":"Free variables require equal -dL/dx/dCdx. Lower bounds require ratio<=mu; upper bounds ratio>=mu. Q0 uses the right derivative.",
-    }
+        lo=max([0.]+[r for _,r in lower])
+        hi=min([r for _,r in upper],default=math.inf)
+        mu=lo;interval=[lo,hi if math.isfinite(hi) else None]
+    scale=max(abs(mu),*(abs(r) for r in ratios.values()),1e-300)
+    inequalities=[{"variable":name,"bound":kind,"ratio":r,
+                   "satisfied":bool((r-mu if kind=="lower" else mu-r)/scale<=1e-4)}
+                  for kind,items in (("lower",lower),("upper",upper)) for name,r in items]
+    violation=max([0.]+[abs(r-mu)/scale for _,r in free]
+                  +[(r-mu)/scale for _,r in lower]+[(mu-r)/scale for _,r in upper])
+    primal=(C<=budget*(1+1e-8) and all(lo-1e-9*max(1,abs(lo))<=x<=hi+1e-9*max(1,abs(hi))
+            for x,(lo,hi) in zip((N,D,Q),(support.N,support.D,(q0,support.Q[1])))))
+    complementarity=abs(mu/scale*(C/budget-1))
+    return {**sol,"loss":L,"cost_FLOPs":C,"budget_utilization":C/budget,
+            "active_set":active,"marginal_benefit_per_cost":ratios,
+            "interior_ratio_relative_spread":(max(vals)-min(vals))/scale if len(vals)>1 else None,
+            "kkt_mu_estimate":mu,"kkt_mu_interval":interval,
+            "boundary_kkt_inequalities":inequalities,"primal_feasible":bool(primal),
+            "kkt_relative_violation":violation,"complementarity_relative_residual":complementarity,
+            "kkt_check_pass":bool(primal and violation<=1e-4 and complementarity<=1e-7),
+            "kkt_note":"Relative marginal residuals; primal, dual and complementarity checked. Necessary, not sufficient, for global optimality."}
 
 
 def detect_transitions(rows):
     out=[]; prev=None
-    for r in sorted(rows,key=lambda x:(x["context_tokens"],x["budget_FLOPs"])):
-        signature=tuple(sorted(r["active_set"])); key=r["context_tokens"]
-        if prev is None or prev["context_tokens"]!=key:
+    def group(r): return (r["context_tokens"],r.get("quality_family",""),r.get("Q0_scenario",0.5))
+    for r in sorted(rows,key=lambda x:(group(x),x["budget_FLOPs"])):
+        signature=tuple(sorted(r["active_set"])); key=group(r)
+        if prev is None or group(prev)!=key:
             prev={**r,"signature":signature}; continue
         if signature!=prev["signature"]:
-            out.append({"context_tokens":key,"budget_left":prev["budget_FLOPs"],
+            out.append({"context_tokens":key[0],"quality_family":key[1],"Q0_scenario":key[2],"budget_left":prev["budget_FLOPs"],
                         "budget_right":r["budget_FLOPs"],
                         "active_left":";".join(prev["signature"]),
                         "active_right":";".join(signature)})

@@ -1,4 +1,4 @@
-# chm → zhh / 集成人：Q3 正式结果接口 v1
+# chm → zhh / 集成人：Q3 正式结果接口 v2
 
 状态：schema frozen，尚无 formal 数据。正式文件只能由 `src/chm/q3_publish.py` 在 readiness v2 通过后生成。
 
@@ -35,7 +35,9 @@
 ## 2. p_sensitivity.csv
 
 用于未识别唯一跨 Loss bridge 时的正式 p 敏感性。至少包含：
-run_id、target、lambda_scenario、eta、mixture_id、A_target_delta、selection_support、large_scale_reliability_flag、status。
+run_id、target、loss_coordinate_id、scale_transfer_status、mixture_id、A_target_delta、selection_support、large_scale_reliability_flag、status。
+
+loss_coordinate_id 固定为 `A4_A5_1M_target_cross_entropy_contrast`；scale_transfer_status 固定为 `not_identified_from_attachment_A`。禁止 eta 和 lambda_scenario 字段；A_target_delta 必须有限。每个主配置 run_id 均需对应不确定性记录及（敏感性模式下）配比记录。
 
 zhh 不应把这些 target-specific A-side 变化直接当 B1 Loss。
 
@@ -44,7 +46,7 @@ zhh 不应把这些 target-specific A-side 变化直接当 B1 Loss。
 每个 run_id × variable 一行，字段：
 variable、point、median、p025、p975、n_draws、coverage_scope、sources。
 
-coverage_scope 必须说明区间覆盖了哪些层：cyj 标度律参数、B-native Q、chm p/eta、数值求解、zhh bridge 等。没有覆盖的层不得被隐去。
+coverage_scope 必须说明区间覆盖了哪些层：cyj 标度律参数、B-native Q、chm 的 A 原生配比对比、数值求解、zhh bridge 等。没有覆盖的层不得被隐去。
 
 ## 4. manifest.json
 
