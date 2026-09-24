@@ -12,4 +12,4 @@
 
 CHM 仍需在本人分支消费精确 v4 扩展版 `3471530d91c8ee7eb709e5cd6c824eb9c423e0df`；ZHH/集成人仍需 Loss--Benchmark 桥接；数据源仍未给真实训练独立外测。这些均 `BLOCKED_EXTERNAL`，不影响 CYJ 条件数值结果。`ready_for_Q3=false`。cyj 后续维持代码/实验/接口 SHA 冻结，若有新证据须独立冻结协议再验证。本轮提交/远端 SHA 以 Git 实际核验为准。
 
-远端备份状态：上次核验的 `origin/team/cyj-scaling` 为 `9403059623ea503db45f4ba41f475dc4a2441a52`；本轮独立优化器与 raw-source 审计的本地提交 `a81ac59`、`335e4b0` 多次推送均被 GitHub HTTPS 443 超时或连接重置中断。数据/代码已本地提交，尚不能称远端成功；恢复网络后优先补推并 `ls-remote` 对照。
+远端备份状态：本轮独立优化器与 raw-source 审计的本地提交 `a81ac59`、`335e4b0` 曾多次被 GitHub HTTPS 443 超时或连接重置阻断。网络恢复后已推送，并由 `ls-remote` 核对 `origin/team/cyj-scaling=54377c5b8cee31e53197d03b8641d158559e1b0c`。其后若仅更新交接文档，以最终 Git 实际 SHA 为准。
