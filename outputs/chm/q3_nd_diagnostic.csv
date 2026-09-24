@@ -1,0 +1,10 @@
+budget_FLOPs,context_tokens,N_params_B,D_tokens_B,diagnostic_loss,C_train_plus_attn_FLOPs,budget_utilization,candidate_source,support_flags,Q_policy,p_policy
+1e19,2048,0.221312,7.049604,2.998926,1e19,1.0,interior,none,"Q=Q0; C_Q=0; no Q performance term","p=p_ref; no cross-Loss correction"
+1e19,8192,0.204461,6.403049,3.034651,1e19,1.0,interior,none,"Q=Q0; C_Q=0; no Q performance term","p=p_ref; no cross-Loss correction"
+1e19,131072,0.106754,2.907809,3.367155,1e19,1.0,interior,none,"Q=Q0; C_Q=0; no Q performance term","p=p_ref; no cross-Loss correction"
+1e22,2048,5.202856,299.893,2.143211,1e22,1.0,D_max,D_max,"Q=Q0; C_Q=0; no Q performance term","p=p_ref; no cross-Loss correction"
+1e22,8192,4.625897,283.009918,2.155556,1e22,1.0,interior,none,"Q=Q0; C_Q=0; no Q performance term","p=p_ref; no cross-Loss correction"
+1e22,131072,2.415289,128.522973,2.270704,1e22,1.0,interior,none,"Q=Q0; C_Q=0; no Q performance term","p=p_ref; no cross-Loss correction"
+1e24,2048,11.965825,299.893,2.093385,2.300064e22,0.02300064,N_max+D_max,N_max;D_max;support_limited_budget_slack,"Q=Q0; C_Q=0; no Q performance term","p=p_ref; no cross-Loss correction"
+1e24,8192,11.965825,299.893,2.093385,2.741015e22,0.02741015,N_max+D_max,N_max;D_max;support_limited_budget_slack,"Q=Q0; C_Q=0; no Q performance term","p=p_ref; no cross-Loss correction"
+1e24,131072,11.965825,299.893,2.093385,1.156003e23,0.1156003,N_max+D_max,N_max;D_max;support_limited_budget_slack,"Q=Q0; C_Q=0; no Q performance term","p=p_ref; no cross-Loss correction"
