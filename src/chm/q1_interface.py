@@ -7,8 +7,8 @@ import json
 import math
 
 
-VERSION = "chm.q1.v1"
-MANIFEST = Path("interfaces/chm/q1_interface_v1.json")
+VERSION = "chm.q1.v1.1"
+MANIFEST = Path("interfaces/chm/q1_interface_v1_1.json")
 FILES = {
     "quality": "outputs/chm/domain_quality.csv",
     "mapping": "outputs/chm/domain_mapping.csv",
@@ -19,8 +19,14 @@ FILES = {
 }
 
 
+def _normalized_text_bytes(path):
+    text = Path(path).read_text(encoding="utf-8-sig")
+    text = text.replace("\r\n", "\n").replace("\r", "\n")
+    return text.encode("utf-8")
+
+
 def _sha256(path):
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    return hashlib.sha256(_normalized_text_bytes(path)).hexdigest()
 
 
 def _csv(path):
@@ -37,6 +43,7 @@ def build_manifest(root):
                       "rows": len(_csv(path)) if path.suffix == ".csv" else None}
     return {"schema_version": VERSION, "producer": "chm",
             "status": "producer_validated_A_side_ready_B_bridge_unidentified",
+            "hash_mode": "sha256_utf8_lf_normalized",
             "files": files, "quality_coordinate": "A_native_Q_z",
             "mixture_effect_unit": "A_target_cross_entropy_delta",
             "scale_N_unit": "parameters"}
@@ -48,6 +55,7 @@ class Q1Interface:
         manifest = json.loads((root / MANIFEST).read_text(encoding="utf-8"))
         if (manifest.get("schema_version") != VERSION
                 or manifest.get("status") != "producer_validated_A_side_ready_B_bridge_unidentified"
+                or manifest.get("hash_mode") != "sha256_utf8_lf_normalized"
                 or manifest.get("quality_coordinate") != "A_native_Q_z"
                 or manifest.get("mixture_effect_unit") != "A_target_cross_entropy_delta"
                 or manifest.get("scale_N_unit") != "parameters"
