@@ -1,8 +1,8 @@
-# chm → cyj Q1 生产者接口 v1.5
+# chm → cyj Q1 生产者接口 v1.6
 
-日期：2026-09-24；版本：`chm.q1.v1`；生产者：chm；消费者：cyj（Q2/Q3）、zhh（需要 Q1 证据时）。状态：**A 侧描述与配比证据可消费，跨 A/B 数值接口未就绪**；尚非 cyj 预测器或 `main` 集成成果。官方数据与派生量的资格审查见 [OFFICIAL_DATA_REVIEW.md](OFFICIAL_DATA_REVIEW.md)。
+日期：2026-09-24；当前推荐版本：`chm.q1.v1.1`；生产者：chm；消费者：cyj（Q2/Q3）、zhh（需要 Q1 证据时）。状态：**A 侧描述与配比证据可消费，跨 A/B 数值接口未就绪**；尚非 cyj 预测器或 `main` 集成成果。官方数据与派生量的资格审查见 [OFFICIAL_DATA_REVIEW.md](OFFICIAL_DATA_REVIEW.md)。
 
-唯一机器入口：`interfaces/chm/q1_interface_v1.json`，指向已审核的六个文件及 SHA256/行数。可调用入口：`src/chm/q1_interface.py` 的 `Q1Interface`。消费者用法、输入校验、返回字段、单位与示例见 [USAGE.md](USAGE.md)；需 cyj 定义的 B 侧接口见 [CYJ_REQUIRED_INTERFACE.md](CYJ_REQUIRED_INTERFACE.md)。
+当前机器入口：`interfaces/chm/q1_interface_v1_1.json`，指向已审核的六个文件及规范化 SHA256/行数。文本身份规则为 UTF-8 文本先统一 CRLF/CR 为 LF，再计算 SHA256，因此跨 Windows/Linux 稳定。旧 `q1_interface_v1.json` 原样保留，只用于已经锁定 `chm.q1.v1` 的消费者追溯，不应作为新消费默认入口。可调用入口：`src/chm/q1_interface.py` 的 `Q1Interface`。消费者用法、输入校验、返回字段、单位与示例见 [USAGE.md](USAGE.md)；需 cyj 定义的 B 侧接口见 [CYJ_REQUIRED_INTERFACE.md](CYJ_REQUIRED_INTERFACE.md)。
 
 | chm 交付 | 数据/算法 | 状态与边界 |
 |---|---|---|
@@ -17,3 +17,17 @@
 **官方字段优先与职责边界：**cyj 的质量项应首先使用赛题 B6–B8 自带的 `Q_score` 字段，并保留其**半合成**来源标签；chm `Q_z` 仅作独立的 A 侧描述与定性/排序敏感性。chm 维护上述 A 侧数值、配比域顺序、目标域面板、参考配比及验证范围。cyj 定义 B 侧质量项、B1 Loss 口径和 target anchor、跨 Loss 系数、最终预测器及 Q3 成本理论。无成对数据时不能把 `Q_z` 数值转成 `Q_score`，也不能用讨论结论替代标定。完整限制见 [Q2_BRIDGE.md](Q2_BRIDGE.md) 与 [UNCERTAINTY.md](UNCERTAINTY.md)。
 
 消费者应记录精确分支/提交 SHA、接口版本、manifest SHA、target、η 情景及是否外推。旧 `team/chm-data` 带有作废祖先，不得直接合并；只读取 clean integration 分支。历史 v1.2 在 `archive/` 仅供审计，不能作当前接口。
+
+
+## v1.6 发布协议修订
+
+cyj 在消费旧 `chm.q1.v1` 时发现 coefficients/reference/validation 三个 CSV 的生产者 manifest 使用 Windows CRLF 字节，而 Git blob 为 LF，必须临时恢复换行才能验签。该问题属于发布身份协议，不影响科学数值。
+
+从 `chm.q1.v1.1` 起：
+- 所有六个发布文件均按 UTF-8 文本读取；
+- 行尾统一为 LF；
+- 对规范化字节计算 SHA256；
+- manifest 显式记录 `hash_mode=sha256_utf8_lf_normalized`；
+- 科学数值、域顺序、Q 定义、p 系数和 eta 均未因此改变。
+
+新消费者应锁定 v1.1；已锁定 `integration/chm-q1-clean-20260923@7c14a0c...` 的 cyj 可继续使用旧 v1 完成当前实验，切换时应显式记录新生产者 SHA 并重跑接口验收。
