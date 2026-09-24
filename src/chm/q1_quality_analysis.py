@@ -54,6 +54,7 @@ DSIR_FIELDS = ["dsir_books", "dsir_wiki", "dsir_math"]
 RPS_FIELDS = [x for x in QUALITY_FIELDS if x not in MODEL_FIELDS + DSIR_FIELDS]
 COUNT_FIELDS = {"rps_doc_word_count", "rps_doc_num_sentences"}
 SIGNED_LOG_FIELDS = set(DSIR_FIELDS)
+PRIMARY_ORIENTATION_POLICY = "stable_loo"
 
 
 def softmax(v):
@@ -217,11 +218,99 @@ def domain_anchor_correlations(z):
     return pd.DataFrame(records)
 
 
+def orientation_stability(z, raw_orientation):
+    """Assess whether non-anchor direction survives leave-one-domain-out refits.
+
+    A metric is stable_loo only when its pooled direction is unchanged after
+    removing each A1 source domain in turn. Model-based anchor fields are
+    semantic anchors and are always retained.
+    """
+    domains = sorted(z["_source_domain"].dropna().unique().tolist())
+    loo = {}
+    for held_out in domains:
+        table = domain_anchor_correlations(z[z["_source_domain"] != held_out])
+        loo[held_out] = table.set_index("metric")
+
+    primary = raw_orientation.set_index("metric")
+    rows = []
+    for metric in QUALITY_FIELDS:
+        full_orientation = int(primary.loc[metric, "orientation"])
+        if metric in MODEL_FIELDS:
+            rows.append({
+                "metric": metric,
+                "loo_min_rho": np.nan,
+                "loo_max_rho": np.nan,
+                "loo_sign_consistent": True,
+                "stable_loo": True,
+            })
+            continue
+
+        loo_rhos = []
+        loo_orientations = []
+        for domain in domains:
+            rho = float(loo[domain].loc[metric, "pooled_rho"])
+            direction = int(loo[domain].loc[metric, "orientation"])
+            loo_rhos.append(rho)
+            loo_orientations.append(direction)
+
+        finite = [v for v in loo_rhos if np.isfinite(v)]
+        loo_consistent = (
+            len(finite) == len(domains)
+            and all(v == full_orientation for v in loo_orientations)
+        )
+        rows.append({
+            "metric": metric,
+            "loo_min_rho": float(np.min(finite)) if finite else np.nan,
+            "loo_max_rho": float(np.max(finite)) if finite else np.nan,
+            "loo_sign_consistent": bool(loo_consistent),
+            "stable_loo": bool(loo_consistent),
+        })
+    return pd.DataFrame(rows)
+
+
+def freeze_primary_orientation(raw_orientation, stability, policy=PRIMARY_ORIENTATION_POLICY):
+    """Freeze the primary direction table.
+
+    Under stable_loo, a non-anchor metric enters Q_A only when deleting any
+    single A1 domain never flips its pooled Spearman direction. Unstable
+    metrics receive orientation=0 and are excluded (NaN) before family means.
+    The original sign is preserved in raw_orientation for auditability.
+    """
+    if policy not in {"stable_loo", "sign_only"}:
+        raise ValueError(f"Unknown orientation policy: {policy}")
+
+    table = raw_orientation.rename(columns={"orientation": "raw_orientation"}).copy()
+    keep_cols = [
+        "metric", "loo_min_rho", "loo_max_rho",
+        "loo_sign_consistent", "stable_loo",
+    ]
+    table = table.merge(stability[keep_cols], on="metric", how="left", validate="one_to_one")
+
+    if policy == "sign_only":
+        included = pd.Series(True, index=table.index)
+    else:
+        included = table["stable_loo"].fillna(False).astype(bool)
+
+    table["included_in_primary"] = included
+    table["orientation"] = np.where(included, table["raw_orientation"], 0).astype(int)
+    table["orientation_policy"] = policy
+    table["orientation_reason"] = np.where(
+        table["metric"].isin(MODEL_FIELDS),
+        "semantic_model_anchor",
+        np.where(included, "pooled_sign_stable_under_leave_one_domain_out", "direction_uncertain_excluded"),
+    )
+    return table
+
+
 def orient(z, orientation):
     out = z.copy()
     omap = orientation.set_index("metric")["orientation"].to_dict()
     for c in QUALITY_FIELDS:
-        out[c] = out[c] * float(omap.get(c, 1))
+        direction = float(omap.get(c, 1))
+        if direction == 0:
+            out[c] = np.nan
+        else:
+            out[c] = out[c] * direction
     return out
 
 
@@ -388,7 +477,9 @@ def main():
 
     params = robust_params(a1)
     z1 = apply_robust_z(a1, params)
-    orientation = domain_anchor_correlations(z1)
+    raw_orientation = domain_anchor_correlations(z1)
+    stability = orientation_stability(z1, raw_orientation)
+    orientation = freeze_primary_orientation(raw_orientation, stability)
     oz1 = orient(z1, orientation)
     s1, qparams = add_quality_scores(oz1)
 
@@ -489,7 +580,9 @@ def main():
     a1_arg = read_jsonl_xz(args.a1, list_mode="argmax")
     p_arg = robust_params(a1_arg)
     z_arg = apply_robust_z(a1_arg, p_arg)
-    o_arg = domain_anchor_correlations(z_arg)
+    o_arg_raw = domain_anchor_correlations(z_arg)
+    o_arg_stability = orientation_stability(z_arg, o_arg_raw)
+    o_arg = freeze_primary_orientation(o_arg_raw, o_arg_stability)
     s_arg, _ = add_quality_scores(orient(z_arg, o_arg))
     domain_arg = domain_summary(s_arg, "sample_argmax", rng, args.bootstrap)
     domain_arg.to_csv(args.output_dir / "domain_quality_argmax_v0.csv", index=False)
@@ -513,8 +606,19 @@ def main():
         "list_compression_primary": "probability_or_expected_rating; qurater=mean4",
         "list_compression_sensitivity": "argmax for binary/PRRC logits",
         "normalization": "A1 median/MAD robust z, clip [-5,5]; A2/A3 reuse A1 parameters",
-        "orientation": "8 model metrics positive anchors; remaining 14 use within-domain Spearman + Fisher-z pooling",
-        "quality_aggregation": "equal within RPS/DSIR/model families, then equal across three families",
+        "orientation": (
+            "8 semantic model anchors fixed positive; remaining 14 use within-domain "
+            "Spearman + Fisher-z pooling and must keep the same pooled sign in every "
+            "leave-one-A1-domain-out refit; unstable metrics are excluded from primary Q_A"
+        ),
+        "primary_orientation_policy": PRIMARY_ORIENTATION_POLICY,
+        "primary_orientation_excluded_metrics": orientation.loc[
+            ~orientation["included_in_primary"], "metric"
+        ].tolist(),
+        "quality_aggregation": (
+            "equal within RPS/DSIR/model families over primary-included metrics, "
+            "then equal across three families"
+        ),
         "bootstrap_reps": args.bootstrap,
         "q_standardization": qparams,
         "versions": {"python": platform.python_version(), "numpy": np.__version__, "pandas": pd.__version__},
