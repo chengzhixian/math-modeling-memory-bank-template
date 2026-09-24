@@ -227,3 +227,16 @@ python -m unittest discover -s src/chm -p 'test_q1_interface.py'
 ```
 
 以及对 LaTeX 做静态/编译检查。若本次远程环境无法完整执行，应由接收者在合并前运行上述命令，不得把“代码已修改”写成“测试已通过”。
+
+## 远端与测试补记
+
+- GitHub 已确认本重构分支相对起点为 ahead、behind=0，且变更范围均在 chm 归属文件。
+- 尝试在当前执行容器通过 `git clone` 拉取该远端分支并运行 `py_compile` / `test_q1_interface.py`，但执行环境 DNS 无法解析 `github.com`，clone 在代码运行前失败。因此本轮**不能宣称本地单元测试已通过**。
+- 已通过 GitHub 连接器重新读取当前 `q1_interface.py`、`q3_solver.py` 和 v1.2 manifest 做静态一致性复核；Q3 中 A4 原始字段名也已修正为去除 `train_the_pile_` 前缀后再调用 Q1 接口。
+- 合并前仍应在团队完整仓库执行：
+  ```powershell
+  python -m py_compile src/chm/q1_interface.py src/chm/q3_solver.py
+  python src/chm/q1_interface.py
+  python -m unittest discover -s src/chm -p 'test_q1_interface.py'
+  ```
+
