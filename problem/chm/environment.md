@@ -27,3 +27,24 @@ Python 3.12.14，NumPy 2.3.5，pandas 3.0.1，SciPy 1.18.1，scikit-learn 1.9.1�
 - 本机/脚本记录的人类可读时间统一注明 `Asia/Shanghai`。查看提交建议使用 `git log --date=iso-strict-local`。
 - 个人研究工作后续以 `integration/chm-q1-clean-20260923` 的干净血缘为可集成起点；接收公共规则必须执行 `git fetch origin` 后 `git merge origin/main`，禁止再次通过逐文件复制伪造“已同步 main”的提交历史。
 - 提交顺序审计示例：`git rev-list --parents --topo-order <ref>`；冲突时以拓扑而非时间戳为准。
+
+
+## Q3 当前诊断/联调命令
+
+当前 cyj 接口仍 `ready_for_Q3=false`，以下命令只用于 gate、求解器和情景联调：
+
+```powershell
+./.venv/Scripts/python.exe src/chm/q3_preflight.py
+./.venv/Scripts/python.exe src/chm/q3_nd_baseline.py
+./.venv/Scripts/python.exe -m unittest discover -s src/chm -p test_q3_nd_baseline.py
+```
+
+`q3_preflight.py` 在当前上游状态下预期以退出码 2 拒绝 formal ready；这表示门禁正常，不是程序故障。
+
+显式 p 情景必须同时给 target/lambda/eta，例如：
+
+```powershell
+./.venv/Scripts/python.exe src/chm/q3_solver.py --mode p-scenario --budget 1e22 --context 8192 --target pile_cc --lambda-loss <显式情景值> --eta 0.1450331705749355
+```
+
+在 cyj 未验证 `lambda_loss` 前不提供默认值，也不把该输出写成正式最优配置。
