@@ -35,10 +35,11 @@ def load_observed_mixtures(root=ROOT):
         rows = list(csv.DictReader(f))
     if len(rows) != 512:
         raise ValueError(f"expected 512 A4 rows, got {len(rows)}")
-    domains = [c for c in rows[0] if c != "index"]
+    raw_domains = [c for c in rows[0] if c != "index"]
+    domains = [c.replace("train_the_pile_", "") for c in raw_domains]
     out = []
     for row in rows:
-        vals = np.array([float(row[d]) for d in domains], dtype=float)
+        vals = np.array([float(row[d]) for d in raw_domains], dtype=float)
         if np.any(vals < 0) or not np.all(np.isfinite(vals)):
             raise ValueError("invalid A4 mixture")
         total = float(vals.sum())
