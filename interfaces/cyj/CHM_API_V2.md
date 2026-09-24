@@ -1,4 +1,6 @@
-# chm 可调用接口：cyj.chm.v2
+# chm 历史诊断接口：cyj.chm.v2
+
+`deprecated_for_formal_Q3=true`。本文件保留 v2 发布时的调用说明以便复现；当前条件入口与 CHM `92e0592` 求解器的 `Support` 包装见 [CHM_API_V3.md](CHM_API_V3.md)。下文关于 CHM 求解器边界来源和本机 SciPy 的叙述均为 v2 发布时的历史状态。
 
 入口 `src/cyj/chm_adapter_v2.py::CHMAdapter`；发布于 `team/cyj-scaling`。状态 **diagnostic_only**，支持 B7 原生 N/D/Q 求值、解析梯度、条件样本、题面成本、预算可行性以及独立 A 侧配比敏感性。已适配 chm `q1.v1.2`，不加载旧 eta 文件。正式 NDQ 验证仍未完成，`ready_for_Q3=false`；chm 正式发布 gate 应继续拒绝。
 

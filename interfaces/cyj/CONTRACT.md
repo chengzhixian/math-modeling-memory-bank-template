@@ -2,7 +2,9 @@
 
 角色：cyj 负责 Q2 标度律与 Q3 理论；chm/zhh 消费。当前 `ready_for_Q3=false`，未获联合验收或 main 集成。可调用接口、公式、字段、单位、成本与约束详见 [Q3_API.md](Q3_API.md)，此处只保留当前入口与证据索引。
 
-**当前 chm 入口：**[CHM_API_V2.md](CHM_API_V2.md)，`src/cyj/chm_adapter_v2.py::CHMAdapter(mode="diagnostic")`。不可变代码发布提交为 `c71807d01b66744f3a6ca45147d9173bc2704a27`，固定 chm Q1 v1.2 生产者 `a5525935b37f873235d2f650e4810a787b9a8788`。`cyj.chm.v2` 提供 B7 原生 NDQ `value_grad`、JSON 批量求值、三成本/预算残差与独立 Q1 v1.2 13-target 配比向量，`p_policy=sensitivity_only`，无旧 eta/B Loss 加法。发布消费测试与 44/44 CYJ 单测通过。科学状态仍 `diagnostic_only`、`ready_for_Q3=false`；chm 本人分支的真实消费验收尚未完成。chm 求解器须读取 v2 的 B7 N/D/Q 边界，不能沿用 B1 D 下界。
+**当前 chm 条件入口：**[CHM_API_V3.md](CHM_API_V3.md)，`src/cyj/chm_adapter_v3.py::CHMAdapterV3(mode="conditional_diagnostic")`，不可变代码发布 `e36aa23143bda9f027853f5af825728625750c5b`。v3 固定 B7 双交互候选，提供 NDQ 值/梯度、弹性、替代率和同源经验区间；A 侧仍为独立的 Q1 v1.2 13-target `p_policy=sensitivity_only`，无旧 eta、默认 lambda 或 B Loss 加法。51/51 CYJ 测试和精确发布 smoke 通过；CYJ 本机用 CHM `92e0592` 原版求解器完成 27 场景软件联调。由于 B7 族选择和区间覆盖没有未触碰样本检验，`ready_for_Q3=false`；CHM 本人消费验收仍待。CHM 的 `Support` 包装和 D_min=10 见 v3 文档。
+
+旧 [CHM_API_V2.md](CHM_API_V2.md) 与 `cyj.q3.v1` 只保留历史诊断复现，`deprecated_for_formal_Q3=true`；不得以旧接口的 fixed constant-G 参数或缺失总预测区间替代 v3，也不得把 v3 条件状态提升为正式准入。
 
 旧 `cyj.q3.v1`：`deprecated=true`，`historical_only=true`，`formal_use_allowed=false`；当前推荐机器入口为 `outputs/cyj/interfaces/chm_v2_manifest.json`，不消费旧 `q3_bundle.json`。
 
