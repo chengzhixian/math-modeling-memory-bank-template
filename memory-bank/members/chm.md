@@ -345,3 +345,14 @@ cyj 远端 ad1d312 已将旧 p/eta 情景降级，正式 ready_for_Q3=false；B7
 
 ## 2026-09-24 Q3 数值验收修复（第一检查点）
 发布接口 v2 撤出 eta/lambda_scenario，A 配比敏感性限定 A4/A5 1M 坐标；通用求解器强制显式模型支持域，预算约束归一化，使用解析梯度及可达 Q 端点，只接受收敛可行解。KKT 改为相对边际残差并检查原始可行性、对偶及互补松弛。32 项 Q3 回归通过。B7 全局误差界、连续预算与转移扫描仍在实施；旧人工模型 KKT 统计待新结果替换，不能作为正式验收依据。
+
+
+## 2026-09-24 Q1 方向稳定性主规则升级
+
+用户复核指出旧主模型把极接近 0 的 pooled Spearman 也按正负号强制定向。回查 `quality_review_v1` 后确认：`rps_lines_numerical_chars_fraction`（full pooled rho 约 8.03e-05，LOO 约 [-0.0275, 0.0274]）和 `rps_doc_frac_chars_top_3gram`（rho 约 -0.0181，LOO 约 [-0.0631, 0.0181]）会在 leave-one-domain-out 中翻转方向。
+
+现已把 `stable_loo` 从 review-only 敏感性规则提升为 `src/chm/q1_quality_analysis.py` 的主方向准入规则：8 个语义模型锚点固定保留；其余指标只有在删除任意一个 A1 域后 pooled 方向均不翻转才进入主 Q_A；不稳定指标 orientation=0，并在家族聚合前置为缺失，避免把“0”当成真实指标值稀释均值。更严格的 `stable_consensus_075` 会删除全部 DSIR 家族，继续仅作压力测试。
+
+已同步方法设计、Q1 LaTeX 方法段和审查清单；新增回归测试覆盖“不稳定指标应被排除而非乘零”。当前远端执行环境只能读取 Git LFS pointer，无法取得 A1--A3 实体，因此 canonical `domain_quality.csv`、bootstrap 区间、扩展集复核和图表尚未按新规则全量重跑。旧数值只能作为 sign-only 历史结果，不得与新主规则混写。方向 bootstrap CI 仍是 R05 未完成增强项，不能声称已经实现。
+
+历史判断：R05 原待办明确要求先做“剔除不稳定指标的 Q 敏感性版”，但没有单列“敏感性验证通过后回写主模型”的验收项；`quality_review_manifest_v1.json` 因而明确写 `review_sensitivity_not_primary` / `primary_quality_definition_unchanged=true`。该缺口现已补成显式两阶段闭环：主规则代码先升级；随后必须在有 LFS 实体的本地环境全量重跑、刷新 canonical 输出和论文数值后再冻结。
