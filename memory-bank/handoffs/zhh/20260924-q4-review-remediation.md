@@ -13,7 +13,7 @@
 
 运行 `node src/zhh/q4_analysis.test.js`，它重跑 `q4_analysis.js` 并检查筛选、分组敏感性和预测为空。结果在 `outputs/zhh/q4_results.json`；代码与论文数字据此同步。清理版 PDF 检查和 AI 入口规则检查通过。原始数据全量校验仍有四个 A 附件 LFS 指针尺寸不符，需获取 LFS 对象后复核；本轮 Q4 使用的 C 附件可读且代码实际运行成功。
 
-本机 OCR 代码审查工具因未配置 LLM endpoint 未运行。GitHub 网络连接失败时不得把本地提交称为远程备份；需联网后先 fetch 核查 `team/zhh-frontier` 是否有新提交，再仅推送该分支并以 `ls-remote` 核验 SHA。
+本机 OCR 代码审查工具因未配置 LLM endpoint 未运行。GitHub 连接起初失败，恢复后已先 fetch 并检查 zhh 远端未新增提交，仅推送 `team/zhh-frontier`；第一笔整改提交 `1da5a0763360b94e4263dbfade2d5274ae31cb28` 已由 `ls-remote` 核验。后续补记的远端状态以实际 Git 核验为准。
 
 ## 待处理
 

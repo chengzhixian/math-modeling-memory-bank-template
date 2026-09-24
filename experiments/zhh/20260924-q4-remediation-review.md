@@ -2,7 +2,7 @@
 
 ## A. 范围与 Git 冻结
 
-本地仓库 `math-modeling-memory-bank-template`，分支 `team/zhh-frontier`；整改前 HEAD 为 `ec275f8908329d40b15ba153f6d7b1f3ebacde0c`，本地跟踪 `origin/main` 为 `af4857045e5df62afc9815bce4b98dbbb8867253`，merge base `968ef7a36f1503aa222a0b09c8a8cb5d0f535ecd`，相对 main 15 behind/6 ahead。整改前工作区干净，`origin/team/zhh-frontier` 与 HEAD 一致。仅审查和修改 zhh 文件；chm/cyj 发现及跨成员正式接口不在本轮修改范围。GitHub fetch 因连接失败，远端 SHA 只能在恢复网络后再核验。
+本地仓库 `math-modeling-memory-bank-template`，分支 `team/zhh-frontier`；整改前 HEAD 为 `ec275f8908329d40b15ba153f6d7b1f3ebacde0c`，本地跟踪 `origin/main` 为 `af4857045e5df62afc9815bce4b98dbbb8867253`，merge base `968ef7a36f1503aa222a0b09c8a8cb5d0f535ecd`，相对 main 15 behind/6 ahead。整改前工作区干净，`origin/team/zhh-frontier` 与 HEAD 一致。仅审查和修改 zhh 文件；chm/cyj 发现及跨成员正式接口不在本轮修改范围。网络起初失败，随后成功 fetch 并仅推送 zhh 分支；第一笔整改提交 `1da5a0763360b94e4263dbfade2d5274ae31cb28` 已与远端分支 SHA 核对一致。
 
 可信来源：当前 F 题题面、清理版 `problem/F/数据说明.pdf`、`problem/readable/DATA_DESCRIPTION_VISIBLE.md`、原始 C 附件、本分支实际代码和输出、main 的 `REPOSITORY_REVIEW_PROTOCOL.md`。`leaderboard_enhanced.csv` SHA256 `D8AE5B1E00F36BF17ADB0C3FBF88C60EDD54298625D2DB1AA744B2B001202799`；`loss_benchmark_bridge_expanded.csv` SHA256 `E175462233C2B856E2878C603055B4ED70135F021300F912852AF1BB485BA4FD`。禁止来源：历史隐藏 PDF 页边文字、已作废 Gemini 工作、旧预测日志、未验收跨成员模型。
 
