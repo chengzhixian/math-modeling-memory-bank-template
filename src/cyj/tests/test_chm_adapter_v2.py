@@ -65,6 +65,11 @@ class CHMV2Tests(unittest.TestCase):
         a = self.model.evaluate(**args, p=p)
         self.assertEqual(a["loss_coordinate"]["id"], "attachment_B7_native_val_loss")
         self.assertIsNone(a["uncertainty"]["prediction_interval"])
+        self.assertIsNone(a["uncertainty"]["cross_source_uncertainty"])
+        self.assertIsNone(a["uncertainty"]["benchmark_bridge_uncertainty"])
+        self.assertEqual(set(a["uncertainty"]["components"]),
+                         {"U1_parameter_estimation", "U2_model_form", "U3_prediction_residual",
+                          "U4_cross_source", "U5_benchmark_bridge"})
         self.assertFalse(a["ready_for_Q3"])
         p["arxiv"] += .01; p["freelaw"] -= .01
         b = self.model.evaluate(**args, p=p)

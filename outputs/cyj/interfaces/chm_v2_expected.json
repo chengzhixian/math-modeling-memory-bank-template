@@ -206,7 +206,16 @@
         ],
         "prediction_interval": null,
         "model_form_uncertainty": "not_quantified",
-        "cross_source_uncertainty": null
+        "cross_source_uncertainty": null,
+        "benchmark_bridge_uncertainty": null,
+        "coverage_scope": "fixed constant-G B7 semi-synthetic conditional mean only",
+        "components": {
+          "U1_parameter_estimation": "conditional_only",
+          "U2_model_form": "not_quantified",
+          "U3_prediction_residual": "not_quantified",
+          "U4_cross_source": "not_identified",
+          "U5_benchmark_bridge": "not_consumed"
+        }
       },
       "constraints": {
         "NDQ_support_satisfied": true,
@@ -446,7 +455,16 @@
         ],
         "prediction_interval": null,
         "model_form_uncertainty": "not_quantified",
-        "cross_source_uncertainty": null
+        "cross_source_uncertainty": null,
+        "benchmark_bridge_uncertainty": null,
+        "coverage_scope": "fixed constant-G B7 semi-synthetic conditional mean only",
+        "components": {
+          "U1_parameter_estimation": "conditional_only",
+          "U2_model_form": "not_quantified",
+          "U3_prediction_residual": "not_quantified",
+          "U4_cross_source": "not_identified",
+          "U5_benchmark_bridge": "not_consumed"
+        }
       },
       "constraints": {
         "NDQ_support_satisfied": true,

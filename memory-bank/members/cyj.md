@@ -10,6 +10,8 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 ## 当前状态
 
+2026-09-24 23:20：Task 5–8 补 B1 Loss 来源、B4/B5 同口径、B8 方向/0.5 堆积及 U1–U5 不确定性审查；B1 Loss 生成机制仍 unknown，B4/B5 `same_loss_coordinate=not_established`，B8 `unresolved_keep_isolated`，v2 总预测区间为 null。Task 9/10 已填本人 Q2 论文与 Q3 理论段，XeLaTeX 协作稿编译成功，正式门槛审查仍 `NOT READY`。各证据见 `problem/cyj/20260924-{b1-loss-provenance,b4-b5-loss-comparability,b8-conflict-source,uncertainty-scope,q3-final-gate-review}.md` 与对应 handoff。当前 v2 不确定性字段变更尚未发布为新不可变提交，需重生 manifest、测试、推送并让 CHM 真实验收。
+
 2026-09-24 22:30：Task 4 的预注册两阶段候选比较已运行，24 个 B7 同源嵌套留级中双 log 交互 22 折被内层选中，单 logN 2 折；双交互比恒定 G 的各轴 RMSE 低约 .006–.007。由于候选形式受全 B7 诊断启发，只能作半合成同源探索；原 `cyj.chm.v2` constant-G 诊断接口不改，`ready_for_Q3=false`。输出 SHA256 `1d28169ce10f5bc274a82037320fdf003f7e3d2148eff2be91d3c3618708925b`，证据见 `experiments/cyj/20260924-b7-interaction-results.md`，交接 `memory-bank/handoffs/cyj/20260924-2230-b7-interaction-comparison.md`。
 
 2026-09-24 22:00：`cyj.chm.v2` 已发布于 `CYJ_RELEASE_COMMIT=587bbb505b730ba8654089650365191bb1493ce0`，远端 `team/cyj-scaling` SHA 与本地一致。精确发布消费测试 PASS（2 请求、`value_grad`、源文件/manifest 哈希），全部 CYJ 单测 44/44 PASS；交接 `memory-bank/handoffs/cyj/20260924-2200-chm-consumable-release.md` 含 CHM 拉取和实际验收命令。CHM 本人分支尚未 pull/验收，接口问题不可写最终解决；科学上 `ready_for_Q3=false`。

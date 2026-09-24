@@ -1,3 +1,14 @@
 % Owner: cyj.
 \subsection{目标函数、约束与理论分析}
-本小节由 cyj 填写。
+
+令 $N,D$ 分别以十亿参数和十亿 token 计，$L_{\rm ctx}$ 为外生上下文长度。对质量成本族 $g$、基准质量 $Q_0$，题面给出的总 FLOPs 可写为
+\begin{equation}
+C(N,D,Q;L_{\rm ctx})=6\times10^{18}ND
++10^{9}D[g(Q)-g(Q_0)]_+
++2\times10^{14}NDL_{\rm ctx}.
+\end{equation}
+质量成本分别考察题面给出的指数、幂函数和对数三族；$L_{\rm ctx}$ 仅取 C7 支持的 2048、8192、131072 token 外生情景，预算作为约束 $C\leq C_{\max}$。$Q=Q_0$ 处正部函数可能不光滑，使用左右导数；不得把双侧导数默认为零。
+
+在固定 B7 半合成 Loss 坐标下，可以对声明支持范围内的 $N,D,Q$ 计算诊断性预算配置，并通过 $\nabla L$、$\nabla C$、活跃约束和预算残差解释数值行为。内点若满足可微条件，等边际关系应比较 $-L_x/C_x$；边界解则检查单侧变化及 KKT 条件。支持域外、成本不可行或预测坐标不明时不输出正式最优结论。
+
+配比 $\boldsymbol p$ 只保留 A 侧 1M、13 个 target 的对比向量，可比较明示权重、minimax 或目标保护约束等敏感性情景，但不与 B7 Loss 直接相加，不使用历史跨规模 $\eta$ 或无证据的 Loss 换算系数。故本节的接口政策为 \texttt{p\_policy=sensitivity\_only}，\texttt{ready\_for\_Q3=false}。正式 N/D/Q 决策及下游能力解释须等待同坐标预测、独立验证、完整不确定性和 CHM/zhh 的消费验收。

@@ -111,14 +111,21 @@
     "total prediction uncertainty unavailable",
     "team acceptance pending"
   ],
+  "uncertainty_policy": {
+    "U1_parameter_estimation": "conditional B7 fixed-family group bootstrap only",
+    "U2_model_form": "unquantified; exploratory B7 interaction comparison is not a calibrated interval",
+    "U3_prediction_residual": "unquantified",
+    "U4_cross_source": "unidentified; B1/B7/A loss and Q bridges absent",
+    "U5_benchmark_bridge": "external zhh interface; no compatible validated bridge consumed"
+  },
   "solver_note": "Use these B7 bounds; CHM legacy solve_generic hardcodes B1 D_min=0.134 and is not directly compatible.",
   "files_sha256_utf8_lf": {
-    "src/cyj/chm_adapter_v2.py": "5c3ed4909ed9c87d3b8d5b3ddd0dd634a6f145fe9b6cd537fc6c2a545b284895",
+    "src/cyj/chm_adapter_v2.py": "51e74354cc0c4e83f7f786cd892507bdf92dfcee343103137dffac0a7eacbfa1",
     "src/cyj/build_chm_release_v2.py": "1352e366ac501f88bfe86036d10084d5943bf2142445aeb9043aa4cd92bb8362",
     "src/cyj/chm_consumer_smoke.py": "382f3fe75ba0d26e7e6c15030d011e7aeb8f121e4eab24968d16031bc0b495ea",
     "src/cyj/quality_scaling.py": "173c129df59dc7c3fb685d1618251b488b876fd958964d44104e7cd2f8f70393",
     "src/cyj/q3_costs.py": "7d64c6d1870bc907ebe91f85334d343140d69cb1593a2f7cbb67a4325afddf88",
     "outputs/cyj/interfaces/chm_v2_request.json": "e97788d1de2df48199b3910abee20159d204ce039c6a79b4d9c8de6a70348b71",
-    "outputs/cyj/interfaces/chm_v2_expected.json": "80f38e44a8aa087857cbeaa5253b32b48ed57831ba861127504dfd91535fd9c3"
+    "outputs/cyj/interfaces/chm_v2_expected.json": "844b625f7ad9d8f4680b2e87d51432606fddc55ecb892da2b6cfd6a0322af4a1"
   }
 }

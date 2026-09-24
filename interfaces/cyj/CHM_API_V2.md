@@ -58,6 +58,8 @@ out = model.evaluate(
 
 p 可省略，此时 NDQ 求值无需 chm Git 对象。提供 p 时要求完整 17 域、非负、总和误差≤1e-6；不自动归一化。检查 simplex 不证明位于训练配方凸包，返回 `simplex_checked_training_convex_hull_not_checked`。chm 可把这些 13 维效应用于各 target/Pareto/明确权重的 A 侧敏感性，不将其追加到 B7 Loss。A_Q_mapping=unidentified **不阻塞 B-native 诊断**，p sensitivity-only 也是有效政策；当前 formal 阻塞在 NDQ 科学验证与联合验收，不在于必须人为完成 A↔B 映射。
 
+顶层 `uncertainty` 明示 U1–U5：U1 仅固定 B7 constant-G 家族的组 bootstrap 条件均值；U2 模型形式、U3 预测残差尚未量化；U4 A/B/B1/B7 桥接不可识别；U5 zhh Benchmark 桥接未消费。`prediction_interval`、`cross_source_uncertainty`、`benchmark_bridge_uncertainty` 均为 null，调用方不得以条件均值区间代替总预测区间。完整审查见 `problem/cyj/20260924-uncertainty-scope.md`。
+
 ## 验收
 
 ```powershell
