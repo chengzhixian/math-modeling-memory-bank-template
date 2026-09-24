@@ -1,0 +1,60 @@
+{
+  "schema_version": "cyj.b7_frozen_candidate.v1",
+  "status": "conditional_within_B7_pending_independent_test",
+  "ready_for_Q3": false,
+  "family": "Q_x_logN_logD",
+  "formula": "E+A*N**(-alpha)+B*D**(-beta)+(1-Q)*(G0+GN*ln(N)+GD*ln(D/100))",
+  "parameters": {
+    "valid": true,
+    "alpha": 0.283217564282511,
+    "beta": 0.2995752931001026,
+    "coefficients": [
+      1.6235020158650686,
+      0.45333043063354395,
+      1.2544668587351944,
+      0.36941341880559986,
+      -0.053959887850598465,
+      -0.014738936968480684
+    ],
+    "training_rmse": 0.04918831032983102,
+    "training_quality_gain_range": [
+      0.2090545734100474,
+      0.5468444487142733
+    ]
+  },
+  "support": {
+    "N_params_B": [
+      0.07,
+      11.97
+    ],
+    "D_tokens_B": [
+      10.0,
+      600.0
+    ],
+    "Q_score": [
+      0.1,
+      1.0
+    ]
+  },
+  "source_files": {
+    "supplementary_NQ_experiment.csv": {
+      "path": "data/raw/real_attachments/B_scaling_laws/supplementary_NQ_experiment.csv",
+      "bytes": 13670,
+      "sha256": "c7450ce0d67d8692535fef4709e60e2da60b2c184738bf96df160a4be0a33a7f"
+    },
+    "supplementary_NQ_experiment_expanded.csv": {
+      "path": "data/raw/real_attachments/B_scaling_laws/supplementary_NQ_experiment_expanded.csv",
+      "bytes": 17154,
+      "sha256": "880fd265ca3e1d9bc93b4559af7ed7c18f89040634266c50bae03d88486e0f3a"
+    }
+  },
+  "B7_sha256": "880fd265ca3e1d9bc93b4559af7ed7c18f89040634266c50bae03d88486e0f3a",
+  "quality_gain_full_rectangle_corners": [
+    0.5468444487142733,
+    0.48649816228444015,
+    0.2694008598398806,
+    0.2090545734100474
+  ],
+  "validation_caveat": "The family was proposed after inspection of all B7; fixed-family grouped CV is conditional within-source assessment, not an untouched test.",
+  "claim_level": "L2_conditional_within_B7_semi_synthetic"
+}

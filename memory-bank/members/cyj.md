@@ -10,6 +10,8 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 ## 当前状态
 
+2026-09-25 00:46：接收 Q2 封板/CHM 真联调新任务单。已重新读取公共记忆、本人角色、数据索引、跨分支依赖与完整审查协议；本机 `team/cyj-scaling@35e16d6` 起点干净，远端同 SHA。先冻结 B7 双交互为**候选**，新增 `src/cyj/b7_formal_model.py`、`outputs/cyj/quality/b7_frozen_model.json` 和梯度测试。原 B7 SHA256 `880fd265...`；重拟合参数与前日候选比较一致，四角最小质量收益 `0.2090545734`，两次构建产物 SHA256 均 `ed6b01b113110b90b25c5f6cc01d7686cb77602f29464bc068843b36d881c9bf`；46/46 CYJ 测试通过。由于候选形式曾参考全 B7，后续固定族留组 CV 不能冒充未触碰的独立最终测试；目前 `ready_for_Q3=false`。新任务 P0-2/P0-3/v3/CHM solver 实测尚未完成。详见 `memory-bank/handoffs/cyj/20260925-0046-b7-frozen-candidate.md`。
+
 2026-09-24 23:04：先前待推的文档检查点已补推，远端 `team/cyj-scaling` 与当时本地均为 `47e621887fa48279a0cc60782238d2f41240477a`。Draft PR #3 的标题/正文已更新并独立 GET 验证，仍为 Draft，写明该远端 HEAD、main base、固定 chm 生产者、44/44 测试与 `ready_for_Q3=false`。CHM 当前远端分支 `20e627710f4979bbdd487e84253e5f1748c13f28` 未包含 CYJ 发布；重新 `merge-tree` 仍仅 `q2.tex`、`q3_theory.tex` 两处 CYJ 正式稿对占位稿冲突。CHM 实际消费与正式科学门槛仍待完成。续办交接 `memory-bank/handoffs/cyj/20260924-2304-pr3-remote-sync.md`；其自身后续文档提交因 Git 主机连接超时待推。
 
 2026-09-24 收尾检查点：当前不可变代码发布为 `c71807d01b66744f3a6ca45147d9173bc2704a27`，已推送并核对远端同 SHA；44/44 CYJ 单测与精确发布消费测试 PASS，`ready_for_Q3=false`。本机对 CHM 提交 `cc199fe35beb50fe40d081d3a09539d3dcb3399a` 运行 `git merge-tree`，发现仅本人论文占位文件 `q2.tex`、`q3_theory.tex` 两处内容冲突；CHM 侧仍为占位稿，合并时应保留 CYJ 发布版完整段落。CHM 实际 pull/求解器消费尚未验收，不能写 BLOCKER 已解决。A 侧四个 LFS 压缩件本机仍是指针，全库 2014 文件校验未过，B 侧本轮输入分别按清单校验。此阶段 GitHub 连接曾失败，PR 与文档检查点状态以本文件上方 23:04 更新为准。
