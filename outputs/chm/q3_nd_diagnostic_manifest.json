@@ -1,0 +1,39 @@
+{
+  "schema_version": "chm.q3.nd_diagnostic.v1",
+  "status": "diagnostic_only",
+  "ready_for_Q3": false,
+  "cyj_source_commit": "6c17cb4e387e1ac047f8fe0e9ecb6fe42fc5ef3b",
+  "cyj_baseline_fit_sha256": "9b0e381fbc0ea84bb37d63ccb273733f3a03a0c2a834e8ef52cdb75c45bc6ead",
+  "zhh_context_source_commit": "d47cd2dc921333caecfcb95f09eb5a2f2714d0db",
+  "budgets_FLOPs": [
+    10000000000000000000,
+    1e+22,
+    1e+24
+  ],
+  "contexts_tokens": [
+    2048,
+    8192,
+    131072
+  ],
+  "support": {
+    "N_params_B": [
+      0.070542,
+      11.965825
+    ],
+    "D_tokens_B": [
+      0.134,
+      299.893
+    ]
+  },
+  "assumptions": [
+    "Q=Q0 so quality cost is zero and Q has no performance effect",
+    "p=p_ref so cross-Loss correction is zero"
+  ],
+  "excluded": [
+    "B7 quality performance",
+    "A/B Q mapping",
+    "p lambda_loss",
+    "Loss-Benchmark bridge"
+  ],
+  "use": "solver and support-boundary diagnostic only; not a formal Q3 answer"
+}
