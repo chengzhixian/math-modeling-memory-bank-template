@@ -63,3 +63,7 @@
 在输入/代码提交 `351ea0e0eaeab0226550311d8fcb9a855cebcc2d` 上，B1 的 1,176 行显示 `C_FLOPs_1e21` 均与 `round(0.006*N_params_B*D_tokens_B, 4)` 相等，最大绝对差 `4.994688e-05`（单位 `1e21 FLOPs`）。原 8 个相对偏差超过 5% 的 run_id 为 8、9、10、11、162、163、316、317，全部满足四位小数舍入。由此可解释相对 warning 的数值机制；不能据此断言原始未舍入计算量是否实际测量，亦不能推断 `val_loss` 的来源。
 
 保留 8 行的原基线与剔除 8 行重拟合的比较见 `outputs/cyj/diagnostics/b1_precision_sensitivity.json`（schema v1，SHA256 `c7c8b346e4cdbec6034aead4f959ea7f60aa14b52ad6cd00169ea98033356fd7`）。重拟合在全部 1,176 行上的 RMSE 为 0.0001466067，原基线为 0.0001465764；所有行的最大预测变化为 `7.6652e-06`。这是同一 B1 数据内的稳健性检查，不是独立外部验证，原审计 JSON 的 warning 保持不变以保留审计轨迹。
+
+## 后续 B2/B3 形状诊断
+
+输入/代码提交 `3cd66aeb23d9ceccc3958371bf41a212f6699658` 上的 `outputs/cyj/diagnostics/b2_b3_shapes.json`（SHA256 `bea31afe812a68bb3d2af9c1ea1f0efcbe557e5dee8ad58f785c86cafe9d189e`）记录：B2 七组总体下降，但 1,022 对相邻 checkpoint 中 328 对 Loss 上升；每组末 5 点显示 D 同为 2050，不能按 D 直接算斜率。B3 八条插值曲线总体下降，但 3,992 对相邻插值点中 566 对 Loss 上升，且 `step` 标签重复，不能视作 500 个独立 checkpoint。B2/B3 均不提供与 B1 独立的真实外部验证；详细命令与未验证项见 `experiments/cyj/20260924-b2-b3-shape-diagnostic.md`。

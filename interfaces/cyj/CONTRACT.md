@@ -1,4 +1,4 @@
-# cyj 交付约定 草案 v1.5
+# cyj 交付约定 草案 v1.6
 
 生产者 cyj；使用者 chm（Q3）、zhh（桥接及论文）。本版为生产者侧草案，尚未取得 chm/zhh 验收，不能标记 validated。
 
@@ -48,3 +48,9 @@
 - `outputs/cyj/diagnostics/b1_precision_sensitivity.json`：schema v1，SHA256 `c7c8b346e4cdbec6034aead4f959ea7f60aa14b52ad6cd00169ea98033356fd7`。输入为同一 B1 CSV、prepared B1 和原 classic_fit；验证文件身份、代码版本、已审基线哈希与 prepared 哈希后生成。
 - 1,176/1,176 行显示 C 与 `round(0.006ND,4)` 一致；8 个相对偏差 warning 均可由四位小数显示精度解释。保留原主拟合，另剔除这 8 行重拟合；全部 B1 行最大预测变化 `7.6652e-06`。
 - 该诊断未确认未舍入 FLOPs 或逐条 `val_loss` 的独立来源，也不提供预测区间、Q/p、Loss anchor 或跨来源可比性。接口状态仍为 draft，`ready_for_Q3=false`；消费者不能将该 JSON 当作 Q3 predictor。
+
+## B2/B3 轨迹形状补充（只供诊断）
+
+- 代码/输入提交 `3cd66aeb23d9ceccc3958371bf41a212f6699658`；`outputs/cyj/diagnostics/b2_b3_shapes.json` schema v1，12,567 bytes，SHA256 `bea31afe812a68bb3d2af9c1ea1f0efcbe557e5dee8ad58f785c86cafe9d189e`。结果逐文件记录 B2 和 8 个 B3 CSV 的 bytes/SHA256。
+- B2 为半合成、B3 为插值，仅记录组内首末下降和相邻波动、重复坐标。B2 末尾显示 D 平台与 B3 重复 `step` 标签均显式保留；不得凭此报告 B1→B2 绝对 RMSE、独立真实泛化或 Q3 可调用预测。
+- v1.6 没有变更原五参数经典基线，仍无 Q/p、13 域 Loss anchor、参数/预测区间或 Loss–Benchmark 桥接；`ready_for_Q3=false`。
