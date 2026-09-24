@@ -6,8 +6,8 @@ Status: **PASS_WITH_LIMITATIONS**
 |---|---|---|
 | data_hashes | PASS | 6 source files match recorded bytes and SHA256 |
 | model_hashes | PASS | c7426036164238d41b92ca08e9ca9087224aeb0c74554478b66093774a5b5b1a |
-| B1_fit | PASS | B1 1176 rows, unknown loss generator |
-| B7_joint_fit | PASS | 8 parameters, 12 starts, min G=0.194145 |
+| B1_fit | PASS | B1 1176 raw rows; RMSE 0.000146576419; loss generator unknown |
+| B7_joint_fit | PASS | 8 parameters, 12 starts, raw B7 RMSE 0.0484101276, min G=0.194145 |
 | nested_CV | PASS | 24 outer folds; 1350 held-out predictions |
 | monotonicity | PASS | all 8 support corners have negative N/D/Q derivatives; max L_Q=-0.194145 |
 | gradient | PASS | center-point finite differences agree with analytic N/D/Q derivatives |
@@ -18,7 +18,7 @@ Status: **PASS_WITH_LIMITATIONS**
 | Q3_model_form | PASS | 144 model-form cases, 132 feasible; all cross-model regrets nonnegative within 1e-5 |
 | Q3_independent_optimizer | PASS | 33 feasible independent solutions agree with CHM within 1e-4 Loss; 3 support-infeasible |
 | manifest_reproducibility | PASS | manifest reproduced; 13 file hashes agree |
-| unit_tests | PASS | ---------------------------------------------------------------------- Ran 62 tests in 3.857s  OK |
+| unit_tests | PASS | ---------------------------------------------------------------------- Ran 62 tests in 3.718s  OK |
 | LaTeX_compile | PASS | XeLaTeX built 8-page team draft; no overfull boxes |
 
 ## Scientific limits

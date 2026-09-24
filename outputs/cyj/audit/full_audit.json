@@ -14,12 +14,12 @@
     {
       "name": "B1_fit",
       "status": "PASS",
-      "detail": "B1 1176 rows, unknown loss generator"
+      "detail": "B1 1176 raw rows; RMSE 0.000146576419; loss generator unknown"
     },
     {
       "name": "B7_joint_fit",
       "status": "PASS",
-      "detail": "8 parameters, 12 starts, min G=0.194145"
+      "detail": "8 parameters, 12 starts, raw B7 RMSE 0.0484101276, min G=0.194145"
     },
     {
       "name": "nested_CV",
@@ -74,7 +74,7 @@
     {
       "name": "unit_tests",
       "status": "PASS",
-      "detail": "----------------------------------------------------------------------\nRan 62 tests in 3.857s\n\nOK"
+      "detail": "----------------------------------------------------------------------\nRan 62 tests in 3.718s\n\nOK"
     },
     {
       "name": "LaTeX_compile",

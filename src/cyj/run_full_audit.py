@@ -80,7 +80,17 @@ def b1_fit():
     require(fit["status"] == "draft_classic_baseline_not_validated_predictor", "unexpected B1 status")
     require(audit["rows"] == 1176 and audit["N_groups"] == 8 and audit["common_D_grid_across_N"], "B1 structure drift")
     require(audit["explicit_loss_generator_found"] is False, "B1 generator claim changed")
-    return f"B1 {audit['rows']} rows, unknown loss generator"
+    p = fit["full_fit"]["parameters"]
+    original = rows("data/raw/real_attachments/B_scaling_laws/pythia_training_log_existing.csv")
+    residuals = []
+    for row in original:
+        n, d, observed = (float(row[key]) for key in ("N_params_B", "D_tokens_B", "val_loss"))
+        predicted = p["E"] + p["A"] * n ** (-p["alpha"]) + p["B"] * d ** (-p["beta"])
+        residuals.append(predicted - observed)
+    rmse = math.sqrt(sum(r * r for r in residuals) / len(residuals))
+    require(len(original) == audit["rows"] and near(rmse, fit["full_fit"]["metrics"]["rmse"]),
+            "B1 raw-source formula/RMSE mismatch")
+    return f"B1 {audit['rows']} raw rows; RMSE {rmse:.9g}; loss generator unknown"
 
 
 def joint_fit():
@@ -88,9 +98,22 @@ def joint_fit():
     model = fit["model"]
     require(len(model["theta"]) == 8 and model["successful_starts"] >= 12, "joint optimization incomplete")
     require(not model["best_at_boundary"] and min(model["corner_quality_gain"]) > 0, "joint constraints failed")
+    theta = model["theta"]
+    original = rows("data/raw/real_attachments/B_scaling_laws/supplementary_NQ_experiment_expanded.csv")
+    residuals = []
+    for row in original:
+        n, d, q, observed = (float(row[key]) for key in
+                              ("N_params_B", "D_tokens_B", "Q_score", "val_loss"))
+        E, A, B, alpha, beta, G0, GN, GD = theta
+        predicted = (E + A * n ** (-alpha) + B * d ** (-beta) +
+                     (1 - q) * (G0 + GN * math.log(n) + GD * math.log(d / 100)))
+        residuals.append(predicted - observed)
+    rmse = math.sqrt(sum(r * r for r in residuals) / len(residuals))
+    require(len(original) == 450 and near(rmse, model["fit"]["rmse"]),
+            "joint raw-source formula/RMSE mismatch")
     comparison = fit["comparison"]
     require(len(comparison) == 2, "staged comparison missing")
-    return f"8 parameters, {model['successful_starts']} starts, min G={min(model['corner_quality_gain']):.6g}"
+    return f"8 parameters, {model['successful_starts']} starts, raw B7 RMSE {rmse:.9g}, min G={min(model['corner_quality_gain']):.6g}"
 
 
 def nested_cv():
