@@ -30,20 +30,28 @@ DEFAULT_OUTPUT = ROOT / "outputs/cyj/diagnostics/b2_b3_shapes.json"
 def describe_curve(rows: list[dict[str, str]]) -> dict[str, float | int | str]:
     if len(rows) < 2:
         raise ValueError("curve must have at least two points")
-    ordered = sorted(rows, key=lambda row: float(row["D_tokens_B"]))
+    step_field = "steps" if "steps" in rows[0] else "step"
+    ordered = sorted(rows, key=lambda row: float(row[step_field]))
     n_values = {float(row["N_params_B"]) for row in ordered}
     if len(n_values) != 1:
         raise ValueError("curve mixes model sizes")
     d_values = [float(row["D_tokens_B"]) for row in ordered]
+    steps = [float(row[step_field]) for row in ordered]
     losses = [float(row["val_loss"]) for row in ordered]
-    if any(right <= left for left, right in zip(d_values, d_values[1:])):
-        raise ValueError("D must be strictly increasing within a trajectory")
+    if any(right <= left for left, right in zip(steps, steps[1:])):
+        raise ValueError("checkpoint step must be strictly increasing")
+    if any(right < left for left, right in zip(d_values, d_values[1:])):
+        raise ValueError("D must be nondecreasing within a trajectory")
     increments = [right - left for left, right in zip(losses, losses[1:])]
     return {
         "N_params_B": n_values.pop(),
         "rows": len(rows),
         "D_min_B": d_values[0],
         "D_max_B": d_values[-1],
+        "distinct_D_values": len(set(d_values)),
+        "adjacent_equal_D_pairs": sum(
+            right == left for left, right in zip(d_values, d_values[1:])
+        ),
         "val_loss_first": losses[0],
         "val_loss_last": losses[-1],
         "val_loss_last_minus_first": losses[-1] - losses[0],
