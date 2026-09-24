@@ -41,10 +41,21 @@ class GenericSolverTests(unittest.TestCase):
     def test_slack_free_point_rejected(self):
         r=enrich_kkt({"N_params_B":1.,"D_tokens_B":100.,"Q":.7},SyntheticLinearQualityLoss(),1e24,8192,.5,"power")
         self.assertFalse(r["kkt_check_pass"])
+    def test_kkt_invariant_to_loss_scaling(self):
+        base=SyntheticLinearQualityLoss()
+        class Scaled:
+            support=base.support
+            def value_grad(self,n,d,q):
+                v,g=base.value_grad(n,d,q)
+                return v*1e-12,tuple(x*1e-12 for x in g)
+        point={"N_params_B":1.,"D_tokens_B":100.,"Q":.7}
+        a=enrich_kkt(point,base,1e24,8192,.5,"power")
+        b=enrich_kkt(point,Scaled(),1e24,8192,.5,"power")
+        self.assertEqual(a["kkt_check_pass"],b["kkt_check_pass"])
+        self.assertAlmostEqual(a["kkt_relative_violation"],b["kkt_relative_violation"])
     def test_transition_detector(self):
         rows=[{"context_tokens":2048,"budget_FLOPs":1,"active_set":["N_min","budget"]},
               {"context_tokens":2048,"budget_FLOPs":2,"active_set":["budget"]},
               {"context_tokens":2048,"budget_FLOPs":3,"active_set":["D_max","budget"]}]
         self.assertEqual(len(detect_transitions(rows)),2)
 if __name__=="__main__":unittest.main()
-

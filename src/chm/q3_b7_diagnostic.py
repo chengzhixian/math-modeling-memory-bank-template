@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import heapq
 import json
 import math
 import subprocess
@@ -76,7 +77,9 @@ def min_1d(fun, lo, hi, points=51):
     return point, value
 
 
-def optimize(budget, context, family, model, q0=Q0):
+def optimize(budget, context, family, model, q0=Q0, *, tolerance=1e-7):
+    if not math.isfinite(budget) or budget <= 0 or context <= 0 or tolerance <= 0:
+        raise ValueError("invalid budget/context/tolerance")
     support = model["support"]
     nmin, nmax = support["N_params_B"][0], support["N_params_B"][-1]
     dmin, dmax = support["D_tokens_B"][0], support["D_tokens_B"][-1]
@@ -84,6 +87,8 @@ def optimize(budget, context, family, model, q0=Q0):
     if not qmin <= q0 < qmax:
         raise ValueError("Q0 outside B7 support")
     p = model["models"][model["selected_family"]]["full_fit"]["parameters"]
+    if any(not math.isfinite(p[k]) or p[k] <= 0 for k in ("A","B","alpha","beta","G")):
+        raise ValueError("certificate requires positive monotone B7 parameters")
     coeff = 6e18 + 2e14 * context
     minimum_cost = coeff * nmin * dmin
     base = {"budget_FLOPs": budget, "context_tokens": context,
@@ -98,12 +103,28 @@ def optimize(budget, context, family, model, q0=Q0):
         if n_hi < nmin:
             return math.inf, None
 
-        def at_n(n):
-            d = min(dmax, budget / (coeff * n + 1e9 * dg))
-            return loss(n, d, q, p)
-
-        n, value = min_1d(at_n, nmin, n_hi)
-        d = min(dmax, budget / (coeff * n + 1e9 * dg))
+        # On the active budget branch the derivative ratio is strictly increasing:
+        # R = beta*B*c*N^(alpha+1)*(c*N+h)^(beta-1)/(alpha*A*C^beta).
+        # The D_max branch decreases in N; include its kink as the lower endpoint.
+        h=1e9*dg
+        lo=max(nmin,min(n_hi,(budget/dmax-h)/coeff))
+        hi=n_hi
+        def log_ratio(n):
+            return (math.log(p["beta"]*p["B"]*coeff/(p["alpha"]*p["A"]))
+                    +(p["alpha"]+1)*math.log(n)+(p["beta"]-1)*math.log(coeff*n+h)
+                    -p["beta"]*math.log(budget))
+        if log_ratio(lo)>=0:
+            n=lo
+        elif log_ratio(hi)<=0:
+            n=hi
+        else:
+            for _ in range(55):
+                mid=(lo+hi)/2
+                if log_ratio(mid)>0: hi=mid
+                else: lo=mid
+            n=(lo+hi)/2
+        d = min(dmax, budget / (coeff * n + h))
+        value=loss(n,d,q,p)
         return value, (n, d, q)
 
     q_hi = qmax
@@ -117,6 +138,25 @@ def optimize(budget, context, family, model, q0=Q0):
                 lo = mid
         q_hi = lo
     q, value = min_1d(lambda x: at_q(x)[0], q0, q_hi, points=61)
+    # H(q)=min_N,D [E+A*N^-alpha+B*D^-beta] is nondecreasing.
+    # Therefore H(a)+G*(1-b) lower-bounds every q in [a,b].
+    safety=1e-11*max(1,abs(value))  # floating-point safeguard, not interval arithmetic
+    def lower_bound(a,b):
+        return at_q(a)[0]-p["G"]*(b-a)-safety
+    heap=[(lower_bound(q0,q_hi),q0,q_hi)]
+    iterations=0
+    while heap and value-heap[0][0]>tolerance:
+        bound,a,b=heapq.heappop(heap)
+        mid=(a+b)/2
+        vm=at_q(mid)[0]
+        if vm<value: q,value=mid,vm
+        for left,right in ((a,mid),(mid,b)):
+            lb=lower_bound(left,right)
+            if lb<value: heapq.heappush(heap,(lb,left,right))
+        iterations+=1
+        if iterations>200000:
+            raise RuntimeError("global certificate did not converge")
+    lower=min(value,heap[0][0]) if heap else value
     n, d, q = at_q(q)[1]
     train, attention, quality = cost_parts(n, d, q, q0, context, family)
     total = train + attention + quality
@@ -127,6 +167,8 @@ def optimize(budget, context, family, model, q0=Q0):
                                       ("Q0", q, q0), ("Q_max", q, qmax))
              if abs(x - bound) <= 1e-6 * max(1, bound)]
     return {**base, "feasible": True, "minimum_supported_cost_FLOPs": minimum_cost,
+            "global_lower_bound": lower, "global_gap": value-lower,
+            "certificate_tolerance": tolerance, "certificate_iterations": iterations,
             "N_params_B": n, "D_tokens_B": d, "Q_score": q,
             "B7_diagnostic_loss": value, "loss_coordinate": "attachment_B7_native_val_loss",
             "C_train_FLOPs": train, "C_attention_FLOPs": attention,

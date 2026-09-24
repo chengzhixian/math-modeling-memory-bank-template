@@ -39,3 +39,8 @@ xelatex -interaction=nonstopmode -halt-on-error main.tex
 `output/chm-q1-draft-20260924.pdf` 是同步 2026-09-24 Q1 可识别性修正后重新编译的固定快照：保留冻结 1M 代理的跨实验组排序检验，不再把经验幅度差异解释为连续的配比尺度律。构建过程文件由 `.gitignore` 排除；如正文、图表、类文件发生变化，应重新编译并替换该 PDF。该模板来自 2025 年第二十二届，2026 年提交前必须核对当年官方封面、匿名要求和最终格式。本稿使用 `withoutpreface`，尚非正式提交版。
 
 第一问数值源见 `paper/sections/chm/q1_draft.md`、`outputs/chm/local_recheck_v1/` 和 `outputs/chm/ablation_v1/`。第二、四问的占位内容在完成接口验收后由各负责人替换。第三问现含 B1 解析诊断与 B7 半合成质量模型的条件联调；cyj 的正式 `ready_for_Q3=false`，表中配置不能作为最终最优结果。
+
+
+## 2026-09-25 Q3 v4 消费验收
+
+当前 `output/chm-q1-all22-latest.pdf` 同步 Q1 全 22 信号版本和 Q3 最新联合双交互条件模型。新增精确 CYJ v4 消费、330 场景复算、33 个可行情景的全局目标值界、1609 点预算扫描、41 个转移区间和支持域敏感性。旧恒定 G 结果明确作为历史对照。旧日期 PDF 保持历史快照；请阅读 latest 文件。编译与视觉验收以 `output/chm-q1-all22-latest-build.json` 为准。CHM 所有者验收通过不改变 `ready_for_Q3=false` 的科学限制。

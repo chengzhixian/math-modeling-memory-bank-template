@@ -1,0 +1,74 @@
+{
+  "consumer_status": "ACCEPTED_FOR_CONDITIONAL_NDQ_ONLY",
+  "ready_for_Q3": false,
+  "release_commit": "3471530d91c8ee7eb709e5cd6c824eb9c423e0df",
+  "manifest_sha256": "dcd50430b88cc754e1d8f43a3890013bcc45b07f877b315e9a812d2978fd41f7",
+  "batch_fixture": {
+    "status": "PASS",
+    "release_commit": "3471530d91c8ee7eb709e5cd6c824eb9c423e0df",
+    "manifest_sha256": "dcd50430b88cc754e1d8f43a3890013bcc45b07f877b315e9a812d2978fd41f7",
+    "requests": 3,
+    "ready_for_Q3": false
+  },
+  "q1_compatibility": {
+    "old_schema": "chm.q1.v1.2",
+    "current_schema": "chm.q1.v1.3",
+    "mixture_coefficients_identical": true,
+    "mixture_reference_identical": true,
+    "A_quality_proxy_changed": true,
+    "B_native_model_uses_A_quality": false,
+    "action": "retain immutable v4; CYJ should repin Q1 metadata in next release"
+  },
+  "max_gradient_relative_error": 1.7520545302860648e-10,
+  "producer_grid_rows": 330,
+  "producer_grid_feasible": 321,
+  "max_producer_loss_difference": 2.2715163083830703e-12,
+  "max_kkt_relative_violation": 1.3353628057866516e-07,
+  "certificate_rows": 36,
+  "certificate_feasible": 33,
+  "max_global_gap": 9.999962324869216e-08,
+  "budget_scan_rows": 1609,
+  "transition_brackets": 41,
+  "support_sensitivity_rows": 54,
+  "remaining_blockers": [
+    "real-training external validation",
+    "uncalibrated total predictive uncertainty",
+    "A/B and Loss/Benchmark bridges"
+  ],
+  "certificate_scope": "joint model prerequisites checked; floating-point lower bounds, not interval arithmetic",
+  "provenance": {
+    "budget_scan.csv": "16a37a5e2df3323aca34067088df4d6ed43021e6d26308d32f2f857ce576fcd8",
+    "cost_comparison.csv": "7c6ca6e783d14688094a837a3f56c2dfbe049d386cc1ca57fcdd9cc3dfeea8ab",
+    "global_certificates.csv": "412d0e16502138b1f364ccaabd8f65b4cc22fc87c6d40ee2701e0d5a79d3d4b7",
+    "independent_DE_comparison.csv": "b287053ae40aa16ecb5edceee71aa2c87623707692c5a60261450f45a05eaa17",
+    "producer_grid_recheck.csv": "17ffb620df711ecaa25d9d92716f1b2fc6a9118dc01c2dbeede4016d696754e7",
+    "resolution_check.csv": "87899c27737589a5a11823356440f3f81288d38f57977f9680b549319b8c4cd7",
+    "support_sensitivity.csv": "8e0d536176eede0fe5ed7eb712fed0bce1a6e7f9e7da73e1e7cb235282d885d0",
+    "transitions.csv": "cbc36317ebcac79dfe649b2e2b58e618b3d5a6f15094753bce1fc648e8104fc6"
+  },
+  "independent_DE_comparison": {
+    "source_commit": "2c237b3c6c47133c85e64a50c8129c2a0a829bea",
+    "feasible_rows": 33,
+    "max_absolute_loss_difference": 8.026395104110406e-09
+  },
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.18.1"
+  },
+  "solver_policy": {
+    "nominal_starts": 12,
+    "certificate_crosscheck_starts": 24,
+    "seed": 20260924,
+    "transition_relative_width": 1e-05,
+    "failed_SLSQP": "independent certified reduction plus KKT"
+  },
+  "source_code_sha256": {
+    "cyj_v4_consumer.py": "fafac14665b98d656d7f04404474203a9be6b3e8985fa4e2f1ffedefe275b1fc",
+    "q3_cyj_v4_acceptance.py": "e6af8a7e58b486f1e2355ae06f68ea6d42e56629570379b324e220daa75bc20f",
+    "q3_joint_certificate.py": "05c8f92da68a0164b8e5de000f14dc6b0ae67d57cff7edec8b7f48d4586c8282",
+    "q3_generic_solver.py": "970b7fa8c519de3d4022bbf72a8d1f888b1e2cf0444180f390bf8a67aa4bd782",
+    "q3_quality_cost_geometry.py": "1b0216e9e3e17ca863cda98e4962bfc43e6a0ef52de822cdc00eb84e1251e589"
+  },
+  "hash_mode": "sha256_utf8_lf_normalized_for_csv_and_source_code"
+}

@@ -1,11 +1,11 @@
 {
-  "built_at": "2026-09-24T17:52:09.2066210+08:00",
+  "built_at": "2026-09-25T02:26:55.9424707+08:00",
   "source_mode": "snapshot_of_current_working_tree",
   "engine": "XeLaTeX + BibTeX + XeLaTeX passes until references stabilize",
-  "page_count": 21,
+  "page_count": 23,
   "reference_glyph_overflow_gate": "passed",
-  "visual_review": "passed: all 21 pages rendered and checked; pages 5-7 inspected in detail",
-  "pdf_sha256": "f2ea99657078d78447b9255a3652497e4c6d663f86bb25154529e1193445253a",
+  "visual_review": "passed: 23-page contact sheet reviewed; Q3 pages 21-22 inspected; final historical figure caption re-rendered",
+  "pdf_sha256": "902d183d6ad8bcbf5b2134c9e9bf48aae4e505bbfa3c971fb022eaac97c96205",
   "source_files": [
     {
       "path": "paper/latex/main.tex",
@@ -29,7 +29,7 @@
     },
     {
       "path": "paper/latex/sections/chm/q3_numerical.tex",
-      "sha256": "64487a2c481313a0af5e701909d43de2dcc325d04c683d35cd6e342abce9a0ac"
+      "sha256": "3be031a6456456578dda6d8d6b81614777ee3c48f81ae544717ab5f0b36d7a6c"
     },
     {
       "path": "paper/latex/sections/cyj/q2.tex",
@@ -90,11 +90,10 @@
     {
       "path": "paper/latex/figures/chm/q3_budget_scan.png",
       "sha256": "868d6565fc27c1d318e39ad95cabdd7b7a83f7b04b92b1289d17cfb014ccbd00"
+    },
+    {
+      "path": "paper/latex/figures/chm/q3_joint_budget_scan.png",
+      "sha256": "20066eaf4fcfb8c1d8664b0ccf782345a6902a463f05b64613e72a40b57329c0"
     }
-  ],
-  "pdf_content_checks": {
-    "unresolved_reference_tokens": 0,
-    "new_quality_results_confirmed_on_page": 7,
-    "q1_static_labels": 33
-  }
+  ]
 }

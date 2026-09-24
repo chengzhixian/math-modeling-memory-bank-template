@@ -25,6 +25,18 @@ class B7DiagnosticTests(unittest.TestCase):
             self.assertAlmostEqual(total / 1e22, row["budget_utilization"], places=9)
             self.assertLessEqual(total / 1e22, 1 + 1e-9)
 
+    def test_global_bound_and_saturated_analytic_solution(self):
+        row=optimize(1e24,8192,"power",self.model)
+        p=self.model["models"]["linear_quality"]["full_fit"]["parameters"]
+        exact=loss(11.97,600,1,p)
+        self.assertLessEqual(row["global_lower_bound"],exact+1e-12)
+        self.assertAlmostEqual(row["B7_diagnostic_loss"],exact,places=12)
+        self.assertLessEqual(row["global_gap"],1e-7)
+    def test_interior_quality_certificate(self):
+        row=optimize(1e19,2048,"exponential",self.model,tolerance=1e-8)
+        self.assertGreater(row["Q_score"],.5)
+        self.assertLess(row["Q_score"],1)
+        self.assertLessEqual(row["global_gap"],1e-8)
     def test_nested_search_beats_independent_coarse_grid(self):
         budget, context, family = 1e22, 8192, "power"
         row = optimize(budget, context, family, self.model)
