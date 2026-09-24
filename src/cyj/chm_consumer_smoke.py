@@ -49,7 +49,7 @@ def main():
             for row in request["requests"]]
     actual = {"schema_version": VERSION, "status": "diagnostic_only", "ready_for_Q3": False,
               "results": rows}
-    if actual != expected:
+    if json.loads(json.dumps(actual, allow_nan=False)) != expected:
         raise ValueError("consumer output differs from pinned example")
     value, gradient = model.value_grad(0.07, 10, 0.5)
     if abs(value - rows[0]["prediction"]["loss_value"]) > 1e-12 or len(gradient) != 3:
