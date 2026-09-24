@@ -75,49 +75,8 @@ def score_subset(oriented, included, label):
 
 
 def orientation_stability(z, primary_orientation):
-    domains = sorted(z["_source_domain"].dropna().unique().tolist())
-    loo = {}
-    for held_out in domains:
-        table = qa.domain_anchor_correlations(z[z["_source_domain"] != held_out])
-        loo[held_out] = table.set_index("metric")
-
-    primary = primary_orientation.set_index("metric")
-    rows = []
-    for metric in qa.QUALITY_FIELDS:
-        full_orientation = int(primary.loc[metric, "orientation"])
-        full_rho = primary.loc[metric, "pooled_rho"]
-        sign_agreement = primary.loc[metric, "sign_agreement"]
-        if metric in qa.MODEL_FIELDS:
-            rows.append({
-                "metric": metric,
-                "full_pooled_rho": np.nan,
-                "full_orientation": 1,
-                "sign_agreement": np.nan,
-                "loo_min_rho": np.nan,
-                "loo_max_rho": np.nan,
-                "loo_sign_consistent": True,
-                "stable_loo": True,
-                "stable_consensus_075": True,
-            })
-            continue
-
-        loo_rhos = [float(loo[d].loc[metric, "pooled_rho"]) for d in domains]
-        loo_orient = [int(loo[d].loc[metric, "orientation"]) for d in domains]
-        loo_consistent = all(v == full_orientation for v in loo_orient)
-        agreement = float(sign_agreement) if np.isfinite(sign_agreement) else np.nan
-        rows.append({
-            "metric": metric,
-            "full_pooled_rho": float(full_rho),
-            "full_orientation": full_orientation,
-            "sign_agreement": agreement,
-            "loo_min_rho": float(np.min(loo_rhos)),
-            "loo_max_rho": float(np.max(loo_rhos)),
-            "loo_sign_consistent": bool(loo_consistent),
-            "stable_loo": bool(loo_consistent),
-            "stable_consensus_075": bool(loo_consistent and np.isfinite(agreement) and agreement >= 0.75),
-        })
-    return pd.DataFrame(rows)
-
+    """Compatibility wrapper; primary implementation lives in q1_quality_analysis."""
+    return qa.orientation_stability(z, primary_orientation)
 
 def family_weight_grid(scored, step=0.05):
     units = int(round(1.0 / step))
@@ -278,11 +237,12 @@ def main():
 
     params = qa.robust_params(a1)
     z1 = qa.apply_robust_z(a1, params)
-    primary_orientation = qa.domain_anchor_correlations(z1)
+    raw_orientation = qa.domain_anchor_correlations(z1)
+    stability = orientation_stability(z1, raw_orientation)
+    primary_orientation = qa.freeze_primary_orientation(raw_orientation, stability)
     oz1 = qa.orient(z1, primary_orientation)
     s1, qparams = qa.add_quality_scores(oz1)
 
-    stability = orientation_stability(z1, primary_orientation)
     stability.to_csv(outdir / "quality_orientation_stability_v1.csv", index=False)
 
     include_loo = stability.loc[stability["stable_loo"], "metric"].tolist()
@@ -348,8 +308,9 @@ def main():
 
     manifest = {
         "seed": SEED,
-        "status": "review_sensitivity_not_primary",
-        "primary_quality_definition_unchanged": True,
+        "status": "review_sensitivity_against_primary_stable_loo",
+        "primary_quality_definition_unchanged": False,
+        "primary_orientation_policy": qa.PRIMARY_ORIENTATION_POLICY,
         "orientation_sensitivity": {
             "stable_loo": "full pooled sign unchanged after leaving out each of 7 A1 domains",
             "stable_consensus_075": "stable_loo and sign_agreement >= 0.75",
@@ -365,7 +326,11 @@ def main():
         "domain_balanced_standardization": balanced,
         "primary_record_weighted_standardization": qparams,
         "qurater_component_standardization": qcomp_params,
-        "warning": "Sensitivity outputs do not replace the primary Q until reviewed and frozen.",
+        "warning": (
+            "stable_loo orientation is now the primary direction-admission rule; "
+            "stable_consensus_075, family-weight grids, domain-balanced scaling, "
+            "and Qurater component variants remain sensitivity/stress tests."
+        ),
     }
     (outdir / "quality_review_manifest_v1.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8"
