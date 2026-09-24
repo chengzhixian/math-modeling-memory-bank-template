@@ -1,4 +1,13 @@
-"""Versioned, read-only Q1 producer interface for downstream consumers."""
+"""Versioned, read-only Q1 producer interface.
+
+v1.2 deliberately exposes only quantities identifiable from Attachment A:
+A-side composite quality proxies, the 17-domain reference composition,
+13 target-specific 1M Ridge contrasts, and held-out ranking evidence.
+
+No N/D-dependent mixture scale factor is supplied. Historical eta-based
+calibration files remain in the repository for audit only and are not part of
+this interface.
+"""
 from pathlib import Path
 import argparse
 import csv
@@ -7,14 +16,14 @@ import json
 import math
 
 
-VERSION = "chm.q1.v1.1"
-MANIFEST = Path("interfaces/chm/q1_interface_v1_1.json")
+VERSION = "chm.q1.v1.2"
+MANIFEST = Path("interfaces/chm/q1_interface_v1_2.json")
+STATUS = "producer_validated_A_side_ready_scale_transfer_removed_B_bridge_unidentified"
 FILES = {
     "quality": "outputs/chm/domain_quality.csv",
     "mapping": "outputs/chm/domain_mapping.csv",
     "coefficients": "outputs/chm/local_recheck_v1/mixture_effect_ridge_v0.csv",
     "reference": "outputs/chm/local_recheck_v1/mixture_reference_v0.csv",
-    "scale": "outputs/chm/local_recheck_v1/mixture_scale_transfer_v0_manifest.json",
     "validation": "outputs/chm/local_recheck_v1/q1_regmix_ridge_domainwise_metrics.csv",
 }
 
@@ -39,28 +48,48 @@ def build_manifest(root):
     files = {}
     for key, relative in FILES.items():
         path = root / relative
-        files[key] = {"path": relative, "sha256": _sha256(path),
-                      "rows": len(_csv(path)) if path.suffix == ".csv" else None}
-    return {"schema_version": VERSION, "producer": "chm",
-            "status": "producer_validated_A_side_ready_B_bridge_unidentified",
-            "hash_mode": "sha256_utf8_lf_normalized",
-            "files": files, "quality_coordinate": "A_native_Q_z",
-            "mixture_effect_unit": "A_target_cross_entropy_delta",
-            "scale_N_unit": "parameters"}
+        files[key] = {
+            "path": relative,
+            "sha256": _sha256(path),
+            "rows": len(_csv(path)) if path.suffix == ".csv" else None,
+        }
+    return {
+        "schema_version": VERSION,
+        "producer": "chm",
+        "status": STATUS,
+        "hash_mode": "sha256_utf8_lf_normalized",
+        "files": files,
+        "quality_coordinate": "A_composite_quality_proxy_z",
+        "mixture_effect_coordinate": "A4_A5_1M_target_cross_entropy_contrast",
+        "scale_transfer_status": "not_identified_from_attachment_A",
+        "compatibility": {
+            "predecessor": "chm.q1.v1.1",
+            "scientific_values_changed": False,
+            "change": (
+                "remove empirical eta-based scale transfer from primary producer "
+                "interface; retain 1M centered target-specific mixture effects and "
+                "held-out ranking evidence"
+            ),
+        },
+    }
 
 
 class Q1Interface:
     def __init__(self, root):
         root = Path(root)
         manifest = json.loads((root / MANIFEST).read_text(encoding="utf-8"))
-        if (manifest.get("schema_version") != VERSION
-                or manifest.get("status") != "producer_validated_A_side_ready_B_bridge_unidentified"
-                or manifest.get("hash_mode") != "sha256_utf8_lf_normalized"
-                or manifest.get("quality_coordinate") != "A_native_Q_z"
-                or manifest.get("mixture_effect_unit") != "A_target_cross_entropy_delta"
-                or manifest.get("scale_N_unit") != "parameters"
-                or set(manifest.get("files", {})) != set(FILES)):
+        if (
+            manifest.get("schema_version") != VERSION
+            or manifest.get("status") != STATUS
+            or manifest.get("hash_mode") != "sha256_utf8_lf_normalized"
+            or manifest.get("quality_coordinate") != "A_composite_quality_proxy_z"
+            or manifest.get("mixture_effect_coordinate")
+            != "A4_A5_1M_target_cross_entropy_contrast"
+            or manifest.get("scale_transfer_status") != "not_identified_from_attachment_A"
+            or set(manifest.get("files", {})) != set(FILES)
+        ):
             raise ValueError("Unexpected Q1 interface version or file set")
+
         for key, expected in FILES.items():
             item = manifest["files"][key]
             path = root / expected
@@ -68,37 +97,79 @@ class Q1Interface:
                 raise ValueError(f"Q1 interface file identity mismatch: {key}")
             if path.suffix == ".csv" and len(_csv(path)) != item["rows"]:
                 raise ValueError(f"Q1 interface row count mismatch: {key}")
+
         self.manifest = manifest
-        self.quality_rows = {r["quality_domain"]: r for r in _csv(root / FILES["quality"])
-                             if r["dataset_scope"] == "sample"}
-        self.mapping_rows = {r["mixture_domain"]: r for r in _csv(root / FILES["mapping"])}
-        self.coefficients = {r["target"]: r for r in _csv(root / FILES["coefficients"])}
-        self.reference = {r["mixture_domain"]: float(r["p_ref"])
-                          for r in _csv(root / FILES["reference"])}
-        self.scale = json.loads((root / FILES["scale"]).read_text(encoding="utf-8"))
-        if len(self.quality_rows) != 7 or len(self.mapping_rows) != 17 or len(self.coefficients) != 13:
+        self.quality_rows = {
+            r["quality_domain"]: r
+            for r in _csv(root / FILES["quality"])
+            if r["dataset_scope"] == "sample"
+        }
+        self.mapping_rows = {
+            r["mixture_domain"]: r for r in _csv(root / FILES["mapping"])
+        }
+        self.coefficients = {
+            r["target"]: r for r in _csv(root / FILES["coefficients"])
+        }
+        self.reference = {
+            r["mixture_domain"]: float(r["p_ref"])
+            for r in _csv(root / FILES["reference"])
+        }
+        self.validation_rows = {
+            r["target"]: r for r in _csv(root / FILES["validation"])
+        }
+
+        if (
+            len(self.quality_rows) != 7
+            or len(self.mapping_rows) != 17
+            or len(self.coefficients) != 13
+            or len(self.validation_rows) != 13
+        ):
             raise ValueError("Unexpected Q1 quality, mapping or target count")
+
         kinds = [row["mapping_type"] for row in self.mapping_rows.values()]
-        if (kinds.count("direct"), kinds.count("near_direct"), kinds.count("inferred")) != (3, 3, 11):
+        if (
+            kinds.count("direct"),
+            kinds.count("near_direct"),
+            kinds.count("inferred"),
+        ) != (3, 3, 11):
             raise ValueError("Unexpected Q1 mapping types")
-        if set(self.reference) != set(self.mapping_rows) or not math.isclose(sum(self.reference.values()), 1, abs_tol=1e-6):
+
+        if set(self.reference) != set(self.mapping_rows) or not math.isclose(
+            sum(self.reference.values()), 1, abs_tol=1e-6
+        ):
             raise ValueError("Invalid 17-domain reference mixture")
+
         for domain, row in self.quality_rows.items():
-            lo, point, hi = (float(row[key]) for key in ("uncertainty_low", "Q", "uncertainty_high"))
+            lo, point, hi = (
+                float(row[key])
+                for key in ("uncertainty_low", "Q", "uncertainty_high")
+            )
             if not all(map(math.isfinite, (lo, point, hi))) or not lo <= point <= hi:
                 raise ValueError(f"Invalid Q or conditional interval for {domain}")
+
         for target, row in self.coefficients.items():
             coeff = [float(row[domain]) for domain in self.reference]
-            if not all(map(math.isfinite, coeff)) or not math.isclose(sum(coeff), 0, abs_tol=1e-6):
-                raise ValueError(f"Nonfinite coefficient for {target}")
+            if not all(map(math.isfinite, coeff)) or not math.isclose(
+                sum(coeff), 0, abs_tol=1e-6
+            ):
+                raise ValueError(f"Invalid zero-sum coefficient vector for {target}")
 
     def quality(self, domain):
-        """Return A-native descriptive domain Q; never a B-native Q_score."""
+        """Return A-side descriptive composite quality proxy, never B Q_score."""
         row = self.quality_rows[domain]
-        return {"domain": domain, "Q_z_median": float(row["Q"]),
-                "conditional_95": [float(row["uncertainty_low"]), float(row["uncertainty_high"])],
-                "n_rows": int(row["n_rows"]), "coordinate": "A_native_Q_z",
-                "B_Q_score_mapping": "unidentified", "direct_B_predictor_input_allowed": False}
+        return {
+            "domain": domain,
+            "Q_A_median": float(row["Q"]),
+            "conditional_95": [
+                float(row["uncertainty_low"]),
+                float(row["uncertainty_high"]),
+            ],
+            "n_rows": int(row["n_rows"]),
+            "coordinate": "A_composite_quality_proxy_z",
+            "interpretation": "descriptive_composite_proxy_not_ground_truth",
+            "B_Q_score_mapping": "unidentified",
+            "direct_B_predictor_input_allowed": False,
+        }
 
     def mapped_quality(self, mixture_domain):
         """Return observed/proxy A-side Q; inferred domains remain null."""
@@ -106,12 +177,24 @@ class Q1Interface:
         kind = row["mapping_type"]
         if kind not in {"direct", "near_direct", "inferred"}:
             raise ValueError(f"Unknown mapping type: {kind}")
-        return {"mixture_domain": mixture_domain, "mapping_type": kind,
-                "quality_domain": None if kind == "inferred" else row["quality_domain"],
-                "quality": None if kind == "inferred" else self.quality(row["quality_domain"])}
+        return {
+            "mixture_domain": mixture_domain,
+            "mapping_type": kind,
+            "quality_domain": None if kind == "inferred" else row["quality_domain"],
+            "quality": (
+                None
+                if kind == "inferred"
+                else self.quality(row["quality_domain"])
+            ),
+        }
 
-    def relative_effect(self, mixture, target, n_params=1_000_000, eta=None):
-        """Centered A-target loss delta; no B1 val_loss or absolute loss."""
+    def relative_effect(self, mixture, target):
+        """Return the centered A4+A5 1M target-loss contrast m_k(p).
+
+        This method intentionally has no N or D argument. Attachment A does not
+        identify a continuous cross-scale amplitude transfer. Downstream code
+        must not silently attach an eta factor to this producer output.
+        """
         if set(mixture) != set(self.reference):
             raise ValueError("Mixture must contain exactly the 17 named domains")
         values = {key: float(value) for key, value in mixture.items()}
@@ -121,24 +204,41 @@ class Q1Interface:
             raise ValueError("Mixture weights must sum to one; no silent normalization")
         if target not in self.coefficients:
             raise ValueError(f"Unknown target: {target}")
-        n_params = float(n_params)
-        if not math.isfinite(n_params) or n_params <= 0:
-            raise ValueError("n_params must be a positive finite parameter count")
-        eta = float(self.scale["pooled_eta"] if eta is None else eta)
-        if not math.isfinite(eta):
-            raise ValueError("eta must be finite")
+
         row = self.coefficients[target]
-        delta_1m = sum(float(row[d]) * (values[d] - self.reference[d]) for d in self.reference)
-        factor = (n_params / 1_000_000) ** (-eta)
-        if not math.isfinite(factor * delta_1m):
-            raise ValueError("Nonfinite scaled mixture effect")
-        return {"target": target, "delta_target_loss": delta_1m * factor,
-                "n_params": n_params, "eta": eta, "scale_factor": factor,
-                "scale_status": "observed_model_scale" if n_params in (1e6, 60e6, 1e9) else "extrapolated_model_scale",
-                "evidence_status": "A4_A5_fitted_1M_effect" if n_params == 1e6 else "conditional_eta_scale_scenario",
-                "mixture_support_status": "not_checked",
-                "loss_coordinate": "A_target_cross_entropy_delta",
-                "bridge_to_B1_val_loss": "unidentified", "direct_B1_addition_allowed": False}
+        delta_1m = sum(
+            float(row[d]) * (values[d] - self.reference[d])
+            for d in self.reference
+        )
+        if not math.isfinite(delta_1m):
+            raise ValueError("Nonfinite centered mixture effect")
+
+        return {
+            "target": target,
+            "delta_target_loss_1m": delta_1m,
+            "reference": "A4_mean_normalized_composition",
+            "loss_coordinate": "A4_A5_1M_target_cross_entropy_contrast",
+            "cross_scale_transfer": "not_identified_from_attachment_A",
+            "bridge_to_B1_val_loss": "unidentified",
+            "direct_B1_addition_allowed": False,
+        }
+
+    def ranking_validation(self, target):
+        """Return held-out ranking evidence for the frozen 1M Ridge surrogate."""
+        if target not in self.validation_rows:
+            raise ValueError(f"Unknown target: {target}")
+        row = self.validation_rows[target]
+        return {
+            "target": target,
+            "test_1m_spearman": float(row["test_1m_spearman"]),
+            "test_60m_spearman": float(row["test_60m_spearman"]),
+            "test_1B_spearman": float(row["test_1B_spearman"]),
+            "est_10B_spearman": float(row["est_10B_spearman"]),
+            "est_70B_spearman": float(row["est_70B_spearman"]),
+            "observed_sets": ["test_1m", "test_60m", "test_1B"],
+            "estimated_sets": ["est_10B", "est_70B"],
+            "interpretation": "rank_transfer_evidence_not_absolute_scale_calibration",
+        }
 
 
 def main():
@@ -146,11 +246,23 @@ def main():
     parser.add_argument("--root", type=Path, default=Path("."))
     parser.add_argument("--build-manifest", action="store_true")
     args = parser.parse_args()
+
     if args.build_manifest:
         path = args.root / MANIFEST
-        path.write_text(json.dumps(build_manifest(args.root), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        path.write_text(
+            json.dumps(
+                build_manifest(args.root), ensure_ascii=False, indent=2
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+
     interface = Q1Interface(args.root)
-    print(f"{interface.manifest['schema_version']}: 7 Q domains, 17 mixture domains, 13 loss targets; hashes verified")
+    print(
+        f"{interface.manifest['schema_version']}: "
+        "7 Q domains, 17 mixture domains, 13 loss targets; "
+        "1M contrasts + ranking evidence; no scale transfer"
+    )
 
 
 if __name__ == "__main__":

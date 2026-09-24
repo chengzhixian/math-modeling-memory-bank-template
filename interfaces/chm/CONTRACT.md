@@ -1,40 +1,100 @@
-# chm → cyj Q1 生产者接口 v1.6
+# chm → cyj Q1 生产者接口 v2.0
 
-日期：2026-09-24；当前推荐版本：`chm.q1.v1.1`；生产者：chm；消费者：cyj（Q2/Q3）、zhh（需要 Q1 证据时）。状态：**A 侧描述与配比证据可消费，跨 A/B 数值接口未就绪**；尚非 cyj 预测器或 `main` 集成成果。官方数据与派生量的资格审查见 [OFFICIAL_DATA_REVIEW.md](OFFICIAL_DATA_REVIEW.md)。
+日期：2026-09-24  
+当前推荐机器版本：\`chm.q1.v1.2\`  
+生产者：chm  
+消费者：cyj（Q2/Q3）、zhh（需要 Q1 证据时）  
+维护分支：\`integration/chm-q1-clean-20260923\`
 
-当前机器入口：`interfaces/chm/q1_interface_v1_1.json`，指向已审核的六个文件及规范化 SHA256/行数。文本身份规则为 UTF-8 文本先统一 CRLF/CR 为 LF，再计算 SHA256，因此跨 Windows/Linux 稳定。旧 `q1_interface_v1.json` 原样保留，只用于已经锁定 `chm.q1.v1` 的消费者追溯，不应作为新消费默认入口。可调用入口：`src/chm/q1_interface.py` 的 `Q1Interface`。消费者用法、输入校验、返回字段、单位与示例见 [USAGE.md](USAGE.md)；需 cyj 定义的 B 侧接口见 [CYJ_REQUIRED_INTERFACE.md](CYJ_REQUIRED_INTERFACE.md)。
+状态：**A 侧质量代理、13-target 配比相对效应与排序验证可消费；Q1 不再提供由附件 A 拟合的连续跨规模幅度参数。**
 
-| chm 交付 | 数据/算法 | 状态与边界 |
-|---|---|---|
-| 质量 Q | 官方 A1–A3 提供 22 个质量信号，但**没有提供 `Q_z`**；chm 按稳健定向与三家族等权计算 7 域 `Q_z` 中位数及条件 bootstrap 95% 区间 | 自定义派生坐标，可为负；仅作 A 侧质量描述/排序，不是 B6–B8 官方提供的 `Q_score`；不能直接输入 B 模型 |
-| 17 域映射 | `direct` 3、`near_direct` 3、`inferred` 11 | `inferred` 不填 Q；`near_direct` 是代理，不是同总体观测 |
-| 配比 p | 17 个命名非负权重，和为 1；A4 平均归一化配比作 `p_ref` | 调用时拒绝缺维/多维/非法和；系数是 Ridge 相对效应，不作因果解释 |
-| 逐目标域效应 | 13 个目标域各有 `m_k(p)=Σβ_kj(p_j-p_ref,j)`，单位为 A 侧目标域交叉熵变化 | 不是绝对 Loss、B1 `val_loss` 或唯一总体 Loss；A6–A11 验证和逐域结果见清单 |
-| 跨规模情景 | `(N/10^6)^(-η)`，`N` 是参数个数；η 点估计 0.14503317 | 1M/60M/1B 是已见规模，**60M/1B 的本函数返回值仍只是条件 η 情景**；其他规模再增加外推。1B 配方支持集不同，η 与区间均条件于固定 A4+A5 Ridge |
+当前机器入口：\`interfaces/chm/q1_interface_v1_2.json\`。旧 v1/v1.1 保留审计，新消费默认使用 v1.2。
 
-η 的目标域 bootstrap 95% 区间为 `[0.10686793, 0.18669841]`；目标域加校准行配对重抽样区间为 `[0.09756180, 0.20097672]`。质量域排序、CV、消融和图表证据分别见 `outputs/chm/quality_review_v1/`、`outputs/chm/local_recheck_v1/q1_regmix_cv_split_sensitivity.csv`、`outputs/chm/ablation_v1/` 和 `paper/sections/chm/figures/`。
+## 1. Q1 正式科学边界
 
-**官方字段优先与职责边界：**cyj 的质量项应首先使用赛题 B6–B8 自带的 `Q_score` 字段，并保留其**半合成**来源标签；chm `Q_z` 仅作独立的 A 侧描述与定性/排序敏感性。chm 维护上述 A 侧数值、配比域顺序、目标域面板、参考配比及验证范围。cyj 定义 B 侧质量项、B1 Loss 口径和 target anchor、跨 Loss 系数、最终预测器及 Q3 成本理论。无成对数据时不能把 `Q_z` 数值转成 `Q_score`，也不能用讨论结论替代标定。完整限制见 [Q2_BRIDGE.md](Q2_BRIDGE.md) 与 [UNCERTAINTY.md](UNCERTAINTY.md)。
+附件 A 的 A4--A15 配比/Loss 表没有与每个配方实验对应的训练数据量 \(D\) 字段；真实模型规模只有 1M、60M、1B 三个离散位置，且 1B 的配方支持集与 1M/60M 不同。因此旧的
+\[
+L_k(N,\mathbf p)=a_k(N)+b_k(N)s_k(\mathbf p),
+\qquad
+\log b_k(N)=c_k-\eta\log(N/10^6)
+\]
+只保留历史诊断，不再属于 Q1 主模型或接口。
 
-消费者应记录精确分支/提交 SHA、接口版本、manifest SHA、target、η 情景及是否外推。旧 `team/chm-data` 带有作废祖先，不得直接合并；只读取 clean integration 分支。历史 v1.2 在 `archive/` 仅供审计，不能作当前接口。
+Q1 正式交付：
+- A1--A3 的七域综合质量代理 \(Q_A\)，其含义是描述性 composite proxy，不是 B6--B8 的原生 \`Q_score\`；
+- A16 的 3 direct、3 near-direct、11 inferred 域映射；
+- A4+A5 的 13-target 1M Ridge；
+- 参考配方 \(\mathbf p_{\rm ref}\)；
+- 13 维相对效应
+  \[
+  \mathbf m(\mathbf p)
+  =
+  \mathbf B(\mathbf p-\mathbf p_{\rm ref}),
+  \qquad
+  \mathbf B\in\mathbb R^{13\times17};
+  \]
+- A6--A11 的 held-out 排序验证；
+- A12--A15 的 estimated/extrapolated 压力测试。
 
+## 2. 配比效应解释
 
-## v1.6 发布协议修订
+归一化后 \(\mathbf1^\top\mathbf p=1\)。零和系数
+\[
+\mathbf1^\top\hat{\boldsymbol\beta}_k=0
+\]
+只是组成数据的规范表示。若从训练域 \(r\) 向训练域 \(j\) 转移比例 \(\delta\)，则
+\[
+\Delta m_k
+=
+\delta(\hat\beta_{k,j}-\hat\beta_{k,r}).
+\]
+消费者不得把单个 \(\hat\beta_{k,j}\) 解释成独立因果效应。
 
-cyj 在消费旧 `chm.q1.v1` 时发现 coefficients/reference/validation 三个 CSV 的生产者 manifest 使用 Windows CRLF 字节，而 Git blob 为 LF，必须临时恢复换行才能验签。该问题属于发布身份协议，不影响科学数值。
+## 3. 多维 Loss 决策层
 
-从 `chm.q1.v1.1` 起：
-- 所有六个发布文件均按 UTF-8 文本读取；
-- 行尾统一为 LF；
-- 对规范化字节计算 SHA256；
-- manifest 显式记录 `hash_mode=sha256_utf8_lf_normalized`；
-- 科学数值、域顺序、Q 定义、p 系数和 eta 均未因此改变。
+13 个 target Loss 不在生产者层强行压成唯一总体 Loss。可用决策口径包括：
+- 已知验证域权重：\(\sum_k s_km_k(\mathbf p)\)；
+- 无偏好时的等权情景：\(s_k=1/13\)，仅表示能力等权，不等于官方总体 Loss；
+- minimax：\(\min_{\mathbf p}\max_k m_k(\mathbf p)\)；
+- 重点能力 + 保护约束；
+- Pareto 多目标分析。
 
-新消费者应锁定 v1.1；已锁定 `integration/chm-q1-clean-20260923@7c14a0c...` 的 cyj 可继续使用旧 v1 完成当前实验，切换时应显式记录新生产者 SHA 并重跑接口验收。
+配比决策支持域建议限制在
+\[
+\mathcal P_A=\operatorname{conv}\{\mathbf p_1,\ldots,\mathbf p_{512}\},
+\]
+避免未观测单纯形顶点外推。
 
+## 4. Q1 → Q2 禁止项
 
-## Q3 正式结果发布接口
+当前附件没有成对证据支持
+\[
+Q_A=Q_{\rm score},\qquad
+L_{k,\rm Q1}=L_{\rm B1},
+\]
+也不支持由 Q1 给出
+\[
+m_k(\mathbf p;N)
+=
+m_k(\mathbf p)(N/10^6)^{-\eta}.
+\]
+因此禁止把 \(Q_A\) 直接输入 B-native Q 模型、禁止默认某个 Q1 target 等于 B1 \`val_loss\`、禁止把旧 \(\eta\) 作为 Q2/Q3 正式参数。
 
-Q3 的下游正式交付协议单列于 [Q3_RESULTS_CONTRACT.md](Q3_RESULTS_CONTRACT.md)。只有 `q3_readiness_policy.v2` 通过并由 `src/chm/q3_publish.py` 验证成功的结果，才允许写入 `outputs/chm/q3_formal_v1/` 并标记 `formal_validated`。
+## 5. v1.2 机器接口
 
-该发布器强制检查成本守恒、预算残差、KKT、Loss 坐标、支持域/外推状态、p policy 和不确定性。diagnostic/scenario/software-validation 文件不会被 zhh 正式桥接接口消费。
+\`src/chm/q1_interface.py\` 提供：
+- \`quality(domain)\`；
+- \`mapped_quality(mixture_domain)\`；
+- \`relative_effect(mixture,target)\`，只返回 1M target contrast；
+- \`ranking_validation(target)\`。
+
+manifest 状态：
+\`\`\`text
+quality_coordinate = A_composite_quality_proxy_z
+mixture_effect_coordinate = A4_A5_1M_target_cross_entropy_contrast
+scale_transfer_status = not_identified_from_attachment_A
+\`\`\`
+
+## 6. Q3 正式结果发布接口
+
+Q3 的正式交付协议仍单列于 [Q3_RESULTS_CONTRACT.md](Q3_RESULTS_CONTRACT.md)。只有 readiness gate 通过并由发布器验证成功的结果，才允许标记 \`formal_validated\`。Q1 v1.2 的科学修订不删除或覆盖 clean 分支既有的 Q3 诊断、预算扫描、质量成本和发布协议成果。

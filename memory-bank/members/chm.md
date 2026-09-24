@@ -291,3 +291,32 @@ synthetic quality 模型只用于软件验证，其数值最优解不得进入�
 - 最稳共同冲突：`rps_lines_uppercase_letter_fraction` vs `rps_lines_ending_with_terminal_punctution_mark`，六个相关系数中最弱绝对值仍为 0.73929。
 
 该结果说明部分指标冲突并非由 A1 与扩展集的样本重叠单独造成，但当前仍是复制性/效应量证据，不宣称通过 bootstrap CI 或 FDR 显著性控制。后两项需完整 LFS 环境重跑逐记录分析。
+
+## 2026-09-24 Q1 可识别性与多维 Loss 重构（已融合至 clean 分支）
+
+用户要求重新审查第一问，并明确以后所有 chm 工作继续维护在 \`integration/chm-q1-clean-20260923\`，不再另开 Q1 临时分支。本轮对附件 A 的可识别性重新核对后：
+
+- A4--A15 的配比/Loss 实验没有与每个配方实验对应的训练数据量 \(D\) 字段；
+- 真实检验规模仅有 1M、60M、1B 三个离散位置；
+- 1M/60M 使用相同 256 个配方，1B 使用另一组 64 个配方；
+- 因此旧的 \(b_k(N)\) 与公共 \(\eta\) 只保留历史审计，不再属于 Q1 主模型或正式生产者接口；
+- Q1 正式交付改为 A4+A5 的 13-target 1M Ridge 对比
+  \[
+  m_k(\mathbf p)=\hat{\boldsymbol\beta}_k^\top(\mathbf p-\mathbf p_{\rm ref}),
+  \]
+  并用 A6--A11 做冻结模型的排序验证；
+- 13 个 target 不先强行平均，而统一写成
+  \[
+  \widehat{\mathbf L}_{1M}(\mathbf p)
+  =
+  \widehat{\boldsymbol\alpha}
+  +\mathbf B(\mathbf p-\mathbf p_{\rm ref}),
+  \quad
+  \mathbf B\in\mathbb R^{13\times17},
+  \]
+  决策层按已知权重、等权情景、minimax、保护约束或 Pareto 口径处理；
+- 第一问的配比优化支持域限定为 A4 的 512 个观测配方凸包，避免在线性代理上跑到未观测单纯形顶点；
+- Data Mixing Laws、BiMix、DoReMi 只作为“逐维建模 + 多目标决策”的文献依据，不直接照搬其需要附件 A 未提供变量的尺度律；
+- clean 分支新增的 Q1 冲突复制性证据同时保留：arxiv 92/96、github 91/91 个样本负相关在完整扩展与 non-overlap 扩展中继续为负；两域共有 56 个三层稳定负相关指标对。该证据仍不宣称 bootstrap/FDR 显著性。
+
+当前正式 Q1 论文源以 \`paper/latex/sections/chm/q1.tex\` 为准；机器接口升级为 \`chm.q1.v1.2\`，明确 \`scale_transfer_status=not_identified_from_attachment_A\`。
