@@ -18,7 +18,7 @@ main 公共记忆落后于最新 cyj 个人分支，且 zhh 个人合同仍滞�
 
 1. B1 经典 N-D predictor：
    [
-   L_0=E+A N_B^{-alpha}+B D_B^{-eta}.
+   L_0=E+A N_B^{-\\alpha}+B D_B^{-\\beta}.
    ]
 2. B1 支持域：
    - N=[0.070542, 11.965825] B 参数；
@@ -120,3 +120,16 @@ Q1 尚有相关系数 bootstrap/多重比较、LightGBM 等增强项，但根据
 - zhh 正式 C7 接口状态。
 
 在这些门槛未满足前，任何数值均标 `diagnostic` 或 `scenario`，不得写作“最优资源配置结论”。
+
+
+## 6. 2026-09-24 readiness v2 修订
+
+此前将 `Q_mapping_status=unidentified` 列为 formal Q3 的绝对 blocker 过严。当前正式原则修订为：
+
+- A-native `Q_z` 与 B-native `Q_score` 可以继续不做数值映射；
+- Q3 若使用 B-native `Q_score`，必须有 validated 的**联合 N-D-Q predictor**和明确 B-native Loss 坐标；
+- 因此真正 blocker 是“没有同一坐标上的 N-D-Q 性能模型”，而不是“A/B Q 没有 mapping”。
+
+配比 p 也不强迫产生唯一 anchor。若跨 Loss lambda 不能识别，cyj 可以正式发布 `p_policy=sensitivity_only`：NDQ 给主优化，p 用不少于 3 个 target 做敏感性，并明确禁止唯一 p 结论。若要发布唯一 p，则必须是 `validated_bridge` 且 anchor/lambda 有证据。
+
+对应机器协议见 `src/chm/q3_readiness_policy.py` 和 `interfaces/chm/CYJ_REQUIRED_INTERFACE.md`。

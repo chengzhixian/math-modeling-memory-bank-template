@@ -169,3 +169,22 @@ cyj 指出的 CRLF/LF manifest 问题已修为新生产者版本 `chm.q1.v1.1`�
 这些只描述成本，不代表提高 Q 的净收益或正式最优 Q。
 
 正式 Q 优化继续等待 cyj 的 B-native Q 性能模型和 ready_for_Q3=true。
+
+
+## 2026-09-24 Q3 generic solver 与 readiness v2
+
+第三阶段工程完成：
+- 通用 N-D-Q loss callback + SLSQP 多起点；
+- active-set/结构切换检测；
+- KKT 内点边际比与上下界单侧条件；
+- Q0 使用右导数；
+- 8 个单元测试通过；
+- 3 成本族 × 5 synthetic 预算点共 15 个 KKT 检查全部通过，自由变量边际比最大相对离散约 3.83e-7。
+
+readiness 规则修订：
+- 不要求 A Q_z 数值映射到 B Q_score；
+- 正式 Q3 必须有同一 B-native Loss 坐标上的 validated 联合 N-D-Q predictor；
+- p 可为 validated_bridge（唯一 p）或 sensitivity_only（NDQ 主结果 + 多 target p 敏感性）；
+- 当前 cyj.q3.v1 仍不满足，formal_ready 保持 false。
+
+synthetic quality 模型只用于软件验证，其数值最优解不得进入论文结果。
