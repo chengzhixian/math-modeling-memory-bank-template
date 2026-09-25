@@ -4,7 +4,7 @@
   "q2_answer_complete_under_stated_assumptions": true,
   "q3_consumer_interface_ready": true,
   "q3_consumer_verified": false,
-  "release_remote_verified": false,
+  "release_remote_verified": true,
   "integrated_in_main": false,
   "cross_source_empirical_calibration_complete": false,
   "status": "conditional_Q2_complete_pending_CHM_consumption_and_main_integration",
@@ -38,7 +38,10 @@
     "outputs/cyj/q2_v7/claim_ladder.csv",
     "outputs/cyj/q2_v7_runtime_audit.json",
     "interfaces/cyj/fixtures_v7/manifest.json",
-    "paper/latex/sections/cyj/q2_v7_tail.tex"
+    "paper/latex/sections/cyj/q2_v7_tail.tex",
+    "outputs/cyj/q2_v7_release_verification.json"
   ],
-  "review_scope": "CYJ local independent arithmetic and software checks; no A/B empirical calibration or CHM owner signature"
+  "review_scope": "CYJ local independent arithmetic and software checks; no A/B empirical calibration or CHM owner signature",
+  "release_subject_commit": "a28a9ffed6e754cb27574b1de61f830e5f15753d",
+  "release_evidence_path": "outputs/cyj/q2_v7_release_verification.json"
 }

@@ -9,7 +9,8 @@
     "build_q2_v7.py": "c42d150ef64a417ee0c8c2b0552a4eaca86f7b3c8a0cddfc3de663d0e0f90d36",
     "revalidate_q1_v2_bounds.py": "fbdddf1f4012c2dd74027e4150f313769a1c4cffffd3f18559f86c6ac8fe7953",
     "bound_single_target_v7.py": "311780bfcd60254e0d8ad2d4a483f3717ba0c898f86d669caced72d32780c182",
-    "finalize_q2_v7.py": "bc9c1f28189904673a06d69318a31e83f157556ac85ec5e9463515bb640cbc0d"
+    "finalize_q2_v7.py": "bc9c1f28189904673a06d69318a31e83f157556ac85ec5e9463515bb640cbc0d",
+    "verify_q2_v7_release.py": "9f9e1202cf8b0c3fc0019bf036daf1e427855d4397d147aa74e307a1dfd357f8"
   },
   "randomness": "none in v7 build; B7 input bootstrap source seed 20260925",
   "python": "3.12.14",
@@ -17,7 +18,7 @@
   "scipy": "1.18.1",
   "command": "python -B src/cyj/build_q2_v7.py",
   "files": {
-    "acceptance.json": "8a05822eebdb492502745c5ac433d7941e2c3839fba31cbaa05ac59f0dc0cfff",
+    "acceptance.json": "71dc7dd8fd890ebea0135640e54ac15539e271a20ac384989d3ab3a18fdd5f29",
     "b7_parameter_uncertainty.csv": "acff778931c968c4bd73ab1b15086bcf640d6a12563d4c7c5c33c4920e9d56e7",
     "baseline_model.json": "24354c19bfa7090acf4c95cbc5e134fe926de2efe303721bc051841c625d8e66",
     "bridge_form_observed_panel.csv": "f29a87021911c29f716b620b5fdce956b4a6543ecf1bd9c9f2ed78f02a20067a",
