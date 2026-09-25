@@ -8,6 +8,8 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 更新时间：2026-09-24（北京时间，接口审查与状态降级）。角色 cyj，负责 Q2 与 Q3 理论；分支 `team/cyj-scaling`。Python 3.12.14 / Windows，环境见 `problem/cyj/environment.md`。
 
+2026-09-25 15:55 Q2 收尾任务第一检查点：核查远端 CHM `2450971` 后确认二阶候选有定义/CV 但无完整参数；在独立 Q1 上游 `src/chm/export_q1_interaction_bundle.py` 复现固定 5 域 10 对的 13 目标 Ridge 候选，13 个已发布 CV RMSE 最大差 `3.33e-16`，bundle manifest SHA256 `608595491268cf859331f3f8b9d7618a9e86fef94928120dbfa6ded3082f600c`。Q1 生产步骤可读 A4/A5，Q2 仍不得读取原始 A。Q2 消费/收尾检查尚待，CHM owner 签收待办，详见 `memory-bank/handoffs/cyj/20260925-1555-q1-interaction-export-checkpoint.md`。
+
 2026-09-25 15:25 V3 条件 Q2 执行：独立 Q1 导出包之后，新增只消费派生输出的 Q2 Ridge/LP/QA 求解、B 组分角色验证、边际与敏感性数值、四图、v6 JSON 接口和一键脚本。主情景 512 配方全凸包最优 Loss `2.1928228144395785`（Q1 配方 136）；直接 QA 约束 `2.263949598559698`，直接+近似映射 `2.2749885718994807`；结果均属未标定 A→B 桥接的工程条件计算。C1–C8 内部/外部测试通过、CYJ 全套 75/75，通过记录和未解决依赖见 `memory-bank/handoffs/cyj/20260925-1525-q2-final-v3.md`。CHM 尚须签收 Q1 增量导出及 v6 Q3 消费；科学门槛 `ready_for_Q3=false`，无论文修改。最终远端提交 SHA 以本次推送核对为准。
 
 15:30 远端检查点暂缺：本地代码/结果提交 `2bb77cf` 后，GitHub 443 连接重置与超时；推送经只读风险核对后获准重试，但网络仍失败。当前仅本地保存，远端已知 SHA 仍为 `55c2d84`。详细失败与下一步见同一交接；下次优先补推并核对。
