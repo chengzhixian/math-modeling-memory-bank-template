@@ -1,0 +1,71 @@
+{
+  "schema_version": "chm.q1.signoff_audit.v2",
+  "Q1_manifest_sha256": "c621f7e405106e42720f918f490235b5e8becefb0f7c8cb997736e96337117a9",
+  "bounds_sha256": "b27939f9d3894a810ee2ec4336f5583fca95e551e318963ac81bfbe77c0dae70",
+  "all_four_passed": true,
+  "evidence_role": "A6-A11 compared models and informed selection; not untouched final blind test",
+  "certificate_scope": "floating-point LP/McCormick numerical bounds, not interval-arithmetic proof",
+  "quality_accuracy_claim": null,
+  "scenarios": [
+    {
+      "policy": "unconstrained",
+      "mode": "weighted",
+      "passed": true,
+      "composition_sum_residual": 0.0,
+      "negative_component_residual": 0.0,
+      "hull_reconstruction_residual": 2.220446049250313e-16,
+      "quality_covered_mass": null,
+      "quality_slack": null,
+      "recomputed_objective_relative": -0.11511193620251012,
+      "reported_upper_residual": 0.0,
+      "reported_lower_relative": -0.11607407179637694,
+      "reported_upper_relative": -0.11511193620251012,
+      "numerical_gap_relative": 0.0009621355938668197
+    },
+    {
+      "policy": "quality_direct",
+      "mode": "weighted",
+      "passed": true,
+      "composition_sum_residual": 1.1102230246251565e-16,
+      "negative_component_residual": 0.0,
+      "hull_reconstruction_residual": 2.7755575615628914e-17,
+      "quality_covered_mass": 0.3231556093473321,
+      "quality_slack": 0.10335269715509623,
+      "recomputed_objective_relative": -0.10299193866039925,
+      "reported_upper_residual": 0.0,
+      "reported_lower_relative": -0.10343290819650305,
+      "reported_upper_relative": -0.10299193866039925,
+      "numerical_gap_relative": 0.00044096953610379963
+    },
+    {
+      "policy": "quality_direct_and_near",
+      "mode": "weighted",
+      "passed": true,
+      "composition_sum_residual": 2.220446049250313e-16,
+      "negative_component_residual": 0.0,
+      "hull_reconstruction_residual": 4.440892098500626e-16,
+      "quality_covered_mass": 0.5646359074665894,
+      "quality_slack": 0.21539716786792285,
+      "recomputed_objective_relative": -0.09700975593037972,
+      "reported_upper_residual": 0.0,
+      "reported_lower_relative": -0.09776015384553347,
+      "reported_upper_relative": -0.09700975593037972,
+      "numerical_gap_relative": 0.0007503979151537443
+    },
+    {
+      "policy": "unconstrained",
+      "mode": "minimax",
+      "passed": true,
+      "composition_sum_residual": 2.220446049250313e-16,
+      "negative_component_residual": 0.0,
+      "hull_reconstruction_residual": 1.942890293094024e-16,
+      "quality_covered_mass": null,
+      "quality_slack": null,
+      "recomputed_objective_relative": -0.019784221015100245,
+      "reported_upper_residual": 0.0,
+      "reported_lower_relative": -0.020779779515382988,
+      "reported_upper_relative": -0.019784221015100245,
+      "numerical_gap_relative": 0.0009955585002827429
+    }
+  ]
+}
