@@ -299,9 +299,11 @@ m_k(\boldsymbol p')-m_k(\boldsymbol p)
 
 主接口输出的 A 侧配比效应为 $m_k^{\mathrm{int}}(\boldsymbol p)=\widehat L^{\mathrm{int}}_{k,1M}(\boldsymbol p)-\widehat L^{\mathrm{int}}_{k,1M}(\boldsymbol p_{\mathrm{ref}})$。用于多目标决策的无量纲分数为 $r_k(\boldsymbol p)=m_k^{\mathrm{int}}(\boldsymbol p)/\widehat L^{\mathrm{int}}_{k,1M}(\boldsymbol p_{\mathrm{ref}})$；分母是该交互模型自身的正参考 Loss，只服务于 A 侧目标加权，不是 B 侧 Loss 标定。交互项使边际效应随当前配方变化；可行的两域转移斜率为 $\partial_j\widehat L_k^{\mathrm{int}}-\partial_r\widehat L_k^{\mathrm{int}}$，单个 $\gamma_{k,uv}$ 的符号不具有独立因果解释。
 
-当前正式配方候选集是 A4 已观测的 512 个配方 $\mathcal S_A=\{\boldsymbol p_1,\ldots,\boldsymbol p_{512}\}$。给定明确的权重 $\boldsymbol w\in\Delta^{12}$，程序精确枚举并求解 $\min_{\boldsymbol p\in\mathcal S_A}\sum_kw_kr_k(\boldsymbol p)$；保护最差域的情景求解 $\min_{\boldsymbol p\in\mathcal S_A}\max_{k:w_k>0}r_k(\boldsymbol p)$。质量政策仅在 A16 direct 或 direct+near 映射域上要求覆盖份额及条件质量不低于参考配方，主值使用 A1 sample；其余 11 个域的 $Q_A$ 保持未知。具体政策与权重由调用者显式声明。
+主决策支持域是 A4 已观测配方的凸包 $\mathcal P_A=\operatorname{conv}\{\boldsymbol p_1,\ldots,\boldsymbol p_{512}\}$。给定明确的权重 $\boldsymbol w\in\Delta^{12}$，求解 $\min_{\boldsymbol p\in\mathcal P_A}\sum_kw_kr_k(\boldsymbol p)$；保护最差域的情景求解 $\min_{\boldsymbol p\in\mathcal P_A}\max_{k:w_k>0}r_k(\boldsymbol p)$。质量政策仅在 A16 direct 或 direct+near 映射域上要求覆盖份额及条件质量不低于参考配方，主值使用 A1 sample；其余 11 个域的 $Q_A$ 保持未知。具体政策与权重由调用者显式声明。
 
-等权情景下，无质量约束选 index 136；direct 政策选 index 301；direct+near 政策选 index 172。最差域保护的无约束情景选 index 477，arxiv 单目标选 index 3。这些结果是指定有限集合和政策下的精确最优；它们不等于整个连续凸包上的全局最优。二阶项使凸包内目标一般非凸，旧 Ridge 的线性规划顶点最优论证不再适用。完整 45 个情景及每个解的 17 维配方、13 目标预测、质量覆盖与输入哈希见 \texttt{outputs/chm/q1\_v2\_decisions/}。
+二阶项使凸包内目标一般非凸，旧 Ridge 的线性规划顶点最优论证不再适用。本文将十个乘积项置于 McCormick 线性松弛中，对五个相关配比坐标做空间分支定界：每个节点的线性规划给出下界，其凸组合权重给出实际可行配方及上界。等权目标在无约束、direct、direct+near 三政策下的可行目标分别为 $-0.11511$、$-0.10299$、$-0.09701$；对应的全局下界分别为 $-0.11607$、$-0.10343$、$-0.09776$。最差域保护的无约束可行目标为 $-0.01978$、下界为 $-0.02078$。这四项数值上下界间隙均小于 0.001；它们是浮点线性规划的数值证据，不是严格区间算术证明。完整配方及节点数见 \texttt{outputs/chm/q1\_v2\_hull\_bounds/bounds.json}。
+
+为提供可直接使用的单条 A4 配方，另精确枚举 512 个已观测方案。在等权无约束、direct、direct+near 下分别选 index 136、301、172；最差域保护选 index 477，arxiv 单目标选 index 3。质量政策下连续凸组合明显改善有限集合目标，因此这些 index 只是备用离散方案；完整 45 个情景见 \texttt{outputs/chm/q1\_v2\_decisions/}。
 
 任务没有给出 13 域的唯一外生权重，且等权 index 136 的未知质量域占比为 0.5686，故不宣称它在所有目标和完整质量口径下全局最优。进一步在 214 个权重情景上的先前稳定性审计显示模型和质量政策均可改变配方；该审计使用共同的旧 Ridge 参考 Loss 进行模型比较，不能与新接口的交互自身归一化结果混写。Q1 v2.0 的生产者清单为 \texttt{interfaces/chm/q1\_interface\_v2.json}。
 \subsubsection{文献函数形式与本题主代理的关系}
@@ -400,7 +402,7 @@ A10 的 64 个 1B 配方与 A4/A6 的配方集合没有完全重复，因此 1B 
 
 \subsubsection{A12--A15 的使用边界}
 
-A12--A15 的 10B/70B Loss 在数据说明中明确标记为 estimated/extrapolated，因此既不参与 Ridge 拟合，也不参与模型选择。两组使用相同的 63 个配方，且这 63 个配方均已出现在 A4 的 1M 训练配方集合中。附件给出的 10B 与 70B estimated Loss 在 13 个目标域中的直接 Spearman 范围为 0.9754--0.9965，中位数 0.9907；但冻结的 1M Ridge 在这两组 estimated Loss 上的 13 域 Spearman 中位数仅为 0.5136 和 0.4148。故 A12--A15 只作为附件内部的外推压力测试，不能作为真实大模型训练验证，也不能补足连续尺度识别。
+A12--A15 的 10B/70B Loss 在数据说明中明确标记为 estimated/extrapolated，因此既不参与交互主模型或 Ridge 基线的拟合，也不参与模型选择。两组使用相同的 63 个配方，且这 63 个配方均已出现在 A4 的 1M 训练配方集合中。附件给出的 10B 与 70B estimated Loss 在 13 个目标域中的直接 Spearman 范围为 0.9754--0.9965，中位数 0.9907；但冻结的 1M Ridge 在这两组 estimated Loss 上的 13 域 Spearman 中位数仅为 0.5136 和 0.4148。故 A12--A15 只作为附件内部的外推压力测试，不能作为真实大模型训练验证，也不能补足连续尺度识别。
 
 \subsection{Q1 向后续问题的严格接口}
 
@@ -411,6 +413,8 @@ A16 中仅有 3 个 direct、3 个 near-direct 域映射，其余 11 个为 infe
   \item 17 维配比的 13 个目标域 1M 二阶交互代理，以及式\eqref{eq:q1_v2_interaction}定义的 target-specific 相对配比效应 $m_k^{\mathrm{int}}(\boldsymbol p)$；线性 Ridge 作为基线保留。
   \item A6--A11 给出的跨实验组排序验证和 A12--A15 的 estimated/extrapolated 压力测试。
 \end{enumerate}
+
+下游条件复算显式固定 Q1 v2.0 的交互系数与参考 Loss、cyj 的 B7 参数以及 $\lambda=1,\eta=0$；在 $N=1$B、$D=100$B、$Q_B=0.5$、13 域等权条件下，三种质量政策的连续凸包可行配方对应条件 B7 Loss 约为 2.271859、2.302976、2.318334。它们附有 Q1 目标的数值上下界，详见 \texttt{outputs/chm/q2\_interaction\_scenarios\_v2/}；此项是 chm 侧按固定 cyj 参数的重算，cyj 的正式新版消费仍需显式锁定 v2.0 清单哈希。Q3 的 A 侧配方诊断已消费 v2.0，旧 Q3 结果不自动继承新版配方数值。
 
 附件 A 没有提供 $Q_A\leftrightarrow Q_{\mathrm{score}}$ 的成对标定样本，也没有证明任一 Q1 目标域 Loss 与 B1 的 \texttt{val\_loss} 属于同一数值坐标。因此第一问不提供 $Q_A\to Q_{\mathrm{score}}$ 的数值映射，不把 $m_k(\boldsymbol p)$ 直接加到 B1 Loss，也不提供由 A 数据拟合的 $\eta$、$b_k(N)$ 或其他连续尺度传递参数。具体地，问题二条件情景中的桥接形式 $L_B=L_{B7}[1+\lambda(N/1\mathrm{B})^{-\eta}\sum_kw_km_k(\boldsymbol p)/L_{A,k,\mathrm{ref}}]$ 在参考配方满足 $m_k(\boldsymbol p_{\rm ref})=0$；因此任意 $\lambda,\eta$ 都复现同一 B 侧基线，单一 $N=1\mathrm{B}$ 情景又使 $\eta$ 消失。缺少配方与 B 侧同条件 Loss 的成对观测时，这两个桥接参数不可从现有附件识别。$N$、$D$、B-native $Q$ 与 Loss 的统一关系由问题二依据附件 B 独立建立；若后续需要把 $m_k(\boldsymbol p)$ 映射到 B 侧 Loss，必须额外给出可验证的 Loss 坐标桥接证据。
 

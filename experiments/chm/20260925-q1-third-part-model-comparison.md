@@ -1,3 +1,5 @@
+> 历史模型比较记录：交互模型现已按用户指令升为 chm.q1.v2.0 主模型；新决策与接口见 interfaces/chm/Q1_V2_DOWNSTREAM.md。下文的“候选/待验收”均指升级前阶段。
+
 # Q1 第三小问：同条件模型比较、决策稳定性及 Q2 质量口径复算
 
 日期：2026-09-25。状态：**用户验收前的候选证据**。当前正式 `chm.q1.v1.3` Ridge 不变；本记录不宣称 Q3 的 `ready_for_Q3=true`。默认数据说明正文使用 `problem/readable/DATA_DESCRIPTION_VISIBLE.md`，未使用历史 PDF 隐藏文字或已作废模型。

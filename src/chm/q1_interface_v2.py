@@ -142,4 +142,10 @@ class Q1Interface:
     def ranking_validation(self, target):
         if target not in self.targets:
             raise ValueError("unknown target")
-        return [r for r in _csv(self.paths["validation"]) if r["target"] == target and r["model"] == "interaction_candidate"]
+        return [{"scope":r["scope"], "support_group":r["support_group"],
+                 "n":int(r["n"]), "spearman":None if not r["interaction_spearman"] else float(r["interaction_spearman"]),
+                 "rmse":float(r["interaction_rmse"]),
+                 "ridge_comparator_rmse":float(r["ridge_rmse"]),
+                 "constant_baseline_rmse":float(r["constant_rmse"]),
+                 "interpretation":"rank_transfer_evidence_not_absolute_scale_calibration"}
+                for r in _csv(self.paths["validation"]) if r["target"] == target]
