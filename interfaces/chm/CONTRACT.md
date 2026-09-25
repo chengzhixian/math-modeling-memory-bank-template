@@ -15,3 +15,5 @@ Q2 的 v2 条件复算在 `outputs/chm/q2_interaction_scenarios_v2/`，固定 cy
 独立数值复核见 outputs/chm/q1_v2_signoff/audit.json：四份配方的总量、非负性、凸包重构、质量约束和上界目标值均通过；数值间隙依次为 0.0009621、0.0004410、0.0007504、0.0009956。这些是浮点 LP/McCormick 数值界，不是严格数学证明。质量判断依赖已声明的工程评分和映射假设。
 
 历史合同与线性 Ridge 复现入口见 [v1.3 归档](archive/CONTRACT_v1_3.md)。
+
+A12--A15 的 v2 压力测试见 outputs/chm/q1_v2_estimated_stress/：两组各 63 个 A4 已见配方，Loss 为 10B/70B 外推估算值。v2 的逐目标 Spearman 中位数分别为 0.4915、0.3941，略低于 Ridge 的 0.5136、0.4148；不能称为大模型实测验证，也不能推断跨规模排序可靠。30 次 80% 训练行重拟合诊断见 outputs/chm/q1_v2_refit_stability/；其中质量约束及 minimax 的已观测候选选择较敏感。该诊断只覆盖 512 个有限候选，不是连续凸包最优解的置信区间。以上新证据不修改冻结 v2 系数或主接口哈希。

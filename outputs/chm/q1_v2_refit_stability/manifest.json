@@ -1,0 +1,40 @@
+{
+  "schema_version": "chm.q1.v2.refit_stability.v1",
+  "q1_manifest_sha256": "c621f7e405106e42720f918f490235b5e8becefb0f7c8cb997736e96337117a9",
+  "seed": 20260925,
+  "repeats": 30,
+  "subsample_fraction": 0.8,
+  "fit_protocol": "reselect 5 highest-variance domains; 10 pair products; per-target five-fold seven-alpha CV; refit",
+  "decision_scope": "512 observed A4 recipes only; no continuous hull recertification",
+  "records_sha256": "99502e5ecef0971cd2905c38998cc171315d9b1f2b709afb94c8387c73134a35",
+  "policies": {
+    "unconstrained": {
+      "frozen_selected_index": "136",
+      "same_choice_fraction": 0.9666666666666667,
+      "distinct_refit_choices": 2,
+      "median_refit_regret_using_frozen_choice": 0.0,
+      "max_refit_regret_using_frozen_choice": 0.0037296644906407023
+    },
+    "quality_direct": {
+      "frozen_selected_index": "301",
+      "same_choice_fraction": 0.3333333333333333,
+      "distinct_refit_choices": 5,
+      "median_refit_regret_using_frozen_choice": 0.006295428843552157,
+      "max_refit_regret_using_frozen_choice": 0.04642585369670884
+    },
+    "quality_direct_and_near": {
+      "frozen_selected_index": "172",
+      "same_choice_fraction": 0.43333333333333335,
+      "distinct_refit_choices": 4,
+      "median_refit_regret_using_frozen_choice": 0.003115812536668719,
+      "max_refit_regret_using_frozen_choice": 0.030820722205883798
+    },
+    "minimax": {
+      "frozen_selected_index": "477",
+      "same_choice_fraction": 0.23333333333333334,
+      "distinct_refit_choices": 6,
+      "median_refit_regret_using_frozen_choice": 0.006337178861709258,
+      "max_refit_regret_using_frozen_choice": 0.09087696988961391
+    }
+  }
+}
