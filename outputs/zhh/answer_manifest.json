@@ -7,10 +7,10 @@
     "paper/latex/figures/zhh/q4_frontier_12m.png": "b62cfb6144edbc12ab93dfe30f6d28475e8751772f7b1deb43467f0e86b3ca58",
     "paper/latex/figures/zhh/q4_resource_history.png": "a242c6bc64f045c88630f9fdaa06e0c9f4bb4cf47814f5d5c89662790a04624c",
     "paper/latex/figures/zhh/q4_signed_contributions.png": "9655849280bbaa15d997f16e2656d741623d11bbda4c965b254d270538bfcc0c",
-    "paper/latex/sections/zhh/q4.tex": "3833655570325d868335aa3ea902600a6be636f83fb8f365ad66cc61b66d10d2",
-    "paper/sections/zhh/q4.md": "50d5d9ac282bffcfa592e13d004918d92308062bfa04f3b100ba9d10a0227259",
-    "outputs/zhh/Q4_FINAL_ANSWER_V2.md": "50d5d9ac282bffcfa592e13d004918d92308062bfa04f3b100ba9d10a0227259",
-    "src/zhh/export_q4_answer.py": "f576c0821904e743360d5b0150f0f00b08883543a920193c012a053c20d8a578"
+    "paper/latex/sections/zhh/q4.tex": "9db544fefedde66875acb3978664098e6b28e66bd8ea4671e01271bd51db7c0e",
+    "paper/sections/zhh/q4.md": "fc6ecc31ad6725afdaa55c6025ee9c68268a8b8536f949c583d962e3b79da4cd",
+    "outputs/zhh/Q4_FINAL_ANSWER_V2.md": "fc6ecc31ad6725afdaa55c6025ee9c68268a8b8536f949c583d962e3b79da4cd",
+    "src/zhh/export_q4_answer.py": "4ee3334164fff4acde0f25397aba228e785828816ab5f85e67b5c6eebab41f1e"
   },
   "PDF_status": "LaTeX source and figures supplied; no final competition PDF compiled by this Q4 task."
 }

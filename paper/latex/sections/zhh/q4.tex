@@ -15,7 +15,7 @@ Epoch算力可能由同源N/D估算，6ND比值是质量筛选而非独立机制
 \Delta_N=\tfrac12[F(z_0+u)-F(z_0)+F(z_0+u+v)-F(z_0+v)],\quad
 \Delta_T=F(z_0+u+v)-F(z_0)-\Delta_N.
 \]
-另列$R=\Delta_{\rm obs}-\Delta_N-\Delta_T$。规模关联与非规模综合项$\Delta_T+R$构成两项账面分解，非规模项包含选择、组成和未解释变化，不能全归于纯技术因果效应。
+另列$R=\Delta_{\rm obs}-\Delta_N-\Delta_T$。规模关联与非规模综合项$\Delta_T+R$构成两项账面分解，非规模项包含选择、组成和未解释变化，不等于题目要求的技术贡献，仍需控制共同支持与组成。
 \begin{table}[htbp]\centering\small
 \caption{早末两个月前沿的带符号分解（分）}
 \begin{tabular}{lrrrr}\toprule 类型 & 观测变化 & 规模关联 & 时间关联 & 未解释 \\ \midrule
@@ -63,4 +63,4 @@ C6高可比7行与中可比68行分开，采用$S=100\sigma(a+\gamma_L L+\gamma_
 
 \subsection{逐任务结果与边界}
 C8的1863目录中1860个成功聚合24个BBH子任务，记录4个损坏JSON。宏平均中位49.401、任务间标准差中位16.934、最弱任务中位14.000分；宏平均最高四分位中仍有1个模型最弱任务低于10分。C8原始acc\_norm与C2榜单归一化尺度未直接拼接。C7的2048/8192/131072 Token保持Q3外生情景。
-本问完成的是数据支持的描述与声明假设下的贡献、映射、资源放缓条件预测；不宣称纯技术因果效应、跨源绝对Loss坐标或长期预测覆盖率已经识别。完整答案、逐行审计、支持域、基线、敏感性和可复现哈希见\texttt{outputs/zhh/Q4\_FINAL\_ANSWER\_V2.md}及\texttt{outputs/zhh/q4\_v2/}。
+本节是条件分析草稿，尚未验收为完整解决第四问。技术贡献解释、均值系数向前沿转移的验证、跨题Loss坐标及误差影响仍需补强。重新验收记录见\texttt{experiments/zhh/20260926-q4-requirement-reaudit.md}；数据、候选计算与复现哈希见\texttt{outputs/zhh/Q4\_FINAL\_ANSWER\_V2.md}及\texttt{outputs/zhh/q4\_v2/}。

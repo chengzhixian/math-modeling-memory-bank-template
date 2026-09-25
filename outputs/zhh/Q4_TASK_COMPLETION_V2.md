@@ -1,15 +1,15 @@
-# CHM任务清单→zhh v2完成对照
+# Q4任务重新验收：核心问题尚未闭环
 
-基线：CHM 20260926-q4-zhh-progress-review.md与Q4_REMAINING_TASKS.md，zhh2d91c662。当前范围为声明假设的条件答卷；全部证据可复现，不把假设当因果事实。
+更新：2026-09-26，重新阅读官方DOCX第四问、递进主线与附录A。结论 **NOT READY（不能无保留宣称Q4完整解决）**。旧表“已完成”仅说明工程产物和假设计算已有，不代表科学验收。新审查见 `experiments/zhh/20260926-q4-requirement-reaudit.md`，本表取代旧完成判断。
 
 | 任务 | 状态 | 证据 |
 |---|---|---|
-| T1 C4数据量/单位/资源链 | 已完成条件审计 | q4_v2/c4_resource_audit.csv、c4_usable_resources.csv、c4_annual_resources.csv |
-| T2 动力学/规模非规模份额 | 已完成条件分解 | dynamic_coefficients.csv、historical_contributions.csv；保留未解释项/符号 |
-| T3 分级Loss映射/误差/Q3消费 | 已完成条件映射 | bridge_mappings/validation/source_diagnostics、q3_bridge_sensitivity；formal仍unidentified |
-| T4 12/24月放缓前沿 | 已完成16主预测格 | outputs/zhh/frontier_forecast.csv；含起点、类型、资源、支持距离 |
-| T5 范围/时间验证/基线敏感性 | 已完成诊断 | rolling_frontier_backtest_primary/expanded、forecast_sensitivity；不称95%PI |
-| T6 类型/许可/缺失/C3/C8 | 已完成数据口径 | leaderboard_sample/all_versions、results.c3/c8、明确许可复核状态 |
-| T7 正式章节/图/复现包 | 已完成条件源码包 | Q4_FINAL_ANSWER_V2.md、q4.tex、三PNG、manifest、18阶段审查及本人交接 |
+| T1 C4数据量/单位/资源链 | 数据接入基本完成 | 81主记录及单位/来源审计；93宽筛选仅计数，未重算资源/预测；跨表配置是假设 |
+| T2 动力学/规模非规模份额 | 部分完成，核心未验收 | 规模/时间/残差已算；需共同支持/组成控制，不将残差解释为技术进步 |
+| T3 分级Loss映射/误差/Q3消费 | 候选仍仅敏感性 | 需来源特定坐标、可检验传递假设、实际消费模型验证及误差对结论影响 |
+| T4 12/24月放缓前沿 | 16格算例完成，依据待验收 | 需验证全样本均值斜率向q90迁移，比较直接前沿候选 |
+| T5 范围/时间验证/基线敏感性 | 部分完成 | 需统一两月/单月回测目标、依据基线选型、补模型偏差；范围非完整极值包络 |
+| T6 类型/许可/缺失/C3/C8 | 大部分完成 | C8满足逐任务要求；C3目前仅来源/年度计数，需实质历史分析 |
+| T7 正式章节/图/复现包 | 工程包完成，正式结论未验收 | 需修复或严格降级上述结论、复算/验收；全论文PDF/main集成尚未完成 |
 
-未列为已完成：无条件技术因果识别、跨源实证Loss标定、联合统计95%预测区间、逐仓库权重/许可证核验、全论文最终PDF/匿名/比赛提交、main集成。
+题目允许动力学模型，不强制因果推断、95%预测区间、当前日期起算或同时给12与24个月，也允许说明其他开放筛选规则。因此这些额外标准不能当作未完成理由。当前准确表述：“Q4已有可复现的条件分析草稿与数据审计；技术贡献解释、前沿模型验证和跨题映射尚未闭环。”

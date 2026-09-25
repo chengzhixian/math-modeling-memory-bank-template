@@ -85,7 +85,9 @@ def main():
     forecast_table=table(primary,['类型','horizon_months','情景','predicted_score','scenario_lower','scenario_upper'],['类型','月数','算力增长','点值','情景下界','情景上界'])
     contribution_table=table(cp,['类型','observed_change','scale_points','non_scale_points','unexplained_change','账面规模百分比','账面非规模百分比'],['类型','观测变化','规模关联','时间关联','未解释','账面规模%','账面非规模%'])
     coeff_table=table(pp,['类型','n','b_logN','b_month','frontier_start','N_anchor_B'],['类型','样本','bN','bt/月','当前90%前沿','高分模型N锚/B'])
-    answer=rf'''# 第四问完整条件答卷：资源增长放缓下的开放模型能力前沿
+    answer=rf'''# 第四问条件分析草稿：资源增长放缓下的开放模型能力前沿
+
+验收修订（2026-09-26）：重新对照官方原件后，整体状态为 **NOT READY（尚未完整回答Q4）**。本文件保留已有条件计算；技术贡献解释、前沿模型验证与跨题Loss坐标仍需补强。详见 `experiments/zhh/20260926-q4-requirement-reaudit.md` 和 `outputs/zhh/Q4_TASK_COMPLETION_V2.md`。此前“完整条件答卷”的表述不代表题面科学验收。
 
 发布：`zhh.q4.conditional.v2`。本答卷补齐原有空预测、C4数据量、带符号贡献、分层映射与不确定性。结论是**声明资源配置和进步持续假设下的条件答案**，不是已经识别的纯技术因果份额或已校准的未来真实最高分。所有数值由 `src/zhh/q4_complete.py` 生成；发布清单为 `outputs/zhh/q4_v2/manifest.json`。
 
@@ -133,7 +135,7 @@ $$z_i=a_k+b_{{N,k}}\log_{{10}}N_i+b_{{t,k}}t_i+\epsilon_i,\quad F(z)=100/(1+e^{{
 
 $$\Delta_N=\tfrac12\{{F(z_0+u)-F(z_0)+F(z_0+u+v)-F(z_0+v)\}},\quad \Delta_T=\Delta_{{model}}-\Delta_N.$$
 
-相加严格等于模型的分数变化，避免分解顺序影响。再列$R=\Delta_{{observed}}-\Delta_N-\Delta_T$。题面所需两项账面分解为“规模关联项$\Delta_N$”与“非规模综合项$\Delta_T+R$”，后者包含未解释组成和选择效应，不能全部称纯技术进步。
+相加严格等于模型的分数变化，避免分解顺序影响。再列$R=\Delta_{{observed}}-\Delta_N-\Delta_T$。现有两项账面分解为“规模关联项$\Delta_N$”与“非规模综合项$\Delta_T+R$”，后者包含未解释组成和选择效应，不等于题面要求的非规模技术进步贡献；本表是候选模型诊断，仍需组成与共同支持控制。
 
 {contribution_table}
 
@@ -192,7 +194,7 @@ $$S=100\,\sigma(a+\gamma_L L+\gamma_N\log_{{10}}N),\qquad \gamma_L\le0\text{{的
 
 消费CHM `integration/chm-q1-clean-20260923@{q3['commit']}` 的Q3 v8快照；该发布固定CYJ v8和Q1 v2，跨A/B映射本身也是条件假设。原始manifest和固定政策格分别保存为`upstream_q3_manifest.json`、`upstream_q3_fixed_policy_grid.csv`，逐字节核验生产者SHA256，未修改生产者文件。
 
-36个预算×上下文×成本格经过high/medium两种映射门禁产生{q3['rows']}条记录，其中{q3['supported_assumption_rows']}条允许同坐标假设换算；越界/不可行者不给分数。输出`q3_bridge_sensitivity.csv`保留源状态、条件Loss、N、假设分数及medium来源族残差范围，实证标定分数和联合95%区间均为空。这满足前问输出进入后问的条件计算，同时避免把A侧目标Loss或半合成质量增益当真实Benchmark提升。
+36个预算×上下文×成本格经过high/medium两种映射门禁产生{q3['rows']}条记录，其中{q3['supported_assumption_rows']}条允许同坐标假设换算；越界/不可行者不给分数。输出`q3_bridge_sensitivity.csv`保留源状态、条件Loss、N、假设分数及medium来源族残差范围，实证标定分数和联合95%区间均为空。这展示了前问输出的敏感性消费，但尚未完成可检验的坐标传递和误差对核心结论的影响分析，不能据此验收四问衔接。
 
 C8对1863目录选最新可解析JSON，1860个模型有24个BBH子任务，记录4个损坏JSON。宏平均中位数{c8['profiles']['bbhMacroMean']['median']:.3f}，任务间标准差中位数{c8['profiles']['bbhTaskSd']['median']:.3f}，最弱任务中位数{c8['profiles']['bbhTaskMin']['median']:.3f}。这说明同一模型平均分不能替代任务覆盖：宏平均最高四分位仍有{c8['low_min_high_mean_n']}个模型的最弱任务低于10分。C8 acc_norm×100是原始准确率尺度，C2可能另含榜单任务归一化，不把两者同名BBH自动相等；C8在这里用于任务差异描述，没有未经版本校准的跨表数值连接。
 
@@ -200,7 +202,7 @@ C8对1863目录选最新可解析JSON，1860个模型有24个BBH子任务，记�
 
 本问已有非空、可复现的条件贡献、分级映射、算力放缓12/24月前沿及情景范围。资源增长减半降低了两类模型的条件能力前沿；这种差异依赖eta、时间进步保留比例、开放性和前沿定义。主chat/领域微调12月半增长点值约53.49，情景范围约40.41--65.96；基础模型范围宽且回测差，解释应更保守。
 
-纯技术因果份额、跨附件Loss绝对坐标和长期未来覆盖率仍未识别。合法的最终答案是把可识别描述、声明假设的求解和未识别边界一并给出，不能宣称真实训练的无条件因果规律已被证明。最终状态：VALIDATED FOR STATED SCOPE（条件计算、数据追溯和复现；不包含因果识别、联合统计预测区间或main正式集成）。
+重新验收：主后训练模型历史变化与观测方向相反且残差较大，均值斜率向高分位前沿迁移尚未验证，跨附件Loss坐标只是假设。最终状态：NOT READY（完整Q4尚未验收）；可复现条件计算、数据追溯和软件测试已通过。赛题允许动力学及情景不确定性，不强制因果识别或95%预测区间，缺口在现有模型解释、验证和跨题连接的证据，而非缺少这些额外要求。
 
 ## 9. 复现与产物
 
@@ -259,7 +261,7 @@ Epoch算力可能由同源N/D估算，6ND比值是质量筛选而非独立机制
 \Delta_N=\tfrac12[F(z_0+u)-F(z_0)+F(z_0+u+v)-F(z_0+v)],\quad
 \Delta_T=F(z_0+u+v)-F(z_0)-\Delta_N.
 \]
-另列$R=\Delta_{\rm obs}-\Delta_N-\Delta_T$。规模关联与非规模综合项$\Delta_T+R$构成两项账面分解，非规模项包含选择、组成和未解释变化，不能全归于纯技术因果效应。
+另列$R=\Delta_{\rm obs}-\Delta_N-\Delta_T$。规模关联与非规模综合项$\Delta_T+R$构成两项账面分解，非规模项包含选择、组成和未解释变化，不等于题目要求的技术贡献，仍需控制共同支持与组成。
 \begin{table}[htbp]\centering\small
 \caption{早末两个月前沿的带符号分解（分）}
 \begin{tabular}{lrrrr}\toprule 类型 & 观测变化 & 规模关联 & 时间关联 & 未解释 \\ \midrule
@@ -299,7 +301,7 @@ C6高可比7行与中可比68行分开，采用$S=100\sigma(a+\gamma_L L+\gamma_
 
 \subsection{逐任务结果与边界}
 C8的1863目录中1860个成功聚合24个BBH子任务，记录4个损坏JSON。宏平均中位49.401、任务间标准差中位16.934、最弱任务中位14.000分；宏平均最高四分位中仍有1个模型最弱任务低于10分。C8原始acc\_norm与C2榜单归一化尺度未直接拼接。C7的2048/8192/131072 Token保持Q3外生情景。
-本问完成的是数据支持的描述与声明假设下的贡献、映射、资源放缓条件预测；不宣称纯技术因果效应、跨源绝对Loss坐标或长期预测覆盖率已经识别。完整答案、逐行审计、支持域、基线、敏感性和可复现哈希见\texttt{outputs/zhh/Q4\_FINAL\_ANSWER\_V2.md}及\texttt{outputs/zhh/q4\_v2/}。
+本节是条件分析草稿，尚未验收为完整解决第四问。技术贡献解释、均值系数向前沿转移的验证、跨题Loss坐标及误差影响仍需补强。重新验收记录见\texttt{experiments/zhh/20260926-q4-requirement-reaudit.md}；数据、候选计算与复现哈希见\texttt{outputs/zhh/Q4\_FINAL\_ANSWER\_V2.md}及\texttt{outputs/zhh/q4\_v2/}。
 '''
     return section.replace('ACCOUNTING_SHARES',shares)
 
