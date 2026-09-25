@@ -1,0 +1,5 @@
+{
+  "cross_source_interval": null,
+  "reason": "no paired A/B cross-source calibration",
+  "grid_spread_is_confidence_interval": false
+}

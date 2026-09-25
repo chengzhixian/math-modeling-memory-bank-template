@@ -1,0 +1,8 @@
+{
+  "Q1_version": "chm.q1.v2.0",
+  "Q1_manifest_sha256": "c621f7e405106e42720f918f490235b5e8becefb0f7c8cb997736e96337117a9",
+  "Q1_producer_commit": "333b1f0bbed65da43f6be2f197d9582555dc755d",
+  "Q1_main_integration_commit": "f9693bbf4c205aa46d3719f6f8a1d6f26561d05f",
+  "Q1_hull_bounds_sha256": "969f810c0bf54f03492afc243091c339aaf4b27aed5c2164c186e651c7589acc",
+  "B7_coefficients_source_sha256": "d6f5b665d3806a322d0ebf87da46889822d2eff89324eacded6040383e7b6733"
+}

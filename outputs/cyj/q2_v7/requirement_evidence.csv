@@ -1,0 +1,7 @@
+requirement,data,result,status
+N_D_Q_scaling,B1_B7,model_coefficients.json,conditional_B7
+p_effect,Q1_v2_derived,policy_solutions.csv,conditional_bridge
+marginal_elasticity,B7_Q1_v2,marginals_elasticities.csv,model_internal
+domain_substitution,Q1_v2,domain_transfer_effects.csv,model_internal
+quality_scale_substitution,B7,quality_vs_scale.csv,model_internal
+cross_source_test,unavailable_joint,validation_by_source.csv,not_empirically_calibrated

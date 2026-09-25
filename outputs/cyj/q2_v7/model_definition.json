@@ -1,0 +1,7 @@
+{
+  "schema_version": "cyj.ndqp.scenario.v7",
+  "formula": "L_B(N,D,Q_B)*exp(sum_k w_k*r_k(p))",
+  "cross_source_empirical_calibration_complete": false,
+  "B7_semisynthetic": true,
+  "bridge_status": "sensitivity-only"
+}

@@ -1,0 +1,12 @@
+{
+  "old_schema": "cyj.ndqp.scenario.v6",
+  "new_schema": "cyj.ndqp.scenario.v7",
+  "B7_parameters_unchanged": true,
+  "old_main_loss": null,
+  "reason": "v6 has no unique unconditioned main Loss",
+  "comparison_status": "requires_fully_matched_v6_scenario",
+  "Q1_change": "ridge_v1_3_to_interaction_v2",
+  "QA_change": "A1_sample_primary",
+  "bridge_change": "linear_conditional_to_exp_baseline",
+  "raw_A_reads": 0
+}

@@ -1,0 +1,8 @@
+{
+  "source": "CHM Q1 v2 decision policy",
+  "coverage_rule": "covered_mass>=reference_covered_mass",
+  "conditional_mean_rule": "quality_numerator-reference_mean*covered_mass>=0",
+  "unknown_Q_A": null,
+  "Q_A_to_Q_B": "unidentified",
+  "tolerance": 1e-10
+}

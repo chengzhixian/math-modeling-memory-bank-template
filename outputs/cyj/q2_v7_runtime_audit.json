@@ -1,0 +1,13 @@
+{
+  "schema_version": "cyj.q2.v7.audit.v1",
+  "status": "PASS",
+  "original_A_open_events": 0,
+  "derived_Q1_open_events": 15,
+  "scope": "Python open events during build_q2_v7 main; not OS subprocess file tracing",
+  "builder": {
+    "policy_rows": 12,
+    "sensitivity_rows": 480,
+    "manifest_sha256": "bac824661033a056622c53e2410dc473e25cc6f7bd3f937934d2e9a98169a2ec"
+  },
+  "manifest_sha256": "bac824661033a056622c53e2410dc473e25cc6f7bd3f937934d2e9a98169a2ec"
+}

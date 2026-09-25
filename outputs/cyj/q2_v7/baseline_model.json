@@ -1,0 +1,6 @@
+{
+  "bridge_model": "exp_bridge",
+  "bridge_lambda": 1,
+  "eta": 0,
+  "status": "conditional_on_unvalidated_cross_source_bridge"
+}

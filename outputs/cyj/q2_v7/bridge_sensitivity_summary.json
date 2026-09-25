@@ -1,0 +1,9 @@
+{
+  "scenarios": 480,
+  "valid": 480,
+  "Loss_range": [
+    0.7022688686159055,
+    2.5673967252758954
+  ],
+  "range_is_confidence_interval": false
+}

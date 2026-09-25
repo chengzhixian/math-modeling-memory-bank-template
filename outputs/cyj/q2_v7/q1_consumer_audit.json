@@ -1,0 +1,10 @@
+{
+  "manifest_sha256": "c621f7e405106e42720f918f490235b5e8becefb0f7c8cb997736e96337117a9",
+  "file_shas_verified": 9,
+  "domains": 17,
+  "targets": 13,
+  "pairs": 10,
+  "recipes": 512,
+  "unknown_Q_A_count": 11,
+  "Q2_original_A_reads": 0
+}

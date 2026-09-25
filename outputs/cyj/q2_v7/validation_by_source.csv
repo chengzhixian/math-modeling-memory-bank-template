@@ -1,0 +1,4 @@
+source,role,status,evidence
+A_Q1,training_nested_CV_and_same_condition_model_selection,signed_CHM_Q1_v2,outputs/chm/q1_v2_signoff/audit.json
+B7,semi_synthetic_conditional_same_source_validation,frozen_CYJ_model,outputs/cyj/q2_final/validation_summary.csv
+A_B_joint,unobserved,not_empirically_calibrated,no paired experiment
