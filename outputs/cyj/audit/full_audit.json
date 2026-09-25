@@ -72,14 +72,29 @@
       "detail": "manifest reproduced; 13 file hashes agree"
     },
     {
+      "name": "Q2_requirement_coverage",
+      "status": "PASS",
+      "detail": "six Q2 gates, seven audit hashes, 17 raw B source hashes; limitations explicit"
+    },
+    {
+      "name": "Q2_conditional_scenarios",
+      "status": "PASS",
+      "detail": "540 reproducible conditional cells; no fitted bridge claim"
+    },
+    {
+      "name": "Q2_scenario_figures",
+      "status": "PASS",
+      "detail": "four conditional figures match input, plot code and output hashes"
+    },
+    {
       "name": "unit_tests",
       "status": "PASS",
-      "detail": "----------------------------------------------------------------------\nRan 62 tests in 3.718s\n\nOK"
+      "detail": "----------------------------------------------------------------------\nRan 68 tests in 4.764s\n\nOK"
     },
     {
       "name": "LaTeX_compile",
       "status": "PASS",
-      "detail": "XeLaTeX built 8-page team draft; no overfull boxes"
+      "detail": "XeLaTeX built team draft; no overfull boxes"
     }
   ],
   "scientific_status": "conditional_B7_semi_synthetic",
@@ -108,7 +123,7 @@
     "Q3 N/D allocation changes across plausible B7 quality terms even when modeled loss regret is small",
     "Derivative-free Q3 agreement on 36 scenarios does not prove global optimality",
     "bootstrap-plus-residual v4 interval lacks direct held-out coverage calibration",
-    "A/B loss or quality bridge and team acceptance absent"
+    "A/B loss or quality bridge unidentified; CHM v4 conditional owner acceptance completed"
   ],
   "model_hash": "c7426036164238d41b92ca08e9ca9087224aeb0c74554478b66093774a5b5b1a",
   "current_code_sha256": {

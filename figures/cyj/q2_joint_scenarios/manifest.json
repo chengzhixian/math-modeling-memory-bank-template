@@ -1,0 +1,19 @@
+{
+  "schema_version": "cyj.q2.ndqp.figures.v1",
+  "source_grid": {
+    "path": "outputs/cyj/q2_joint_scenarios/scenario_grid.csv",
+    "sha256": "1d327ed32670b2acc026694f8137660fc3f3192db8ef94f5947d1ddcf7ce5760"
+  },
+  "plot_code": {
+    "path": "src/cyj/plot_q2_ndqp_scenarios.py",
+    "sha256": "f7c1c92d49d1d5f24e2004ffc0ff02b3260a5bf0b12139ab2ab30361e217a9b0"
+  },
+  "figures_sha256": {
+    "lambda_by_scale.png": "5ba76357035f5a8e4391e95ca259ed3451a5de8e7c3b7ce31a85ad90762321ac",
+    "weight_sensitivity.png": "9e2a86e1b897495d146d4ada247a7acd1436b51892ab6e57a3c7bbb1dafbfff8",
+    "eta_by_scale.png": "ab95eb62c87d818487a17ecbfbd6bfad7a5564387fd0f51eedfa05294acc18fc",
+    "mixture_transfer_by_scale.png": "a928c4b99181ad5ade5f916009833ea483e2719b3b3bd4077ad80280ab941441"
+  },
+  "data_status": "A fitted contrasts plus B7 semi-synthetic fit; lambda/eta/weights are scenarios",
+  "bridge_calibrated": false
+}

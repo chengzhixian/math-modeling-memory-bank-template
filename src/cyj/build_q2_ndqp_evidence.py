@@ -46,27 +46,68 @@ def run():
     b23 = json.loads((ROOT / source["B2_B3"]["path"]).read_text(encoding="utf-8"))
     b45 = json.loads((ROOT / source["B4_B5"]["path"]).read_text(encoding="utf-8"))
     b910 = json.loads((ROOT / source["B9_B10"]["path"]).read_text(encoding="utf-8"))
+    joint = json.loads((ROOT / source["B7_joint"]["path"]).read_text(encoding="utf-8"))
+    conflict = json.loads((ROOT / source["B6_B7_B8"]["path"]).read_text(encoding="utf-8"))
+    raw = {}
+    for collection in (b23["provenance"]["source_files"], joint["source_files"],
+                       conflict["source_files"], b910["provenance"]["raw_files"]):
+        for info in collection.values():
+            path = ROOT / info["path"]
+            if digest(path) != info["sha256"] or path.stat().st_size != info["bytes"]:
+                raise ValueError(f"raw B source identity changed: {info['path']}")
+            raw[info["path"]] = {"sha256": info["sha256"], "bytes": info["bytes"]}
     coverage = {
         "schema_version": "cyj.q2.requirement_coverage.v1", "source": source,
+        "raw_B_inputs": raw,
         "requirements": {
             "B1_main_ND": {"status": "pass_conditional_within_source", "rows": 1176,
-                           "role": "fit_and_group_holdout", "source": "B1"},
+                           "role": "fit_and_group_holdout", "source": "B1",
+                           "input": "B_scaling_laws/pythia_training_log_existing.csv",
+                           "fields": ["run_id", "N_params_B", "D_tokens_B", "val_loss"],
+                           "units": "N=1e9 parameters; D=1e9 tokens; native val_loss",
+                           "nature": "real_source_label_generation_unknown", "evidence_level": "L2_within_source_only",
+                           "paper_evidence": "q2.tex B1 same-source fit subsection"},
             "B2_or_B3_trajectory": {"status": "partial_shape_only", "B2_rows": b23["b2"]["rows"],
                                      "B3_rows": b23["b3"]["rows"],
-                                     "role": "semi_synthetic_cross_family_and_interpolated_shape; no common absolute RMSE", "source": "B2_B3"},
+                                     "role": "semi_synthetic_cross_family_and_interpolated_shape; no common absolute RMSE", "source": "B2_B3",
+                                     "inputs": ["B_scaling_laws/cerebras_training_log.csv", "B_scaling_laws/training_trajectories/*.csv"],
+                                     "fields": ["N_params_B", "D_tokens_B", "val_loss", "steps"],
+                                     "units": "N=1e9 parameters; D=1e9 tokens; source-specific val_loss",
+                                     "nature": "B2_semi_synthetic; B3_interpolated_B1",
+                                     "evidence_level": "L1_shape_only", "paper_evidence": "q2.tex attachment roles subsection"},
             "B4_and_B5_external": {"status": "partial_coordinate_unverified",
                                     "B4_rows": b45["datasets"]["B4"]["rows"],
                                     "B5_rows": b45["datasets"]["B5"]["rows"],
                                     "B4_inside_B1_rectangle": b45["datasets"]["B4"]["support_counts"]["inside_rectangle"],
                                     "B5_inside_B1_rectangle": b45["datasets"]["B5"]["support_counts"]["inside_rectangle"],
-                                    "role": "descriptive_stratification; tokenizer/corpus/log_base/aggregation unverified", "source": "B4_B5"},
+                                    "role": "descriptive_stratification; tokenizer/corpus/log_base/aggregation unverified", "source": "B4_B5",
+                                    "inputs": ["B_scaling_laws/scaling_baseline.csv", "B_scaling_laws/published_scaling_data.csv"],
+                                    "fields": ["family", "N_params_B", "D_tokens_B", "val_loss", "is_converged"],
+                                    "units": "N=1e9 parameters; D=1e9 tokens; heterogeneous val_loss",
+                                    "nature": "B4_real_cross_family; B5_literature_compilation",
+                                    "evidence_level": "L1_descriptive_not_common_loss",
+                                    "paper_evidence": "q2.tex attachment roles and source limitations"},
             "B6_B7_B8_quality": {"status": "partial_semi_synthetic_conflict",
                                   "B6_rows": 360, "B7_rows": 450, "B8_rows": 1704,
-                                  "B6_nested_in_B7": True, "B8_isolated": True, "source": "B6_B7_B8"},
+                                  "B6_nested_in_B7": True, "B8_isolated": True, "source": "B6_B7_B8",
+                                  "inputs": ["B_scaling_laws/supplementary_NQ_experiment.csv",
+                                             "B_scaling_laws/supplementary_NQ_experiment_expanded.csv",
+                                             "B_scaling_laws/supplementary_NQ_experiment_large.csv"],
+                                  "fields": ["N_params_B", "D_tokens_B", "Q_score", "val_loss", "data_type"],
+                                  "units": "N=1e9 parameters; D=1e9 tokens; Q_B unitless; B-native Loss",
+                                  "nature": "semi_synthetic; B8_calibrated_and_extrapolated_labels",
+                                  "evidence_level": "L2_B7_within_source; B8_conflict_not_test",
+                                  "paper_evidence": "q2.tex B7 fit, nested check and conflict subsections"},
             "B9_B10_large": {"status": "partial_estimated_stress_only",
                               "B9_rows": b910["checks"]["B9_rows"], "B10_rows": b910["checks"]["B10_rows"],
                               "B10_outside_B1_N": b910["checks"]["B10_above_B1_N_max_count"],
-                              "role": "metadata_and_estimated_extrapolation_stress", "source": "B9_B10"},
+                              "role": "metadata_and_estimated_extrapolation_stress", "source": "B9_B10",
+                              "inputs": ["B_scaling_laws/supplementary_large_models.csv",
+                                         "B_scaling_laws/supplementary_large_baseline.csv"],
+                              "fields": ["model_name", "family", "N_params_B", "D_tokens_B", "val_loss"],
+                              "units": "N=1e9 parameters; D=1e9 tokens; estimated val_loss",
+                              "nature": "B9_real_metadata; B10_estimated_loss",
+                              "evidence_level": "L1_stress_only", "paper_evidence": "q2.tex conflict and extrapolation subsection"},
             "unique_AB_bridge": {"status": "unidentified", "role": "no paired same-Loss N,D,Q,p observations"},
         },
         "interpretation": "Data roles and source checks are recorded; partial does not mean a missing validation was passed.",
@@ -75,7 +116,8 @@ def run():
 
     ref = model.a["reference"]
     variants = {"reference": ref}
-    for receiver, donor in (("arxiv", "freelaw"), ("freelaw", "arxiv")):
+    for receiver, donor in (("arxiv", "freelaw"), ("freelaw", "arxiv"),
+                            ("arxiv", "github"), ("arxiv", "pile_cc")):
         p = ref.copy()
         p[receiver] += .01
         p[donor] -= .01
@@ -85,7 +127,11 @@ def run():
     # The exact equal weights sum to 0.9999999999999998, accepted by tolerance.
     assumptions = {**model.assumptions(), "lambda_grid": [0, .25, .5, 1],
                    "eta_grid": [-.5, 0, .5], "weight_scenarios": weights,
-                   "p_variants": variants, "grid_interpretation": "analytic sensitivity ranges, not confidence limits",
+                   "p_variants": variants,
+                   "p_variant_mapping_confidence": {name: ("reference" if name == "reference" else
+                       {domain: model.a["mapping_type"][domain] for domain in model.a["reference"]
+                        if domain in name}) for name in variants},
+                   "grid_interpretation": "analytic sensitivity ranges, not confidence limits",
                    "N_scenarios_B": [.1, 1, 10], "D_B": 100, "Q_B": .5,
                    "raw_and_prior_evidence": source}
     write_json(OUT / "model_assumptions.json", assumptions)
@@ -101,7 +147,9 @@ def run():
                             result = model.evaluate_ndqp_scenario(n, 100, .5, p=p, weights=w,
                                                                    bridge_lambda=lam, eta=eta)
                             grid.append({**key, "loss": result["loss"], "baseline_loss": result["baseline_loss"],
-                                         "factor": result["factor"], "relative_A_effect": result["relative_A_effect"],
+                                         "factor": result["factor"],
+                                         "minimum_factor_over_B7_N": result["minimum_factor_over_B7_N"],
+                                         "relative_A_effect": result["relative_A_effect"],
                                          "gradient_N": result["gradient"]["N"],
                                          "gradient_D": result["gradient"]["D"],
                                          "gradient_Q_B": result["gradient"]["Q_B"],
@@ -110,6 +158,26 @@ def run():
                             failures.append({**key, "reason": str(exc)})
     write_csv(OUT / "scenario_grid.csv", grid)
     write_csv(OUT / "support_failures.csv", failures or [{"status": "none_on_predeclared_grid"}])
+    stability = {}
+    for variant in variants:
+        if variant == "reference":
+            continue
+        by_weight = {}
+        for weight in weights:
+            changes = [r["loss"] - r["baseline_loss"] for r in grid
+                       if r["p_variant"] == variant and r["weights"] == weight
+                       and r["bridge_lambda"] > 0]
+            if len(changes) != 27:
+                raise ValueError("incomplete nonzero-bridge sensitivity grid")
+            sign = "improves" if max(changes) < 0 else "worsens" if min(changes) > 0 else "mixed_or_zero"
+            by_weight[weight] = {"direction": sign, "min_delta_B_loss": min(changes),
+                                 "max_delta_B_loss": max(changes)}
+        stability[variant] = {"by_weight": by_weight,
+                              "direction_robust_to_weights": len({v["direction"] for v in by_weight.values()}) == 1,
+                              "mapping_confidence": assumptions["p_variant_mapping_confidence"][variant]}
+    write_json(OUT / "robustness_summary.json", {"schema_version": "cyj.q2.ndqp.robustness.v1",
+               "scope": "grid only; lambda>0; not a statistical confidence statement",
+               "p_variant_results": stability})
     validation = [{"source": "CHM_Q1_v1.3", "test": "targetwise_1M_60M_1B_rank",
                    "status": "producer_held_out_metrics_consumed_not_refitted", "target": r["target"],
                    "test_1m_spearman": r["test_1m_spearman"],
@@ -128,6 +196,9 @@ def run():
     (OUT / "identifiability_report.md").write_text(report, encoding="utf-8", newline="\n")
     write_json(OUT / "manifest.json", {"schema_version": "cyj.q2.ndqp.evidence.v1",
               "files_sha256": {p.name: digest(p) for p in sorted(OUT.iterdir()) if p.is_file() and p.name != "manifest.json"},
+              "code_sha256": {name: digest(ROOT / name) for name in
+                              ("src/cyj/joint_ndqp_scenarios.py", "src/cyj/build_q2_ndqp_evidence.py",
+                               "src/cyj/tests/test_joint_ndqp_scenarios.py")},
               "CHM_commit": model.assumptions()["producer_commit"], "B7_joint_sha256": source["B7_joint"]["sha256"]})
     return {"scenarios": len(grid), "failures": len(failures), "manifest_sha256": digest(OUT / "manifest.json")}
 

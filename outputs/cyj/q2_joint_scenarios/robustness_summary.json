@@ -1,0 +1,102 @@
+{
+  "schema_version": "cyj.q2.ndqp.robustness.v1",
+  "scope": "grid only; lambda>0; not a statistical confidence statement",
+  "p_variant_results": {
+    "transfer_freelaw_to_arxiv_one_percent": {
+      "by_weight": {
+        "arxiv_only": {
+          "direction": "improves",
+          "min_delta_B_loss": -0.07265995628902155,
+          "max_delta_B_loss": -0.001368652775205259
+        },
+        "pile_cc_only": {
+          "direction": "worsens",
+          "min_delta_B_loss": 7.54621343026507e-05,
+          "max_delta_B_loss": 0.0040061843874914516
+        },
+        "equal_13": {
+          "direction": "improves",
+          "min_delta_B_loss": -0.0016617868719168705,
+          "max_delta_B_loss": -3.1302099948948836e-05
+        }
+      },
+      "direction_robust_to_weights": false,
+      "mapping_confidence": {
+        "arxiv": "direct",
+        "freelaw": "inferred"
+      }
+    },
+    "transfer_arxiv_to_freelaw_one_percent": {
+      "by_weight": {
+        "arxiv_only": {
+          "direction": "worsens",
+          "min_delta_B_loss": 0.001368652775204815,
+          "max_delta_B_loss": 0.07265995628902155
+        },
+        "pile_cc_only": {
+          "direction": "improves",
+          "min_delta_B_loss": -0.0040061843874914516,
+          "max_delta_B_loss": -7.546213430309479e-05
+        },
+        "equal_13": {
+          "direction": "worsens",
+          "min_delta_B_loss": 3.1302099948948836e-05,
+          "max_delta_B_loss": 0.0016617868719168705
+        }
+      },
+      "direction_robust_to_weights": false,
+      "mapping_confidence": {
+        "arxiv": "direct",
+        "freelaw": "inferred"
+      }
+    },
+    "transfer_github_to_arxiv_one_percent": {
+      "by_weight": {
+        "arxiv_only": {
+          "direction": "improves",
+          "min_delta_B_loss": -0.06573558811197655,
+          "max_delta_B_loss": -0.0012382225326605933
+        },
+        "pile_cc_only": {
+          "direction": "improves",
+          "min_delta_B_loss": -0.0017067763503426647,
+          "max_delta_B_loss": -3.214954023977867e-05
+        },
+        "equal_13": {
+          "direction": "improves",
+          "min_delta_B_loss": -0.0010709714332257647,
+          "max_delta_B_loss": -2.017325772163403e-05
+        }
+      },
+      "direction_robust_to_weights": true,
+      "mapping_confidence": {
+        "arxiv": "direct",
+        "github": "direct"
+      }
+    },
+    "transfer_pile_cc_to_arxiv_one_percent": {
+      "by_weight": {
+        "arxiv_only": {
+          "direction": "improves",
+          "min_delta_B_loss": -0.06604224445477236,
+          "max_delta_B_loss": -0.0012439988374648436
+        },
+        "pile_cc_only": {
+          "direction": "worsens",
+          "min_delta_B_loss": 0.00041926252042268075,
+          "max_delta_B_loss": 0.022258089823392613
+        },
+        "equal_13": {
+          "direction": "worsens",
+          "min_delta_B_loss": 3.6550109874688985e-05,
+          "max_delta_B_loss": 0.001940396741952899
+        }
+      },
+      "direction_robust_to_weights": false,
+      "mapping_confidence": {
+        "arxiv": "direct",
+        "pile_cc": "near_direct"
+      }
+    }
+  }
+}

@@ -18,8 +18,11 @@ Status: **PASS_WITH_LIMITATIONS**
 | Q3_model_form | PASS | 144 model-form cases, 132 feasible; all cross-model regrets nonnegative within 1e-5 |
 | Q3_independent_optimizer | PASS | 33 feasible independent solutions agree with CHM within 1e-4 Loss; 3 support-infeasible |
 | manifest_reproducibility | PASS | manifest reproduced; 13 file hashes agree |
-| unit_tests | PASS | ---------------------------------------------------------------------- Ran 62 tests in 3.718s  OK |
-| LaTeX_compile | PASS | XeLaTeX built 8-page team draft; no overfull boxes |
+| Q2_requirement_coverage | PASS | six Q2 gates, seven audit hashes, 17 raw B source hashes; limitations explicit |
+| Q2_conditional_scenarios | PASS | 540 reproducible conditional cells; no fitted bridge claim |
+| Q2_scenario_figures | PASS | four conditional figures match input, plot code and output hashes |
+| unit_tests | PASS | ---------------------------------------------------------------------- Ran 68 tests in 4.764s  OK |
+| LaTeX_compile | PASS | XeLaTeX built team draft; no overfull boxes |
 
 ## Scientific limits
 
@@ -28,4 +31,4 @@ Status: **PASS_WITH_LIMITATIONS**
 - Q3 N/D allocation changes across plausible B7 quality terms even when modeled loss regret is small
 - Derivative-free Q3 agreement on 36 scenarios does not prove global optimality
 - bootstrap-plus-residual v4 interval lacks direct held-out coverage calibration
-- A/B loss or quality bridge and team acceptance absent
+- A/B loss or quality bridge unidentified; CHM v4 conditional owner acceptance completed

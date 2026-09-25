@@ -30,19 +30,114 @@
       "sha256": "6415f73031c853e2749afe535128b1075fed91e114606ce54c62aab7097a6087"
     }
   },
+  "raw_B_inputs": {
+    "data/raw/real_attachments/B_scaling_laws/cerebras_training_log.csv": {
+      "sha256": "178f878cad2cb31e4ec104c670553de23818197876d824a113fdb911125951a6",
+      "bytes": 89643
+    },
+    "data/raw/real_attachments/B_scaling_laws/training_trajectories/pythia_0.070542B_trajectory.csv": {
+      "sha256": "19663f2f14d62af377377962ec8f794148450bfb278fdbeb2452f4641fe6a440",
+      "bytes": 14040
+    },
+    "data/raw/real_attachments/B_scaling_laws/training_trajectories/pythia_0.162405B_trajectory.csv": {
+      "sha256": "8e2b78cde966b0a3e8b6272935c3f3dcccc5a54e94bb7db79ded2fd8fdf5a124",
+      "bytes": 14040
+    },
+    "data/raw/real_attachments/B_scaling_laws/training_trajectories/pythia_0.409009B_trajectory.csv": {
+      "sha256": "8c803195d475d8ff320afd90887ae48cec6463f4d01a2264c6680611ed9db170",
+      "bytes": 14040
+    },
+    "data/raw/real_attachments/B_scaling_laws/training_trajectories/pythia_1.040867B_trajectory.csv": {
+      "sha256": "bb73b2852db183bee3d76c76f55e2bdcc292d7ed0881cb27966525b56afcafc0",
+      "bytes": 14040
+    },
+    "data/raw/real_attachments/B_scaling_laws/training_trajectories/pythia_1.416184B_trajectory.csv": {
+      "sha256": "cd0d718747fb6048cb474066dbf35f64ef852f59cba2886484cbdf14bc68a02f",
+      "bytes": 14040
+    },
+    "data/raw/real_attachments/B_scaling_laws/training_trajectories/pythia_11.965825B_trajectory.csv": {
+      "sha256": "e223b3d48bc4fef3cbc03fd583ff7aef87e474903d829f6c417310cb99fa7b5e",
+      "bytes": 14540
+    },
+    "data/raw/real_attachments/B_scaling_laws/training_trajectories/pythia_2.782831B_trajectory.csv": {
+      "sha256": "552f03249b69234009eb028b3296d6bd1b1cb3a52c0d3a84a669baa0e3179482",
+      "bytes": 14040
+    },
+    "data/raw/real_attachments/B_scaling_laws/training_trajectories/pythia_6.86104B_trajectory.csv": {
+      "sha256": "8814c8414fddc914444c74e6cf8da02e3e156a0d7fb8acea6c5da05e438bf054",
+      "bytes": 13540
+    },
+    "data/raw/real_attachments/B_scaling_laws/supplementary_NQ_experiment.csv": {
+      "sha256": "c7450ce0d67d8692535fef4709e60e2da60b2c184738bf96df160a4be0a33a7f",
+      "bytes": 13670
+    },
+    "data/raw/real_attachments/B_scaling_laws/supplementary_NQ_experiment_expanded.csv": {
+      "sha256": "880fd265ca3e1d9bc93b4559af7ed7c18f89040634266c50bae03d88486e0f3a",
+      "bytes": 17154
+    },
+    "data/raw/real_attachments/B_scaling_laws/pythia_training_log_existing.csv": {
+      "sha256": "529a59644b0f57bf3a76037838b614bfedc35e58bb26b93052e34ffc63e454c2",
+      "bytes": 111459
+    },
+    "data/raw/real_attachments/B_scaling_laws/scaling_baseline.csv": {
+      "sha256": "2272983ded93de35e05f9acbf95ebceedf43f283345e4be72b54fee94080391e",
+      "bytes": 1421
+    },
+    "data/raw/real_attachments/B_scaling_laws/published_scaling_data.csv": {
+      "sha256": "dd858c5e48610e28589340d5db023d6abfb31df597506789ccdfc6a546731bbd",
+      "bytes": 1967
+    },
+    "data/raw/real_attachments/B_scaling_laws/supplementary_NQ_experiment_large.csv": {
+      "sha256": "bda0d449f75c73bbd04141e5cffbf4bea7002073e34b7fa95a638570fa095ffe",
+      "bytes": 81268
+    },
+    "data/raw/real_attachments/B_scaling_laws/supplementary_large_models.csv": {
+      "sha256": "ee794c1c586ed33c485a9eb9a2a3d993790402b63297e9b2765a1387930e940e",
+      "bytes": 13400
+    },
+    "data/raw/real_attachments/B_scaling_laws/supplementary_large_baseline.csv": {
+      "sha256": "a240e210c5b37444356c28eea96c6cc36be79c29baae1621c2e08aff727ccfeb",
+      "bytes": 4744
+    }
+  },
   "requirements": {
     "B1_main_ND": {
       "status": "pass_conditional_within_source",
       "rows": 1176,
       "role": "fit_and_group_holdout",
-      "source": "B1"
+      "source": "B1",
+      "input": "B_scaling_laws/pythia_training_log_existing.csv",
+      "fields": [
+        "run_id",
+        "N_params_B",
+        "D_tokens_B",
+        "val_loss"
+      ],
+      "units": "N=1e9 parameters; D=1e9 tokens; native val_loss",
+      "nature": "real_source_label_generation_unknown",
+      "evidence_level": "L2_within_source_only",
+      "paper_evidence": "q2.tex B1 same-source fit subsection"
     },
     "B2_or_B3_trajectory": {
       "status": "partial_shape_only",
       "B2_rows": 1029,
       "B3_rows": 4000,
       "role": "semi_synthetic_cross_family_and_interpolated_shape; no common absolute RMSE",
-      "source": "B2_B3"
+      "source": "B2_B3",
+      "inputs": [
+        "B_scaling_laws/cerebras_training_log.csv",
+        "B_scaling_laws/training_trajectories/*.csv"
+      ],
+      "fields": [
+        "N_params_B",
+        "D_tokens_B",
+        "val_loss",
+        "steps"
+      ],
+      "units": "N=1e9 parameters; D=1e9 tokens; source-specific val_loss",
+      "nature": "B2_semi_synthetic; B3_interpolated_B1",
+      "evidence_level": "L1_shape_only",
+      "paper_evidence": "q2.tex attachment roles subsection"
     },
     "B4_and_B5_external": {
       "status": "partial_coordinate_unverified",
@@ -51,7 +146,22 @@
       "B4_inside_B1_rectangle": 8,
       "B5_inside_B1_rectangle": 8,
       "role": "descriptive_stratification; tokenizer/corpus/log_base/aggregation unverified",
-      "source": "B4_B5"
+      "source": "B4_B5",
+      "inputs": [
+        "B_scaling_laws/scaling_baseline.csv",
+        "B_scaling_laws/published_scaling_data.csv"
+      ],
+      "fields": [
+        "family",
+        "N_params_B",
+        "D_tokens_B",
+        "val_loss",
+        "is_converged"
+      ],
+      "units": "N=1e9 parameters; D=1e9 tokens; heterogeneous val_loss",
+      "nature": "B4_real_cross_family; B5_literature_compilation",
+      "evidence_level": "L1_descriptive_not_common_loss",
+      "paper_evidence": "q2.tex attachment roles and source limitations"
     },
     "B6_B7_B8_quality": {
       "status": "partial_semi_synthetic_conflict",
@@ -60,7 +170,23 @@
       "B8_rows": 1704,
       "B6_nested_in_B7": true,
       "B8_isolated": true,
-      "source": "B6_B7_B8"
+      "source": "B6_B7_B8",
+      "inputs": [
+        "B_scaling_laws/supplementary_NQ_experiment.csv",
+        "B_scaling_laws/supplementary_NQ_experiment_expanded.csv",
+        "B_scaling_laws/supplementary_NQ_experiment_large.csv"
+      ],
+      "fields": [
+        "N_params_B",
+        "D_tokens_B",
+        "Q_score",
+        "val_loss",
+        "data_type"
+      ],
+      "units": "N=1e9 parameters; D=1e9 tokens; Q_B unitless; B-native Loss",
+      "nature": "semi_synthetic; B8_calibrated_and_extrapolated_labels",
+      "evidence_level": "L2_B7_within_source; B8_conflict_not_test",
+      "paper_evidence": "q2.tex B7 fit, nested check and conflict subsections"
     },
     "B9_B10_large": {
       "status": "partial_estimated_stress_only",
@@ -68,7 +194,22 @@
       "B10_rows": 128,
       "B10_outside_B1_N": 128,
       "role": "metadata_and_estimated_extrapolation_stress",
-      "source": "B9_B10"
+      "source": "B9_B10",
+      "inputs": [
+        "B_scaling_laws/supplementary_large_models.csv",
+        "B_scaling_laws/supplementary_large_baseline.csv"
+      ],
+      "fields": [
+        "model_name",
+        "family",
+        "N_params_B",
+        "D_tokens_B",
+        "val_loss"
+      ],
+      "units": "N=1e9 parameters; D=1e9 tokens; estimated val_loss",
+      "nature": "B9_real_metadata; B10_estimated_loss",
+      "evidence_level": "L1_stress_only",
+      "paper_evidence": "q2.tex conflict and extrapolation subsection"
     },
     "unique_AB_bridge": {
       "status": "unidentified",

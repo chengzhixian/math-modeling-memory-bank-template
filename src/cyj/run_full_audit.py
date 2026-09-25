@@ -279,13 +279,18 @@ def q2_requirement_coverage():
     require(set(coverage["requirements"]) == required, "Q2 requirement omitted")
     for name, item in coverage["source"].items():
         require(sha(ROOT / item["path"]) == item["sha256"], f"Q2 evidence drift: {name}")
+    require(len(coverage["raw_B_inputs"]) >= 17, "Q2 raw input coverage incomplete")
+    for relative, info in coverage["raw_B_inputs"].items():
+        path = ROOT / relative
+        require(path.stat().st_size == info["bytes"] and sha(path) == info["sha256"],
+                f"Q2 raw input drift: {relative}")
     require(coverage["requirements"]["B4_and_B5_external"]["status"] == "partial_coordinate_unverified",
             "B4/B5 coordinate gate was overstated")
     require(coverage["requirements"]["B9_B10_large"]["status"] == "partial_estimated_stress_only",
             "B10 was overstated as an external test")
     require(coverage["requirements"]["unique_AB_bridge"]["status"] == "unidentified",
             "unidentified bridge was overstated")
-    return "six Q2 gates, seven source hashes, B4/B5 and B9/B10 limitations explicit"
+    return "six Q2 gates, seven audit hashes, 17 raw B source hashes; limitations explicit"
 
 
 def q2_conditional_scenarios():
@@ -294,14 +299,30 @@ def q2_conditional_scenarios():
     original = (OUT / "manifest.json").read_bytes()
     run()
     require((OUT / "manifest.json").read_bytes() == original, "scenario manifest not reproducible")
-    require(len(rows("outputs/cyj/q2_joint_scenarios/scenario_grid.csv")) == 324,
+    require(len(rows("outputs/cyj/q2_joint_scenarios/scenario_grid.csv")) == 540,
             "scenario grid incomplete")
     for name, expected in manifest["files_sha256"].items():
         require(sha(OUT / name) == expected, f"scenario artifact drift: {name}")
+    for relative, expected in manifest["code_sha256"].items():
+        require(sha(ROOT / relative) == expected, f"scenario code drift: {relative}")
     assumptions = document("outputs/cyj/q2_joint_scenarios/model_assumptions.json")
     require(assumptions["ready_for_Q3"] is False and "unidentified" in assumptions["scenario_bridge"],
             "bridge calibration status overstated")
-    return "324 reproducible conditional cells; no fitted bridge claim"
+    return "540 reproducible conditional cells; no fitted bridge claim"
+
+
+def q2_scenario_figures():
+    path = ROOT / "figures/cyj/q2_joint_scenarios/manifest.json"
+    manifest = json.loads(path.read_text(encoding="utf-8"))
+    require(manifest["bridge_calibrated"] is False, "figure bridge falsely marked calibrated")
+    require(manifest["source_grid"]["sha256"] == sha(ROOT / manifest["source_grid"]["path"]),
+            "figure source grid drift")
+    require(manifest["plot_code"]["sha256"] == sha(ROOT / manifest["plot_code"]["path"]),
+            "figure code drift")
+    require(len(manifest["figures_sha256"]) == 4, "expected four conditional figures")
+    for name, digest in manifest["figures_sha256"].items():
+        require(sha(path.parent / name) == digest, f"figure drift: {name}")
+    return "four conditional figures match input, plot code and output hashes"
 
 
 def latex_compile():
@@ -314,14 +335,15 @@ def latex_compile():
     require(result.returncode == 0, result.stdout[-1200:] + result.stderr[-1200:])
     log = (work / "main.log").read_text(encoding="utf-8", errors="replace")
     require("Overfull \\hbox" not in log, "overfull paper box")
-    return "XeLaTeX built 8-page team draft; no overfull boxes"
+    return "XeLaTeX built team draft; no overfull boxes"
 
 
 def run(*, coverage_only=False):
     checks = []
     if coverage_only:
         for name, operation in (("Q2_requirement_coverage", q2_requirement_coverage),
-                                ("Q2_conditional_scenarios", q2_conditional_scenarios)):
+                                ("Q2_conditional_scenarios", q2_conditional_scenarios),
+                                ("Q2_scenario_figures", q2_scenario_figures)):
             assess(name, operation, checks)
             print(f"{checks[-1]['status']}: {name}: {checks[-1]['detail']}", flush=True)
         return 1 if any(item["status"] == "FAIL" for item in checks) else 0
@@ -334,6 +356,7 @@ def run(*, coverage_only=False):
              ("manifest_reproducibility", manifest_reproducibility),
              ("Q2_requirement_coverage", q2_requirement_coverage),
              ("Q2_conditional_scenarios", q2_conditional_scenarios),
+             ("Q2_scenario_figures", q2_scenario_figures),
              ("unit_tests", unit_tests), ("LaTeX_compile", latex_compile))
     for name, operation in tasks:
         assess(name, operation, checks)
@@ -361,12 +384,12 @@ def run(*, coverage_only=False):
                                        "q3_independent_optimizer_check.py", "chm_adapter_v4.py",
                                        "q3_costs.py")}}
     OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / "full_audit.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (OUT / "full_audit.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     lines = ["# CYJ full audit", "", f"Status: **{status}**", "", "| Check | Status | Detail |", "|---|---|---|"]
     for item in checks:
         lines.append(f"| {item['name']} | {item['status']} | {item['detail'].replace('|', '/').replace(chr(10), ' ')} |")
     lines += ["", "## Scientific limits", ""] + [f"- {item}" for item in report["limitations"]]
-    (OUT / "full_audit.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    (OUT / "full_audit.md").write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
     print(status)
     return 1 if failed else 0
 

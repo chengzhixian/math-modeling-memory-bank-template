@@ -7,7 +7,7 @@ owner acceptance is complete; this does not establish an A/B calibration.
 ## Exact inputs and provenance
 
 - `src/cyj/joint_ndqp_scenarios.py:ConditionalNDQP` exposes `evaluate_ndq`,
-  `evaluate_ndqp_scenario`, `transfer_derivative`, `local_substitution`,
+  `evaluate_ndqp_scenario`, `gradient`, `transfer_derivative`, `local_substitution`,
   `equal_loss_root`, `assumptions`, `support`, and `calibration_status`.
 - B7 native joint model is the already published eight-parameter fit. Inputs
   `N_params_B`, `D_tokens_B` are billions; `Q_score` is B7 native, not `Q_A`.
@@ -18,7 +18,10 @@ owner acceptance is complete; this does not establish an A/B calibration.
   producer CSVs. It does not read raw A tables.
 - `p` must name exactly the 17 CHM domains and lie on the nonnegative unit
   simplex. Producer validation does not provide a callable training recipe
-  convex hull check, so this further support property is not certified.
+  convex hull check, so this further support property is not certified. For
+  each exact supplied `p`, the interface checks the smallest factor across
+  both B7 `N` endpoints, which proves positivity over the whole B7 N interval
+  at that `p`; it does not certify positivity over the entire p simplex.
 - `weights` must explicitly name one or more of the 13 targets and sum to one.
   `bridge_lambda` and `eta` are required numeric arguments, with no defaults.
   Both remain **unidentified**. `N_ref=1`B is inside B7 support, while the
@@ -46,6 +49,13 @@ assert abs(v["loss"] - 2.5577553937078172) < 1e-12
 
 Run with `src/cyj` on `PYTHONPATH`; the import uses Python standard library
 and Git, and resolves the pinned CHM producer from the local Git object store.
+For process consumers, call `python -B src/cyj/joint_ndqp_scenarios.py --describe`
+or `--request interfaces/cyj/fixtures/nonzero_bridge.json`. The batch schema
+is `cyj.ndqp.scenario.v5` with explicit `conditional_diagnostic` mode and no
+default lambda or eta. Three fixed request fixtures are published in
+`interfaces/cyj/fixtures/`: reference/zero lambda, nonzero conditional bridge,
+and invalid p (expected exit code 2). Duplicate JSON keys and unsupported
+fields are rejected.
 Run `python -B -m unittest discover -s src/cyj/tests -p
 test_joint_ndqp_scenarios.py -v` for reference/zero-lambda degeneration,
 finite differences, support and provenance checks. See

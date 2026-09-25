@@ -6,11 +6,13 @@ module reads only the immutable CHM Q1 producer objects, never raw A tables.
 from __future__ import annotations
 
 import csv
+import argparse
 import hashlib
 import io
 import json
 import math
 import subprocess
+import sys
 from functools import lru_cache
 from pathlib import Path
 
@@ -18,6 +20,7 @@ ROOT = Path(__file__).resolve().parents[2]
 CHM_COMMIT = "cdda1ad62c5c7eb72b413c4228caeff87d2bad30"
 MANIFEST_PATH = "interfaces/chm/q1_interface_v1_3.json"
 N_REF = 1.0  # billion parameters; inside B7 support
+VERSION = "cyj.ndqp.scenario.v5"
 BOUNDS = ((0.07, 11.97), (10.0, 600.0), (0.1, 1.0))
 
 
@@ -70,7 +73,8 @@ def producer():
         reference_loss[target] = value
     return {"manifest_sha256": hashlib.sha256(manifest_raw).hexdigest(),
             "manifest": manifest, "reference": reference, "coefficients": coefficients,
-            "reference_loss": reference_loss, "validation": tables["validation"]}
+            "reference_loss": reference_loss, "validation": tables["validation"],
+            "mapping_type": {r["mixture_domain"]: r["mapping_type"] for r in tables["mapping"]}}
 
 
 class ConditionalNDQP:
@@ -142,19 +146,25 @@ class ConditionalNDQP:
         baseline, (bn, bd, bq) = self._base_value_grad(n, d, q)
         phi = (n / N_REF) ** -exponent
         h = 1 + lam * phi * relative
-        if not math.isfinite(h) or h <= 0:
-            raise ValueError("nonpositive or nonfinite conditional Loss factor")
+        # For fixed p and weights, phi is monotone in N.  Its minimum factor
+        # over the entire declared B7 N interval is attained at an endpoint.
+        support_factors = [1 + lam * (edge / N_REF) ** -exponent * relative
+                           for edge in (BOUNDS[0][0], BOUNDS[0][1])]
+        minimum_factor = min(support_factors)
+        if not math.isfinite(h) or not math.isfinite(minimum_factor) or minimum_factor <= 0:
+            raise ValueError("nonpositive conditional Loss factor somewhere on B7 N support")
         value = baseline * h
         grad = {"N": h * bn - baseline * lam * phi * exponent * relative / n,
                 "D": h * bd, "Q_B": h * bq,
                 "p": {domain: baseline * lam * phi * derivative for domain, derivative in slope.items()}}
         if not math.isfinite(value) or not all(map(math.isfinite, (grad["N"], grad["D"], grad["Q_B"], *grad["p"].values()))):
             raise ValueError("nonfinite conditional output")
-        return {"loss": value, "baseline_loss": baseline, "factor": h, "relative_A_effect": relative,
+        return {"loss": value, "baseline_loss": baseline, "factor": h,
+                "minimum_factor_over_B7_N": minimum_factor, "relative_A_effect": relative,
                 "gradient": grad, "improvement_elasticity": {
                     axis: -x * grad[axis] / value for axis, x in (("N", n), ("D", d), ("Q_B", q))},
                 "assumptions": {"bridge_lambda": lam, "eta": exponent, "weights": w, "N_ref_B": N_REF},
-                "support": "B7_rectangle_and_p_simplex; A_training_recipe_convex_hull_unverified",
+                "support": "B7_rectangle_for_this_exact_p; p_simplex_checked; A_training_recipe_convex_hull_unverified",
                 "ready_for_Q3": False}
 
     def transfer_derivative(self, result, donor, recipient):
@@ -162,6 +172,11 @@ class ConditionalNDQP:
         if donor not in slopes or recipient not in slopes or donor == recipient:
             raise ValueError("invalid named transfer")
         return slopes[recipient] - slopes[donor]
+
+    def gradient(self, N_params_B, D_tokens_B, Q_score, *, p, weights, bridge_lambda, eta):
+        """Return N/D/Q partials and 17 ambient p partials for an explicit scenario."""
+        return self.evaluate_ndqp_scenario(N_params_B, D_tokens_B, Q_score, p=p,
+            weights=weights, bridge_lambda=bridge_lambda, eta=eta)["gradient"]
 
     def local_substitution(self, result, numerator, denominator):
         grad = result["gradient"]
@@ -207,7 +222,7 @@ class ConditionalNDQP:
 
     def support(self):
         return {"B7": dict(zip(("N_params_B", "D_tokens_B", "Q_score"), BOUNDS)),
-                "p": "17-domain simplex; training convex hull not certified"}
+                "p": "exact supplied 17-domain simplex point; H>0 over B7 N checked for that point; training convex hull not certified"}
 
     def calibration_status(self):
         return {"identified_B_native": "conditional B7 semi-synthetic fit",
@@ -222,3 +237,54 @@ class ConditionalNDQP:
                 "A_reference_loss_kind": "fitted Ridge prediction at p_ref, not observed B loss",
                 "quality_mapping": "Q_A to Q_B unidentified; Q_B independent input",
                 **self.calibration_status()}
+
+
+def _unique_pairs(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"duplicate JSON key: {key}")
+        result[key] = value
+    return result
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument("--describe", action="store_true")
+    group.add_argument("--request", type=Path)
+    args = parser.parse_args()
+    try:
+        model = ConditionalNDQP()
+        if args.describe:
+            result = {"schema_version": VERSION, "assumptions": model.assumptions(),
+                      "support": model.support(), "calibration_status": model.calibration_status()}
+        else:
+            request = json.loads(args.request.read_text(encoding="utf-8-sig"), object_pairs_hook=_unique_pairs)
+            if (not isinstance(request, dict) or set(request) != {"schema_version", "mode", "requests"}
+                    or request["schema_version"] != VERSION or request["mode"] != "conditional_diagnostic"
+                    or not isinstance(request["requests"], list) or not request["requests"]):
+                raise ValueError("expected explicit cyj.ndqp.scenario.v5 conditional_diagnostic batch")
+            fields = {"request_id", "N_params_B", "D_tokens_B", "Q_score", "p",
+                      "weights", "bridge_lambda", "eta"}
+            seen, rows = set(), []
+            for item in request["requests"]:
+                if not isinstance(item, dict) or set(item) != fields:
+                    raise ValueError("incorrect scenario fields")
+                identity = item["request_id"]
+                if not isinstance(identity, str) or not identity.strip() or identity in seen:
+                    raise ValueError("empty or duplicate request_id")
+                seen.add(identity)
+                result = model.evaluate_ndqp_scenario(**{k: v for k, v in item.items() if k != "request_id"})
+                rows.append({"request_id": identity, **result})
+            result = {"schema_version": VERSION, "mode": "conditional_diagnostic",
+                      "ready_for_Q3": False, "results": rows}
+        print(json.dumps(result, ensure_ascii=False, allow_nan=False))
+        return 0
+    except (ValueError, TypeError, KeyError, OSError, subprocess.CalledProcessError) as exc:
+        print(json.dumps({"error": str(exc)}, ensure_ascii=False), file=sys.stderr)
+        return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

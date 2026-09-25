@@ -96,12 +96,29 @@ L_N&=H L_{B,N}-L_B\lambda\eta\phi_\eta r_w/N,&
 L_D&=H L_{B,D},& L_Q&=H L_{B,Q},\\
 L_{p_j}&=L_B\lambda\phi_\eta\sum_k\frac{w_k\beta_{kj}}{L^A_{k,\rm ref}}.
 \end{align}
-可实施的域 $i\to j$ 小幅转移使用 $d\boldsymbol p=d\delta(\boldsymbol e_j-\boldsymbol e_i)$，故 $dL/d\delta=L_{p_j}-L_{p_i}$，并须检查转移后仍在单纯形及有证据的配方支持内。改善弹性为 $\varepsilon_x=-xL_x/L$，与旧 v3 的带符号弹性 $xL_x/L$ 相反。等 Loss 局部替代例如 $dN/dQ_B=-L_Q/L_N$、$dD/dQ_B=-L_Q/L_D$；分母为零、曲面失单调或有限根离开支持域时分别返回 undefined 或 \texttt{no\_equal\_loss\_root\_in\_support}。线性 Ridge 的组分系数差只代表条件关联，不证明因果互补。
+可实施的域 $i\to j$ 小幅转移使用 $d\boldsymbol p=d\delta(\boldsymbol e_j-\boldsymbol e_i)$，故 $dL/d\delta=L_{p_j}-L_{p_i}$，并须检查转移后仍在单纯形及有证据的配方支持内。改善弹性为 $\varepsilon_x=-xL_x/L$，与旧 v3 的带符号弹性 $xL_x/L$ 相反。等 Loss 局部替代例如 $dN/dQ_B=-L_Q/L_N$、$dD/dQ_B=-L_Q/L_D$；分母为零、曲面失单调或有限根离开支持域时分别报告未定义或无域内等损失根。线性 Ridge 的组分系数差只代表条件关联，不证明因果互补。
 
 \subsection{识别反例、情景结果与原题数据覆盖}
 
 所有 B 行都没有配方 $\boldsymbol p$，所有 A 配方行都没有 B 原生 Loss 与 $Q_B$。因此 $\lambda=0$ 和 $\lambda=1$ 对 B 行取 $\boldsymbol p=\boldsymbol p_{\rm ref}$ 时给出相同预测，对 A 行也给出相同原生 $m_k$；现有观测不能区别这两组参数，但在非零 $r_w$ 下预测及问题三配置可不同。A 的 1M/60M/1B 对照还改变训练条件且缺完整 $D$，不能单独识别纯 $N$ 指数 $\eta$。这是可检验模型与当前可识别性之间的边界。
 
-预声明分析网格取 $\lambda\in\{0,.25,.5,1\}$、$\eta\in\{-.5,0,.5\}$，目标权重为 arxiv、pile\_cc 单目标及 13 域等权，$N\in\{.1,1,10\}$B、$D=100$B、$Q_B=.5$，配方为参考配方或 arxiv/freelaw 间 1\% 转移。这些范围是敏感性分析，不是置信区间。324 个条件格点均通过正性与单纯形检查。例如在 $N=1$B、$D=100$B、$Q_B=.5$，将 1\% 配比从 freelaw 转向 arxiv，令 arxiv 权重为 1、$\lambda=.5,\eta=0$，则 $r_w=-.0075105896$，B7 基线为 $2.5673967253$，条件 Loss 为 $2.5577553937$。同一曲面在 $Q_B$ 增至 $.6$ 时，保持 Loss 所需的 $N$ 为约 $.78174038$B；两数均可由接口和网格重算，仅是明确假设下的数值例子。
+预声明分析网格取 $\lambda\in\{0,.25,.5,1\}$、$\eta\in\{-.5,0,.5\}$，目标权重为 arxiv、pile\_cc 单目标及 13 域等权，$N\in\{.1,1,10\}$B、$D=100$B、$Q_B=.5$。配方为参考配方，或从 freelaw、github、pile\_cc 向 arxiv 转移 1\%，另含 arxiv 向 freelaw 的反向转移 1\%，从而覆盖 inferred、direct、near-direct 映射等级。这些范围是敏感性分析，不是置信区间。540 个条件格点均通过正性与单纯形检查。例如在 $N=1$B、$D=100$B、$Q_B=.5$，将 1\% 配比从 freelaw 转向 arxiv，令 arxiv 权重为 1、$\lambda=.5,\eta=0$，则 $r_w=-.0075105896$，B7 基线为 $2.5673967253$，条件 Loss 为 $2.5577553937$。同一曲面在 $Q_B$ 增至 $.6$ 时，保持 Loss 所需的 $N$ 为约 $.78174038$B；两数均可由接口和网格重算，仅是明确假设下的数值例子。
 
-题目数据门禁的机器结果位于 \texttt{outputs/cyj/q2\_joint\_scenarios/requirement\_coverage.json}：B1 主拟合 1176 行；B2 半合成 1029 行与 B3 插值轨迹仅作形状检查；B4 57 行、B5 44 行中各仅 8 行落在 B1 的 $N,D$ 矩形内，且 tokenizer、语料、对数底、聚合方式均未核实，不能合算外测 RMSE；B6/B7 嵌套而 B8 冲突；B9 132 元数据行、B10 128 estimated 行只作域外压力。A 侧 held-out 的 13 target 排序指标由 CHM v1.3 原接口消费，没有重复拟合或把 A12--A15 估算项用作校准。B7 的簇 bootstrap 和嵌套 OOF 不确定性只覆盖 B 原生条件模型，不能吞并 $\lambda,\eta,w$ 与 A/B 映射不确定性。完整四变量\emph{唯一实证预测器}尚不可识别；本文交付的是可计算、可反驳的条件标度律，正式科学准入保持关闭。
+在本预声明网格的 $\lambda>0$ 部分，github 向 arxiv 转移 1\% 对三组目标权重均降低条件 Loss；freelaw 或 pile\_cc 向 arxiv 的方向随目标权重改变。这仅是所给 Ridge、候选桥接与配方点下的排序敏感性，不证明干预有效，也不能外推到未核定的 A 训练配方凸包。逐格范围和映射等级见 \texttt{robustness\_summary.json}。
+
+
+
+题目数据门禁的机器结果见 \texttt{requirement\_coverage.json}：B1 主拟合 1176 行；B2 半合成 1029 行与 B3 插值轨迹仅作形状检查；B4 57 行、B5 44 行中各仅 8 行落在 B1 的 $N,D$ 矩形内，且 tokenizer、语料、对数底、聚合方式均未核实，不能合算外测 RMSE；B6/B7 嵌套而 B8 冲突；B9 132 元数据行、B10 128 estimated 行只作域外压力。A 侧 held-out 的 13 target 排序指标由 CHM v1.3 原接口消费，没有重复拟合或把 A12--A15 估算项用作校准。B7 的簇 bootstrap 和嵌套 OOF 不确定性只覆盖 B 原生条件模型，不能吞并 $\lambda,\eta,w$ 与 A/B 映射不确定性。完整四变量\emph{唯一实证预测器}尚不可识别；本文交付的是可计算、可反驳的条件标度律，正式科学准入保持关闭。
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=.95\textwidth]{../../figures/cyj/q2_joint_scenarios/lambda_by_scale.png}
+\caption{假设性迁移倍数与规模指数敏感性。纵轴为条件 Loss 与 B7 基线之差；曲线不是实测误差。输入为 \texttt{scenario\_grid.csv}，绘图程序与图像哈希见 CYJ 图表 manifest。}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=.68\textwidth]{../../figures/cyj/q2_joint_scenarios/weight_sensitivity.png}
+\caption{相同配方转移在不同目标权重下的条件 Loss。目标权重是决策效用情景，不能解释为官方统一验证 Loss；来源与哈希同前图。}
+\end{figure}
+
+\clearpage
