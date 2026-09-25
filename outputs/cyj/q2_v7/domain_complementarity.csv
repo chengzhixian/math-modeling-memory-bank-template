@@ -26,6 +26,12 @@ minimax_13,continuous_hull,mixed_two_feasible_directions,"1,2",convex_hull,True,
 arxiv_only,observed_512,self_direction,1,convex_hull,True,2.064270628091256,False,,
 arxiv_only,observed_512,self_direction,2,convex_hull,True,1.4296060990314008,False,,
 arxiv_only,observed_512,mixed_two_feasible_directions,"1,2",convex_hull,True,1.7095601272782623,False,1.7096492221924109,8.909491414854642e-05
+arxiv_only,continuous_hull,self_direction,1,convex_hull,True,1.6359974294968833,False,,
+arxiv_only,continuous_hull,self_direction,2,convex_hull,True,1.126962931711865,False,,
+arxiv_only,continuous_hull,mixed_two_feasible_directions,"1,2",convex_hull,True,1.3483669449989317,False,1.3484974470401312,0.00013050204119946507
 pile_cc_only,observed_512,self_direction,1,convex_hull,True,-0.010299797707831416,False,,
 pile_cc_only,observed_512,self_direction,2,convex_hull,True,0.17896474219428912,False,,
 pile_cc_only,observed_512,mixed_two_feasible_directions,"1,2",convex_hull,True,-0.03480135460185232,False,-0.03480118415666311,1.704451892056702e-07
+pile_cc_only,continuous_hull,self_direction,1,convex_hull,True,0.02737617379545568,False,,
+pile_cc_only,continuous_hull,self_direction,2,convex_hull,True,0.03984123600888165,False,,
+pile_cc_only,continuous_hull,mixed_two_feasible_directions,"1,2",convex_hull,True,-0.08406118362591938,False,-0.08406204621280722,-8.625868878342491e-07

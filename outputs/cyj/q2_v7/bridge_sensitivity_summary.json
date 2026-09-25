@@ -1,8 +1,8 @@
 {
-  "scenarios": 1440,
-  "valid": 1436,
+  "scenarios": 1728,
+  "valid": 1719,
   "Loss_range": [
-    0.12397301543649285,
+    0.10169017711754842,
     3.0592931965585177
   ],
   "range_is_confidence_interval": false

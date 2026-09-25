@@ -1,0 +1,13 @@
+policy,support,N_params_B,D_tokens_B,Q_score,conditional_bridge_factor_fixed,bootstrap_draws,parameter_only_q025,parameter_only_median,parameter_only_q975,interval_type,joint_A_B_coverage_claim
+equal_13,observed_512,1.0,100.0,0.5,0.8913079302086115,200,2.2795647810212825,2.288150059154295,2.296379499326905,B7_ND_cluster_parameter_bootstrap_conditional_on_fixed_bridge,False
+equal_13,continuous_hull,1.0,100.0,0.5,0.8912663733497092,200,2.2794584972682124,2.288043375116228,2.296272431594637,B7_ND_cluster_parameter_bootstrap_conditional_on_fixed_bridge,False
+quality_direct,observed_512,1.0,100.0,0.5,0.9494022201255851,200,2.4281438441988956,2.437288699577855,2.4460545239416502,B7_ND_cluster_parameter_bootstrap_conditional_on_fixed_bridge,False
+quality_direct,continuous_hull,1.0,100.0,0.5,0.9021342458627253,200,2.3072536268588384,2.315943186495354,2.3242725859681626,B7_ND_cluster_parameter_bootstrap_conditional_on_fixed_bridge,False
+quality_direct_and_near,observed_512,1.0,100.0,0.5,0.9348478761773423,200,2.390920378827597,2.39992504349737,2.408556487700601,B7_ND_cluster_parameter_bootstrap_conditional_on_fixed_bridge,False
+quality_direct_and_near,continuous_hull,1.0,100.0,0.5,0.9075471521232508,200,2.321097406383582,2.3298391043487037,2.3382184811488997,B7_ND_cluster_parameter_bootstrap_conditional_on_fixed_bridge,False
+minimax_13,observed_512,1.0,100.0,0.5,0.9494606207173694,200,2.4282932066444776,2.437438624551051,2.446204988127121,B7_ND_cluster_parameter_bootstrap_conditional_on_fixed_bridge,False
+minimax_13,continuous_hull,1.0,100.0,0.5,0.9687951422997529,200,2.477742216311408,2.487073868671561,2.4960187477563966,B7_ND_cluster_parameter_bootstrap_conditional_on_fixed_bridge,False
+arxiv_only,observed_512,1.0,100.0,0.5,0.6161215353446444,200,1.5757617599920701,1.5816963809747806,1.587385026999717,B7_ND_cluster_parameter_bootstrap_conditional_on_fixed_bridge,False
+arxiv_only,continuous_hull,1.0,100.0,0.5,0.5993257719974207,200,1.5328057519739005,1.5385785923924478,1.5441121632464643,B7_ND_cluster_parameter_bootstrap_conditional_on_fixed_bridge,False
+pile_cc_only,observed_512,1.0,100.0,0.5,0.8903351809639919,200,2.2770769259897663,2.285652834383617,2.293873293168942,B7_ND_cluster_parameter_bootstrap_conditional_on_fixed_bridge,False
+pile_cc_only,continuous_hull,1.0,100.0,0.5,0.8713281945913774,200,2.228465604066239,2.236858432899201,2.2449034003061668,B7_ND_cluster_parameter_bootstrap_conditional_on_fixed_bridge,False

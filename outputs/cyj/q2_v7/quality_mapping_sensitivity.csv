@@ -17,5 +17,9 @@ minimax_13,continuous_hull,quality_direct,0.24114723581804381,1.1793907141972584
 minimax_13,continuous_hull,quality_direct_and_near,0.5465986936084082,0.7521544110638756,False,11
 arxiv_only,observed_512,quality_direct,0.679,2.6886935343361333,True,11
 arxiv_only,observed_512,quality_direct_and_near,0.9480000000000001,2.049685324829596,True,11
+arxiv_only,continuous_hull,quality_direct,0.9313047616075887,1.5815857253743786,True,11
+arxiv_only,continuous_hull,quality_direct_and_near,0.9416344233649526,1.5643384247938648,True,11
 pile_cc_only,observed_512,quality_direct,0.10489510489510491,2.023655720306036,False,11
 pile_cc_only,observed_512,quality_direct_and_near,0.9490509490509491,0.6121217896106902,False,11
+pile_cc_only,continuous_hull,quality_direct,0.0014180947580645167,2.6886935343361333,False,11
+pile_cc_only,continuous_hull,quality_direct_and_near,0.7070667842741938,0.4417549739135696,False,11

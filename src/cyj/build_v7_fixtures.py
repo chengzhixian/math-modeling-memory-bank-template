@@ -74,10 +74,23 @@ def main():
         dump(exp, {"exit_code": 2, "error_contains": error})
         files[req.name] = hashlib.sha256(req.read_bytes()).hexdigest()
         files[exp.name] = hashlib.sha256(exp.read_bytes()).hexdigest()
-    dump(OUT / "manifest.json", {"schema_version": "cyj.v7.fixtures.v1", "count": len(scenarios) + len(raw_cases),
+    integrity_cases = {
+        "invalid_manifest": ("manifest_identity", "Q1 v2 manifest identity mismatch:"),
+        "invalid_file_hash": ("model_file_hash", "Q1 v2 identity mismatch: model"),
+    }
+    for name, (mutation, error) in integrity_cases.items():
+        req = OUT / f"{name}.request.json"
+        exp = OUT / f"{name}.expected.json"
+        dump(req, {"test_kind": "consumer_integrity", "mutation": mutation})
+        dump(exp, {"exit_code": 2, "error_contains": error})
+        files[req.name] = hashlib.sha256(req.read_bytes()).hexdigest()
+        files[exp.name] = hashlib.sha256(exp.read_bytes()).hexdigest()
+    count = len(scenarios) + len(raw_cases) + len(integrity_cases)
+    dump(OUT / "manifest.json", {"schema_version": "cyj.v7.fixtures.v1", "count": count,
                                   "Q1_manifest_sha256": q1.manifest_sha256, "files": files,
-                                  "raw_parser_cases": list(raw_cases)})
-    return len(scenarios) + len(raw_cases)
+                                  "raw_parser_cases": list(raw_cases),
+                                  "consumer_integrity_cases": list(integrity_cases)})
+    return count
 
 
 if __name__ == "__main__":

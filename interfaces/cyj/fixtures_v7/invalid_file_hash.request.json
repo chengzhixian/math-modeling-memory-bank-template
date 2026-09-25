@@ -1,0 +1,4 @@
+{
+  "test_kind": "consumer_integrity",
+  "mutation": "model_file_hash"
+}

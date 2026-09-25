@@ -1,8 +1,28 @@
 {
   "Q1_version": "chm.q1.v2.0",
+  "expected_Q1_manifest_sha256": "c621f7e405106e42720f918f490235b5e8becefb0f7c8cb997736e96337117a9",
+  "actual_Q1_manifest_sha256": "c621f7e405106e42720f918f490235b5e8becefb0f7c8cb997736e96337117a9",
   "Q1_manifest_sha256": "c621f7e405106e42720f918f490235b5e8becefb0f7c8cb997736e96337117a9",
   "Q1_producer_commit": "333b1f0bbed65da43f6be2f197d9582555dc755d",
   "Q1_main_integration_commit": "f9693bbf4c205aa46d3719f6f8a1d6f26561d05f",
+  "Q1_model_owner_release_evidence": [
+    "interfaces/chm/Q1_V2_DOWNSTREAM.md",
+    "interfaces/chm/q1_interface_v2.json"
+  ],
+  "Q1_bounds_main_release_commit": "f9693bbf4c205aa46d3719f6f8a1d6f26561d05f",
   "Q1_hull_bounds_sha256": "969f810c0bf54f03492afc243091c339aaf4b27aed5c2164c186e651c7589acc",
+  "Q1_current_bounds_revalidated": true,
+  "CHM_signoff_audit_bounds_hash_matches_current": false,
+  "CHM_signoff_audit_bounds_sha256": "b27939f9d3894a810ee2ec4336f5583fca95e551e318963ac81bfbe77c0dae70",
+  "bounds_difference": "published CHM signoff hash differs from current main bounds file; four reported upper/lower values and gaps regenerated exactly",
+  "CYJ_consumption_decision": "accept_current_main_bounds_as_conditional_numerical_candidates_after_full_reproduction; CHM_owner_signoff_refresh_pending",
+  "affected_rebuilt_outputs": [
+    "policy_details.json",
+    "policy_solutions.csv",
+    "bridge_sensitivity.csv",
+    "b7_parameter_uncertainty.csv",
+    "paper/latex/sections/cyj/q2_v7_tail.tex"
+  ],
+  "CYJ_single_target_bounds_sha256": "03dbb4c413ea3cad2ed3a7a29ac0219bd5f81a268367d1b36fb0831a6b103443",
   "B7_coefficients_source_sha256": "d6f5b665d3806a322d0ebf87da46889822d2eff89324eacded6040383e7b6733"
 }

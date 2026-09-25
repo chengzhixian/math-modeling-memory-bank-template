@@ -1,6 +1,6 @@
 {
   "schema_version": "cyj.v7.fixtures.v1",
-  "count": 19,
+  "count": 21,
   "Q1_manifest_sha256": "c621f7e405106e42720f918f490235b5e8becefb0f7c8cb997736e96337117a9",
   "files": {
     "baseline_reference.request.json": "45548579e55f685ac6de6fd4d7b5b3d9c78a42e7b036b46b16ebdace137759ba",
@@ -40,10 +40,18 @@
     "duplicate_key.request.json": "c61932794d54ecd8f6cfccbf347448d54a1f79cac0aeec55a2835078f982870f",
     "duplicate_key.expected.json": "37523452b07eb8577e7a0e6999a10ed0c3694dd468e1b30f948891b7f6dbcdfc",
     "nonfinite_json.request.json": "2510e167082a4f71b80739a3f1f3c3d38f603565825e60c14d7ef06855db762f",
-    "nonfinite_json.expected.json": "543a5b15bf50d5034b29632121735db0233b64018f9255ecdf290f063e8eb026"
+    "nonfinite_json.expected.json": "543a5b15bf50d5034b29632121735db0233b64018f9255ecdf290f063e8eb026",
+    "invalid_manifest.request.json": "e638446da02dd8e098460974be7b5f681c79adaf9c73a8d4f2ebb3a50cdecd1e",
+    "invalid_manifest.expected.json": "5f7f2ea2947523a06acec4d75b63d08405a897df43237187713f1c78d28f9fe4",
+    "invalid_file_hash.request.json": "06ab15cdfae11d9464dffe1df4cd92b4d4bde2f7111bd2562e2c3fa78f05d6e7",
+    "invalid_file_hash.expected.json": "c0aab3af80790769af327ca0084cbfab13f73d0d8f50e81f40407f670fee7ccc"
   },
   "raw_parser_cases": [
     "duplicate_key",
     "nonfinite_json"
+  ],
+  "consumer_integrity_cases": [
+    "invalid_manifest",
+    "invalid_file_hash"
   ]
 }

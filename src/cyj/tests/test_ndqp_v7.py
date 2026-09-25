@@ -5,12 +5,13 @@ import shutil
 import sys
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "src/cyj"))
 
-from chm_q1_v2_consumer import Q1V2Consumer
+from chm_q1_v2_consumer import Q1V2Consumer, sha256
 from ndqp_scenarios_v7 import ConditionalV7, THETA, b7, request, VERSION
 
 
@@ -45,6 +46,13 @@ class ConditionalV7Tests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "identity mismatch: model"):
                 Q1V2Consumer(root)
 
+    def test_bound_file_hash_fail_closed(self):
+        def changed_bounds(path):
+            return "0"*64 if Path(path).name == "bounds.json" else sha256(path)
+        with mock.patch("chm_q1_v2_consumer.sha256", side_effect=changed_bounds):
+            with self.assertRaisesRegex(ValueError, "hull bounds identity mismatch"):
+                Q1V2Consumer(ROOT)
+
     def test_b7_direct_formula_and_gradients(self):
         e, a, b, alpha, beta, g0, gn, gd = THETA
         expected = e+a*1**-alpha+b*100**-beta+(1-.5)*(g0+gn*math.log(1)+gd*math.log(1))
@@ -68,6 +76,19 @@ class ConditionalV7Tests(unittest.TestCase):
         self.assertEqual(baseline["Loss"], equivalent["Loss"])
         self.assertEqual(off["Loss"], off["B7_loss"])
         self.assertAlmostEqual(off["gradients"]["p_ambient"]["arxiv"], 0)
+        with self.assertRaisesRegex(ValueError, "bridge scale"):
+            self.model.predict_sensitivity(.07, 100, .5, self.p, self.w, p_policy="observed_512",
+                                           bridge_lambda=1, eta=1e300, bridge_model="exp_bridge")
+
+    def test_q1_explicit_polynomial_recalculation(self):
+        upstream = self.q1.upstream
+        x = self.q1.point(self.p)
+        k = 0
+        direct = upstream.intercepts[k] + float(x @ upstream.main[k])
+        direct += sum(upstream.gamma[k, j]*x[a]*x[b]
+                      for j, (a, b) in enumerate(upstream.pairs))
+        relative = direct/upstream.reference_loss[k]-1
+        self.assertAlmostEqual(relative, self.q1.relative_effect(self.p, self.q1.targets[k]), places=12)
 
     def test_sensitivity_gradients(self):
         for form in ("exp_bridge", "linear_bridge"):

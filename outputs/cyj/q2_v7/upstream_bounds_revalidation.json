@@ -1,0 +1,65 @@
+{
+  "schema_version": "cyj.q1_v2.bounds_revalidation.v1",
+  "Q1_manifest_sha256": "c621f7e405106e42720f918f490235b5e8becefb0f7c8cb997736e96337117a9",
+  "current_bounds_sha256": "969f810c0bf54f03492afc243091c339aaf4b27aed5c2164c186e651c7589acc",
+  "CHM_signoff_audit_bounds_sha256": "b27939f9d3894a810ee2ec4336f5583fca95e551e318963ac81bfbe77c0dae70",
+  "CHM_signoff_hash_matches_current_bounds": false,
+  "stale_signoff_note": "CHM audit signs earlier bytes; CYJ regenerated current numerical bounds",
+  "method": "rerun_CHM_McCormick_branch_and_bound_plus_CYJ_support_check",
+  "scope": "floating_point_numerical_reproduction_not_interval_arithmetic_proof_or_CHM_owner_signoff",
+  "all_four_reproduced": true,
+  "rows": [
+    {
+      "policy": "unconstrained",
+      "mode": "weighted",
+      "published_and_reproduced_gap": 0.0009621355938668197,
+      "numeric_fields_absolute_errors": {
+        "lower_bound_relative": 0.0,
+        "feasible_upper_bound_relative": 0.0,
+        "absolute_gap_relative": 0.0,
+        "best_observed_A4_objective_relative": 0.0
+      },
+      "nodes_reproduced": 205,
+      "candidate_feasible": true
+    },
+    {
+      "policy": "quality_direct",
+      "mode": "weighted",
+      "published_and_reproduced_gap": 0.00044096953610379963,
+      "numeric_fields_absolute_errors": {
+        "lower_bound_relative": 0.0,
+        "feasible_upper_bound_relative": 0.0,
+        "absolute_gap_relative": 0.0,
+        "best_observed_A4_objective_relative": 0.0
+      },
+      "nodes_reproduced": 187,
+      "candidate_feasible": true
+    },
+    {
+      "policy": "quality_direct_and_near",
+      "mode": "weighted",
+      "published_and_reproduced_gap": 0.0007503979151537443,
+      "numeric_fields_absolute_errors": {
+        "lower_bound_relative": 0.0,
+        "feasible_upper_bound_relative": 0.0,
+        "absolute_gap_relative": 0.0,
+        "best_observed_A4_objective_relative": 0.0
+      },
+      "nodes_reproduced": 245,
+      "candidate_feasible": true
+    },
+    {
+      "policy": "unconstrained",
+      "mode": "minimax",
+      "published_and_reproduced_gap": 0.0009955585002827429,
+      "numeric_fields_absolute_errors": {
+        "lower_bound_relative": 0.0,
+        "feasible_upper_bound_relative": 0.0,
+        "absolute_gap_relative": 0.0,
+        "best_observed_A4_objective_relative": 0.0
+      },
+      "nodes_reproduced": 435,
+      "candidate_feasible": true
+    }
+  ]
+}

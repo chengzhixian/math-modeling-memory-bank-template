@@ -43,6 +43,12 @@
       },
       "n_feasible": 512,
       "global_within_observed_set": true,
+      "tie_tolerance_relative": 1e-10,
+      "tie_recipe_indices": [
+        "136"
+      ],
+      "next_distinct_objective_gap": 0.024826177473232902,
+      "regret_within_observed_set": 0.0,
       "baseline_loss": 2.2883410612300255,
       "B7_loss": 2.5673967252758954,
       "r_w": -0.11506531053442215,
@@ -78,6 +84,8 @@
       "objective": -0.11511193620251012,
       "lower_bound_relative": -0.11607407179637694,
       "absolute_gap_relative": 0.0009621355938668197,
+      "candidate_regret_upper_relative": 0.0009621355938668197,
+      "candidate_regret_upper_conditional_Loss": 0.002200532957542215,
       "certificate_kind": "McCormick_LP_relaxation_numerical_bounds",
       "support": {
         "in_A4_hull": true,
@@ -86,6 +94,7 @@
         "mode": "convex_hull"
       },
       "source_sha256": "969f810c0bf54f03492afc243091c339aaf4b27aed5c2164c186e651c7589acc",
+      "bound_producer_scope": "CHM_main_release_revalidated_by_CYJ",
       "global_optimality": "numerical_gap_below_0.001_not_interval_arithmetic",
       "baseline_loss": 2.2882343682865667,
       "B7_loss": 2.5673967252758954,
@@ -137,6 +146,12 @@
       },
       "n_feasible": 91,
       "global_within_observed_set": true,
+      "tie_tolerance_relative": 1e-10,
+      "tie_recipe_indices": [
+        "301"
+      ],
+      "next_distinct_objective_gap": 6.151112186356111e-05,
+      "regret_within_observed_set": 0.0,
       "baseline_loss": 2.4374921509200917,
       "B7_loss": 2.5673967252758954,
       "r_w": -0.05192273441643689,
@@ -172,6 +187,8 @@
       "objective": -0.10299193866039925,
       "lower_bound_relative": -0.10343290819650305,
       "absolute_gap_relative": 0.00044096953610379963,
+      "candidate_regret_upper_relative": 0.00044096953610379963,
+      "candidate_regret_upper_conditional_Loss": 0.0010211204836850563,
       "certificate_kind": "McCormick_LP_relaxation_numerical_bounds",
       "support": {
         "in_A4_hull": true,
@@ -194,6 +211,7 @@
         "mode": "quality_direct"
       },
       "source_sha256": "969f810c0bf54f03492afc243091c339aaf4b27aed5c2164c186e651c7589acc",
+      "bound_producer_scope": "CHM_main_release_revalidated_by_CYJ",
       "global_optimality": "numerical_gap_below_0.001_not_interval_arithmetic",
       "baseline_loss": 2.3161365085872005,
       "B7_loss": 2.5673967252758954,
@@ -245,6 +263,12 @@
       },
       "n_feasible": 108,
       "global_within_observed_set": true,
+      "tie_tolerance_relative": 1e-10,
+      "tie_recipe_indices": [
+        "172"
+      ],
+      "next_distinct_objective_gap": 0.003407985373192826,
+      "regret_within_observed_set": 0.0,
       "baseline_loss": 2.4001253759288343,
       "B7_loss": 2.5673967252758954,
       "r_w": -0.06737146220598264,
@@ -280,6 +304,8 @@
       "objective": -0.09700975593037972,
       "lower_bound_relative": -0.09776015384553347,
       "absolute_gap_relative": 0.0007503979151537443,
+      "candidate_regret_upper_relative": 0.0007503979151537443,
+      "candidate_regret_upper_conditional_Loss": 0.001747796492032152,
       "certificate_kind": "McCormick_LP_relaxation_numerical_bounds",
       "support": {
         "in_A4_hull": true,
@@ -302,6 +328,7 @@
         "mode": "quality_direct_and_near"
       },
       "source_sha256": "969f810c0bf54f03492afc243091c339aaf4b27aed5c2164c186e651c7589acc",
+      "bound_producer_scope": "CHM_main_release_revalidated_by_CYJ",
       "global_optimality": "numerical_gap_below_0.001_not_interval_arithmetic",
       "baseline_loss": 2.330033586394699,
       "B7_loss": 2.5673967252758954,
@@ -353,6 +380,12 @@
       },
       "n_feasible": 512,
       "global_within_observed_set": true,
+      "tie_tolerance_relative": 1e-10,
+      "tie_recipe_indices": [
+        "477"
+      ],
+      "next_distinct_objective_gap": 0.0025900536515444106,
+      "regret_within_observed_set": 0.0,
       "baseline_loss": 2.437642088408193,
       "B7_loss": 2.5673967252758954,
       "r_w": -0.05186122329457333,
@@ -388,6 +421,8 @@
       "objective": -0.019784221015100245,
       "lower_bound_relative": -0.020779779515382988,
       "absolute_gap_relative": 0.0009955585002827429,
+      "candidate_regret_upper_relative": 0.0009955585002827429,
+      "candidate_regret_upper_conditional_Loss": null,
       "certificate_kind": "McCormick_LP_relaxation_numerical_bounds",
       "support": {
         "in_A4_hull": true,
@@ -396,6 +431,7 @@
         "mode": "convex_hull"
       },
       "source_sha256": "969f810c0bf54f03492afc243091c339aaf4b27aed5c2164c186e651c7589acc",
+      "bound_producer_scope": "CHM_main_release_revalidated_by_CYJ",
       "global_optimality": "numerical_gap_below_0.001_not_interval_arithmetic",
       "baseline_loss": 2.487281475803581,
       "B7_loss": 2.5673967252758954,
@@ -435,6 +471,12 @@
       },
       "n_feasible": 512,
       "global_within_observed_set": true,
+      "tie_tolerance_relative": 1e-10,
+      "tie_recipe_indices": [
+        "3"
+      ],
+      "next_distinct_objective_gap": 0.03414126724188393,
+      "regret_within_observed_set": 0.0,
       "baseline_loss": 1.5818284122157968,
       "B7_loss": 2.5673967252758954,
       "r_w": -0.48431103727182667,
@@ -447,8 +489,45 @@
       }
     },
     "continuous_hull": {
-      "status": "not_available",
-      "reason": "published CHM bound has different target weights"
+      "status": "numerically_bounded_feasible",
+      "p": {
+        "arxiv": 0.6064653020469296,
+        "freelaw": 0.0,
+        "nih_exporter": 0.0,
+        "pubmed_central": 0.05635297054418373,
+        "wikipedia_en": 0.006037818272591113,
+        "dm_mathematics": 0.0,
+        "github": 0.324839459560659,
+        "philpapers": 0.0,
+        "stackexchange": 0.0,
+        "enron_emails": 0.0,
+        "gutenberg_pg_19": 0.0,
+        "pile_cc": 0.00429184348477284,
+        "ubuntu_irc": 0.0013417373939091362,
+        "europarl": 0.0,
+        "hackernews": 0.0,
+        "pubmed_abstracts": 0.0,
+        "uspto_backgrounds": 0.0006708686969545681
+      },
+      "objective": -0.5119499689428373,
+      "lower_bound_relative": -0.5128574413548651,
+      "absolute_gap_relative": 0.000907472412027821,
+      "candidate_regret_upper_relative": 0.000907472412027821,
+      "candidate_regret_upper_conditional_Loss": 0.0013957007990700891,
+      "certificate_kind": "McCormick_LP_relaxation_numerical_bounds",
+      "support": {
+        "in_A4_hull": true,
+        "observed_index": null,
+        "residual": 0.0,
+        "mode": "convex_hull"
+      },
+      "source_sha256": "03dbb4c413ea3cad2ed3a7a29ac0219bd5f81a268367d1b36fb0831a6b103443",
+      "bound_producer_scope": "CYJ_single_target_numerical_extension",
+      "global_optimality": "numerical_gap_below_0.001_not_interval_arithmetic",
+      "baseline_loss": 1.5387070243996257,
+      "B7_loss": 2.5673967252758954,
+      "r_w": -0.5119499689428373,
+      "bridge_factor": 0.5993257719974207
     }
   },
   {
@@ -483,6 +562,12 @@
       },
       "n_feasible": 512,
       "global_within_observed_set": true,
+      "tie_tolerance_relative": 1e-10,
+      "tie_recipe_indices": [
+        "187"
+      ],
+      "next_distinct_objective_gap": 0.0033909780933620848,
+      "regret_within_observed_set": 0.0,
       "baseline_loss": 2.2858436280048746,
       "B7_loss": 2.5673967252758954,
       "r_w": -0.11615727933016817,
@@ -495,8 +580,45 @@
       }
     },
     "continuous_hull": {
-      "status": "not_available",
-      "reason": "published CHM bound has different target weights"
+      "status": "numerically_bounded_feasible",
+      "p": {
+        "arxiv": 0.0014180947580645167,
+        "freelaw": 0.14552154737903203,
+        "nih_exporter": 0.0,
+        "pubmed_central": 0.14640083165322612,
+        "wikipedia_en": 0.0,
+        "dm_mathematics": 0.0,
+        "github": 0.0,
+        "philpapers": 0.0010108366935483856,
+        "stackexchange": 0.0,
+        "enron_emails": 0.0,
+        "gutenberg_pg_19": 0.00014654737903225837,
+        "pile_cc": 0.705502142137097,
+        "ubuntu_irc": 0.0,
+        "europarl": 0.0,
+        "hackernews": 0.0,
+        "pubmed_abstracts": 0.0,
+        "uspto_backgrounds": 0.0
+      },
+      "objective": -0.13773657104501102,
+      "lower_bound_relative": -0.13844509327610993,
+      "absolute_gap_relative": 0.000708522231098907,
+      "candidate_regret_upper_relative": 0.000708522231098907,
+      "candidate_regret_upper_conditional_Loss": 0.0015844348532391588,
+      "certificate_kind": "McCormick_LP_relaxation_numerical_bounds",
+      "support": {
+        "in_A4_hull": true,
+        "observed_index": null,
+        "residual": 4.440892098500626e-16,
+        "mode": "convex_hull"
+      },
+      "source_sha256": "03dbb4c413ea3cad2ed3a7a29ac0219bd5f81a268367d1b36fb0831a6b103443",
+      "bound_producer_scope": "CYJ_single_target_numerical_extension",
+      "global_optimality": "numerical_gap_below_0.001_not_interval_arithmetic",
+      "baseline_loss": 2.2370451534344604,
+      "B7_loss": 2.5673967252758954,
+      "r_w": -0.13773657104501102,
+      "bridge_factor": 0.8713281945913774
     }
   }
 ]

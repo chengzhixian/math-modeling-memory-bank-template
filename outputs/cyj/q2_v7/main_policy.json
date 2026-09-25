@@ -42,6 +42,12 @@
     },
     "n_feasible": 512,
     "global_within_observed_set": true,
+    "tie_tolerance_relative": 1e-10,
+    "tie_recipe_indices": [
+      "136"
+    ],
+    "next_distinct_objective_gap": 0.024826177473232902,
+    "regret_within_observed_set": 0.0,
     "baseline_loss": 2.2883410612300255,
     "B7_loss": 2.5673967252758954,
     "r_w": -0.11506531053442215,
@@ -77,6 +83,8 @@
     "objective": -0.11511193620251012,
     "lower_bound_relative": -0.11607407179637694,
     "absolute_gap_relative": 0.0009621355938668197,
+    "candidate_regret_upper_relative": 0.0009621355938668197,
+    "candidate_regret_upper_conditional_Loss": 0.002200532957542215,
     "certificate_kind": "McCormick_LP_relaxation_numerical_bounds",
     "support": {
       "in_A4_hull": true,
@@ -85,6 +93,7 @@
       "mode": "convex_hull"
     },
     "source_sha256": "969f810c0bf54f03492afc243091c339aaf4b27aed5c2164c186e651c7589acc",
+    "bound_producer_scope": "CHM_main_release_revalidated_by_CYJ",
     "global_optimality": "numerical_gap_below_0.001_not_interval_arithmetic",
     "baseline_loss": 2.2882343682865667,
     "B7_loss": 2.5673967252758954,

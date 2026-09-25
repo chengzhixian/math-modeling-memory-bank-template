@@ -61,7 +61,12 @@ class ConditionalV7:
         w = self.q1.weight_vector(weights)
         r = self.q1.weighted_effect(p, weights)
         grad_r = self.q1.gradient(p, weights)
-        a = 0.0 if lam == 0 else lam * float(n) ** -eta
+        try:
+            a = 0.0 if lam == 0 else lam * float(n) ** -eta
+        except OverflowError as exc:
+            raise ValueError("bridge scale overflows numerical range") from exc
+        if not math.isfinite(a) or (lam > 0 and a == 0):
+            raise ValueError("bridge scale outside finite nonzero numerical range")
         z = a * r
         if not math.isfinite(z):
             raise ValueError("nonfinite bridge exponent")

@@ -16,6 +16,7 @@ if str(CHM_SOURCE) not in sys.path:
 from q1_interface_v2 import Q1Interface  # noqa: E402
 
 EXPECTED_SHA = "c621f7e405106e42720f918f490235b5e8becefb0f7c8cb997736e96337117a9"
+EXPECTED_BOUNDS_SHA = "969f810c0bf54f03492afc243091c339aaf4b27aed5c2164c186e651c7589acc"
 SOURCE_COMMIT = "333b1f0bbed65da43f6be2f197d9582555dc755d"
 POLICY_TOL = 1e-10
 
@@ -46,6 +47,8 @@ class Q1V2Consumer:
         if len(self.qa_rows) != 17 or sum(row["Q_A"] is None for row in self.qa_rows.values()) != 11:
             raise ValueError("Q1 v2 QA mapping does not match signed primary scope")
         self.bounds_path = self.root / "outputs/chm/q1_v2_hull_bounds/bounds.json"
+        if sha256(self.bounds_path) != EXPECTED_BOUNDS_SHA:
+            raise ValueError("CHM hull bounds identity mismatch")
         self.bounds = json.loads(self.bounds_path.read_text(encoding="utf-8"))
         if len(self.bounds) != 4 or any(row["Q1_manifest_sha256"] != actual for row in self.bounds):
             raise ValueError("CHM hull bounds do not match pinned Q1 release")
