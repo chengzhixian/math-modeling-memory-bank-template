@@ -1,3 +1,0 @@
-quality_domain,sample_n,extended_n,sample_Q_median,extended_Q_median,delta_Q_median,extended_scope
-arxiv,1419,17523,2.6886935343361333,2.7252526038451155,0.036559069508982134,arxiv_extended
-github,10000,203752,-0.48535057808024096,-0.505484640415014,-0.020134062334772995,github_extended

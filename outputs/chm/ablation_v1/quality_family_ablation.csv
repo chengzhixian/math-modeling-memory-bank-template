@@ -1,4 +1,0 @@
-removed_family,rank_spearman_vs_primary,changed_rank_domains,top_domain,bottom_domain
-rps,0.8214285714285715,4,arxiv,c4
-dsir,0.9642857142857145,2,arxiv,github
-model,1.0,0,book,github

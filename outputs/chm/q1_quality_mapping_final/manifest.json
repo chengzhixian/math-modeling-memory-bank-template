@@ -1,9 +1,0 @@
-{
-  "schema_version": "chm.q1.quality_mapping.v1",
-  "counts": {
-    "direct": 3,
-    "near_direct": 3,
-    "inferred": 11
-  },
-  "scientific_limit": "No paired per-mixture Q_A and Loss; full 17-domain quality effect is NOT_IDENTIFIED"
-}
