@@ -1,0 +1,169 @@
+{
+  "exit_code": 0,
+  "output": {
+    "empirically_calibrated_A_to_B": false,
+    "mode": "conditional_diagnostic",
+    "ready_for_Q3": false,
+    "results": [
+      {
+        "assumptions": {
+          "N_ref_B": 1.0,
+          "bridge_lambda": 0.0,
+          "eta": 0.0,
+          "weights": {
+            "arxiv": 0.07692307692307693,
+            "dm_mathematics": 0.07692307692307693,
+            "freelaw": 0.07692307692307693,
+            "github": 0.07692307692307693,
+            "gutenberg_pg_19": 0.07692307692307693,
+            "hackernews": 0.07692307692307693,
+            "pile_cc": 0.07692307692307693,
+            "pubmed_abstracts": 0.07692307692307693,
+            "pubmed_central": 0.07692307692307693,
+            "stackexchange": 0.07692307692307693,
+            "ubuntu_irc": 0.07692307692307693,
+            "uspto_backgrounds": 0.07692307692307693,
+            "wikipedia_en": 0.07692307692307693
+          }
+        },
+        "baseline_loss": 2.5673967252758954,
+        "empirically_calibrated_A_to_B": false,
+        "factor": 1.0,
+        "gradient": {
+          "D": -0.0010061005339727154,
+          "N": -0.1510620579457051,
+          "Q_B": -0.3701472576630735,
+          "p": {
+            "arxiv": 0.0,
+            "dm_mathematics": -0.0,
+            "enron_emails": -0.0,
+            "europarl": -0.0,
+            "freelaw": 0.0,
+            "github": 0.0,
+            "gutenberg_pg_19": 0.0,
+            "hackernews": -0.0,
+            "nih_exporter": -0.0,
+            "philpapers": -0.0,
+            "pile_cc": 0.0,
+            "pubmed_abstracts": 0.0,
+            "pubmed_central": 0.0,
+            "stackexchange": 0.0,
+            "ubuntu_irc": -0.0,
+            "uspto_backgrounds": 0.0,
+            "wikipedia_en": 0.0
+          }
+        },
+        "improvement_elasticity": {
+          "D": 0.039187575650763466,
+          "N": 0.05883861128999134,
+          "Q_B": 0.07208610457803265
+        },
+        "loss": 2.5673967252758954,
+        "minimum_factor_over_B7_N": 1.0,
+        "model_variant": "ridge_main",
+        "p_policy": "convex_hull",
+        "p_support": {
+          "certificate": [
+            {
+              "index": "30",
+              "weight": 0.02511482363289327
+            },
+            {
+              "index": "42",
+              "weight": 0.03138517854833337
+            },
+            {
+              "index": "83",
+              "weight": 0.058181997043952736
+            },
+            {
+              "index": "152",
+              "weight": 0.0429115206006302
+            },
+            {
+              "index": "186",
+              "weight": 0.12040750945769794
+            },
+            {
+              "index": "188",
+              "weight": 0.14950107296269205
+            },
+            {
+              "index": "204",
+              "weight": 0.009526105659319441
+            },
+            {
+              "index": "284",
+              "weight": 0.004555741649298959
+            },
+            {
+              "index": "292",
+              "weight": 0.0814499893258167
+            },
+            {
+              "index": "367",
+              "weight": 0.11122126551294229
+            },
+            {
+              "index": "387",
+              "weight": 0.09316866847451877
+            },
+            {
+              "index": "409",
+              "weight": 0.054445374128286914
+            },
+            {
+              "index": "435",
+              "weight": 0.08752693357810307
+            },
+            {
+              "index": "447",
+              "weight": 0.03541984358803116
+            },
+            {
+              "index": "484",
+              "weight": 0.0031301420560704957
+            },
+            {
+              "index": "491",
+              "weight": 0.054682887169746085
+            },
+            {
+              "index": "495",
+              "weight": 0.037370946611666185
+            }
+          ],
+          "inside": true,
+          "max_residual": 6.522560269672795e-16,
+          "status": "in_Q1_A4_convex_hull"
+        },
+        "q1_export_manifest_sha256": "b0dda7caac30513c0f37e74ccb143064606847fdc35fd7607c999ac2f8647ecb",
+        "q1_export_status": "Q1_derived_export_pending_CHM_owner_signoff",
+        "qa_direct": {
+          "Q_A_coordinate": "Q1 family-balanced z-score; never B7 Q_score",
+          "covered_mass": 0.3231556093473321,
+          "mapping_policy": "direct",
+          "mean_Q_A_on_mapped": 0.8574247439016351,
+          "unmapped_mass": 0.6768443906526679,
+          "weighted_Q_A": 0.2770816155850131
+        },
+        "qa_direct_and_near": {
+          "Q_A_coordinate": "Q1 family-balanced z-score; never B7 Q_score",
+          "covered_mass": 0.5646359074665894,
+          "mapping_policy": "direct_and_near",
+          "mean_Q_A_on_mapped": 0.7864741235637406,
+          "unmapped_mass": 0.4353640925334106,
+          "weighted_Q_A": 0.4440715304574033
+        },
+        "ready_for_Q3": false,
+        "relative_A_effect": 0.0,
+        "request_id": "reference_lambda_zero",
+        "scenario_solution_ready": true,
+        "schema_version": "cyj.ndqp.scenario.v6",
+        "support": "B7_rectangle_for_this_exact_p; p_simplex_checked; A_training_recipe_convex_hull_unverified"
+      }
+    ],
+    "scenario_solution_ready": true,
+    "schema_version": "cyj.ndqp.scenario.v6"
+  }
+}

@@ -1,0 +1,46 @@
+group,metric,value,sample_or_pair_count,role,source_file,interpretation
+B1,fit_rmse,0.00014657641916440922,1176,training,outputs/cyj/classic/classic_fit.json,Near-exact reconstruction warrants provenance caution
+B1,leave_one_N_group_mean_rmse,0.0001461276665284509,8,group_holdout,outputs/cyj/classic/classic_fit.json,Eight held-out N levels
+B1,token_tail_rmse,0.00011600413680986439,360,ordered_tail_holdout,outputs/cyj/classic/classic_fit.json,Within-family token tail
+B1,full_LOSO_RMSE_mean,0.0001461276665284509,8,group_holdout_term_ablation,outputs/cyj/ablation/b1_terms.json,Each reduced model refit within train folds; same B1 data source
+B1,no_E_LOSO_RMSE_mean,0.06368451673556055,8,group_holdout_term_ablation,outputs/cyj/ablation/b1_terms.json,Each reduced model refit within train folds; same B1 data source
+B1,no_N_LOSO_RMSE_mean,0.21260468679619052,8,group_holdout_term_ablation,outputs/cyj/ablation/b1_terms.json,Each reduced model refit within train folds; same B1 data source
+B1,no_D_LOSO_RMSE_mean,0.2552874887618868,8,group_holdout_term_ablation,outputs/cyj/ablation/b1_terms.json,Each reduced model refit within train folds; same B1 data source
+B2,trajectory_count,7,1029,shape_only,outputs/cyj/diagnostics/b2_b3_shapes.json,semi_synthetic_calibrated_from_pythia_scaling
+B2,fraction_curves_end_below_start,1.0,7,shape_only,outputs/cyj/diagnostics/b2_b3_shapes.json,B3 interpolation is not independent external validation
+B2,adjacent_loss_increase_fraction,0.32093933463796476,1022,shape_only,outputs/cyj/diagnostics/b2_b3_shapes.json,Adjacent observations by source trajectory order
+B2,mean_normalized_end_minus_start,-0.4989193055142703,7,shape_only,outputs/cyj/diagnostics/b2_b3_shapes.json,Each curve normalized by its own first loss
+B3,trajectory_count,8,4000,shape_only,outputs/cyj/diagnostics/b2_b3_shapes.json,interpolated_from_pythia_checkpoints
+B3,fraction_curves_end_below_start,1.0,8,shape_only,outputs/cyj/diagnostics/b2_b3_shapes.json,B3 interpolation is not independent external validation
+B3,adjacent_loss_increase_fraction,0.14178356713426854,3992,shape_only,outputs/cyj/diagnostics/b2_b3_shapes.json,Adjacent observations by source trajectory order
+B3,mean_normalized_end_minus_start,-0.45162011123043444,8,shape_only,outputs/cyj/diagnostics/b2_b3_shapes.json,Each curve normalized by its own first loss
+B4,rows,57,57,descriptive_within_source,outputs/cyj/diagnostics/b4_b5_comparability.json,Cross-source absolute RMSE is not a validated common coordinate
+B4,dominance_pairs,133,133,within_family_source_descriptive,outputs/cyj/diagnostics/b4_b5_comparability.json,"Pairs share family and source; both N,D weakly increase, at least one strictly"
+B4,concordant_pairs,131,133,within_family_source_descriptive,outputs/cyj/diagnostics/b4_b5_comparability.json,"Pairs share family and source; both N,D weakly increase, at least one strictly"
+B4,discordant_pairs,2,133,within_family_source_descriptive,outputs/cyj/diagnostics/b4_b5_comparability.json,"Pairs share family and source; both N,D weakly increase, at least one strictly"
+B4,tied_pairs,0,133,within_family_source_descriptive,outputs/cyj/diagnostics/b4_b5_comparability.json,"Pairs share family and source; both N,D weakly increase, at least one strictly"
+B4,mean_relative_loss_reduction,0.1606809943074941,133,within_family_source_descriptive,outputs/cyj/diagnostics/b4_b5_comparability.json,"Pairs share family and source; both N,D weakly increase, at least one strictly"
+B4,concordance_fraction_non_tied,0.9849624060150376,133,within_family_source_descriptive,outputs/cyj/diagnostics/b4_b5_comparability.json,"Pairs share family and source; both N,D weakly increase, at least one strictly"
+B5,rows,44,44,descriptive_within_source,outputs/cyj/diagnostics/b4_b5_comparability.json,Cross-source absolute RMSE is not a validated common coordinate
+B5,dominance_pairs,113,113,within_family_source_descriptive,outputs/cyj/diagnostics/b4_b5_comparability.json,"Pairs share family and source; both N,D weakly increase, at least one strictly"
+B5,concordant_pairs,113,113,within_family_source_descriptive,outputs/cyj/diagnostics/b4_b5_comparability.json,"Pairs share family and source; both N,D weakly increase, at least one strictly"
+B5,discordant_pairs,0,113,within_family_source_descriptive,outputs/cyj/diagnostics/b4_b5_comparability.json,"Pairs share family and source; both N,D weakly increase, at least one strictly"
+B5,tied_pairs,0,113,within_family_source_descriptive,outputs/cyj/diagnostics/b4_b5_comparability.json,"Pairs share family and source; both N,D weakly increase, at least one strictly"
+B5,mean_relative_loss_reduction,0.14532812178056437,113,within_family_source_descriptive,outputs/cyj/diagnostics/b4_b5_comparability.json,"Pairs share family and source; both N,D weakly increase, at least one strictly"
+B5,concordance_fraction_non_tied,1.0,113,within_family_source_descriptive,outputs/cyj/diagnostics/b4_b5_comparability.json,"Pairs share family and source; both N,D weakly increase, at least one strictly"
+B7,nested_outer_N_params_B_rmse,0.0500703991474233,450,group_holdout_semi_synthetic,outputs/cyj/quality/b7_nested_cv_summary.json,Axis-wise held-level aggregate
+B7,nested_outer_D_tokens_B_rmse,0.05003877712172856,450,group_holdout_semi_synthetic,outputs/cyj/quality/b7_nested_cv_summary.json,Axis-wise held-level aggregate
+B7,nested_outer_Q_score_rmse,0.04969678457762935,450,group_holdout_semi_synthetic,outputs/cyj/quality/b7_nested_cv_summary.json,Axis-wise held-level aggregate
+B7,nested_fold_count,24,1350,group_holdout_semi_synthetic,outputs/cyj/quality/b7_nested_cv_summary.json,24 held-level folds and 1350 pooled predictions across three axes
+B6,rows_nested_in_B7,360,360,nested_in_B7,outputs/cyj/b_data_audit.json,"B6 is a subset, not an independent validation set"
+B8,shared_B7_coordinates,224,224,conflict_audit,outputs/cyj/quality/b7_b8_conflict_summary.json,Same NDQ coordinate; separate loss source
+B8,nonzero_loss_difference_count,224,224,conflict_audit,outputs/cyj/quality/b7_b8_conflict_summary.json,B8 cannot be pooled into B7 target
+B9,metadata_rows,132,132,metadata_only,outputs/cyj/diagnostics/b9_b10_extrapolation_audit.json,No observed val_loss in B9
+B10,B10_rows,128,128,estimated_stress_only,outputs/cyj/diagnostics/b9_b10_extrapolation_audit.json,Estimated loss is not independent measured holdout
+B10,B10_above_B1_N_max_count,128,128,estimated_stress_only,outputs/cyj/diagnostics/b9_b10_extrapolation_audit.json,Estimated loss is not independent measured holdout
+B10,B10_above_B1_D_max_count,102,128,estimated_stress_only,outputs/cyj/diagnostics/b9_b10_extrapolation_audit.json,Estimated loss is not independent measured holdout
+B10,B10_minus_B1_curve_rmse_descriptive_only,0.0011047668055016787,128,estimated_stress_only,outputs/cyj/diagnostics/b9_b10_extrapolation_audit.json,Estimated loss is not independent measured holdout
+B10,N_max_over_B7_N_max,835.421888053467,128,out_of_support_distance,outputs/cyj/diagnostics/b9_b10_extrapolation_audit.json,Ratio only; Q2 makes no prediction outside B7 support
+B10,D_max_over_B7_D_max,60.0,128,out_of_support_distance,outputs/cyj/diagnostics/b9_b10_extrapolation_audit.json,Ratio only; Q2 makes no prediction outside B7 support
+Q1_derived,test_1B_targets_beating_constant_rmse,4,13,Q1_derived_heldout,outputs/chm/q1_exports/q1_q2_bundle_v1/heldout_target_metrics.csv,Observed Q1 heldout; 4/13 absolute-RMSE wins at 1B
+Q1_derived,paired_1m_60m_targets,13,13,Q1_derived_same_recipe,outputs/chm/q1_exports/q1_q2_bundle_v1/paired_scale_metrics.csv,"Descriptive paired rank relation, not A-to-B calibration"

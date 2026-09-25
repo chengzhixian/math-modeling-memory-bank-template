@@ -1,0 +1,8 @@
+name,inside,certificate_size,min_factor_B7_N,max_simplex_residual
+observed_512__equal_13,True,1,0.8541036111993697,0.0
+convex_hull__equal_13,True,1,0.8541036111993697,0.0
+convex_hull__arxiv_only,True,1,0.5286250346810724,0.0
+convex_hull__pile_cc_only,True,1,0.8401668452501942,0.0
+minimax_13__equal_13,True,10,0.941357553880202,2.220446049250313e-16
+quality_direct__equal_13,True,3,0.8818074652316975,0.0
+quality_direct_and_near__equal_13,True,3,0.8861071409425467,1.1102230246251565e-16

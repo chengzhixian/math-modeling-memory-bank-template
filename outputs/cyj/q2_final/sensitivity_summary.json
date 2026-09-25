@@ -1,0 +1,17 @@
+{
+  "Q1_interaction_model": "diagnostic metrics only, full 13-target coefficients unavailable",
+  "conditional_loss_range_valid": [
+    1.2415776903877673,
+    3.4739665945679854
+  ],
+  "grid_rows": 324,
+  "invalid_rows": 0,
+  "lambda_zero_all_p_tied_at_fixed_NDQ": true,
+  "old_v5_grid": "outputs/cyj/q2_joint_scenarios/scenario_grid.csv (retained, not rerun)",
+  "uncertainty": {
+    "B7_example_80pct_training_residual_interval_coverage": 0.7711111111111111,
+    "B7_parameter_residual": "See frozen outputs/cyj/quality/b7_interval_calibration.json and b7_nested_cv_summary.json",
+    "bridge_lambda_eta_weights": "Engineering scenario grid; not a confidence interval"
+  },
+  "valid_rows": 324
+}

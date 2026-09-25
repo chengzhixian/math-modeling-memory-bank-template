@@ -1,0 +1,102 @@
+{
+  "Q1_export_status": "Q1_derived_export_pending_CHM_owner_signoff",
+  "Q2_raw_A_reads": 0,
+  "domain_order": [
+    "arxiv",
+    "freelaw",
+    "nih_exporter",
+    "pubmed_central",
+    "wikipedia_en",
+    "dm_mathematics",
+    "github",
+    "philpapers",
+    "stackexchange",
+    "enron_emails",
+    "gutenberg_pg_19",
+    "pile_cc",
+    "ubuntu_irc",
+    "europarl",
+    "hackernews",
+    "pubmed_abstracts",
+    "uspto_backgrounds"
+  ],
+  "manifest_sha256": "b0dda7caac30513c0f37e74ccb143064606847fdc35fd7607c999ac2f8647ecb",
+  "p_ref_hull": {
+    "certificate": [
+      {
+        "index": "30",
+        "weight": 0.02511482363289327
+      },
+      {
+        "index": "42",
+        "weight": 0.03138517854833337
+      },
+      {
+        "index": "83",
+        "weight": 0.058181997043952736
+      },
+      {
+        "index": "152",
+        "weight": 0.0429115206006302
+      },
+      {
+        "index": "186",
+        "weight": 0.12040750945769794
+      },
+      {
+        "index": "188",
+        "weight": 0.14950107296269205
+      },
+      {
+        "index": "204",
+        "weight": 0.009526105659319441
+      },
+      {
+        "index": "284",
+        "weight": 0.004555741649298959
+      },
+      {
+        "index": "292",
+        "weight": 0.0814499893258167
+      },
+      {
+        "index": "367",
+        "weight": 0.11122126551294229
+      },
+      {
+        "index": "387",
+        "weight": 0.09316866847451877
+      },
+      {
+        "index": "409",
+        "weight": 0.054445374128286914
+      },
+      {
+        "index": "435",
+        "weight": 0.08752693357810307
+      },
+      {
+        "index": "447",
+        "weight": 0.03541984358803116
+      },
+      {
+        "index": "484",
+        "weight": 0.0031301420560704957
+      },
+      {
+        "index": "491",
+        "weight": 0.054682887169746085
+      },
+      {
+        "index": "495",
+        "weight": 0.037370946611666185
+      }
+    ],
+    "inside": true,
+    "max_residual": 6.522560269672795e-16,
+    "status": "in_Q1_A4_convex_hull"
+  },
+  "recipe_rows": 512,
+  "schema_version": "chm.q1.q2_bundle.v1",
+  "verified_file_count": 13
+}
