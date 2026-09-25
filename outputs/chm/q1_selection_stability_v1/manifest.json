@@ -1,0 +1,85 @@
+{
+  "schema_version": "chm.q1.selection_stability.v1",
+  "status": "A_side_exploratory_not_Q2_Q3_calibrated",
+  "weight_scenarios": 214,
+  "model_choice_agreement_fraction_all_scenarios": 0.6440809968847352,
+  "model_agreement_fraction_by_quality_policy": {
+    "unconstrained": 0.7710280373831776,
+    "quality_direct": 0.5257009345794392,
+    "quality_direct_and_near": 0.6355140186915887
+  },
+  "quality_scope_selection_flip_counts": {
+    "ridge_v1.3/quality_direct": 6,
+    "ridge_v1.3/quality_direct_and_near": 0,
+    "interaction_candidate/quality_direct": 5,
+    "interaction_candidate/quality_direct_and_near": 0
+  },
+  "summary": {
+    "ridge_v1.3": {
+      "n_weight_scenarios": 214,
+      "distinct_selected_A4_recipes": 42,
+      "share_equal_13_choice": 0.5560747663551402
+    },
+    "interaction_candidate": {
+      "n_weight_scenarios": 214,
+      "distinct_selected_A4_recipes": 47,
+      "share_equal_13_choice": 0.5327102803738317
+    },
+    "test_1m/all_heldout/ridge_v1.3": {
+      "n_weight_scenarios": 214,
+      "median_realized_relative_regret": 0.11242384825646753,
+      "top_decile_fraction": 0.4672897196261682,
+      "chosen_outside_A4_hull_fraction": 1.0
+    },
+    "test_1m/all_heldout/interaction_candidate": {
+      "n_weight_scenarios": 214,
+      "median_realized_relative_regret": 0.10246848592874944,
+      "top_decile_fraction": 0.49065420560747663,
+      "chosen_outside_A4_hull_fraction": 1.0
+    },
+    "test_60m/all_heldout/ridge_v1.3": {
+      "n_weight_scenarios": 214,
+      "median_realized_relative_regret": 0.1127167294058285,
+      "top_decile_fraction": 0.411214953271028,
+      "chosen_outside_A4_hull_fraction": 1.0
+    },
+    "test_60m/all_heldout/interaction_candidate": {
+      "n_weight_scenarios": 214,
+      "median_realized_relative_regret": 0.10429151256306342,
+      "top_decile_fraction": 0.4392523364485981,
+      "chosen_outside_A4_hull_fraction": 1.0
+    },
+    "test_1B/all_heldout/ridge_v1.3": {
+      "n_weight_scenarios": 214,
+      "median_realized_relative_regret": 0.2963345862133589,
+      "top_decile_fraction": 0.24766355140186916,
+      "chosen_outside_A4_hull_fraction": 0.9766355140186916
+    },
+    "test_1B/all_heldout/interaction_candidate": {
+      "n_weight_scenarios": 214,
+      "median_realized_relative_regret": 0.2079615520425426,
+      "top_decile_fraction": 0.3644859813084112,
+      "chosen_outside_A4_hull_fraction": 0.9439252336448598
+    },
+    "test_1B/in_A4_hull_only/ridge_v1.3": {
+      "n_weight_scenarios": 214,
+      "median_realized_relative_regret": 0.19238281967751164,
+      "top_decile_fraction": 0.3364485981308411,
+      "chosen_outside_A4_hull_fraction": 0.0
+    },
+    "test_1B/in_A4_hull_only/interaction_candidate": {
+      "n_weight_scenarios": 214,
+      "median_realized_relative_regret": 0.15973878194934527,
+      "top_decile_fraction": 0.32710280373831774,
+      "chosen_outside_A4_hull_fraction": 0.0
+    }
+  },
+  "heldout_selection_limit": "actual Loss of held-out candidate chosen among held-out rows; not actual Loss of selected A4 recipe; model form already inspected held-outs",
+  "source_sha256": {
+    "Q1_bundle": "b0dda7caac30513c0f37e74ccb143064606847fdc35fd7607c999ac2f8647ecb",
+    "interaction": "24829c25584f2f3d22819f2abcd240ef934b48019d31773485c5fb5948ce76cc",
+    "support": "ba6fc681d88c8ed9932a916cc3de3c5421dae9fd85e9fdc9fffe9557b0a0dfd1"
+  },
+  "selection_grid_sha256": "845d7b2470b545d61ce2d514d4c6c3961cbb0d12e2f9a53be68b75bff1cd0bf2",
+  "heldout_selection_sha256": "6b1187b749b1ba847d9c1a18f9422907f92671ca2c101c80adc6621827c96047"
+}

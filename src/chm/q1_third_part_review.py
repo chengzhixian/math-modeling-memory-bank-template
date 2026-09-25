@@ -51,7 +51,9 @@ def run() -> dict:
             a, b = pair["domains"]
             ia, ib = domains.index(a), domains.index(b)
             interaction[:, j] += pair["gamma"] * (p[:, ia] * p[:, ib] - pref[ia] * pref[ib])
-    reference_loss = np.array([candidate[k]["fitted_reference_loss"] for k in targets])
+    frozen_rows = {r["target"]: r for r in rows(BASE / "q1_q2_bundle_v1/coefficients.csv")}
+    reference_loss = np.array([float(frozen_rows[k]["intercept"]) + float(pref @ ridge_beta[j])
+                               for j, k in enumerate(targets)])
     assert np.all(reference_loss > 0)
     ridge_rel = ridge / reference_loss
     interaction_rel = interaction / reference_loss
@@ -142,7 +144,7 @@ def run() -> dict:
     result = {"status": "CANDIDATE_FOR_USER_REVIEW_NOT_FORMAL_RELEASE",
               "primary_q1_model": "chm.q1.v1.3 targetwise Ridge",
               "interaction_role": "A-side 1M sensitivity only; no Q2/Q3 substitution",
-              "loss_normalization": "each 1M target contrast divided by positive interaction-model fitted reference Loss; explicit decision scenario, not a cross-source bridge",
+              "loss_normalization": "each 1M target contrast divided by the same positive frozen Ridge fitted reference Loss; explicit decision scenario, not a cross-source bridge",
               "policy_support": "512 observed A4 recipes only",
               "quality_coverage": "3 direct + 3 near_direct + 11 unknown; no global Q_A or B7 Q_score assigned to unknown domains",
               "upstream_audit": upstream, "heldout_counts": counts, "policies": decisions,

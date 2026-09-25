@@ -2,7 +2,7 @@
   "status": "CANDIDATE_FOR_USER_REVIEW_NOT_FORMAL_RELEASE",
   "primary_q1_model": "chm.q1.v1.3 targetwise Ridge",
   "interaction_role": "A-side 1M sensitivity only; no Q2/Q3 substitution",
-  "loss_normalization": "each 1M target contrast divided by positive interaction-model fitted reference Loss; explicit decision scenario, not a cross-source bridge",
+  "loss_normalization": "each 1M target contrast divided by the same positive frozen Ridge fitted reference Loss; explicit decision scenario, not a cross-source bridge",
   "policy_support": "512 observed A4 recipes only",
   "quality_coverage": "3 direct + 3 near_direct + 11 unknown; no global Q_A or B7 Q_score assigned to unknown domains",
   "upstream_audit": {
@@ -53,7 +53,7 @@
       "policy": "equal_13_relative",
       "model": "ridge_v1.3",
       "recipe_index": "136",
-      "objective_relative": -0.1491558510331784,
+      "objective_relative": -0.14589638880063033,
       "known_QA_share": 0.4314314314314314,
       "direct_QA_share": 0.15915915915915915,
       "unknown_QA_share": 0.5685685685685684,
@@ -63,7 +63,7 @@
       "policy": "equal_13_relative",
       "model": "interaction_candidate",
       "recipe_index": "136",
-      "objective_relative": -0.11506531053442216,
+      "objective_relative": -0.11301299167599131,
       "known_QA_share": 0.4314314314314314,
       "direct_QA_share": 0.15915915915915915,
       "unknown_QA_share": 0.5685685685685684,
@@ -73,7 +73,7 @@
       "policy": "minimax_13_relative",
       "model": "ridge_v1.3",
       "recipe_index": "163",
-      "objective_relative": 0.004693560761744829,
+      "objective_relative": 0.004655833489546141,
       "known_QA_share": 0.4814814814814815,
       "direct_QA_share": 0.23723723723723722,
       "unknown_QA_share": 0.5185185185185186,
@@ -83,7 +83,7 @@
       "policy": "minimax_13_relative",
       "model": "interaction_candidate",
       "recipe_index": "477",
-      "objective_relative": 0.03992746837819158,
+      "objective_relative": 0.039631946462151194,
       "known_QA_share": 0.6306306306306307,
       "direct_QA_share": 0.5675675675675675,
       "unknown_QA_share": 0.3693693693693694,
@@ -93,7 +93,7 @@
       "policy": "arxiv_only_relative",
       "model": "ridge_v1.3",
       "recipe_index": "300",
-      "objective_relative": -0.4993718944769767,
+      "objective_relative": -0.4713749653189275,
       "known_QA_share": 0.9131736526946108,
       "direct_QA_share": 0.9021956087824351,
       "unknown_QA_share": 0.08682634730538923,
@@ -103,7 +103,7 @@
       "policy": "arxiv_only_relative",
       "model": "interaction_candidate",
       "recipe_index": "3",
-      "objective_relative": -0.4843110372718267,
+      "objective_relative": -0.4571584843329752,
       "known_QA_share": 0.9480000000000001,
       "direct_QA_share": 0.679,
       "unknown_QA_share": 0.052000000000000005,
@@ -114,7 +114,7 @@
     {
       "score_scope": "v1.3_primary_sample",
       "policy": "direct",
-      "objective_relative": -0.12115338773792278,
+      "objective_relative": -0.11819399030559574,
       "covered_mass": 0.3231556093473321,
       "mean_Q_A_on_covered": 0.8515354932354259,
       "active_A4_recipes": [
@@ -135,7 +135,7 @@
     {
       "score_scope": "v1.3_primary_sample",
       "policy": "direct_and_near",
-      "objective_relative": -0.11686273645253507,
+      "objective_relative": -0.11392929224838033,
       "covered_mass": 0.5646359074665894,
       "mean_Q_A_on_covered": 0.7831035543837231,
       "active_A4_recipes": [
@@ -156,7 +156,7 @@
     {
       "score_scope": "cyj_export_extended_where_available",
       "policy": "direct",
-      "objective_relative": -0.12115189310459351,
+      "objective_relative": -0.11819253476830247,
       "covered_mass": 0.3231556093473321,
       "mean_Q_A_on_covered": 0.8574247439016351,
       "active_A4_recipes": [
@@ -177,7 +177,7 @@
     {
       "score_scope": "cyj_export_extended_where_available",
       "policy": "direct_and_near",
-      "objective_relative": -0.11682298058880448,
+      "objective_relative": -0.11389285905745328,
       "covered_mass": 0.5646359074665894,
       "mean_Q_A_on_covered": 0.7864741235637406,
       "active_A4_recipes": [
@@ -187,11 +187,11 @@
         },
         {
           "index": "248",
-          "weight": 0.27235624016124843
+          "weight": 0.2723562401612484
         },
         {
           "index": "301",
-          "weight": 0.13488241588763267
+          "weight": 0.1348824158876327
         }
       ]
     }

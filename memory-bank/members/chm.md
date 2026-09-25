@@ -386,3 +386,7 @@ cyj 远端 ad1d312 已将旧 p/eta 情景降级，正式 ready_for_Q3=false；B7
 ## 2026-09-25 Q1 第三小问验收候选
 
 已在本人 clean integration worktree 对 cyj `86526a1` 的两个 Q1 派生包进行原始 A4/A5、逐行归一化、冻结 `chm.q1.v1.3` 五表和交互定义复核。数值身份通过：512 行归一化最大差 `2.22e-16`，13 目标交互 CV 与本人 `2450971` 审计最大差 `3.33e-16`；四个交互实质文件跨 NumPy 环境哈希相同。发现 `qa_mapping.json` 的 arxiv/github 使用 A2/A3 扩展分数，而 v1.3 主 `Q_A` 使用 A1 sample；已分别重算质量约束场景，不能无条件签收 v1 的质量政策语义。第三小问多目标、覆盖与模型形式敏感性及论文验收 PDF 已就绪，主 Ridge v1.3 暂不变，交互候选只用于敏感性。用户要求先验收再进入正式模型；详见 `memory-bank/handoffs/chm/20260925-q1-third-part-export-owner-review.md` 与 `paper/sections/chm/q1_third_part_acceptance_candidate.md`。Q2/Q3 的正式版本切换与第三问重算待验收后执行。
+
+## 2026-09-25 Q1 模型比较与稳定性补证
+
+用户要求继续完成同条件 Ridge/交互对照、配方选择稳健性及 Q2 质量映射更正情景。本轮训练内嵌套五折中交互 13/13 目标 OOF RMSE 优于 Ridge；A6--A11 同条件检验中 1B 凸包内 17 与外 47 条各为 13/13 目标交互 RMSE 较低，但全 1B 仅 11/13 目标优于常数且 Spearman 仅 7/13 高于 Ridge。214 权重扫描下无质量约束两模型选方一致 77.1%，加 direct 52.6%、direct+near 63.6%；真实检验候选内部的决策压力结果不支持“所有指标上交互最优”。chm 侧独立复现 cyj 两项旧条件 Q2 政策，并以 A1 主评分重算，损失变化量很小但最优混合权重变化。交互现是 Q1 支持域内优先预测候选，正式 `v1.3` 仍为 Ridge，等待用户验收后才切换接口。详细见 `memory-bank/handoffs/chm/20260925-q1-comparison-stability-q2-remap.md` 与 `experiments/chm/20260925-q1-third-part-model-comparison.md`；`ready_for_Q3=false`。
