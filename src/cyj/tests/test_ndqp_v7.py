@@ -1,7 +1,9 @@
 """Independent checks for the new conditional bridge and pinned Q1 release."""
 import copy
 import math
+import shutil
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -31,6 +33,18 @@ class ConditionalV7Tests(unittest.TestCase):
         self.assertTrue(result["conditional_on_bridge_assumptions"])
         self.assertFalse(result["empirically_calibrated_A_to_B"])
 
+    def test_producer_file_hash_fail_closed(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            manifest = Path("interfaces/chm/q1_interface_v2.json")
+            (root / manifest).parent.mkdir(parents=True)
+            shutil.copy2(ROOT / manifest, root / manifest)
+            source = Path("outputs/chm/q1_v2/interaction_coefficients_13_targets.json")
+            (root / source).parent.mkdir(parents=True)
+            (root / source).write_bytes((ROOT / source).read_bytes() + b" ")
+            with self.assertRaisesRegex(ValueError, "identity mismatch: model"):
+                Q1V2Consumer(root)
+
     def test_b7_direct_formula_and_gradients(self):
         e, a, b, alpha, beta, g0, gn, gd = THETA
         expected = e+a*1**-alpha+b*100**-beta+(1-.5)*(g0+gn*math.log(1)+gd*math.log(1))
@@ -56,17 +70,18 @@ class ConditionalV7Tests(unittest.TestCase):
         self.assertAlmostEqual(off["gradients"]["p_ambient"]["arxiv"], 0)
 
     def test_sensitivity_gradients(self):
-        result = self.model.predict_sensitivity(1, 100, .5, self.p, self.w, p_policy="observed_512",
-                                                bridge_lambda=.75, eta=.2, bridge_model="exp_bridge")
-        for name, index, step in (("N_B", 0, 1e-5), ("D_B", 1, 1e-3), ("Q_B", 2, 1e-5)):
-            point = [1, 100, .5]
-            point[index] += step
-            plus = self.model.predict_sensitivity(*point, self.p, self.w, p_policy="observed_512",
-                                                  bridge_lambda=.75, eta=.2, bridge_model="exp_bridge")["Loss"]
-            point[index] -= 2*step
-            minus = self.model.predict_sensitivity(*point, self.p, self.w, p_policy="observed_512",
-                                                   bridge_lambda=.75, eta=.2, bridge_model="exp_bridge")["Loss"]
-            self.assertAlmostEqual((plus-minus)/(2*step), result["gradients"][name], delta=2e-7)
+        for form in ("exp_bridge", "linear_bridge"):
+            result = self.model.predict_sensitivity(1, 100, .5, self.p, self.w, p_policy="observed_512",
+                                                    bridge_lambda=.75, eta=.2, bridge_model=form)
+            for name, index, step in (("N_B", 0, 1e-5), ("D_B", 1, 1e-3), ("Q_B", 2, 1e-5)):
+                point = [1, 100, .5]
+                point[index] += step
+                plus = self.model.predict_sensitivity(*point, self.p, self.w, p_policy="observed_512",
+                                                      bridge_lambda=.75, eta=.2, bridge_model=form)["Loss"]
+                point[index] -= 2*step
+                minus = self.model.predict_sensitivity(*point, self.p, self.w, p_policy="observed_512",
+                                                       bridge_lambda=.75, eta=.2, bridge_model=form)["Loss"]
+                self.assertAlmostEqual((plus-minus)/(2*step), result["gradients"][name], delta=2e-7)
 
     def test_policy_and_request_rejection(self):
         base = {"schema_version": VERSION, "mode": "baseline", "N_params_B": 1, "D_tokens_B": 100,

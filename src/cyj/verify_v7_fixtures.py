@@ -20,19 +20,18 @@ def main():
     count = 0
     for path in FOLDER.glob("*.request.json"):
         expected = json.loads(path.with_name(path.name.replace(".request.json", ".expected.json")).read_text(encoding="utf-8"))
-        payload = json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=_unique)
-        if expected["exit_code"] == 0:
-            actual = request(model, payload)
-            if actual != expected["result"]:
-                raise ValueError(f"fixture output mismatch: {path.name}")
-        else:
-            try:
-                request(model, payload)
-            except (ValueError, TypeError, KeyError) as exc:
-                if str(exc) != expected["error_contains"]:
-                    raise ValueError(f"fixture error mismatch: {path.name}") from exc
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=_unique)
+            if expected["exit_code"] == 0:
+                actual = request(model, payload)
+                if actual != expected["result"]:
+                    raise ValueError(f"fixture output mismatch: {path.name}")
             else:
+                request(model, payload)
                 raise ValueError(f"invalid fixture unexpectedly accepted: {path.name}")
+        except (ValueError, TypeError, KeyError) as exc:
+            if expected["exit_code"] != 2 or str(exc) != expected["error_contains"]:
+                raise ValueError(f"fixture error mismatch: {path.name}: {exc}") from exc
         count += 1
     if count != manifest["count"]:
         raise ValueError("fixture count mismatch")

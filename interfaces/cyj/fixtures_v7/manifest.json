@@ -1,6 +1,6 @@
 {
   "schema_version": "cyj.v7.fixtures.v1",
-  "count": 16,
+  "count": 19,
   "Q1_manifest_sha256": "c621f7e405106e42720f918f490235b5e8becefb0f7c8cb997736e96337117a9",
   "files": {
     "baseline_reference.request.json": "45548579e55f685ac6de6fd4d7b5b3d9c78a42e7b036b46b16ebdace137759ba",
@@ -34,6 +34,16 @@
     "baseline_override.request.json": "c6afbeee4e752a998f39372535089b61958cef2160e5ff38c12744297c0edbcb",
     "baseline_override.expected.json": "a4ba97eddaa5fdd244247cebd0f16759811fd332ea44a90af91e69cde9ee9279",
     "nonfinite_replacement.request.json": "2a07faf17cf65b935b9920d6296fa68e21f4e40ebd5956cecd340c9927c5d95f",
-    "nonfinite_replacement.expected.json": "543a5b15bf50d5034b29632121735db0233b64018f9255ecdf290f063e8eb026"
-  }
+    "nonfinite_replacement.expected.json": "543a5b15bf50d5034b29632121735db0233b64018f9255ecdf290f063e8eb026",
+    "zero_coverage_observed.request.json": "f9dca8e5930f8976aff11af4b802473de815a9efe872cf459154453ee5bdb37c",
+    "zero_coverage_observed.expected.json": "5b032aa93d4cadcdbcdc36833567b55c027d108a45bc48cc80041fb7bda7e15e",
+    "duplicate_key.request.json": "c61932794d54ecd8f6cfccbf347448d54a1f79cac0aeec55a2835078f982870f",
+    "duplicate_key.expected.json": "37523452b07eb8577e7a0e6999a10ed0c3694dd468e1b30f948891b7f6dbcdfc",
+    "nonfinite_json.request.json": "2510e167082a4f71b80739a3f1f3c3d38f603565825e60c14d7ef06855db762f",
+    "nonfinite_json.expected.json": "543a5b15bf50d5034b29632121735db0233b64018f9255ecdf290f063e8eb026"
+  },
+  "raw_parser_cases": [
+    "duplicate_key",
+    "nonfinite_json"
+  ]
 }

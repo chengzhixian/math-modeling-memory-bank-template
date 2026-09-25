@@ -48,6 +48,7 @@ def main():
                      "p_policy": "convex_hull"},
         "baseline_override": {**base, "bridge_lambda": 1},
         "nonfinite_replacement": {**base, "N_params_B": "NaN"},
+        "zero_coverage_observed": {**base, "p": q1.p_dict(q1.recipes[0])},
     }
     files = {}
     for name, data in scenarios.items():
@@ -61,9 +62,22 @@ def main():
         dump(exp, result)
         files[req.name] = hashlib.sha256(req.read_bytes()).hexdigest()
         files[exp.name] = hashlib.sha256(exp.read_bytes()).hexdigest()
-    dump(OUT / "manifest.json", {"schema_version": "cyj.v7.fixtures.v1", "count": len(scenarios),
-                                  "Q1_manifest_sha256": q1.manifest_sha256, "files": files})
-    return len(scenarios)
+    raw_cases = {
+        "duplicate_key": ('{"schema_version":"x","schema_version":"y"}', "duplicate JSON key: schema_version"),
+        "nonfinite_json": (json.dumps(base, ensure_ascii=False).replace('"N_params_B": 1.0', '"N_params_B": NaN'),
+                           "N must be a finite number"),
+    }
+    for name, (raw, error) in raw_cases.items():
+        req = OUT / f"{name}.request.json"
+        exp = OUT / f"{name}.expected.json"
+        req.write_text(raw + "\n", encoding="utf-8", newline="\n")
+        dump(exp, {"exit_code": 2, "error_contains": error})
+        files[req.name] = hashlib.sha256(req.read_bytes()).hexdigest()
+        files[exp.name] = hashlib.sha256(exp.read_bytes()).hexdigest()
+    dump(OUT / "manifest.json", {"schema_version": "cyj.v7.fixtures.v1", "count": len(scenarios) + len(raw_cases),
+                                  "Q1_manifest_sha256": q1.manifest_sha256, "files": files,
+                                  "raw_parser_cases": list(raw_cases)})
+    return len(scenarios) + len(raw_cases)
 
 
 if __name__ == "__main__":
