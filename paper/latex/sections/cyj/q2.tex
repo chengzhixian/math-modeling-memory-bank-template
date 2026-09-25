@@ -1,69 +1,279 @@
-% Owner: cyj. Joint-fit evidence: experiments/cyj/20260925-b7-joint-fit.md;
-% nested validation: experiments/cyj/20260925-b7-nested-cv.md.
-\section{问题二：分层标度关系与可识别性}
+% Owner: cyj. Frozen model cyj.ndqp.scenario.v8; figures and values are
+% traced to outputs/cyj/q2_v8/manifest.json.
+\section{问题二：跨维度数据融合与广义标度律}
 
-\subsection{附件角色与统一坐标的边界}
+\subsection{数据角色与跨来源统一假设}
 
-我们先按来源和生成方式固定数据角色。B1 的 1176 条 Pythia 轨迹记录用于同源 $N$--$D$ 基线；B2 为半合成 Cerebras 轨迹，B3 为插值轨迹，只用于形状检查。B2 的 7 条、B3 的 8 条轨迹首尾 Loss 均下降；它们不是独立真实外测。B4 的 57 个跨族收敛点和 B5 的 44 个文献整理点，在各自同家族、同来源的规模支配配对中，下降方向分别符合 131/133、113/113 对；这只是描述性方向验证。尚不能证明它们与 B1 使用相同 tokenizer、验证语料、对数底和聚合定义，因此不计算统一的外部 RMSE。B6 的 360 点全部包含在 B7 的 450 个 $N,D,Q$ 坐标中，两表不互作独立检验。B8 含 calibrated 与 extrapolated 标签，质量方向和损失水平与 B7 冲突，单独审计。B9 是大模型元数据，B10 是 estimated Loss，仅作为大规模外推的压力参考，不能当真实独立测试。详细计数及输入身份见源别验证表。
+为同时刻画参数规模 $N$、训练 token 数 $D$、质量 $Q$ 和 17 维配比
+$\boldsymbol p$，先固定证据角色。B1 的 1176 条 Pythia 轨迹拟合经典
+$N$--$D$ 骨架；B7 的 450 条半合成记录只估计质量扩展。B2 为半合成
+Cerebras 轨迹，B3 为 B1 风格插值轨迹，二者检查形状；B4/B5 只检查
+同族规模变化的 Loss 方向。B6 包含在 B7 网格中，不能再作独立测试；
+B8 与 B7 的质量方向有冲突，保持独立审计。B9 为大模型元数据，B10
+的 Loss 为 estimated，只作外推压力参考。全文取 $N$ 为十亿参数、$D$
+为十亿 token，Loss 为来源自身报告的交叉熵量。不同来源的 tokenizer、
+验证语料和 Loss 聚合口径未证明一致，故没有统一绝对 Loss 的外部 RMSE。
 
-全文取 $N$ 的单位为十亿参数，$D$ 的单位为十亿 token。$Q_{\rm score}$ 为 B 侧原生半合成质量坐标，问题一的 $Q_A$ 是 A 侧质量代理；附件没有成对标定样本。问题一配比 $\boldsymbol p$ 对应 17 域单纯形，其可核验输出是 1M 条件下 13 个目标域的相对 Loss 对比，并非 B1 或 B7 的总体 \texttt{val\_loss}。
+问题一给出 A 侧质量评分 $Q_A$、17 域配比及 13 个目标域的相对 Loss
+曲面；B7 的 \texttt{Q\_score} 是 B 侧原生半合成质量坐标，记作 $Q_B$。
+现有附件既无同一次实验的 $(Q_A,Q_B)$ 成对观测，也无 A 侧逐目标 Loss
+与 B1/B7 总体 \texttt{val\_loss} 的实测对齐。以下桥接均为明示的条件性
+代理假设，不是经验标定。
 
-\subsection{B1 同源 $N$--$D$ 经验基线}
+\subsection{经典 $N$--$D$ 标度律建立}
 
-在 B1 的范围 $N\in[0.070542,11.965825]$、$D\in[0.134,299.893]$ 内，采用待检验的经验式
-\begin{equation}
-\widehat L_{B1}(N,D)=E+A N^{-\alpha}+B D^{-\beta}.
+以 B1 为唯一经典骨架来源，在 $N\in[0.070542,11.965825]$、
+$D\in[0.134,299.893]$ 拟合
+\begin{equation}\label{eq:cyj-b1}
+L_0(N,D)=E+A N^{-\alpha}+B D^{-\beta}.
 \end{equation}
-以 8 个规模组等权、对数 Loss 残差的 Huber 目标和正参数约束估计得到
-$E=1.689838$、$A=0.353969$、$B=1.240275$、$\alpha=0.339985$、$\beta=0.279892$。
-全样本 RMSE 为 $1.4658\times10^{-4}$；留一规模组均值为 $1.4613\times10^{-4}$；每组后 30\% token 检查点留出的 RMSE 为 $1.1600\times10^{-4}$。去除 $E$、$N$ 或 $D$ 项均明显损害 B1 同源重构。
+估计对 8 个规模组等权，采用对数 Loss 残差的 Huber 目标、正参数约束
+及固定种子的多起点搜索。以所述十亿单位为输入，$E,A,B$ 为 Loss
+单位，$\alpha,\beta$ 无量纲。得到 $E=1.689838$、$A=0.353969$、
+$B=1.240275$、$\alpha=0.339985$、$\beta=0.279892$。
+全样本 RMSE 为 $1.4658\times10^{-4}$ Loss；留一规模组平均 RMSE 为
+$1.4613\times10^{-4}$，各组最后 30\% token 检查点留出的 RMSE 为
+$1.1600\times10^{-4}$。B1 的 $D$ 与步数乘固定每步 token 数的显示
+舍入相容，\texttt{ppl} 与 $\exp(\texttt{val\_loss})$ 的显示舍入也全行
+相容；附件缺少原始评估记录和生成脚本。这些极小残差只支持 B1 同源
+条件重构，不代表真实跨来源预测有相同精度。
 
-上述接近确定性的精度触发来源审查。B1 的 $D$ 与训练步数乘每步 $2{,}097{,}152$ token 的显示舍入相容，\texttt{ppl} 与 $\exp(\texttt{val\_loss})$ 的显示舍入也全行相容；但本附件缺少逐检查点原始评估记录和生成脚本，尚不能判断 \texttt{val\_loss} 是否经插值、平滑或共同公式构造。因此这里只主张\emph{B1 同源数据上的条件经验重构}，不以极低残差推断真实跨源预测精度。
+\subsection{数据质量扩展与模型选择}
 
-\subsection{B7 原生质量关系及冻结主候选}
-
-B7 的原生支持为 $N\in[0.07,11.97]$、$D\in[10,600]$、$Q_{\rm score}\in[0.1,1]$。已发布的诊断基线为
-\begin{equation}
-\widehat L_{B7}=E_7+A_7N^{-\alpha_7}+B_7D^{-\beta_7}+G(1-Q_{\rm score}),
-\end{equation}
-其 $\partial\widehat L_{B7}/\partial Q_{\rm score}=-G$ 恒定。对 45 个固定 $(N,D)$ 组分别以组内十个 Q 点回归，斜率范围为 $[-0.6072,-0.1931]$，对恒定斜率的组级 RMSE 为 $0.1078$。用 $\log N$ 与 $\log D$ 描述这些斜率的回归 $R^2=0.8601$；这只描述半合成网格，不是质量的因果机制。
-
-早期同源分组比较显示双交互优于恒定 $G$：旧两阶段双交互与恒定项的平均 RMSE 在 N 留级为 $0.05194$ 对 $0.05823$，D 留级为 $0.05021$ 对 $0.05709$，Q 留级为 $0.05006$ 对 $0.05762$。候选形式在此前的全 B7 诊断后提出，这些分数只是探索性选型证据；下文另以五族嵌套外留级评估联合拟合族。恒定 $G$ 保留为诊断基线，不将交互参数当已验证真实质量规律。
-
-据此固定 B7 的主\emph{候选}族，不再扩展函数族：
-\begin{align}
-\widehat L_B&=E+AN^{-\alpha}+BD^{-\beta}+(1-Q)G(N,D),\\
+冻结 B1 五参数，仅用 B7 估计三个质量系数：
+\begin{align}\label{eq:cyj-b7}
+L_B(N,D,Q_B)&=L_0(N,D)+(1-Q_B)G(N,D),\\
 G(N,D)&=G_0+G_N\ln N+G_D\ln(D/100).
 \end{align}
-旧接口先从无质量模型估计两个指数，再固定指数对其余系数做线性回归。该两阶段估计不是八参数的联合最小二乘。本文重新以解析参数 Jacobian、正幅度与正指数边界、$G$ 四角正性约束做多起点联合最小二乘；在每一留出折内也独立重估全部自由参数。完整 B7 的联合拟合为
-\begin{align*}
-(E,A,B)&=(1.73538614,\ 0.35758295,\ 1.26537325),\\
-(\alpha,\beta)&=(0.33926681,\ 0.32039457),\\
-(G_0,G_N,G_D)&=(0.37014726,\ -0.05949206,\ -0.01580520).
-\end{align*}
-$G$ 在声明矩形支持域的四角最小值为 $0.19414484>0$，故该拟合的 $\partial\widehat L_B/\partial Q=-G<0$ 在域内成立。联合拟合 12 个起点全部收敛至近同一解，扩大搜索边界后参数基本不变；这不证明全局唯一。
+在 B7 固定 $(N,D)$ 的 45 个组中，质量斜率并不恒定；恒斜率近似
+的组级 RMSE 为 $0.1078$。三系数在质量增益非负约束下最小二乘
+估计为 $G_0=0.371703$、$G_N=-0.061115$、$G_D=-0.014961$。
+四角检查得到 B7 矩形内 $G\geq0.193184$，故模型域内 $L_{Q_B}<0$。
 
-\subsection{嵌套留级检查、识别性与经验不确定性}
+\begin{table}[htbp]
+\centering\small
+\caption{最终模型的冻结参数；输入 $N,D$ 均以十亿单位计，$E,A,B,G_0,G_N,G_D$ 以 Loss 计，指数无量纲}
+\label{tab:cyj-q2-parameters}
+\begin{tabular}{p{0.15\textwidth}p{0.68\textwidth}}
+\hline
+拟合来源 & 估计参数\\ \hline
+B1 经典骨架 & $E=1.689838,\ A=0.353969,\ B=1.240275,\ \alpha=0.339985,\ \beta=0.279892$\\
+B7 质量扩展 & $G_0=0.371703,\ G_N=-0.061115,\ G_D=-0.014961$；B1 五参数保持固定\\ \hline
+\end{tabular}
+\end{table}
 
-联合拟合全样本 RMSE 为 $0.048410$，低于旧两阶段方案的 $0.049188$。同一固定族、24 折的留级平均 RMSE 为
-\begin{align*}
-&\text{联合：N }0.049764,\quad\text{D }0.049008,\quad\text{Q }0.049352;\\
-&\text{两阶段：N }0.051936,\quad\text{D }0.050207,\quad\text{Q }0.050061.
-\end{align*}
-考虑训练和三轴留出、12 起点收敛及扩大搜索界后的稳定性，本节以联合拟合作条件分析；旧参数只供历史 v3 接口复现。
+\begin{table}[htbp]
+\centering\small
+\caption{B7 半合成数据上的质量模型比较；RMSE 为 B7 原生 Loss，留出按 $N,D,Q_B$ 等级分折}
+\label{tab:cyj-q2-quality}
+\begin{tabular}{p{0.36\textwidth}rrrr}
+\hline
+模型 & 训练 & 留 $N$ & 留 $D$ & 留 $Q_B$\\ \hline
+固定 B1 骨架＋3 质量参数 & 0.048540 & 0.048738 & 0.048751 & 0.048639\\
+B7 联合 8 参数比较模型 & 0.048410 & 0.049764 & 0.049008 & 0.049352\\ \hline
+\end{tabular}
+\end{table}
 
-另在外层留一个 N、D 或 Q 等级时，只用外层训练部分完成五个函数族的内层选择。24 折中双交互被选中 23 折，单 $\log N$ 交互被选中 1 折；三轴 pooled 外层 RMSE 为 $0.050070$、$0.050039$、$0.049697$，MAE 为 $0.038994$、$0.038903$、$0.038709$。完整 B7 曾参与候选族构思，所以这些仍是半合成同源条件泛化，不能称未触碰的真实训练外测。局部参数 Jacobian 满秩，但 $A$ 与 $\alpha$ 的工作相关系数约 $-0.964$；200 次 $(N,D)$ 簇重抽虽均成功，也不能令这些系数获得独立物理解释。
+三参数模型采用 24 折内层选择惩罚、外层留等级的嵌套验证；八参数
+行是固定族留级比较，选择流程不同，不以微小差异宣称真实训练中的
+优劣。选择固定 B1 骨架，是为了保持 B1 估计规模、B7 补充质量
+的可追溯角色。B7 有 240 条记录的 $N,D$ 落在 B1 矩形外；它们参与
+质量项估计，却不扩大最终预测范围。质量效应随规模变化的结果属于
+半合成网格上的条件关系，不是质量干预的因果效应。
 
-外层训练部分的内层 OOF 绝对残差分位数产生对称经验区间，不读取该外层留出观测来调宽度。80/90/95\% 名义区间的三轴外层覆盖分别为 $(.80,.80,.80)$、$(.90,.89,.90)$、$(.96,.95,.95)$；95\% 平均宽约为 $0.20/0.19/0.19$ B 原生 Loss。但逐组最低 95\% 覆盖仅为 $0.84$（留 $N=0.07$）、$0.88$（留 $D=10$）、$0.89$（留 $Q=1$），不能声称每个支持域子群都达到名义水平。该方法与历史 v3 的 500 次两阶段参数 bootstrap 区间及新 v4 的 bootstrap 加残差区间不同，不能直接替它们标注已校准；折间相关且支持域为半合成网格，也没有真实训练覆盖保证。
+\subsection{质量与领域配比的跨来源条件融合}
 
-\subsection{边际效用、弹性与替代关系}
+设 $\mathcal M$ 为问题一中有 A1 质量映射的 6 个训练域（3 个 direct、
+3 个 near-direct）。主方案只对已映射域计算均值：
+\begin{equation}\label{eq:cyj-qa}
+Q_A(\boldsymbol p)=\frac{\sum_{i\in\mathcal M}p_iq_{A,i}}
+{\sum_{i\in\mathcal M}p_i},\qquad \sum_{i\in\mathcal M}p_i>0.
+\end{equation}
+无映射评分保留缺失；零覆盖的请求被拒绝。令 $q_{\min},q_{\max}$
+为已映射域 A1 评分极值，主方案把该均值单调归一化为 B7 范围内
+的代理坐标
+\begin{equation}\label{eq:cyj-qproxy}
+q=g(Q_A)=\operatorname{clip}_{[0.1,1]}
+\left[0.1+0.9\frac{Q_A-q_{\min}}{q_{\max}-q_{\min}}\right].
+\end{equation}
+参考配比有 $Q_A^{\rm ref}=0.783104$、$q^{\rm ref}=0.435406$。
+映射斜率的 0.5 倍和 1.5 倍另作敏感性情景；$q$ 始终是条件性
+$Q_B$ 代理，不是观测到的 $Q_B$。
 
-在输入单位为十亿参数、十亿 token 和 B 原生 Q 分数时，三偏导为
-\begin{align}
-L_N&=-\alpha AN^{-\alpha-1}+(1-Q)G_N/N,\\
-L_D&=-\beta BD^{-\beta-1}+(1-Q)G_D/D,\\
-L_Q&=-G(N,D).
+问题一冻结的 interaction surface 对 13 个目标域给出
+$\widehat L_{A,k}(\boldsymbol p)$，令
+\begin{align}\label{eq:cyj-rp}
+R_k&=\widehat L_{A,k}(\boldsymbol p_{\rm ref})>0,\qquad
+r_k(\boldsymbol p)=\frac{\widehat L_{A,k}(\boldsymbol p)-R_k}{R_k},\\
+r_w(\boldsymbol p)&=\sum_{k=1}^{13}w_kr_k(\boldsymbol p),\qquad
+w_k\geq0,\quad\sum_kw_k=1.
 \end{align}
-为把改善写成正数，定义弹性 $\varepsilon_x=-xL_x/L$，$x=N,D,Q$，均无量纲。例如 N 提高 1\% 时，Loss 的局部相对降幅约为 $\varepsilon_N$\%；旧 v3 接口返回的是带符号 $xL_x/L$，其语义保持历史不变。固定 $L,D$ 得 $dN/dQ=-L_Q/L_N$；固定 $L,N$ 得 $dD/dQ=-L_Q/L_D$，在本拟合支持域内均为负。有限替代对给定 $Q_1$ 在 N 或 D 声明边界内解等损失方程；无根时明确标记，不把替代曲线延伸到域外。交叉导数 $L_{NQ}=-G_N/N$、$L_{DQ}=-G_D/D$ 只描述拟合曲面的质量与规模交互，不是干预效应。
+$w_k$ 是目标域分析权重，并非训练域配比。$r_w$ 在参考配比
+为零；它是 A 侧 1M 条件下的相对 Loss 效应，向 B 侧总体 Loss
+的迁移幅度不能由现有附件识别。
 
-\input{sections/cyj/q2_v7_tail}
+\subsection{最终广义标度律}
+
+在上述明示的跨来源假设下，唯一条件主模型为
+\begin{equation}\label{eq:cyj-v8}
+\boxed{\widehat L(N,D,\boldsymbol p;\boldsymbol w)=
+\left[L_0(N,D)+\{1-g(Q_A(\boldsymbol p))\}G(N,D)\right]
+\exp\{r_w(\boldsymbol p)\}.}
+\end{equation}
+B1 拟合 $L_0$，B7 半合成数据拟合 $G$；$g$ 与指数乘子是
+跨来源条件桥接。指数形式在参考配比乘子为 1、保持正 Loss，
+但不证明实际 B 侧训练配比等于参考配比。$g$ 与 $r_w$ 均依赖
+$\boldsymbol p$，两条路径的影响不能由附件完全分离。
+式\eqref{eq:cyj-b7} 在 $Q_B=1$ 时退化为经典式\eqref{eq:cyj-b1}。
+最终式在 $q=1$ 时仅质量项消失，配比修正仍可能存在；冻结参考
+配比的代理值为 $0.435406$，不能再把 $q=1$ 与参考配比当作
+同一个已观测情景。因此最终式不施加“任意配比下 $q=1$ 即退化”
+的额外约束。
+
+正式预测域为 $N\in[0.070542,11.965825]$ B、$D\in[10,299.893]$ B、
+$q\in[0.1,1]$；配比为 A4 的 512 条观测配方或其可行凸包点。
+主展示用 13 个目标等权和 direct+near 质量政策。在 $N=1$ B、
+$D=100$ B 的 512 条观测配方中，108 条满足质量政策；其中
+条件 Loss 最小的配方有 $Q_A=1.675449$、$q=0.671361$、
+$\widehat L=2.344348$。这是可行观测配方枚举最优，并非连续
+凸包或联合预算下的全局最优。
+
+\subsection{参数检验与验证}
+
+表\ref{tab:cyj-q2-validation} 分开列出不同来源真正能检验的内容。
+B3 的 8 条插值轨迹对 B1 骨架的平均归一化 RMSE 为 $0.001892$，
+B2 的 7 条半合成轨迹为 $0.004370$；二者仅检查形状。
+B4/B5 共同支持内的同族规模支配配对，下降方向分别一致 12/12、
+7/7；支持外分别是 119/121、106/106，不说明绝对 Loss 可比。
+
+\begin{table}[htbp]
+\centering\small
+\caption{冻结验证结果及证据等级；B2/B3 为归一化轨迹 RMSE，B4/B5 为方向配对}
+\label{tab:cyj-q2-validation}
+\begin{tabular}{p{0.24\textwidth}p{0.30\textwidth}p{0.34\textwidth}}
+\hline
+来源 & 数值 & 解释边界\\ \hline
+B1 同源拟合 & RMSE $1.4658\times10^{-4}$ & 同源重构\\
+B7 嵌套留 $N/D/Q$ & $0.048738/0.048751/0.048639$ & 半合成同源条件泛化\\
+B2/B3 轨迹 & $0.004370/0.001892$ & 半合成或插值，不是独立真实外测\\
+B4/B5 支持内方向 & $12/12$、$7/7$ & 同族描述性方向\\
+B9/B10 外推压力 & B10 共 128 条，$N$ 全超 B1 上界 & estimated Loss 不作真实测试\\ \hline
+\end{tabular}
+\end{table}
+
+正式输出及哈希见 CYJ 的 v8 结果清单；发布主体提交
+\texttt{615c078} 已经远端核验。18 组冻结接口 fixture
+与 95 项 CYJ 回归测试通过，仅说明工程实现与接口一致。
+问题三的 CHM 消费者验收仍待完成。
+
+\subsection{边际效用与弹性分析}
+
+设 $q=g(Q_A(\boldsymbol p))$、$F=\exp\{r_w(\boldsymbol p)\}$。
+固定配比时，主模型的局部偏导为
+\begin{align}\label{eq:cyj-derivatives}
+L_N&=F[-\alpha AN^{-\alpha-1}+(1-q)G_N/N],\\
+L_D&=F[-\beta BD^{-\beta-1}+(1-q)G_D/D],\\
+L_q&=-FG(N,D),\qquad L_{Q_A}=L_qg'(Q_A).
+\end{align}
+代理截断处只取单侧导数；改变配比时还要计入 $r_w$ 的梯度。
+定义无量纲正改善弹性 $\varepsilon_x=-xL_x/L$。在指定点使
+$x$ 增加 1\%，Loss 局部相对下降近似为 $\varepsilon_x$\%。
+
+\begin{table}[htbp]
+\centering\small
+\caption{冻结示例配比、$D=100$ B、$q=0.671361$ 的条件模型局部弹性}
+\label{tab:cyj-q2-elasticity}
+\begin{tabular}{rrrrr}
+\hline
+$N$（B 参数） & $\widehat L$ & $\varepsilon_N$ & $\varepsilon_D$ & $\varepsilon_q$\\ \hline
+0.1 & 2.780596 & 0.095267 & 0.033814 & 0.115662\\
+1 & 2.344348 & 0.055998 & 0.040106 & 0.099511\\
+10 & 2.121466 & 0.033091 & 0.044320 & 0.068334\\ \hline
+\end{tabular}
+\end{table}
+
+本例中参数规模的相对边际收益随 $N$ 增加而下降；该比较固定了
+配比和质量代理，且未把不同资源的单位成本视为相同。
+若题面成本 $C$ 的质量成本族与基准已指定，同一点的每单位算力
+局部收益分别为 $-L_N/C_N$ 与 $-L_q/C_q$；前者大时在该点增加
+参数更划算，后者大时提高代理质量更划算。$C_q$ 在质量成本
+折点须取可行单侧导数。不同成本族给出的比较可能不同，且
+$q$ 由配比派生；故弹性本身不能给出跨情景的唯一支出建议。
+
+\subsection{质量与模型规模的替代关系}
+
+固定 $D,\boldsymbol p$ 作假想的独立质量代理扰动，等 Loss 曲线满足
+\begin{equation}\label{eq:cyj-tradeoff}
+\frac{dN}{dq}=-\frac{L_q}{L_N},\qquad
+\frac{dD}{dq}=-\frac{L_q}{L_D}.
+\end{equation}
+二者为负表示质量提高后可缩小规模。有限变化还需在支持域内求根。
+表\ref{tab:cyj-q2-tradeoff} 区分“旧质量下的等价扩模”和“新质量下
+保持原 Loss 的缩模”。
+
+\begin{table}[htbp]
+\centering\small
+\caption{固定示例配比、$D=100$ B、$q=0.671361$ 的质量--规模条件替代；$N$ 单位 B 参数，根仅在共同支持域内报告}
+\label{tab:cyj-q2-tradeoff}
+\begin{tabular}{rrrrr}
+\hline
+初始 $N$ & $dN/dq$ & $q+0.05$ 等价旧质量 $N'$ & $q+0.10$ 等价旧质量 $N'$ & $q+0.05$ 等 Loss 新 $N'$\\ \hline
+0.1 & $-0.181$ & 0.109607 & 0.120466 & 0.091384\\
+1 & $-2.647$ & 1.144490 & 1.317062 & 0.875789\\
+10 & $-30.759$ & 11.697632 & 无支持域内根 & 8.546552\\ \hline
+\end{tabular}
+\end{table}
+
+例如 $N=1$ B 时，代理质量增加 $0.05$ 的模型内部改善等价于
+旧质量下扩模至 $1.144490$ B；若提高质量并保持 Loss 不变，
+$N$ 可降至 $0.875789$ B。固定配比却改变由它派生的代理质量，
+这里只是敏感性运算，不是已观测的配比干预。
+
+\subsection{领域之间的替代与互补}
+
+配比位于 $\sum_i p_i=1$ 的单纯形内，故只有可行的零和转移方向有
+操作含义。从域 $j$ 向域 $i$ 转移 $\epsilon$，在 512 条 A4 配方
+的均值点计算
+\begin{equation}\label{eq:cyj-pair}
+\left.\frac{dL}{d\epsilon}\right|_0=L_{p_i}-L_{p_j},\quad
+\left.\frac{d^2L}{d\epsilon^2}\right|_0=
+(\boldsymbol e_i-\boldsymbol e_j)^\top H_pL
+(\boldsymbol e_i-\boldsymbol e_j).
+\end{equation}
+梯度同时包括质量代理和配比相对修正两条路径。全部
+$\binom{17}{2}=136$ 对均有局部方向和凸包线性规划给出的
+可行 $\epsilon$ 上限。例如 freelaw$\to$arxiv 的导数为 $-0.444104$，
+该方向上限为 $0.096825$，方向曲率为 $2.816224$；
+wikipedia\_en$\to$arxiv 的导数为 $-0.769184$、上限为
+$0.075078$。这些方向与互补曲率仅为条件模型内部的局部描述，
+没有因果含义。
+
+\begin{table}[htbp]
+\centering\small
+\caption{A4 观测配方均值点的代表性领域转移；导数为每单位配比转移的条件 Loss，$\epsilon_{\max}$ 来自 A4 凸包}
+\label{tab:cyj-q2-pairs}
+\begin{tabular}{lrrr}
+\hline
+转移方向 & $dL/d\epsilon$ & $\epsilon_{\max}$ & 方向曲率\\ \hline
+freelaw$\to$arxiv & $-0.444104$ & 0.096825 & 2.816224\\
+wikipedia\_en$\to$arxiv & $-0.769184$ & 0.075078 & 0.124064\\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{外推分析、适用范围与模型局限}
+
+B7 为半合成网格，B3 为 B1 风格插值，B4/B5 未验证统一绝对
+Loss 坐标，B10 的 128 条 Loss 为 estimated。其中 B10 的 $N$
+全部超过 B1 上界，$D$ 有 $79.6875\%$ 超过上界；不能把这些点
+算作真实外推验证。$Q_A\to Q_B$、A 侧逐目标相对 Loss 到 B 侧
+总体 Loss 的桥接，以及二者对配比的重复影响，均无法由现有附件
+识别。支持域外不直接宣称预测可靠；支持域内的高拟合精度与代码
+测试也不证明跨来源科学解释成立。
+
+\subsection{问题二小结}
+
+以 B1 五参数骨架及 B7 三参数半合成质量扩展建立主模型，再以
+明示的质量代理与相对配比假设接入问题一。模型在共同支持域内
+给出 $N,D,Q,\boldsymbol p$ 的条件局部效用、质量--规模替代及
+136 对领域的可行局部方向；跨来源幅度仍待成对实验标定。
+问题三接口已发布，CHM 的正式消费者验收另行记录。
