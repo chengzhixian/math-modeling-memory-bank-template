@@ -1,0 +1,10 @@
+context_tokens,quality_family,fine_points,coarse_points,refinements,transition_signatures_agree
+2048,exponential,321,161,1,True
+2048,power,321,161,1,True
+2048,logarithmic,321,161,1,True
+8192,exponential,321,161,1,True
+8192,power,321,161,1,True
+8192,logarithmic,641,321,2,True
+131072,exponential,641,321,2,True
+131072,power,641,321,2,True
+131072,logarithmic,321,161,1,True
