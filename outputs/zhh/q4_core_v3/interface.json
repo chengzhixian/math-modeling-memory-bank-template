@@ -1,0 +1,12 @@
+{
+  "schema": "zhh.q4.core.v3.interface",
+  "formal_cross_coordinate_status": "unidentified",
+  "ready_for_empirical_Q3_conversion": false,
+  "conditional_mapping_policy": "explicit named C6 source coordinate and declared affine assumptions; source support required",
+  "historical_target": "standardized six-task mean, separate from q90 forecast target",
+  "technical_effect_identified": false,
+  "frontier_target": "type-specific recent two-calendar-month q90, anchored conditional evolution",
+  "frontier_model_selection": "lowest diagnostic two-month-window RMSE; four overlapping test windows per type, not blind selection",
+  "forecast_origin": "latest observed submission per type; supplied per row",
+  "paper_status": "not updated at user request; old v2 paper and root tables are not current v3 core results"
+}

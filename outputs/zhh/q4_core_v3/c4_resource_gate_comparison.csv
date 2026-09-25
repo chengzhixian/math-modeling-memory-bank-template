@@ -1,0 +1,3 @@
+resource_gate,n,gC_log10_per_year,annual_compute_factor,recent_D_median_B,D_max_B,N_max_B
+primary,81,0.6903147486034148,4.901339080948628,6500.0,18000.0,405.0
+wide_ratio,93,0.6005515619926791,3.986130951929158,6500.0,18000.0,405.0

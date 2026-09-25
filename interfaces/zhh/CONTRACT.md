@@ -1,5 +1,7 @@
 # zhh接口 v2：条件Q4答卷与默认拒绝跨坐标换算
 
+当前核心接口为 `outputs/zhh/q4_core_v3/interface.json`，结果入口 `outputs/zhh/Q4_CORE_STATUS_V3.md`。贡献改为标准化均值三项分解，前沿新增q90分位候选和同两月窗口诊断；C6按原始来源分别映射，4860压力格。经验Q3转换仍false。本文其余内容描述冻结v2，根表/论文未更新（用户要求不写论文），不得与v3混用。
+
 2026-09-26重新验收状态：**NOT READY（完整Q4未验收）**；本契约只描述已有条件计算接口，不代表技术贡献或前沿预测科学验收。最新发现和任务以 `experiments/zhh/20260926-q4-requirement-reaudit.md` 与 `outputs/zhh/Q4_TASK_COMPLETION_V2.md` 为准。
 
 发布者zhh；分支 `team/zhh-frontier`，尚未main集成。完整答案 `outputs/zhh/Q4_FINAL_ANSWER_V2.md`；完整审查 `experiments/zhh/20260926-q4-v2-full-review.md`。

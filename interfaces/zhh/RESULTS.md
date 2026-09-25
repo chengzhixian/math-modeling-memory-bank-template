@@ -1,5 +1,7 @@
 # zhh Q4 v2结果索引
 
+最新核心为v3：`outputs/zhh/Q4_CORE_STATUS_V3.md`与`outputs/zhh/q4_core_v3/`。13项测试；独立manifest/接口。工程与条件分析已补强，严格技术机制和实证Loss坐标仍未识别。以下v2索引作为历史，论文按用户要求未改。
+
 状态：**NOT READY（完整Q4未验收）**。2026-09-26重新阅读官方原件，发现技术贡献解释、均值→q90前沿转移、跨题Loss坐标及误差影响尚未闭环；详细证据见 `experiments/zhh/20260926-q4-requirement-reaudit.md`。已有数据/数值与软件复现保留，尚未进入main。
 
 - `outputs/zhh/Q4_FINAL_ANSWER_V2.md`：完整推导、数据角色、贡献、桥接、12/24月及局限。

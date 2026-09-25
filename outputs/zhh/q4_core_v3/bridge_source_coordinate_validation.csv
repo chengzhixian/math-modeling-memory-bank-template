@@ -1,0 +1,32 @@
+coordinate_id,grade,loss_kind,n,loss_kind_provenance,source_Loss_values_independently_verified,status,monotone_LOO_RMSE,constant_LOO_RMSE,monotone_LOO_R2
+BLOOM paper,medium,unspecified,1,attachment source label; not independent paper verification,False,insufficient_source_coordinate_support,,,
+"DeepSeek LLM Technical Report (DeepSeek-AI, 2023), validation loss",medium,validation,1,attachment source label; not independent paper verification,False,insufficient_source_coordinate_support,,,
+Falcon technical report,medium,unspecified,2,attachment source label; not independent paper verification,False,insufficient_source_coordinate_support,,,
+"Falcon technical report (TII, 2023), validation loss",medium,validation,2,attachment source label; not independent paper verification,False,insufficient_source_coordinate_support,,,
+GPT-NeoX paper,medium,unspecified,1,attachment source label; not independent paper verification,False,insufficient_source_coordinate_support,,,
+"Gemma 2 Technical Report (Google, 2024), final loss",medium,unspecified,3,attachment source label; not independent paper verification,False,insufficient_source_coordinate_support,,,
+"Gemma Technical Report (Google, 2024), final loss",medium,unspecified,3,attachment source label; not independent paper verification,False,insufficient_source_coordinate_support,,,
+Gemma report,medium,unspecified,1,attachment source label; not independent paper verification,False,insufficient_source_coordinate_support,,,
+Gemma2 report,medium,unspecified,4,attachment source label; not independent paper verification,False,not_validated_primary_bridge,3.4143947735299864,11.543004719215416,0.8439633636371144
+"LLaMA 2 paper (Touvron et al., 2023), training loss",medium,training,2,attachment source label; not independent paper verification,False,insufficient_source_coordinate_support,,,
+"LLaMA 2 paper (Touvron et al., 2023), training loss at convergence",medium,training,1,attachment source label; not independent paper verification,False,insufficient_source_coordinate_support,,,
+"LLaMA 3 Technical Report (Meta, 2024), training loss at convergence",medium,training,2,attachment source label; not independent paper verification,False,insufficient_source_coordinate_support,,,
+"LLaMA 3.1 Technical Report (Meta, 2024), training loss",medium,training,1,attachment source label; not independent paper verification,False,insufficient_source_coordinate_support,,,
+Llama3 technical report,medium,unspecified,2,attachment source label; not independent paper verification,False,insufficient_source_coordinate_support,,,
+"Mistral 7B model card (Mistral AI, 2024)",medium,unspecified,1,attachment source label; not independent paper verification,False,insufficient_source_coordinate_support,,,
+"Mistral 7B technical report (Mistral AI, 2023), validation loss",medium,validation,1,attachment source label; not independent paper verification,False,insufficient_source_coordinate_support,,,
+"Mixtral technical report (Mistral AI, 2023), validation loss",medium,validation,1,attachment source label; not independent paper verification,False,insufficient_source_coordinate_support,,,
+"OPT paper (Zhang et al., 2022), Pile validation loss",medium,validation,1,attachment source label; not independent paper verification,False,insufficient_source_coordinate_support,,,
+Phi-1.5 paper,medium,unspecified,1,attachment source label; not independent paper verification,False,insufficient_source_coordinate_support,,,
+"Phi-1.5 paper (Microsoft, 2023), training loss",medium,training,1,attachment source label; not independent paper verification,False,insufficient_source_coordinate_support,,,
+"Phi-2 model card (Microsoft, 2023), training loss",medium,training,1,attachment source label; not independent paper verification,False,insufficient_source_coordinate_support,,,
+"Phi-3 Technical Report (Microsoft, 2024), training loss",medium,training,3,attachment source label; not independent paper verification,False,insufficient_source_coordinate_support,,,
+"Pythia training log (Attachment B, final checkpoint D=299.9B tokens)",high,validation,7,attachment source label; not independent paper verification,False,not_validated_primary_bridge,0.5379696853398879,0.42558721239332864,-1.1865492209089568
+Qwen2 MoE report,medium,unspecified,1,attachment source label; not independent paper verification,False,insufficient_source_coordinate_support,,,
+"Qwen2 Technical Report (Alibaba, 2024), validation loss",medium,validation,4,attachment source label; not independent paper verification,False,diagnostic_candidate,7.0475440184535865,10.708269938224815,0.2070923015943461
+Qwen2 report,medium,unspecified,3,attachment source label; not independent paper verification,False,insufficient_source_coordinate_support,,,
+"Qwen2.5 Technical Report (Alibaba, 2024), validation loss",medium,validation,6,attachment source label; not independent paper verification,False,diagnostic_candidate,2.655323563077578,15.074496783167412,0.9508095886990741
+Qwen2.5 report,medium,unspecified,8,attachment source label; not independent paper verification,False,not_validated_primary_bridge,1.935249181821854,14.936712764172066,0.9766009853998253
+"Yi Technical Report (01.AI, 2023), training loss",medium,training,2,attachment source label; not independent paper verification,False,insufficient_source_coordinate_support,,,
+Yi technical report,medium,unspecified,4,attachment source label; not independent paper verification,False,insufficient_source_coordinate_support,,,
+Yi-1.5 report,medium,unspecified,4,attachment source label; not independent paper verification,False,insufficient_source_coordinate_support,,,
