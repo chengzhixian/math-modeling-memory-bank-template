@@ -1,0 +1,28 @@
+{
+  "schema_version": "chm.q2.qa_mapping_recheck.v1",
+  "status": "conditional_owner_side_recalculation_not_CYJ_release",
+  "source_cyj_branch_commit": "86526a17d698e5fcc585f3099248bfa5a4ad28d8",
+  "Q1_producer": "chm.q1.v1.3 Ridge unchanged",
+  "Q1_quality_mapping_candidate": "chm.q1.q2_quality_policy.candidate.v2",
+  "scientific_limit": "lambda/eta and A/B quality coordinate remain unidentified; values are engineering scenarios",
+  "old_CYJ_main_policy_reproduction": "both old conditional losses match published v6 within 1e-9",
+  "deltas": {
+    "quality_direct": {
+      "conditional_loss_sample_minus_extended": -3.736941680543282e-06,
+      "mixture_l1_distance": 7.68742228433604e-05,
+      "same_active_vertex_set": true
+    },
+    "quality_direct_and_near": {
+      "conditional_loss_sample_minus_extended": -9.353845507753533e-05,
+      "mixture_l1_distance": 0.004045005691229417,
+      "same_active_vertex_set": true
+    }
+  },
+  "source_sha256": {
+    "cyj_frozen_model_coefficients": "d6f5b665d3806a322d0ebf87da46889822d2eff89324eacded6040383e7b6733",
+    "Q1_bundle": "b0dda7caac30513c0f37e74ccb143064606847fdc35fd7607c999ac2f8647ecb",
+    "Q1_mapping_candidate": "d18993de119652987b114525e16eaea14b346ab31637cc5628a80bfe09c2bfd8"
+  },
+  "comparison_sha256": "4cb0d36a947184109aba6bf15edc41726291460fb66b23ef80acb053364b055e",
+  "mixtures_sha256": "e6de0727debb1b84bf000883af4f11d51acd86bda558ff4492bb848cd51981d8"
+}

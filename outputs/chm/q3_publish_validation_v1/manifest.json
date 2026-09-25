@@ -1,0 +1,14 @@
+{
+  "schema_version": "chm.q3.publish_software_validation.v1",
+  "status": "software_validation_only",
+  "synthetic_only": true,
+  "tests": "5/5 PASS",
+  "rejected_cases": [
+    "formal_ready=false",
+    "cost components mismatch",
+    "unique p in sensitivity-only scope",
+    "missing uncertainty summary"
+  ],
+  "accepted_case": "well-formed synthetic NDQ_with_p_sensitivity bundle",
+  "note": "Passing this validator is necessary but not sufficient for scientific validity; upstream predictor evidence still controls readiness."
+}

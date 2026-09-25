@@ -1,0 +1,10 @@
+budget_FLOPs,context_tokens,N_params_B,D_tokens_B,diagnostic_loss,C_train_plus_attn_FLOPs,budget_utilization,candidate_source,support_flags,Q_policy,p_policy
+1e19,2048,0.221311693734,7.04960381459,2.99892562893,1e19,1.0,interior,none,"Q=Q0; C_Q=0; no Q performance term","p=p_ref; no cross-Loss correction"
+1e19,8192,0.204461141406,6.40304894745,3.03465142842,1e19,1.0,interior,none,"Q=Q0; C_Q=0; no Q performance term","p=p_ref; no cross-Loss correction"
+1e19,131072,0.106753967058,2.90780936125,3.36715456569,1e19,1.0,interior,none,"Q=Q0; C_Q=0; no cross-Loss correction"
+1e22,2048,5.20238805294,299.893,2.14321509399,1e22,1.0,D_max,D_max,"Q=Q0; C_Q=0; no Q performance term","p=p_ref; no cross-Loss correction"
+1e22,8192,4.62589688324,283.009917712,2.15555563459,1e22,1.0,interior,none,"Q=Q0; C_Q=0; no Q performance term","p=p_ref; no cross-Loss correction"
+1e22,131072,2.41528947796,128.522973165,2.27070367001,1e22,1.0,interior,none,"Q=Q0; C_Q=0; no Q performance term","p=p_ref; no cross-Loss correction"
+1e24,2048,11.965825,299.893,2.0933845246,2.30006390877e22,0.0230006390877,support_corner,N_max;D_max;support_limited_budget_slack,"Q=Q0; C_Q=0; no Q performance term","p=p_ref; no cross-Loss correction"
+1e24,8192,11.965825,299.893,2.0933845246,2.74101475299e22,0.0274101475299,support_corner,N_max;D_max;support_limited_budget_slack,"Q=Q0; C_Q=0; no Q performance term","p=p_ref; no cross-Loss correction"
+1e24,131072,11.965825,299.893,2.0933845246,1.15600316374e23,0.115600316374,support_corner,N_max;D_max;support_limited_budget_slack,"Q=Q0; C_Q=0; no Q performance term","p=p_ref; no cross-Loss correction"

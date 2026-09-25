@@ -1,0 +1,22 @@
+{
+  "algorithm": "exact CHM selected-feature definition and unshuffled five-fold CV; dense centered Ridge equivalent to sklearn fit_intercept=True",
+  "candidate_source_commit": "2450971d15b7f6516d6db408759bf1b22f497808",
+  "files_sha256": {
+    "interaction_coefficients_13_targets.json": "24829c25584f2f3d22819f2abcd240ef934b48019d31773485c5fb5948ce76cc",
+    "interaction_cv_summary.csv": "75ef3591efd13c9b703c5fd6e9f8e40cc24f58b247669c1976e7306c307becb4",
+    "interaction_feature_definition.json": "b9cd7b0de3b1a424e9c43e0b50714ce0d3656f467e67480e4d9ee76f79fb21d5",
+    "interaction_fold_stability.csv": "a2eb9112ee4f1382eea73b9cd426fa43ef7bdf438596f982c4faec401b26450e"
+  },
+  "generation_command": "python -B src/chm/export_q1_interaction_bundle.py",
+  "normalization": "consume Q1 published normalized 512x17 recipes; verify original A4 hash and original A5 identity",
+  "numpy_version": "2.3.5",
+  "published_candidate_metrics_sha256": "a50df69cd38ba41691d0f038a0d830d61d8f88dc3c6cb003ae538fbd0a52d185",
+  "python_version": "3.12.14",
+  "schema_version": "chm.q1.interaction_bundle.v1",
+  "source_A4_A5_sha256": {
+    "train_mixture_1m.csv": "04a32ef4ab594376bf90e11404c033668f887c351d6a03ad3744824c7296a2d8",
+    "train_pile_loss_1m.csv": "49a959aa07ce5c20831d5abe3a7896ff0cd90a398bd407c8913fd5588be0465a"
+  },
+  "status": "Q1_upstream_reproduction_pending_CHM_owner_signoff",
+  "upstream_Q1_export_manifest_sha256": "b0dda7caac30513c0f37e74ccb143064606847fdc35fd7607c999ac2f8647ecb"
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": "chm.q3.generic_solver_software_validation.v1",
+  "status": "software_validation_only",
+  "synthetic_only": true,
+  "scientific_result": false,
+  "unittest": {
+    "generic_solver": "4/4 PASS",
+    "readiness_policy": "4/4 PASS"
+  },
+  "kkt_scan": {
+    "families": [
+      "exponential",
+      "power",
+      "logarithmic"
+    ],
+    "budgets": [
+      1000000000000000000,
+      10000000000000000000,
+      100000000000000000000,
+      1e+21,
+      1e+22
+    ],
+    "context_tokens": 8192,
+    "Q0": 0.5,
+    "points": 15,
+    "pass": 15,
+    "max_interior_ratio_relative_spread": 3.830669812701212e-7
+  },
+  "note": "SyntheticLinearQualityLoss exists only to validate optimizer, active-set and KKT software. Its optima are not F-problem evidence."
+}

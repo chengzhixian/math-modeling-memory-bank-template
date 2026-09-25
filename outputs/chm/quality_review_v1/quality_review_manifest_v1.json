@@ -1,0 +1,137 @@
+{
+  "seed": 20260923,
+  "status": "review_sensitivity_against_primary_global_all22",
+  "primary_quality_definition_unchanged": true,
+  "primary_orientation_policy": "global_spearman_sign_for_14_plus_semantic_positive_for_8",
+  "orientation_sensitivity": {
+    "stable_loo": "full pooled sign unchanged after leaving out each of 7 A1 domains",
+    "stable_consensus_075": "stable_loo and sign_agreement >= 0.75",
+    "loo_included_metrics": [
+      "fineweb_edu",
+      "fluency_en",
+      "modernbert_cleanliness",
+      "modernbert_readability",
+      "modernbert_reasoning",
+      "modernbert_professionalism",
+      "dsir_books",
+      "dsir_wiki",
+      "dsir_math",
+      "qurater",
+      "ad_en",
+      "rps_doc_word_count",
+      "rps_doc_num_sentences",
+      "rps_doc_unigram_entropy",
+      "rps_doc_frac_unique_words",
+      "rps_doc_frac_no_alph_words",
+      "rps_doc_frac_chars_top_2gram",
+      "rps_lines_uppercase_letter_fraction",
+      "rps_lines_ending_with_terminal_punctution_mark",
+      "rps_doc_mean_word_length"
+    ],
+    "consensus_included_metrics": [
+      "fineweb_edu",
+      "fluency_en",
+      "modernbert_cleanliness",
+      "modernbert_readability",
+      "modernbert_reasoning",
+      "modernbert_professionalism",
+      "qurater",
+      "ad_en",
+      "rps_doc_word_count",
+      "rps_doc_unigram_entropy",
+      "rps_doc_frac_unique_words",
+      "rps_lines_ending_with_terminal_punctution_mark"
+    ],
+    "loo_standardization": {
+      "mean": -0.12925932617084454,
+      "std": 0.720381681832208,
+      "included_metrics": [
+        "ad_en",
+        "dsir_books",
+        "dsir_math",
+        "dsir_wiki",
+        "fineweb_edu",
+        "fluency_en",
+        "modernbert_cleanliness",
+        "modernbert_professionalism",
+        "modernbert_readability",
+        "modernbert_reasoning",
+        "qurater",
+        "rps_doc_frac_chars_top_2gram",
+        "rps_doc_frac_no_alph_words",
+        "rps_doc_frac_unique_words",
+        "rps_doc_mean_word_length",
+        "rps_doc_num_sentences",
+        "rps_doc_unigram_entropy",
+        "rps_doc_word_count",
+        "rps_lines_ending_with_terminal_punctution_mark",
+        "rps_lines_uppercase_letter_fraction"
+      ],
+      "included_families": [
+        "rps",
+        "dsir",
+        "model"
+      ],
+      "dropped_families": [],
+      "warning": ""
+    },
+    "consensus_standardization": {
+      "mean": -0.11323333176751951,
+      "std": 0.6908581081909355,
+      "included_metrics": [
+        "ad_en",
+        "fineweb_edu",
+        "fluency_en",
+        "modernbert_cleanliness",
+        "modernbert_professionalism",
+        "modernbert_readability",
+        "modernbert_reasoning",
+        "qurater",
+        "rps_doc_frac_unique_words",
+        "rps_doc_unigram_entropy",
+        "rps_doc_word_count",
+        "rps_lines_ending_with_terminal_punctution_mark"
+      ],
+      "included_families": [
+        "rps",
+        "model"
+      ],
+      "dropped_families": [
+        "dsir"
+      ],
+      "warning": "Family weights are rebalanced over surviving families; this is a stress test, not the primary Q definition."
+    }
+  },
+  "family_weight_grid": {
+    "step": 0.05,
+    "simplex": "w_rps+w_dsir+w_model=1; zero weights allowed for stress testing"
+  },
+  "domain_balanced_standardization": {
+    "mean": 0.4088934992765861,
+    "std": 1.039736623659713,
+    "definition": "equal total weight per A1 domain"
+  },
+  "primary_record_weighted_standardization": {
+    "Q_raw_mean": -0.08817485436104841,
+    "Q_raw_std": 0.689942114046033
+  },
+  "qurater_component_standardization": {
+    "qurater_0": {
+      "median": -1.62109375,
+      "scale": 2.5404817932128907
+    },
+    "qurater_1": {
+      "median": 0.634765625,
+      "scale": 2.5988935546875
+    },
+    "qurater_2": {
+      "median": -0.5673828125,
+      "scale": 2.046900146484375
+    },
+    "qurater_3": {
+      "median": 1.0107421875,
+      "scale": 3.107089453125
+    }
+  },
+  "warning": "All 22 signals remain in the primary global-Spearman score; stable_loo, stable_consensus_075, family-weight grids, domain-balanced scaling, and Qurater component variants remain sensitivity/stress tests."
+}

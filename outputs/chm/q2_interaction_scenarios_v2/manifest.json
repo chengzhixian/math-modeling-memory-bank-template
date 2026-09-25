@@ -1,0 +1,13 @@
+{
+  "schema_version": "chm.q2.interaction_scenarios.v2",
+  "Q1_version": "chm.q1.v2.0",
+  "Q1_manifest_sha256": "c621f7e405106e42720f918f490235b5e8becefb0f7c8cb997736e96337117a9",
+  "CYJ_B7_parameters_sha256": "d6f5b665d3806a322d0ebf87da46889822d2eff89324eacded6040383e7b6733",
+  "Q1_decision_support": "convex_hull_A4_numerical_bounds",
+  "Q1_hull_bounds_sha256": "b27939f9d3894a810ee2ec4336f5583fca95e551e318963ac81bfbe77c0dae70",
+  "formula": "L_B(N,D,Q_B)*(1+lambda*(N/1B)^(-eta)*sum_k w_k*m_k(p)/L_A_k_ref)",
+  "conditional_scenario_count": 3,
+  "conditional_scenarios_sha256": "4636d08a3a3a22f85984435a20cd16097b3897aec6cd3c67b9e23ff7d3e3a8b9",
+  "status": "CHM_RECALCULATION_PENDING_CYJ_REPUBLICATION",
+  "ready_for_Q3_empirical_absolute_loss": false
+}

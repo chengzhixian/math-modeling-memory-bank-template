@@ -1,0 +1,147 @@
+# 问题一：数据质量评价与训练数据配比效应（严谨重构版）
+
+当前正式 LaTeX 见 \`paper/latex/sections/chm/q1.tex\`。本草稿只保留建模逻辑与可识别性边界。
+
+## 1. 质量代理
+
+A1--A3 没有样本级真实质量标签，因此定义 A 侧综合质量代理 \(Q_A\)，不把它解释成客观质量真值。22 个指标先按字段语义压缩，使用 A1 的 median/MAD 冻结标准化；8 个 model-based 指标作为语义锚点，其余指标用域内 Spearman + Fisher-z 对齐方向。三个指标家族采用组内等权、组间等权：
+\[
+G_{ig}
+=
+\frac1{|\mathcal J_{ig}|}\sum_{j\in\mathcal J_{ig}}z^+_{ij},
+\qquad
+Q_{A,i}
+=
+\frac{\frac13\sum_gG_{ig}-\mu_{S,A1}}{\sigma_{S,A1}}.
+\]
+家族等权是透明定义，不是数据唯一识别结果；必须结合 argmax、22 指标等权、家族删除敏感性解释。
+
+指标冲突先使用方向统一后的域内 Spearman 作描述性分析。此前的复制性结果显示：arxiv 的 96 个样本负相关中 92 个、github 的 91 个中 91 个，在完整扩展和 non-overlap 扩展仍为负；两域共有 56 个三层同号指标对。这些旧计数只是描述性符号复核；下述新分析另行控制多重比较。
+
+### 第二小问增补：冲突成因与二维评价
+
+在描述性负相关之外，对 A1 总体的 231 个指标对统一做 Spearman 检验，并在该检验家族内用 Benjamini--Hochberg 控制 FDR 为 0.05。若总体显著负相关且同一指标对在 arxiv 或 github 的去重扩展集中也通过各自 231 对的 FDR 校正，记为复制性显著冲突边。这个规则先于结果固定，不能把相关性解释为因果。完整表见 `outputs/chm/conflict_aware_v1/`。目前运行得到总体 66 对显著负相关，其中 55 对满足复制性规则。
+
+对每条边比较总体与七个 A1 域内的相关性，并输出有多少域通过同样的多重比较校正。多个域内负相关支持跨领域重复的结构性分歧；仅总体负相关支持领域混合解释；少数域内负相关说明领域依赖。它们是可检验的模式分类，不自动证明指标语义上的取舍。专业性评分与平均词长在七域内均显著负相关（总体 $\rho=-0.4994$），高频二元与三元字符比例也在七域内显著负相关（总体 $\rho=-0.4844$）。这些变量的方向来自 A1 评分规则；尤其字符比例的语义方向须谨慎解释。
+
+保留原 $Q_{A,i}$，用复制性冲突边集合 $\mathcal E_c$ 定义样本分歧度
+\[
+D_i=\frac{\sum_{(j,k)\in\mathcal E_c}|\rho_{jk}|\,|z^+_{ij}-z^+_{ik}|}{\sum_{(j,k)\in\mathcal E_c:\,z^+_{ij},z^+_{ik}\,\mathrm{available}}|\rho_{jk}|},
+\]
+分子也仅对可用的边求和。若无可用边，则 $D_i$ 缺失。主结果为 $(Q_{A,i},D_i)$；$D_i$ 表示同一文本的指标分歧，不是低质量惩罚。A1 七域的 $D$ 中位数依次为 book 2.580、arxiv 2.292、github 1.999、c4 1.903、commoncrawl 1.512、wikipedia 1.471、stackexchange 1.202。去重扩展集 arxiv 与 github 分别为 2.332 和 2.003；与 A1 对应域的方向接近，但不能据此宣称全域排序稳定。四象限以 A1 的 $Q$ 与 $D$ 中位数划分；另输出全 22 项标准差作为敏感性对照。所有数值须以脚本完成运行后的 manifest 为准。
+
+本轮补充证据见 `experiments/chm/20260925-q1-quality-conflict-evidence.md`。主 $Q_A$ 保持 22 指标不变：固定 70/30 分层划分后，训练集 100 次方向重抽样在固定评估集上未改变七域排序；LOO 仍有五字段翻号，八种评分规则的域级名次包络更宽，因此固定规则抽样区间与规则不确定性分开解释。冲突决策用 A1 冻结的 $Q$ 中位数 0.02725594 和 $D$ 第75百分位 2.04229706：高 $D$ 进入复核标记而不扣减 $Q$，低 $Q$ 只标低优先级；缺失 $D$ 触发复核。按域与四象限固定哈希选出的27个案例已以原文行号和 SHA 定向核查，仓库不保存全文。book 高 $Q$ 高 $D$ 的版权开头文本和 c4 低 $Q$ 低 $D$ 的事务公告是反例，说明不能直接把分数/分歧当真实质量标签。没有独立人工标签，不能报告准确率。
+
+## 2. 13-target 配比代理
+
+A4 配方归一化后
+\[
+\mathbf1^\top\mathbf p_i=1.
+\]
+以
+\[
+\mathbf p_{\rm ref}
+=
+\frac1{512}\sum_i\mathbf p_i
+\]
+为参考，对每个验证域 \(k\) 独立拟合零和 Ridge：
+\[
+(\hat\alpha_k,\hat{\boldsymbol\beta}_k)
+=
+\arg\min
+\sum_i
+[L_{ik}-\alpha-\boldsymbol\beta^\top(\mathbf p_i-\mathbf p_{\rm ref})]^2
++
+\lambda_k\|\boldsymbol\beta\|_2^2,
+\quad
+\mathbf1^\top\boldsymbol\beta=0.
+\]
+\(\lambda_k\) 只在 A4+A5 内五折选择。
+
+相对效应：
+\[
+m_k(\mathbf p)
+=
+\hat{\boldsymbol\beta}_k^\top
+(\mathbf p-\mathbf p_{\rm ref}).
+\]
+若从域 \(r\) 向域 \(j\) 转移 \(\delta\)，则
+\[
+\Delta m_k
+=
+\delta(\hat\beta_{k,j}-\hat\beta_{k,r}).
+\]
+
+## 3. 多维 Loss
+
+将 13 个 target 联立：
+\[
+\widehat{\mathbf L}_{1M}(\mathbf p)
+=
+\widehat{\boldsymbol\alpha}
++
+\mathbf B(\mathbf p-\mathbf p_{\rm ref}),
+\qquad
+\mathbf B\in\mathbb R^{13\times17}.
+\]
+因此
+\[
+\mathbf m(\mathbf p)=\mathbf B(\mathbf p-\mathbf p_{\rm ref}).
+\]
+
+配比决策限定在 A4 观测配方凸包
+\[
+\mathcal P_A=\operatorname{conv}\{\mathbf p_1,\ldots,\mathbf p_{512}\}.
+\]
+
+决策层按需求选择：
+\[
+J_{\mathbf s}(\mathbf p)
+=
+\mathbf s^\top\mathbf m(\mathbf p)
+\]
+（已知权重或明确声明的等权情景）；
+\[
+\min_{\mathbf p\in\mathcal P_A}\max_km_k(\mathbf p)
+\]
+（鲁棒最差能力）；
+或
+\[
+\min m_q(\mathbf p)
+\quad
+{\rm s.t.}\quad
+m_k(\mathbf p)\le\varepsilon_k
+\]
+（重点能力 + 保护约束）。若没有权重或阈值，Q1 不自行创造数值。
+
+## 4. 文献函数与主模型
+
+Data Mixing Laws 使用逐验证域指数混合律，BiMix 建模配比与数据量的双变量关系，DoReMi 使用 Group DRO 的最坏域 excess-loss 思想。它们支持“逐维建模后再做多目标决策”的框架，但附件 A 没有对应 \(D\)，所以不直接照搬 BiMix 的双变量尺度项，也不把 DoReMi 等同于本题 minimax。
+
+当前已经在 A6--A11 held-out 上验证的是 Ridge；Data Mixing Laws 的指数形式只能作为候选模型，必须在同一 A4+A5 拟合/调参协议下与 Ridge 比较后才能替换。
+
+## 5. 跨实验组验证
+
+冻结 1M Ridge 后：
+\[
+\rho_{k,\ell}
+=
+\rho_S(
+\widehat L_{k,1M}(\mathbf p_i^{(\ell)}),
+L_{ik}^{(\ell)}
+).
+\]
+13-target 中位 Spearman：
+- 1M：0.8381；
+- 60M：0.8381；
+- 1B：0.7067。
+
+A6/A8 同一 256 配方真实 Loss 的 1M↔60M 中位 Spearman 为 0.9944。
+
+## 6. 不再拟合连续跨规模幅度
+
+A 配方实验没有对应 \(D\)，真实 \(N\) 位置只有 1M/60M/1B，且 1B 支持集改变。因此旧 \(b_k(N)\)、公共 \(\eta\) 不再进入 Q1 主模型。A12--A15 只作为 estimated/extrapolated 压力测试。
+
+## 7. Q1 → Q2
+
+Q1 正式输出：\(Q_A\)、A16 映射、13-target Ridge、\(\mathbf m(\mathbf p)\)、held-out 排序证据。Q1 不提供 \(Q_A\to Q_{\rm score}\) 数值映射，不把 \(m_k\) 直接加到 B1 Loss，也不提供 \(N,D\)-dependent 的配比尺度函数。

@@ -1,0 +1,18 @@
+{
+  "schema_version": "chm.q1.decision_panel.v2",
+  "primary_model": "chm.q1.v2.0",
+  "Q1_manifest_sha256": "c621f7e405106e42720f918f490235b5e8becefb0f7c8cb997736e96337117a9",
+  "scenario_count": 15,
+  "quality_policies": [
+    "unconstrained",
+    "quality_direct",
+    "quality_direct_and_near"
+  ],
+  "decision_count": 45,
+  "optimization_status": "exact_finite_A4_enumeration",
+  "continuous_hull_optimum_claimed": false,
+  "decision_panel_csv_sha256": "b9d5c40166ba16588c04947f513c0752ea2e094ae732a50dfbae7c938dfaa372",
+  "decision_panel_json_sha256": "b606cf9bdd43ef875d6cdff9fbb680ad98ce9b503e2caa5415b14ca35355767d",
+  "default_equal_unconstrained_index": "136",
+  "ready_for_Q3_empirical_absolute_loss": false
+}

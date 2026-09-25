@@ -1,0 +1,19 @@
+{
+  "schema_version": "chm.q3.b7_diagnostic.v1",
+  "status": "diagnostic_only",
+  "ready_for_Q3": false,
+  "cyj_commit": "ad1d312c15bcf79c23d715dd199eec7c2e65a0af",
+  "cyj_artifact_sha256": "e676bfb06da81c02ad968591aa9ae09da5c7cd6b56def49d59a82c371465b025",
+  "source_data_role": "B7 semi-synthetic, B6 duplicate excluded, B8 excluded",
+  "Q0": 0.5,
+  "C7_contexts_status": "external scenarios, not optimized",
+  "p_policy": "omitted: no A-to-B7 loss bridge; no eta transfer",
+  "limitations": [
+    "not an independently validated N-D-Q-p predictor",
+    "B7 rectangular support is an interpolation assumption",
+    "no total predictive or Benchmark interval"
+  ],
+  "published_example_prediction": 3.492870995028143,
+  "rows": 27,
+  "feasible_rows": 24
+}

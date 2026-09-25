@@ -1,0 +1,29 @@
+{
+  "status": "VALIDATED_FOR_STATED_NUMERICAL_SCOPE",
+  "ready_for_Q3": false,
+  "scope": "B7 semi-synthetic conditional model only; rectangular interpolation; Q0=.5; no A/B bridge",
+  "cyj_commit": "ad1d312c15bcf79c23d715dd199eec7c2e65a0af",
+  "artifact_sha256": "e676bfb06da81c02ad968591aa9ae09da5c7cd6b56def49d59a82c371465b025",
+  "scipy_version": "1.18.1",
+  "nominal_rows": 27,
+  "feasible_nominal_rows": 24,
+  "budget_scan_rows": 1449,
+  "transition_brackets": 45,
+  "support_sensitivity_rows": 54,
+  "max_nominal_global_gap": 9.994775140853562e-08,
+  "max_multistart_loss_gap": 4.82280881897168e-13,
+  "max_kkt_relative_violation": 3.213075665395116e-08,
+  "checks": [
+    "all nominal KKT passed",
+    "24-start independent SLSQP agreement",
+    "budget loss monotonicity",
+    "81/161 point transition signatures agree",
+    "nested support cannot improve loss"
+  ],
+  "limitations": [
+    "floating-point bounds are not interval arithmetic proofs",
+    "transition brackets use numerical active-set tolerance",
+    "parameter and model uncertainty not included",
+    "formal publication remains blocked by upstream validation"
+  ]
+}

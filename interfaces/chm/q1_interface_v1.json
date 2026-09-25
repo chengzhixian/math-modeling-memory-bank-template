@@ -1,0 +1,40 @@
+{
+  "schema_version": "chm.q1.v1",
+  "producer": "chm",
+  "status": "producer_validated_A_side_ready_B_bridge_unidentified",
+  "files": {
+    "quality": {
+      "path": "outputs/chm/domain_quality.csv",
+      "sha256": "458e42669bab460f5cc446c873e0e1275b9eb9b4304675363a4dc604a08197b7",
+      "rows": 9
+    },
+    "mapping": {
+      "path": "outputs/chm/domain_mapping.csv",
+      "sha256": "960ff8094339473b0fd72c774774dbba3cae438f3fcb5b0fb4fdc8bf9e20006a",
+      "rows": 17
+    },
+    "coefficients": {
+      "path": "outputs/chm/local_recheck_v1/mixture_effect_ridge_v0.csv",
+      "sha256": "2d4f3b528574f0329fc39a889b475ee17deecdf34154e3962528edb3461e0ae8",
+      "rows": 13
+    },
+    "reference": {
+      "path": "outputs/chm/local_recheck_v1/mixture_reference_v0.csv",
+      "sha256": "87658558a5dac32c370e65e0d58ea8a07940aa8f9f83b85692c9b5dd55a4e2a5",
+      "rows": 17
+    },
+    "scale": {
+      "path": "outputs/chm/local_recheck_v1/mixture_scale_transfer_v0_manifest.json",
+      "sha256": "b1e8a68ed277089cd7c5f2d72efef9097cecd614a0f70bc374392b765e08ba83",
+      "rows": null
+    },
+    "validation": {
+      "path": "outputs/chm/local_recheck_v1/q1_regmix_ridge_domainwise_metrics.csv",
+      "sha256": "784e8b04caf0d648d24068f3e5c5913d3003cede57b95a545400ef9b4b4aafc2",
+      "rows": 13
+    }
+  },
+  "quality_coordinate": "A_native_Q_z",
+  "mixture_effect_unit": "A_target_cross_entropy_delta",
+  "scale_N_unit": "parameters"
+}

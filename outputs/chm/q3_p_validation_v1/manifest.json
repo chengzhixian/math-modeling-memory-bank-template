@@ -1,0 +1,86 @@
+{
+  "schema_version": "chm.q3.p_selection_validation.v1",
+  "status": "A-side optimization diagnostic only",
+  "ready_for_Q3": false,
+  "primary_panel": [
+    "pile_cc",
+    "wikipedia_en",
+    "arxiv",
+    "stackexchange",
+    "github"
+  ],
+  "summary": {
+    "all_targets": {
+      "n": 39,
+      "exact_best": 25,
+      "top10pct": 34,
+      "max_rank": 45,
+      "max_relative_regret": 0.21052126927064216
+    },
+    "primary_panel": {
+      "n": 15,
+      "exact_best": 11,
+      "top10pct": 14,
+      "max_rank": 10,
+      "max_relative_regret": 0.02634645514824117
+    },
+    "by_scale_all": {
+      "1M": {
+        "n": 13,
+        "exact_best": 10,
+        "top10pct": 13,
+        "max_rank": 3,
+        "max_relative_regret": 0.01405276023712777
+      },
+      "60M": {
+        "n": 13,
+        "exact_best": 8,
+        "top10pct": 13,
+        "max_rank": 9,
+        "max_relative_regret": 0.03228743578728586
+      },
+      "1B": {
+        "n": 13,
+        "exact_best": 7,
+        "top10pct": 8,
+        "max_rank": 45,
+        "max_relative_regret": 0.21052126927064216
+      }
+    },
+    "by_scale_primary_panel": {
+      "1M": {
+        "n": 5,
+        "exact_best": 4,
+        "top10pct": 5,
+        "max_rank": 3,
+        "max_relative_regret": 0.0008135810372005
+      },
+      "60M": {
+        "n": 5,
+        "exact_best": 3,
+        "top10pct": 5,
+        "max_rank": 4,
+        "max_relative_regret": 0.006493840919414389
+      },
+      "1B": {
+        "n": 5,
+        "exact_best": 4,
+        "top10pct": 4,
+        "max_rank": 10,
+        "max_relative_regret": 0.02634645514824117
+      }
+    }
+  },
+  "training_candidate_extremeness": {
+    "panel_max_share_median": 0.954,
+    "panel_count_max_share_gt_0_9": 4,
+    "panel_count_max_share_gt_0_7": 5
+  },
+  "identifiability": "fixed-target linear p ranking is invariant to positive lambda and scale factor",
+  "limitations": [
+    "A-target loss is not B1 val_loss",
+    "training-supported optimum can be optimistic",
+    "1B selection reliability is target-dependent",
+    "no continuous simplex optimum is released"
+  ]
+}

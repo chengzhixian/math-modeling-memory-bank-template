@@ -1,0 +1,32 @@
+{
+  "schema_version": "chm.q1.v2.estimated_stress.v1",
+  "role": "estimated/extrapolated tables only; no observed large-model validation",
+  "model_selection_use": false,
+  "composition_support": "63 A4-seen recipes in both groups",
+  "max_A4_recipe_difference": 0.0,
+  "q1_manifest_sha256": "c621f7e405106e42720f918f490235b5e8becefb0f7c8cb997736e96337117a9",
+  "input_sha256": {
+    "est_mixture_10b.csv": "880c7ca1ebef470422e2b93d9bfcd0976db7db4e34ea57047518d95fe43327d1",
+    "est_pile_loss_10b.csv": "226457581f3f59e15e44d8f72dee31fa7492c821699725fef47627d82cf34c0d",
+    "est_mixture_70b.csv": "880c7ca1ebef470422e2b93d9bfcd0976db7db4e34ea57047518d95fe43327d1",
+    "est_pile_loss_70b.csv": "d0883b2d1a44da9386a6d629a3623c724ee291cba1ac87b6d1079e5377307682"
+  },
+  "ridge_sha256": "2d4f3b528574f0329fc39a889b475ee17deecdf34154e3962528edb3461e0ae8",
+  "targetwise_sha256": "e67dc1793233d108620028d5d76bc7daf49bade7fac32cf9f9bc539156dcd0e3",
+  "decision_sha256": "b404f2f6ac183c3254160e42730ddd21ab9a0327a3945586b755b1a82e7ace68",
+  "groups": {
+    "est_10B": {
+      "n": 63,
+      "v2_spearman_median": 0.49153335657049246,
+      "ridge_spearman_median": 0.5136328725038403,
+      "v2_higher_spearman_targets": 5
+    },
+    "est_70B": {
+      "n": 63,
+      "v2_spearman_median": 0.39410522273425497,
+      "ridge_spearman_median": 0.4148475284420329,
+      "v2_higher_spearman_targets": 5
+    }
+  },
+  "estimated_10B_70B_spearman_median": 0.9906874039938558
+}

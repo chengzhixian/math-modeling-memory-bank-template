@@ -1,0 +1,63 @@
+{
+  "schema_version": "chm.q3.p_selection_validation.v2",
+  "Q1_version": "chm.q1.v2.0",
+  "Q1_manifest_sha256": "c621f7e405106e42720f918f490235b5e8becefb0f7c8cb997736e96337117a9",
+  "status": "A_side_selection_diagnostic_only",
+  "ready_for_Q3_empirical_absolute_loss": false,
+  "primary_panel": [
+    "pile_cc",
+    "wikipedia_en",
+    "arxiv",
+    "stackexchange",
+    "github"
+  ],
+  "selection_support": "heldout_candidates_within_each_set; off_hull_allowed_only_for_validation",
+  "summary": {
+    "all": {
+      "n": 39,
+      "exact_best": 23,
+      "top10pct": 36,
+      "max_rank": 28,
+      "median_relative_regret": 0.0
+    },
+    "primary_panel": {
+      "n": 15,
+      "exact_best": 7,
+      "top10pct": 15,
+      "max_rank": 19,
+      "median_relative_regret": 2.9836671501649817e-05
+    },
+    "by_scope_primary_panel": {
+      "test_1m": {
+        "n": 5,
+        "exact_best": 2,
+        "top10pct": 5,
+        "max_rank": 19,
+        "median_relative_regret": 0.01386035924978305
+      },
+      "test_60m": {
+        "n": 5,
+        "exact_best": 1,
+        "top10pct": 5,
+        "max_rank": 13,
+        "median_relative_regret": 0.006493840919414389
+      },
+      "test_1B": {
+        "n": 5,
+        "exact_best": 4,
+        "top10pct": 5,
+        "max_rank": 2,
+        "median_relative_regret": 0.0
+      }
+    }
+  },
+  "limitations": [
+    "heldout candidates are not selected A4 training recipes",
+    "absolute cross-scale 1M Loss is uncalibrated",
+    "A/B bridge unidentified"
+  ],
+  "files_sha256": {
+    "training_supported_candidates.csv": "85b6bddb671f941ec42d71e891b70351de5ea64b03bf3e863d465d88cbda4c83",
+    "heldout_selection_validation.csv": "14db167cf59e6a2de96c317b3e65cb9a204c533173c6739fc9aa5fb45d961d04"
+  }
+}
