@@ -1,0 +1,24 @@
+{
+  "schema": "zhh.q4.visuals.v3",
+  "scope": "visualization of frozen results; no refit or paper edit",
+  "inputs_sha256": {
+    "outputs/zhh/q4_core_v3/historical_standardized_contributions.csv": "21f60da5422cdc2d4405310443dbf62cb5009a272fded3f3e08cf4352a63fe40",
+    "outputs/zhh/q4_core_v3/frontier_candidate_forecasts.csv": "84f2fd60611abbffb6b09dc5c1f779a7849f5268c25a0a9cbc7b118c497ead76",
+    "outputs/zhh/q4_core_v3/frontier_scenario_union.csv": "3193da8f3f3d29512003d6af93cd364b7e1ce8a76d5998492d7b3b57fa501411",
+    "outputs/zhh/q4_core_v3/frontier_model_comparison.csv": "674c75a8f12b4b9fde8928938119296bfc8a86ea8873a073e2a8efef60e6e69d",
+    "outputs/zhh/q4_core_v3/bridge_source_coordinate_models.csv": "806d47d845d3467d9e94280896201b83b426b46fd084c915decbdcba3485814b",
+    "outputs/zhh/q4_core_v3/bridge_source_coordinate_validation.csv": "88ee5eda2aaf4cad01bf4394620e1004bd01dfb526bea3ce5b0088dfa232fd36",
+    "outputs/zhh/q4_v2/bridge_sample.csv": "ead8c15e7bfefa589978c855f17cd70141f99446738c78eb4dc939c958f842dd"
+  },
+  "outputs_sha256": {
+    "01_contributions.png": "b14ff747458c259ddbb5d0ae81c7783f5dfc968109f1e350e86e743a32287544",
+    "02_frontier_and_validation.png": "9fba11064451ea5ab194c22adc8ab747a161fd8d813520d504f3f0e7b372c2a1",
+    "03_loss_bridge.png": "7c9ad3652cfb36337858098b6675caeef394410ec0130ec8ab9e5ec490195105"
+  },
+  "plot_script_sha256": "50a962869ca206e801a15e605bd12386182360af80193e8cd8f71cf616c39c5f",
+  "versions": {
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "matplotlib": "3.11.2"
+  }
+}
