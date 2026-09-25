@@ -18,15 +18,24 @@ TABLES = (
     "fixed_policy_grid.csv", "observed_joint_grid.csv", "native_Q_sensitivity_grid.csv",
     "fixed_budget_scan.csv", "observed_budget_scan.csv", "transitions.csv",
     "transition_resolution.json",
+    "assumption_official_grid.csv", "assumption_8192_power_scan.csv",
+    "assumption_8192_power_transitions.csv", "assumption_sensitivity.json",
+    "external_nd_runs.csv", "external_nd_budget_comparison.csv",
+    "external_nd_audit.json",
 )
 CODE = (
     "src/chm/q3_v8_inputs.py", "src/chm/q3_conditional_v8.py",
     "src/chm/q3_v8_transition_scan.py", "src/chm/q3_v8_publish.py",
     "src/chm/test_q3_conditional_v8.py", "src/chm/plot_q3_v8.py",
+    "src/chm/q3_v8_assumption_sensitivity.py", "src/chm/q3_external_nd_audit.py",
 )
 PAPER = (
     "paper/latex/sections/chm/q3_numerical.tex",
     "paper/latex/figures/chm/q3_v8_power_8192.png",
+    "paper/latex/q3_final.tex", "outputs/chm/Q3_FINAL_ANSWER_V8.md",
+    "experiments/chm/20260925-q3-public-external-validation.md",
+    "paper/latex/output/chm-q3-v8-final.pdf",
+    "paper/latex/output/chm-q3-v8-final-build.json",
 )
 
 
@@ -117,11 +126,57 @@ def validate(out_dir: Path = OUTPUT) -> dict:
            _numeric(chosen["conditional_bridge_loss"], "joint Loss") > \
            _numeric(baseline["conditional_bridge_loss"], "fixed Loss")+1e-9:
             raise ValueError("observed joint optimization is worse than its included fixed policy")
+    assumptions = json.loads((out_dir/"assumption_sensitivity.json").read_text(encoding="utf-8"))
+    sensitivity = data["assumption_official_grid.csv"]
+    sensitivity_scan = data["assumption_8192_power_scan.csv"]
+    sensitivity_transitions = data["assumption_8192_power_transitions.csv"]
+    if assumptions["status"] != "one_factor_at_a_time_hypotheses_not_confidence_intervals" or \
+       len(assumptions["comparisons"]) != 9 or len(sensitivity) != 243 or \
+       len(sensitivity_scan) != 1449 or not sensitivity_transitions:
+        raise ValueError("Q3 assumption stress grid incomplete")
+    for name, expected in assumptions["outputs_sha256"].items():
+        if digest(out_dir/name) != expected:
+            raise ValueError("Q3 assumption stress hash mismatch")
+    baseline = [row for row in sensitivity if row["scenario"] == "baseline"]
+    if len(baseline) != 27:
+        raise ValueError("Q3 assumption baseline incomplete")
+    for row in sensitivity:
+        if row["status"] != "conditional_v8_fixed_policy_feasible":
+            if row["conditional_bridge_loss"]:
+                raise ValueError("infeasible Q3 stress cell contains Loss")
+            continue
+        q = _numeric(row["Q_B_proxy"], "stress Q")
+        if q < _numeric(row["Q0"], "stress Q0")-1e-10:
+            raise ValueError("Q3 stress result violates quality baseline")
+        if _numeric(row["C_total_FLOPs"], "stress cost") > \
+           _numeric(row["budget_FLOPs"], "stress budget")*(1+1e-8):
+            raise ValueError("Q3 stress result exceeds budget")
+    for row in baseline:
+        cell = (row["budget_FLOPs"], row["context_tokens"], row["quality_family"])
+        reference = by_key(joint)[cell]
+        if row["status"] != reference["status"] or row["recipe_index"] != reference.get("recipe_index", ""):
+            raise ValueError("Q3 assumption baseline differs from release grid")
+        if row["status"] == "conditional_v8_fixed_policy_feasible" and not math.isclose(
+            _numeric(row["conditional_bridge_loss"], "stress baseline Loss"),
+            _numeric(reference["conditional_bridge_loss"], "release Loss"), rel_tol=1e-11):
+            raise ValueError("Q3 assumption baseline Loss differs from release grid")
+    external = json.loads((out_dir/"external_nd_audit.json").read_text(encoding="utf-8"))
+    if external["full_cross_attachment_optimum_validated"] or \
+       external["source_models"] != 104 or external["common_support_models"] != 42 or \
+       len(data["external_nd_runs.csv"]) != 42 or \
+       len(data["external_nd_budget_comparison.csv"]) != 15 or \
+       external["budget_restricting_selection_match_count"] != 5:
+        raise ValueError("Q3 external N-D audit incomplete or overstated")
+    for name, expected in external["output_files_sha256"].items():
+        if digest(out_dir/name) != expected:
+            raise ValueError("Q3 external N-D audit hash mismatch")
     return {"fixed_feasible": sum(r["status"] == "conditional_v8_fixed_policy_feasible" for r in fixed),
             "observed_joint_feasible": sum(r["status"] == "conditional_v8_fixed_policy_feasible" for r in joint),
             "native_Q_sensitivity_feasible": sum(r["status"] == "conditional_v8_native_Q_sensitivity_feasible" for r in native),
             "transition_brackets": len(data["transitions.csv"]),
             "fixed_recipe": policy["recipe_index"],
+            "assumption_scenarios": len(assumptions["comparisons"]),
+            "external_common_support_models": external["common_support_models"],
             "official_budget_count": len(OFFICIAL_BUDGETS)}
 
 
@@ -143,12 +198,16 @@ def publish(out_dir: Path = OUTPUT) -> dict:
                 "units": {"N": "billion_parameters", "D": "billion_tokens",
                           "context": "tokens", "cost": "FLOPs"},
                 "Q0": 0.5, "quality_proxy": "uncalibrated_monotone_A_to_B_assumption",
+                "assumption_sensitivity": "nine_one_factor_scenarios_not_confidence_intervals",
+                "external_validation": "independent_real_N_D_rank_only_not_full_Q3_optimum",
                 "cross_source_empirical_calibration_complete": False,
                 "joint_prediction_interval_95": None,
                 "optimization_bound_scope": "floating_point_fixed_policy_convex_and_native_Q_certificate_only",
                 "python": platform.python_version(), "numpy": numpy.__version__, "scipy": scipy.__version__,
                 "commands": ["python -B src/chm/q3_conditional_v8.py",
                              "python -B src/chm/q3_v8_transition_scan.py",
+                             "python -B src/chm/q3_v8_assumption_sensitivity.py",
+                             "python -B src/chm/q3_external_nd_audit.py",
                              "python -B src/chm/q3_v8_publish.py"]}
     path = out_dir/"manifest.json"
     path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2, allow_nan=False)+"\n",

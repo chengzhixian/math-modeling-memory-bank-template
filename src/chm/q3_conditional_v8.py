@@ -72,15 +72,21 @@ def _convex_prerequisites(model, bounds) -> None:
 
 def solve_fixed_p(model, bounds, p: dict, weights: dict, *, p_policy: str,
                   mapping_policy: str, budget: float, context: int, family: str,
-                  q0: float = 0.5, recipe_index: str | None = None) -> dict:
+                  q0: float = 0.5, recipe_index: str | None = None,
+                  quality_bridge_scale: float = 1.0,
+                  mixture_bridge_lambda: float = 1.0) -> dict:
     if not math.isfinite(budget) or budget <= 0 or context not in CONTEXTS or family not in FAMILIES:
         raise ValueError("invalid Q3 scenario")
-    if not 0 < q0 <= 1:
+    if not math.isfinite(q0) or not 0 < q0 <= 1:
         raise ValueError("invalid Q0")
+    if not math.isfinite(quality_bridge_scale) or not 0 < quality_bridge_scale <= 2:
+        raise ValueError("invalid A-to-B quality bridge scale")
+    if not math.isfinite(mixture_bridge_lambda) or mixture_bridge_lambda < 0:
+        raise ValueError("invalid mixture bridge strength")
     _convex_prerequisites(model, bounds)
     model.q1.support(p, p_policy)
     model.q1.weight_vector(weights)
-    proxy = model.qa(p, mapping_policy)
+    proxy = model.qa(p, mapping_policy, quality_bridge_scale)
     q = proxy["Q_B_proxy"]
     n_min, n_max = bounds[0]
     d_min, d_max = bounds[1]
@@ -135,8 +141,15 @@ def solve_fixed_p(model, bounds, p: dict, weights: dict, *, p_policy: str,
         width = right-left
         lower = max(vl+min(0.0, gl*width), vr+min(0.0, -gr*width))
     base, slope, n, d = at(x)
-    predicted = model.predict_baseline_v8(n, d, p, weights, p_policy=p_policy,
-                                          quality_mapping_policy=mapping_policy)
+    if quality_bridge_scale == 1.0 and mixture_bridge_lambda == 1.0:
+        predicted = model.predict_baseline_v8(n, d, p, weights, p_policy=p_policy,
+                                              quality_mapping_policy=mapping_policy)
+    else:
+        predicted = model.evaluate(n, d, p, weights, p_policy=p_policy,
+                                   quality_mapping_policy=mapping_policy,
+                                   quality_mode="q1_quality_bridge_sensitivity",
+                                   quality_bridge_scale=quality_bridge_scale,
+                                   mixture_bridge_lambda=mixture_bridge_lambda)
     if not math.isclose(predicted["NDQ_loss"], base, rel_tol=1e-12):
         raise RuntimeError("v8 producer and CHM fixed-p objective differ")
     cost, _ = cost_and_grad(n, d, q, q0, context, family)
@@ -181,7 +194,9 @@ def main_grid(model=None, bounds=None, policy=None) -> list[dict]:
             for context in CONTEXTS for family in FAMILIES]
 
 
-def observed_joint_grid(model, bounds, fixed_rows: list[dict], q0: float = 0.5) -> list[dict]:
+def observed_joint_grid(model, bounds, fixed_rows: list[dict], q0: float = 0.5,
+                        quality_bridge_scale: float = 1.0,
+                        mixture_bridge_lambda: float = 1.0) -> list[dict]:
     """Exactly enumerate eligible A4 recipes; each fixed-p N/D solve is convex.
 
     This is a conditional finite-policy result, not a continuous-hull optimum.
@@ -193,7 +208,7 @@ def observed_joint_grid(model, bounds, fixed_rows: list[dict], q0: float = 0.5) 
         p = model.q1.p_dict(vector)
         if not model.q1.qa_stats(p, "quality_direct_and_near")["eligible"]:
             continue
-        if model.qa(p, mapping)["Q_B_proxy"] < q0-1e-12:
+        if model.qa(p, mapping, quality_bridge_scale)["Q_B_proxy"] < q0-1e-12:
             continue
         candidates.append((recipe_id, p))
     if not candidates:
@@ -203,7 +218,9 @@ def observed_joint_grid(model, bounds, fixed_rows: list[dict], q0: float = 0.5) 
         rows = [solve_fixed_p(model, bounds, p, weights, p_policy="observed_512",
                               mapping_policy=mapping, budget=fixed["budget_FLOPs"],
                               context=fixed["context_tokens"], family=fixed["quality_family"],
-                              q0=q0, recipe_index=recipe_id)
+                              q0=q0, recipe_index=recipe_id,
+                              quality_bridge_scale=quality_bridge_scale,
+                              mixture_bridge_lambda=mixture_bridge_lambda)
                 for recipe_id, p in candidates]
         feasible = [row for row in rows if row["status"] == "conditional_v8_fixed_policy_feasible"]
         common = {"budget_FLOPs": fixed["budget_FLOPs"],

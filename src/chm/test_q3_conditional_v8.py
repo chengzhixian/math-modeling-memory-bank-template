@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import math
+import csv
+import json
 from pathlib import Path
 import shutil
 import sys
@@ -129,6 +131,39 @@ class ConditionalV8Q3Tests(unittest.TestCase):
         self.assertLess(float(recipe_switches[0]["relative_width"]), 1e-4)
         self.assertEqual(state({"status": "infeasible_within_v8_support"}),
                          "infeasible_within_v8_support")
+
+    def test_assumption_stress_replays_v8_sensitivity_mode(self):
+        row = solve_fixed_p(self.model, self.bounds, self.policy["p"], self.policy["weights"],
+                            p_policy="observed_512", mapping_policy="direct_and_near",
+                            budget=1e22, context=8192, family="power", recipe_index="172",
+                            quality_bridge_scale=1.5, mixture_bridge_lambda=2.0)
+        upstream = self.model.evaluate(row["N_params_B"], row["D_tokens_B"],
+                                       self.policy["p"], self.policy["weights"],
+                                       p_policy="observed_512",
+                                       quality_mode="q1_quality_bridge_sensitivity",
+                                       quality_bridge_scale=1.5, mixture_bridge_lambda=2.0)
+        self.assertEqual(row["status"], "conditional_v8_fixed_policy_feasible")
+        self.assertAlmostEqual(row["conditional_bridge_loss"], upstream["Loss"], places=11)
+        self.assertAlmostEqual(row["Q_B_proxy"], upstream["Q_B_proxy_or_native"], places=12)
+
+    def test_assumption_and_external_published_claims(self):
+        verify_manifest(OUTPUT)
+        with (OUTPUT/"assumption_official_grid.csv").open(encoding="utf-8", newline="") as stream:
+            scenarios = list(csv.DictReader(stream))
+        self.assertEqual(len(scenarios), 243)
+        low = {(r["scenario"], r["budget_FLOPs"], r["context_tokens"],
+                r["quality_family"]): r for r in scenarios}
+        def recipe(label):
+            return low[(label, "1e+19", "8192", "power")]["recipe_index"]
+        self.assertEqual(recipe("baseline"), "477")
+        self.assertEqual(recipe("Q0_0p60"), "475")
+        self.assertEqual(recipe("Q0_0p65"), "172")
+        self.assertEqual(recipe("mixture_lambda_0"), "159")
+        external = json.loads((OUTPUT/"external_nd_audit.json").read_text(encoding="utf-8"))
+        self.assertFalse(external["full_cross_attachment_optimum_validated"])
+        self.assertEqual(external["common_support_models"], 42)
+        self.assertEqual(external["budget_restricting_selection_match_count"], 5)
+        self.assertEqual(external["budget_restricting_selection_total"], 6)
 
 
 if __name__ == "__main__":

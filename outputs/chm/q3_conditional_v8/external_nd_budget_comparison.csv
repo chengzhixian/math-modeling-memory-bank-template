@@ -1,0 +1,16 @@
+training_corpus,training_cost_budget_FLOPs,candidate_count,B1_selected_model,observed_best_model,selection_match,observed_loss_regret_in_OpenLM_coordinates,scope
+c4_original,1e+19,1,c4_original-d=512_l=8_h=4-8.0,c4_original-d=512_l=8_h=4-8.0,True,0.0,discrete_N_D_training_cost_only_no_Q_p_or_attention
+c4_original,1e+20,9,c4_original-d=1024_l=24_h=8-4.0,c4_original-d=1024_l=24_h=8-4.0,True,0.0,discrete_N_D_training_cost_only_no_Q_p_or_attention
+c4_original,1e+21,13,c4_original-open_lm_1b-4.0,c4_original-open_lm_1b-4.0,True,0.0,discrete_N_D_training_cost_only_no_Q_p_or_attention
+c4_original,1e+22,14,c4_original-open_lm_7b-1.0,c4_original-open_lm_7b-1.0,True,0.0,discrete_N_D_training_cost_only_no_Q_p_or_attention
+c4_original,1e+24,14,c4_original-open_lm_7b-1.0,c4_original-open_lm_7b-1.0,True,0.0,discrete_N_D_training_cost_only_no_Q_p_or_attention
+rpj,1e+19,1,rpj-d=512_l=8_h=4-8.0,rpj-d=512_l=8_h=4-8.0,True,0.0,discrete_N_D_training_cost_only_no_Q_p_or_attention
+rpj,1e+20,9,rpj-d=1024_l=24_h=8-4.0,rpj-d=1024_l=24_h=8-4.0,True,0.0,discrete_N_D_training_cost_only_no_Q_p_or_attention
+rpj,1e+21,13,rpj-d=1024_l=24_h=8-32.0,rpj-d=1024_l=24_h=8-32.0,True,0.0,discrete_N_D_training_cost_only_no_Q_p_or_attention
+rpj,1e+22,14,rpj-open_lm_7b-1.0,rpj-open_lm_7b-1.0,True,0.0,discrete_N_D_training_cost_only_no_Q_p_or_attention
+rpj,1e+24,14,rpj-open_lm_7b-1.0,rpj-open_lm_7b-1.0,True,0.0,discrete_N_D_training_cost_only_no_Q_p_or_attention
+rw_original,1e+19,1,rw_original-d=512_l=8_h=4-8.0,rw_original-d=512_l=8_h=4-8.0,True,0.0,discrete_N_D_training_cost_only_no_Q_p_or_attention
+rw_original,1e+20,9,rw_original-d=1024_l=24_h=8-4.0,rw_original-d=1024_l=24_h=8-4.0,True,0.0,discrete_N_D_training_cost_only_no_Q_p_or_attention
+rw_original,1e+21,13,rw_original-d=1024_l=24_h=8-32.0,rw_original-open_lm_1b-1.0,False,0.070514669243527,discrete_N_D_training_cost_only_no_Q_p_or_attention
+rw_original,1e+22,14,rw_original-open_lm_7b-1.0,rw_original-open_lm_7b-1.0,True,0.0,discrete_N_D_training_cost_only_no_Q_p_or_attention
+rw_original,1e+24,14,rw_original-open_lm_7b-1.0,rw_original-open_lm_7b-1.0,True,0.0,discrete_N_D_training_cost_only_no_Q_p_or_attention

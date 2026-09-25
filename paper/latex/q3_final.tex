@@ -1,0 +1,30 @@
+% !TEX program = xelatex
+% Owner: chm. Standalone complete Q3 answer; integrates read-only CYJ v8 theory.
+\documentclass[bwprint,withoutpreface]{gmcmthesis}
+\hypersetup{hidelinks}
+\usepackage{float}
+\usepackage{siunitx}
+\graphicspath{{figures/}{figures/chm/}}
+\title{第三问：算力约束下的条件最优资源配置}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+基于第一问冻结的质量与领域配比模型和第二问正式发布的条件标度律，
+按赛题给定的训练、质量、注意力成本构建预算内资源配置模型。
+对三档预算、三种质量成本和三个上下文情景，给出可行性、
+参数量、训练 token、质量代理、已观测配方及结构转移的数值答案。
+进一步对跨源质量映射、质量基线与配比效应作单因素压力检验，
+并以独立公开真实训练记录核查参数量与 token 子结构的排序迁移。
+所有最优配置均限于声明的模型、候选与支持域，不解释为真实训练的
+无条件四变量最优。
+\keywords{算力预算\quad 数据配比\quad 质量成本\quad 标度律\quad 稳健性}
+\end{abstract}
+\maketoc
+\clearpage
+
+\section{问题三：给定算力预算的配置优化}
+\input{sections/chm/q3_numerical.tex}
+\bibliographystyle{gmcm}
+\bibliography{references}
+\end{document}

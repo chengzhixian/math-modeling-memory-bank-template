@@ -30,19 +30,33 @@
     "fixed_budget_scan.csv": "2492491c19620d42e0e1f7e6925e29e369beb9de3b50eea113365a1d9281b563",
     "observed_budget_scan.csv": "69fed2eba936343096e7df0f927c670eb504e7f9e3b8fece11badfe6b85031db",
     "transitions.csv": "68cf3fb6cc20cda0c5c563da2b92707c41ad008645234e29c56d2baf0a0c5997",
-    "transition_resolution.json": "b255a0d2cada18d7cde9ae8313bd6a29b5310152a398c1facace94430e5a1316"
+    "transition_resolution.json": "b255a0d2cada18d7cde9ae8313bd6a29b5310152a398c1facace94430e5a1316",
+    "assumption_official_grid.csv": "4947a515502ab448516133d028175ab9e371c366e8684fcd7c7b237ee7854696",
+    "assumption_8192_power_scan.csv": "8166eede7de422f3aa11db92765d8994079d498be94af7f297007885bee1ff95",
+    "assumption_8192_power_transitions.csv": "607fe0e0d4201ad89ab6387e1544b052aa4368e3f1c567ed9b4862598eba5771",
+    "assumption_sensitivity.json": "c57ea1fa659401ec610765ec248839cba13ba45667fb04bea485e43a9cbe2b1d",
+    "external_nd_runs.csv": "d7dc42d26734ec8bce48a84d5981016f6e59f689fb1bdf1177163e5cfdee79d1",
+    "external_nd_budget_comparison.csv": "bc08f0aafd9c11cff3862581a07a43ccb975e057bb7eaa5af6bd4611aae28a37",
+    "external_nd_audit.json": "04ff8e296cddc1ad9ed42307f23217c06151e90ebc5207470c8981ac8afaa1b4"
   },
   "code_files_sha256": {
     "src/chm/q3_v8_inputs.py": "711555617eefac3534317b03d9804c0c4c585855386a945c89a986d40496594c",
-    "src/chm/q3_conditional_v8.py": "3e81321b8cc0ae9dc6db17d2d9728e0fac340082912731fb397c09680835f7a4",
+    "src/chm/q3_conditional_v8.py": "f42fe627206e3a7e3558d0c7d352441d2ad1f8a8e3d84b3ad56d6bf374b41b97",
     "src/chm/q3_v8_transition_scan.py": "6d699646af6743075256243927b31d4fc35331f806e19d2469bb72f2d3846051",
-    "src/chm/q3_v8_publish.py": "23a740e173795f32ab330e205952ea5a311c1d0fdd93937cb3c12a31c18f7b3c",
-    "src/chm/test_q3_conditional_v8.py": "e6af262a529e1e3ba18f5db71723f4e505ef599041b6cd2610f901903c67a055",
-    "src/chm/plot_q3_v8.py": "a0f67efa78c5fa06ede0f6b487db0002db62fa72472414067165c7caa64e817f"
+    "src/chm/q3_v8_publish.py": "8c3ad1d6cae0bbd28d03e9afbcd5ab00989da9ed8047d86416150f40e64d42f5",
+    "src/chm/test_q3_conditional_v8.py": "decb2e5d102aff723821da984d6c41a700c7f619d4ea277e457800140bec83a5",
+    "src/chm/plot_q3_v8.py": "a0f67efa78c5fa06ede0f6b487db0002db62fa72472414067165c7caa64e817f",
+    "src/chm/q3_v8_assumption_sensitivity.py": "e5ba57043ee9b4ad39535ecc1d83560c7fcf13e37401b44596dd9b9b4e78852d",
+    "src/chm/q3_external_nd_audit.py": "a8fa27f119ff4849b972121724b73b8cd8141fb2a08bdcc7be1445e095da757d"
   },
   "paper_files_sha256": {
-    "paper/latex/sections/chm/q3_numerical.tex": "fd470652244e2bc3b69fa2d733e76fa67083569d3c7a385ff90329545df51562",
-    "paper/latex/figures/chm/q3_v8_power_8192.png": "3a5b1d70ce803f6ef0edcfd3dadf4ebac97299d8ad9a045ada8bf0973c5394bc"
+    "paper/latex/sections/chm/q3_numerical.tex": "584c327211ecdc104bb2a2ca04bcea03e0b596bff6a9760e6d39ea0c75e46b97",
+    "paper/latex/figures/chm/q3_v8_power_8192.png": "3a5b1d70ce803f6ef0edcfd3dadf4ebac97299d8ad9a045ada8bf0973c5394bc",
+    "paper/latex/q3_final.tex": "e541daa2279ce7f2c1d1d4d8b2f7ad0ad8fdf483dd9f5395fbd5d791cf9ac8eb",
+    "outputs/chm/Q3_FINAL_ANSWER_V8.md": "32b19a2d57d7a2ee3d820351dac72dd7a6f2ce976751a4c03b888993c529e203",
+    "experiments/chm/20260925-q3-public-external-validation.md": "6b023e126e1b5fe662e391912976506d371a4852ba30dd3c8e922633a2f06584",
+    "paper/latex/output/chm-q3-v8-final.pdf": "141bd5f461dab49c03afc698c1f1a0b0ac2fc1d90bfd5fbbc6f007584a92955e",
+    "paper/latex/output/chm-q3-v8-final-build.json": "f26c0c3996b0f8ade49f02e886c5fc160d86551268576e0bc40aced1581becae"
   },
   "counts": {
     "fixed_feasible": 30,
@@ -50,6 +64,8 @@
     "native_Q_sensitivity_feasible": 33,
     "transition_brackets": 82,
     "fixed_recipe": "172",
+    "assumption_scenarios": 9,
+    "external_common_support_models": 42,
     "official_budget_count": 3
   },
   "data_roles": {
@@ -68,6 +84,8 @@
   },
   "Q0": 0.5,
   "quality_proxy": "uncalibrated_monotone_A_to_B_assumption",
+  "assumption_sensitivity": "nine_one_factor_scenarios_not_confidence_intervals",
+  "external_validation": "independent_real_N_D_rank_only_not_full_Q3_optimum",
   "cross_source_empirical_calibration_complete": false,
   "joint_prediction_interval_95": null,
   "optimization_bound_scope": "floating_point_fixed_policy_convex_and_native_Q_certificate_only",
@@ -77,6 +95,8 @@
   "commands": [
     "python -B src/chm/q3_conditional_v8.py",
     "python -B src/chm/q3_v8_transition_scan.py",
+    "python -B src/chm/q3_v8_assumption_sensitivity.py",
+    "python -B src/chm/q3_external_nd_audit.py",
     "python -B src/chm/q3_v8_publish.py"
   ]
 }

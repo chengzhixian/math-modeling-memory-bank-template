@@ -1,0 +1,482 @@
+{
+  "schema_version": "chm.q3.v8.assumption_sensitivity.v1",
+  "status": "one_factor_at_a_time_hypotheses_not_confidence_intervals",
+  "baseline": "CYJ_v8_Q0_0p5_quality_scale_1_mixture_lambda_1",
+  "candidate_policy": "A4_observed_512_Q1_direct_and_near_and_Qproxy_at_least_Q0",
+  "quality_mapping_policy": "direct_and_near",
+  "bridge_eta": 0.0,
+  "scenario_selection": "illustrative_symmetric_bridge_scales_and_Q0_values_straddling_recipe_477_Qproxy",
+  "comparisons": [
+    {
+      "scenario": "baseline",
+      "Q0": 0.5,
+      "quality_bridge_scale": 1.0,
+      "mixture_bridge_lambda": 1.0,
+      "eligible_observed_recipes": 87,
+      "feasible_official_cells": 24,
+      "changed_feasibility_or_recipe_cells": 0,
+      "changed_cells": [],
+      "recipes_at_mid_budget": {
+        "2048:exponential": "172",
+        "2048:power": "172",
+        "2048:logarithmic": "172",
+        "8192:exponential": "172",
+        "8192:power": "172",
+        "8192:logarithmic": "172",
+        "131072:exponential": "172",
+        "131072:power": "172",
+        "131072:logarithmic": "172"
+      }
+    },
+    {
+      "scenario": "Q0_0p45",
+      "Q0": 0.45,
+      "quality_bridge_scale": 1.0,
+      "mixture_bridge_lambda": 1.0,
+      "eligible_observed_recipes": 101,
+      "feasible_official_cells": 24,
+      "changed_feasibility_or_recipe_cells": 4,
+      "changed_cells": [
+        [
+          1e+19,
+          2048,
+          "power"
+        ],
+        [
+          1e+19,
+          2048,
+          "logarithmic"
+        ],
+        [
+          1e+19,
+          8192,
+          "power"
+        ],
+        [
+          1e+19,
+          8192,
+          "logarithmic"
+        ]
+      ],
+      "recipes_at_mid_budget": {
+        "2048:exponential": "172",
+        "2048:power": "172",
+        "2048:logarithmic": "172",
+        "8192:exponential": "172",
+        "8192:power": "172",
+        "8192:logarithmic": "172",
+        "131072:exponential": "172",
+        "131072:power": "172",
+        "131072:logarithmic": "172"
+      }
+    },
+    {
+      "scenario": "Q0_0p55",
+      "Q0": 0.55,
+      "quality_bridge_scale": 1.0,
+      "mixture_bridge_lambda": 1.0,
+      "eligible_observed_recipes": 82,
+      "feasible_official_cells": 24,
+      "changed_feasibility_or_recipe_cells": 2,
+      "changed_cells": [
+        [
+          1e+19,
+          2048,
+          "logarithmic"
+        ],
+        [
+          1e+19,
+          8192,
+          "logarithmic"
+        ]
+      ],
+      "recipes_at_mid_budget": {
+        "2048:exponential": "172",
+        "2048:power": "172",
+        "2048:logarithmic": "172",
+        "8192:exponential": "172",
+        "8192:power": "172",
+        "8192:logarithmic": "172",
+        "131072:exponential": "172",
+        "131072:power": "172",
+        "131072:logarithmic": "172"
+      }
+    },
+    {
+      "scenario": "Q0_0p60",
+      "Q0": 0.6,
+      "quality_bridge_scale": 1.0,
+      "mixture_bridge_lambda": 1.0,
+      "eligible_observed_recipes": 73,
+      "feasible_official_cells": 24,
+      "changed_feasibility_or_recipe_cells": 4,
+      "changed_cells": [
+        [
+          1e+19,
+          2048,
+          "power"
+        ],
+        [
+          1e+19,
+          2048,
+          "logarithmic"
+        ],
+        [
+          1e+19,
+          8192,
+          "power"
+        ],
+        [
+          1e+19,
+          8192,
+          "logarithmic"
+        ]
+      ],
+      "recipes_at_mid_budget": {
+        "2048:exponential": "172",
+        "2048:power": "172",
+        "2048:logarithmic": "172",
+        "8192:exponential": "172",
+        "8192:power": "172",
+        "8192:logarithmic": "172",
+        "131072:exponential": "172",
+        "131072:power": "172",
+        "131072:logarithmic": "172"
+      }
+    },
+    {
+      "scenario": "Q0_0p65",
+      "Q0": 0.65,
+      "quality_bridge_scale": 1.0,
+      "mixture_bridge_lambda": 1.0,
+      "eligible_observed_recipes": 60,
+      "feasible_official_cells": 24,
+      "changed_feasibility_or_recipe_cells": 4,
+      "changed_cells": [
+        [
+          1e+19,
+          2048,
+          "power"
+        ],
+        [
+          1e+19,
+          2048,
+          "logarithmic"
+        ],
+        [
+          1e+19,
+          8192,
+          "power"
+        ],
+        [
+          1e+19,
+          8192,
+          "logarithmic"
+        ]
+      ],
+      "recipes_at_mid_budget": {
+        "2048:exponential": "172",
+        "2048:power": "172",
+        "2048:logarithmic": "172",
+        "8192:exponential": "172",
+        "8192:power": "172",
+        "8192:logarithmic": "172",
+        "131072:exponential": "172",
+        "131072:power": "172",
+        "131072:logarithmic": "172"
+      }
+    },
+    {
+      "scenario": "quality_scale_0p5",
+      "Q0": 0.5,
+      "quality_bridge_scale": 0.5,
+      "mixture_bridge_lambda": 1.0,
+      "eligible_observed_recipes": 79,
+      "feasible_official_cells": 24,
+      "changed_feasibility_or_recipe_cells": 4,
+      "changed_cells": [
+        [
+          1e+19,
+          2048,
+          "power"
+        ],
+        [
+          1e+19,
+          2048,
+          "logarithmic"
+        ],
+        [
+          1e+19,
+          8192,
+          "power"
+        ],
+        [
+          1e+19,
+          8192,
+          "logarithmic"
+        ]
+      ],
+      "recipes_at_mid_budget": {
+        "2048:exponential": "172",
+        "2048:power": "172",
+        "2048:logarithmic": "172",
+        "8192:exponential": "172",
+        "8192:power": "172",
+        "8192:logarithmic": "172",
+        "131072:exponential": "172",
+        "131072:power": "172",
+        "131072:logarithmic": "172"
+      }
+    },
+    {
+      "scenario": "quality_scale_1p5",
+      "Q0": 0.5,
+      "quality_bridge_scale": 1.5,
+      "mixture_bridge_lambda": 1.0,
+      "eligible_observed_recipes": 93,
+      "feasible_official_cells": 24,
+      "changed_feasibility_or_recipe_cells": 9,
+      "changed_cells": [
+        [
+          1e+19,
+          2048,
+          "exponential"
+        ],
+        [
+          1e+19,
+          2048,
+          "power"
+        ],
+        [
+          1e+19,
+          2048,
+          "logarithmic"
+        ],
+        [
+          1e+19,
+          8192,
+          "exponential"
+        ],
+        [
+          1e+19,
+          8192,
+          "power"
+        ],
+        [
+          1e+19,
+          8192,
+          "logarithmic"
+        ],
+        [
+          1e+22,
+          131072,
+          "exponential"
+        ],
+        [
+          1e+22,
+          131072,
+          "power"
+        ],
+        [
+          1e+22,
+          131072,
+          "logarithmic"
+        ]
+      ],
+      "recipes_at_mid_budget": {
+        "2048:exponential": "172",
+        "2048:power": "172",
+        "2048:logarithmic": "172",
+        "8192:exponential": "172",
+        "8192:power": "172",
+        "8192:logarithmic": "172",
+        "131072:exponential": "301",
+        "131072:power": "301",
+        "131072:logarithmic": "301"
+      }
+    },
+    {
+      "scenario": "mixture_lambda_0",
+      "Q0": 0.5,
+      "quality_bridge_scale": 1.0,
+      "mixture_bridge_lambda": 0.0,
+      "eligible_observed_recipes": 87,
+      "feasible_official_cells": 24,
+      "changed_feasibility_or_recipe_cells": 24,
+      "changed_cells": [
+        [
+          1e+19,
+          2048,
+          "exponential"
+        ],
+        [
+          1e+19,
+          2048,
+          "power"
+        ],
+        [
+          1e+19,
+          2048,
+          "logarithmic"
+        ],
+        [
+          1e+19,
+          8192,
+          "exponential"
+        ],
+        [
+          1e+19,
+          8192,
+          "power"
+        ],
+        [
+          1e+19,
+          8192,
+          "logarithmic"
+        ],
+        [
+          1e+22,
+          2048,
+          "exponential"
+        ],
+        [
+          1e+22,
+          2048,
+          "power"
+        ],
+        [
+          1e+22,
+          2048,
+          "logarithmic"
+        ],
+        [
+          1e+22,
+          8192,
+          "exponential"
+        ],
+        [
+          1e+22,
+          8192,
+          "power"
+        ],
+        [
+          1e+22,
+          8192,
+          "logarithmic"
+        ],
+        [
+          1e+22,
+          131072,
+          "exponential"
+        ],
+        [
+          1e+22,
+          131072,
+          "power"
+        ],
+        [
+          1e+22,
+          131072,
+          "logarithmic"
+        ],
+        [
+          1e+24,
+          2048,
+          "exponential"
+        ],
+        [
+          1e+24,
+          2048,
+          "power"
+        ],
+        [
+          1e+24,
+          2048,
+          "logarithmic"
+        ],
+        [
+          1e+24,
+          8192,
+          "exponential"
+        ],
+        [
+          1e+24,
+          8192,
+          "power"
+        ],
+        [
+          1e+24,
+          8192,
+          "logarithmic"
+        ],
+        [
+          1e+24,
+          131072,
+          "exponential"
+        ],
+        [
+          1e+24,
+          131072,
+          "power"
+        ],
+        [
+          1e+24,
+          131072,
+          "logarithmic"
+        ]
+      ],
+      "recipes_at_mid_budget": {
+        "2048:exponential": "88",
+        "2048:power": "88",
+        "2048:logarithmic": "88",
+        "8192:exponential": "88",
+        "8192:power": "88",
+        "8192:logarithmic": "88",
+        "131072:exponential": "88",
+        "131072:power": "88",
+        "131072:logarithmic": "88"
+      }
+    },
+    {
+      "scenario": "mixture_lambda_2",
+      "Q0": 0.5,
+      "quality_bridge_scale": 1.0,
+      "mixture_bridge_lambda": 2.0,
+      "eligible_observed_recipes": 87,
+      "feasible_official_cells": 24,
+      "changed_feasibility_or_recipe_cells": 1,
+      "changed_cells": [
+        [
+          1e+19,
+          2048,
+          "logarithmic"
+        ]
+      ],
+      "recipes_at_mid_budget": {
+        "2048:exponential": "172",
+        "2048:power": "172",
+        "2048:logarithmic": "172",
+        "8192:exponential": "172",
+        "8192:power": "172",
+        "8192:logarithmic": "172",
+        "131072:exponential": "172",
+        "131072:power": "172",
+        "131072:logarithmic": "172"
+      }
+    }
+  ],
+  "scan": {
+    "context_tokens": 8192,
+    "quality_family": "power",
+    "log10_budget_min": 19,
+    "log10_budget_max": 21,
+    "points_per_scenario": 161,
+    "transition_target_relative_width": 0.0001,
+    "resolution_limit": "sampled_transitions_only_no_proof_of_absent_narrow_states"
+  },
+  "outputs_sha256": {
+    "assumption_official_grid.csv": "4947a515502ab448516133d028175ab9e371c366e8684fcd7c7b237ee7854696",
+    "assumption_8192_power_scan.csv": "8166eede7de422f3aa11db92765d8994079d498be94af7f297007885bee1ff95",
+    "assumption_8192_power_transitions.csv": "607fe0e0d4201ad89ab6387e1544b052aa4368e3f1c567ed9b4862598eba5771"
+  }
+}
