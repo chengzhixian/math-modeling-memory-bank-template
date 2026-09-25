@@ -10,6 +10,8 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 2026-09-25 16:08 Q2 条件建模收尾：Q1 上游完整二阶候选包交付、CYJ 仅消费派生输出完成 10×13 领域交互、3 策略同一 512 配方模型形式 regret；`FINAL_FACTS.md` 与 11 项独立 `final_closure.json` 已生成。`Q2_MODELING_COMPLETE_EXCEPT_PAPER=true` 仅表示工程条件模型、求解、验证、敏感性和机器产物收尾；`ready_for_Q3=false` 与 CHM owner 签收待办不变。完整一键重现和 75/75 单测通过。精确 SHA/限制/交接见 `memory-bank/handoffs/cyj/20260925-1608-q2-closure.md`。最终远端检查点 SHA 以本轮实际推送核对为准。
 
+16:11 GitHub 443 网络故障：Q1 上游提交 `9104aa2`、Q2 收尾提交 `cbc959a` 已本地保存，远端查询/推送连接失败，尚不能称远程备份成功；详见同一交接，下一轮先补推并核 SHA。
+
 2026-09-25 15:55 Q2 收尾任务第一检查点：核查远端 CHM `2450971` 后确认二阶候选有定义/CV 但无完整参数；在独立 Q1 上游 `src/chm/export_q1_interaction_bundle.py` 复现固定 5 域 10 对的 13 目标 Ridge 候选，13 个已发布 CV RMSE 最大差 `3.33e-16`，bundle manifest SHA256 `608595491268cf859331f3f8b9d7618a9e86fef94928120dbfa6ded3082f600c`。Q1 生产步骤可读 A4/A5，Q2 仍不得读取原始 A。Q2 消费/收尾检查尚待，CHM owner 签收待办，详见 `memory-bank/handoffs/cyj/20260925-1555-q1-interaction-export-checkpoint.md`。
 
 2026-09-25 15:25 V3 条件 Q2 执行：独立 Q1 导出包之后，新增只消费派生输出的 Q2 Ridge/LP/QA 求解、B 组分角色验证、边际与敏感性数值、四图、v6 JSON 接口和一键脚本。主情景 512 配方全凸包最优 Loss `2.1928228144395785`（Q1 配方 136）；直接 QA 约束 `2.263949598559698`，直接+近似映射 `2.2749885718994807`；结果均属未标定 A→B 桥接的工程条件计算。C1–C8 内部/外部测试通过、CYJ 全套 75/75，通过记录和未解决依赖见 `memory-bank/handoffs/cyj/20260925-1525-q2-final-v3.md`。CHM 尚须签收 Q1 增量导出及 v6 Q3 消费；科学门槛 `ready_for_Q3=false`，无论文修改。最终远端提交 SHA 以本次推送核对为准。
