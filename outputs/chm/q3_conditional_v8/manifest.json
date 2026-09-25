@@ -1,0 +1,82 @@
+{
+  "schema_version": "chm.q3.conditional_v8.release.v1",
+  "status": "conditional_problem_answer_not_empirically_calibrated",
+  "producer_branch": "integration/chm-q1-clean-20260923",
+  "inputs": {
+    "CYJ_v8_commit": "fd2dbb3b2002983430329cdb2ec6a275c2eed4f6",
+    "release_subject": "615c078517379284f6b0504c568790a7975c6eda",
+    "Q1_manifest_sha256": "c621f7e405106e42720f918f490235b5e8becefb0f7c8cb997736e96337117a9",
+    "B1_fit_sha256": "9b0e381fbc0ea84bb37d63ccb273733f3a03a0c2a834e8ef52cdb75c45bc6ead",
+    "B7_quality_fit_sha256": "30819a5931b0552c1ef207f52f489f9d4ecaf427166bec25a98ce7319ac3d07b"
+  },
+  "input_files_sha256": {
+    "src/chm/q1_interface_v2.py": "27749bd48835812abb570f5b569207fb8742d65fa4a4810b1cb027b86f5d68a5",
+    "src/cyj/chm_q1_v2_consumer.py": "9de3b58089b9527ba969a32d89e9cff2671297acfc26070beacbf52e73e7133f",
+    "src/cyj/fit_b7_quality_extension_from_b1.py": "5fefc82d117496bc1624e36d11779579f77acabdf7eb38cd2d630f510638e9ed",
+    "src/cyj/ndqp_scenarios_v8.py": "2ecd692fefb6eb321fec0cc439134d1c2478fc3c0039c7c33ac069632dc6965c",
+    "interfaces/chm/q1_interface_v2.json": "c621f7e405106e42720f918f490235b5e8becefb0f7c8cb997736e96337117a9",
+    "outputs/chm/q1_v2_hull_bounds/bounds.json": "969f810c0bf54f03492afc243091c339aaf4b27aed5c2164c186e651c7589acc",
+    "outputs/cyj/classic/classic_fit.json": "9b0e381fbc0ea84bb37d63ccb273733f3a03a0c2a834e8ef52cdb75c45bc6ead",
+    "outputs/cyj/q2_v8/b7_quality_extension.json": "30819a5931b0552c1ef207f52f489f9d4ecaf427166bec25a98ce7319ac3d07b",
+    "outputs/cyj/q2_v8/main_policy.json": "1429c82b33fcb17f9aa0ed42ea8d63deba9370864e1030dd39b87df32067ddc6",
+    "outputs/cyj/q2_v8/manifest.json": "b834e78ddca57ff3a1957fe4f5c927f56491162c9c82cdd687f5b734a831a170",
+    "outputs/cyj/q2_v8/acceptance.json": "65e5a5f2f657ff4bd431ec31e4cec0a8cee54bea40541dd339668c3e25cc9dec",
+    "outputs/cyj/q2_v8_release_verification.json": "91463211bc373133842a620de564accf012ba247db53764afbc965c9286067b3"
+  },
+  "output_files_sha256": {
+    "fixed_policy_grid.csv": "9e1ea053b5754ac903e2167caa9efb5c5b934e2eed96b4bbaf064f5a42c9d388",
+    "observed_joint_grid.csv": "8fc644e7b956a0e1b35bfcf219fd0573392a31e68e532d9248432661049af3da",
+    "native_Q_sensitivity_grid.csv": "d8c6f006448fb5fb4fcddef0cf2f5e19e2f7e416014b5732bea080ced6dce527",
+    "fixed_budget_scan.csv": "2492491c19620d42e0e1f7e6925e29e369beb9de3b50eea113365a1d9281b563",
+    "observed_budget_scan.csv": "69fed2eba936343096e7df0f927c670eb504e7f9e3b8fece11badfe6b85031db",
+    "transitions.csv": "68cf3fb6cc20cda0c5c563da2b92707c41ad008645234e29c56d2baf0a0c5997",
+    "transition_resolution.json": "b255a0d2cada18d7cde9ae8313bd6a29b5310152a398c1facace94430e5a1316"
+  },
+  "code_files_sha256": {
+    "src/chm/q3_v8_inputs.py": "711555617eefac3534317b03d9804c0c4c585855386a945c89a986d40496594c",
+    "src/chm/q3_conditional_v8.py": "3e81321b8cc0ae9dc6db17d2d9728e0fac340082912731fb397c09680835f7a4",
+    "src/chm/q3_v8_transition_scan.py": "6d699646af6743075256243927b31d4fc35331f806e19d2469bb72f2d3846051",
+    "src/chm/q3_v8_publish.py": "23a740e173795f32ab330e205952ea5a311c1d0fdd93937cb3c12a31c18f7b3c",
+    "src/chm/test_q3_conditional_v8.py": "e6af262a529e1e3ba18f5db71723f4e505ef599041b6cd2610f901903c67a055",
+    "src/chm/plot_q3_v8.py": "a0f67efa78c5fa06ede0f6b487db0002db62fa72472414067165c7caa64e817f"
+  },
+  "paper_files_sha256": {
+    "paper/latex/sections/chm/q3_numerical.tex": "fd470652244e2bc3b69fa2d733e76fa67083569d3c7a385ff90329545df51562",
+    "paper/latex/figures/chm/q3_v8_power_8192.png": "3a5b1d70ce803f6ef0edcfd3dadf4ebac97299d8ad9a045ada8bf0973c5394bc"
+  },
+  "counts": {
+    "fixed_feasible": 30,
+    "observed_joint_feasible": 33,
+    "native_Q_sensitivity_feasible": 33,
+    "transition_brackets": 82,
+    "fixed_recipe": "172",
+    "official_budget_count": 3
+  },
+  "data_roles": {
+    "B1": "fixed_backbone_training",
+    "B7": "semi_synthetic_quality_fit_and_nested_CV",
+    "A4_A5": "Q1_frozen_training_only",
+    "A6_A11": "Q1_prior_same_project_check_not_blind_final_test",
+    "C7": "observed_external_context_scenarios",
+    "B10": "estimated_stress_not_validation"
+  },
+  "units": {
+    "N": "billion_parameters",
+    "D": "billion_tokens",
+    "context": "tokens",
+    "cost": "FLOPs"
+  },
+  "Q0": 0.5,
+  "quality_proxy": "uncalibrated_monotone_A_to_B_assumption",
+  "cross_source_empirical_calibration_complete": false,
+  "joint_prediction_interval_95": null,
+  "optimization_bound_scope": "floating_point_fixed_policy_convex_and_native_Q_certificate_only",
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "scipy": "1.18.1",
+  "commands": [
+    "python -B src/chm/q3_conditional_v8.py",
+    "python -B src/chm/q3_v8_transition_scan.py",
+    "python -B src/chm/q3_v8_publish.py"
+  ]
+}

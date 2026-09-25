@@ -12,7 +12,8 @@ import math
 from pathlib import Path
 import sys
 
-from q3_generic_solver import cost_and_grad
+from q3_generic_solver import Support, cost_and_grad
+from q3_conditional_grid import solve_scenario as solve_native_q
 from q3_quality_cost_geometry import CONTEXTS, FAMILIES, delta_g
 from q3_v8_inputs import EXPORT, ROOT, load_v8, digest
 
@@ -20,6 +21,27 @@ from q3_v8_inputs import EXPORT, ROOT, load_v8, digest
 OFFICIAL_BUDGETS = (1e19, 1e22, 1e24)
 EXTRA_BUDGETS = (1e20,)
 OUTPUT = ROOT / "outputs/chm/q3_conditional_v8"
+
+
+class V8NativeQAdapter:
+    """Use v8's B1+B7 backbone with Q_B as an independent sensitivity input."""
+
+    def __init__(self, model, bounds):
+        self.model = model
+        self.support = Support(*bounds)
+        self.theta = tuple(model.b1[key] for key in ("E", "A", "B", "alpha", "beta")) + tuple(model.gamma)
+
+    def value_grad(self, n: float, d: float, q: float):
+        values = []
+        for value, (lo, hi) in zip((n, d, q), (self.support.N, self.support.D, self.support.Q)):
+            margin = 8*max(1.0, abs(value))*sys.float_info.epsilon
+            if lo-margin <= value < lo:
+                value = lo
+            if hi < value <= hi+margin:
+                value = hi
+            values.append(value)
+        value, gradient, _ = self.model.base(*values)
+        return value, gradient
 
 
 def main_policy(model, export: Path = EXPORT) -> dict:
@@ -187,9 +209,11 @@ def observed_joint_grid(model, bounds, fixed_rows: list[dict], q0: float = 0.5) 
         common = {"budget_FLOPs": fixed["budget_FLOPs"],
                   "context_tokens": fixed["context_tokens"],
                   "quality_family": fixed["quality_family"],
+                  "Q0_scenario": q0,
                   "eligible_observed_recipes": len(candidates),
                   "feasible_observed_recipes": len(feasible),
                   "candidate_set": "A4_observed_512_Q1_direct_and_near_Qproxy_at_least_Q0",
+                  "cross_source_empirical_calibration_complete": False,
                   "claim_scope": "conditional_finite_recipe_optimum_not_continuous_hull_or_empirical_bridge"}
         if not feasible:
             joint.append({**common, "status": "infeasible_within_v8_support"})
@@ -208,6 +232,45 @@ def observed_joint_grid(model, bounds, fixed_rows: list[dict], q0: float = 0.5) 
     return joint
 
 
+def native_q_sensitivity_grid(model, bounds, policy: dict) -> list[dict]:
+    """Independently allocate Q_B; v8 labels this mode sensitivity, not baseline."""
+    adapter = V8NativeQAdapter(model, bounds)
+    rows = []
+    for budget in sorted(OFFICIAL_BUDGETS+EXTRA_BUDGETS):
+        for context in CONTEXTS:
+            for family in FAMILIES:
+                solved = solve_native_q(adapter, budget, context, family)
+                base = solved.pop("B_native_loss")
+                solved["model_scope"] = "CYJ_v8_native_QB_sensitivity"
+                solved["recipe_index"] = policy["recipe_index"]
+                solved["p_policy"] = "observed_512"
+                solved["cross_source_empirical_calibration_complete"] = False
+                if solved["status"] == "conditional_B_native_feasible":
+                    for key, (lo, hi) in zip(("N_params_B", "D_tokens_B", "Q_score"), bounds):
+                        value = solved[key]
+                        if value < lo and lo-value <= 8*max(1.0, abs(lo))*sys.float_info.epsilon:
+                            solved[key] = lo
+                        if value > hi and value-hi <= 8*max(1.0, abs(hi))*sys.float_info.epsilon:
+                            solved[key] = hi
+                    result = model.evaluate(solved["N_params_B"], solved["D_tokens_B"],
+                                            policy["p"], policy["weights"],
+                                            p_policy="observed_512",
+                                            quality_mode="native_QB_sensitivity",
+                                            native_QB=solved["Q_score"])
+                    if not math.isclose(result["NDQ_loss"], base, rel_tol=1e-10):
+                        raise RuntimeError("CYJ v8 native Q result differs from CHM optimizer")
+                    solved["status"] = "conditional_v8_native_Q_sensitivity_feasible"
+                    solved["v8_NDQ_native_loss"] = base
+                    solved["conditional_bridge_loss"] = result["Loss"]
+                    solved["bridge_factor"] = result["mixture_bridge_factor"]
+                else:
+                    solved["status"] = "infeasible_within_v8_native_Q_support"
+                    solved["v8_NDQ_native_loss"] = None
+                    solved["conditional_bridge_loss"] = None
+                rows.append(solved)
+    return rows
+
+
 def write_csv(path: Path, rows: list[dict]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     columns = list(dict.fromkeys(key for row in rows for key in row))
@@ -224,11 +287,15 @@ def generate(out_dir: Path = OUTPUT) -> dict:
     write_csv(out_dir / "fixed_policy_grid.csv", rows)
     joint = observed_joint_grid(model, bounds, rows)
     write_csv(out_dir / "observed_joint_grid.csv", joint)
+    native = native_q_sensitivity_grid(model, bounds, policy)
+    write_csv(out_dir / "native_Q_sensitivity_grid.csv", native)
     return {"rows": len(rows), "feasible": sum(r["status"] == "conditional_v8_fixed_policy_feasible" for r in rows),
             "policy_recipe": policy["recipe_index"],
             "grid_sha256": digest(out_dir / "fixed_policy_grid.csv"),
             "joint_feasible": sum(r["status"] == "conditional_v8_fixed_policy_feasible" for r in joint),
-            "joint_grid_sha256": digest(out_dir / "observed_joint_grid.csv")}
+            "joint_grid_sha256": digest(out_dir / "observed_joint_grid.csv"),
+            "native_Q_feasible": sum(r["status"] == "conditional_v8_native_Q_sensitivity_feasible" for r in native),
+            "native_Q_grid_sha256": digest(out_dir / "native_Q_sensitivity_grid.csv")}
 
 
 if __name__ == "__main__":

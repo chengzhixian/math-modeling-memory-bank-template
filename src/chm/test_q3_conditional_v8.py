@@ -11,9 +11,11 @@ import unittest
 from scipy.optimize import minimize
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from q3_conditional_v8 import main_grid, main_policy, observed_joint_grid, solve_fixed_p  # noqa: E402
+from q3_conditional_v8 import OUTPUT, main_grid, main_policy, native_q_sensitivity_grid, observed_joint_grid, solve_fixed_p  # noqa: E402
 from q3_generic_solver import cost_and_grad  # noqa: E402
 from q3_v8_inputs import EXPORT, load_v8, verify_export  # noqa: E402
+from q3_v8_publish import validate, verify_manifest  # noqa: E402
+from q3_v8_transition_scan import state  # noqa: E402
 
 
 class ConditionalV8Q3Tests(unittest.TestCase):
@@ -101,6 +103,32 @@ class ConditionalV8Q3Tests(unittest.TestCase):
         self.assertEqual({r["recipe_index"] for r in joint if r.get("recipe_index")}, {"172", "477"})
         self.assertTrue(all(r.get("fixed_policy_regret") is None or r["fixed_policy_regret"] >= -1e-10
                             for r in joint))
+
+    def test_native_quality_is_labeled_sensitivity(self):
+        rows = native_q_sensitivity_grid(self.model, self.bounds, self.policy)
+        self.assertEqual(len(rows), 36)
+        self.assertEqual(sum(r["status"] == "conditional_v8_native_Q_sensitivity_feasible" for r in rows), 33)
+        sample = next(r for r in rows if r["budget_FLOPs"] == 1e22 and
+                      r["context_tokens"] == 8192 and r["quality_family"] == "power")
+        self.assertEqual(sample["model_scope"], "CYJ_v8_native_QB_sensitivity")
+        self.assertAlmostEqual(sample["Q_score"], 1.0)
+        self.assertLess(sample["global_gap"], 1.1e-7)
+
+    def test_published_result_gates_and_short_context_transition(self):
+        counts = validate(OUTPUT)
+        verify_manifest(OUTPUT)
+        self.assertEqual(counts["transition_brackets"], 82)
+        import csv
+        with (OUTPUT/"transitions.csv").open(encoding="utf-8", newline="") as stream:
+            transitions = list(csv.DictReader(stream))
+        recipe_switches = [r for r in transitions if r["scenario"] == "observed_joint" and
+                           r["context_tokens"] == "8192" and r["quality_family"] == "power" and
+                           r["state_left"].startswith("recipe=477;") and
+                           r["state_right"].startswith("recipe=172;")]
+        self.assertEqual(len(recipe_switches), 1)
+        self.assertLess(float(recipe_switches[0]["relative_width"]), 1e-4)
+        self.assertEqual(state({"status": "infeasible_within_v8_support"}),
+                         "infeasible_within_v8_support")
 
 
 if __name__ == "__main__":

@@ -1,295 +1,165 @@
-% Owner: chm. Numerical Q3 section.
-% Current state: diagnostic/scenario evidence only until cyj ready_for_Q3=true.
-\subsection{数值求解、支持域与结构转移诊断}
+% Owner: chm. Conditional Q3 answer using pinned CYJ v8 and Q1 v2.
+% Evidence: outputs/chm/q3_conditional_v8/manifest.json.
+\subsection{算力约束下的条件配置与结构转移}
 \label{sec:q3_numerical}
 
-\subsubsection{求解流程与上游门禁}
-第三问的数值求解不手工复制第二问参数，而通过版本化预测器调用。正式运行前检查预测器的 Loss 坐标、$N/D/Q$ 适用域、质量变量状态、配比策略和不确定性。附件 A 的派生 $Q_z$ 不要求被人为映射到附件 B 的 $Q_{\mathrm{score}}$；若使用连续质量变量，则正式预测器必须在同一 B-native Loss 坐标上验证 $N,D,Q$。配比若无法建立跨 Loss 标定，则只作多目标域敏感性，不输出唯一配比。当前上游接口仍未满足正式门禁，因此本小节先报告求解器和支持域诊断，当前 v4 已通过 CHM 消费验收，但真实训练外测与总不确定性仍不足，正式配置表需在科学门禁通过后生成。
+\subsubsection{题面成本、输入范围与配比策略}
+题面要求在参数量 $N$、训练数据量 $D$、数据质量 $Q$ 与领域配比
+$\boldsymbol p$ 间配置有限算力，并将上下文长度 $L_c$ 作为外生情景。
+本文以十亿参数、十亿 Token 为 $N,D$ 的单位，按题面三项代理成本计算
+\begin{equation}
+\begin{aligned}
+C(N,D,Q;L_c)&=C_{\rm train}+C_{\rm quality}+C_{\rm attention},\\
+C_{\rm train}&=6\times10^{18}ND,\\
+C_{\rm quality}&=10^9D\max\{g(Q)-g(Q_0),0\},\\
+C_{\rm attention}&=2\times10^{14}L_cND.
+\end{aligned}
+\label{eq:q3_cost_v8}
+\end{equation}
+其中 $g$ 分别取题面附录 B 的指数、幂函数与对数渐进形式；
+$Q_0=0.5$ 是明确给定的质量基线情景，不是跨附件估计值。
+附件 C7 支持 $L_c=2048,8192,131072$ Token 的外生对照，高端情景样本较少。
+题面建议的预算为 $10^{19},10^{22},10^{24}$ FLOPs；另以 $10^{20}$ 作过渡诊断。
 
-\subsubsection{$N$--$D$ 解析诊断与连续预算相位}
-固定 $Q=Q_0$、$\boldsymbol p=\boldsymbol p_{\rm ref}$ 时，质量额外成本为零，题面成本化为
+预测器固定为 cyj 的 \texttt{cyj.ndqp.scenario.v8}：B1 五参数 $N$--$D$ 主干
+和 B7 三参数质量增量在各自来源中拟合，配比效应消费第一问冻结的
+\texttt{chm.q1.v2.0}。在主情景中，$Q=\phi(Q_A(\boldsymbol p))$
+由六个已映射 A1 质量域给出单调质量代理，联合 Loss 写为
 \begin{equation}
-C_0(N,D;L_c)=
-\left(6\times10^{18}+2\times10^{14}L_c\right)ND.
-\label{eq:q3_nd_cost}
+\begin{aligned}
+\widetilde L_8(N,D,\boldsymbol p)
+={}&\Bigl[E+AN^{-\alpha}+BD^{-\beta}\\
+&+\bigl(1-\phi(Q_A(\boldsymbol p))\bigr)
+\bigl(G_0+G_N\log N+G_D\log(D/100)\bigr)\Bigr]\\
+&\hspace{2em}\times\exp\{r_w(\boldsymbol p)\}.
+\end{aligned}
+\label{eq:q3_v8_loss}
 \end{equation}
-以第二问 B1 diagnostic 的
+这里 $r_w$ 是 A 侧 13 个目标域等权的相对配比响应。
+$\phi$ 与指数幅度是明示的\emph{未标定跨源假设}，
+并无 A/B 成对训练实验识别它们或区分质量与配比的重叠贡献。
+本问主表只作该假设下的条件资源配置，不解释为真实训练 Loss 的保证值。
+
+题面允许配比由前两问确定。固定策略采用第二问 v8 已发布的
+A4 已观测配方 172，它满足第一问 \texttt{direct+near} 质量政策，
+代理质量为 $0.67136\ge Q_0$。
+第一问无约束等权主配方的同一代理质量约为 $0.38578$，
+不满足本节的 $Q\ge Q_0$ 约束，因此没有被暗中代入主表。
+作为联立检查，另对同时满足质量政策与 $Q\ge Q_0$ 的 87 个 A4
+已观测配方逐一寻优；有限候选枚举不等于连续配比凸包全局最优。
+所有模式采用 v8 的共同支持域
+$N\in[0.070542,11.965825]$、$D\in[10,299.893]$、$Q\in[0.1,1]$。
+
+\subsubsection{求解方法与预算可行性}
+固定配方使 $Q$ 与 $r_w$ 固定。记
+$c(L_c)=6\times10^{18}+2\times10^{14}L_c$、
+$h(Q)=10^9\max\{g(Q)-g(Q_0),0\}$。当前 v8 参数在声明支持域内
+满足 $\partial\widetilde L_8/\partial D<0$，故给定 $N$ 时
 \begin{equation}
-L_0(N,D)=E+AN^{-\alpha}+BD^{-\beta}
-\label{eq:q3_nd_loss}
-\end{equation}
-检查数值求解器。令
-\begin{equation}
-P=\frac{C_{\max}}{6\times10^{18}+2\times10^{14}L_c},
-\qquad ND=P,
-\end{equation}
-在不触边界时得到
-\begin{equation}
-N^\star=
-\left(\frac{\alpha A}{\beta B}P^\beta\right)^{1/(\alpha+\beta)},
+D^*(N)=\min\left\{D_{\max},\frac{C_{\max}}{c(L_c)N+h(Q)}\right\},
 \qquad
-D^\star=\frac{P}{N^\star}.
-\label{eq:q3_nd_inner}
+C_{\min}=D_{\min}\{c(L_c)N_{\min}+h(Q)\}.
+\label{eq:q3_v8_reduction}
 \end{equation}
+若 $C_{\max}<C_{\min}$，直接报告支持域内不可行。
+当前拟合系数满足 $A,B,\alpha,\beta>0$、$G_N,G_D\le0$，
+质量收益在矩形支持域内为正；据此检查分段目标对 $\log N$ 的凸性，
+用导数二分并核对成本和边界。联立有限配方解对每个候选重复上述二维求解，
+选择条件 Loss 最低者。另用 v8 明确标记的
+\texttt{native\_QB\_sensitivity} 模式独立选择 B 侧 $Q$，
+作为题面质量投入的条件敏感性；它不把 A 侧质量代理当作独立可控实验变量。
 
-结合 B1 声明的 $N\in[0.070542,11.965825]$ B、$D\in[0.134,299.893]$ B token，连续增加预算时依次出现
-\[
-N_{\min}\ {\rm bound}
-\rightarrow {\rm interior}
-\rightarrow D_{\max}\ {\rm bound}
-\rightarrow (N_{\max},D_{\max})\ {\rm support\ corner}.
-\]
-表\ref{tab:q3_regime}给出三个 C7 上下文情景的临界预算。
-
+表\ref{tab:q3_v8_power}是幂函数质量成本下的有限配方联立结果。
+预算 $10^{19}$、131072 Token 的三类成本均不足以进入 v8 声明支持域；
+幂函数场景在另外两个上下文改选低质量成本的配方 477 才可行。
 \begin{table}[htbp]
 \centering\small
-\caption{$N$--$D$ 诊断模型的预算相位临界点}
-\label{tab:q3_regime}
-\begin{tabular}{rrrr}
+\caption{幂函数质量成本下的 v8 条件资源配置；$N,D$ 为十亿单位，Loss 为未标定情景值}
+\label{tab:q3_v8_power}
+\begin{tabular}{rrrrrrr}
 \toprule
-Context & $N_{\min}$ 释放 & $D_{\max}$ 激活 & 支持域饱和 \\
+预算/FLOPs & $L_c$ & 配方 & $N$ & $D$ & $Q$ 代理 & 条件 Loss\\
 \midrule
-2048 & $7.95\times10^{17}$ & $9.33\times10^{21}$ & $2.30\times10^{22}$ \\
-8192 & $9.47\times10^{17}$ & $1.11\times10^{22}$ & $2.74\times10^{22}$ \\
-131072 & $3.99\times10^{18}$ & $4.69\times10^{22}$ & $1.16\times10^{23}$ \\
+$10^{19}$ & 2048 & 477 & 0.104 & 10.000 & 0.600 & 3.1551\\
+$10^{19}$ & 8192 & 477 & 0.087 & 10.000 & 0.600 & 3.2038\\
+$10^{19}$ & 131072 & \multicolumn{5}{c}{支持域内不可行}\\
+$10^{22}$ & 2048 & 172 & 7.291 & 210.799 & 0.671 & 2.0809\\
+$10^{22}$ & 8192 & 172 & 6.661 & 193.874 & 0.671 & 2.0944\\
+$10^{22}$ & 131072 & 172 & 3.214 & 95.943 & 0.671 & 2.2179\\
+$10^{24}$ & 2048 & 172 & 11.966 & 299.893 & 0.671 & 2.0195\\
+$10^{24}$ & 8192 & 172 & 11.966 & 299.893 & 0.671 & 2.0195\\
+$10^{24}$ & 131072 & 172 & 11.966 & 299.893 & 0.671 & 2.0195\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-注意力成本与基础训练成本之比具有简单形式
+固定配方 172 的 36 个主网格情景中 30 个可行；有限配方联立后 33 个可行。
+例如 $10^{19}$、2048 Token 的幂函数成本使配方 172 的最小成本
+约为 $1.1554\times10^{19}$ FLOPs，故其不可行；配方 477 可行。
+在 $10^{19}$、8192 Token 下，幂函数和对数函数同样需要改选配方 477，
+而指数函数可保持 172。到 $10^{22}$、8192 Token 时，三类成本都选择 172，
+其 $(N,D)$ 分别约为 $(6.599,196.983)$、$(6.661,193.874)$、
+$(6.625,195.681)$，条件 Loss 为 $2.09389,2.09442,2.09411$。
+在 $10^{24}$ 时达到 v8 的 $N,D$ 支持上界，8192 Token 幂成本仅使用
+约 $2.76\%$ 的预算；这说明当前模型不支持继续外推资源收益。
+
+原生 B 质量的独立决策敏感性有 33/36 格可行。在
+$10^{22}$、8192 Token、幂成本下，给定配方 172，取
+$Q_B=1$ 得 $(N,D)\approx(5.259,222.936)$、条件 Loss $2.02322$。
+这个数值与主情景的差只衡量\emph{不同质量输入假设}，
+不构成真实质量干预增益的估计。
+
+\subsubsection{结构转移与上下文敏感性}
+对预算 $B$ 定义稳定配置状态
 \begin{equation}
-\frac{C_{\rm attn}}{C_{\rm train}}=\frac{L_c}{30000}.
-\label{eq:q3_attn_ratio}
+S(B)=\bigl(\mathbf 1_{\rm feasible},\operatorname{index}(\boldsymbol p^*(B)),
+\mathcal A_{N,D,B}(B)\bigr),
+\label{eq:q3_v8_state}
 \end{equation}
-因此 2048、8192、131072 Token 对应约 0.0683、0.2731、4.3691。题面三档预算中，$10^{19}$ FLOPs 的三个上下文均为内点；$10^{22}$ FLOPs、2048 Token 已触及 $D_{\max}$；$10^{24}$ FLOPs 的三个情景均到达 $N_{\max},D_{\max}$。后者存在大量预算剩余，只能解释为 B1 支持域不足，不能解释为额外算力无效。
-
-在解析临界点和三档预算上使用 25 起点数值优化交叉验证，最佳数值解与解析解的 Loss 最大绝对差约 $4.44\times10^{-16}$，$N/D$ 最大相对误差约 $4.23\times10^{-8}$，说明相位变化来自活跃约束切换而非局部最优。
-
-\subsubsection{质量成本函数的几何性质}
-题面质量成本为
-\begin{equation}
-C_Q=10^9D\,[g(Q)-g(Q_0)]_+.
-\end{equation}
-将其与训练和注意力成本比较，$D$ 可约去：
-\begin{equation}
-\frac{C_Q}{C_{\rm train}+C_{\rm attn}}
-=
-\frac{g(Q)-g(Q_0)}
-{N\left(6\times10^9+2\times10^5L_c\right)}.
-\label{eq:q3_quality_ratio}
-\end{equation}
-故相同质量升级的相对成本随 $N$ 按 $1/N$ 下降。等成本临界规模为
-\begin{equation}
-N_{\rm crit}
-=
-\frac{g(Q)-g(Q_0)}
-{6\times10^9+2\times10^5L_c}.
-\end{equation}
-指数型和幂函数型 $g(Q)$ 为凸成本，而对数型为凹成本。又因正部函数存在，$Q=Q_0$ 处不光滑，左导数为 0，右导数为 $10^9Dg'(Q_0)$，数值求解中采用单侧 KKT 条件。
-
-为比较量级，取诊断场景 $Q_0=0.5\rightarrow Q=1$、$N=1$ B，得到表\ref{tab:q3_quality_cost}。这些比例只描述成本侧价格，并不代表提高质量后的净收益。
-
-\begin{table}[htbp]
-\centering\small
-\caption{诊断场景下质量升级成本与基础计算成本之比}
-\label{tab:q3_quality_cost}
-\begin{tabular}{rrrr}
-\toprule
-Context & 指数型 & 幂函数型 & 对数型 \\
-\midrule
-2048 & 0.598 & 0.731 & 0.189 \\
-8192 & 0.502 & 0.614 & 0.159 \\
-131072 & 0.119 & 0.146 & 0.0376 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\subsubsection{历史恒定质量收益模型的对照诊断}
-旧版 cyj 接口的 B7 原生预测器在其半合成 \texttt{val\_loss} 坐标内使用
-$L_7=E+AN^{-\alpha}+BD^{-\beta}+G(1-Q_{\mathrm{score}})$，
-并明确不与 B1 Loss 或附件 A 的配比效应相加。本文固定该发布的参数文件 SHA256，
-取仅用于诊断的 $Q_0=0.5$，在 B7 声明的矩形支持域内对
-$N,D,Q_{\mathrm{score}}$ 做条件寻优。对于固定 $N,Q$，Loss 随 $D$ 单调下降，
-故可先取预算允许的最大 $D$，再对 $N,Q$ 做有界搜索。三个预算、三个 C7
-上下文和三类质量成本共构成 27 个条件情景，其中 24 个可行。
-
-\begin{table}[htbp]
-\centering\small
-\caption{B7 半合成质量模型与幂函数成本的条件联调示例；不是正式 Q3 配置}
-\label{tab:q3_b7_diagnostic}
-\begin{tabular}{rrrrrr}
-\toprule
-预算/FLOPs & Context & $N$/B & $D$/B & $Q_{\rm score}$ & B7 Loss \\
-\midrule
-$10^{19}$ & 8192 & 0.1309 & 10.00 & 0.50 & 3.3103 \\
-$10^{22}$ & 8192 & 8.1688 & 149.07 & 1.00 & 2.1102 \\
-$10^{24}$ & 8192 & 11.9700 & 600.00 & 1.00 & 1.9791 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-在 131072 Token、$10^{19}$ FLOPs 下，B7 支持域左下角仅基础训练与注意力
-成本就需 $2.255008\times10^{19}$ FLOPs，故三种质量成本情景均不可行。
-在 8192 Token、$10^{24}$ FLOPs 下，表中解已到 B7 支持域上界，实际预算使用率
-仅约 $5.77\%$；这表示数据支持域限制，而不是额外算力没有价值。
-上述数值仅检验新接口与成本几何的联调能力：B7 是半合成数据，尚缺独立
-验证、完整预测区间及 $p$ 到同一 Loss 坐标的桥接，不能把表中配置当作最终
-$N$--$D$--$Q$--$\boldsymbol p$ 最优方案。
-
-\subsubsection{配比代理的优化选择验证}
-为检验第一问配比代理是否可用于候选选择，严格保持 A4/A5 为拟合集，对 A6/A8/A10 的 held-out 配方选择预测 Loss 最低者，再由 A7/A9/A11 的真实目标域 Loss 评价其实际名次。表\ref{tab:q3_p_selection}给出全部 13 个目标域结果。
-
-\begin{table}[htbp]
-\centering\small
-\caption{逐目标域配比代理的 held-out 选择能力}
-\label{tab:q3_p_selection}
-\begin{tabular}{lrr}
-\toprule
-规模 & 精确选中真实最优 & 落入真实前 10\% \\
-\midrule
-1M & 10/13 & 13/13 \\
-60M & 8/13 & 13/13 \\
-1B & 7/13 & 8/13 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-对 pile\_cc、wikipedia\_en、arxiv、stackexchange、github 五个主敏感性目标，共 15 次检验中 11 次精确选中真实最优，14 次进入真实前 10\%。明显偏离发生在 1B pile\_cc，其预测选择为实际第 10/64，相对最优 regret 约 2.63\%。因此配比代理可用于受支持候选筛选，但 1B 已出现明显的目标域依赖失效风险。
-
-同时，A4 训练支持内五个主目标域的最低预测候选最大单域占比中位数约 0.954，4/5 超过 0.9，存在极端化选择倾向。由于
-\begin{equation}
-m_k(\boldsymbol p)
-=
-\boldsymbol\beta_k^\top(\boldsymbol p-\boldsymbol p_{\rm ref})
-\end{equation}
-是线性函数，当目标域固定且跨 Loss 系数为正时，正的尺度因子不会改变 $\boldsymbol p$ 的排序。故当前代理本身不能识别“预算增加引起最优配比支持集切换”，正式求解不采用无约束连续单纯形最优，而采用已观测/受支持候选与多目标域敏感性。
-
-\subsubsection{多起点求解与 KKT 验证}
-正式数值求解器将上游 Loss 抽象为 $L(N,D,Q)$ 及其梯度，并定义单位额外算力的边际收益
-\begin{equation}
-r_x=-\frac{\partial L/\partial x}{\partial C/\partial x}.
-\end{equation}
-预算约束活跃且变量均为内点时，有
-\begin{equation}
-r_N=r_D=r_Q=\mu.
-\label{eq:q3_kkt_ratio}
-\end{equation}
-变量位于下界时要求 $r_x\le\mu$，位于上界时要求 $r_x\ge\mu$；$Q=Q_0$ 使用质量成本右导数，预算未用满时由互补松弛得 $\mu=0$。
-
-求解器按上游模型显式传入支持域，不再默认使用 B1 的边界。预算约束除以预算值后求解，采用解析梯度，只接受收敛且可行的解。KKT 检查以所有边际比值的最大绝对值作归一化，避免对极小的收益/FLOPs 使用固定绝对容差；同时检查原始可行性、对偶条件与互补松弛。该检查是必要条件，不能单独证明全局最优。
-
-对于本节特定的 B7 线性质量模型，记 $c=6\times10^{18}+2\times10^{14}L_c$、
-$h(Q)=10^9[g(Q)-g(Q_0)]$，则成本为 $D(cN+h)$。固定 $Q$ 后，先取
-$D=\min\{D_{\max},C/(cN+h)\}$。预算活跃段的驻点满足
-\begin{equation}
-R(N)=\frac{\beta BcN^{\alpha+1}(cN+h)^{\beta-1}}{\alpha AC^\beta}=1.
-\end{equation}
-因 $\mathrm d\log R/\mathrm dN>0$，该段至多有一个驻点，结合支持域端点和
-$D_{\max}$ 折点即可求得固定质量下的全局最小值。令
-$H(Q)=\min_{N,D}\{E+AN^{-\alpha}+BD^{-\beta}\}$，提高质量使可行集收缩，故
-$H$ 单调不减。任意区间 $[a,b]$ 上有
-\begin{equation}
-\min_{Q\in[a,b]}L_7(Q)\ge H(a)+G(1-b).
-\end{equation}
-据此细分区间，直到可行解上界与全局下界相差不超过指定容差。计算留出浮点误差余量，但未采用严格区间算术。
-
-\begin{table}[htbp]
-\centering\small
-\caption{B7 条件模型的数值验收；不包含模型与参数不确定性}
-\label{tab:q3_numerical_audit}
-\begin{tabular}{lr}
-\toprule
-检验项目 & 结果 \\
-\midrule
-27 个情景中的可行数 & 24 \\
-全局目标值误差界上限 & $1.0\times10^{-7}$ \\
-独立 24 起点 SLSQP 的最大 Loss 差 & $4.83\times10^{-13}$ \\
-最大 KKT 相对违反量 & $3.22\times10^{-8}$ \\
-连续预算区间的扫描点数 & 1449 \\
-复核的活跃集转移区间 & 45 \\
-支持域收缩情景数 & 54 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-对每个上下文和成本族，在 $10^{19}$--$10^{24}$ FLOPs 间取 161 个对数等距预算点，
-并与其 81 点子网格比较，观察到的转移类型一致；再将每个转移区间二分至相对宽度
-$10^{-5}$。这些区间按数值活跃集容差定义，不能解释为现实系统的精确相变点。
-全部可行曲线的最优 Loss 随预算不增。
+其中 $\mathcal A$ 为参数、数据与预算约束的活跃集。
+若一个预算附近的左右稳定状态不同，则称发生本模型的数值结构转移；
+成本占比的连续变化本身不算结构转移。
+每个 C7 上下文与成本族在 $10^{19}$--$10^{24}$ FLOPs 扫描 161 个对数点，
+对异状态相邻点二分至预算相对宽度小于 $10^{-4}$。
+固定策略记录 33 个、已观测配方联立记录 49 个括区；
+包含支持域可行性开启、配方切换以及 $D_{\min}$、$D_{\max}$、
+$N_{\max}$ 和预算约束的切换。
+例如 8192 Token、幂成本的配方 $477\to172$ 切换位于
+$[1.610535,1.610648]\times10^{19}$ FLOPs。
+131072 Token 的三个成本族在可行性边缘还依次出现多个短暂配方状态，
+81 点粗网格漏掉其中一些，因此不声称更窄的状态已穷尽。
+这些是给定半合成模型、成本代理与数值容差的转移，
+不是现实大模型训练的精确相变阈值。
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.98\textwidth]{figures/chm/q3_budget_scan.png}
-\caption{历史恒定 $G$ 模型在 8192 Token 下的质量选择及 Loss 随预算变化。曲线平台受矩形支持域上界约束。}
-\label{fig:q3_budget_scan}
+\includegraphics[width=0.86\textwidth]{figures/chm/q3_v8_power_8192.png}
+\caption{8192 Token、幂函数质量成本下的条件 Loss 与配比质量代理。
+纵虚线是已观测候选中配方 $477\to172$ 的数值切换括区；
+曲线只在 v8 共同支持域内绘制。}
+\label{fig:q3_v8_budget}
 \end{figure}
 
-在 $10^{22}$ FLOPs 下，三个上下文的对数型质量成本均取得较低条件 Loss；
-在 $10^{19}$ FLOPs 的两个可行情景中，指数型反而略低，故不能用单一预算的排序概括全部成本族。
-在 $10^{24}$ FLOPs 下各族均触及支持域上界并给出相同 Loss。
-将 $N$ 或 $D$ 上界收缩至发布支持数组的次大观测值，54 组比较中的最优 Loss 均未改善，
-最大增加量分别为 0.04423 和 0.04511，说明高预算平台对数据支持范围敏感。
-正式预算配置仍须等待 cyj 的独立验证与完整不确定性接口；当前仅完成所声明条件模型下的数值验收。
-
-\subsubsection{当前 v4 联合双交互模型的消费验收}
-最新条件候选使用
+注意力与基础训练开销的比值由题面公式直接消去 $N,D$：
 \begin{equation}
-L_4=E+AN^{-\alpha}+BD^{-\beta}
- +(1-Q)\{G_0+G_N\ln N+G_D\ln(D/100)\}.
+\frac{C_{\rm attention}}{C_{\rm train}}=\frac{L_c}{30000},
+\qquad L_{\rm crit}=30000\ {\rm Token}.
+\label{eq:q3_v8_context}
 \end{equation}
-本人成员分支锁定 cyj v4 发布提交并核对文件哈希及三个批量样例，直接调用其解析梯度，
-不重复拟合 B7。支持域为 $N\in[0.07,11.97]$、$D\in[10,600]$、$Q\in[0.1,1]$。
-十个上下文中仅 2048、8192、131072 属于原 C7 候选，其余七个是外生敏感性情景。
-接口仍引用 Q1 v1.2；与当前 v1.3 实际比较发现，13 域配比系数和参考配方一致，
-更新仅影响 A 侧描述性质量，因此不影响这里的 B 原生求解；两类质量仍不作映射。
+C7 的 2048、8192、131072 Token 分别给出约 0.0683、0.2731、4.3691。
+$L_{\rm crit}$ 是两项简化成本相等的位置，不是观测得到的模型能力阈值；
+尤其长上下文情景应按稀疏支持谨慎解释。
 
-旧恒定 $G$ 模型的证明不能直接套用到交互模型。对于此次发布的参数，
-$G_N,G_D\le0$ 且矩形四角的质量收益均为正。固定成本质量 $a$、评价质量 $b$ 后，
-令 $x=\ln N$，由预算得到的 $\ln D(x)$ 为凹函数；D 项关于 $\ln D$ 凸且递减，
-所以消去 D 后的目标关于 x 为凸函数，可用导数二分与凸切线构造下界。
-对 $Q\in[a,b]$，将成本放宽至 a、将收益提高至 b 所得最小值是整个区间的下界。
-重复细分质量区间，得到独立于多起点 SLSQP 的条件全局目标值误差界。
-该算法显式检查上述符号条件，不能推广成任意预测器的全局最优证明。
-
-\begin{table}[htbp]
-\centering\small
-\caption{当前 v4 条件模型的 CHM 所有者验收}
-\label{tab:q3_v4_acceptance}
-\begin{tabular}{lr}
-\toprule
-检验项目 & 结果 \\
-\midrule
-上游网格复算 / 可行配置 & 330 / 321 \\
-与上游配置的最大 Loss 差 & $2.28\times10^{-12}$ \\
-36 个独立误差界情景中的可行数 & 33 \\
-可行情景的最大全局目标值误差界 & $1.0\times10^{-7}$ \\
-预算扫描点 / 活跃集转移区间 & 1609 / 41 \\
-支持域收缩比较 & 54 组 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-在 2048 Token、对数质量成本下，81 点粗网格遗漏短暂活跃集状态，故加密至 321 点，
-与 161 点状态序列核对一致；其他组合使用 161/81 点核对。转移区间的相对宽度不超过
-$10^{-5}$。一处边界附近 SLSQP 未收敛，改用上述带误差界的降维解并重新检查 KKT，
-未把失败返回值当作已收敛解。图\ref{fig:q3_joint_budget_scan}给出当前模型的条件预算曲线。
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.98\textwidth]{figures/chm/q3_joint_budget_scan.png}
-\caption{当前 v4 双交互模型的条件预算扫描；8192 Token，$Q_0=0.5$。}
-\label{fig:q3_joint_budget_scan}
-\end{figure}
-
-cyj 的独立微分进化结果与 CHM 复算相符，但算法一致不等于真实训练有效性。
-其模型族消融还显示，在 $10^{22}$ FLOPs、30000 Token、指数成本下，
-恒定质量收益与双交互模型的 $N/D$ 配置约为 $6.30/125.90$ 与 $4.52/172.29$，
-而按双交互模型评价的 Loss 仅相差约 0.002827。因此应报告配置对模型形式的敏感性，
-不能把单一最优点解释为稳健结构规律。上述数值界只衡量优化误差，不覆盖参数、模型形式或
-跨数据源误差；半合成数据与未校准区间仍使正式 Q3 门禁保持关闭。
-
-% TODO(chm): cyj 发布 ready_for_Q3=true 的同一 B-native Loss 坐标 N-D-Q predictor 后：
-% 1) 生成三预算×三上下文×三质量成本正式配置表；
-% 2) p_policy=validated_bridge 时加入唯一 p，否则只给多 target p 敏感性；
-% 3) 写入总不确定性、KKT 残差、支持域/外推标志与结构转移临界预算；
-% 4) 交 zhh 做 Loss--Benchmark 不确定性传播。
+\subsubsection{数值复核与结论边界}
+CYJ v8 的 18 个冻结请求/期望样例在 CHM 本机重放通过；
+固定配方的 $10^{22}$ FLOPs、8192 Token、幂成本解与独立 SLSQP
+在 Loss 上相差小于 $10^{-8}$。本轮 7 项新检查覆盖精确生产者身份、
+跨源标记、支持域、成本分解、预算、有限候选排序和转移括区；
+自由 $Q_B$ 模式的最大浮点目标间隙约 $10^{-7}$。
+这些误差界只处理\emph{给定模型内的数值求解}，不含 B1/B7 参数、
+跨附件映射、配比桥、模型形式或选优造成的总预测误差。
+附件 B7 为半合成质量数据；缺少 A/B 成对实验使 Q1 质量和配比响应无法
+在同一真实 Loss 坐标中独立识别。因此本文只将表中配置用作
+条件规划情景，不给出联合 95\% 区间、真实训练因果收益或 Benchmark 提升断言。
+完整表、输入与程序 SHA256、角色和复现命令见
+\texttt{outputs/chm/q3\_conditional\_v8/manifest.json}。
