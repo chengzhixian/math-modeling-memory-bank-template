@@ -382,3 +382,7 @@ cyj 远端 ad1d312 已将旧 p/eta 情景降级，正式 ready_for_Q3=false；B7
 ## 2026-09-25 配比最终审计第一检查点
 
 用户已授权继续第三小问及 CYJ 一次性上游交付，并明确目前无人工真值/盲评条件，可跳过该可选项且如实注明。新增 `src/chm/q1_mixture_final_audit.py` 对 A4--A15 一对一索引/列序/原始SHA、逐目标误差与基线、A4凸包、A6/A8配对、训练内交互候选做独立审计。初轮运行：A10 1B 64配方中17个在A4凸包内、47个超出；主Ridge 1B绝对RMSE 4/13优于训练均值基线；交互候选在三个真实检验组RMSE改善，但尚未更改正式13x17 Ridge接口。详见 `experiments/chm/20260925-q1-mixture-final-audit.md`。此为检查点，Q1完整发布与新接口仍待完成。
+
+## 2026-09-25 Q1 第三小问验收候选
+
+已在本人 clean integration worktree 对 cyj `86526a1` 的两个 Q1 派生包进行原始 A4/A5、逐行归一化、冻结 `chm.q1.v1.3` 五表和交互定义复核。数值身份通过：512 行归一化最大差 `2.22e-16`，13 目标交互 CV 与本人 `2450971` 审计最大差 `3.33e-16`；四个交互实质文件跨 NumPy 环境哈希相同。发现 `qa_mapping.json` 的 arxiv/github 使用 A2/A3 扩展分数，而 v1.3 主 `Q_A` 使用 A1 sample；已分别重算质量约束场景，不能无条件签收 v1 的质量政策语义。第三小问多目标、覆盖与模型形式敏感性及论文验收 PDF 已就绪，主 Ridge v1.3 暂不变，交互候选只用于敏感性。用户要求先验收再进入正式模型；详见 `memory-bank/handoffs/chm/20260925-q1-third-part-export-owner-review.md` 与 `paper/sections/chm/q1_third_part_acceptance_candidate.md`。Q2/Q3 的正式版本切换与第三问重算待验收后执行。

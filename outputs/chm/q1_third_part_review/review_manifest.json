@@ -1,0 +1,204 @@
+{
+  "status": "CANDIDATE_FOR_USER_REVIEW_NOT_FORMAL_RELEASE",
+  "primary_q1_model": "chm.q1.v1.3 targetwise Ridge",
+  "interaction_role": "A-side 1M sensitivity only; no Q2/Q3 substitution",
+  "loss_normalization": "each 1M target contrast divided by positive interaction-model fitted reference Loss; explicit decision scenario, not a cross-source bridge",
+  "policy_support": "512 observed A4 recipes only",
+  "quality_coverage": "3 direct + 3 near_direct + 11 unknown; no global Q_A or B7 Q_score assigned to unknown domains",
+  "upstream_audit": {
+    "status": "IDENTITY_PASS_WITH_QA_SCOPE_DIFFERENCE",
+    "frozen_q1_version": "chm.q1.v1.3",
+    "q1_recipe_count": 512,
+    "max_recipe_abs_error": 2.220446049250313e-16,
+    "interaction_target_count": 13,
+    "max_interaction_cv_error": 3.3306690738754696e-16,
+    "qa_primary_scope_differences": [
+      {
+        "mixture_domain": "arxiv",
+        "export_scope": "arxiv_extended",
+        "primary_scope": "sample",
+        "export_Q_A": 2.7252526038451155,
+        "primary_Q_A": 2.6886935343361333
+      },
+      {
+        "mixture_domain": "github",
+        "export_scope": "github_extended",
+        "primary_scope": "sample",
+        "export_Q_A": -0.505484640415014,
+        "primary_Q_A": -0.4853505780802409
+      }
+    ],
+    "q1_export_manifest_sha256": "b0dda7caac30513c0f37e74ccb143064606847fdc35fd7607c999ac2f8647ecb",
+    "interaction_export_manifest_sha256": "87d61b1df53f1370ec31d8da483930579c3bfe71f5436185e125ce3e40512c40"
+  },
+  "heldout_counts": {
+    "test_1m": {
+      "candidate_better_than_ridge_rmse": 11,
+      "candidate_better_than_constant_rmse": 13,
+      "ridge_better_than_constant_rmse": 13
+    },
+    "test_60m": {
+      "candidate_better_than_ridge_rmse": 13,
+      "candidate_better_than_constant_rmse": 13,
+      "ridge_better_than_constant_rmse": 13
+    },
+    "test_1B": {
+      "candidate_better_than_ridge_rmse": 13,
+      "candidate_better_than_constant_rmse": 11,
+      "ridge_better_than_constant_rmse": 4
+    }
+  },
+  "policies": [
+    {
+      "policy": "equal_13_relative",
+      "model": "ridge_v1.3",
+      "recipe_index": "136",
+      "objective_relative": -0.1491558510331784,
+      "known_QA_share": 0.4314314314314314,
+      "direct_QA_share": 0.15915915915915915,
+      "unknown_QA_share": 0.5685685685685684,
+      "max_domain_share": 0.22522522522522523
+    },
+    {
+      "policy": "equal_13_relative",
+      "model": "interaction_candidate",
+      "recipe_index": "136",
+      "objective_relative": -0.11506531053442216,
+      "known_QA_share": 0.4314314314314314,
+      "direct_QA_share": 0.15915915915915915,
+      "unknown_QA_share": 0.5685685685685684,
+      "max_domain_share": 0.22522522522522523
+    },
+    {
+      "policy": "minimax_13_relative",
+      "model": "ridge_v1.3",
+      "recipe_index": "163",
+      "objective_relative": 0.004693560761744829,
+      "known_QA_share": 0.4814814814814815,
+      "direct_QA_share": 0.23723723723723722,
+      "unknown_QA_share": 0.5185185185185186,
+      "max_domain_share": 0.35435435435435436
+    },
+    {
+      "policy": "minimax_13_relative",
+      "model": "interaction_candidate",
+      "recipe_index": "477",
+      "objective_relative": 0.03992746837819158,
+      "known_QA_share": 0.6306306306306307,
+      "direct_QA_share": 0.5675675675675675,
+      "unknown_QA_share": 0.3693693693693694,
+      "max_domain_share": 0.35535535535535534
+    },
+    {
+      "policy": "arxiv_only_relative",
+      "model": "ridge_v1.3",
+      "recipe_index": "300",
+      "objective_relative": -0.4993718944769767,
+      "known_QA_share": 0.9131736526946108,
+      "direct_QA_share": 0.9021956087824351,
+      "unknown_QA_share": 0.08682634730538923,
+      "max_domain_share": 0.9021956087824351
+    },
+    {
+      "policy": "arxiv_only_relative",
+      "model": "interaction_candidate",
+      "recipe_index": "3",
+      "objective_relative": -0.4843110372718267,
+      "known_QA_share": 0.9480000000000001,
+      "direct_QA_share": 0.679,
+      "unknown_QA_share": 0.052000000000000005,
+      "max_domain_share": 0.679
+    }
+  ],
+  "qa_policy_sensitivity": [
+    {
+      "score_scope": "v1.3_primary_sample",
+      "policy": "direct",
+      "objective_relative": -0.12115338773792278,
+      "covered_mass": 0.3231556093473321,
+      "mean_Q_A_on_covered": 0.8515354932354259,
+      "active_A4_recipes": [
+        {
+          "index": "79",
+          "weight": 0.17539090059293536
+        },
+        {
+          "index": "136",
+          "weight": 0.748720852841805
+        },
+        {
+          "index": "326",
+          "weight": 0.07588824656525968
+        }
+      ]
+    },
+    {
+      "score_scope": "v1.3_primary_sample",
+      "policy": "direct_and_near",
+      "objective_relative": -0.11686273645253507,
+      "covered_mass": 0.5646359074665894,
+      "mean_Q_A_on_covered": 0.7831035543837231,
+      "active_A4_recipes": [
+        {
+          "index": "136",
+          "weight": 0.5933822467518389
+        },
+        {
+          "index": "248",
+          "weight": 0.2762873210575941
+        },
+        {
+          "index": "301",
+          "weight": 0.1303304321905669
+        }
+      ]
+    },
+    {
+      "score_scope": "cyj_export_extended_where_available",
+      "policy": "direct",
+      "objective_relative": -0.12115189310459351,
+      "covered_mass": 0.3231556093473321,
+      "mean_Q_A_on_covered": 0.8574247439016351,
+      "active_A4_recipes": [
+        {
+          "index": "79",
+          "weight": 0.17543830678642044
+        },
+        {
+          "index": "136",
+          "weight": 0.748724447459886
+        },
+        {
+          "index": "326",
+          "weight": 0.0758372457536936
+        }
+      ]
+    },
+    {
+      "score_scope": "cyj_export_extended_where_available",
+      "policy": "direct_and_near",
+      "objective_relative": -0.11682298058880448,
+      "covered_mass": 0.5646359074665894,
+      "mean_Q_A_on_covered": 0.7864741235637406,
+      "active_A4_recipes": [
+        {
+          "index": "136",
+          "weight": 0.5927613439511189
+        },
+        {
+          "index": "248",
+          "weight": 0.27235624016124843
+        },
+        {
+          "index": "301",
+          "weight": 0.13488241588763267
+        }
+      ]
+    }
+  ],
+  "sources_sha256": {
+    "q1_v1.3_manifest": "c948d70456d5423fc639270de77181a82389dcc4281436590b55b509b4e7f2cc",
+    "cy_j_q1_bundle": "b0dda7caac30513c0f37e74ccb143064606847fdc35fd7607c999ac2f8647ecb",
+    "cy_j_interaction_bundle": "87d61b1df53f1370ec31d8da483930579c3bfe71f5436185e125ce3e40512c40"
+  }
+}
