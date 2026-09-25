@@ -1,0 +1,41 @@
+{
+  "schema_version": "chm.q1.v1.3",
+  "producer": "chm",
+  "status": "producer_validated_A_side_ready_scale_transfer_removed_B_bridge_unidentified",
+  "hash_mode": "sha256_utf8_lf_normalized",
+  "files": {
+    "quality": {
+      "path": "outputs/chm/domain_quality.csv",
+      "sha256": "ab7f13f9d0ff3d0683152d53933a89337cc3fadfefa9b2383772ea9fe3c2d976",
+      "rows": 9
+    },
+    "mapping": {
+      "path": "outputs/chm/domain_mapping.csv",
+      "sha256": "960ff8094339473b0fd72c774774dbba3cae438f3fcb5b0fb4fdc8bf9e20006a",
+      "rows": 17
+    },
+    "coefficients": {
+      "path": "outputs/chm/local_recheck_v1/mixture_effect_ridge_v0.csv",
+      "sha256": "39e7661d1ec2b4c552715ff39d11ea32416afa3cd4013436d9f6351288a194fd",
+      "rows": 13
+    },
+    "reference": {
+      "path": "outputs/chm/local_recheck_v1/mixture_reference_v0.csv",
+      "sha256": "ee3e623419982d5cce284509d014954ca436e95445ff444c7c870bed42beafe8",
+      "rows": 17
+    },
+    "validation": {
+      "path": "outputs/chm/local_recheck_v1/q1_regmix_ridge_domainwise_metrics.csv",
+      "sha256": "2d22d5b98dfe27c643b2f8ca3a29834b68767c08e0dc91fcaa06f2efcb694b20",
+      "rows": 13
+    }
+  },
+  "quality_coordinate": "A_composite_quality_proxy_z",
+  "mixture_effect_coordinate": "A4_A5_1M_target_cross_entropy_contrast",
+  "scale_transfer_status": "not_identified_from_attachment_A",
+  "compatibility": {
+    "predecessor": "chm.q1.v1.2",
+    "scientific_values_changed": true,
+    "change": "recompute A-side Q from all 22 signals with global Spearman signs; retain existing 1M mixture contrast and ranking interface"
+  }
+}

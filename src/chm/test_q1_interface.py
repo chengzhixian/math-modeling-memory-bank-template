@@ -1,7 +1,7 @@
 from pathlib import Path
 import unittest
 
-from q1_interface import Q1Interface, build_manifest
+from q1_interface_v1_3 import Q1Interface, build_manifest
 
 
 ROOT = Path(__file__).resolve().parents[2]

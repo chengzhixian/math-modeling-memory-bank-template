@@ -4,8 +4,8 @@ import unittest
 
 import numpy as np
 
-from q1_interface import Q1Interface
-from q1_multiloss_decision import (
+from q1_interface_v1_3 import Q1Interface
+from q1_multiloss_decision_v1_3 import (
     build_effect_matrix,
     load_a4,
     solve_minimax,
