@@ -1,0 +1,146 @@
+{
+  "formula": "L_B(N,D,Q_B)*(1+lambda*(N/1B)^(-eta)*sum_k w_k*m_k(p)/L_A_k_ref)",
+  "N_ref_B": 1.0,
+  "producer_commit": "cdda1ad62c5c7eb72b413c4228caeff87d2bad30",
+  "producer_schema": "chm.q1.v1.3",
+  "producer_manifest_sha256": "925cf317c861e5f65d7f2ebdaebc693bc7f4b60d17d486488e87858bce4b5d80",
+  "A_reference_loss_kind": "fitted Ridge prediction at p_ref, not observed B loss",
+  "quality_mapping": "Q_A to Q_B unidentified; Q_B independent input",
+  "identified_B_native": "conditional B7 semi-synthetic fit",
+  "identified_A_native": "fitted 1M Ridge target contrasts and fitted positive reference Loss",
+  "scenario_bridge": "lambda and eta unidentified; weights are decision scenarios",
+  "formal_ready": false,
+  "ready_for_Q3": false,
+  "conditional_diagnostic": true,
+  "lambda_grid": [
+    0,
+    0.25,
+    0.5,
+    1
+  ],
+  "eta_grid": [
+    -0.5,
+    0,
+    0.5
+  ],
+  "weight_scenarios": {
+    "arxiv_only": {
+      "arxiv": 1.0
+    },
+    "pile_cc_only": {
+      "pile_cc": 1.0
+    },
+    "equal_13": {
+      "arxiv": 0.07692307692307693,
+      "freelaw": 0.07692307692307693,
+      "pubmed_central": 0.07692307692307693,
+      "wikipedia_en": 0.07692307692307693,
+      "dm_mathematics": 0.07692307692307693,
+      "github": 0.07692307692307693,
+      "stackexchange": 0.07692307692307693,
+      "gutenberg_pg_19": 0.07692307692307693,
+      "pile_cc": 0.07692307692307693,
+      "ubuntu_irc": 0.07692307692307693,
+      "hackernews": 0.07692307692307693,
+      "pubmed_abstracts": 0.07692307692307693,
+      "uspto_backgrounds": 0.07692307692307693
+    }
+  },
+  "p_variants": {
+    "reference": {
+      "arxiv": 0.11302252583269279,
+      "freelaw": 0.0968248321520278,
+      "nih_exporter": 0.00588968021709595,
+      "pubmed_central": 0.11375419105058357,
+      "wikipedia_en": 0.07507775607983627,
+      "dm_mathematics": 0.0254628540970504,
+      "github": 0.11070066007050916,
+      "philpapers": 0.005487697351193036,
+      "stackexchange": 0.09943242344413017,
+      "enron_emails": 0.002211033043406226,
+      "gutenberg_pg_19": 0.04691494424753537,
+      "pile_cc": 0.11948759779188561,
+      "ubuntu_irc": 0.019599998284005892,
+      "europarl": 0.012737064754031531,
+      "hackernews": 0.011650822378108678,
+      "pubmed_abstracts": 0.06618116611257162,
+      "uspto_backgrounds": 0.07556475309333588
+    },
+    "transfer_freelaw_to_arxiv_one_percent": {
+      "arxiv": 0.12302252583269278,
+      "freelaw": 0.08682483215202781,
+      "nih_exporter": 0.00588968021709595,
+      "pubmed_central": 0.11375419105058357,
+      "wikipedia_en": 0.07507775607983627,
+      "dm_mathematics": 0.0254628540970504,
+      "github": 0.11070066007050916,
+      "philpapers": 0.005487697351193036,
+      "stackexchange": 0.09943242344413017,
+      "enron_emails": 0.002211033043406226,
+      "gutenberg_pg_19": 0.04691494424753537,
+      "pile_cc": 0.11948759779188561,
+      "ubuntu_irc": 0.019599998284005892,
+      "europarl": 0.012737064754031531,
+      "hackernews": 0.011650822378108678,
+      "pubmed_abstracts": 0.06618116611257162,
+      "uspto_backgrounds": 0.07556475309333588
+    },
+    "transfer_arxiv_to_freelaw_one_percent": {
+      "arxiv": 0.1030225258326928,
+      "freelaw": 0.1068248321520278,
+      "nih_exporter": 0.00588968021709595,
+      "pubmed_central": 0.11375419105058357,
+      "wikipedia_en": 0.07507775607983627,
+      "dm_mathematics": 0.0254628540970504,
+      "github": 0.11070066007050916,
+      "philpapers": 0.005487697351193036,
+      "stackexchange": 0.09943242344413017,
+      "enron_emails": 0.002211033043406226,
+      "gutenberg_pg_19": 0.04691494424753537,
+      "pile_cc": 0.11948759779188561,
+      "ubuntu_irc": 0.019599998284005892,
+      "europarl": 0.012737064754031531,
+      "hackernews": 0.011650822378108678,
+      "pubmed_abstracts": 0.06618116611257162,
+      "uspto_backgrounds": 0.07556475309333588
+    }
+  },
+  "grid_interpretation": "analytic sensitivity ranges, not confidence limits",
+  "N_scenarios_B": [
+    0.1,
+    1,
+    10
+  ],
+  "D_B": 100,
+  "Q_B": 0.5,
+  "raw_and_prior_evidence": {
+    "B1": {
+      "path": "outputs/cyj/classic/classic_fit.json",
+      "sha256": "9b0e381fbc0ea84bb37d63ccb273733f3a03a0c2a834e8ef52cdb75c45bc6ead"
+    },
+    "B2_B3": {
+      "path": "outputs/cyj/diagnostics/b2_b3_shapes.json",
+      "sha256": "bea31afe812a68bb3d2af9c1ea1f0efcbe557e5dee8ad58f785c86cafe9d189e"
+    },
+    "B4_B5": {
+      "path": "outputs/cyj/diagnostics/b4_b5_comparability.json",
+      "sha256": "28c3efa18b2acdd417e2a2f31d5163ead256ed07eabe7f9bf5fdd077611f79e1"
+    },
+    "B6_B7_B8": {
+      "path": "outputs/cyj/quality/b7_b8_conflict_summary.json",
+      "sha256": "7ac3032b13fb45f4d99a3a121c272ec88d501b3eb2824af5a8f6b49a38008988"
+    },
+    "B9_B10": {
+      "path": "outputs/cyj/diagnostics/b9_b10_extrapolation_audit.json",
+      "sha256": "53977e436fed3afabd5cb6ba908ff6d1f90a4cd42873209c5ba0d888db311068"
+    },
+    "B7_joint": {
+      "path": "outputs/cyj/quality/b7_joint_fit.json",
+      "sha256": "c7426036164238d41b92ca08e9ca9087224aeb0c74554478b66093774a5b5b1a"
+    },
+    "B7_nested": {
+      "path": "outputs/cyj/quality/b7_nested_cv_summary.json",
+      "sha256": "6415f73031c853e2749afe535128b1075fed91e114606ce54c62aab7097a6087"
+    }
+  }
+}
