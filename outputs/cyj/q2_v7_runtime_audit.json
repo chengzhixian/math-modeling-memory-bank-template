@@ -7,7 +7,7 @@
   "builder": {
     "policy_rows": 12,
     "sensitivity_rows": 1440,
-    "manifest_sha256": "f4c6b6d9ddcb716adc53a3893272e8186479e985b51648c9589f5b4b8fada3dc"
+    "manifest_sha256": "22e92a07495a62b4bd3800f4c7a661a6709b464da406238a09eef2bfff931ab3"
   },
-  "manifest_sha256": "f4c6b6d9ddcb716adc53a3893272e8186479e985b51648c9589f5b4b8fada3dc"
+  "manifest_sha256": "22e92a07495a62b4bd3800f4c7a661a6709b464da406238a09eef2bfff931ab3"
 }

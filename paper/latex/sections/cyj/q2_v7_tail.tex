@@ -30,6 +30,15 @@ $L_{\exp}=L_Be^{a r_w}$ 与 $L_{\rm lin}=L_B(1+a r_w)$；后者只在括号正�
 敏感性覆盖 $\lambda=0,0.5,0.75,1,1.25,1.5$ 和 $\eta=0,0.1,0.2,0.4$。
 这些情景范围不构成置信区间。
 
+图\ref{fig:cyj-v7-bridge} 展示等权凸包可行候选在三个规模下的指数桥接情景。
+它只比较固定配方的条件 Loss；随 $N$ 分离的曲线来自假设中的 $N^{-\eta}$，并非观测到跨规模配比效应。
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.96\textwidth]{figures/cyj/q2_v7_bridge_sensitivity.pdf}
+\caption{固定配方的条件桥接敏感性；点来自明示网格，非置信区间。}
+\label{fig:cyj-v7-bridge}
+\end{figure}
+
 \subsection{支持域、质量政策与配比决策}
 
 基础配比域为 A4 归一化 512 条配方的凸包。
@@ -89,9 +98,7 @@ B4/B5 与 B1 的 Loss 坐标尚未证明可比，B10 为估算值。
 共同的参考及变化配方、受控 $N,D,Q_B$ 的成对重复实验，并事先指定误差与拒绝标准。
 现有附件未提供这种检验，故不报告跨源预测误差或联合置信区间。
 
-版本化接口为 \texttt{cyj.ndqp.scenario.v7}，声明
-\texttt{conditional\_on\_bridge\_assumptions=true} 和
-\texttt{not\_empirically\_calibrated=true}。
+版本化接口为 \texttt{cyj.ndqp.scenario.v7}，明确声明结果以桥接假设为条件，且尚未经过跨来源实证校准。
 固定政策、输入哈希、环境与输出清单存于 Q2 v7 结果目录。
 Q2 运行期间的 Python 文件打开审计记录原始 A 为零次；审计文件同时说明覆盖范围与限制。
 CHM 的 Q3 消费验收和问题四能力映射是后续独立步骤；本节结论仅限所述假设、支持域和数据角色。

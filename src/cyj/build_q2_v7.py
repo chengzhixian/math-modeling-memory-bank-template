@@ -264,9 +264,28 @@ def main():
                                       "finite_forward_difference": (exact_next-base["Loss"])/step,
                                       "difference_error": (exact_next-base["Loss"])/step-predicted})
                 curvature_rows.append({"policy": entry["policy"], "support": name,
+                                       "curvature_type": "self_direction",
                                        "toward_observed_index": q1.recipe_ids[j], "path_support": path_policy,
                                        "direction_feasible": True,
                                        "directional_second_derivative": float(base["Loss"]*((u@hessian@u)+(gradient@u)**2)),
+                                       "causal_interpretation": False})
+            if len(target_candidates) >= 2:
+                u = q1.recipes[target_candidates[0]] - point
+                v = q1.recipes[target_candidates[1]] - point
+                h = 1e-4
+                path_policy = entry["quality_policy"] or "convex_hull"
+                def path_loss(displacement):
+                    return model.predict_baseline(N, D, Q, q1.p_dict(point+displacement), w,
+                                                  p_policy=path_policy)["Loss"]
+                mixed_fd = (path_loss(h*(u+v))-path_loss(h*u)-path_loss(h*v)+base["Loss"])/(h*h)
+                mixed_formula = float(base["Loss"]*((u@hessian@v)+(gradient@u)*(gradient@v)))
+                curvature_rows.append({"policy": entry["policy"], "support": name,
+                                       "curvature_type": "mixed_two_feasible_directions",
+                                       "toward_observed_index": f"{q1.recipe_ids[target_candidates[0]]},{q1.recipe_ids[target_candidates[1]]}",
+                                       "path_support": path_policy, "direction_feasible": True,
+                                       "directional_second_derivative": mixed_formula,
+                                       "finite_forward_mixed_difference": mixed_fd,
+                                       "difference_error": mixed_fd-mixed_formula,
                                        "causal_interpretation": False})
     write_csv("bridge_model_comparison.csv", comparisons)
     write_csv("bridge_sensitivity.csv", sensitivity)
@@ -327,10 +346,18 @@ def main():
                                           "reason": "no paired A/B cross-source calibration",
                                           "grid_spread_is_confidence_interval": False})
     write_csv("validation_by_source.csv", [
+        {"source": "B1", "role": "primary_N_D_fit_and_group_holdout", "status": "same_source_only",
+         "evidence": "outputs/cyj/q2_final/validation_summary.csv"},
+        {"source": "B2_B3", "role": "semi_synthetic_or_interpolated_trajectory_shape", "status": "shape_only",
+         "evidence": "outputs/cyj/diagnostics/b2_b3_shapes.json"},
+        {"source": "B4_B5", "role": "within_family_source_scale_dominance", "status": "absolute_Loss_coordinate_not_established",
+         "evidence": "outputs/cyj/diagnostics/b4_b5_comparability.json"},
         {"source": "A_Q1", "role": "training_nested_CV_and_same_condition_model_selection",
          "status": "signed_CHM_Q1_v2", "evidence": "outputs/chm/q1_v2_signoff/audit.json"},
         {"source": "B7", "role": "semi_synthetic_conditional_same_source_validation",
          "status": "frozen_CYJ_model", "evidence": "outputs/cyj/q2_final/validation_summary.csv"},
+        {"source": "B9_B10", "role": "large_model_metadata_and_estimated_Loss_stress", "status": "not_real_heldout",
+         "evidence": "outputs/cyj/diagnostics/b9_b10_extrapolation_audit.json"},
         {"source": "A_B_joint", "role": "unobserved", "status": "not_empirically_calibrated",
          "evidence": "no paired experiment"}])
     write_csv("requirement_evidence.csv", [
