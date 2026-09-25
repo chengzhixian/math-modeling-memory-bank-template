@@ -19,3 +19,5 @@
 ## 复现与下一步
 
 本机解释器 `H:\研究生数模\math-modeling-memory-bank-template\.venv\Scripts\python.exe`；顺序执行 `q1_third_part_review.py`、`q1_mixture_nested_model_comparison.py`、`q1_mixture_comparative_validation.py`、`q1_mixture_selection_stability.py`、`q2_quality_mapping_recheck.py`。每个输出目录的 `manifest.json` 固定原始输入、版本与结果 SHA。下一步由用户验收模型主次；cyj 在本人分支实现正式 Q2 新版；chm 接收后验收 Q3 消费和更新第三问论文复现。完整安全资料与原始数据检查仍按仓库三个入口脚本执行。
+
+补充（用户要求优先建模）：实验记录新增目标权重、全配方质量和 A/B 桥接的形式化不可识别说明；Q1 LaTeX 同步更新。PDF 继续暂缓。

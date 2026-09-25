@@ -390,3 +390,7 @@ cyj 远端 ad1d312 已将旧 p/eta 情景降级，正式 ready_for_Q3=false；B7
 ## 2026-09-25 Q1 模型比较与稳定性补证
 
 用户要求继续完成同条件 Ridge/交互对照、配方选择稳健性及 Q2 质量映射更正情景。本轮训练内嵌套五折中交互 13/13 目标 OOF RMSE 优于 Ridge；A6--A11 同条件检验中 1B 凸包内 17 与外 47 条各为 13/13 目标交互 RMSE 较低，但全 1B 仅 11/13 目标优于常数且 Spearman 仅 7/13 高于 Ridge。214 权重扫描下无质量约束两模型选方一致 77.1%，加 direct 52.6%、direct+near 63.6%；真实检验候选内部的决策压力结果不支持“所有指标上交互最优”。chm 侧独立复现 cyj 两项旧条件 Q2 政策，并以 A1 主评分重算，损失变化量很小但最优混合权重变化。交互现是 Q1 支持域内优先预测候选，正式 `v1.3` 仍为 Ridge，等待用户验收后才切换接口。详细见 `memory-bank/handoffs/chm/20260925-q1-comparison-stability-q2-remap.md` 与 `experiments/chm/20260925-q1-third-part-model-comparison.md`；`ready_for_Q3=false`。
+
+## 2026-09-25 Q1 主要矛盾形式化
+
+用户最新要求暂缓论文 PDF，优先完成模型与问题主要矛盾。已在实验记录和 Q1 LaTeX 源码写明三项识别边界：13 目标外生权重缺失导致配方条件最优；A16 的 11 个 inferred 域无 Q_A 数值使全配方质量不可求；A/B 无成对配比与 B 侧 Loss，故 cyj 条件公式的 lambda/eta 无法由现有数据估计，其中 N=1B 单点使 eta 完全消失。已有比较和 Q2 重算只支持条件预测，不解除此边界。论文 PDF 暂缓。

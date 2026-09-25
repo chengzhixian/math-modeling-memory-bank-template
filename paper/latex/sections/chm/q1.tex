@@ -353,7 +353,7 @@ m_1(\boldsymbol p),\ldots,m_{13}(\boldsymbol p)
 
 进一步固定相同的 Ridge 参考 Loss 为目标归一化分母，对等权、13 个单目标和 200 组固定随机权重共 214 个情景扫描。只在 512 个 A4 已观测配方中选择时，Ridge 与交互候选分别产生 42 与 47 个不同选择；不加质量约束时两模型选方一致率约 77.1\%，加入 direct 与 direct+near 质量约束后分别约 52.6\% 与 63.6\%。等权下 index 136 在两模型一致，但在全部权重情景中仅分别占 55.6\% 与 53.3\%。这些比例依赖本研究设定的权重情景分布，不是题目给定的真实需求分布；它们用于检验单一配方结论的脆弱性。
 
-质量约束须同时报告映射覆盖。A16 的 17 个训练域中，只有 3 个 direct、3 个 near-direct 可附带 A 侧质量代理，另 11 个 inferred 域没有数值质量；例如等权 Ridge 所选 index 136 的未知域权重为 0.5686。我们不以已映射域的条件均值冒充整条配方的全局质量，也不以 $Q_A$ 代替 B7 的 $Q_{\mathrm{score}}$。后续若以已映射域覆盖率与条件均值作为情景约束，主口径须使用 \texttt{chm.q1.v1.3} 的 A1 sample 分数；A2/A3 的 arxiv/github extended 分数单列敏感性。两口径给出的约束最优混合权重并非完全相同，详见 Q1 导出审计。
+质量约束须同时报告映射覆盖。A16 的 17 个训练域中，只有 3 个 direct、3 个 near-direct 可附带 A 侧质量代理，另 11 个 inferred 域没有数值质量；例如等权 Ridge 所选 index 136 的未知域权重为 0.5686。若把全配方质量写成 $Q(\boldsymbol p)=\sum_d p_dq_d$，这些未知域的 $q_d$ 可在不改变任何已观测质量行的情况下取不同值，进而改变配方的质量排序。因此不能用已映射域的条件均值冒充全配方质量，也不能以 $Q_A$ 代替 B7 的 $Q_{\mathrm{score}}$。后续以已映射域覆盖率与条件均值作为情景约束时，主口径须使用 \texttt{chm.q1.v1.3} 的 A1 sample 分数；A2/A3 的 arxiv/github extended 分数单列敏感性。两口径给出的约束最优混合权重并非完全相同，详见 Q1 导出审计。
 
 \subsubsection{文献函数形式与本题主代理的关系}
 
@@ -463,7 +463,7 @@ A16 中仅有 3 个 direct、3 个 near-direct 域映射，其余 11 个为 infe
   \item A6--A11 给出的跨实验组排序验证和 A12--A15 的 estimated/extrapolated 压力测试。
 \end{enumerate}
 
-附件 A 没有提供 $Q_A\leftrightarrow Q_{\mathrm{score}}$ 的成对标定样本，也没有证明任一 Q1 目标域 Loss 与 B1 的 \texttt{val\_loss} 属于同一数值坐标。因此第一问不提供 $Q_A\to Q_{\mathrm{score}}$ 的数值映射，不把 $m_k(\boldsymbol p)$ 直接加到 B1 Loss，也不提供由 A 数据拟合的 $\eta$、$b_k(N)$ 或其他连续尺度传递参数。$N$、$D$、B-native $Q$ 与 Loss 的统一关系由问题二依据附件 B 独立建立；若后续需要把 $m_k(\boldsymbol p)$ 映射到 B 侧 Loss，必须额外给出可验证的 Loss 坐标桥接证据。
+附件 A 没有提供 $Q_A\leftrightarrow Q_{\mathrm{score}}$ 的成对标定样本，也没有证明任一 Q1 目标域 Loss 与 B1 的 \texttt{val\_loss} 属于同一数值坐标。因此第一问不提供 $Q_A\to Q_{\mathrm{score}}$ 的数值映射，不把 $m_k(\boldsymbol p)$ 直接加到 B1 Loss，也不提供由 A 数据拟合的 $\eta$、$b_k(N)$ 或其他连续尺度传递参数。具体地，问题二条件情景中的桥接形式 $L_B=L_{B7}[1+\lambda(N/1\mathrm{B})^{-\eta}\sum_kw_km_k(\boldsymbol p)/L_{A,k,\mathrm{ref}}]$ 在参考配方满足 $m_k(\boldsymbol p_{\rm ref})=0$；因此任意 $\lambda,\eta$ 都复现同一 B 侧基线，单一 $N=1\mathrm{B}$ 情景又使 $\eta$ 消失。缺少配方与 B 侧同条件 Loss 的成对观测时，这两个桥接参数不可从现有附件识别。$N$、$D$、B-native $Q$ 与 Loss 的统一关系由问题二依据附件 B 独立建立；若后续需要把 $m_k(\boldsymbol p)$ 映射到 B 侧 Loss，必须额外给出可验证的 Loss 坐标桥接证据。
 
 \subsection{本问结论与局限}
 
