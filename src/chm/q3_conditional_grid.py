@@ -164,6 +164,39 @@ def refine_transition(left: dict, right: dict, solve_at_budget,
             "relative_width": hi["budget_FLOPs"] / lo["budget_FLOPs"] - 1}
 
 
+def refine_transition_chain(left: dict, right: dict, solve_at_budget,
+                            relative_width: float = 1e-5) -> list[dict]:
+    """Resolve every intermediate stable state discovered within a bracket."""
+    if structural_state(left) == structural_state(right):
+        raise ValueError("transition endpoints have the same structural state")
+    if not 0 < relative_width < 1:
+        raise ValueError("invalid relative width")
+
+    def visit(lo: dict, hi: dict, depth: int) -> list[dict]:
+        if depth > 64:
+            raise RuntimeError("transition refinement did not converge")
+        width = hi["budget_FLOPs"] / lo["budget_FLOPs"] - 1
+        if width <= relative_width:
+            return [{"context_tokens": lo["context_tokens"],
+                     "quality_family": lo["quality_family"],
+                     "budget_left": lo["budget_FLOPs"],
+                     "budget_right": hi["budget_FLOPs"],
+                     "active_left": structural_state(lo),
+                     "active_right": structural_state(hi),
+                     "relative_width": width}]
+        mid = solve_at_budget(math.sqrt(lo["budget_FLOPs"] * hi["budget_FLOPs"]))
+        if mid["status"] != "conditional_B_native_feasible":
+            raise RuntimeError("transition refinement left feasible support")
+        state = structural_state(mid)
+        if state == structural_state(lo):
+            return visit(mid, hi, depth + 1)
+        if state == structural_state(hi):
+            return visit(lo, mid, depth + 1)
+        return visit(lo, mid, depth + 1) + visit(mid, hi, depth + 1)
+
+    return visit(left, right, 0)
+
+
 def scan_group(model: B7Adapter, context: int, family: str, points: int = 161,
                tolerance: float = 1e-6) -> list[dict]:
     if points < 3 or points % 2 != 1:
@@ -214,8 +247,8 @@ def scan_all(model: B7Adapter, initial_points: int = 161) -> tuple[list[dict], l
                                "transition_signatures_agree": True})
             by_budget = {r["budget_FLOPs"]: r for r in group}
             for pair in transition_pairs(group):
-                transitions.append(refine_transition(by_budget[pair["budget_left"]],
-                                                     by_budget[pair["budget_right"]], solve))
+                transitions.extend(refine_transition_chain(by_budget[pair["budget_left"]],
+                                                           by_budget[pair["budget_right"]], solve))
             rows.extend(group)
     return rows, transitions, resolution
 

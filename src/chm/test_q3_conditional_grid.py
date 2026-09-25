@@ -5,7 +5,7 @@ import sys
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from q3_conditional_grid import B7Adapter, solve_scenario, main_grid, transition_pairs, refine_transition, scan_group, midpoint_refine, structural_state  # noqa: E402
+from q3_conditional_grid import B7Adapter, solve_scenario, main_grid, transition_pairs, refine_transition, refine_transition_chain, scan_group, midpoint_refine, structural_state  # noqa: E402
 
 
 class ConditionalGridTests(unittest.TestCase):
@@ -82,6 +82,20 @@ class ConditionalGridTests(unittest.TestCase):
         boundary = {"active_set": "D_max;N_max;Q1;budget"}
         beyond = {"active_set": "D_max;N_max;Q1"}
         self.assertEqual(structural_state(boundary), structural_state(beyond))
+
+    def test_refinement_splits_a_hidden_intermediate_state(self):
+        left = {"budget_FLOPs": 2.0, "context_tokens": 2048, "quality_family": "power",
+                "active_set": "A", "status": "conditional_B_native_feasible"}
+        right = {**left, "budget_FLOPs": 4.0, "active_set": "C"}
+
+        def fake_solve(budget):
+            state = "A" if budget < 3 else ("B" if budget < 3.5 else "C")
+            return {**left, "budget_FLOPs": budget, "active_set": state}
+
+        brackets = refine_transition_chain(left, right, fake_solve)
+        self.assertEqual([(x["active_left"], x["active_right"]) for x in brackets],
+                         [("A", "B"), ("B", "C")])
+        self.assertTrue(all(x["relative_width"] <= 1e-5 for x in brackets))
 
 
 if __name__ == "__main__":
