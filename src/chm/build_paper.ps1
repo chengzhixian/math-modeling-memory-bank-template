@@ -1,11 +1,15 @@
 param(
     [string]$TexBin = '',
-    [string]$OutputName = 'chm-q1-all22-latest'
+    [string]$OutputName = 'chm-q1-all22-latest',
+    [string]$SourceName = 'main.tex'
 )
 
 $ErrorActionPreference = 'Stop'
 if ($OutputName -notmatch '^[A-Za-z0-9_-]+$') {
     throw 'OutputName must be a simple filename without an extension.'
+}
+if ($SourceName -notmatch '^[A-Za-z0-9_-]+\.tex$') {
+    throw 'SourceName must be a TeX filename in paper/latex.'
 }
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $paperRoot = Join-Path $repoRoot 'paper/latex'
@@ -37,10 +41,16 @@ foreach ($tool in @($xelatex, $bibtex)) {
 }
 
 New-Item -ItemType Directory -Force -Path $buildRoot, $outputRoot | Out-Null
-$sourcePaths = @('main.tex', 'gmcmthesis.cls', 'gmcm.bst', 'references.bib')
-foreach ($folder in @('sections', 'figures')) {
-    $sourcePaths += Get-ChildItem -LiteralPath (Join-Path $paperRoot $folder) -Recurse -File |
+$sourcePaths = @($SourceName, 'gmcmthesis.cls', 'gmcm.bst', 'references.bib')
+if ($SourceName -eq 'q1_final.tex') {
+    $sourcePaths += 'sections/chm/q1.tex'
+    $sourcePaths += Get-ChildItem -LiteralPath (Join-Path $paperRoot 'figures/chm') -File -Filter 'q1_*.png' |
         ForEach-Object { [IO.Path]::GetRelativePath($paperRoot, $_.FullName) }
+} else {
+    foreach ($folder in @('sections', 'figures')) {
+        $sourcePaths += Get-ChildItem -LiteralPath (Join-Path $paperRoot $folder) -Recurse -File |
+            ForEach-Object { [IO.Path]::GetRelativePath($paperRoot, $_.FullName) }
+    }
 }
 $sourceManifest = @()
 foreach ($relative in $sourcePaths) {
@@ -53,11 +63,15 @@ foreach ($relative in $sourcePaths) {
         sha256 = (Get-FileHash -LiteralPath $target -Algorithm SHA256).Hash.ToLowerInvariant()
     }
 }
+if ($SourceName -ne 'main.tex') {
+    Copy-Item -LiteralPath (Join-Path $buildRoot $SourceName) -Destination (Join-Path $buildRoot 'main.tex') -Force
+}
 
 function Invoke-TexStep([string]$Executable, [string[]]$Arguments, [string]$LogName) {
-    & $Executable @Arguments *> $LogName
-    if ($LASTEXITCODE -ne 0) {
+    $step = Start-Process -FilePath $Executable -ArgumentList $Arguments -Wait -PassThru -WindowStyle Hidden -RedirectStandardOutput $LogName -RedirectStandardError "$LogName.stderr"
+    if ($step.ExitCode -ne 0) {
         Get-Content -LiteralPath $LogName -Tail 35
+        Get-Content -LiteralPath "$LogName.stderr" -Tail 15
         throw "Compilation failed; inspect $buildRoot/$LogName"
     }
 }

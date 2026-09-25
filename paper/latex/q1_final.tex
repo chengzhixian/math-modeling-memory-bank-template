@@ -1,0 +1,26 @@
+% !TEX program = xelatex
+% Q1 standalone paper on the frozen chm.q1.v2.0 model.
+% Data description: problem/readable/DATA_DESCRIPTION_VISIBLE.md only.
+\documentclass[bwprint,withoutpreface]{gmcmthesis}
+\hypersetup{hidelinks}
+\usepackage{float}
+\usepackage{siunitx}
+\graphicspath{{figures/}{figures/chm/}}
+\title{问题一：数据质量评价、指标冲突与领域配比建模}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+针对题目附件 A 的质量信号和训练配比实验，本文建立逐文本与逐领域的质量代理，分析指标冲突，并构建 17 维配比到 13 个目标域交叉熵 Loss 的条件性决策模型。对 A1 的 51,230 条记录统一处理 22 个指标，按家族等权合成质量分数；冻结该规则后，对 A2/A3 全量扩展集及去重记录进行对照。以方向统一后的秩相关识别冲突，55 条显著负相关指标边在去重扩展集复现；采用综合质量与指标分歧的二维评价，标记需复核文本而不伪造人工质量真值。
+
+对 A4+A5 的 512 个配方，本文逐目标拟合含 17 个主项与 10 个二元乘积项的交互代理。训练内嵌套五折比较中，交互模型在 13 个目标域的 RMSE 均低于线性 Ridge，目标域中位数分别为 0.4499 和 0.4921。A6--A11 用于同条件比较；这些组曾影响模型选择，不能视为全新盲测。在 A4 配方凸包内，采用 McCormick 松弛与空间分支定界计算等权、质量约束及最差域保护情景，四组浮点数值上下界间隙均小于 0.001。A12--A15 为估算外推表：交互代理与 10B、70B 估算 Loss 的排序相关中位数仅为 0.4915、0.3941，不能支持真实大模型的配方最优主张。最终答案是在明确权重、质量政策和支持范围内可复现的条件性配方决策。
+\keywords{数据质量\quad 指标冲突\quad 领域配比\quad 交互回归\quad 多目标决策}
+\end{abstract}
+\maketoc
+\clearpage
+
+\input{sections/chm/q1.tex}
+
+\bibliographystyle{gmcm}
+\bibliography{references}
+\end{document}

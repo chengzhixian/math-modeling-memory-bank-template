@@ -1,0 +1,11 @@
+{
+  "seed": 20260925,
+  "reps": 100,
+  "split": "per-domain 70% train / 30% fixed holdout",
+  "bootstrap": "resample training records within each domain; refit 14 statistical signs",
+  "holdout_is_not_used_for_direction_fit": true,
+  "primary_Q_unchanged": true,
+  "ranking_envelope_is_not_confidence_interval": true,
+  "input_sha256_A1": "14a4eeec4c7d98efd78942ddd9c1329640527f2108e73227be449bc1a8dbe579",
+  "limitations": "Q preprocessing and Q scale are frozen from full A1; holdout is independent only of bootstrap sign fits, not of original Q rule selection"
+}

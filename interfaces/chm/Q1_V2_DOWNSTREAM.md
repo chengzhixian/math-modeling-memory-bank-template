@@ -32,6 +32,8 @@ CHM 已基于 cyj 远端最新 `team/cyj-scaling@86526a1` 的冻结 B7 系数独
 CYJ 应在其本人分支发布新的不可变消费版本：输入必须写明本 v2 Q1 manifest SHA，按交互公式重算 Q2 各配比情景、质量政策和论文数值，保留旧 v6 复现。若 cyj 选择不同支持集或权重，须显式命名新政策并重算，不得无声切回 Ridge。CHM 的 `q3_p_support.py`、`q3_p_selection_validation.py` 与诊断 `q3_solver.py` 已消费 v2 并记录 Q1 SHA。现有 cyj v4/v6、Q3 旧优化输出没有被自动转化为 v2；正式 Q3 经验绝对 Loss 仍受 A/B 桥接缺失阻断，`ready_for_Q3=false`。
 
 复现顺序：
+
+清理中间发布包后，首条命令现在仅验证已冻结 v2 清单及其全部文件哈希，不重新拟合模型；其余命令按各自情景重算。
 ```powershell
 $p = 'H:\研究生数模\math-modeling-memory-bank-template\.venv\Scripts\python.exe'
 & $p -B src/chm/release_q1_v2.py

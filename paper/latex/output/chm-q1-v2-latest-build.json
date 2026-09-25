@@ -1,0 +1,65 @@
+{
+  "built_at": "2026-09-25T11:05:43.2428689+08:00",
+  "source_mode": "snapshot_of_current_working_tree",
+  "engine": "XeLaTeX + BibTeX + XeLaTeX passes until references stabilize",
+  "page_count": 17,
+  "reference_glyph_overflow_gate": "passed",
+  "visual_review": "passed: 17-page contact sheet plus pages 1, 11, 15, 16 inspected",
+  "pdf_sha256": "633a4f5e6ab489370bad786f18c24f49e44f5e09a8908c9c28a2f98c11175722",
+  "source_files": [
+    {
+      "path": "paper/latex/q1_final.tex",
+      "sha256": "90520a02521a563d11523169e857cbd0b261665c9452fea42cc8e3d83449b471"
+    },
+    {
+      "path": "paper/latex/gmcmthesis.cls",
+      "sha256": "f299a4b4abfdeff92dcf81980fc96cf3c04c0ea2e7a8eb30f109da49ea18f5f7"
+    },
+    {
+      "path": "paper/latex/gmcm.bst",
+      "sha256": "9bc50567b04b859fdac949125106e24182c373d13794d53db4856ce3cbbcd8a4"
+    },
+    {
+      "path": "paper/latex/references.bib",
+      "sha256": "8d7e4ccc14564cdc1f4b6b158dee4ea45df22c6fd61376c8529c125eee69ce22"
+    },
+    {
+      "path": "paper/latex/sections/chm/q1.tex",
+      "sha256": "250a554eff8961034817f1e934203f72ebca6eae01a6e6dc0f2cb5f0586402a6"
+    },
+    {
+      "path": "paper/latex/figures/chm/q1_direct_rank_stability_1m_60m.png",
+      "sha256": "0898ac2c9fcf90e1596bbe3fa712c90ef37e7228597882ae32c6a4ea668f69f8"
+    },
+    {
+      "path": "paper/latex/figures/chm/q1_domainwise_spearman_box.png",
+      "sha256": "2fb238d51875aa3eb1a8ab0beccac79f6d31eaf15580e26e0655ac4d8251ac58"
+    },
+    {
+      "path": "paper/latex/figures/chm/q1_interaction_heatmap.png",
+      "sha256": "ace7cdb32b10e983d349e54b941da8cbf41c361a9fb1d7cc51f98eebcc39ea3c"
+    },
+    {
+      "path": "paper/latex/figures/chm/q1_mixture_ablation.png",
+      "sha256": "4a43f3564d082f94d871848b57dbb5cf3314cd2046ff55d91fe408cd410c1b66"
+    },
+    {
+      "path": "paper/latex/figures/chm/q1_mixture_effect_scale_decay.png",
+      "sha256": "b6a950e14024cfc9d5e338104cdbe1299acd0dec0163e732b92eaab91fd0bce5"
+    },
+    {
+      "path": "paper/latex/figures/chm/q1_quality_domain_intervals.png",
+      "sha256": "2235d5855cf714a38a7d2bd63fcfb8e8233f0202dea23a11a4d59040dd2264b0"
+    },
+    {
+      "path": "paper/latex/figures/chm/q1_v2_bound_gaps.png",
+      "sha256": "1650232b63f642ee2363f28dccd7729d77020b5ef9e896d0d0abbb052bacf96f"
+    },
+    {
+      "path": "paper/latex/figures/chm/q1_v2_rank_stress.png",
+      "sha256": "c07d26874da4a7adf3734b622285b454c7ffbcbb2eaeb8d49d73e05ae2578524"
+    }
+  ],
+  "scope": "Q1 standalone paper, frozen chm.q1.v2.0",
+  "Q1_manifest_sha256": "c621f7e405106e42720f918f490235b5e8becefb0f7c8cb997736e96337117a9"
+}

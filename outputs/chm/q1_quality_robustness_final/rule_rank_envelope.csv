@@ -1,0 +1,8 @@
+domain,rank_min,rank_max,n_variants
+arxiv,1.0,2.0,8
+book,1.0,2.0,8
+c4,5.0,7.0,8
+commoncrawl,3.0,3.0,8
+github,5.0,7.0,8
+stackexchange,4.0,4.0,8
+wikipedia,5.0,6.0,8

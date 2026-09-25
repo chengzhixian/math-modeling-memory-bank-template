@@ -24,6 +24,10 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def sha_text(path):
+    return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+
+
 def rank_rho(a, b):
     return float(spearmanr(a, b).statistic)
 
@@ -101,7 +105,7 @@ def run():
         "max_A4_recipe_difference": max_seen_difference,
         "q1_manifest_sha256": q1.manifest_sha256,
         "input_sha256": {f: sha(DATA/f) for f in FILES},
-        "ridge_sha256": sha(RIDGE),
+        "ridge_sha256_utf8_lf": sha_text(RIDGE),
         "targetwise_sha256": sha(OUT/"targetwise.csv"),
         "decision_sha256": sha(OUT/"decision_stress.csv"),
         "groups": {
