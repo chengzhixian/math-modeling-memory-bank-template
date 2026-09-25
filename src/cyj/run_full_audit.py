@@ -271,6 +271,39 @@ def unit_tests():
     return (result.stdout + result.stderr).strip()[-300:]
 
 
+def q2_requirement_coverage():
+    """Check every mandatory B source has a hashed audit and an honest role."""
+    coverage = document("outputs/cyj/q2_joint_scenarios/requirement_coverage.json")
+    required = {"B1_main_ND", "B2_or_B3_trajectory", "B4_and_B5_external",
+                "B6_B7_B8_quality", "B9_B10_large", "unique_AB_bridge"}
+    require(set(coverage["requirements"]) == required, "Q2 requirement omitted")
+    for name, item in coverage["source"].items():
+        require(sha(ROOT / item["path"]) == item["sha256"], f"Q2 evidence drift: {name}")
+    require(coverage["requirements"]["B4_and_B5_external"]["status"] == "partial_coordinate_unverified",
+            "B4/B5 coordinate gate was overstated")
+    require(coverage["requirements"]["B9_B10_large"]["status"] == "partial_estimated_stress_only",
+            "B10 was overstated as an external test")
+    require(coverage["requirements"]["unique_AB_bridge"]["status"] == "unidentified",
+            "unidentified bridge was overstated")
+    return "six Q2 gates, seven source hashes, B4/B5 and B9/B10 limitations explicit"
+
+
+def q2_conditional_scenarios():
+    from build_q2_ndqp_evidence import OUT, run
+    manifest = document("outputs/cyj/q2_joint_scenarios/manifest.json")
+    original = (OUT / "manifest.json").read_bytes()
+    run()
+    require((OUT / "manifest.json").read_bytes() == original, "scenario manifest not reproducible")
+    require(len(rows("outputs/cyj/q2_joint_scenarios/scenario_grid.csv")) == 324,
+            "scenario grid incomplete")
+    for name, expected in manifest["files_sha256"].items():
+        require(sha(OUT / name) == expected, f"scenario artifact drift: {name}")
+    assumptions = document("outputs/cyj/q2_joint_scenarios/model_assumptions.json")
+    require(assumptions["ready_for_Q3"] is False and "unidentified" in assumptions["scenario_bridge"],
+            "bridge calibration status overstated")
+    return "324 reproducible conditional cells; no fitted bridge claim"
+
+
 def latex_compile():
     program = shutil.which("xelatex")
     if not program:
@@ -284,8 +317,14 @@ def latex_compile():
     return "XeLaTeX built 8-page team draft; no overfull boxes"
 
 
-def run():
+def run(*, coverage_only=False):
     checks = []
+    if coverage_only:
+        for name, operation in (("Q2_requirement_coverage", q2_requirement_coverage),
+                                ("Q2_conditional_scenarios", q2_conditional_scenarios)):
+            assess(name, operation, checks)
+            print(f"{checks[-1]['status']}: {name}: {checks[-1]['detail']}", flush=True)
+        return 1 if any(item["status"] == "FAIL" for item in checks) else 0
     tasks = (("data_hashes", data_hashes), ("model_hashes", model_hashes), ("B1_fit", b1_fit),
              ("B7_joint_fit", joint_fit), ("nested_CV", nested_cv), ("monotonicity", monotonicity),
              ("gradient", gradient_check), ("interval_coverage", interval_coverage),
@@ -293,6 +332,8 @@ def run():
              ("Q3_support_KKT", q3_support), ("Q3_model_form", q3_model_form),
              ("Q3_independent_optimizer", q3_independent_optimizer),
              ("manifest_reproducibility", manifest_reproducibility),
+             ("Q2_requirement_coverage", q2_requirement_coverage),
+             ("Q2_conditional_scenarios", q2_conditional_scenarios),
              ("unit_tests", unit_tests), ("LaTeX_compile", latex_compile))
     for name, operation in tasks:
         assess(name, operation, checks)
@@ -313,7 +354,7 @@ def run():
                               "Q3 N/D allocation changes across plausible B7 quality terms even when modeled loss regret is small",
                               "Derivative-free Q3 agreement on 36 scenarios does not prove global optimality",
                               "bootstrap-plus-residual v4 interval lacks direct held-out coverage calibration",
-                              "A/B loss or quality bridge and team acceptance absent"],
+                              "A/B loss or quality bridge unidentified; CHM v4 conditional owner acceptance completed"],
               "model_hash": sha(ROOT / "outputs/cyj/quality/b7_joint_fit.json"),
               "current_code_sha256": {name: sha(ROOT / "src/cyj" / name) for name in
                                       ("q3_joint_sweeps.py", "q3_form_sensitivity.py",
@@ -331,4 +372,7 @@ def run():
 
 
 if __name__ == "__main__":
-    raise SystemExit(run())
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--coverage-only", action="store_true",
+                        help="run source coverage and NDQP scenario checks without SciPy")
+    raise SystemExit(run(coverage_only=parser.parse_args().coverage_only))

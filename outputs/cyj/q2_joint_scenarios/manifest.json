@@ -1,0 +1,13 @@
+{
+  "schema_version": "cyj.q2.ndqp.evidence.v1",
+  "files_sha256": {
+    "identifiability_report.md": "f511bb7ba5d535d268c8f56fe40aac86a44aa2c00be50c930dfd964a5ab7ca43",
+    "model_assumptions.json": "4921845f9d1be652803206c57aaaab025dc9e84a4b31e04bac2b6ce704fb95d3",
+    "requirement_coverage.json": "c9c41e997b3e90bca720ff917843c1645737bcbd3f1504016c794178bc77c919",
+    "scenario_grid.csv": "d6160353b9696dbee35d99f4c90ece295179441d1e29d327a9bdc11e55747b4e",
+    "support_failures.csv": "c18994ee9640fbc66437db8547dd0ee6b66665001115cfa17c6782e22d388892",
+    "validation_by_source.csv": "eea0f9e00722456edd52c07ff8581c42e1f919822aab4cb5f9045aa0896185fe"
+  },
+  "CHM_commit": "cdda1ad62c5c7eb72b413c4228caeff87d2bad30",
+  "B7_joint_sha256": "c7426036164238d41b92ca08e9ca9087224aeb0c74554478b66093774a5b5b1a"
+}

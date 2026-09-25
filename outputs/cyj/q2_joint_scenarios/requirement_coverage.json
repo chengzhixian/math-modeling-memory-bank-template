@@ -1,0 +1,79 @@
+{
+  "schema_version": "cyj.q2.requirement_coverage.v1",
+  "source": {
+    "B1": {
+      "path": "outputs/cyj/classic/classic_fit.json",
+      "sha256": "9b0e381fbc0ea84bb37d63ccb273733f3a03a0c2a834e8ef52cdb75c45bc6ead"
+    },
+    "B2_B3": {
+      "path": "outputs/cyj/diagnostics/b2_b3_shapes.json",
+      "sha256": "bea31afe812a68bb3d2af9c1ea1f0efcbe557e5dee8ad58f785c86cafe9d189e"
+    },
+    "B4_B5": {
+      "path": "outputs/cyj/diagnostics/b4_b5_comparability.json",
+      "sha256": "28c3efa18b2acdd417e2a2f31d5163ead256ed07eabe7f9bf5fdd077611f79e1"
+    },
+    "B6_B7_B8": {
+      "path": "outputs/cyj/quality/b7_b8_conflict_summary.json",
+      "sha256": "7ac3032b13fb45f4d99a3a121c272ec88d501b3eb2824af5a8f6b49a38008988"
+    },
+    "B9_B10": {
+      "path": "outputs/cyj/diagnostics/b9_b10_extrapolation_audit.json",
+      "sha256": "53977e436fed3afabd5cb6ba908ff6d1f90a4cd42873209c5ba0d888db311068"
+    },
+    "B7_joint": {
+      "path": "outputs/cyj/quality/b7_joint_fit.json",
+      "sha256": "c7426036164238d41b92ca08e9ca9087224aeb0c74554478b66093774a5b5b1a"
+    },
+    "B7_nested": {
+      "path": "outputs/cyj/quality/b7_nested_cv_summary.json",
+      "sha256": "6415f73031c853e2749afe535128b1075fed91e114606ce54c62aab7097a6087"
+    }
+  },
+  "requirements": {
+    "B1_main_ND": {
+      "status": "pass_conditional_within_source",
+      "rows": 1176,
+      "role": "fit_and_group_holdout",
+      "source": "B1"
+    },
+    "B2_or_B3_trajectory": {
+      "status": "partial_shape_only",
+      "B2_rows": 1029,
+      "B3_rows": 4000,
+      "role": "semi_synthetic_cross_family_and_interpolated_shape; no common absolute RMSE",
+      "source": "B2_B3"
+    },
+    "B4_and_B5_external": {
+      "status": "partial_coordinate_unverified",
+      "B4_rows": 57,
+      "B5_rows": 44,
+      "B4_inside_B1_rectangle": 8,
+      "B5_inside_B1_rectangle": 8,
+      "role": "descriptive_stratification; tokenizer/corpus/log_base/aggregation unverified",
+      "source": "B4_B5"
+    },
+    "B6_B7_B8_quality": {
+      "status": "partial_semi_synthetic_conflict",
+      "B6_rows": 360,
+      "B7_rows": 450,
+      "B8_rows": 1704,
+      "B6_nested_in_B7": true,
+      "B8_isolated": true,
+      "source": "B6_B7_B8"
+    },
+    "B9_B10_large": {
+      "status": "partial_estimated_stress_only",
+      "B9_rows": 132,
+      "B10_rows": 128,
+      "B10_outside_B1_N": 128,
+      "role": "metadata_and_estimated_extrapolation_stress",
+      "source": "B9_B10"
+    },
+    "unique_AB_bridge": {
+      "status": "unidentified",
+      "role": "no paired same-Loss N,D,Q,p observations"
+    }
+  },
+  "interpretation": "Data roles and source checks are recorded; partial does not mean a missing validation was passed."
+}
