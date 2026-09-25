@@ -199,6 +199,7 @@
   "sources_sha256": {
     "q1_v1.3_manifest": "c948d70456d5423fc639270de77181a82389dcc4281436590b55b509b4e7f2cc",
     "cy_j_q1_bundle": "b0dda7caac30513c0f37e74ccb143064606847fdc35fd7607c999ac2f8647ecb",
-    "cy_j_interaction_bundle": "87d61b1df53f1370ec31d8da483930579c3bfe71f5436185e125ce3e40512c40"
+    "cy_j_interaction_bundle": "87d61b1df53f1370ec31d8da483930579c3bfe71f5436185e125ce3e40512c40",
+    "qa_mapping_primary_candidate": "d18993de119652987b114525e16eaea14b346ab31637cc5628a80bfe09c2bfd8"
   }
 }

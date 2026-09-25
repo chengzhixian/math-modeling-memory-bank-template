@@ -79,6 +79,29 @@ def run() -> dict:
     # Re-evaluate the two Q_A policies under the v1.3 primary sample score and
     # the CYJ export's explicitly named extended-sample sensitivity score.
     exported_qa = {r["mixture_domain"]: r for r in json.loads((BASE / "q1_q2_bundle_v1/qa_mapping.json").read_text(encoding="utf-8"))["rows"]}
+    primary_qa = []
+    for d in domains:
+        original = exported_qa[d]
+        row = dict(original)
+        if d in known:
+            row["Q_A"] = float(q1.quality(mapped[d]["quality_domain"])["Q_A_median"])
+            row["Q_A_dataset_scope"] = "sample"
+            row["Q_A_extended_sensitivity"] = (original["Q_A"]
+                                                 if original["Q_A_dataset_scope"] != "sample" else None)
+        else:
+            row["Q_A"] = None
+            row["Q_A_dataset_scope"] = None
+            row["Q_A_extended_sensitivity"] = None
+        primary_qa.append(row)
+    qa_candidate = {"schema_version": "chm.q1.q2_quality_policy.candidate.v2",
+                    "status": "USER_REVIEW_REQUIRED_NOT_FORMAL_INTERFACE",
+                    "source_q1_version": "chm.q1.v1.3",
+                    "source_q1_commit": "cdda1ad62c5c7eb72b413c4228caeff87d2bad30",
+                    "quality_primary_scope": "A1_sample",
+                    "quality_extended_scope": "arxiv_A2_and_github_A3_sensitivity_only",
+                    "B_Q_mapping": "unidentified",
+                    "rows": primary_qa}
+    (OUT / "qa_mapping_primary_candidate.json").write_text(json.dumps(qa_candidate, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     qa_policy_sensitivity = []
     for score_scope in ("v1.3_primary_sample", "cyj_export_extended_where_available"):
         qvals = np.array([float(q1.quality(mapped[d]["quality_domain"])["Q_A_median"])
@@ -126,7 +149,8 @@ def run() -> dict:
               "qa_policy_sensitivity": qa_policy_sensitivity,
               "sources_sha256": {"q1_v1.3_manifest": sha(ROOT / "interfaces/chm/q1_interface_v1_3.json"),
                                  "cy_j_q1_bundle": sha(BASE / "q1_q2_bundle_v1/export_manifest.json"),
-                                 "cy_j_interaction_bundle": sha(BASE / "q1_interaction_bundle_v1/interaction_manifest.json")}}
+                                 "cy_j_interaction_bundle": sha(BASE / "q1_interaction_bundle_v1/interaction_manifest.json"),
+                                 "qa_mapping_primary_candidate": sha(OUT / "qa_mapping_primary_candidate.json")}}
     (OUT / "review_manifest.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return result
 

@@ -5,7 +5,7 @@
 ## 变更与证据
 
 - 从 cyj `team/cyj-scaling@86526a1` 取回两个明确位于 `src/chm`、`outputs/chm/q1_exports` 的 Q1 派生导出，并在 chm 原始 A4/A5 实体环境复跑。`q1_q2_bundle_v1` manifest 与 cyj 完全同 SHA `b0dda7ca...`。`q1_interaction_bundle_v1` 四个实质文件 SHA 与 cyj 完全相同；manifest 仅因 NumPy 2.3.5/2.5.3 环境字段不同而变。所有者审计见 `src/chm/audit_cyj_q1_exports.py`，512 行归一化最大差 `2.22e-16`，13 目标 CV 最大差 `3.33e-16`。
-- 两包的原始 A4/A5 哈希与 chm 冻结审计一致，五表身份与 `chm.q1.v1.3@cdda1ad` 一致，交互定义与 `2450971` 一致。但导出包 `qa_mapping.json` 对 arxiv/github 使用扩展集 `Q_A`，而主接口 `Q1Interface.quality()` 使用 A1 sample。已在 `src/chm/q1_third_part_review.py` 明确分为主口径与扩展敏感性，并计算受影响的两种质量约束政策；结果在 `outputs/chm/q1_third_part_review/review_manifest.json`。故**数值身份通过，质量政策语义尚须更正版本后才能无条件签收整个 v1 包**。
+- 两包的原始 A4/A5 哈希与 chm 冻结审计一致，五表身份与 `chm.q1.v1.3@cdda1ad` 一致，交互定义与 `2450971` 一致。但导出包 `qa_mapping.json` 对 arxiv/github 使用扩展集 `Q_A`，而主接口 `Q1Interface.quality()` 使用 A1 sample。已在 `src/chm/q1_third_part_review.py` 明确分为主口径与扩展敏感性，并计算受影响的两种质量约束政策；结果在 `outputs/chm/q1_third_part_review/review_manifest.json`。机器可读修订候选为 `qa_mapping_primary_candidate.json`，17 域主值/sample、extended 敏感性与未知域 null 均明确。故**数值身份通过，质量政策语义尚须更正版本后才能无条件签收整个 v1 包**。
 - Q1 17 域质量覆盖实现与测试 `src/chm/q1_quality_coverage.py`、`test_q1_quality_coverage.py` 已本机运行；3 direct、3 near-direct、11 inferred，未知域不填零或假分数。原先未跟踪的相关文件在本次检查点纳入 chm 范围。
 - 第三小问论文 `paper/latex/sections/chm/q1.tex` 已补 512 已观测配方上的多目标情景、质量覆盖、A10 凸包外 47/64、交互候选局限和正式 Ridge 版本边界。24 页验收 PDF 编译，引用/字形/溢出门禁通过；`paper/sections/chm/q1_third_part_acceptance_candidate.md` 为用户审阅短稿。
 

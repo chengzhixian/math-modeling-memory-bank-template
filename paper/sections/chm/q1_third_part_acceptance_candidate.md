@@ -8,7 +8,7 @@
 - `q1_interaction_bundle_v1`：A4/A5 原始哈希一致；五个域仅按 A4 归一化配方方差选取，10 个配对、13 个目标、五折不打乱与 chm `2450971` 已发布候选定义一致。重新运行导出器后四个实质输出文件的 SHA256 均与 cyj 发布一致；13 个 CV RMSE 与原审计最大差 `3.33e-16`。本机 NumPy 2.3.5、cyj 发布时 2.5.3，故包含环境版本字段的 interaction manifest 字节哈希不同；系数、折稳定性、特征定义与 CV 四文件完全一致。源包仍为 **候选敏感性**，不是 v1.3 替代。
 - 发现质量口径差异：cyj `qa_mapping.json` 对 arxiv/github 使用 A2/A3 extended 的 `Q_A`（`2.725253/-0.505485`），而 v1.3 主接口 `Q1Interface.quality()` 取 A1 sample（`2.688694/-0.485351`）。两组均有来源标记，但质量约束政策不能称为与 v1.3 主口径完全一致。以同一 512 配方和 Ridge 相对目标重算，direct 条件下主/扩展目标值分别 `-0.121153388/-0.121151893`，direct+near 为 `-0.116862736/-0.116822981`，最优凸组合权重也变化。应将 sample 设为主口径，extended 单列敏感性，并让 cyj 重算受影响的质量约束情景；原 v1 包保留不可变复现。
 
-核验程序：`src/chm/audit_cyj_q1_exports.py`；复现输入及完整结果：`outputs/chm/q1_third_part_review/review_manifest.json`。两个 cyj 包的科学来源未使用历史隐藏 PDF 或作废模型。
+核验程序：`src/chm/audit_cyj_q1_exports.py`；复现输入及完整结果：`outputs/chm/q1_third_part_review/review_manifest.json`。可供验收后发布新导出版本的 17 域主口径候选文件为 `outputs/chm/q1_third_part_review/qa_mapping_primary_candidate.json`，它逐域保留 A1 sample 主值、A2/A3 extended 敏感性值和未知域 null，并在 review manifest 中固定 SHA；当前标记 `USER_REVIEW_REQUIRED_NOT_FORMAL_INTERFACE`。两个 cyj 包的科学来源未使用历史隐藏 PDF 或作废模型。
 
 ## 2. 第三小问主模型建议
 
