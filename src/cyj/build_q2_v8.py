@@ -15,6 +15,8 @@ from audit_b4_b5_comparability import read as read_b4_b5
 from chm_q1_v2_consumer import ROOT, sha256
 from fit_b7_quality_extension_from_b1 import B1_FILE, B7_FILE, b1_value
 from ndqp_scenarios_v8 import BOUNDS, ConditionalV8, VERSION
+from ndqp_scenarios_v7 import ConditionalV7
+from smoke_q3_v8 import main as smoke_q3
 from validate_b3_against_b1 import main as validate_trajectories
 
 OUT = ROOT / "outputs/cyj/q2_v8"
@@ -182,7 +184,7 @@ def marginals_tradeoff(model, main, weights):
                          "scope": "fixed_p_hypothetical_proxy_quality_intervention_not_independent_QA_observation"})
     write_csv("marginals_elasticities.csv", rows)
     write_csv("quality_scale_local_tradeoff.csv", tradeoff)
-    return rows
+    return rows, tradeoff
 
 
 def scale_order_validation(model):
@@ -260,6 +262,7 @@ def main():
     validate_trajectories()
     main_policy = observed_policy(model, weights)
     write_json("main_policy.json", main_policy)
+    smoke_q3()
     reference = model.predict_baseline_v8(N, D, model.q1.reference, weights,
                                            p_policy="algebraic_reference_only")
     main_prediction = model.predict_baseline_v8(N, D, main_policy["p"], weights,
@@ -293,12 +296,21 @@ def main():
                              "unmapped_mass": result["unmapped_mass"],
                              "Loss": result["Loss"], "empirically_calibrated": False})
     write_csv("quality_bridge_sensitivity.csv", quality_rows)
-    marginal_rows = marginals_tradeoff(model, main_policy, weights)
+    marginal_rows, tradeoff_rows = marginals_tradeoff(model, main_policy, weights)
     pair_count = domain_pairs(model, weights)
     b45 = scale_order_validation(model)
     b910 = b9_b10_stress()
     old_main = json.loads((ROOT/"outputs/cyj/q2_v7/main_policy.json").read_text(encoding="utf-8"))
+    old_model = ConditionalV7()
+    old_prediction = old_model.predict_baseline(N, D, .5, old_main["observed_512"]["p"],
+                                                weights, p_policy="observed_512")
+    with (ROOT/"outputs/cyj/q2_v7/quality_vs_scale.csv").open(encoding="utf-8", newline="") as stream:
+        old_roots = list(csv.DictReader(stream))
+    old_root = next(row for row in old_roots if float(row["N_B"]) == N and float(row["D_B"]) == D
+                    and float(row["Q_B"]) == .5 and float(row["Delta_Q"]) == .05
+                    and float(row["eta"]) == 0 and row["bridge_model"] == "exp_bridge")
     old_smoke = json.loads((ROOT/"outputs/cyj/q3_v7_sample_smoke.json").read_text(encoding="utf-8"))
+    new_smoke = json.loads((OUT/"q3_fixed_p_smoke.json").read_text(encoding="utf-8"))
     old_solution = old_smoke["solution"]
     old_recipe_pos = model.q1.recipe_ids.index(old_smoke["recipe_index"])
     old_at_v8 = model.predict_baseline_v8(old_solution["N_params_B"], old_solution["D_tokens_B"],
@@ -314,19 +326,40 @@ def main():
                "new_main_Loss": main_prediction["Loss"],
                "old_main_p": old_main["observed_512"]["p"], "new_main_p": main_policy["p"],
                "new_main_elasticities": main_prediction["elasticities_signed"],
-               "old_elasticities_at_old_main": {"N": None, "D": None, "Q_B": None,
-                                                 "reason": "v7 main policy file does not freeze these elasticities at matching p"},
-               "quality_scale_local_tradeoff_new": marginal_rows[1],
-               "old_quality_scale_root_evidence": "outputs/cyj/q2_v7/quality_vs_scale.csv",
+               "old_elasticities_at_old_main": old_prediction["elasticities_signed"],
+               "old_quality_scale_equivalent_N_delta_0_05": float(old_root["N_prime_B"]),
+               "new_quality_scale_equivalent_N_delta_0_05": tradeoff_rows[1]["equivalent_oldQ_N_delta_0_05"],
+               "quality_scale_coordinates_differ": "old_native_QB_0.5_vs_new_Q1_QA_proxy",
                "old_Q3_sample_Loss": old_solution["loss"],
                "v8_at_old_Q3_ND_p_Loss": old_at_v8["Loss"],
-               "new_Q3_sample_optimum": None,
-               "new_Q3_sample_optimum_reason": "new Q3 optimization is CHM-owned and final large-scale solve is excluded by this task",
+               "new_Q3_fixed_p_sample_Loss": new_smoke["solution"]["Loss"],
+               "new_Q3_fixed_p_sample_ND": {"N_params_B": new_smoke["solution"]["N_params_B"],
+                                           "D_tokens_B": new_smoke["solution"]["D_tokens_B"]},
+               "new_Q3_joint_optimum": None,
+               "new_Q3_joint_optimum_reason": "final joint Q3 optimization is CHM-owned and excluded by this task",
                "comparison_status": "different_backbone_and_quality_coordinate_not_common_empirical_Loss_measure"})
     write_json("q3_v8_consumer_sample.json", {"input": {"N_params_B": N, "D_tokens_B": D,
                "p": main_policy["p"], "weights": weights,
                "p_policy": "quality_direct_and_near", "quality_mapping_policy": "direct_and_near"},
                "output": main_prediction, "CHM_owner_consumption_verified": False})
+    write_csv("requirement_evidence.csv", [
+        {"requirement": name, "evidence": evidence, "scope": scope} for name, evidence, scope in (
+            ("B1_classic_backbone", "b7_quality_extension.json;model_coefficients.json", "B1_pinned"),
+            ("B7_quality_extension", "b7_quality_extension.json;b7_backbone_comparison.csv", "semi_synthetic"),
+            ("Q1_quality_in_Loss", "model_definition.json;quality_bridge_sensitivity.csv", "uncalibrated_proxy"),
+            ("Q1_p_in_Loss", "model_definition.json;main_policy.json", "conditional_relative_bridge"),
+            ("B3_model_validation", "b2_b3_model_validation.csv;b2_b3_validation_summary.json", "interpolated_not_independent"),
+            ("B4_B5_direction", "scale_order_validation.csv;scale_order_validation_summary.json", "descriptive_no_common_Loss_coordinate"),
+            ("B9_B10_roles", "b9_b10_support_stress.json", "estimated_stress_only"),
+            ("N_D_quality_p_marginals", "marginals_elasticities.csv;domain_pair_substitution.csv", "model_internal"),
+            ("N_D_quality_elasticities", "marginals_elasticities.csv", "model_internal"),
+            ("domain_pair_substitution", "domain_pair_substitution.csv", "136_hull_directions"),
+            ("domain_pair_interaction", "domain_pair_interaction.csv", "not_causal"),
+            ("quality_scale_finite_and_local", "quality_scale_local_tradeoff.csv", "fixed_p_hypothetical_proxy_quality"),
+            ("migration_v7_to_v8", "migration_audit.json", "different_quality_coordinates"),
+            ("Q3_v8_interface", "q3_v8_consumer_sample.json;q3_fixed_p_smoke.json", "owner_acceptance_pending"),
+            ("cross_source_empirical_calibration", "model_definition.json", "unavailable"),
+        )])
     write_json("final_closure.json", {"status": "conditional_v8_engineering_candidate_pending_independent_acceptance",
                "paper_layout_started": False, "CHM_Q3_owner_acceptance": False,
                "A_B_empirical_calibration": False})
@@ -344,7 +377,7 @@ def main():
                 "command": "python -B src/cyj/fit_b7_quality_extension_from_b1.py; python -B src/cyj/build_q2_v8.py",
                 "code_sha256": {name: sha256(ROOT/"src/cyj"/name) for name in
                                 ("fit_b7_quality_extension_from_b1.py", "validate_b3_against_b1.py",
-                                 "ndqp_scenarios_v8.py", "build_q2_v8.py")},
+                                 "ndqp_scenarios_v8.py", "build_q2_v8.py", "smoke_q3_v8.py")},
                 "files": {name: sha256(OUT/name) for name in names}}
     write_json("manifest.json", manifest)
     return {"main_Loss": main_prediction["Loss"], "pair_count": pair_count,

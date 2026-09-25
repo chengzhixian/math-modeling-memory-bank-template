@@ -56,33 +56,21 @@
     "Q_A_mapped": -0.06566622449143551
   },
   "old_elasticities_at_old_main": {
-    "N": null,
-    "D": null,
-    "Q_B": null,
-    "reason": "v7 main policy file does not freeze these elasticities at matching p"
+    "N": -0.05883861128999135,
+    "D": -0.039187575650763466,
+    "Q_B": -0.07208610457803265
   },
-  "quality_scale_local_tradeoff_new": {
-    "policy": "observed_512_plus_quality_direct_and_near",
-    "N_params_B": 1.0,
-    "D_tokens_B": 100.0,
-    "Q_A_mapped": 1.6754490814383751,
-    "Q_B_proxy": 0.6713607648391644,
-    "Loss": 2.3443478102094826,
-    "N_marginal": -0.13127971067491853,
-    "D_marginal": -0.0009402271872188602,
-    "quality_proxy_marginal": -0.3474857076466794,
-    "Q_A_mapped_marginal": -0.09188251155866796,
-    "N_elasticity": -0.05599839328584432,
-    "D_elasticity": -0.04010613029023389,
-    "quality_proxy_elasticity": -0.09951094689977216,
-    "Q_A_mapped_elasticity": -0.06566622449143551,
-    "p_marginal_min": -0.9490441007899578,
-    "p_marginal_max": 0.7537689779978619
-  },
-  "old_quality_scale_root_evidence": "outputs/cyj/q2_v7/quality_vs_scale.csv",
+  "old_quality_scale_equivalent_N_delta_0_05": 1.1326958413285113,
+  "new_quality_scale_equivalent_N_delta_0_05": 1.1444896523903783,
+  "quality_scale_coordinates_differ": "old_native_QB_0.5_vs_new_Q1_QA_proxy",
   "old_Q3_sample_Loss": 1.9275090016084957,
   "v8_at_old_Q3_ND_p_Loss": 2.0685402583123436,
-  "new_Q3_sample_optimum": null,
-  "new_Q3_sample_optimum_reason": "new Q3 optimization is CHM-owned and final large-scale solve is excluded by this task",
+  "new_Q3_fixed_p_sample_Loss": 2.094421151267249,
+  "new_Q3_fixed_p_sample_ND": {
+    "N_params_B": 6.66065527863228,
+    "D_tokens_B": 193.87353557427727
+  },
+  "new_Q3_joint_optimum": null,
+  "new_Q3_joint_optimum_reason": "final joint Q3 optimization is CHM-owned and excluded by this task",
   "comparison_status": "different_backbone_and_quality_coordinate_not_common_empirical_Loss_measure"
 }
