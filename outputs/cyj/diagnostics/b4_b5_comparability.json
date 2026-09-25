@@ -1,0 +1,1186 @@
+{
+  "schema_version": "cyj.b4_b5_comparability.v1",
+  "status": "descriptive_only",
+  "input_sha256": {
+    "B1": "529a59644b0f57bf3a76037838b614bfedc35e58bb26b93052e34ffc63e454c2",
+    "B4": "2272983ded93de35e05f9acbf95ebceedf43f283345e4be72b54fee94080391e",
+    "B5": "dd858c5e48610e28589340d5db023d6abfb31df597506789ccdfc6a546731bbd"
+  },
+  "code_sha256_utf8_lf": "5a3b352afec0acaecf46c16ad4b1ac0fd3d6a88298241b80f46d066cee786d28",
+  "B1_support": {
+    "N_params_B": [
+      0.070542,
+      11.965825
+    ],
+    "D_tokens_B": [
+      0.134,
+      299.893
+    ]
+  },
+  "datasets": {
+    "B4": {
+      "rows": 57,
+      "support_counts": {
+        "D_outside_only": 32,
+        "both_outside": 16,
+        "inside_rectangle": 8,
+        "N_outside_only": 1
+      },
+      "families": {
+        "Phi": 6,
+        "LLaMA": 6,
+        "Qwen2": 7,
+        "Pythia": 8,
+        "Gemma": 3,
+        "GPT2": 4,
+        "OPT": 7,
+        "BLOOM": 4,
+        "Falcon": 2,
+        "Mistral": 1,
+        "Yi": 2,
+        "Cerebras-GPT": 7
+      },
+      "source_strata": null,
+      "row_audit": [
+        {
+          "source_line": 2,
+          "family": "Phi",
+          "source": null,
+          "N_params_B": 1.3,
+          "D_tokens_B": 405.0,
+          "val_loss": 2.5317,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 3,
+          "family": "LLaMA",
+          "source": null,
+          "N_params_B": 65.0,
+          "D_tokens_B": 11349.0,
+          "val_loss": 1.8828,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 4,
+          "family": "LLaMA",
+          "source": null,
+          "N_params_B": 13.0,
+          "D_tokens_B": 2229.0,
+          "val_loss": 2.0796,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 5,
+          "family": "LLaMA",
+          "source": null,
+          "N_params_B": 33.0,
+          "D_tokens_B": 4583.0,
+          "val_loss": 1.9757,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 6,
+          "family": "Qwen2",
+          "source": null,
+          "N_params_B": 20.0,
+          "D_tokens_B": 3000.0,
+          "val_loss": 2.0858,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 7,
+          "family": "Qwen2",
+          "source": null,
+          "N_params_B": 72.0,
+          "D_tokens_B": 33739.0,
+          "val_loss": 1.8505,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 8,
+          "family": "Pythia",
+          "source": null,
+          "N_params_B": 1.4,
+          "D_tokens_B": 129.0,
+          "val_loss": 2.6238,
+          "support_class": "inside_rectangle",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 9,
+          "family": "Pythia",
+          "source": null,
+          "N_params_B": 12.0,
+          "D_tokens_B": 300.0,
+          "val_loss": 2.1077,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 10,
+          "family": "Pythia",
+          "source": null,
+          "N_params_B": 2.8,
+          "D_tokens_B": 300.0,
+          "val_loss": 2.4276,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 11,
+          "family": "Pythia",
+          "source": null,
+          "N_params_B": 0.16,
+          "D_tokens_B": 13.0,
+          "val_loss": 3.725,
+          "support_class": "inside_rectangle",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 12,
+          "family": "Phi",
+          "source": null,
+          "N_params_B": 2.7,
+          "D_tokens_B": 1084.0,
+          "val_loss": 2.32,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 13,
+          "family": "LLaMA",
+          "source": null,
+          "N_params_B": 7.0,
+          "D_tokens_B": 1229.0,
+          "val_loss": 2.187,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 14,
+          "family": "LLaMA",
+          "source": null,
+          "N_params_B": 3.5,
+          "D_tokens_B": 2200.0,
+          "val_loss": 2.3258,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 15,
+          "family": "Pythia",
+          "source": null,
+          "N_params_B": 0.41,
+          "D_tokens_B": 41.0,
+          "val_loss": 3.1611,
+          "support_class": "inside_rectangle",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 16,
+          "family": "Pythia",
+          "source": null,
+          "N_params_B": 6.9,
+          "D_tokens_B": 300.0,
+          "val_loss": 2.3285,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 17,
+          "family": "Qwen2",
+          "source": null,
+          "N_params_B": 0.5,
+          "D_tokens_B": 361.0,
+          "val_loss": 2.8399,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 18,
+          "family": "Phi",
+          "source": null,
+          "N_params_B": 14.0,
+          "D_tokens_B": 4790.0,
+          "val_loss": 2.0512,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 19,
+          "family": "Phi",
+          "source": null,
+          "N_params_B": 4.2,
+          "D_tokens_B": 350.0,
+          "val_loss": 2.3867,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 20,
+          "family": "Phi",
+          "source": null,
+          "N_params_B": 7.0,
+          "D_tokens_B": 4448.0,
+          "val_loss": 2.1464,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 21,
+          "family": "Qwen2",
+          "source": null,
+          "N_params_B": 7.0,
+          "D_tokens_B": 2221.0,
+          "val_loss": 2.2237,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 22,
+          "family": "Gemma",
+          "source": null,
+          "N_params_B": 2.0,
+          "D_tokens_B": 1049.0,
+          "val_loss": 2.394,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 23,
+          "family": "Gemma",
+          "source": null,
+          "N_params_B": 7.0,
+          "D_tokens_B": 4109.0,
+          "val_loss": 2.0973,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 24,
+          "family": "Pythia",
+          "source": null,
+          "N_params_B": 0.07,
+          "D_tokens_B": 6.0,
+          "val_loss": 4.3629,
+          "support_class": "N_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 25,
+          "family": "Qwen2",
+          "source": null,
+          "N_params_B": 1.5,
+          "D_tokens_B": 680.0,
+          "val_loss": 2.5398,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 26,
+          "family": "Pythia",
+          "source": null,
+          "N_params_B": 1.0,
+          "D_tokens_B": 111.0,
+          "val_loss": 2.7965,
+          "support_class": "inside_rectangle",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 27,
+          "family": "Phi",
+          "source": null,
+          "N_params_B": 18.0,
+          "D_tokens_B": 2800.0,
+          "val_loss": 2.0743,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 28,
+          "family": "GPT2",
+          "source": null,
+          "N_params_B": 0.12,
+          "D_tokens_B": 40.0,
+          "val_loss": 3.0,
+          "support_class": "inside_rectangle",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 29,
+          "family": "GPT2",
+          "source": null,
+          "N_params_B": 0.35,
+          "D_tokens_B": 40.0,
+          "val_loss": 2.85,
+          "support_class": "inside_rectangle",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 30,
+          "family": "GPT2",
+          "source": null,
+          "N_params_B": 0.77,
+          "D_tokens_B": 40.0,
+          "val_loss": 2.75,
+          "support_class": "inside_rectangle",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 31,
+          "family": "GPT2",
+          "source": null,
+          "N_params_B": 1.5,
+          "D_tokens_B": 40.0,
+          "val_loss": 2.7,
+          "support_class": "inside_rectangle",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 32,
+          "family": "OPT",
+          "source": null,
+          "N_params_B": 0.13,
+          "D_tokens_B": 300.0,
+          "val_loss": 3.11,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 33,
+          "family": "OPT",
+          "source": null,
+          "N_params_B": 0.35,
+          "D_tokens_B": 300.0,
+          "val_loss": 2.88,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 34,
+          "family": "OPT",
+          "source": null,
+          "N_params_B": 1.3,
+          "D_tokens_B": 300.0,
+          "val_loss": 2.65,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 35,
+          "family": "OPT",
+          "source": null,
+          "N_params_B": 2.7,
+          "D_tokens_B": 300.0,
+          "val_loss": 2.5,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 36,
+          "family": "OPT",
+          "source": null,
+          "N_params_B": 6.7,
+          "D_tokens_B": 300.0,
+          "val_loss": 2.33,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 37,
+          "family": "OPT",
+          "source": null,
+          "N_params_B": 13.0,
+          "D_tokens_B": 300.0,
+          "val_loss": 2.22,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 38,
+          "family": "OPT",
+          "source": null,
+          "N_params_B": 30.0,
+          "D_tokens_B": 300.0,
+          "val_loss": 2.1,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 39,
+          "family": "BLOOM",
+          "source": null,
+          "N_params_B": 0.56,
+          "D_tokens_B": 350.0,
+          "val_loss": 2.75,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 40,
+          "family": "BLOOM",
+          "source": null,
+          "N_params_B": 1.7,
+          "D_tokens_B": 350.0,
+          "val_loss": 2.55,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 41,
+          "family": "BLOOM",
+          "source": null,
+          "N_params_B": 3.0,
+          "D_tokens_B": 350.0,
+          "val_loss": 2.45,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 42,
+          "family": "BLOOM",
+          "source": null,
+          "N_params_B": 7.1,
+          "D_tokens_B": 350.0,
+          "val_loss": 2.3,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 43,
+          "family": "Falcon",
+          "source": null,
+          "N_params_B": 7.0,
+          "D_tokens_B": 1500.0,
+          "val_loss": 2.25,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 44,
+          "family": "Falcon",
+          "source": null,
+          "N_params_B": 40.0,
+          "D_tokens_B": 1500.0,
+          "val_loss": 2.05,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 45,
+          "family": "Mistral",
+          "source": null,
+          "N_params_B": 7.0,
+          "D_tokens_B": 8000.0,
+          "val_loss": 2.1,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 46,
+          "family": "Yi",
+          "source": null,
+          "N_params_B": 6.0,
+          "D_tokens_B": 3000.0,
+          "val_loss": 2.1,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 47,
+          "family": "Yi",
+          "source": null,
+          "N_params_B": 34.0,
+          "D_tokens_B": 3000.0,
+          "val_loss": 1.9,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 48,
+          "family": "LLaMA",
+          "source": null,
+          "N_params_B": 70.0,
+          "D_tokens_B": 15000.0,
+          "val_loss": 1.71,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 49,
+          "family": "Qwen2",
+          "source": null,
+          "N_params_B": 32.0,
+          "D_tokens_B": 18000.0,
+          "val_loss": 1.95,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 50,
+          "family": "Qwen2",
+          "source": null,
+          "N_params_B": 72.0,
+          "D_tokens_B": 18000.0,
+          "val_loss": 1.85,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 51,
+          "family": "Gemma",
+          "source": null,
+          "N_params_B": 9.0,
+          "D_tokens_B": 8000.0,
+          "val_loss": 2.1,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 52,
+          "family": "Cerebras-GPT",
+          "source": null,
+          "N_params_B": 0.11,
+          "D_tokens_B": 2050.0,
+          "val_loss": 2.95,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 53,
+          "family": "Cerebras-GPT",
+          "source": null,
+          "N_params_B": 0.26,
+          "D_tokens_B": 2050.0,
+          "val_loss": 2.7,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 54,
+          "family": "Cerebras-GPT",
+          "source": null,
+          "N_params_B": 0.59,
+          "D_tokens_B": 2050.0,
+          "val_loss": 2.5,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 55,
+          "family": "Cerebras-GPT",
+          "source": null,
+          "N_params_B": 1.3,
+          "D_tokens_B": 2050.0,
+          "val_loss": 2.35,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 56,
+          "family": "Cerebras-GPT",
+          "source": null,
+          "N_params_B": 2.7,
+          "D_tokens_B": 2050.0,
+          "val_loss": 2.22,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 57,
+          "family": "Cerebras-GPT",
+          "source": null,
+          "N_params_B": 6.7,
+          "D_tokens_B": 2050.0,
+          "val_loss": 2.08,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 58,
+          "family": "Cerebras-GPT",
+          "source": null,
+          "N_params_B": 13.0,
+          "D_tokens_B": 2050.0,
+          "val_loss": 2.0,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        }
+      ],
+      "same_loss_coordinate": "not_established",
+      "descriptive_only": true
+    },
+    "B5": {
+      "rows": 44,
+      "support_counts": {
+        "inside_rectangle": 8,
+        "D_outside_only": 17,
+        "both_outside": 15,
+        "N_outside_only": 4
+      },
+      "families": {
+        "GPT-2": 1,
+        "GPT-3": 8,
+        "Chinchilla": 9,
+        "Gopher": 7,
+        "LLaMA": 4,
+        "LLaMA-2": 3,
+        "PaLM": 3,
+        "OPT": 5,
+        "BLOOM": 4
+      },
+      "source_strata": {
+        "Kaplan et al. 2020": 9,
+        "Hoffmann et al. 2022": 16,
+        "Touvron et al. 2023": 7,
+        "Chowdhery et al. 2022": 3,
+        "Zhang et al. 2022": 5,
+        "Scao et al. 2022": 4
+      },
+      "row_audit": [
+        {
+          "source_line": 2,
+          "family": "GPT-2",
+          "source": "Kaplan et al. 2020",
+          "N_params_B": 1.5,
+          "D_tokens_B": 10.0,
+          "val_loss": 2.906,
+          "support_class": "inside_rectangle",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 3,
+          "family": "GPT-3",
+          "source": "Kaplan et al. 2020",
+          "N_params_B": 0.125,
+          "D_tokens_B": 300.0,
+          "val_loss": 2.761,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 4,
+          "family": "GPT-3",
+          "source": "Kaplan et al. 2020",
+          "N_params_B": 0.35,
+          "D_tokens_B": 300.0,
+          "val_loss": 2.632,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 5,
+          "family": "GPT-3",
+          "source": "Kaplan et al. 2020",
+          "N_params_B": 0.77,
+          "D_tokens_B": 300.0,
+          "val_loss": 2.506,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 6,
+          "family": "GPT-3",
+          "source": "Kaplan et al. 2020",
+          "N_params_B": 1.3,
+          "D_tokens_B": 300.0,
+          "val_loss": 2.415,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 7,
+          "family": "GPT-3",
+          "source": "Kaplan et al. 2020",
+          "N_params_B": 2.6,
+          "D_tokens_B": 300.0,
+          "val_loss": 2.318,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 8,
+          "family": "GPT-3",
+          "source": "Kaplan et al. 2020",
+          "N_params_B": 6.7,
+          "D_tokens_B": 300.0,
+          "val_loss": 2.199,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 9,
+          "family": "GPT-3",
+          "source": "Kaplan et al. 2020",
+          "N_params_B": 13.0,
+          "D_tokens_B": 300.0,
+          "val_loss": 2.12,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 10,
+          "family": "GPT-3",
+          "source": "Kaplan et al. 2020",
+          "N_params_B": 175.0,
+          "D_tokens_B": 300.0,
+          "val_loss": 2.011,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 11,
+          "family": "Chinchilla",
+          "source": "Hoffmann et al. 2022",
+          "N_params_B": 0.5,
+          "D_tokens_B": 5.0,
+          "val_loss": 3.015,
+          "support_class": "inside_rectangle",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 12,
+          "family": "Chinchilla",
+          "source": "Hoffmann et al. 2022",
+          "N_params_B": 1.0,
+          "D_tokens_B": 20.0,
+          "val_loss": 2.628,
+          "support_class": "inside_rectangle",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 13,
+          "family": "Chinchilla",
+          "source": "Hoffmann et al. 2022",
+          "N_params_B": 1.4,
+          "D_tokens_B": 20.0,
+          "val_loss": 2.517,
+          "support_class": "inside_rectangle",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 14,
+          "family": "Chinchilla",
+          "source": "Hoffmann et al. 2022",
+          "N_params_B": 4.0,
+          "D_tokens_B": 80.0,
+          "val_loss": 2.227,
+          "support_class": "inside_rectangle",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 15,
+          "family": "Chinchilla",
+          "source": "Hoffmann et al. 2022",
+          "N_params_B": 7.0,
+          "D_tokens_B": 140.0,
+          "val_loss": 2.106,
+          "support_class": "inside_rectangle",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 16,
+          "family": "Chinchilla",
+          "source": "Hoffmann et al. 2022",
+          "N_params_B": 13.0,
+          "D_tokens_B": 260.0,
+          "val_loss": 1.989,
+          "support_class": "N_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 17,
+          "family": "Chinchilla",
+          "source": "Hoffmann et al. 2022",
+          "N_params_B": 20.0,
+          "D_tokens_B": 400.0,
+          "val_loss": 1.917,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 18,
+          "family": "Chinchilla",
+          "source": "Hoffmann et al. 2022",
+          "N_params_B": 40.0,
+          "D_tokens_B": 800.0,
+          "val_loss": 1.818,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 19,
+          "family": "Chinchilla",
+          "source": "Hoffmann et al. 2022",
+          "N_params_B": 70.0,
+          "D_tokens_B": 1400.0,
+          "val_loss": 1.71,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 20,
+          "family": "Gopher",
+          "source": "Hoffmann et al. 2022",
+          "N_params_B": 0.2,
+          "D_tokens_B": 300.0,
+          "val_loss": 2.819,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 21,
+          "family": "Gopher",
+          "source": "Hoffmann et al. 2022",
+          "N_params_B": 0.5,
+          "D_tokens_B": 300.0,
+          "val_loss": 2.679,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 22,
+          "family": "Gopher",
+          "source": "Hoffmann et al. 2022",
+          "N_params_B": 1.4,
+          "D_tokens_B": 300.0,
+          "val_loss": 2.484,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 23,
+          "family": "Gopher",
+          "source": "Hoffmann et al. 2022",
+          "N_params_B": 2.8,
+          "D_tokens_B": 300.0,
+          "val_loss": 2.381,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 24,
+          "family": "Gopher",
+          "source": "Hoffmann et al. 2022",
+          "N_params_B": 7.6,
+          "D_tokens_B": 300.0,
+          "val_loss": 2.312,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 25,
+          "family": "Gopher",
+          "source": "Hoffmann et al. 2022",
+          "N_params_B": 40.0,
+          "D_tokens_B": 300.0,
+          "val_loss": 2.169,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 26,
+          "family": "Gopher",
+          "source": "Hoffmann et al. 2022",
+          "N_params_B": 280.0,
+          "D_tokens_B": 300.0,
+          "val_loss": 2.057,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 27,
+          "family": "LLaMA",
+          "source": "Touvron et al. 2023",
+          "N_params_B": 7.0,
+          "D_tokens_B": 1000.0,
+          "val_loss": 1.943,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 28,
+          "family": "LLaMA",
+          "source": "Touvron et al. 2023",
+          "N_params_B": 13.0,
+          "D_tokens_B": 1000.0,
+          "val_loss": 1.835,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 29,
+          "family": "LLaMA",
+          "source": "Touvron et al. 2023",
+          "N_params_B": 33.0,
+          "D_tokens_B": 1000.0,
+          "val_loss": 1.778,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 30,
+          "family": "LLaMA",
+          "source": "Touvron et al. 2023",
+          "N_params_B": 65.0,
+          "D_tokens_B": 1400.0,
+          "val_loss": 1.685,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 31,
+          "family": "LLaMA-2",
+          "source": "Touvron et al. 2023",
+          "N_params_B": 7.0,
+          "D_tokens_B": 2000.0,
+          "val_loss": 1.849,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 32,
+          "family": "LLaMA-2",
+          "source": "Touvron et al. 2023",
+          "N_params_B": 13.0,
+          "D_tokens_B": 2000.0,
+          "val_loss": 1.75,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 33,
+          "family": "LLaMA-2",
+          "source": "Touvron et al. 2023",
+          "N_params_B": 70.0,
+          "D_tokens_B": 2000.0,
+          "val_loss": 1.617,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 34,
+          "family": "PaLM",
+          "source": "Chowdhery et al. 2022",
+          "N_params_B": 8.0,
+          "D_tokens_B": 780.0,
+          "val_loss": 1.901,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 35,
+          "family": "PaLM",
+          "source": "Chowdhery et al. 2022",
+          "N_params_B": 62.0,
+          "D_tokens_B": 780.0,
+          "val_loss": 1.653,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 36,
+          "family": "PaLM",
+          "source": "Chowdhery et al. 2022",
+          "N_params_B": 540.0,
+          "D_tokens_B": 780.0,
+          "val_loss": 1.473,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 37,
+          "family": "OPT",
+          "source": "Zhang et al. 2022",
+          "N_params_B": 1.3,
+          "D_tokens_B": 180.0,
+          "val_loss": 2.723,
+          "support_class": "inside_rectangle",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 38,
+          "family": "OPT",
+          "source": "Zhang et al. 2022",
+          "N_params_B": 6.7,
+          "D_tokens_B": 180.0,
+          "val_loss": 2.417,
+          "support_class": "inside_rectangle",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 39,
+          "family": "OPT",
+          "source": "Zhang et al. 2022",
+          "N_params_B": 30.0,
+          "D_tokens_B": 180.0,
+          "val_loss": 2.256,
+          "support_class": "N_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 40,
+          "family": "OPT",
+          "source": "Zhang et al. 2022",
+          "N_params_B": 66.0,
+          "D_tokens_B": 180.0,
+          "val_loss": 2.179,
+          "support_class": "N_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 41,
+          "family": "OPT",
+          "source": "Zhang et al. 2022",
+          "N_params_B": 175.0,
+          "D_tokens_B": 180.0,
+          "val_loss": 2.042,
+          "support_class": "N_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 42,
+          "family": "BLOOM",
+          "source": "Scao et al. 2022",
+          "N_params_B": 0.56,
+          "D_tokens_B": 366.0,
+          "val_loss": 2.628,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 43,
+          "family": "BLOOM",
+          "source": "Scao et al. 2022",
+          "N_params_B": 1.7,
+          "D_tokens_B": 366.0,
+          "val_loss": 2.456,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 44,
+          "family": "BLOOM",
+          "source": "Scao et al. 2022",
+          "N_params_B": 7.1,
+          "D_tokens_B": 366.0,
+          "val_loss": 2.267,
+          "support_class": "D_outside_only",
+          "same_loss_coordinate_verified": false
+        },
+        {
+          "source_line": 45,
+          "family": "BLOOM",
+          "source": "Scao et al. 2022",
+          "N_params_B": 176.0,
+          "D_tokens_B": 366.0,
+          "val_loss": 1.846,
+          "support_class": "both_outside",
+          "same_loss_coordinate_verified": false
+        }
+      ],
+      "same_loss_coordinate": "not_established",
+      "descriptive_only": true
+    }
+  },
+  "B4_Pythia_nearest_terminal": [
+    {
+      "B4_N": 1.4,
+      "B4_D": 129.0,
+      "B4_Loss": 2.6238,
+      "nearest_B1_N": 1.416184,
+      "B1_terminal_D": 299.893,
+      "B1_terminal_Loss": 2.2558,
+      "B4_minus_B1_terminal_Loss": 0.3680000000000003,
+      "warning": "nominal nearest-size comparison only; no checkpoint/evaluation identity"
+    },
+    {
+      "B4_N": 12.0,
+      "B4_D": 300.0,
+      "B4_Loss": 2.1077,
+      "nearest_B1_N": 11.965825,
+      "B1_terminal_D": 299.893,
+      "B1_terminal_Loss": 2.0933,
+      "B4_minus_B1_terminal_Loss": 0.014399999999999746,
+      "warning": "nominal nearest-size comparison only; no checkpoint/evaluation identity"
+    },
+    {
+      "B4_N": 2.8,
+      "B4_D": 300.0,
+      "B4_Loss": 2.4276,
+      "nearest_B1_N": 2.782831,
+      "B1_terminal_D": 299.893,
+      "B1_terminal_Loss": 2.1911,
+      "B4_minus_B1_terminal_Loss": 0.23649999999999993,
+      "warning": "nominal nearest-size comparison only; no checkpoint/evaluation identity"
+    },
+    {
+      "B4_N": 0.16,
+      "B4_D": 13.0,
+      "B4_Loss": 3.725,
+      "nearest_B1_N": 0.162405,
+      "B1_terminal_D": 299.893,
+      "B1_terminal_Loss": 2.5978,
+      "B4_minus_B1_terminal_Loss": 1.1272000000000002,
+      "warning": "nominal nearest-size comparison only; no checkpoint/evaluation identity"
+    },
+    {
+      "B4_N": 0.41,
+      "B4_D": 41.0,
+      "B4_Loss": 3.1611,
+      "nearest_B1_N": 0.409009,
+      "B1_terminal_D": 299.893,
+      "B1_terminal_Loss": 2.4209,
+      "B4_minus_B1_terminal_Loss": 0.7401999999999997,
+      "warning": "nominal nearest-size comparison only; no checkpoint/evaluation identity"
+    },
+    {
+      "B4_N": 6.9,
+      "B4_D": 300.0,
+      "B4_Loss": 2.3285,
+      "nearest_B1_N": 6.86104,
+      "B1_terminal_D": 299.893,
+      "B1_terminal_Loss": 2.125,
+      "B4_minus_B1_terminal_Loss": 0.20350000000000001,
+      "warning": "nominal nearest-size comparison only; no checkpoint/evaluation identity"
+    },
+    {
+      "B4_N": 0.07,
+      "B4_D": 6.0,
+      "B4_Loss": 4.3629,
+      "nearest_B1_N": 0.070542,
+      "B1_terminal_D": 299.893,
+      "B1_terminal_Loss": 2.8131,
+      "B4_minus_B1_terminal_Loss": 1.5497999999999998,
+      "warning": "nominal nearest-size comparison only; no checkpoint/evaluation identity"
+    },
+    {
+      "B4_N": 1.0,
+      "B4_D": 111.0,
+      "B4_Loss": 2.7965,
+      "nearest_B1_N": 1.040867,
+      "B1_terminal_D": 299.893,
+      "B1_terminal_Loss": 2.2904,
+      "B4_minus_B1_terminal_Loss": 0.5061,
+      "warning": "nominal nearest-size comparison only; no checkpoint/evaluation identity"
+    }
+  ],
+  "coordinate_gate": {
+    "B1_tokenizer": null,
+    "B4_tokenizer": null,
+    "B5_tokenizer": null,
+    "evaluation_corpus_alignment": null,
+    "loss_definition_alignment": null,
+    "log_base_alignment": null,
+    "aggregation_alignment": null,
+    "same_loss_coordinate": "not_established",
+    "formal_external_RMSE_allowed": false
+  },
+  "claim": "support overlap is necessary but insufficient; same val_loss name does not establish comparability"
+}

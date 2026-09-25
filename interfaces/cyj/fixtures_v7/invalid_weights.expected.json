@@ -1,0 +1,4 @@
+{
+  "exit_code": 2,
+  "error_contains": "weights must name one or more known Q1 targets"
+}

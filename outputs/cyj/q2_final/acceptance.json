@@ -1,0 +1,19 @@
+{
+  "C8_runtime_file_trace": "test_q2_final_v6 fresh Q2Final audit found Q1 derived reads and zero raw-A reads",
+  "CHM_Q1_export_owner_signoff": "pending",
+  "CHM_v6_Q3_consumption_signoff": "pending",
+  "all_internal_checks_pass": true,
+  "checks": {
+    "C1": true,
+    "C2": true,
+    "C3": true,
+    "C4": true,
+    "C5": true,
+    "C6": true,
+    "C7": true,
+    "C8": true
+  },
+  "conditional_engineering_delivery": true,
+  "external_test_suite_status": "passed_after_rebuild",
+  "formal_scientific_ready_for_Q3": false
+}

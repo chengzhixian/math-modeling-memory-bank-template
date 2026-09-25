@@ -1,0 +1,139 @@
+{
+  "B7_fit_sha256": "c7426036164238d41b92ca08e9ca9087224aeb0c74554478b66093774a5b5b1a",
+  "Q1_export_manifest_sha256": "b0dda7caac30513c0f37e74ccb143064606847fdc35fd7607c999ac2f8647ecb",
+  "inputs": {
+    "D_tokens_B": 100,
+    "N_params_B": 1,
+    "Q_score": 0.5,
+    "bridge_lambda": 1,
+    "eta": 0,
+    "model_variant": "ridge_main",
+    "p": {
+      "arxiv": 0.0,
+      "dm_mathematics": 0.22522522522522523,
+      "enron_emails": 0.0,
+      "europarl": 0.0,
+      "freelaw": 0.018018018018018018,
+      "github": 0.15915915915915915,
+      "gutenberg_pg_19": 0.0850850850850851,
+      "hackernews": 0.03903903903903904,
+      "nih_exporter": 0.05405405405405405,
+      "philpapers": 0.008008008008008008,
+      "pile_cc": 0.1871871871871872,
+      "pubmed_abstracts": 0.001001001001001001,
+      "pubmed_central": 0.05905905905905905,
+      "stackexchange": 0.0,
+      "ubuntu_irc": 0.16216216216216217,
+      "uspto_backgrounds": 0.002002002002002002,
+      "wikipedia_en": 0.0
+    },
+    "p_policy": "convex_hull",
+    "weights": {
+      "arxiv": 0.07692307692307693,
+      "dm_mathematics": 0.07692307692307693,
+      "freelaw": 0.07692307692307693,
+      "github": 0.07692307692307693,
+      "gutenberg_pg_19": 0.07692307692307693,
+      "hackernews": 0.07692307692307693,
+      "pile_cc": 0.07692307692307693,
+      "pubmed_abstracts": 0.07692307692307693,
+      "pubmed_central": 0.07692307692307693,
+      "stackexchange": 0.07692307692307693,
+      "ubuntu_irc": 0.07692307692307693,
+      "uspto_backgrounds": 0.07692307692307693,
+      "wikipedia_en": 0.07692307692307693
+    }
+  },
+  "result": {
+    "assumptions": {
+      "N_ref_B": 1.0,
+      "bridge_lambda": 1.0,
+      "eta": 0.0,
+      "weights": {
+        "arxiv": 0.07692307692307693,
+        "dm_mathematics": 0.07692307692307693,
+        "freelaw": 0.07692307692307693,
+        "github": 0.07692307692307693,
+        "gutenberg_pg_19": 0.07692307692307693,
+        "hackernews": 0.07692307692307693,
+        "pile_cc": 0.07692307692307693,
+        "pubmed_abstracts": 0.07692307692307693,
+        "pubmed_central": 0.07692307692307693,
+        "stackexchange": 0.07692307692307693,
+        "ubuntu_irc": 0.07692307692307693,
+        "uspto_backgrounds": 0.07692307692307693,
+        "wikipedia_en": 0.07692307692307693
+      }
+    },
+    "baseline_loss": 2.5673967252758954,
+    "empirically_calibrated_A_to_B": false,
+    "factor": 0.8541036111993697,
+    "gradient": {
+      "D": -0.0008593140992957105,
+      "N": -0.12902264920663517,
+      "Q_B": -0.31614410944557464,
+      "p": {
+        "arxiv": 0.513978472937221,
+        "dm_mathematics": -0.42048715698595346,
+        "enron_emails": -1.2632361594161,
+        "europarl": -0.027415605719506825,
+        "freelaw": 0.558079347878289,
+        "github": 0.5424001544658926,
+        "gutenberg_pg_19": 0.29163022901437063,
+        "hackernews": -0.48341805875750926,
+        "nih_exporter": -0.5248004936835061,
+        "philpapers": -1.16632647824591,
+        "pile_cc": 0.46248378640486915,
+        "pubmed_abstracts": 0.34813170272603905,
+        "pubmed_central": 0.47818302090534304,
+        "stackexchange": 0.3475082254685269,
+        "ubuntu_irc": -0.5071994311705199,
+        "uspto_backgrounds": 0.4244453593344351,
+        "wikipedia_en": 0.4260430848440192
+      }
+    },
+    "improvement_elasticity": {
+      "D": 0.039187575650763466,
+      "N": 0.05883861128999134,
+      "Q_B": 0.07208610457803265
+    },
+    "loss": 2.1928228144395785,
+    "minimum_factor_over_B7_N": 0.8541036111993697,
+    "model_variant": "ridge_main",
+    "p_policy": "convex_hull",
+    "p_support": {
+      "certificate": [
+        {
+          "index": "136",
+          "weight": 1.0
+        }
+      ],
+      "inside": true,
+      "max_residual": 0.0,
+      "status": "in_Q1_A4_convex_hull"
+    },
+    "q1_export_manifest_sha256": "b0dda7caac30513c0f37e74ccb143064606847fdc35fd7607c999ac2f8647ecb",
+    "q1_export_status": "Q1_derived_export_pending_CHM_owner_signoff",
+    "qa_direct": {
+      "Q_A_coordinate": "Q1 family-balanced z-score; never B7 Q_score",
+      "covered_mass": 0.15915915915915915,
+      "mapping_policy": "direct",
+      "mean_Q_A_on_mapped": -0.505484640415014,
+      "unmapped_mass": 0.8408408408408409,
+      "weighted_Q_A": -0.08045251033632354
+    },
+    "qa_direct_and_near": {
+      "Q_A_coordinate": "Q1 family-balanced z-score; never B7 Q_score",
+      "covered_mass": 0.4314314314314314,
+      "mapping_policy": "direct_and_near",
+      "mean_Q_A_on_mapped": 0.5785427632650646,
+      "unmapped_mass": 0.5685685685685686,
+      "weighted_Q_A": 0.2496015324997426
+    },
+    "ready_for_Q3": false,
+    "relative_A_effect": -0.1458963888006303,
+    "scenario_solution_ready": true,
+    "schema_version": "cyj.ndqp.scenario.v6",
+    "support": "B7_rectangle_for_this_exact_p; p_simplex_checked; A_training_recipe_convex_hull_unverified"
+  }
+}

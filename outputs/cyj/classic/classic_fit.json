@@ -1,0 +1,255 @@
+{
+  "schema_version": 2,
+  "status": "draft_classic_baseline_not_validated_predictor",
+  "input_version": "cf297a4ad47e235acf5a9b6e890a5df5e05b07e5",
+  "model": "L(N,D) = E + A*N^(-alpha) + B*D^(-beta)",
+  "fit_loss": "group-equal weighted Huber loss on log(predicted_loss)-log(actual_loss)",
+  "provenance": {
+    "git_commit": "cf297a4ad47e235acf5a9b6e890a5df5e05b07e5",
+    "code_files_verified_against_input_commit": true,
+    "script_sha256": "549471fd71a83040e02d0c29ab3a30e9f16f1be373095dfff7e4ba55a01f8ef9",
+    "prepared_b1_sha256": "2eb418f022c414db13af89d2177b2b90c62d3ad3b29300adf7fb1de570927704",
+    "classic_data_manifest_sha256": "5edf56694d63b74ab715c50c8ce2bf1ebb510f40fcd184d58ae714788e8e067e",
+    "source_files": {
+      "pythia_training_log_existing.csv": {
+        "path": "data/raw/real_attachments/B_scaling_laws/pythia_training_log_existing.csv",
+        "bytes": 111459,
+        "sha256": "529a59644b0f57bf3a76037838b614bfedc35e58bb26b93052e34ffc63e454c2"
+      },
+      "scaling_baseline.csv": {
+        "path": "data/raw/real_attachments/B_scaling_laws/scaling_baseline.csv",
+        "bytes": 1421,
+        "sha256": "2272983ded93de35e05f9acbf95ebceedf43f283345e4be72b54fee94080391e"
+      },
+      "published_scaling_data.csv": {
+        "path": "data/raw/real_attachments/B_scaling_laws/published_scaling_data.csv",
+        "bytes": 1967,
+        "sha256": "dd858c5e48610e28589340d5db023d6abfb31df597506789ccdfc6a546731bbd"
+      }
+    },
+    "python_version": "3.12.14",
+    "numpy_version": "2.3.5"
+  },
+  "data_scope": {
+    "rows": 1176,
+    "groups": [
+      "N=0.070542B",
+      "N=0.162405B",
+      "N=0.409009B",
+      "N=1.040867B",
+      "N=1.416184B",
+      "N=2.782831B",
+      "N=6.86104B",
+      "N=11.965825B"
+    ],
+    "N_params_B_range": [
+      0.070542,
+      11.965825
+    ],
+    "D_tokens_B_range": [
+      0.134,
+      299.893
+    ],
+    "val_loss_range": [
+      2.0933,
+      4.7388
+    ],
+    "group_weighting": "each N_params_B group has equal total fit weight",
+    "compute_identity_outliers_retained": true,
+    "reason": "classic fit uses N,D,Loss; C-identity warnings remain flagged for sensitivity and were not silently deleted"
+  },
+  "full_fit": {
+    "parameters": {
+      "E": 1.6898377713152422,
+      "A": 0.3539687193311042,
+      "B": 1.2402746295202214,
+      "alpha": 0.33998542577775076,
+      "beta": 0.2798924656094203
+    },
+    "objective": 1.4436514784534833e-09,
+    "iterations": 679,
+    "converged": true,
+    "starts": 24,
+    "seed": 20260924,
+    "huber_delta": 0.05,
+    "best_start_index": 9,
+    "candidate_objectives": [
+      1.4436514784534833e-09,
+      1.4436514784562993e-09,
+      1.4436514784591965e-09,
+      1.443651478460286e-09,
+      1.4436514784621931e-09,
+      1.4436514784689795e-09,
+      1.4436514784693557e-09,
+      1.4436515289942208e-09,
+      1.4531454013895314e-09,
+      0.00010143224340672768,
+      0.0001682574020916448,
+      0.0002467156758076982,
+      0.0010928246628662173,
+      0.0011345337001018253,
+      0.0011855934821647376,
+      0.0012297588836388245,
+      0.002198932151608996,
+      0.00258183397455571,
+      0.002637202682850883,
+      0.0028368519910496447,
+      0.0031224913025574086,
+      0.003499481055186127,
+      0.003585568896128562,
+      0.0035901360997493367
+    ],
+    "metrics": {
+      "rmse": 0.00014657641916440922,
+      "mae": 0.00010515475149067427,
+      "mape": 4.089407127758357e-05,
+      "r2": 0.9999998163808995,
+      "log_rmse": 5.3733629664363505e-05
+    }
+  },
+  "m0_log_linear_baseline": {
+    "model": "Loss = intercept + b_N*log(N) + b_D*log(D)",
+    "parameters": {
+      "intercept": 3.300953362102788,
+      "log_N": -0.13585918171302971,
+      "log_D": -0.1785511571630688
+    },
+    "metrics": {
+      "rmse": 0.10302626268593858,
+      "mae": 0.07328458791977616,
+      "mape": 0.028515955607544483,
+      "r2": 0.9092836575196844,
+      "log_rmse": 0.036831097942081364
+    }
+  },
+  "validation": {
+    "leave_one_model_size_out": {
+      "folds": 8,
+      "aggregate": {
+        "rmse": {
+          "mean": 0.0001461276665284509,
+          "std": 3.437336888517393e-05,
+          "min": 0.00010142545227495377,
+          "max": 0.00021448179140155194
+        },
+        "mae": {
+          "mean": 0.00010709953443476037,
+          "std": 2.814901624335756e-05,
+          "min": 7.55388245587766e-05,
+          "max": 0.00016365594238283116
+        },
+        "mape": {
+          "mean": 4.153956944966518e-05,
+          "std": 7.2683824848865955e-06,
+          "min": 3.355108770314616e-05,
+          "max": 5.49637178478704e-05
+        },
+        "r2": {
+          "mean": 0.9999996401825848,
+          "std": 1.7526859614108382e-07,
+          "min": 0.9999992654049898,
+          "max": 0.9999998357641732
+        },
+        "log_rmse": {
+          "mean": 5.3931579931567506e-05,
+          "std": 9.087189667555402e-06,
+          "min": 4.325292537906024e-05,
+          "max": 7.044417705074791e-05
+        }
+      },
+      "random_row_split_used": false
+    },
+    "token_tail_70_30": {
+      "train_rows": 816,
+      "test_rows": 360,
+      "metrics": {
+        "rmse": 0.00011600413680986439,
+        "mae": 8.883701182597441e-05,
+        "mape": 3.686318314316511e-05,
+        "r2": 0.9999997528234637,
+        "log_rmse": 4.697295198970799e-05
+      },
+      "fit": {
+        "parameters": {
+          "E": 1.689788451298401,
+          "A": 0.35395246589536355,
+          "B": 1.2403516441267335,
+          "alpha": 0.3399967193678872,
+          "beta": 0.27986955460496266
+        },
+        "objective": 1.608386418972572e-09,
+        "iterations": 549,
+        "converged": true,
+        "starts": 8,
+        "seed": 20261024,
+        "huber_delta": 0.05,
+        "best_start_index": 4,
+        "candidate_objectives": [
+          1.608386418972572e-09,
+          1.6083864189745817e-09,
+          1.6083864189831788e-09,
+          1.6083864189851803e-09,
+          1.6083864190126301e-09,
+          0.0015115081377361315,
+          0.001634288619833882,
+          0.003499686617341651
+        ]
+      }
+    },
+    "B4_B5": {
+      "absolute_loss_comparability": "not_established",
+      "aggregate_error_metrics_reported": false,
+      "predictions_status": "descriptive_only",
+      "descriptive_summary_not_error_metrics": {
+        "B4": {
+          "rows": 57,
+          "ND_extrapolation_rows": 49,
+          "raw_difference_min": -1.0477172874600367,
+          "raw_difference_max": 0.14740631779907232,
+          "raw_absolute_difference_max": 1.0477172874600367
+        },
+        "B5": {
+          "rows": 44,
+          "ND_extrapolation_rows": 36,
+          "raw_difference_min": -0.4194763399648078,
+          "raw_difference_max": 0.450851765351296,
+          "raw_absolute_difference_max": 0.450851765351296
+        }
+      }
+    }
+  },
+  "diagnostics": {
+    "near_exact_reconstruction_threshold_rmse": 0.001,
+    "near_exact_reconstruction_triggered": true,
+    "interpretation": "Near-exact B1 reconstruction across in-sample, leave-one-size-out, and token-tail checks may indicate shared deterministic construction or strong preprocessing. It is not evidence of independent real-world generalization.",
+    "ready_for_Q3": false,
+    "ready_for_Q3_reason": "Classic B1-only draft lacks evidenced B4/B5 absolute Loss comparability, Q/p calibration, and uncertainty intervals."
+  },
+  "outputs": {
+    "classic_predictions": {
+      "path": "outputs/cyj/classic/classic_predictions.csv",
+      "bytes": 220514,
+      "sha256": "d0e0263e50d654b76fd5a77dbaae7fff87b62dff613643f6feee5dc5be27b7a2"
+    },
+    "classic_cv": {
+      "path": "outputs/cyj/classic/classic_cv.csv",
+      "bytes": 2692,
+      "sha256": "b5334d05ad50f72813c05aadc7bc28cc25796113b2c8defa7bbbdf1760361d83"
+    },
+    "classic_loso_predictions": {
+      "path": "outputs/cyj/classic/classic_loso_predictions.csv",
+      "bytes": 143532,
+      "sha256": "162e7143cbde79e35de6710613c6d4811a8fb30c5d831f411d0526d8737d6519"
+    },
+    "classic_token_tail_predictions": {
+      "path": "outputs/cyj/classic/classic_token_tail_predictions.csv",
+      "bytes": 40870,
+      "sha256": "f0d646949296bf1ce2fd22740caa3da652cf8858339ffecc0af01d8d0ddeefcf"
+    },
+    "external_predictions_unvalidated": {
+      "path": "outputs/cyj/classic/external_predictions_unvalidated.csv",
+      "bytes": 15911,
+      "sha256": "0dd3abaff6722ce930d41d272ad7ffcc963d380f2bd5aee749eff43238e61baa"
+    }
+  }
+}

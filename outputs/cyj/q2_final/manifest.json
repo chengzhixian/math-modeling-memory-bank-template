@@ -1,0 +1,39 @@
+{
+  "Q1_export_manifest_sha256": "b0dda7caac30513c0f37e74ccb143064606847fdc35fd7607c999ac2f8647ecb",
+  "Q1_interaction_manifest_sha256": "608595491268cf859331f3f8b9d7618a9e86fef94928120dbfa6ded3082f600c",
+  "figures_sha256": {
+    "composition_transfers.png": "956142e9dd60334982bd9c9df527cba6c1e8dd86cb5f0e2409016bf7932d554a",
+    "manifest.json": "c8f776705f5b22766127faeced70f33a856787f86e68b74c1f28224f71e7a0e1",
+    "p_policy_loss.png": "2cce9da4c5319f0fdcd82a8770ec28758fcee99f60e49e6bcc8c76bb14917311",
+    "qa_mapping.png": "6976554d9109fd8076f22c1efa8b4b1eee2b8f8834dfa3e642605fd8f29d488e",
+    "quality_marginal.png": "5a89da7476ef76046e63fa73390a0efc5e336e120168e9bfcaf7757337773dc8"
+  },
+  "files_sha256": {
+    "FINAL_FACTS.md": "21043775529c0368e862e27f8f7e9916c9054b63a05881eb21489a65cf8661eb",
+    "README.md": "98696cbc058625f31b17001406ce978bf8892946eeac2049dd473ddccb6517b2",
+    "acceptance.json": "1da19dfb54c86ff886b0ff1b22bf15fb2acfe78375a6dd57041300c591e28435",
+    "conditional_example.json": "527210bcab19605622f2fe23166e3005c7cbfc9b08d7df3070a4e3c02a7455ea",
+    "domain_combinations.csv": "66b9fed2286cfed44fa9f3b3ae86eae96e335d79493691c465d20a5d9236c7ea",
+    "domain_interactions.csv": "bdc32a39b098b8d67540adcb65c64f3fdf1bcf6d15f5e81f5f75161796841944",
+    "final_closure.json": "ca6205f8f35d3df31ecf3073a01c167947df21a0b9810148db8f1d4c901059ae",
+    "interaction_summary.json": "cd5fa128058034c7de6272f7642072a1b5444e2a2c7ffc031d8f12b55681b458",
+    "main_policy.json": "fe583e68213d609ad4cb102cf78257402bb6c23115d700ffa4e696afbf6b5cdf",
+    "marginals_elasticities.csv": "5e1415b4fc8023d33735708a38c08e1b599436bb871b8c5604418b38daa63627",
+    "mixture_support_results.csv": "a9fbd2226551338a167cbfa73ac12622fff84c039e4cbd1fbd58ba5ca6055fa2",
+    "model_coefficients.json": "d6f5b665d3806a322d0ebf87da46889822d2eff89324eacded6040383e7b6733",
+    "model_selection.csv": "995b45789024ed09ddbf955b91f9cb55514544e32de58ff55d069b4c1aaa2ff8",
+    "new_sensitivity_grid.csv": "7253147e623e4e46b71124f5b4ea91189ed4fd03a27781d40f48ebe1c07f154f",
+    "p_optimization_by_scenario.csv": "e4a5a297c265240936bafa40ec6c02d5efc33137ea222cea2e15e2cffe9860d6",
+    "p_optimization_main.csv": "886c856b45a2459f77c399837baeca91200467dfe247776ba47a26866df22423",
+    "p_policy_details.json": "da96a0e4377a4934c31d3bfa9725e89972446433bc937485851e5712f9335d8b",
+    "p_transfer.csv": "e29681c6b207170ec5485e1063ac0ce1d0a7743dc61bc8932236093daf6a8b68",
+    "q1_bundle_consumer_audit.json": "4f71e9c43330008a162331ce7f66013312af95f6779243bc9659eff9e5520561",
+    "quality_mapping_sensitivity.csv": "2f83435a888b6c59c21a805f161d054164f594f070f2f23c13899fecc26af3b9",
+    "quality_vs_scale.csv": "14bd67b8f70b5d2d213223d569d2439b6dd56747430d805c3da0df4a8200ba5b",
+    "ridge_vs_interaction_policy.csv": "48fec3975d6e78a326bb5f3fc75566d224a3e5957623fd98c2adac3845584674",
+    "sensitivity_summary.json": "7eb6708ef556b4f50b075efec358e2056a94933411bf328a73db3b6720020ba1",
+    "validation_summary.csv": "9c0b8cbffe29fb2f0ab84a4b7588153fc61f92c9e0f0e677682f2f9f6a28a079"
+  },
+  "generator": "python -B src/cyj/build_q2_final.py",
+  "schema_version": "cyj.q2_final.manifest.v1"
+}

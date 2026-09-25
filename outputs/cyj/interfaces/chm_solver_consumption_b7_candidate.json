@@ -1,0 +1,1427 @@
+{
+  "schema_version": "cyj.chm_solver_consumption_candidate.v1",
+  "scientific_status": "software_integration_only_not_formal_Q3",
+  "chm_exact_commit": "92e0592000cba58fca355a881dc59caadbd446b2",
+  "chm_module_sha256": {
+    "q3_generic_solver.py": "970b7fa8c519de3d4022bbf72a8d1f888b1e2cf0444180f390bf8a67aa4bd782",
+    "q3_quality_cost_geometry.py": "1b0216e9e3e17ca863cda98e4962bfc43e6a0ef52de822cdc00eb84e1251e589",
+    "q3_nd_baseline.py": "01a7888daed37efb8ea6129c49985c9ed14b29524bc7a78ec6fb10cb7a03e1b1"
+  },
+  "cyj_frozen_model_sha256": "ed6b01b113110b90b25c5f6cc01d7686cb77602f29464bc068843b36d881c9bf",
+  "scipy_version": "1.18.1",
+  "starts_per_feasible_case": 36,
+  "support": {
+    "N_params_B": [
+      0.07,
+      11.97
+    ],
+    "D_tokens_B": [
+      10.0,
+      600.0
+    ],
+    "Q_score": [
+      0.1,
+      1.0
+    ]
+  },
+  "results": [
+    {
+      "budget_FLOPs": 1e+19,
+      "context_tokens": 2048,
+      "Q0": 0.5,
+      "quality_family": "exponential",
+      "minimum_supported_cost_FLOPs": 4.4867200000000005e+18,
+      "status": "converged_feasible",
+      "solution": {
+        "start_id": 23,
+        "success": true,
+        "feasible": true,
+        "loss": 3.26362905606115,
+        "N_params_B": 0.13947810493873725,
+        "D_tokens_B": 10.000000000000002,
+        "Q": 0.5706325240169682,
+        "cost_FLOPs": 1.000000000007274e+19,
+        "budget_residual": 72740864.0,
+        "message": "Optimization terminated successfully",
+        "budget_utilization": 1.0000000000072742,
+        "active_set": [
+          "D_min",
+          "budget"
+        ],
+        "marginal_benefit_per_cost": {
+          "N": 2.768089833331936e-20,
+          "D": 1.9486251149401376e-20,
+          "Q": 2.768089863439402e-20
+        },
+        "interior_ratio_relative_spread": 1.0876621521569327e-08,
+        "kkt_mu_estimate": 2.768089848385669e-20,
+        "kkt_mu_interval": [
+          2.768089848385669e-20,
+          2.768089848385669e-20
+        ],
+        "boundary_kkt_inequalities": [
+          {
+            "variable": "D",
+            "bound": "lower",
+            "ratio": 1.9486251149401376e-20,
+            "satisfied": true
+          }
+        ],
+        "primal_feasible": true,
+        "kkt_relative_violation": 5.438310760784664e-09,
+        "complementarity_relative_residual": 7.274181217784767e-12,
+        "kkt_check_pass": true,
+        "kkt_note": "Relative marginal residuals; primal, dual and complementarity checked. Necessary, not sufficient, for global optimality."
+      },
+      "starts": 36,
+      "converged_feasible_starts": 36
+    },
+    {
+      "budget_FLOPs": 1e+19,
+      "context_tokens": 2048,
+      "Q0": 0.5,
+      "quality_family": "power",
+      "minimum_supported_cost_FLOPs": 4.4867200000000005e+18,
+      "status": "converged_feasible",
+      "solution": {
+        "start_id": 9,
+        "success": true,
+        "feasible": true,
+        "loss": 3.271865170588405,
+        "N_params_B": 0.15601597603651485,
+        "D_tokens_B": 10.000000000000002,
+        "Q": 0.5,
+        "cost_FLOPs": 1.0000000000036456e+19,
+        "budget_residual": 36456448.0,
+        "message": "Optimization terminated successfully",
+        "budget_utilization": 1.0000000000036458,
+        "active_set": [
+          "D_min",
+          "Q0",
+          "budget"
+        ],
+        "marginal_benefit_per_cost": {
+          "N": 2.4427194849810697e-20,
+          "D": 1.9590355981412777e-20,
+          "Q": 2.0143903436822588e-20
+        },
+        "interior_ratio_relative_spread": null,
+        "kkt_mu_estimate": 2.4427194849810697e-20,
+        "kkt_mu_interval": [
+          2.4427194849810697e-20,
+          2.4427194849810697e-20
+        ],
+        "boundary_kkt_inequalities": [
+          {
+            "variable": "D",
+            "bound": "lower",
+            "ratio": 1.9590355981412777e-20,
+            "satisfied": true
+          },
+          {
+            "variable": "Q",
+            "bound": "lower",
+            "ratio": 2.0143903436822588e-20,
+            "satisfied": true
+          }
+        ],
+        "primal_feasible": true,
+        "kkt_relative_violation": 0.0,
+        "complementarity_relative_residual": 3.645750368264089e-12,
+        "kkt_check_pass": true,
+        "kkt_note": "Relative marginal residuals; primal, dual and complementarity checked. Necessary, not sufficient, for global optimality."
+      },
+      "starts": 36,
+      "converged_feasible_starts": 36
+    },
+    {
+      "budget_FLOPs": 1e+19,
+      "context_tokens": 2048,
+      "Q0": 0.5,
+      "quality_family": "logarithmic",
+      "minimum_supported_cost_FLOPs": 4.4867200000000005e+18,
+      "status": "converged_feasible",
+      "solution": {
+        "start_id": 31,
+        "success": true,
+        "feasible": true,
+        "loss": 3.271865170587701,
+        "N_params_B": 0.1560159760369646,
+        "D_tokens_B": 10.000000000000007,
+        "Q": 0.5,
+        "cost_FLOPs": 1.000000000006529e+19,
+        "budget_residual": 65290240.0,
+        "message": "Optimization terminated successfully",
+        "budget_utilization": 1.000000000006529,
+        "active_set": [
+          "D_min",
+          "Q0",
+          "budget"
+        ],
+        "marginal_benefit_per_cost": {
+          "N": 2.4427194849722523e-20,
+          "D": 1.9590355981356293e-20,
+          "Q": 1.5107927577612266e-20
+        },
+        "interior_ratio_relative_spread": null,
+        "kkt_mu_estimate": 2.4427194849722523e-20,
+        "kkt_mu_interval": [
+          2.4427194849722523e-20,
+          2.4427194849722523e-20
+        ],
+        "boundary_kkt_inequalities": [
+          {
+            "variable": "D",
+            "bound": "lower",
+            "ratio": 1.9590355981356293e-20,
+            "satisfied": true
+          },
+          {
+            "variable": "Q",
+            "bound": "lower",
+            "ratio": 1.5107927577612266e-20,
+            "satisfied": true
+          }
+        ],
+        "primal_feasible": true,
+        "kkt_relative_violation": 0.0,
+        "complementarity_relative_residual": 6.5289995632156206e-12,
+        "kkt_check_pass": true,
+        "kkt_note": "Relative marginal residuals; primal, dual and complementarity checked. Necessary, not sufficient, for global optimality."
+      },
+      "starts": 36,
+      "converged_feasible_starts": 32
+    },
+    {
+      "budget_FLOPs": 1e+19,
+      "context_tokens": 8192,
+      "Q0": 0.5,
+      "quality_family": "exponential",
+      "minimum_supported_cost_FLOPs": 5.346880000000001e+18,
+      "status": "converged_feasible",
+      "solution": {
+        "start_id": 13,
+        "success": true,
+        "feasible": true,
+        "loss": 3.308003107670748,
+        "N_params_B": 0.11782407940868758,
+        "D_tokens_B": 10.000000000000002,
+        "Q": 0.5673477125078017,
+        "cost_FLOPs": 1.0000000000009509e+19,
+        "budget_residual": 9508864.0,
+        "message": "Optimization terminated successfully",
+        "budget_utilization": 1.0000000000009508,
+        "active_set": [
+          "D_min",
+          "budget"
+        ],
+        "marginal_benefit_per_cost": {
+          "N": 2.8736179451185366e-20,
+          "D": 1.949109261250328e-20,
+          "Q": 2.8736179461678886e-20
+        },
+        "interior_ratio_relative_spread": 3.6516752666977266e-10,
+        "kkt_mu_estimate": 2.873617945643212e-20,
+        "kkt_mu_interval": [
+          2.873617945643212e-20,
+          2.873617945643212e-20
+        ],
+        "boundary_kkt_inequalities": [
+          {
+            "variable": "D",
+            "bound": "lower",
+            "ratio": 1.949109261250328e-20,
+            "satisfied": true
+          }
+        ],
+        "primal_feasible": true,
+        "kkt_relative_violation": 1.8258386805533263e-10,
+        "complementarity_relative_residual": 9.507949981153842e-13,
+        "kkt_check_pass": true,
+        "kkt_note": "Relative marginal residuals; primal, dual and complementarity checked. Necessary, not sufficient, for global optimality."
+      },
+      "starts": 36,
+      "converged_feasible_starts": 36
+    },
+    {
+      "budget_FLOPs": 1e+19,
+      "context_tokens": 8192,
+      "Q0": 0.5,
+      "quality_family": "power",
+      "minimum_supported_cost_FLOPs": 5.346880000000001e+18,
+      "status": "converged_feasible",
+      "solution": {
+        "start_id": 12,
+        "success": true,
+        "feasible": true,
+        "loss": 3.3156707766692137,
+        "N_params_B": 0.13091746962730375,
+        "D_tokens_B": 10.000000000000002,
+        "Q": 0.5,
+        "cost_FLOPs": 1.000000000001197e+19,
+        "budget_residual": 11970560.0,
+        "message": "Optimization terminated successfully",
+        "budget_utilization": 1.000000000001197,
+        "active_set": [
+          "D_min",
+          "Q0",
+          "budget"
+        ],
+        "marginal_benefit_per_cost": {
+          "N": 2.5533826667632956e-20,
+          "D": 1.9590355981460748e-20,
+          "Q": 2.052246721181537e-20
+        },
+        "interior_ratio_relative_spread": null,
+        "kkt_mu_estimate": 2.5533826667632956e-20,
+        "kkt_mu_interval": [
+          2.5533826667632956e-20,
+          2.5533826667632956e-20
+        ],
+        "boundary_kkt_inequalities": [
+          {
+            "variable": "D",
+            "bound": "lower",
+            "ratio": 1.9590355981460748e-20,
+            "satisfied": true
+          },
+          {
+            "variable": "Q",
+            "bound": "lower",
+            "ratio": 2.052246721181537e-20,
+            "satisfied": true
+          }
+        ],
+        "primal_feasible": true,
+        "kkt_relative_violation": 0.0,
+        "complementarity_relative_residual": 1.1970424651508438e-12,
+        "kkt_check_pass": true,
+        "kkt_note": "Relative marginal residuals; primal, dual and complementarity checked. Necessary, not sufficient, for global optimality."
+      },
+      "starts": 36,
+      "converged_feasible_starts": 35
+    },
+    {
+      "budget_FLOPs": 1e+19,
+      "context_tokens": 8192,
+      "Q0": 0.5,
+      "quality_family": "logarithmic",
+      "minimum_supported_cost_FLOPs": 5.346880000000001e+18,
+      "status": "converged_feasible",
+      "solution": {
+        "start_id": 5,
+        "success": true,
+        "feasible": true,
+        "loss": 3.315670776669317,
+        "N_params_B": 0.13091746962724468,
+        "D_tokens_B": 10.000000000000629,
+        "Q": 0.5,
+        "cost_FLOPs": 1.0000000000008086e+19,
+        "budget_residual": 8085504.0,
+        "message": "Optimization terminated successfully",
+        "budget_utilization": 1.0000000000008085,
+        "active_set": [
+          "D_min",
+          "Q0",
+          "budget"
+        ],
+        "marginal_benefit_per_cost": {
+          "N": 2.5533826667645794e-20,
+          "D": 1.9590355981468006e-20,
+          "Q": 1.5391850408861267e-20
+        },
+        "interior_ratio_relative_spread": null,
+        "kkt_mu_estimate": 2.5533826667645794e-20,
+        "kkt_mu_interval": [
+          2.5533826667645794e-20,
+          2.5533826667645794e-20
+        ],
+        "boundary_kkt_inequalities": [
+          {
+            "variable": "D",
+            "bound": "lower",
+            "ratio": 1.9590355981468006e-20,
+            "satisfied": true
+          },
+          {
+            "variable": "Q",
+            "bound": "lower",
+            "ratio": 1.5391850408861267e-20,
+            "satisfied": true
+          }
+        ],
+        "primal_feasible": true,
+        "kkt_relative_violation": 0.0,
+        "complementarity_relative_residual": 8.08464406532039e-13,
+        "kkt_check_pass": true,
+        "kkt_note": "Relative marginal residuals; primal, dual and complementarity checked. Necessary, not sufficient, for global optimality."
+      },
+      "starts": 36,
+      "converged_feasible_starts": 29
+    },
+    {
+      "budget_FLOPs": 1e+19,
+      "context_tokens": 131072,
+      "Q0": 0.5,
+      "quality_family": "exponential",
+      "minimum_supported_cost_FLOPs": 2.2550080000000004e+19,
+      "status": "infeasible_by_supported_domain",
+      "expected_failure": "budget below minimum supported cost"
+    },
+    {
+      "budget_FLOPs": 1e+19,
+      "context_tokens": 131072,
+      "Q0": 0.5,
+      "quality_family": "power",
+      "minimum_supported_cost_FLOPs": 2.2550080000000004e+19,
+      "status": "infeasible_by_supported_domain",
+      "expected_failure": "budget below minimum supported cost"
+    },
+    {
+      "budget_FLOPs": 1e+19,
+      "context_tokens": 131072,
+      "Q0": 0.5,
+      "quality_family": "logarithmic",
+      "minimum_supported_cost_FLOPs": 2.2550080000000004e+19,
+      "status": "infeasible_by_supported_domain",
+      "expected_failure": "budget below minimum supported cost"
+    },
+    {
+      "budget_FLOPs": 1e+22,
+      "context_tokens": 2048,
+      "Q0": 0.5,
+      "quality_family": "exponential",
+      "minimum_supported_cost_FLOPs": 4.4867200000000005e+18,
+      "status": "converged_feasible",
+      "solution": {
+        "start_id": 10,
+        "success": true,
+        "feasible": true,
+        "loss": 2.139114046607189,
+        "N_params_B": 7.596561087839129,
+        "D_tokens_B": 190.3878848971326,
+        "Q": 1.0,
+        "cost_FLOPs": 1.000000000001494e+22,
+        "budget_residual": 14940110848.0,
+        "message": "Optimization terminated successfully",
+        "budget_utilization": 1.000000000001494,
+        "active_set": [
+          "Q1",
+          "budget"
+        ],
+        "marginal_benefit_per_cost": {
+          "N": 7.799047643420609e-24,
+          "D": 7.799047601215347e-24,
+          "Q": 5.435827724205693e-23
+        },
+        "interior_ratio_relative_spread": 7.764275155254582e-10,
+        "kkt_mu_estimate": 7.799047622317978e-24,
+        "kkt_mu_interval": [
+          7.799047622317978e-24,
+          7.799047622317978e-24
+        ],
+        "boundary_kkt_inequalities": [
+          {
+            "variable": "Q",
+            "bound": "upper",
+            "ratio": 5.435827724205693e-23,
+            "satisfied": true
+          }
+        ],
+        "primal_feasible": true,
+        "kkt_relative_violation": 3.8821377127831503e-10,
+        "complementarity_relative_residual": 2.143394421949967e-13,
+        "kkt_check_pass": true,
+        "kkt_note": "Relative marginal residuals; primal, dual and complementarity checked. Necessary, not sufficient, for global optimality."
+      },
+      "starts": 36,
+      "converged_feasible_starts": 36
+    },
+    {
+      "budget_FLOPs": 1e+22,
+      "context_tokens": 2048,
+      "Q0": 0.5,
+      "quality_family": "power",
+      "minimum_supported_cost_FLOPs": 4.4867200000000005e+18,
+      "status": "converged_feasible",
+      "solution": {
+        "start_id": 31,
+        "success": true,
+        "feasible": true,
+        "loss": 2.1403679218153986,
+        "N_params_B": 7.731041831811115,
+        "D_tokens_B": 184.36447061190734,
+        "Q": 1.0,
+        "cost_FLOPs": 1.0000000000007827e+22,
+        "budget_residual": 7826571264.0,
+        "message": "Optimization terminated successfully",
+        "budget_utilization": 1.0000000000007827,
+        "active_set": [
+          "Q1",
+          "budget"
+        ],
+        "marginal_benefit_per_cost": {
+          "N": 7.87452317318054e-24,
+          "D": 7.874523162512216e-24,
+          "Q": 6.781020182426047e-23
+        },
+        "interior_ratio_relative_spread": 1.573262369106478e-10,
+        "kkt_mu_estimate": 7.874523167846378e-24,
+        "kkt_mu_interval": [
+          7.874523167846378e-24,
+          7.874523167846378e-24
+        ],
+        "boundary_kkt_inequalities": [
+          {
+            "variable": "Q",
+            "bound": "upper",
+            "ratio": 6.781020182426047e-23,
+            "satisfied": true
+          }
+        ],
+        "primal_feasible": true,
+        "kkt_relative_violation": 7.86631292897404e-11,
+        "complementarity_relative_residual": 9.089261009484905e-14,
+        "kkt_check_pass": true,
+        "kkt_note": "Relative marginal residuals; primal, dual and complementarity checked. Necessary, not sufficient, for global optimality."
+      },
+      "starts": 36,
+      "converged_feasible_starts": 35
+    },
+    {
+      "budget_FLOPs": 1e+22,
+      "context_tokens": 2048,
+      "Q0": 0.5,
+      "quality_family": "logarithmic",
+      "minimum_supported_cost_FLOPs": 4.4867200000000005e+18,
+      "status": "converged_feasible",
+      "solution": {
+        "start_id": 4,
+        "success": true,
+        "feasible": true,
+        "loss": 2.1350732018313217,
+        "N_params_B": 7.156110839182364,
+        "D_tokens_B": 212.4040587036284,
+        "Q": 1.0,
+        "cost_FLOPs": 1.0000000000043203e+22,
+        "budget_residual": 43203428352.0,
+        "message": "Optimization terminated successfully",
+        "budget_utilization": 1.0000000000043203,
+        "active_set": [
+          "Q1",
+          "budget"
+        ],
+        "marginal_benefit_per_cost": {
+          "N": 7.547527500537025e-24,
+          "D": 7.547527498479597e-24,
+          "Q": 6.528380940011679e-22
+        },
+        "interior_ratio_relative_spread": 3.1515135348493145e-12,
+        "kkt_mu_estimate": 7.54752749950831e-24,
+        "kkt_mu_interval": [
+          7.54752749950831e-24,
+          7.54752749950831e-24
+        ],
+        "boundary_kkt_inequalities": [
+          {
+            "variable": "Q",
+            "bound": "upper",
+            "ratio": 6.528380940011679e-22,
+            "satisfied": true
+          }
+        ],
+        "primal_feasible": true,
+        "kkt_relative_violation": 1.5757578927939886e-12,
+        "complementarity_relative_residual": 4.9947679954277937e-14,
+        "kkt_check_pass": true,
+        "kkt_note": "Relative marginal residuals; primal, dual and complementarity checked. Necessary, not sufficient, for global optimality."
+      },
+      "starts": 36,
+      "converged_feasible_starts": 36
+    },
+    {
+      "budget_FLOPs": 1e+22,
+      "context_tokens": 8192,
+      "Q0": 0.5,
+      "quality_family": "exponential",
+      "minimum_supported_cost_FLOPs": 5.346880000000001e+18,
+      "status": "converged_feasible",
+      "solution": {
+        "start_id": 31,
+        "success": true,
+        "feasible": true,
+        "loss": 2.1519701259005926,
+        "N_params_B": 6.895650901775009,
+        "D_tokens_B": 176.97494889106318,
+        "Q": 1.0,
+        "cost_FLOPs": 1.0000000000015393e+22,
+        "budget_residual": 15393095680.0,
+        "message": "Optimization terminated successfully",
+        "budget_utilization": 1.0000000000015392,
+        "active_set": [
+          "Q1",
+          "budget"
+        ],
+        "marginal_benefit_per_cost": {
+          "N": 7.971615666743088e-24,
+          "D": 7.971615633773187e-24,
+          "Q": 5.994882406442048e-23
+        },
+        "interior_ratio_relative_spread": 5.499674374460723e-10,
+        "kkt_mu_estimate": 7.971615650258137e-24,
+        "kkt_mu_interval": [
+          7.971615650258137e-24,
+          7.971615650258137e-24
+        ],
+        "boundary_kkt_inequalities": [
+          {
+            "variable": "Q",
+            "bound": "upper",
+            "ratio": 5.994882406442048e-23,
+            "satisfied": true
+          }
+        ],
+        "primal_feasible": true,
+        "kkt_relative_violation": 2.7498371872303615e-10,
+        "complementarity_relative_residual": 2.0467484118959781e-13,
+        "kkt_check_pass": true,
+        "kkt_note": "Relative marginal residuals; primal, dual and complementarity checked. Necessary, not sufficient, for global optimality."
+      },
+      "starts": 36,
+      "converged_feasible_starts": 36
+    },
+    {
+      "budget_FLOPs": 1e+22,
+      "context_tokens": 8192,
+      "Q0": 0.5,
+      "quality_family": "power",
+      "minimum_supported_cost_FLOPs": 5.346880000000001e+18,
+      "status": "converged_feasible",
+      "solution": {
+        "start_id": 27,
+        "success": true,
+        "feasible": true,
+        "loss": 2.1531623201602605,
+        "N_params_B": 7.009870221557535,
+        "D_tokens_B": 171.72779179660031,
+        "Q": 1.0,
+        "cost_FLOPs": 1.000000000000847e+22,
+        "budget_residual": 8470396928.0,
+        "message": "Optimization terminated successfully",
+        "budget_utilization": 1.000000000000847,
+        "active_set": [
+          "Q1",
+          "budget"
+        ],
+        "marginal_benefit_per_cost": {
+          "N": 8.043816893002735e-24,
+          "D": 8.043816632367172e-24,
+          "Q": 7.464323392862303e-23
+        },
+        "interior_ratio_relative_spread": 3.4917506909146624e-09,
+        "kkt_mu_estimate": 8.043816762684954e-24,
+        "kkt_mu_interval": [
+          8.043816762684954e-24,
+          8.043816762684954e-24
+        ],
+        "boundary_kkt_inequalities": [
+          {
+            "variable": "Q",
+            "bound": "upper",
+            "ratio": 7.464323392862303e-23,
+            "satisfied": true
+          }
+        ],
+        "primal_feasible": true,
+        "kkt_relative_violation": 1.7458753552999376e-09,
+        "complementarity_relative_residual": 9.128648600421177e-14,
+        "kkt_check_pass": true,
+        "kkt_note": "Relative marginal residuals; primal, dual and complementarity checked. Necessary, not sufficient, for global optimality."
+      },
+      "starts": 36,
+      "converged_feasible_starts": 36
+    },
+    {
+      "budget_FLOPs": 1e+22,
+      "context_tokens": 8192,
+      "Q0": 0.5,
+      "quality_family": "logarithmic",
+      "minimum_supported_cost_FLOPs": 5.346880000000001e+18,
+      "status": "converged_feasible",
+      "solution": {
+        "start_id": 14,
+        "success": true,
+        "feasible": true,
+        "loss": 2.148140745227029,
+        "N_params_B": 6.523093155862906,
+        "D_tokens_B": 195.93141992192943,
+        "Q": 1.0,
+        "cost_FLOPs": 1.0000000000009072e+22,
+        "budget_residual": 9072279552.0,
+        "message": "Optimization terminated successfully",
+        "budget_utilization": 1.0000000000009073,
+        "active_set": [
+          "Q1",
+          "budget"
+        ],
+        "marginal_benefit_per_cost": {
+          "N": 7.732277522730553e-24,
+          "D": 7.732277501605041e-24,
+          "Q": 7.250933395704394e-22
+        },
+        "interior_ratio_relative_spread": 2.913488537767723e-11,
+        "kkt_mu_estimate": 7.732277512167797e-24,
+        "kkt_mu_interval": [
+          7.732277512167797e-24,
+          7.732277512167797e-24
+        ],
+        "boundary_kkt_inequalities": [
+          {
+            "variable": "Q",
+            "bound": "upper",
+            "ratio": 7.250933395704394e-22,
+            "satisfied": true
+          }
+        ],
+        "primal_feasible": true,
+        "kkt_relative_violation": 1.4567442688838614e-11,
+        "complementarity_relative_residual": 9.6750251892494e-15,
+        "kkt_check_pass": true,
+        "kkt_note": "Relative marginal residuals; primal, dual and complementarity checked. Necessary, not sufficient, for global optimality."
+      },
+      "starts": 36,
+      "converged_feasible_starts": 34
+    },
+    {
+      "budget_FLOPs": 1e+22,
+      "context_tokens": 131072,
+      "Q0": 0.5,
+      "quality_family": "exponential",
+      "minimum_supported_cost_FLOPs": 2.2550080000000004e+19,
+      "status": "converged_feasible",
+      "solution": {
+        "start_id": 35,
+        "success": true,
+        "feasible": true,
+        "loss": 2.27171221960828,
+        "N_params_B": 3.161520358291561,
+        "D_tokens_B": 94.62536088376368,
+        "Q": 1.0,
+        "cost_FLOPs": 1.0000000000021764e+22,
+        "budget_residual": 21764243456.0,
+        "message": "Optimization terminated successfully",
+        "budget_utilization": 1.0000000000021765,
+        "active_set": [
+          "Q1",
+          "budget"
+        ],
+        "marginal_benefit_per_cost": {
+          "N": 9.61617050345375e-24,
+          "D": 9.616170270324504e-24,
+          "Q": 1.3452095218576065e-22
+        },
+        "interior_ratio_relative_spread": 1.7330329724677606e-09,
+        "kkt_mu_estimate": 9.616170386889128e-24,
+        "kkt_mu_interval": [
+          9.616170386889128e-24,
+          9.616170386889128e-24
+        ],
+        "boundary_kkt_inequalities": [
+          {
+            "variable": "Q",
+            "bound": "upper",
+            "ratio": 1.3452095218576065e-22,
+            "satisfied": true
+          }
+        ],
+        "primal_feasible": true,
+        "kkt_relative_violation": 8.665164916953638e-10,
+        "complementarity_relative_residual": 1.5558479100120753e-13,
+        "kkt_check_pass": true,
+        "kkt_note": "Relative marginal residuals; primal, dual and complementarity checked. Necessary, not sufficient, for global optimality."
+      },
+      "starts": 36,
+      "converged_feasible_starts": 36
+    },
+    {
+      "budget_FLOPs": 1e+22,
+      "context_tokens": 131072,
+      "Q0": 0.5,
+      "quality_family": "power",
+      "minimum_supported_cost_FLOPs": 2.2550080000000004e+19,
+      "status": "converged_feasible",
+      "solution": {
+        "start_id": 33,
+        "success": true,
+        "feasible": true,
+        "loss": 2.2724847806836164,
+        "N_params_B": 3.1907087061363946,
+        "D_tokens_B": 93.04552914548348,
+        "Q": 1.0,
+        "cost_FLOPs": 1.000000000001247e+22,
+        "budget_residual": 12469665792.0,
+        "message": "Optimization terminated successfully",
+        "budget_utilization": 1.000000000001247,
+        "active_set": [
+          "Q1",
+          "budget"
+        ],
+        "marginal_benefit_per_cost": {
+          "N": 9.664795043967073e-24,
+          "D": 9.664795092540916e-24,
+          "Q": 1.6544010089666077e-22
+        },
+        "interior_ratio_relative_spread": 2.936038084054155e-10,
+        "kkt_mu_estimate": 9.664795068253994e-24,
+        "kkt_mu_interval": [
+          9.664795068253994e-24,
+          9.664795068253994e-24
+        ],
+        "boundary_kkt_inequalities": [
+          {
+            "variable": "Q",
+            "bound": "upper",
+            "ratio": 1.6544010089666077e-22,
+            "satisfied": true
+          }
+        ],
+        "primal_feasible": true,
+        "kkt_relative_violation": 1.4680190864349305e-10,
+        "complementarity_relative_residual": 7.284826084454716e-14,
+        "kkt_check_pass": true,
+        "kkt_note": "Relative marginal residuals; primal, dual and complementarity checked. Necessary, not sufficient, for global optimality."
+      },
+      "starts": 36,
+      "converged_feasible_starts": 36
+    },
+    {
+      "budget_FLOPs": 1e+22,
+      "context_tokens": 131072,
+      "Q0": 0.5,
+      "quality_family": "logarithmic",
+      "minimum_supported_cost_FLOPs": 2.2550080000000004e+19,
+      "status": "converged_feasible",
+      "solution": {
+        "start_id": 9,
+        "success": true,
+        "feasible": true,
+        "loss": 2.2692816535838958,
+        "N_params_B": 3.068825916075855,
+        "D_tokens_B": 99.92739555495778,
+        "Q": 1.0,
+        "cost_FLOPs": 1.0000000000057707e+22,
+        "budget_residual": 57707331584.0,
+        "message": "Optimization terminated successfully",
+        "budget_utilization": 1.0000000000057707,
+        "active_set": [
+          "Q1",
+          "budget"
+        ],
+        "marginal_benefit_per_cost": {
+          "N": 9.460391136034823e-24,
+          "D": 9.460391180904671e-24,
+          "Q": 1.7002899135368357e-21
+        },
+        "interior_ratio_relative_spread": 2.6389527694808176e-11,
+        "kkt_mu_estimate": 9.460391158469747e-24,
+        "kkt_mu_interval": [
+          9.460391158469747e-24,
+          9.460391158469747e-24
+        ],
+        "boundary_kkt_inequalities": [
+          {
+            "variable": "Q",
+            "bound": "upper",
+            "ratio": 1.7002899135368357e-21,
+            "satisfied": true
+          }
+        ],
+        "primal_feasible": true,
+        "kkt_relative_violation": 1.3194763847404088e-11,
+        "complementarity_relative_residual": 3.210819631173057e-14,
+        "kkt_check_pass": true,
+        "kkt_note": "Relative marginal residuals; primal, dual and complementarity checked. Necessary, not sufficient, for global optimality."
+      },
+      "starts": 36,
+      "converged_feasible_starts": 35
+    },
+    {
+      "budget_FLOPs": 1e+24,
+      "context_tokens": 2048,
+      "Q0": 0.5,
+      "quality_family": "exponential",
+      "minimum_supported_cost_FLOPs": 4.4867200000000005e+18,
+      "status": "converged_feasible",
+      "solution": {
+        "start_id": 0,
+        "success": true,
+        "feasible": true,
+        "loss": 2.032515234425615,
+        "N_params_B": 11.969999999999997,
+        "D_tokens_B": 600.0,
+        "Q": 0.9999999999999999,
+        "cost_FLOPs": 4.8333806739417266e+22,
+        "budget_residual": -9.516661932605828e+23,
+        "message": "Optimization terminated successfully",
+        "budget_utilization": 0.048333806739417264,
+        "active_set": [
+          "N_max",
+          "D_max",
+          "Q1"
+        ],
+        "marginal_benefit_per_cost": {
+          "N": 1.38077695007526e-24,
+          "D": 1.144059755940588e-24,
+          "Q": 1.439429108006146e-23
+        },
+        "interior_ratio_relative_spread": null,
+        "kkt_mu_estimate": 0.0,
+        "kkt_mu_interval": [
+          0.0,
+          0.0
+        ],
+        "boundary_kkt_inequalities": [
+          {
+            "variable": "N",
+            "bound": "upper",
+            "ratio": 1.38077695007526e-24,
+            "satisfied": true
+          },
+          {
+            "variable": "D",
+            "bound": "upper",
+            "ratio": 1.144059755940588e-24,
+            "satisfied": true
+          },
+          {
+            "variable": "Q",
+            "bound": "upper",
+            "ratio": 1.439429108006146e-23,
+            "satisfied": true
+          }
+        ],
+        "primal_feasible": true,
+        "kkt_relative_violation": 0.0,
+        "complementarity_relative_residual": 0.0,
+        "kkt_check_pass": true,
+        "kkt_note": "Relative marginal residuals; primal, dual and complementarity checked. Necessary, not sufficient, for global optimality."
+      },
+      "starts": 36,
+      "converged_feasible_starts": 36
+    },
+    {
+      "budget_FLOPs": 1e+24,
+      "context_tokens": 2048,
+      "Q0": 0.5,
+      "quality_family": "power",
+      "minimum_supported_cost_FLOPs": 4.4867200000000005e+18,
+      "status": "converged_feasible",
+      "solution": {
+        "start_id": 0,
+        "success": true,
+        "feasible": true,
+        "loss": 2.032515234425615,
+        "N_params_B": 11.969999999999997,
+        "D_tokens_B": 600.0,
+        "Q": 0.9999999999999999,
+        "cost_FLOPs": 4.884624719999998e+22,
+        "budget_residual": -9.511537528e+23,
+        "message": "Optimization terminated successfully",
+        "budget_utilization": 0.048846247199999984,
+        "active_set": [
+          "N_max",
+          "D_max",
+          "Q1"
+        ],
+        "marginal_benefit_per_cost": {
+          "N": 1.38077695007526e-24,
+          "D": 1.1320575543002468e-24,
+          "Q": 1.7421214450837292e-23
+        },
+        "interior_ratio_relative_spread": null,
+        "kkt_mu_estimate": 0.0,
+        "kkt_mu_interval": [
+          0.0,
+          0.0
+        ],
+        "boundary_kkt_inequalities": [
+          {
+            "variable": "N",
+            "bound": "upper",
+            "ratio": 1.38077695007526e-24,
+            "satisfied": true
+          },
+          {
+            "variable": "D",
+            "bound": "upper",
+            "ratio": 1.1320575543002468e-24,
+            "satisfied": true
+          },
+          {
+            "variable": "Q",
+            "bound": "upper",
+            "ratio": 1.7421214450837292e-23,
+            "satisfied": true
+          }
+        ],
+        "primal_feasible": true,
+        "kkt_relative_violation": 0.0,
+        "complementarity_relative_residual": 0.0,
+        "kkt_check_pass": true,
+        "kkt_note": "Relative marginal residuals; primal, dual and complementarity checked. Necessary, not sufficient, for global optimality."
+      },
+      "starts": 36,
+      "converged_feasible_starts": 36
+    },
+    {
+      "budget_FLOPs": 1e+24,
+      "context_tokens": 2048,
+      "Q0": 0.5,
+      "quality_family": "logarithmic",
+      "minimum_supported_cost_FLOPs": 4.4867200000000005e+18,
+      "status": "converged_feasible",
+      "solution": {
+        "start_id": 0,
+        "success": true,
+        "feasible": true,
+        "loss": 2.032515234425615,
+        "N_params_B": 11.969999999999997,
+        "D_tokens_B": 600.0,
+        "Q": 0.9999999999999999,
+        "cost_FLOPs": 4.6761110164284365e+22,
+        "budget_residual": -9.532388898357156e+23,
+        "message": "Optimization terminated successfully",
+        "budget_utilization": 0.046761110164284365,
+        "active_set": [
+          "N_max",
+          "D_max",
+          "Q1"
+        ],
+        "marginal_benefit_per_cost": {
+          "N": 1.38077695007526e-24,
+          "D": 1.182537432231717e-24,
+          "Q": 1.9163335895921012e-22
+        },
+        "interior_ratio_relative_spread": null,
+        "kkt_mu_estimate": 0.0,
+        "kkt_mu_interval": [
+          0.0,
+          0.0
+        ],
+        "boundary_kkt_inequalities": [
+          {
+            "variable": "N",
+            "bound": "upper",
+            "ratio": 1.38077695007526e-24,
+            "satisfied": true
+          },
+          {
+            "variable": "D",
+            "bound": "upper",
+            "ratio": 1.182537432231717e-24,
+            "satisfied": true
+          },
+          {
+            "variable": "Q",
+            "bound": "upper",
+            "ratio": 1.9163335895921012e-22,
+            "satisfied": true
+          }
+        ],
+        "primal_feasible": true,
+        "kkt_relative_violation": 0.0,
+        "complementarity_relative_residual": 0.0,
+        "kkt_check_pass": true,
+        "kkt_note": "Relative marginal residuals; primal, dual and complementarity checked. Necessary, not sufficient, for global optimality."
+      },
+      "starts": 36,
+      "converged_feasible_starts": 36
+    },
+    {
+      "budget_FLOPs": 1e+24,
+      "context_tokens": 8192,
+      "Q0": 0.5,
+      "quality_family": "exponential",
+      "minimum_supported_cost_FLOPs": 5.346880000000001e+18,
+      "status": "converged_feasible",
+      "solution": {
+        "start_id": 0,
+        "success": true,
+        "feasible": true,
+        "loss": 2.032515234425615,
+        "N_params_B": 11.969999999999997,
+        "D_tokens_B": 600.0,
+        "Q": 0.9999999999999999,
+        "cost_FLOPs": 5.7159048339417266e+22,
+        "budget_residual": -9.428409516605828e+23,
+        "message": "Optimization terminated successfully",
+        "budget_utilization": 0.05715904833941727,
+        "active_set": [
+          "N_max",
+          "D_max",
+          "Q1"
+        ],
+        "marginal_benefit_per_cost": {
+          "N": 1.1586494474238566e-24,
+          "D": 9.674192406706717e-25,
+          "Q": 1.439429108006146e-23
+        },
+        "interior_ratio_relative_spread": null,
+        "kkt_mu_estimate": 0.0,
+        "kkt_mu_interval": [
+          0.0,
+          0.0
+        ],
+        "boundary_kkt_inequalities": [
+          {
+            "variable": "N",
+            "bound": "upper",
+            "ratio": 1.1586494474238566e-24,
+            "satisfied": true
+          },
+          {
+            "variable": "D",
+            "bound": "upper",
+            "ratio": 9.674192406706717e-25,
+            "satisfied": true
+          },
+          {
+            "variable": "Q",
+            "bound": "upper",
+            "ratio": 1.439429108006146e-23,
+            "satisfied": true
+          }
+        ],
+        "primal_feasible": true,
+        "kkt_relative_violation": 0.0,
+        "complementarity_relative_residual": 0.0,
+        "kkt_check_pass": true,
+        "kkt_note": "Relative marginal residuals; primal, dual and complementarity checked. Necessary, not sufficient, for global optimality."
+      },
+      "starts": 36,
+      "converged_feasible_starts": 36
+    },
+    {
+      "budget_FLOPs": 1e+24,
+      "context_tokens": 8192,
+      "Q0": 0.5,
+      "quality_family": "power",
+      "minimum_supported_cost_FLOPs": 5.346880000000001e+18,
+      "status": "converged_feasible",
+      "solution": {
+        "start_id": 0,
+        "success": true,
+        "feasible": true,
+        "loss": 2.032515234425615,
+        "N_params_B": 11.969999999999997,
+        "D_tokens_B": 600.0,
+        "Q": 0.9999999999999999,
+        "cost_FLOPs": 5.767148879999998e+22,
+        "budget_residual": -9.423285112e+23,
+        "message": "Optimization terminated successfully",
+        "budget_utilization": 0.05767148879999998,
+        "active_set": [
+          "N_max",
+          "D_max",
+          "Q1"
+        ],
+        "marginal_benefit_per_cost": {
+          "N": 1.1586494474238566e-24,
+          "D": 9.588232295119331e-25,
+          "Q": 1.7421214450837292e-23
+        },
+        "interior_ratio_relative_spread": null,
+        "kkt_mu_estimate": 0.0,
+        "kkt_mu_interval": [
+          0.0,
+          0.0
+        ],
+        "boundary_kkt_inequalities": [
+          {
+            "variable": "N",
+            "bound": "upper",
+            "ratio": 1.1586494474238566e-24,
+            "satisfied": true
+          },
+          {
+            "variable": "D",
+            "bound": "upper",
+            "ratio": 9.588232295119331e-25,
+            "satisfied": true
+          },
+          {
+            "variable": "Q",
+            "bound": "upper",
+            "ratio": 1.7421214450837292e-23,
+            "satisfied": true
+          }
+        ],
+        "primal_feasible": true,
+        "kkt_relative_violation": 0.0,
+        "complementarity_relative_residual": 0.0,
+        "kkt_check_pass": true,
+        "kkt_note": "Relative marginal residuals; primal, dual and complementarity checked. Necessary, not sufficient, for global optimality."
+      },
+      "starts": 36,
+      "converged_feasible_starts": 36
+    },
+    {
+      "budget_FLOPs": 1e+24,
+      "context_tokens": 8192,
+      "Q0": 0.5,
+      "quality_family": "logarithmic",
+      "minimum_supported_cost_FLOPs": 5.346880000000001e+18,
+      "status": "converged_feasible",
+      "solution": {
+        "start_id": 0,
+        "success": true,
+        "feasible": true,
+        "loss": 2.032515234425615,
+        "N_params_B": 11.969999999999997,
+        "D_tokens_B": 600.0,
+        "Q": 0.9999999999999999,
+        "cost_FLOPs": 5.5586351764284365e+22,
+        "budget_residual": -9.444136482357156e+23,
+        "message": "Optimization terminated successfully",
+        "budget_utilization": 0.055586351764284364,
+        "active_set": [
+          "N_max",
+          "D_max",
+          "Q1"
+        ],
+        "marginal_benefit_per_cost": {
+          "N": 1.1586494474238566e-24,
+          "D": 9.947902927046714e-25,
+          "Q": 1.9163335895921012e-22
+        },
+        "interior_ratio_relative_spread": null,
+        "kkt_mu_estimate": 0.0,
+        "kkt_mu_interval": [
+          0.0,
+          0.0
+        ],
+        "boundary_kkt_inequalities": [
+          {
+            "variable": "N",
+            "bound": "upper",
+            "ratio": 1.1586494474238566e-24,
+            "satisfied": true
+          },
+          {
+            "variable": "D",
+            "bound": "upper",
+            "ratio": 9.947902927046714e-25,
+            "satisfied": true
+          },
+          {
+            "variable": "Q",
+            "bound": "upper",
+            "ratio": 1.9163335895921012e-22,
+            "satisfied": true
+          }
+        ],
+        "primal_feasible": true,
+        "kkt_relative_violation": 0.0,
+        "complementarity_relative_residual": 0.0,
+        "kkt_check_pass": true,
+        "kkt_note": "Relative marginal residuals; primal, dual and complementarity checked. Necessary, not sufficient, for global optimality."
+      },
+      "starts": 36,
+      "converged_feasible_starts": 36
+    },
+    {
+      "budget_FLOPs": 1e+24,
+      "context_tokens": 131072,
+      "Q0": 0.5,
+      "quality_family": "exponential",
+      "minimum_supported_cost_FLOPs": 2.2550080000000004e+19,
+      "status": "converged_feasible",
+      "solution": {
+        "start_id": 0,
+        "success": true,
+        "feasible": true,
+        "loss": 2.032515234425615,
+        "N_params_B": 11.969999999999997,
+        "D_tokens_B": 600.0,
+        "Q": 0.9999999999999999,
+        "cost_FLOPs": 2.3366388033941724e+23,
+        "budget_residual": -7.663361196605828e+23,
+        "message": "Optimization terminated successfully",
+        "budget_utilization": 0.23366388033941723,
+        "active_set": [
+          "N_max",
+          "D_max",
+          "Q1"
+        ],
+        "marginal_benefit_per_cost": {
+          "N": 2.747289392073851e-25,
+          "D": 2.3665088100759897e-25,
+          "Q": 1.439429108006146e-23
+        },
+        "interior_ratio_relative_spread": null,
+        "kkt_mu_estimate": 0.0,
+        "kkt_mu_interval": [
+          0.0,
+          0.0
+        ],
+        "boundary_kkt_inequalities": [
+          {
+            "variable": "N",
+            "bound": "upper",
+            "ratio": 2.747289392073851e-25,
+            "satisfied": true
+          },
+          {
+            "variable": "D",
+            "bound": "upper",
+            "ratio": 2.3665088100759897e-25,
+            "satisfied": true
+          },
+          {
+            "variable": "Q",
+            "bound": "upper",
+            "ratio": 1.439429108006146e-23,
+            "satisfied": true
+          }
+        ],
+        "primal_feasible": true,
+        "kkt_relative_violation": 0.0,
+        "complementarity_relative_residual": 0.0,
+        "kkt_check_pass": true,
+        "kkt_note": "Relative marginal residuals; primal, dual and complementarity checked. Necessary, not sufficient, for global optimality."
+      },
+      "starts": 36,
+      "converged_feasible_starts": 36
+    },
+    {
+      "budget_FLOPs": 1e+24,
+      "context_tokens": 131072,
+      "Q0": 0.5,
+      "quality_family": "power",
+      "minimum_supported_cost_FLOPs": 2.2550080000000004e+19,
+      "status": "converged_feasible",
+      "solution": {
+        "start_id": 0,
+        "success": true,
+        "feasible": true,
+        "loss": 2.032515234425615,
+        "N_params_B": 11.969999999999997,
+        "D_tokens_B": 600.0,
+        "Q": 0.9999999999999999,
+        "cost_FLOPs": 2.3417632079999995e+23,
+        "budget_residual": -7.658236792e+23,
+        "message": "Optimization terminated successfully",
+        "budget_utilization": 0.23417632079999995,
+        "active_set": [
+          "N_max",
+          "D_max",
+          "Q1"
+        ],
+        "marginal_benefit_per_cost": {
+          "N": 2.747289392073851e-25,
+          "D": 2.361330255470359e-25,
+          "Q": 1.7421214450837292e-23
+        },
+        "interior_ratio_relative_spread": null,
+        "kkt_mu_estimate": 0.0,
+        "kkt_mu_interval": [
+          0.0,
+          0.0
+        ],
+        "boundary_kkt_inequalities": [
+          {
+            "variable": "N",
+            "bound": "upper",
+            "ratio": 2.747289392073851e-25,
+            "satisfied": true
+          },
+          {
+            "variable": "D",
+            "bound": "upper",
+            "ratio": 2.361330255470359e-25,
+            "satisfied": true
+          },
+          {
+            "variable": "Q",
+            "bound": "upper",
+            "ratio": 1.7421214450837292e-23,
+            "satisfied": true
+          }
+        ],
+        "primal_feasible": true,
+        "kkt_relative_violation": 0.0,
+        "complementarity_relative_residual": 0.0,
+        "kkt_check_pass": true,
+        "kkt_note": "Relative marginal residuals; primal, dual and complementarity checked. Necessary, not sufficient, for global optimality."
+      },
+      "starts": 36,
+      "converged_feasible_starts": 36
+    },
+    {
+      "budget_FLOPs": 1e+24,
+      "context_tokens": 131072,
+      "Q0": 0.5,
+      "quality_family": "logarithmic",
+      "minimum_supported_cost_FLOPs": 2.2550080000000004e+19,
+      "status": "converged_feasible",
+      "solution": {
+        "start_id": 0,
+        "success": true,
+        "feasible": true,
+        "loss": 2.032515234425615,
+        "N_params_B": 11.969999999999997,
+        "D_tokens_B": 600.0,
+        "Q": 0.9999999999999999,
+        "cost_FLOPs": 2.3209118376428434e+23,
+        "budget_residual": -7.679088162357156e+23,
+        "message": "Optimization terminated successfully",
+        "budget_utilization": 0.23209118376428434,
+        "active_set": [
+          "N_max",
+          "D_max",
+          "Q1"
+        ],
+        "marginal_benefit_per_cost": {
+          "N": 2.747289392073851e-25,
+          "D": 2.3825447500900154e-25,
+          "Q": 1.9163335895921012e-22
+        },
+        "interior_ratio_relative_spread": null,
+        "kkt_mu_estimate": 0.0,
+        "kkt_mu_interval": [
+          0.0,
+          0.0
+        ],
+        "boundary_kkt_inequalities": [
+          {
+            "variable": "N",
+            "bound": "upper",
+            "ratio": 2.747289392073851e-25,
+            "satisfied": true
+          },
+          {
+            "variable": "D",
+            "bound": "upper",
+            "ratio": 2.3825447500900154e-25,
+            "satisfied": true
+          },
+          {
+            "variable": "Q",
+            "bound": "upper",
+            "ratio": 1.9163335895921012e-22,
+            "satisfied": true
+          }
+        ],
+        "primal_feasible": true,
+        "kkt_relative_violation": 0.0,
+        "complementarity_relative_residual": 0.0,
+        "kkt_check_pass": true,
+        "kkt_note": "Relative marginal residuals; primal, dual and complementarity checked. Necessary, not sufficient, for global optimality."
+      },
+      "starts": 36,
+      "converged_feasible_starts": 36
+    }
+  ],
+  "ready_for_Q3": false,
+  "chm_owner_acceptance": false
+}

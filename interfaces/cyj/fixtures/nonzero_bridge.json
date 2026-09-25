@@ -1,0 +1,36 @@
+{
+  "schema_version": "cyj.ndqp.scenario.v5",
+  "mode": "conditional_diagnostic",
+  "requests": [
+    {
+      "request_id": "nonzero_bridge",
+      "N_params_B": 1,
+      "D_tokens_B": 100,
+      "Q_score": 0.5,
+      "p": {
+        "arxiv": 0.12302252583269278,
+        "freelaw": 0.08682483215202781,
+        "nih_exporter": 0.00588968021709595,
+        "pubmed_central": 0.11375419105058357,
+        "wikipedia_en": 0.07507775607983627,
+        "dm_mathematics": 0.0254628540970504,
+        "github": 0.11070066007050916,
+        "philpapers": 0.005487697351193036,
+        "stackexchange": 0.09943242344413017,
+        "enron_emails": 0.002211033043406226,
+        "gutenberg_pg_19": 0.04691494424753537,
+        "pile_cc": 0.11948759779188561,
+        "ubuntu_irc": 0.019599998284005892,
+        "europarl": 0.012737064754031531,
+        "hackernews": 0.011650822378108678,
+        "pubmed_abstracts": 0.06618116611257162,
+        "uspto_backgrounds": 0.07556475309333588
+      },
+      "weights": {
+        "arxiv": 1.0
+      },
+      "bridge_lambda": 0.5,
+      "eta": 0
+    }
+  ]
+}

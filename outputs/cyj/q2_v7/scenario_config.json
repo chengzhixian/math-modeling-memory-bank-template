@@ -1,0 +1,38 @@
+{
+  "N_params_B": 1.0,
+  "D_tokens_B": 100.0,
+  "Q_score": 0.5,
+  "equal_13": {
+    "arxiv": 0.07692307692307693,
+    "freelaw": 0.07692307692307693,
+    "pubmed_central": 0.07692307692307693,
+    "wikipedia_en": 0.07692307692307693,
+    "dm_mathematics": 0.07692307692307693,
+    "github": 0.07692307692307693,
+    "stackexchange": 0.07692307692307693,
+    "gutenberg_pg_19": 0.07692307692307693,
+    "pile_cc": 0.07692307692307693,
+    "ubuntu_irc": 0.07692307692307693,
+    "hackernews": 0.07692307692307693,
+    "pubmed_abstracts": 0.07692307692307693,
+    "uspto_backgrounds": 0.07692307692307693
+  },
+  "policy_tolerance": 1e-10,
+  "support": [
+    [
+      0.07,
+      11.97
+    ],
+    [
+      10.0,
+      600.0
+    ],
+    [
+      0.1,
+      1.0
+    ]
+  ],
+  "bridge_lambda": 1,
+  "eta": 0,
+  "status": "conditional_scenario"
+}

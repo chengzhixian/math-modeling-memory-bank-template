@@ -1,0 +1,102 @@
+dataset,family,source,N_params_B,D_tokens_B,reported_val_loss,classic_prediction,raw_difference_not_a_validated_error,is_ND_extrapolation,ND_extrapolation_distance_log_space,comparison_status
+B4,Phi,,1.3,405,2.5317,2.2446523119115867,-0.2870476880884132,True,0.30046132273768844,descriptive_only_absolute_loss_comparability_not_established
+B4,LLaMA,,65.0,11349,1.8828,1.8663632040495843,-0.016436795950415695,True,4.008243400875327,descriptive_only_absolute_loss_comparability_not_established
+B4,LLaMA,,13.0,2229,2.0796,1.9811835969735216,-0.09841640302647847,True,2.0075947026518888,descriptive_only_absolute_loss_comparability_not_established
+B4,LLaMA,,33.0,4583,1.9757,1.9148187822874825,-0.06088121771251753,True,2.909281132207607,descriptive_only_absolute_loss_comparability_not_established
+B4,Qwen2,,20.0,3000,2.0858,1.949584128785116,-0.13621587121488377,True,2.359535064735935,descriptive_only_absolute_loss_comparability_not_established
+B4,Qwen2,,72.0,33739,1.8505,1.8395446859318099,-0.01095531406819017,True,5.052445730604139,descriptive_only_absolute_loss_comparability_not_established
+B4,Pythia,,1.4,129,2.6238,2.3238025144715446,-0.2999974855284555,False,0.0,descriptive_only_absolute_loss_comparability_not_established
+B4,Pythia,,12.0,300,2.1077,2.0932119035174015,-0.014488096482598412,True,0.0028742033142490856,descriptive_only_absolute_loss_comparability_not_established
+B4,Pythia,,2.8,300,2.4276,2.1905601692413743,-0.23703983075862567,True,0.00035673028735061507,descriptive_only_absolute_loss_comparability_not_established
+B4,Pythia,,0.16,13,3.725,2.9548203134290554,-0.7701796865709447,False,0.0,descriptive_only_absolute_loss_comparability_not_established
+B4,Phi,,2.7,1084,2.32,2.1177671824755278,-0.20223281752447209,True,1.2849874376307415,descriptive_only_absolute_loss_comparability_not_established
+B4,LLaMA,,7.0,1229,2.187,2.041844188487908,-0.14515581151209167,True,1.410530365197184,descriptive_only_absolute_loss_comparability_not_established
+B4,LLaMA,,3.5,2200,2.3258,2.0649182606384144,-0.26088173936158565,True,1.9927868949775567,descriptive_only_absolute_loss_comparability_not_established
+B4,Pythia,,0.41,41,3.1611,2.6077872344344692,-0.5533127655655306,False,0.0,descriptive_only_absolute_loss_comparability_not_established
+B4,Pythia,,6.9,300,2.3285,2.124692425840422,-0.20380757415957795,True,0.00035673028735061507,descriptive_only_absolute_loss_comparability_not_established
+B4,Qwen2,,0.5,361,2.8399,2.3764827070126087,-0.4634172929873914,True,0.18545221396403022,descriptive_only_absolute_loss_comparability_not_established
+B4,Phi,,14.0,4790,2.0512,1.9498713115491269,-0.10132868845087328,True,2.775304429363565,descriptive_only_absolute_loss_comparability_not_established
+B4,Phi,,4.2,350,2.3867,2.1478293768624512,-0.2388706231375486,True,0.15450741011460867,descriptive_only_absolute_loss_comparability_not_established
+B4,Phi,,7.0,4448,2.1464,1.990645306504789,-0.15575469349521076,True,2.696784091561568,descriptive_only_absolute_loss_comparability_not_established
+B4,Qwen2,,7.0,2221,2.2237,2.015995378763491,-0.207704621236509,True,2.002287079525577,descriptive_only_absolute_loss_comparability_not_established
+B4,Gemma,,2.0,1049,2.394,2.1465118219589203,-0.2474881780410798,True,1.2521668640274468,descriptive_only_absolute_loss_comparability_not_established
+B4,Gemma,,7.0,4109,2.0973,1.9932961117574493,-0.10400388824255091,True,2.61750922451456,descriptive_only_absolute_loss_comparability_not_established
+B4,Pythia,,0.07,6,4.3629,3.315182712539963,-1.0477172874600367,True,0.007713035064299767,descriptive_only_absolute_loss_comparability_not_established
+B4,Qwen2,,1.5,680,2.5398,2.1980823001566194,-0.34171769984338063,True,0.8186670538013017,descriptive_only_absolute_loss_comparability_not_established
+B4,Pythia,,1.0,111,2.7965,2.375737149951863,-0.42076285004813707,False,0.0,descriptive_only_absolute_loss_comparability_not_established
+B4,Phi,,18.0,2800,2.0743,1.9568182738377202,-0.11748172616227981,True,2.2709581157338463,descriptive_only_absolute_loss_comparability_not_established
+B4,GPT2,,0.12,40,3.0,2.8593532841067266,-0.14064671589327338,False,0.0,descriptive_only_absolute_loss_comparability_not_established
+B4,GPT2,,0.35,40,2.85,2.6373191386620927,-0.21268086133790742,False,0.0,descriptive_only_absolute_loss_comparability_not_established
+B4,GPT2,,0.77,40,2.75,2.5183857486003958,-0.23161425139960423,False,0.0,descriptive_only_absolute_loss_comparability_not_established
+B4,GPT2,,1.5,40,2.7,2.4399107277161756,-0.2600892722838246,False,0.0,descriptive_only_absolute_loss_comparability_not_established
+B4,OPT,,0.13,300,3.11,2.649426693167027,-0.46057330683297293,True,0.00035673028735061507,descriptive_only_absolute_loss_comparability_not_established
+B4,OPT,,0.35,300,2.88,2.44693216301296,-0.43306783698704,True,0.00035673028735061507,descriptive_only_absolute_loss_comparability_not_established
+B4,OPT,,1.3,300,2.65,2.26489844465057,-0.3851015553494297,True,0.00035673028735061507,descriptive_only_absolute_loss_comparability_not_established
+B4,OPT,,2.7,300,2.5,2.1936633052958427,-0.30633669470415725,True,0.00035673028735061507,descriptive_only_absolute_loss_comparability_not_established
+B4,OPT,,6.7,300,2.33,2.126537247795335,-0.20346275220466525,True,0.00035673028735061507,descriptive_only_absolute_loss_comparability_not_established
+B4,OPT,,13.0,300,2.22,2.0891292252479072,-0.13087077475209297,True,0.08289545494660226,descriptive_only_absolute_loss_comparability_not_established
+B4,OPT,,30.0,300,2.1,2.052505717940487,-0.047494282059513004,True,0.9191427807970848,descriptive_only_absolute_loss_comparability_not_established
+B4,BLOOM,,0.56,350,2.75,2.361623900022501,-0.3883760999774988,True,0.15450741011460867,descriptive_only_absolute_loss_comparability_not_established
+B4,BLOOM,,1.7,350,2.55,2.2260641835285497,-0.3239358164714501,True,0.15450741011460867,descriptive_only_absolute_loss_comparability_not_established
+B4,BLOOM,,3.0,350,2.45,2.174165765709866,-0.2758342342901341,True,0.15450741011460867,descriptive_only_absolute_loss_comparability_not_established
+B4,BLOOM,,7.1,350,2.3,2.1123060356272627,-0.1876939643727371,True,0.15450741011460867,descriptive_only_absolute_loss_comparability_not_established
+B4,Falcon,,7.0,1500,2.25,2.0326578668025324,-0.21734213319746765,True,1.6097946427214511,descriptive_only_absolute_loss_comparability_not_established
+B4,Falcon,,40.0,1500,2.05,1.9509898933401935,-0.09901010665980636,True,2.0119306277969375,descriptive_only_absolute_loss_comparability_not_established
+B4,Mistral,,7.0,8000,2.1,1.9727451753181025,-0.12725482468189764,True,3.2837710762931227,descriptive_only_absolute_loss_comparability_not_established
+B4,Yi,,6.0,3000,2.1,2.01424238145706,-0.08575761854294006,True,2.3029418232813956,descriptive_only_absolute_loss_comparability_not_established
+B4,Yi,,34.0,3000,1.9,1.9284833509951549,0.028483350995154977,True,2.5286588854993397,descriptive_only_absolute_loss_comparability_not_established
+B4,LLaMA,,70.0,15000,1.71,1.8574063177990723,0.14740631779907232,True,4.2926713699861585,descriptive_only_absolute_loss_comparability_not_established
+B4,Qwen2,,32.0,18000,1.95,1.8786811644294494,-0.07131883557055052,True,4.211200237754374,descriptive_only_absolute_loss_comparability_not_established
+B4,Qwen2,,72.0,18000,1.85,1.8524277508615732,0.002427750861573097,True,4.470705640890762,descriptive_only_absolute_loss_comparability_not_established
+B4,Gemma,,9.0,8000,2.1,1.9577862661161893,-0.14221373388381076,True,3.2837710762931227,descriptive_only_absolute_loss_comparability_not_established
+B4,Cerebras-GPT,,0.11,2050,2.95,2.586271939577507,-0.3637280604224933,True,1.9221693277636032,descriptive_only_absolute_loss_comparability_not_established
+B4,Cerebras-GPT,,0.26,2050,2.7,2.3961735616221245,-0.3038264383778757,True,1.9221693277636032,descriptive_only_absolute_loss_comparability_not_established
+B4,Cerebras-GPT,,0.59,2050,2.5,2.260107380255776,-0.23989261974422416,True,1.9221693277636032,descriptive_only_absolute_loss_comparability_not_established
+B4,Cerebras-GPT,,1.3,2050,2.35,2.160351340802617,-0.18964865919738294,True,1.9221693277636032,descriptive_only_absolute_loss_comparability_not_established
+B4,Cerebras-GPT,,2.7,2050,2.22,2.08911620144789,-0.13088379855211008,True,1.9221693277636032,descriptive_only_absolute_loss_comparability_not_established
+B4,Cerebras-GPT,,6.7,2050,2.08,2.0219901439473817,-0.058009856052618325,True,1.9221693277636032,descriptive_only_absolute_loss_comparability_not_established
+B4,Cerebras-GPT,,13.0,2050,2.0,1.9845821213999542,-0.015417878600045842,True,1.9239559386299596,descriptive_only_absolute_loss_comparability_not_established
+B5,GPT-2,Kaplan et al. 2020,1.5,10,2.906,2.6492915945264386,-0.25670840547356155,False,0.0,descriptive_only_absolute_loss_comparability_not_established
+B5,GPT-3,Kaplan et al. 2020,0.125,300,2.761,2.6589346188603677,-0.10206538113963237,True,0.00035673028735061507,descriptive_only_absolute_loss_comparability_not_established
+B5,GPT-3,Kaplan et al. 2020,0.35,300,2.632,2.44693216301296,-0.1850678369870402,True,0.00035673028735061507,descriptive_only_absolute_loss_comparability_not_established
+B5,GPT-3,Kaplan et al. 2020,0.77,300,2.506,2.327998772951263,-0.17800122704873678,True,0.00035673028735061507,descriptive_only_absolute_loss_comparability_not_established
+B5,GPT-3,Kaplan et al. 2020,1.3,300,2.415,2.26489844465057,-0.15010155534942982,True,0.00035673028735061507,descriptive_only_absolute_loss_comparability_not_established
+B5,GPT-3,Kaplan et al. 2020,2.6,300,2.318,2.1969243946045562,-0.12107560539544382,True,0.00035673028735061507,descriptive_only_absolute_loss_comparability_not_established
+B5,GPT-3,Kaplan et al. 2020,6.7,300,2.199,2.126537247795335,-0.07246275220466503,True,0.00035673028735061507,descriptive_only_absolute_loss_comparability_not_established
+B5,GPT-3,Kaplan et al. 2020,13,300,2.12,2.0891292252479072,-0.030870774752092878,True,0.08289545494660226,descriptive_only_absolute_loss_comparability_not_established
+B5,GPT-3,Kaplan et al. 2020,175,300,2.011,2.0022820153366037,-0.00871798466339646,True,2.6827313275505116,descriptive_only_absolute_loss_comparability_not_established
+B5,Chinchilla,Hoffmann et al. 2022,0.5,5,3.015,2.928334259861777,-0.08666574013822315,False,0.0,descriptive_only_absolute_loss_comparability_not_established
+B5,Chinchilla,Hoffmann et al. 2022,1.0,20,2.628,2.580059036179437,-0.04794096382056301,False,0.0,descriptive_only_absolute_loss_comparability_not_established
+B5,Chinchilla,Hoffmann et al. 2022,1.4,20,2.517,2.541796786732794,0.024796786732794285,False,0.0,descriptive_only_absolute_loss_comparability_not_established
+B5,Chinchilla,Hoffmann et al. 2022,4,80,2.227,2.274572708475317,0.04757270847531725,False,0.0,descriptive_only_absolute_loss_comparability_not_established
+B5,Chinchilla,Hoffmann et al. 2022,7,140,2.106,2.1835497984030647,0.07754979840306486,False,0.0,descriptive_only_absolute_loss_comparability_not_established
+B5,Chinchilla,Hoffmann et al. 2022,13,260,1.989,2.099398743734878,0.1103987437348779,True,0.08289468737082162,descriptive_only_absolute_loss_comparability_not_established
+B5,Chinchilla,Hoffmann et al. 2022,20,400,1.917,2.0495253770378876,0.13252537703788758,True,0.5889236216888966,descriptive_only_absolute_loss_comparability_not_established
+B5,Chinchilla,Hoffmann et al. 2022,40,800,1.818,1.9817998391374578,0.16379983913745777,True,1.555362335005985,descriptive_only_absolute_loss_comparability_not_established
+B5,Chinchilla,Hoffmann et al. 2022,70,1400,1.71,1.9366151394320226,0.2266151394320226,True,2.3440098959904057,descriptive_only_absolute_loss_comparability_not_established
+B5,Gopher,Hoffmann et al. 2022,0.2,300,2.819,2.5529294896085384,-0.26607051039146157,True,0.00035673028735061507,descriptive_only_absolute_loss_comparability_not_established
+B5,Gopher,Hoffmann et al. 2022,0.5,300,2.679,2.389170210381457,-0.28982978961854267,True,0.00035673028735061507,descriptive_only_absolute_loss_comparability_not_established
+B5,Gopher,Hoffmann et al. 2022,1.4,300,2.484,2.2568429658091214,-0.22715703419087863,True,0.00035673028735061507,descriptive_only_absolute_loss_comparability_not_established
+B5,Gopher,Hoffmann et al. 2022,2.8,300,2.381,2.1905601692413743,-0.19043983075862547,True,0.00035673028735061507,descriptive_only_absolute_loss_comparability_not_established
+B5,Gopher,Hoffmann et al. 2022,7.6,300,2.312,2.1187602727932995,-0.19323972720670035,True,0.00035673028735061507,descriptive_only_absolute_loss_comparability_not_established
+B5,Gopher,Hoffmann et al. 2022,40,300,2.169,2.0421286967095753,-0.12687130329042473,True,1.2068248367469043,descriptive_only_absolute_loss_comparability_not_established
+B5,Gopher,Hoffmann et al. 2022,280,300,2.057,1.9932519851911865,-0.06374801480881342,True,3.1527349532604556,descriptive_only_absolute_loss_comparability_not_established
+B5,LLaMA,Touvron et al. 2023,7,1000,1.943,2.051905391357191,0.10890539135719113,True,1.2043295346132865,descriptive_only_absolute_loss_comparability_not_established
+B5,LLaMA,Touvron et al. 2023,13,1000,1.835,2.017237946433184,0.18223794643318403,True,1.2071790079090017,descriptive_only_absolute_loss_comparability_not_established
+B5,LLaMA,Touvron et al. 2023,33,1000,1.778,1.977063466527814,0.19906346652781393,True,1.5746505316299566,descriptive_only_absolute_loss_comparability_not_established
+B5,LLaMA,Touvron et al. 2023,65,1400,1.685,1.9387455647811174,0.2537455647811173,True,2.288680783028043,descriptive_only_absolute_loss_comparability_not_established
+B5,LLaMA-2,Touvron et al. 2023,7,2000,1.849,2.02026732024892,0.17126732024891989,True,1.897476715173232,descriptive_only_absolute_loss_comparability_not_established
+B5,LLaMA-2,Touvron et al. 2023,13,2000,1.75,1.9855998753249127,0.23559987532491267,True,1.8992865538983066,descriptive_only_absolute_loss_comparability_not_established
+B5,LLaMA-2,Touvron et al. 2023,70,2000,1.617,1.9211017562605013,0.3041017562605013,True,2.5924371118478806,descriptive_only_absolute_loss_comparability_not_established
+B5,PaLM,Chowdhery et al. 2022,8,780,1.901,2.056718760976806,0.15571876097680604,True,0.9558681753147873,descriptive_only_absolute_loss_comparability_not_established
+B5,PaLM,Chowdhery et al. 2022,62,780,1.653,1.9691774431938605,0.31617744319386043,True,1.9026222003156574,descriptive_only_absolute_loss_comparability_not_established
+B5,PaLM,Chowdhery et al. 2022,540,780,1.473,1.923851765351296,0.450851765351296,True,3.9276054360975046,descriptive_only_absolute_loss_comparability_not_established
+B5,OPT,Zhang et al. 2022,1.3,180,2.723,2.303523660035192,-0.4194763399648078,False,0.0,descriptive_only_absolute_loss_comparability_not_established
+B5,OPT,Zhang et al. 2022,6.7,180,2.417,2.1651624631799566,-0.2518375368200432,False,0.0,descriptive_only_absolute_loss_comparability_not_established
+B5,OPT,Zhang et al. 2022,30,180,2.256,2.091130933325109,-0.16486906667489087,True,0.9191427115714403,descriptive_only_absolute_loss_comparability_not_established
+B5,OPT,Zhang et al. 2022,66,180,2.179,2.064943443030607,-0.11405655696939299,True,1.70760007193571,descriptive_only_absolute_loss_comparability_not_established
+B5,OPT,Zhang et al. 2022,175,180,2.042,2.0409072307212255,-0.0010927692787743304,True,2.6827313038327993,descriptive_only_absolute_loss_comparability_not_established
+B5,BLOOM,Scao et al. 2022,0.56,366,2.628,2.3586313673387296,-0.26936863266127054,True,0.19920758903251556,descriptive_only_absolute_loss_comparability_not_established
+B5,BLOOM,Scao et al. 2022,1.7,366,2.456,2.223071650844778,-0.23292834915522187,True,0.19920758903251556,descriptive_only_absolute_loss_comparability_not_established
+B5,BLOOM,Scao et al. 2022,7.1,366,2.267,2.109313502943491,-0.15768649705650883,True,0.19920758903251556,descriptive_only_absolute_loss_comparability_not_established
+B5,BLOOM,Scao et al. 2022,176,366,1.846,1.9885592796273739,0.1425592796273738,True,2.695799677046771,descriptive_only_absolute_loss_comparability_not_established

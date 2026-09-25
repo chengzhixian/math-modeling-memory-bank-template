@@ -1,0 +1,107 @@
+{
+  "exit_code": 0,
+  "result": {
+    "schema_version": "cyj.ndqp.scenario.v7",
+    "Loss": 2.330033586394699,
+    "B7_loss": 2.5673967252758954,
+    "Q1_weighted_effect": -0.09700975593037972,
+    "bridge_factor": 0.9075471521232508,
+    "bridge_model": "exp_bridge",
+    "bridge_lambda": 1.0,
+    "eta": 0.0,
+    "gradients": {
+      "N_B": -0.13709594048250215,
+      "D_B": -0.0009130836743566198,
+      "Q_B": -0.33592608955835346,
+      "p_ambient": {
+        "arxiv": 0.06956778148342063,
+        "freelaw": 0.1347530630467967,
+        "nih_exporter": -0.2582632144638669,
+        "pubmed_central": 0.019852788855189013,
+        "wikipedia_en": 0.29687380069158825,
+        "dm_mathematics": -0.4260909633704789,
+        "github": 0.07342368066907981,
+        "philpapers": -0.9192370671269405,
+        "stackexchange": 0.23065191899842075,
+        "enron_emails": -0.9432493848311538,
+        "gutenberg_pg_19": 0.1696327006021869,
+        "pile_cc": 0.13647919520897228,
+        "ubuntu_irc": -0.5418898314423768,
+        "europarl": -0.1757277187203979,
+        "hackernews": -0.554096559021505,
+        "pubmed_abstracts": 0.23119648026578313,
+        "uspto_backgrounds": 0.3126861704285759
+      }
+    },
+    "elasticities_signed": {
+      "N": -0.05883861128999134,
+      "D": -0.039187575650763466,
+      "Q_B": -0.07208610457803265
+    },
+    "p_support": {
+      "in_A4_hull": true,
+      "observed_index": null,
+      "residual": 4.440892098500626e-16,
+      "quality": {
+        "policy": "quality_direct_and_near",
+        "covered_mass": 0.5646359074665894,
+        "unmapped_mass": 0.43536409253341035,
+        "weighted_Q_A_numerator": 0.6575655539376881,
+        "mean_Q_A_on_mapped": 1.1645833097793157,
+        "reference_covered_mass": 0.5646359074665894,
+        "reference_mean_Q_A": 0.7831035543837233,
+        "coverage_margin": 0.0,
+        "quality_margin": 0.2153971678679229,
+        "eligible": true,
+        "unknown_Q_A_count": 11,
+        "Q_A_to_Q_B_mapping": "unidentified"
+      },
+      "mode": "quality_direct_and_near"
+    },
+    "qa_stats": {
+      "quality_direct": {
+        "policy": "quality_direct",
+        "covered_mass": 0.3146434995754553,
+        "unmapped_mass": 0.6853565004245445,
+        "weighted_Q_A_numerator": 0.4158051850162859,
+        "mean_Q_A_on_mapped": 1.321512078200652,
+        "reference_covered_mass": 0.3231556093473321,
+        "reference_mean_Q_A": 0.8515354932354259,
+        "coverage_margin": -0.00851210977187683,
+        "quality_margin": 0.14787507741198003,
+        "eligible": false,
+        "unknown_Q_A_count": 11,
+        "Q_A_to_Q_B_mapping": "unidentified"
+      },
+      "quality_direct_and_near": {
+        "policy": "quality_direct_and_near",
+        "covered_mass": 0.5646359074665894,
+        "unmapped_mass": 0.43536409253341035,
+        "weighted_Q_A_numerator": 0.6575655539376881,
+        "mean_Q_A_on_mapped": 1.1645833097793157,
+        "reference_covered_mass": 0.5646359074665894,
+        "reference_mean_Q_A": 0.7831035543837233,
+        "coverage_margin": 0.0,
+        "quality_margin": 0.2153971678679229,
+        "eligible": true,
+        "unknown_Q_A_count": 11,
+        "Q_A_to_Q_B_mapping": "unidentified"
+      }
+    },
+    "Q1_manifest_sha256": "c621f7e405106e42720f918f490235b5e8becefb0f7c8cb997736e96337117a9",
+    "Q1_source_commit": "333b1f0bbed65da43f6be2f197d9582555dc755d",
+    "B7_parameters_sha256": "d6f5b665d3806a322d0ebf87da46889822d2eff89324eacded6040383e7b6733",
+    "units": {
+      "N": "billion_parameters",
+      "D": "billion_tokens",
+      "Loss": "conditional_cross_entropy"
+    },
+    "conditional_on_bridge_assumptions": true,
+    "scenario_only": true,
+    "not_empirically_calibrated": true,
+    "empirically_calibrated_A_to_B": false,
+    "bridge_status": "sensitivity-only",
+    "mode": "baseline",
+    "baseline_loss": 2.330033586394699
+  }
+}

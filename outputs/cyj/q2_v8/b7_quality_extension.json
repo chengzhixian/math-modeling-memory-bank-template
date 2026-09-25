@@ -1,0 +1,353 @@
+{
+  "schema_version": "cyj.b1_fixed_b7_quality.v1",
+  "status": "conditional_semi_synthetic_quality_extension",
+  "B1_parameters": {
+    "E": 1.6898377713152422,
+    "A": 0.3539687193311042,
+    "B": 1.2402746295202214,
+    "alpha": 0.33998542577775076,
+    "beta": 0.2798924656094203
+  },
+  "B1_fit_sha256": "9b0e381fbc0ea84bb37d63ccb273733f3a03a0c2a834e8ef52cdb75c45bc6ead",
+  "B7_source_sha256": "880fd265ca3e1d9bc93b4559af7ed7c18f89040634266c50bae03d88486e0f3a",
+  "B7_joint_comparator_sha256": "c7426036164238d41b92ca08e9ca9087224aeb0c74554478b66093774a5b5b1a",
+  "B7_nested_comparator_sha256": "6415f73031c853e2749afe535128b1075fed91e114606ce54c62aab7097a6087",
+  "quality_parameters": {
+    "G0": 0.3717029438710098,
+    "GN": -0.061114886661040806,
+    "GD": -0.014961072437374254
+  },
+  "selected_ridge": 0.0,
+  "full_inner_CV_mean_RMSE": {
+    "0.0": 0.048699326252224784,
+    "0.001": 0.048699326502531226,
+    "0.01": 0.04869932879640775
+  },
+  "train_RMSE": 0.048540124773653444,
+  "train_SSE": 1.0602646708688301,
+  "outer_nested_mean_RMSE": {
+    "N_params_B": 0.04873833203393279,
+    "D_tokens_B": 0.048750748848520875,
+    "Q_score": 0.048638674550539204
+  },
+  "outer_fixed_form_mean_RMSE": {
+    "N_params_B": 0.04873824089979418,
+    "D_tokens_B": 0.04875064556264881,
+    "Q_score": 0.04863864341420031
+  },
+  "outer_folds": [
+    {
+      "axis": "N_params_B",
+      "held_level": 0.07,
+      "selected_ridge": 0.01,
+      "inner_mean_rmse": {
+        "0.0": 0.047275189987999164,
+        "0.001": 0.047275183162089604,
+        "0.01": 0.04727512183222453
+      },
+      "outer_rmse": 0.060776582427896145,
+      "held_rows": 50
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.16,
+      "selected_ridge": 0.0,
+      "inner_mean_rmse": {
+        "0.0": 0.048581755672842286,
+        "0.001": 0.0485817599171866,
+        "0.01": 0.048581798209796176
+      },
+      "outer_rmse": 0.05025530400327927,
+      "held_rows": 50
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.41,
+      "selected_ridge": 0.0,
+      "inner_mean_rmse": {
+        "0.0": 0.0485558443399695,
+        "0.001": 0.048555845756127765,
+        "0.01": 0.04855585856257619
+      },
+      "outer_rmse": 0.050587109207872405,
+      "held_rows": 50
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.7,
+      "selected_ridge": 0.0,
+      "inner_mean_rmse": {
+        "0.0": 0.049834934012081486,
+        "0.001": 0.04983493410083853,
+        "0.01": 0.049834934954943066
+      },
+      "outer_rmse": 0.0402626566552898,
+      "held_rows": 50
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 1.0,
+      "selected_ridge": 0.01,
+      "inner_mean_rmse": {
+        "0.0": 0.04861681086644585,
+        "0.001": 0.04861680957497523,
+        "0.01": 0.048616798009566906
+      },
+      "outer_rmse": 0.049574318806836735,
+      "held_rows": 50
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 2.8,
+      "selected_ridge": 0.01,
+      "inner_mean_rmse": {
+        "0.0": 0.04894006048266968,
+        "0.001": 0.04894005819915502,
+        "0.01": 0.048940037707709605
+      },
+      "outer_rmse": 0.047878982489775894,
+      "held_rows": 50
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 4.0,
+      "selected_ridge": 0.01,
+      "inner_mean_rmse": {
+        "0.0": 0.04912935457631261,
+        "0.001": 0.04912934922039616,
+        "0.01": 0.049129301085164875
+      },
+      "outer_rmse": 0.0467470649962004,
+      "held_rows": 50
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 6.9,
+      "selected_ridge": 0.01,
+      "inner_mean_rmse": {
+        "0.0": 0.04942100448966954,
+        "0.001": 0.04942100009636524,
+        "0.01": 0.04942096063088894
+      },
+      "outer_rmse": 0.042655902973028,
+      "held_rows": 50
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 11.97,
+      "selected_ridge": 0.0,
+      "inner_mean_rmse": {
+        "0.0": 0.04856190581916425,
+        "0.001": 0.048561911266312374,
+        "0.01": 0.04856196037447934
+      },
+      "outer_rmse": 0.049907066745216465,
+      "held_rows": 50
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 10.0,
+      "selected_ridge": 0.01,
+      "inner_mean_rmse": {
+        "0.0": 0.04587746700161223,
+        "0.001": 0.045877459019689155,
+        "0.01": 0.045877387329422675
+      },
+      "outer_rmse": 0.05967568393628943,
+      "held_rows": 90
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 50.0,
+      "selected_ridge": 0.0,
+      "inner_mean_rmse": {
+        "0.0": 0.047290167083750265,
+        "0.001": 0.047290194896301145,
+        "0.01": 0.0472904453144374
+      },
+      "outer_rmse": 0.052963005286551276,
+      "held_rows": 90
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 150.0,
+      "selected_ridge": 0.0,
+      "inner_mean_rmse": {
+        "0.0": 0.0490995466473104,
+        "0.001": 0.04909954955809155,
+        "0.01": 0.049099575818925614
+      },
+      "outer_rmse": 0.047940208610359365,
+      "held_rows": 90
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 300.0,
+      "selected_ridge": 0.01,
+      "inner_mean_rmse": {
+        "0.0": 0.050471696490231706,
+        "0.001": 0.05047169007744191,
+        "0.01": 0.050471632451570006
+      },
+      "outer_rmse": 0.04268997653984226,
+      "held_rows": 90
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 600.0,
+      "selected_ridge": 0.0,
+      "inner_mean_rmse": {
+        "0.0": 0.051187662124490184,
+        "0.001": 0.051187664276744656,
+        "0.01": 0.05118768370093522
+      },
+      "outer_rmse": 0.04048486986956206,
+      "held_rows": 90
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.1,
+      "selected_ridge": 0.01,
+      "inner_mean_rmse": {
+        "0.0": 0.049392801593524126,
+        "0.001": 0.04939279711806176,
+        "0.01": 0.04939275690169878
+      },
+      "outer_rmse": 0.04338701982110216,
+      "held_rows": 45
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.2,
+      "selected_ridge": 0.0,
+      "inner_mean_rmse": {
+        "0.0": 0.04885351294725361,
+        "0.001": 0.048853513184846695,
+        "0.01": 0.04885351539044968
+      },
+      "outer_rmse": 0.04674692036993887,
+      "held_rows": 45
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.3,
+      "selected_ridge": 0.01,
+      "inner_mean_rmse": {
+        "0.0": 0.048914330129444364,
+        "0.001": 0.04891433010886099,
+        "0.01": 0.04891432997896459
+      },
+      "outer_rmse": 0.04702032464852238,
+      "held_rows": 45
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.4,
+      "selected_ridge": 0.01,
+      "inner_mean_rmse": {
+        "0.0": 0.04796441777742658,
+        "0.001": 0.04796441528242037,
+        "0.01": 0.04796439288867071
+      },
+      "outer_rmse": 0.05420103940659249,
+      "held_rows": 45
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.5,
+      "selected_ridge": 0.01,
+      "inner_mean_rmse": {
+        "0.0": 0.049465270951558366,
+        "0.001": 0.04946527034819554,
+        "0.01": 0.049465264969185754
+      },
+      "outer_rmse": 0.041539446495642465,
+      "held_rows": 45
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.6,
+      "selected_ridge": 0.0,
+      "inner_mean_rmse": {
+        "0.0": 0.04784453225612754,
+        "0.001": 0.047844532466224124,
+        "0.01": 0.047844534404228985
+      },
+      "outer_rmse": 0.05612728031635688,
+      "held_rows": 45
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.7,
+      "selected_ridge": 0.01,
+      "inner_mean_rmse": {
+        "0.0": 0.04950036379298401,
+        "0.001": 0.04950036378518035,
+        "0.01": 0.04950036375926019
+      },
+      "outer_rmse": 0.04112463386236117,
+      "held_rows": 45
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.8,
+      "selected_ridge": 0.0,
+      "inner_mean_rmse": {
+        "0.0": 0.04847160556094745,
+        "0.001": 0.048471606249737335,
+        "0.01": 0.04847161249143156
+      },
+      "outer_rmse": 0.05024853989821429,
+      "held_rows": 45
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.9,
+      "selected_ridge": 0.01,
+      "inner_mean_rmse": {
+        "0.0": 0.048334090052734285,
+        "0.001": 0.04833408892308242,
+        "0.01": 0.04833407880048213
+      },
+      "outer_rmse": 0.051402226476628725,
+      "held_rows": 45
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 1.0,
+      "selected_ridge": 0.01,
+      "inner_mean_rmse": {
+        "0.0": 0.04797745777021895,
+        "0.001": 0.04797745740202148,
+        "0.01": 0.047977454131241874
+      },
+      "outer_rmse": 0.054589314210032595,
+      "held_rows": 45
+    }
+  ],
+  "positive_gain_corners": [
+    0.5686724619998937,
+    0.5074166764209196,
+    0.25444027649502976,
+    0.19318449091605552
+  ],
+  "training_rows": 450,
+  "B7_rows_outside_B1_ND_rectangle": 240,
+  "formal_prediction_support": {
+    "N_params_B": [
+      0.070542,
+      11.965825
+    ],
+    "D_tokens_B": [
+      10,
+      299.893
+    ],
+    "Q_proxy": [
+      0.1,
+      1
+    ]
+  },
+  "validation_limit": "B7 is semi-synthetic; fixed B1 backbone is extrapolated for some training rows; A/B quality bridge is uncalibrated",
+  "python": "3.12.14",
+  "numpy": "2.3.5"
+}

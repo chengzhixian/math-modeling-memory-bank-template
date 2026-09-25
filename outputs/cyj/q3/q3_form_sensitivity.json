@@ -1,0 +1,144 @@
+{
+  "scientific_status": "conditional_B7_semi_synthetic",
+  "candidate_result_scope": "B7_NDQ",
+  "formal_result_scope": null,
+  "support": {
+    "N_params_B": [
+      0.07,
+      11.97
+    ],
+    "D_tokens_B": [
+      10.0,
+      600.0
+    ],
+    "Q_score": [
+      0.1,
+      1.0
+    ]
+  },
+  "source_dataset": "official_attachment_B7",
+  "source_hash": "880fd265ca3e1d9bc93b4559af7ed7c18f89040634266c50bae03d88486e0f3a",
+  "ready_for_Q3": false,
+  "code_commit": "c11629a032fdca8c0a366b732227711410b305d9",
+  "schema_version": "cyj.q3_form_sensitivity.v1",
+  "model_hash": "c7426036164238d41b92ca08e9ca9087224aeb0c74554478b66093774a5b5b1a",
+  "CHM_commit": "92e0592000cba58fca355a881dc59caadbd446b2",
+  "CHM_module_sha256": {
+    "q3_generic_solver.py": "970b7fa8c519de3d4022bbf72a8d1f888b1e2cf0444180f390bf8a67aa4bd782",
+    "q3_quality_cost_geometry.py": "1b0216e9e3e17ca863cda98e4962bfc43e6a0ef52de822cdc00eb84e1251e589",
+    "q3_nd_baseline.py": "01a7888daed37efb8ea6129c49985c9ed14b29524bc7a78ec6fb10cb7a03e1b1"
+  },
+  "Q0_scenario": 0.5,
+  "budgets": [
+    1e+19,
+    1e+20,
+    1e+22,
+    1e+23
+  ],
+  "contexts": [
+    2048,
+    30000,
+    131072
+  ],
+  "cost_families": [
+    "exponential",
+    "power",
+    "logarithmic"
+  ],
+  "optimizer_starts": 20,
+  "seed": 20260925,
+  "ablations": {
+    "no_Q": {
+      "theta": [
+        1.6845719031462165,
+        0.5291238229693084,
+        1.3285646487913365,
+        0.2832175555984316,
+        0.29957530160096957,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "train_RMSE": 0.1182387744906499,
+      "successful_starts": 12,
+      "corner_quality_gain": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "constant_G": {
+      "theta": [
+        1.521673922873593,
+        0.5291237943033599,
+        1.3285646401316238,
+        0.28321757842838663,
+        0.299575217638619,
+        0.36199528480818655,
+        0.0,
+        0.0
+      ],
+      "train_RMSE": 0.0562988396574333,
+      "successful_starts": 12,
+      "corner_quality_gain": [
+        0.36199528480818655,
+        0.36199528480818655,
+        0.36199528480818655,
+        0.36199528480818655
+      ]
+    },
+    "Q_x_logN": {
+      "theta": [
+        1.69072818700881,
+        0.3575829827675981,
+        1.3285646595912783,
+        0.3392667926944353,
+        0.2995752778091802,
+        0.3691986114222255,
+        -0.05949205609894438,
+        0.0
+      ],
+      "train_RMSE": 0.04884872299646716,
+      "successful_starts": 12,
+      "corner_quality_gain": [
+        0.5274034587211112,
+        0.5274034587211112,
+        0.2215153219757571,
+        0.2215153219757571
+      ]
+    },
+    "Q_x_logD": {
+      "theta": [
+        1.5663318257190122,
+        0.5291239199151473,
+        1.265373080062708,
+        0.28321750857229505,
+        0.3203945284633512,
+        0.36294388646579884,
+        0.0,
+        -0.01580521367229572
+      ],
+      "train_RMSE": 0.055918709389248915,
+      "successful_starts": 12,
+      "corner_quality_gain": [
+        0.39933673585921264,
+        0.3346247452052903,
+        0.39933673585921264,
+        0.3346247452052903
+      ]
+    }
+  },
+  "rows": 144,
+  "status_counts": {
+    "converged_feasible": 132,
+    "infeasible_by_supported_domain": 12
+  },
+  "negative_regret_tolerance": 1e-05,
+  "csv_sha256": "6a265880611a3e5bd47d0a53d00e1ca7c6553e5a9d711697dc30c87bf4252107",
+  "limitation": "B7 semi-synthetic model-form ablation; all families explored on source before this test; not an independent external validation",
+  "max_joint_model_regret": 0.2142337681745019,
+  "min_joint_model_regret": -2.6991742174686806e-12,
+  "max_candidate_model_regret": 0.10293351535086792,
+  "min_candidate_model_regret": -1.7137402608113916e-12
+}

@@ -1,0 +1,158 @@
+{
+  "schema_version": "cyj.q3.v1",
+  "ready_for_Q3": false,
+  "status": "consumer_accepted_A_interface; B_bridge_scenario_only",
+  "provenance": {
+    "cyj_code_commit": "6e3fa709dbac03c224f6ba3d42f99f56ab1322f3",
+    "chm_commit": "7c14a0c894072048d09f04bd03653be1301f7257",
+    "chm_branch": "integration/chm-q1-clean-20260923",
+    "chm_files": {
+      "interfaces/chm/q1_interface_v1.json": {
+        "sha256": "c3525c2f58baa97a44bd5e4dd497b2ea9e23752c7f03e4bfad309f0af95f238d",
+        "bytes": 1443
+      },
+      "src/chm/q1_interface.py": {
+        "sha256": "00c0fe262727f7fce4b0d3fbb3ea1be4c63789f6e033c7815be50b7835f36f04",
+        "bytes": 8079
+      },
+      "outputs/chm/domain_quality.csv": {
+        "sha256": "458e42669bab460f5cc446c873e0e1275b9eb9b4304675363a4dc604a08197b7",
+        "bytes": 2492,
+        "producer_sha256": "458e42669bab460f5cc446c873e0e1275b9eb9b4304675363a4dc604a08197b7",
+        "producer_bytes": 2492,
+        "materialization": "git_blob_unchanged"
+      },
+      "outputs/chm/domain_mapping.csv": {
+        "sha256": "960ff8094339473b0fd72c774774dbba3cae438f3fcb5b0fb4fdc8bf9e20006a",
+        "bytes": 2115,
+        "producer_sha256": "960ff8094339473b0fd72c774774dbba3cae438f3fcb5b0fb4fdc8bf9e20006a",
+        "producer_bytes": 2115,
+        "materialization": "git_blob_unchanged"
+      },
+      "outputs/chm/local_recheck_v1/mixture_effect_ridge_v0.csv": {
+        "sha256": "39e7661d1ec2b4c552715ff39d11ea32416afa3cd4013436d9f6351288a194fd",
+        "bytes": 9112,
+        "producer_sha256": "2d4f3b528574f0329fc39a889b475ee17deecdf34154e3962528edb3461e0ae8",
+        "producer_bytes": 9126,
+        "materialization": "LF_to_CRLF_exact_published_SHA"
+      },
+      "outputs/chm/local_recheck_v1/mixture_reference_v0.csv": {
+        "sha256": "ee3e623419982d5cce284509d014954ca436e95445ff444c7c870bed42beafe8",
+        "bytes": 569,
+        "producer_sha256": "87658558a5dac32c370e65e0d58ea8a07940aa8f9f83b85692c9b5dd55a4e2a5",
+        "producer_bytes": 587,
+        "materialization": "LF_to_CRLF_exact_published_SHA"
+      },
+      "outputs/chm/local_recheck_v1/mixture_scale_transfer_v0_manifest.json": {
+        "sha256": "b1e8a68ed277089cd7c5f2d72efef9097cecd614a0f70bc374392b765e08ba83",
+        "bytes": 1552,
+        "producer_sha256": "b1e8a68ed277089cd7c5f2d72efef9097cecd614a0f70bc374392b765e08ba83",
+        "producer_bytes": 1552,
+        "materialization": "git_blob_unchanged"
+      },
+      "outputs/chm/local_recheck_v1/q1_regmix_ridge_domainwise_metrics.csv": {
+        "sha256": "2d22d5b98dfe27c643b2f8ca3a29834b68767c08e0dc91fcaa06f2efcb694b20",
+        "bytes": 4148,
+        "producer_sha256": "784e8b04caf0d648d24068f3e5c5913d3003cede57b95a545400ef9b4b4aafc2",
+        "producer_bytes": 4162,
+        "materialization": "LF_to_CRLF_exact_published_SHA"
+      },
+      "interfaces/chm/CONTRACT.md": {
+        "sha256": "599d6a43b879856187f3d19e61a1b1763e0cdc5669a33db5723173e10df7b7cb",
+        "bytes": 3208
+      },
+      "interfaces/chm/USAGE.md": {
+        "sha256": "b1f8047c967f6e4c2cb06f299bf9c03510a3794489ea65b96e8eb664ee154db5",
+        "bytes": 3958
+      },
+      "interfaces/chm/CYJ_REQUIRED_INTERFACE.md": {
+        "sha256": "5b21b1daa7ab4f634acda1b2b4522bcae28b7a088b6f2a5ee0593af8926b89c8",
+        "bytes": 3803
+      },
+      "interfaces/chm/Q2_BRIDGE.md": {
+        "sha256": "877a19a92c12bf0d9bc20eff12f7c43a0296de30fbd0a391f9e758537a84e048",
+        "bytes": 4302
+      },
+      "interfaces/chm/UNCERTAINTY.md": {
+        "sha256": "2242de581a4acd32ffa655de97233927d847631263b123cf9868120de8516be6",
+        "bytes": 2302
+      },
+      "interfaces/chm/OFFICIAL_DATA_REVIEW.md": {
+        "sha256": "5bbb6a09142de16f9d6de83c7a8938e04c7f812b2eead5f81ebfdfe0c88a7ece",
+        "bytes": 3282
+      }
+    },
+    "chm_manifest_sha256": "c3525c2f58baa97a44bd5e4dd497b2ea9e23752c7f03e4bfad309f0af95f238d",
+    "baseline_fit_sha256": "9b0e381fbc0ea84bb37d63ccb273733f3a03a0c2a834e8ef52cdb75c45bc6ead",
+    "baseline_input_version": "cf297a4ad47e235acf5a9b6e890a5df5e05b07e5",
+    "main_integrated": false
+  },
+  "baseline": {
+    "parameters": {
+      "E": 1.6898377713152422,
+      "A": 0.3539687193311042,
+      "B": 1.2402746295202214,
+      "alpha": 0.33998542577775076,
+      "beta": 0.2798924656094203
+    },
+    "scope": {
+      "N_params_B": [
+        0.070542,
+        11.965825
+      ],
+      "D_tokens_B": [
+        0.134,
+        299.893
+      ]
+    },
+    "loss_coordinate": {
+      "field": "B1.val_loss",
+      "kind": "validation_cross_entropy",
+      "model_family": "attachment_B1_Pythia",
+      "evaluation_corpus": null,
+      "tokenizer": null,
+      "log_base": null,
+      "aggregation": null
+    }
+  },
+  "adoption": {
+    "Q_mapping_status": "unidentified",
+    "Q_use": "A_native_relative_ranking",
+    "domains": [
+      "arxiv",
+      "freelaw",
+      "nih_exporter",
+      "pubmed_central",
+      "wikipedia_en",
+      "dm_mathematics",
+      "github",
+      "philpapers",
+      "stackexchange",
+      "enron_emails",
+      "gutenberg_pg_19",
+      "pile_cc",
+      "ubuntu_irc",
+      "europarl",
+      "hackernews",
+      "pubmed_abstracts",
+      "uspto_backgrounds"
+    ],
+    "target_panel": [
+      "pile_cc",
+      "wikipedia_en",
+      "arxiv",
+      "stackexchange",
+      "github"
+    ],
+    "primary_anchor": null,
+    "p_rule": "strict named simplex; CHM relative_effect; no silent normalization",
+    "lambda_loss_unit": "B1_loss / A_target_loss",
+    "lambda_status": "explicit_scenario_only",
+    "eta_default_policy": "caller_must_supply",
+    "eta_producer_estimate": 0.1450331705749355,
+    "eta_conditional_interval": [
+      0.09756179967187481,
+      0.20097672162197266
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+claim,level,evidence,limit
+B7 same-source conditional surface,L2_within_semi_synthetic_source,outputs/cyj/q2_final/validation_summary.csv,not independent real-model validation
+Q1 v2 recipe-specific relative effects,L2_within_A_model_selection_scope,outputs/chm/q1_v2/targetwise_validation.csv,A6-A11 informed selection
+Q2 v7 conditional policy ranking,scenario_only,policy_solutions.csv;bridge_form_observed_panel.csv,transport amplitude unidentified
+Q2 mixed curvature,model_internal,domain_complementarity.csv,not causal complementarity
+Q2 absolute cross-source prediction,unavailable,validation_by_source.csv,no paired A/B observations
+Q2 large-model extrapolation,not_validated,outputs/cyj/diagnostics/b9_b10_extrapolation_audit.json,B10 estimated Loss

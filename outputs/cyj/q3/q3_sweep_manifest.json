@@ -1,0 +1,72 @@
+{
+  "scientific_status": "conditional_B7_semi_synthetic",
+  "candidate_result_scope": "B7_NDQ",
+  "formal_result_scope": null,
+  "support": {
+    "N_params_B": [
+      0.07,
+      11.97
+    ],
+    "D_tokens_B": [
+      10.0,
+      600.0
+    ],
+    "Q_score": [
+      0.1,
+      1.0
+    ]
+  },
+  "source_dataset": "official_attachment_B7",
+  "source_hash": "880fd265ca3e1d9bc93b4559af7ed7c18f89040634266c50bae03d88486e0f3a",
+  "ready_for_Q3": false,
+  "code_commit": "c11629a032fdca8c0a366b732227711410b305d9",
+  "model_hash": "c7426036164238d41b92ca08e9ca9087224aeb0c74554478b66093774a5b5b1a",
+  "CHM_commit": "92e0592000cba58fca355a881dc59caadbd446b2",
+  "CHM_module_sha256": {
+    "q3_generic_solver.py": "970b7fa8c519de3d4022bbf72a8d1f888b1e2cf0444180f390bf8a67aa4bd782",
+    "q3_quality_cost_geometry.py": "1b0216e9e3e17ca863cda98e4962bfc43e6a0ef52de822cdc00eb84e1251e589",
+    "q3_nd_baseline.py": "01a7888daed37efb8ea6129c49985c9ed14b29524bc7a78ec6fb10cb7a03e1b1"
+  },
+  "budgets": [
+    1e+19,
+    3e+19,
+    1e+20,
+    3e+20,
+    1e+21,
+    3e+21,
+    1e+22,
+    3e+22,
+    1e+23,
+    3e+23,
+    1e+24
+  ],
+  "contexts": [
+    2048,
+    4096,
+    8192,
+    16384,
+    24576,
+    30000,
+    32768,
+    49152,
+    65536,
+    131072
+  ],
+  "quality_families": [
+    "exponential",
+    "power",
+    "logarithmic"
+  ],
+  "starts": 20,
+  "status_counts": {
+    "converged_feasible": 321,
+    "infeasible_by_supported_domain": 9
+  },
+  "budget_sweep_sha256": "baa0ce59ddf5e69b603c4f07fcc15bf5da0076ea0a931c1e51c568162d586ce2",
+  "context_sweep_sha256": "6a58c5af9b39387f2b74cdaf6e8195d78227b52d37c88d843e4b71aecfd1f2a1",
+  "regime_map_sha256": "baa0ce59ddf5e69b603c4f07fcc15bf5da0076ea0a931c1e51c568162d586ce2",
+  "transitions_sha256": "795f41180b67af81c840b59d4a2b7ae042e38c338a038a2a890e712023c6101a",
+  "interval_scope": "B7 conditional bootstrap plus leave-N nested OOF empirical residual; coverage not directly calibrated for this construction",
+  "Q0_scenario": 0.5,
+  "context_provenance": "2048/8192/131072 are prior C7 scenarios; extra contexts are CYJ external sensitivity grid"
+}

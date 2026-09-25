@@ -1,0 +1,4 @@
+{
+  "exit_code": 2,
+  "error_contains": "Q_A bridge requires positive mapped coverage"
+}

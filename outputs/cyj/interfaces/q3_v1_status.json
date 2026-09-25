@@ -1,0 +1,10 @@
+{
+  "schema_version": "cyj.q3.v1.status",
+  "applies_to": "outputs/cyj/interfaces/q3_bundle.json",
+  "deprecated": true,
+  "historical_only": true,
+  "formal_use_allowed": false,
+  "recommended_schema": "cyj.chm.v2",
+  "recommended_manifest": "outputs/cyj/interfaces/chm_v2_manifest.json",
+  "reason": "The v1 p scenario consumes an A-side cross-scale eta withdrawn by chm.q1.v1.2; A target Loss to B1 val_loss is not identified."
+}

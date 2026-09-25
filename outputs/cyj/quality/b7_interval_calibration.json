@@ -1,0 +1,1486 @@
+{
+  "scientific_status": "conditional_B7_semi_synthetic",
+  "candidate_result_scope": "B7_NDQ",
+  "formal_result_scope": null,
+  "support": {
+    "N_params_B": [
+      0.07,
+      11.97
+    ],
+    "D_tokens_B": [
+      10.0,
+      600.0
+    ],
+    "Q_score": [
+      0.1,
+      1.0
+    ]
+  },
+  "source_dataset": "official_attachment_B7",
+  "source_hash": "880fd265ca3e1d9bc93b4559af7ed7c18f89040634266c50bae03d88486e0f3a",
+  "ready_for_Q3": false,
+  "code_commit": "e7b60795c5c00704e2494ebd54e2a9d0df9aef65",
+  "model_hash": "6415f73031c853e2749afe535128b1075fed91e114606ce54c62aab7097a6087",
+  "coverage": [
+    {
+      "axis": "N_params_B",
+      "held_level": null,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 450,
+      "coverage": 0.7711111111111111,
+      "mean_width": 0.1244267456436077
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": null,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 450,
+      "coverage": 0.8044444444444444,
+      "mean_width": 0.1308907945462768
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": null,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 450,
+      "coverage": 0.9,
+      "mean_width": 0.16091911908039494
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": null,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 450,
+      "coverage": 0.9,
+      "mean_width": 0.16334023171963027
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": null,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 450,
+      "coverage": 0.9466666666666667,
+      "mean_width": 0.19080268137277498
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": null,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 450,
+      "coverage": 0.9555555555555556,
+      "mean_width": 0.1963878279698028
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.07,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 0.68,
+      "mean_width": 0.12196650630657224
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.07,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 0.7,
+      "mean_width": 0.12968612834463222
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.07,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 0.8,
+      "mean_width": 0.15563849382429318
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.07,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 0.82,
+      "mean_width": 0.1589249756457427
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.07,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 0.84,
+      "mean_width": 0.18262961570616285
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.07,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 0.84,
+      "mean_width": 0.19273014300050575
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.16,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 0.84,
+      "mean_width": 0.12728332515197582
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.16,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 0.86,
+      "mean_width": 0.1338004521844951
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.16,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 0.88,
+      "mean_width": 0.15818544945782165
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.16,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 0.88,
+      "mean_width": 0.16363448183037207
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.16,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 0.94,
+      "mean_width": 0.19049249227610773
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.16,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 0.96,
+      "mean_width": 0.19648517330958448
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.41,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 0.72,
+      "mean_width": 0.12137849993799055
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.41,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 0.74,
+      "mean_width": 0.12899333609242447
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.41,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 0.94,
+      "mean_width": 0.16431182185753015
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.41,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 0.96,
+      "mean_width": 0.16615493108467128
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.41,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 0.96,
+      "mean_width": 0.19227245184640382
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.41,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 0.96,
+      "mean_width": 0.19712002292071332
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.7,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 0.8,
+      "mean_width": 0.12548007009972917
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.7,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 0.84,
+      "mean_width": 0.12841030917709784
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.7,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 0.96,
+      "mean_width": 0.1642301252849414
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.7,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 0.96,
+      "mean_width": 0.17029137133455394
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.7,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 1.0,
+      "mean_width": 0.19517106013312535
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 0.7,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 1.0,
+      "mean_width": 0.2012959814962967
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 1.0,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 0.76,
+      "mean_width": 0.12379263815634811
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 1.0,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 0.82,
+      "mean_width": 0.13137350237577383
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 1.0,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 0.86,
+      "mean_width": 0.15918106732892845
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 1.0,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 0.86,
+      "mean_width": 0.16021044779224525
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 1.0,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 0.92,
+      "mean_width": 0.19035681417025607
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 1.0,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 0.96,
+      "mean_width": 0.19436304560289572
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 2.8,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 0.82,
+      "mean_width": 0.12517256477259497
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 2.8,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 0.88,
+      "mean_width": 0.13478662541516595
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 2.8,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 0.92,
+      "mean_width": 0.16189745589963245
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 2.8,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 0.92,
+      "mean_width": 0.16236003062996662
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 2.8,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 0.96,
+      "mean_width": 0.18920379681649457
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 2.8,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 0.96,
+      "mean_width": 0.19232227867185436
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 4.0,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 0.76,
+      "mean_width": 0.12341845605768942
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 4.0,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 0.8,
+      "mean_width": 0.12953151520402972
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 4.0,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 0.92,
+      "mean_width": 0.16136897749356027
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 4.0,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 0.88,
+      "mean_width": 0.15994790017987093
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 4.0,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 0.98,
+      "mean_width": 0.19212307489451774
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 4.0,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 1.0,
+      "mean_width": 0.20489321486983592
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 6.9,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 0.82,
+      "mean_width": 0.12505550666543996
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 6.9,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 0.84,
+      "mean_width": 0.12965966945362872
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 6.9,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 0.94,
+      "mean_width": 0.16321870666056526
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 6.9,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 0.94,
+      "mean_width": 0.1652745941482374
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 6.9,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 0.96,
+      "mean_width": 0.18973807219694463
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 6.9,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 0.96,
+      "mean_width": 0.19252996945651632
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 11.97,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 0.74,
+      "mean_width": 0.12629314364412902
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 11.97,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 0.76,
+      "mean_width": 0.13177561266924354
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 11.97,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 0.88,
+      "mean_width": 0.16023997391628164
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 11.97,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 0.88,
+      "mean_width": 0.16326335283101212
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 11.97,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 50,
+      "coverage": 0.96,
+      "mean_width": 0.195236754314962
+    },
+    {
+      "axis": "N_params_B",
+      "held_level": 11.97,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 50,
+      "coverage": 0.96,
+      "mean_width": 0.19575062240002253
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": null,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 450,
+      "coverage": 0.7844444444444445,
+      "mean_width": 0.1234901521784419
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": null,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 450,
+      "coverage": 0.8044444444444444,
+      "mean_width": 0.129688753106627
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": null,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 450,
+      "coverage": 0.8711111111111111,
+      "mean_width": 0.15990746877813358
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": null,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 450,
+      "coverage": 0.8888888888888888,
+      "mean_width": 0.16556888562674102
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": null,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 450,
+      "coverage": 0.9444444444444444,
+      "mean_width": 0.19196862885932173
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": null,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 450,
+      "coverage": 0.9466666666666667,
+      "mean_width": 0.194267692950857
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 10.0,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 90,
+      "coverage": 0.6,
+      "mean_width": 0.11632421983675556
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 10.0,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 90,
+      "coverage": 0.6,
+      "mean_width": 0.11677043281635859
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 10.0,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 90,
+      "coverage": 0.7111111111111111,
+      "mean_width": 0.1532301836404271
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 10.0,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 90,
+      "coverage": 0.7333333333333333,
+      "mean_width": 0.15643863728786925
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 10.0,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 90,
+      "coverage": 0.8777777777777778,
+      "mean_width": 0.18635858283265525
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 10.0,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 90,
+      "coverage": 0.8777777777777778,
+      "mean_width": 0.18714012102010089
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 50.0,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 90,
+      "coverage": 0.8111111111111111,
+      "mean_width": 0.12575230532774562
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 50.0,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 90,
+      "coverage": 0.8222222222222222,
+      "mean_width": 0.13189174405471604
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 50.0,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 90,
+      "coverage": 0.8555555555555555,
+      "mean_width": 0.1577150128068814
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 50.0,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 90,
+      "coverage": 0.8777777777777778,
+      "mean_width": 0.15977550018122777
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 50.0,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 90,
+      "coverage": 0.9222222222222223,
+      "mean_width": 0.18559942134427307
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 50.0,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 90,
+      "coverage": 0.9333333333333333,
+      "mean_width": 0.19668661893319594
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 150.0,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 90,
+      "coverage": 0.7666666666666667,
+      "mean_width": 0.12127738226731744
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 150.0,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 90,
+      "coverage": 0.8111111111111111,
+      "mean_width": 0.13124993903220797
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 150.0,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 90,
+      "coverage": 0.9111111111111111,
+      "mean_width": 0.16287897710397736
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 150.0,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 90,
+      "coverage": 0.9111111111111111,
+      "mean_width": 0.16677278557030562
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 150.0,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 90,
+      "coverage": 0.9555555555555556,
+      "mean_width": 0.19627013410106642
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 150.0,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 90,
+      "coverage": 0.9555555555555556,
+      "mean_width": 0.194221046528904
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 300.0,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 90,
+      "coverage": 0.8666666666666667,
+      "mean_width": 0.12719205995154767
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 300.0,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 90,
+      "coverage": 0.8888888888888888,
+      "mean_width": 0.13305486069811145
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 300.0,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 90,
+      "coverage": 0.9111111111111111,
+      "mean_width": 0.1628308926559292
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 300.0,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 90,
+      "coverage": 0.9444444444444444,
+      "mean_width": 0.17069551222118748
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 300.0,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 90,
+      "coverage": 0.9666666666666667,
+      "mean_width": 0.1947015290838712
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 300.0,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 90,
+      "coverage": 0.9666666666666667,
+      "mean_width": 0.19404236185381937
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 600.0,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 90,
+      "coverage": 0.8777777777777778,
+      "mean_width": 0.12690479350884318
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 600.0,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 90,
+      "coverage": 0.9,
+      "mean_width": 0.13547678893174095
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 600.0,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 90,
+      "coverage": 0.9666666666666667,
+      "mean_width": 0.16288227768345287
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 600.0,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 90,
+      "coverage": 0.9777777777777777,
+      "mean_width": 0.17416199287311507
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 600.0,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 90,
+      "coverage": 1.0,
+      "mean_width": 0.1969134769347427
+    },
+    {
+      "axis": "D_tokens_B",
+      "held_level": 600.0,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 90,
+      "coverage": 1.0,
+      "mean_width": 0.19924831641826476
+    },
+    {
+      "axis": "Q_score",
+      "held_level": null,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 450,
+      "coverage": 0.7822222222222223,
+      "mean_width": 0.124560080080649
+    },
+    {
+      "axis": "Q_score",
+      "held_level": null,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 450,
+      "coverage": 0.8022222222222222,
+      "mean_width": 0.12864678973730292
+    },
+    {
+      "axis": "Q_score",
+      "held_level": null,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 450,
+      "coverage": 0.8866666666666667,
+      "mean_width": 0.15977258939744432
+    },
+    {
+      "axis": "Q_score",
+      "held_level": null,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 450,
+      "coverage": 0.8955555555555555,
+      "mean_width": 0.163781325720859
+    },
+    {
+      "axis": "Q_score",
+      "held_level": null,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 450,
+      "coverage": 0.9422222222222222,
+      "mean_width": 0.18928603202232372
+    },
+    {
+      "axis": "Q_score",
+      "held_level": null,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 450,
+      "coverage": 0.9488888888888889,
+      "mean_width": 0.19419284891325156
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.1,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.8222222222222222,
+      "mean_width": 0.12626234726148944
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.1,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.8222222222222222,
+      "mean_width": 0.13080762204051766
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.1,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.9333333333333333,
+      "mean_width": 0.1625608558689171
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.1,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.9333333333333333,
+      "mean_width": 0.16398699587152965
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.1,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 1.0,
+      "mean_width": 0.19277284773904937
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.1,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 1.0,
+      "mean_width": 0.20110447321264324
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.2,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.7777777777777778,
+      "mean_width": 0.1242005005220177
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.2,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.8,
+      "mean_width": 0.12895059644343299
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.2,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.9111111111111111,
+      "mean_width": 0.1611782152438508
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.2,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.9111111111111111,
+      "mean_width": 0.16629803975968827
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.2,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.9333333333333333,
+      "mean_width": 0.18731797862425204
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.2,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.9333333333333333,
+      "mean_width": 0.1902064150797802
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.3,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.8,
+      "mean_width": 0.12404216933870948
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.3,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.8222222222222222,
+      "mean_width": 0.1313150085555721
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.3,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.8666666666666667,
+      "mean_width": 0.15868297773353213
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.3,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.8666666666666667,
+      "mean_width": 0.16280703445478295
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.3,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.9333333333333333,
+      "mean_width": 0.19212841434479258
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.3,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.9777777777777777,
+      "mean_width": 0.19780269925649485
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.4,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.7777777777777778,
+      "mean_width": 0.12459818709049753
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.4,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.7777777777777778,
+      "mean_width": 0.12590694691299653
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.4,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.8666666666666667,
+      "mean_width": 0.15644782055322715
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.4,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.8666666666666667,
+      "mean_width": 0.16017938050918623
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.4,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.9333333333333333,
+      "mean_width": 0.18993760933322257
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.4,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.9333333333333333,
+      "mean_width": 0.19429426997197474
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.5,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.8444444444444444,
+      "mean_width": 0.12576018339668593
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.5,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.8888888888888888,
+      "mean_width": 0.1301722502501761
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.5,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.9555555555555556,
+      "mean_width": 0.16239625259916846
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.5,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.9555555555555556,
+      "mean_width": 0.16456310681409736
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.5,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.9777777777777777,
+      "mean_width": 0.19178040789972514
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.5,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.9777777777777777,
+      "mean_width": 0.19869940411785258
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.6,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.6444444444444445,
+      "mean_width": 0.12016481950007663
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.6,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.7111111111111111,
+      "mean_width": 0.12655955723942736
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.6,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.8666666666666667,
+      "mean_width": 0.1588652061445215
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.6,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.8888888888888888,
+      "mean_width": 0.1657339845781456
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.6,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.8888888888888888,
+      "mean_width": 0.1846389254593248
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.6,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.9111111111111111,
+      "mean_width": 0.18921778825001836
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.7,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.8444444444444444,
+      "mean_width": 0.12785180365728266
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.7,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.8444444444444444,
+      "mean_width": 0.12974858754439023
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.7,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.9333333333333333,
+      "mean_width": 0.16264525093061533
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.7,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.9555555555555556,
+      "mean_width": 0.1662513547669322
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.7,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 1.0,
+      "mean_width": 0.19501933946749794
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.7,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 1.0,
+      "mean_width": 0.19994477104151975
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.8,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.7777777777777778,
+      "mean_width": 0.1244616288702094
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.8,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.7777777777777778,
+      "mean_width": 0.128720027466926
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.8,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.8666666666666667,
+      "mean_width": 0.15896128945580923
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.8,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.9111111111111111,
+      "mean_width": 0.1655880531382401
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.8,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.9333333333333333,
+      "mean_width": 0.18990811544829356
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.8,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.9333333333333333,
+      "mean_width": 0.18972617769421787
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.9,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.8222222222222222,
+      "mean_width": 0.12550675077432594
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.9,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.8222222222222222,
+      "mean_width": 0.12732774414616
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.9,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.8888888888888888,
+      "mean_width": 0.161323103631398
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.9,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.8888888888888888,
+      "mean_width": 0.16361320402484303
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.9,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.9333333333333333,
+      "mean_width": 0.18514733364348146
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 0.9,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.9333333333333333,
+      "mean_width": 0.19325014418635703
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 1.0,
+      "nominal": 0.8,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.7111111111111111,
+      "mean_width": 0.12275241039519535
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 1.0,
+      "nominal": 0.8,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.7555555555555555,
+      "mean_width": 0.1269595567734303
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 1.0,
+      "nominal": 0.9,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.7777777777777778,
+      "mean_width": 0.15466492181340374
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 1.0,
+      "nominal": 0.9,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.7777777777777778,
+      "mean_width": 0.15879210329114457
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 1.0,
+      "nominal": 0.95,
+      "method": "training_residual",
+      "n": 45,
+      "coverage": 0.8888888888888888,
+      "mean_width": 0.18420934826359756
+    },
+    {
+      "axis": "Q_score",
+      "held_level": 1.0,
+      "nominal": 0.95,
+      "method": "inner_oof_calibrated",
+      "n": 45,
+      "coverage": 0.8888888888888888,
+      "mean_width": 0.18768234632165728
+    }
+  ],
+  "method": "symmetric empirical abs-residual quantiles fitted only in outer training groups",
+  "limitations": "Not a distribution-free conformal guarantee; groups are few, folds correlated, selected-family residuals reused internally. Undercoverage is reported without tuning on outer holdouts."
+}

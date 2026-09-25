@@ -1,0 +1,23 @@
+{
+  "schema_version": "cyj.q2.v7.audit.v1",
+  "status": "PASS",
+  "original_A_open_events": 0,
+  "derived_Q1_open_events": 45,
+  "approved_legacy_git_show_events": 6,
+  "approved_legacy_git_show_paths": [
+    "cdda1ad62c5c7eb72b413c4228caeff87d2bad30:interfaces/chm/q1_interface_v1_3.json",
+    "cdda1ad62c5c7eb72b413c4228caeff87d2bad30:outputs/chm/domain_mapping.csv",
+    "cdda1ad62c5c7eb72b413c4228caeff87d2bad30:outputs/chm/domain_quality.csv",
+    "cdda1ad62c5c7eb72b413c4228caeff87d2bad30:outputs/chm/local_recheck_v1/mixture_effect_ridge_v0.csv",
+    "cdda1ad62c5c7eb72b413c4228caeff87d2bad30:outputs/chm/local_recheck_v1/mixture_reference_v0.csv",
+    "cdda1ad62c5c7eb72b413c4228caeff87d2bad30:outputs/chm/local_recheck_v1/q1_regmix_ridge_domainwise_metrics.csv"
+  ],
+  "unapproved_subprocess_launch_events": 0,
+  "scope": "Python open and subprocess-launch events during v7 imports and build; only pinned CHM v1.3 derived-file git show is allowed; native-library file access is outside Python audit coverage",
+  "builder": {
+    "policy_rows": 12,
+    "sensitivity_rows": 1728,
+    "manifest_sha256": "b8815bd061520e438befc260c3c8d7d86d6750b9b83ed53740652f261c6eac4c"
+  },
+  "manifest_sha256": "b8815bd061520e438befc260c3c8d7d86d6750b9b83ed53740652f261c6eac4c"
+}

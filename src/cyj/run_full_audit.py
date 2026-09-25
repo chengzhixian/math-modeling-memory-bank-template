@@ -1,0 +1,401 @@
+"""One-command evidence audit for CYJ's conditional B7/Q3 release.
+
+Run from the repository root with the local scientific Python environment. The
+script validates frozen artifacts; expensive fitting and sweeps are separate
+reproduction commands documented in the experiment notes.
+"""
+from __future__ import annotations
+
+import argparse
+import csv
+import hashlib
+import json
+import math
+import shutil
+import subprocess
+import sys
+from collections import Counter, defaultdict
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+OUT = ROOT / "outputs/cyj/audit"
+
+
+def sha(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def document(path: str):
+    return json.loads((ROOT / path).read_text(encoding="utf-8"))
+
+
+def rows(path: str):
+    with (ROOT / path).open(encoding="utf-8", newline="") as handle:
+        return list(csv.DictReader(handle))
+
+
+def near(actual, expected, tolerance=1e-10):
+    return math.isclose(float(actual), float(expected), rel_tol=tolerance, abs_tol=tolerance)
+
+
+def assess(name, operation, checks):
+    try:
+        detail = operation()
+        checks.append({"name": name, "status": "PASS", "detail": detail})
+    except Exception as exc:
+        checks.append({"name": name, "status": "FAIL", "detail": f"{type(exc).__name__}: {exc}"})
+
+
+def require(condition, message):
+    if not condition:
+        raise AssertionError(message)
+
+
+def data_hashes():
+    fit = document("outputs/cyj/quality/b7_joint_fit.json")
+    classic = document("outputs/cyj/classic/classic_data_manifest.json")
+    all_sources = {**classic["provenance"]["source_files"], **fit["source_files"]}
+    conflict = document("outputs/cyj/quality/b7_b8_conflict_summary.json")
+    all_sources.update(conflict["source_files"])
+    for name, info in all_sources.items():
+        path = ROOT / info["path"]
+        require(path.stat().st_size == info["bytes"] and sha(path) == info["sha256"], f"source drift: {name}")
+    return f"{len(all_sources)} source files match recorded bytes and SHA256"
+
+
+def model_hashes():
+    model = ROOT / "outputs/cyj/quality/b7_joint_fit.json"
+    digest = sha(model)
+    expected = document("outputs/cyj/quality/b7_identifiability.json")
+    require(expected["model_hash"] == digest, "identifiability model hash mismatch")
+    manifest = document("outputs/cyj/interfaces/chm_v4_manifest.json")
+    require(manifest["model_hash"] == digest, "v4 model hash mismatch")
+    require(not manifest["ready_for_Q3"], "formal Q3 gate incorrectly open")
+    return digest
+
+
+def b1_fit():
+    fit = document("outputs/cyj/classic/classic_fit.json")
+    audit = document("outputs/cyj/classic/b1_structure_audit.json")
+    require(fit["status"] == "draft_classic_baseline_not_validated_predictor", "unexpected B1 status")
+    require(audit["rows"] == 1176 and audit["N_groups"] == 8 and audit["common_D_grid_across_N"], "B1 structure drift")
+    require(audit["explicit_loss_generator_found"] is False, "B1 generator claim changed")
+    p = fit["full_fit"]["parameters"]
+    original = rows("data/raw/real_attachments/B_scaling_laws/pythia_training_log_existing.csv")
+    residuals = []
+    for row in original:
+        n, d, observed = (float(row[key]) for key in ("N_params_B", "D_tokens_B", "val_loss"))
+        predicted = p["E"] + p["A"] * n ** (-p["alpha"]) + p["B"] * d ** (-p["beta"])
+        residuals.append(predicted - observed)
+    rmse = math.sqrt(sum(r * r for r in residuals) / len(residuals))
+    require(len(original) == audit["rows"] and near(rmse, fit["full_fit"]["metrics"]["rmse"]),
+            "B1 raw-source formula/RMSE mismatch")
+    return f"B1 {audit['rows']} raw rows; RMSE {rmse:.9g}; loss generator unknown"
+
+
+def joint_fit():
+    fit = document("outputs/cyj/quality/b7_joint_fit.json")
+    model = fit["model"]
+    require(len(model["theta"]) == 8 and model["successful_starts"] >= 12, "joint optimization incomplete")
+    require(not model["best_at_boundary"] and min(model["corner_quality_gain"]) > 0, "joint constraints failed")
+    theta = model["theta"]
+    original = rows("data/raw/real_attachments/B_scaling_laws/supplementary_NQ_experiment_expanded.csv")
+    residuals = []
+    for row in original:
+        n, d, q, observed = (float(row[key]) for key in
+                              ("N_params_B", "D_tokens_B", "Q_score", "val_loss"))
+        E, A, B, alpha, beta, G0, GN, GD = theta
+        predicted = (E + A * n ** (-alpha) + B * d ** (-beta) +
+                     (1 - q) * (G0 + GN * math.log(n) + GD * math.log(d / 100)))
+        residuals.append(predicted - observed)
+    rmse = math.sqrt(sum(r * r for r in residuals) / len(residuals))
+    require(len(original) == 450 and near(rmse, model["fit"]["rmse"]),
+            "joint raw-source formula/RMSE mismatch")
+    comparison = fit["comparison"]
+    require(len(comparison) == 2, "staged comparison missing")
+    return f"8 parameters, {model['successful_starts']} starts, raw B7 RMSE {rmse:.9g}, min G={min(model['corner_quality_gain']):.6g}"
+
+
+def nested_cv():
+    summary = document("outputs/cyj/quality/b7_nested_cv_summary.json")
+    predictions = ROOT / "outputs/cyj/quality/b7_nested_cv_predictions.csv"
+    require(summary["prediction_sha256"] == sha(predictions), "nested OOF hash mismatch")
+    data = rows("outputs/cyj/quality/b7_nested_cv_predictions.csv")
+    require(len(summary["folds"]) == 24 and len(data) == 1350, "fold or OOF count changed")
+    counts = Counter(r["axis"] for r in data)
+    require(counts == {"N_params_B": 450, "D_tokens_B": 450, "Q_score": 450}, "axis OOF count changed")
+    for row in data:
+        require(near(float(row["observed"]) - float(row["prediction"]), row["residual"]), "OOF residual mismatch")
+    return f"24 outer folds; {len(data)} held-out predictions"
+
+
+def monotonicity():
+    from quality_substitution import derivatives
+    theta = document("outputs/cyj/quality/b7_joint_fit.json")["model"]["theta"]
+    worst = -math.inf
+    for n in (0.07, 11.97):
+        for d in (10.0, 600.0):
+            for q in (0.1, 1.0):
+                _, gradient = derivatives(theta, n, d, q)
+                require(all(math.isfinite(v) and v < 0 for v in gradient), "nondecreasing or nonfinite gradient")
+                worst = max(worst, gradient[2])
+    return f"all 8 support corners have negative N/D/Q derivatives; max L_Q={worst:.6g}"
+
+
+def gradient_check():
+    from chm_adapter_v4 import CHMAdapterV4
+    adapter = CHMAdapterV4(mode="conditional_diagnostic")
+    for point in ((0.07, 10.0, 0.1), (0.7, 150.0, 0.5), (11.97, 600.0, 1.0)):
+        _, analytic = adapter.value_grad(*point)
+        for axis, value in enumerate(point):
+            if point != (0.7, 150.0, 0.5):
+                continue
+            step = value * 1e-5
+            lo, hi = list(point), list(point)
+            lo[axis] -= step
+            hi[axis] += step
+            numeric = (adapter.value_grad(*hi)[0] - adapter.value_grad(*lo)[0]) / (2 * step)
+            require(abs(numeric - analytic[axis]) <= 1e-5 * max(abs(analytic[axis]), 1e-5), f"gradient axis {axis}")
+    return "center-point finite differences agree with analytic N/D/Q derivatives"
+
+
+def interval_coverage():
+    calibration = document("outputs/cyj/quality/b7_interval_calibration.json")
+    data = rows("outputs/cyj/quality/b7_nested_cv_predictions.csv")
+    checked = 0
+    for entry in calibration["coverage"]:
+        if entry["held_level"] is not None:
+            continue
+        axis = entry["axis"]
+        selected = [r for r in data if r["axis"] == axis]
+        nominal = str(entry["nominal"])
+        prefix = f"{entry['method']}_{nominal}"
+        cover = sum(float(r[f"{prefix}_lower"]) <= float(r["observed"]) <= float(r[f"{prefix}_upper"]) for r in selected) / len(selected)
+        width = sum(float(r[f"{prefix}_upper"]) - float(r[f"{prefix}_lower"]) for r in selected) / len(selected)
+        require(near(cover, entry["coverage"]) and near(width, entry["mean_width"]), f"coverage mismatch: {axis}/{prefix}")
+        checked += 1
+    require(checked == 18, f"only {checked} aggregate coverage cells")
+    return "18 nominal/method/axis coverage and interval-width cells independently recomputed"
+
+
+def q3_sweep():
+    manifest = document("outputs/cyj/q3/q3_sweep_manifest.json")
+    path = ROOT / "outputs/cyj/q3/q3_budget_sweep.csv"
+    require(manifest["budget_sweep_sha256"] == sha(path), "Q3 budget CSV hash mismatch")
+    data = rows("outputs/cyj/q3/q3_budget_sweep.csv")
+    require(len(data) == 330, f"Q3 grid has {len(data)} rows")
+    require({r["quality_family"] for r in data} == {"exponential", "power", "logarithmic"}, "cost family missing")
+    require(all(r["ready_for_Q3"] == "False" for r in data), "formal Q3 gate opened")
+    return f"{len(data)} grid cells; statuses {dict(Counter(r['status'] for r in data))}"
+
+
+def q3_context():
+    manifest = document("outputs/cyj/q3/q3_sweep_manifest.json")
+    path = ROOT / "outputs/cyj/q3/q3_context_sweep.csv"
+    require(manifest["context_sweep_sha256"] == sha(path), "context CSV hash mismatch")
+    data = rows("outputs/cyj/q3/q3_budget_sweep.csv")
+    contexts = {int(r["context_tokens"]) for r in data}
+    require({24576, 30000, 32768, 49152} <= contexts, "critical-context neighborhood missing")
+    require(len(rows("outputs/cyj/q3/q3_context_sweep.csv")) == 90, "context subset size drift")
+    return f"{len(contexts)} contexts including 30000 and 32768"
+
+
+def q3_support():
+    data = rows("outputs/cyj/q3/q3_budget_sweep.csv")
+    evaluated = 0
+    for row in data:
+        if row["status"] != "converged_feasible":
+            require(row["regime"] in ("infeasible", "unresolved"), "unclear nonconverged regime")
+            continue
+        n, d, q = (float(row[k]) for k in ("N_params_B", "D_tokens_B", "Q_score"))
+        require(0.07 - 1e-10 <= n <= 11.97 + 1e-10 and 10 - 1e-10 <= d <= 600 + 1e-10 and 0.5 - 1e-10 <= q <= 1 + 1e-10, "Q3 outside supported bounds")
+        require(float(row["budget_utilization"]) <= 1 + 1e-6, "budget violation")
+        require(row["kkt_check_pass"] == "True", "KKT check failed")
+        if row["support_saturated"] == "True":
+            require(row["regime"] == "support_limited" and row["budget_active"] == "False", "support saturation misclassified")
+        evaluated += 1
+    require(evaluated >= 300, "too few evaluated Q3 cells")
+    return f"{evaluated} solutions satisfy support, budget and recorded KKT check"
+
+
+def q3_model_form():
+    report = document("outputs/cyj/q3/q3_form_sensitivity.json")
+    data = rows("outputs/cyj/q3/q3_form_sensitivity.csv")
+    require(report["model_hash"] == sha(ROOT / "outputs/cyj/quality/b7_joint_fit.json"), "model-form base model drift")
+    require(report["csv_sha256"] == sha(ROOT / "outputs/cyj/q3/q3_form_sensitivity.csv"), "model-form CSV drift")
+    require(len(data) == 144 and {r["model_family"] for r in data} ==
+            {"no_Q", "constant_G", "Q_x_logN", "Q_x_logD"}, "ablation grid incomplete")
+    feasible = [r for r in data if r["candidate_status"] == "converged_feasible"]
+    require(len(feasible) == 132, "ablation feasibility count drift")
+    for row in feasible:
+        require(row["candidate_KKT_pass"] == "True", "ablation KKT check failed")
+        require(float(row["joint_model_regret"]) >= -1e-5 and
+                float(row["candidate_model_regret"]) >= -1e-5, "negative cross-model regret")
+        if row["model_family"] == "no_Q":
+            require(near(row["candidate_Q"], .5, 1e-6), "no-Q negative control spent on Q")
+    return "144 model-form cases, 132 feasible; all cross-model regrets nonnegative within 1e-5"
+
+
+def q3_independent_optimizer():
+    report = document("outputs/cyj/q3/q3_independent_optimizer_check.json")
+    path = ROOT / "outputs/cyj/q3/q3_independent_optimizer_check.csv"
+    data = rows("outputs/cyj/q3/q3_independent_optimizer_check.csv")
+    require(report["model_hash"] == sha(ROOT / "outputs/cyj/quality/b7_joint_fit.json"), "independent optimizer model drift")
+    require(report["result_csv_hash"] == sha(path), "independent optimizer CSV drift")
+    require(len(data) == 36 and report["rows"] == 36, "independent optimizer scenario count drift")
+    feasible = [r for r in data if r["independent_status"] == "feasible"]
+    require(len(feasible) == 33 and all(r["solver_success"] == "True" and
+                                       r["support_feasible"] == "True" for r in feasible),
+            "independent optimizer feasibility or convergence failed")
+    require(max(abs(float(r["independent_minus_CHM_loss"])) for r in feasible) < 1e-4,
+            "independent optimizer disagrees with CHM objective")
+    return "33 feasible independent solutions agree with CHM within 1e-4 Loss; 3 support-infeasible"
+
+
+def manifest_reproducibility():
+    from build_chm_release_v4 import run
+    path = ROOT / "outputs/cyj/interfaces/chm_v4_manifest.json"
+    before = path.read_bytes()
+    run()
+    require(path.read_bytes() == before, "v4 manifest not reproducible")
+    manifest = json.loads(before)
+    for relative, digest in manifest["files_sha256_utf8_lf"].items():
+        require(hashlib.sha256((ROOT / relative).read_bytes().replace(b"\r\n", b"\n")).hexdigest() == digest, f"manifest file drift: {relative}")
+    return f"manifest reproduced; {len(manifest['files_sha256_utf8_lf'])} file hashes agree"
+
+
+def unit_tests():
+    command = [sys.executable, "-B", "-m", "unittest", "discover", "-s", "src/cyj/tests", "-p", "test_*.py", "-q"]
+    result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, timeout=300)
+    require(result.returncode == 0, (result.stdout + result.stderr)[-2000:])
+    return (result.stdout + result.stderr).strip()[-300:]
+
+
+def q2_requirement_coverage():
+    """Check every mandatory B source has a hashed audit and an honest role."""
+    coverage = document("outputs/cyj/q2_joint_scenarios/requirement_coverage.json")
+    required = {"B1_main_ND", "B2_or_B3_trajectory", "B4_and_B5_external",
+                "B6_B7_B8_quality", "B9_B10_large", "unique_AB_bridge"}
+    require(set(coverage["requirements"]) == required, "Q2 requirement omitted")
+    for name, item in coverage["source"].items():
+        require(sha(ROOT / item["path"]) == item["sha256"], f"Q2 evidence drift: {name}")
+    require(len(coverage["raw_B_inputs"]) >= 17, "Q2 raw input coverage incomplete")
+    for relative, info in coverage["raw_B_inputs"].items():
+        path = ROOT / relative
+        require(path.stat().st_size == info["bytes"] and sha(path) == info["sha256"],
+                f"Q2 raw input drift: {relative}")
+    require(coverage["requirements"]["B4_and_B5_external"]["status"] == "partial_coordinate_unverified",
+            "B4/B5 coordinate gate was overstated")
+    require(coverage["requirements"]["B9_B10_large"]["status"] == "partial_estimated_stress_only",
+            "B10 was overstated as an external test")
+    require(coverage["requirements"]["unique_AB_bridge"]["status"] == "unidentified",
+            "unidentified bridge was overstated")
+    return "six Q2 gates, seven audit hashes, 17 raw B source hashes; limitations explicit"
+
+
+def q2_conditional_scenarios():
+    from build_q2_ndqp_evidence import OUT, run
+    manifest = document("outputs/cyj/q2_joint_scenarios/manifest.json")
+    original = (OUT / "manifest.json").read_bytes()
+    run()
+    require((OUT / "manifest.json").read_bytes() == original, "scenario manifest not reproducible")
+    require(len(rows("outputs/cyj/q2_joint_scenarios/scenario_grid.csv")) == 540,
+            "scenario grid incomplete")
+    for name, expected in manifest["files_sha256"].items():
+        require(sha(OUT / name) == expected, f"scenario artifact drift: {name}")
+    for relative, expected in manifest["code_sha256"].items():
+        require(sha(ROOT / relative) == expected, f"scenario code drift: {relative}")
+    assumptions = document("outputs/cyj/q2_joint_scenarios/model_assumptions.json")
+    require(assumptions["ready_for_Q3"] is False and "unidentified" in assumptions["scenario_bridge"],
+            "bridge calibration status overstated")
+    return "540 reproducible conditional cells; no fitted bridge claim"
+
+
+def q2_scenario_figures():
+    path = ROOT / "figures/cyj/q2_joint_scenarios/manifest.json"
+    manifest = json.loads(path.read_text(encoding="utf-8"))
+    require(manifest["bridge_calibrated"] is False, "figure bridge falsely marked calibrated")
+    require(manifest["source_grid"]["sha256"] == sha(ROOT / manifest["source_grid"]["path"]),
+            "figure source grid drift")
+    require(manifest["plot_code"]["sha256"] == sha(ROOT / manifest["plot_code"]["path"]),
+            "figure code drift")
+    require(len(manifest["figures_sha256"]) == 4, "expected four conditional figures")
+    for name, digest in manifest["figures_sha256"].items():
+        require(sha(path.parent / name) == digest, f"figure drift: {name}")
+    return "four conditional figures match input, plot code and output hashes"
+
+
+def latex_compile():
+    program = shutil.which("xelatex")
+    if not program:
+        return "BLOCKED_BY_EXTERNAL_DEPENDENCY: XeLaTeX unavailable"
+    work = ROOT / "paper/latex"
+    result = subprocess.run([program, "-interaction=nonstopmode", "-halt-on-error", "main.tex"], cwd=work,
+                            capture_output=True, text=True, timeout=120)
+    require(result.returncode == 0, result.stdout[-1200:] + result.stderr[-1200:])
+    log = (work / "main.log").read_text(encoding="utf-8", errors="replace")
+    require("Overfull \\hbox" not in log, "overfull paper box")
+    return "XeLaTeX built team draft; no overfull boxes"
+
+
+def run(*, coverage_only=False):
+    checks = []
+    if coverage_only:
+        for name, operation in (("Q2_requirement_coverage", q2_requirement_coverage),
+                                ("Q2_conditional_scenarios", q2_conditional_scenarios),
+                                ("Q2_scenario_figures", q2_scenario_figures)):
+            assess(name, operation, checks)
+            print(f"{checks[-1]['status']}: {name}: {checks[-1]['detail']}", flush=True)
+        return 1 if any(item["status"] == "FAIL" for item in checks) else 0
+    tasks = (("data_hashes", data_hashes), ("model_hashes", model_hashes), ("B1_fit", b1_fit),
+             ("B7_joint_fit", joint_fit), ("nested_CV", nested_cv), ("monotonicity", monotonicity),
+             ("gradient", gradient_check), ("interval_coverage", interval_coverage),
+             ("Q3_budget_sweep", q3_sweep), ("Q3_context_sweep", q3_context),
+             ("Q3_support_KKT", q3_support), ("Q3_model_form", q3_model_form),
+             ("Q3_independent_optimizer", q3_independent_optimizer),
+             ("manifest_reproducibility", manifest_reproducibility),
+             ("Q2_requirement_coverage", q2_requirement_coverage),
+             ("Q2_conditional_scenarios", q2_conditional_scenarios),
+             ("Q2_scenario_figures", q2_scenario_figures),
+             ("unit_tests", unit_tests), ("LaTeX_compile", latex_compile))
+    for name, operation in tasks:
+        assess(name, operation, checks)
+        print(f"{checks[-1]['status']}: {name}: {checks[-1]['detail']}", flush=True)
+    for check in checks:
+        if check["detail"].startswith("BLOCKED_BY_EXTERNAL_DEPENDENCY:"):
+            check["status"] = "BLOCKED_BY_EXTERNAL_DEPENDENCY"
+    failed = any(item["status"] == "FAIL" for item in checks)
+    blocked = any(item["status"] == "BLOCKED_BY_EXTERNAL_DEPENDENCY" for item in checks)
+    status = "FAIL" if failed else "BLOCKED_BY_EXTERNAL_DEPENDENCY" if blocked else "PASS_WITH_LIMITATIONS"
+    joint = document("outputs/cyj/quality/b7_joint_fit.json")
+    report = {"status": status, "checks": checks, "scientific_status": "conditional_B7_semi_synthetic",
+              "candidate_result_scope": "B7_NDQ_plus_conditional_Q3", "formal_result_scope": None,
+              "support": joint["support"], "source_dataset": joint["source_dataset"],
+              "source_hash": joint["source_hash"], "ready_for_Q3": False,
+              "limitations": ["B7 semi-synthetic with no real-training external test",
+                              "B7 function family was explored before nested evaluation",
+                              "Q3 N/D allocation changes across plausible B7 quality terms even when modeled loss regret is small",
+                              "Derivative-free Q3 agreement on 36 scenarios does not prove global optimality",
+                              "bootstrap-plus-residual v4 interval lacks direct held-out coverage calibration",
+                              "A/B loss or quality bridge unidentified; CHM v4 conditional owner acceptance completed"],
+              "model_hash": sha(ROOT / "outputs/cyj/quality/b7_joint_fit.json"),
+              "current_code_sha256": {name: sha(ROOT / "src/cyj" / name) for name in
+                                      ("q3_joint_sweeps.py", "q3_form_sensitivity.py",
+                                       "q3_independent_optimizer_check.py", "chm_adapter_v4.py",
+                                       "q3_costs.py")}}
+    OUT.mkdir(parents=True, exist_ok=True)
+    (OUT / "full_audit.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
+    lines = ["# CYJ full audit", "", f"Status: **{status}**", "", "| Check | Status | Detail |", "|---|---|---|"]
+    for item in checks:
+        lines.append(f"| {item['name']} | {item['status']} | {item['detail'].replace('|', '/').replace(chr(10), ' ')} |")
+    lines += ["", "## Scientific limits", ""] + [f"- {item}" for item in report["limitations"]]
+    (OUT / "full_audit.md").write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
+    print(status)
+    return 1 if failed else 0
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--coverage-only", action="store_true",
+                        help="run source coverage and NDQP scenario checks without SciPy")
+    raise SystemExit(run(coverage_only=parser.parse_args().coverage_only))

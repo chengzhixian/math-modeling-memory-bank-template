@@ -1,0 +1,4 @@
+{
+  "exit_code": 2,
+  "error_contains": "baseline does not accept bridge overrides or unknown fields"
+}

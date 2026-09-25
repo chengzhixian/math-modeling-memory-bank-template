@@ -1,0 +1,56 @@
+{
+  "scientific_status": "conditional_B7_semi_synthetic",
+  "candidate_result_scope": "B7_NDQ",
+  "formal_result_scope": null,
+  "support": {
+    "N_params_B": [
+      0.07,
+      11.97
+    ],
+    "D_tokens_B": [
+      10.0,
+      600.0
+    ],
+    "Q_score": [
+      0.1,
+      1.0
+    ]
+  },
+  "source_dataset": "official_attachment_B7",
+  "source_hash": "880fd265ca3e1d9bc93b4559af7ed7c18f89040634266c50bae03d88486e0f3a",
+  "ready_for_Q3": false,
+  "code_commit": "9403059623ea503db45f4ba41f475dc4a2441a52",
+  "schema_version": "cyj.q3_independent_optimizer_check.v1",
+  "model_hash": "c7426036164238d41b92ca08e9ca9087224aeb0c74554478b66093774a5b5b1a",
+  "baseline_csv_hash": "baa0ce59ddf5e69b603c4f07fcc15bf5da0076ea0a931c1e51c568162d586ce2",
+  "result_csv_hash": "de0a24d1c280a3b85cb6549d64e4801cf3bfa5452e2b0936dab54a003c157f1e",
+  "seed": 20260925,
+  "method": "independent derivative-free differential_evolution in N,Q; D eliminated analytically",
+  "popsize": 12,
+  "maxiter": 150,
+  "tol": 1e-08,
+  "polish": false,
+  "protocol_deviation": "SciPy trust-constr polish probed outside Q bounds and raised; disabled local polish before completed run",
+  "budgets": [
+    1e+19,
+    1e+20,
+    1e+22,
+    1e+23
+  ],
+  "contexts": [
+    2048,
+    30000,
+    131072
+  ],
+  "quality_families": [
+    "exponential",
+    "power",
+    "logarithmic"
+  ],
+  "rows": 36,
+  "feasible_rows": 33,
+  "min_independent_minus_CHM_loss": 1.3142908983354573e-10,
+  "max_independent_minus_CHM_loss": 8.026408426786702e-09,
+  "num_CHM_beaten_by_more_than_1e_minus_4": 0,
+  "limitation": "Independent heuristic cross-check; numerical agreement is not a global-optimality or real-training guarantee"
+}

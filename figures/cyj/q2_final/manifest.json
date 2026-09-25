@@ -1,0 +1,36 @@
+{
+  "figures": [
+    {
+      "figure": "p_policy_loss.png",
+      "figure_sha256": "2cce9da4c5319f0fdcd82a8770ec28758fcee99f60e49e6bcc8c76bb14917311",
+      "generator": "src/cyj/build_q2_final.py::figures",
+      "meaning": "Conditional policy comparison",
+      "source_csv": "p_optimization_main.csv",
+      "source_sha256": "886c856b45a2459f77c399837baeca91200467dfe247776ba47a26866df22423"
+    },
+    {
+      "figure": "qa_mapping.png",
+      "figure_sha256": "6976554d9109fd8076f22c1efa8b4b1eee2b8f8834dfa3e642605fd8f29d488e",
+      "generator": "src/cyj/build_q2_final.py::figures",
+      "meaning": "Q_A is distinct from B7 Q_B",
+      "source_csv": "quality_mapping_sensitivity.csv",
+      "source_sha256": "2f83435a888b6c59c21a805f161d054164f594f070f2f23c13899fecc26af3b9"
+    },
+    {
+      "figure": "quality_marginal.png",
+      "figure_sha256": "5a89da7476ef76046e63fa73390a0efc5e336e120168e9bfcaf7757337773dc8",
+      "generator": "src/cyj/build_q2_final.py::figures",
+      "meaning": "Q_B response at supported p",
+      "source_csv": "marginals_elasticities.csv",
+      "source_sha256": "5e1415b4fc8023d33735708a38c08e1b599436bb871b8c5604418b38daa63627"
+    },
+    {
+      "figure": "composition_transfers.png",
+      "figure_sha256": "956142e9dd60334982bd9c9df527cba6c1e8dd86cb5f0e2409016bf7932d554a",
+      "generator": "src/cyj/build_q2_final.py::figures",
+      "meaning": "Supported Q1 recipe-segment transfers",
+      "source_csv": "p_transfer.csv",
+      "source_sha256": "e29681c6b207170ec5485e1063ac0ce1d0a7743dc61bc8932236093daf6a8b68"
+    }
+  ]
+}

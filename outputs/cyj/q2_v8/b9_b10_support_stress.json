@@ -1,0 +1,9 @@
+{
+  "B9_role": "metadata_only",
+  "B10_role": "estimated_loss_stress_only",
+  "B10_rows": 128,
+  "B10_above_B1_N_support_ratio": 1.0,
+  "B10_above_B1_D_support_ratio": 0.796875,
+  "B10_external_RMSE": null,
+  "source_audit_sha256": "53977e436fed3afabd5cb6ba908ff6d1f90a4cd42873209c5ba0d888db311068"
+}

@@ -1,3 +1,45 @@
-% Owner: cyj.
-\subsection{目标函数、约束与理论分析}
-本小节由 cyj 填写。
+% Owner: cyj. Q3 theory consumes the frozen conditional Q2 model;
+% numerical optimization and owner acceptance belong to chm.
+\subsection{目标函数、成本约束与变量角色}
+
+问题三以问题二式\eqref{eq:cyj-v8} 的条件 Loss 为优化目标。
+$N,D$ 分别以十亿参数、十亿 token 计，$\boldsymbol p$ 必须满足
+问题一的可行配比与质量覆盖政策，质量代理
+$q=g(Q_A(\boldsymbol p))$ 随配比确定，不能当作与配比独立的
+自由控制量。上下文长度 $L_{\rm ctx}$ 是外生情景。对题面给定
+的质量成本函数族 $g_c$ 与基准质量 $q_0$，成本为
+\begin{equation}\label{eq:cyj-q3-cost}
+C(N,D,q;L_{\rm ctx})=6\times10^{18}ND
++10^{9}D[g_c(q)-g_c(q_0)]_+
++2\times10^{14}NDL_{\rm ctx}.
+\end{equation}
+在预算 $C\leq C_{\max}$ 下最小化条件 Loss，同时遵守
+$N\in[0.070542,11.965825]$、$D\in[10,299.893]$、
+$q\in[0.1,1]$ 及 A4 配比凸包。成本函数中的情景系数
+不由附件 B 拟合，$L_{\rm ctx}$ 也不作为连续优化变量。
+
+\subsection{局部最优条件及消费者门禁}
+
+记 $F=\exp\{r_w(\boldsymbol p)\}$，$B=L_0+(1-q)G$。
+固定配比时，$L_N,L_D,L_q$ 见式\eqref{eq:cyj-derivatives}。
+若 $g_c(q)>g_c(q_0)$，令
+$a=6\times10^{18}+2\times10^{14}L_{\rm ctx}$，则
+\begin{equation}
+C_N=aD,\qquad C_D=aN+10^9[g_c(q)-g_c(q_0)],\qquad
+C_q=10^9Dg_c'(q).
+\end{equation}
+只在变量可独立变化、解为内点、预算激活并满足约束资格条件时，
+才可比较 $-L_x/C_x$ 与同一个预算乘子。联合配比问题须沿
+可行零和方向取导：$\nabla_{\boldsymbol p}L$ 同时包括
+$\nabla q$ 和 $\nabla r_w$，成本的配比导数包含
+$C_q\nabla q$。在质量成本正部的折点以及配比凸包边界，
+应使用相应单侧或活跃约束条件。KKT 残差只证明候选点满足
+局部必要条件，不构成全局最优保证。
+
+正式的 Q2 接口版本为 \texttt{cyj.ndqp.scenario.v8}，已发布
+请求字段、单位、支持域与冻结 fixture；固定配比的 Q3 成本
+smoke 已通过。CHM 作为问题三求解负责人仍需正式消费该
+接口，报告可行性、预算与独立数值核验。此前只使用 B7
+原生质量坐标的资源扫描属于单源诊断，不作为本节最终
+四变量优化数值。跨来源桥接与质量成本均为明示情景，
+故未来优化结果也须按条件方案解释。

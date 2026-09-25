@@ -1,0 +1,150 @@
+{
+  "A4_design": {
+    "full_design_condition_number": 61.807689087548596,
+    "full_feature_rank": 27,
+    "linear_feature_rank": 17,
+    "pair_block_condition_after_linear_projection": 1.8276163014304616,
+    "pair_block_rank_after_linear_projection": 10,
+    "rows": 512
+  },
+  "Q1_interaction_manifest_sha256": "608595491268cf859331f3f8b9d7618a9e86fef94928120dbfa6ded3082f600c",
+  "Q1_status": "Q1_upstream_reproduction_pending_CHM_owner_signoff",
+  "candidate_1B_absolute_RMSE_beats_constant_targets": 11,
+  "claim_limit": "Training-side Q1 1M association only. Fold sign stability and A4 co-occurrence do not identify causal complementarity, cross-scale transfer or the B7 bridge.",
+  "cross_partial_note": "Quadratic mixed partial gamma is constant across reference/Ridge/QA p in this fitted basis; pair-product contribution changes with p.",
+  "domain_interaction_rows": 130,
+  "pair_count": 10,
+  "pairs": [
+    {
+      "A4_both_domains_positive_rows": 216,
+      "arxiv_only_normalized_cross_partial": -1.4836631438710102,
+      "domain_i": "freelaw",
+      "domain_j": "arxiv",
+      "equal_weight_normalized_cross_partial": -0.3097146780260323,
+      "label": "mixed_or_fold_sensitive_fitted_relation",
+      "negative_targets": 8,
+      "pile_cc_only_normalized_cross_partial": -0.06358053269028328,
+      "positive_targets": 5,
+      "same_sign_training_folds_of_65": 58
+    },
+    {
+      "A4_both_domains_positive_rows": 238,
+      "arxiv_only_normalized_cross_partial": -0.5988389807988421,
+      "domain_i": "freelaw",
+      "domain_j": "pubmed_central",
+      "equal_weight_normalized_cross_partial": -0.45934044385416894,
+      "label": "consistent_fitted_complement",
+      "negative_targets": 13,
+      "pile_cc_only_normalized_cross_partial": -0.19624124373135413,
+      "positive_targets": 0,
+      "same_sign_training_folds_of_65": 62
+    },
+    {
+      "A4_both_domains_positive_rows": 213,
+      "arxiv_only_normalized_cross_partial": -0.41227781662805707,
+      "domain_i": "freelaw",
+      "domain_j": "github",
+      "equal_weight_normalized_cross_partial": -0.3714037008895064,
+      "label": "mixed_or_fold_sensitive_fitted_relation",
+      "negative_targets": 12,
+      "pile_cc_only_normalized_cross_partial": -0.1250651511290114,
+      "positive_targets": 1,
+      "same_sign_training_folds_of_65": 62
+    },
+    {
+      "A4_both_domains_positive_rows": 231,
+      "arxiv_only_normalized_cross_partial": -0.7577965176814127,
+      "domain_i": "freelaw",
+      "domain_j": "pile_cc",
+      "equal_weight_normalized_cross_partial": -0.30958656005598284,
+      "label": "consistent_fitted_complement",
+      "negative_targets": 13,
+      "pile_cc_only_normalized_cross_partial": -0.3722639486237733,
+      "positive_targets": 0,
+      "same_sign_training_folds_of_65": 64
+    },
+    {
+      "A4_both_domains_positive_rows": 240,
+      "arxiv_only_normalized_cross_partial": -0.780729452515142,
+      "domain_i": "arxiv",
+      "domain_j": "pubmed_central",
+      "equal_weight_normalized_cross_partial": -0.28865108571060827,
+      "label": "mixed_or_fold_sensitive_fitted_relation",
+      "negative_targets": 13,
+      "pile_cc_only_normalized_cross_partial": -0.014344862016922305,
+      "positive_targets": 0,
+      "same_sign_training_folds_of_65": 58
+    },
+    {
+      "A4_both_domains_positive_rows": 213,
+      "arxiv_only_normalized_cross_partial": -1.994136612668371,
+      "domain_i": "arxiv",
+      "domain_j": "github",
+      "equal_weight_normalized_cross_partial": -0.7216467818394058,
+      "label": "consistent_fitted_complement",
+      "negative_targets": 13,
+      "pile_cc_only_normalized_cross_partial": -0.13334594378079845,
+      "positive_targets": 0,
+      "same_sign_training_folds_of_65": 65
+    },
+    {
+      "A4_both_domains_positive_rows": 225,
+      "arxiv_only_normalized_cross_partial": -1.8707264985455772,
+      "domain_i": "arxiv",
+      "domain_j": "pile_cc",
+      "equal_weight_normalized_cross_partial": -0.4572300077594578,
+      "label": "consistent_fitted_complement",
+      "negative_targets": 13,
+      "pile_cc_only_normalized_cross_partial": -0.39926809825979875,
+      "positive_targets": 0,
+      "same_sign_training_folds_of_65": 65
+    },
+    {
+      "A4_both_domains_positive_rows": 230,
+      "arxiv_only_normalized_cross_partial": -0.6299189126707458,
+      "domain_i": "pubmed_central",
+      "domain_j": "github",
+      "equal_weight_normalized_cross_partial": -0.5410126798441641,
+      "label": "mixed_or_fold_sensitive_fitted_relation",
+      "negative_targets": 12,
+      "pile_cc_only_normalized_cross_partial": -0.18288612698154327,
+      "positive_targets": 1,
+      "same_sign_training_folds_of_65": 64
+    },
+    {
+      "A4_both_domains_positive_rows": 241,
+      "arxiv_only_normalized_cross_partial": -0.5639292451421629,
+      "domain_i": "pubmed_central",
+      "domain_j": "pile_cc",
+      "equal_weight_normalized_cross_partial": -0.4305921279062512,
+      "label": "mixed_or_fold_sensitive_fitted_relation",
+      "negative_targets": 12,
+      "pile_cc_only_normalized_cross_partial": -0.416220591426677,
+      "positive_targets": 1,
+      "same_sign_training_folds_of_65": 63
+    },
+    {
+      "A4_both_domains_positive_rows": 233,
+      "arxiv_only_normalized_cross_partial": -0.037612008745739826,
+      "domain_i": "github",
+      "domain_j": "pile_cc",
+      "equal_weight_normalized_cross_partial": -0.22518915739227383,
+      "label": "mixed_or_fold_sensitive_fitted_relation",
+      "negative_targets": 11,
+      "pile_cc_only_normalized_cross_partial": -0.32290476651874456,
+      "positive_targets": 2,
+      "same_sign_training_folds_of_65": 57
+    }
+  ],
+  "policy_comparisons": 3,
+  "published_candidate_RMSE_better_than_Ridge_target_counts": {
+    "test_1B": 13,
+    "test_1m": 11,
+    "test_60m": 13
+  },
+  "ready_for_Q3": false,
+  "schema_version": "cyj.q2.interactions.v1",
+  "screening_rule": "exploratory fitted-basis complement screen: gamma<0 in 13/13 targets, at least 60/65 matching training-fold signs, and both domains positive in at least 10/512 training recipes; rule is descriptive, not a significance test",
+  "simplex_note": "Composition proportions sum to one. Ambient gamma is basis-specific; a feasible simultaneous addition to pair i,j must remove mass elsewhere. A donor outside the selected five yields the same local mixed partial, but such perturbations may leave the Q1 convex hull and are not automatically supported.",
+  "target_count": 13
+}

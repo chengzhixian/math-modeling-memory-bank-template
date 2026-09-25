@@ -1,0 +1,33 @@
+{
+  "schema_version": "cyj.q2.v8.acceptance.v1",
+  "q2_implementation_complete": true,
+  "q2_competition_requirements_complete": true,
+  "q3_consumer_interface_ready": true,
+  "q3_consumer_verified_by_CHM": false,
+  "cross_source_empirical_calibration_complete": false,
+  "release_remote_verified": true,
+  "status": "conditional_v8_competition_requirements_complete_remote_verified_pending_CHM_consumption",
+  "checks": {
+    "B1_fixed_parameter_count": 5,
+    "B7_quality_parameter_count": 3,
+    "nested_CV_folds": 24,
+    "B3_trajectories": 8,
+    "domain_pairs": 136,
+    "v8_fixtures": 18,
+    "CYJ_tests_including_v7": 95,
+    "raw_A_open_events": 0,
+    "Q3_fixed_p_smoke": true
+  },
+  "evidence_paths": [
+    "outputs/cyj/q2_v8/b7_quality_extension.json",
+    "outputs/cyj/q2_v8/b2_b3_model_validation.csv",
+    "outputs/cyj/q2_v8/domain_pair_substitution.csv",
+    "outputs/cyj/q2_v8/requirement_evidence.csv",
+    "outputs/cyj/q2_v8_runtime_audit.json",
+    "interfaces/cyj/fixtures_v8/manifest.json",
+    "outputs/cyj/q2_v8_release_verification.json"
+  ],
+  "claim_limit": "uncalibrated_cross_source_quality_and_mixture_bridges; B3 interpolation and B4/B5 directions are not independent absolute validation",
+  "release_subject_commit": "615c078517379284f6b0504c568790a7975c6eda",
+  "release_evidence_path": "outputs/cyj/q2_v8_release_verification.json"
+}

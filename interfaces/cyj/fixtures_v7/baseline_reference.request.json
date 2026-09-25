@@ -1,0 +1,42 @@
+{
+  "schema_version": "cyj.ndqp.scenario.v7",
+  "mode": "baseline",
+  "N_params_B": 1.0,
+  "D_tokens_B": 100.0,
+  "Q_score": 0.5,
+  "p_policy": "algebraic_reference_only",
+  "p": {
+    "arxiv": 0.11302252583269279,
+    "dm_mathematics": 0.0254628540970504,
+    "enron_emails": 0.002211033043406226,
+    "europarl": 0.012737064754031531,
+    "freelaw": 0.0968248321520278,
+    "github": 0.11070066007050916,
+    "gutenberg_pg_19": 0.04691494424753537,
+    "hackernews": 0.011650822378108678,
+    "nih_exporter": 0.00588968021709595,
+    "philpapers": 0.005487697351193036,
+    "pile_cc": 0.11948759779188561,
+    "pubmed_abstracts": 0.06618116611257162,
+    "pubmed_central": 0.11375419105058357,
+    "stackexchange": 0.09943242344413017,
+    "ubuntu_irc": 0.019599998284005892,
+    "uspto_backgrounds": 0.07556475309333588,
+    "wikipedia_en": 0.07507775607983627
+  },
+  "weights": {
+    "arxiv": 0.07692307692307693,
+    "freelaw": 0.07692307692307693,
+    "pubmed_central": 0.07692307692307693,
+    "wikipedia_en": 0.07692307692307693,
+    "dm_mathematics": 0.07692307692307693,
+    "github": 0.07692307692307693,
+    "stackexchange": 0.07692307692307693,
+    "gutenberg_pg_19": 0.07692307692307693,
+    "pile_cc": 0.07692307692307693,
+    "ubuntu_irc": 0.07692307692307693,
+    "hackernews": 0.07692307692307693,
+    "pubmed_abstracts": 0.07692307692307693,
+    "uspto_backgrounds": 0.07692307692307693
+  }
+}
