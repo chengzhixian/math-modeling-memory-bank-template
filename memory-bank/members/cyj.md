@@ -8,6 +8,8 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 更新时间：2026-09-24（北京时间，接口审查与状态降级）。角色 cyj，负责 Q2 与 Q3 理论；分支 `team/cyj-scaling`。Python 3.12.14 / Windows，环境见 `problem/cyj/environment.md`。
 
+2026-09-25 14:01：本地/远端 `team/cyj-scaling` 已用非强推合并统一到 `2a8b03e2a26ef4eb25285cb89d14edf28d4ee316`，工作区当时干净；v5 代码、540 情景与四图已远端备份。复审发现 v5 文档错误声称 CHM 已验收 v4，现已纠正为待 CHM 所有人验收。CHM 新 `2450971` 配比凸包审计尚未发布 v1.4 消费合同，不能替代本人验收。完整四变量 Loss 仍不可识别，`ready_for_Q3=false`。本轮审查及交接见 `problem/cyj/20260925-v5-release-review.md`、`memory-bank/handoffs/cyj/20260925-1401-v5-release-review.md`；公共记忆由集成人维护。
+
 ## 当前状态
 
 2026-09-25 独立优化器抽检：36 冻结 Q3 情景使用不依赖 CHM SLSQP 的解析消去 D + 约束微分进化；33 可行解与 CHM 条件 Loss 差 `1.31e-10` 至 `8.03e-9`，3 低预算支持域不可行判据相同。SciPy local polish 在质量边界探测时报错，正式运行关闭 polish 并记录偏离。16/16 审计项包含从原始 B1/B7 CSV 独立重算两模型 RMSE，62/62 本人单测、XeLaTeX 8 页通过；`PASS_WITH_LIMITATIONS`、`ready_for_Q3=false`。见 `20260925-q3-independent-optimizer-results.md` 与交接。GitHub HTTPS 曾 443 超时/连接重置，之后已补推并以 `ls-remote` 核对 `team/cyj-scaling@54377c5b8cee31e53197d03b8641d158559e1b0c`；后续文档检查点以最终 Git 实际 SHA 为准。

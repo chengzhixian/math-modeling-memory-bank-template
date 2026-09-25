@@ -1,5 +1,7 @@
 # cyj 交付约定 v1.13（joint B7 条件交付）
 
+**2026-09-25 v5 增补：**[NDQP_SCENARIO_V5.md](NDQP_SCENARIO_V5.md) 是独立的 `cyj.ndqp.scenario.v5` 四变量条件情景入口，固定 CHM `chm.q1.v1.3@cdda1ad62c5c7eb72b413c4228caeff87d2bad30`。`lambda`、`eta`、权重均由调用者明确给出，A/B Loss 桥接与质量映射未识别；默认 `ready_for_Q3=false`。它不取代下述 B7 原生 `cyj.chm.v4`，也不将情景预测当作正式四维经验律。当前精确代码发布及 CHM 待验收事项见 `memory-bank/handoffs/cyj/20260925-1401-v5-release-review.md`。
+
 角色：cyj 负责 Q2 标度律与 Q3 理论；chm/zhh 消费。当前 `ready_for_Q3=false`，未获联合验收或 main 集成。可调用接口、公式、字段、单位、成本与约束详见 [Q3_API.md](Q3_API.md)，此处只保留当前入口与证据索引。
 
 **当前 chm 条件候选入口：**[CHM_API_V4.md](CHM_API_V4.md)，`src/cyj/chm_adapter_v4.py::CHMAdapterV4(mode="conditional_diagnostic")`，本地精确发布 `3471530d91c8ee7eb709e5cd6c824eb9c423e0df`，manifest SHA256 `dcd50430b88cc754e1d8f43a3890013bcc45b07f877b315e9a812d2978fd41f7`。本版是 B7 八参数联合拟合、嵌套 N/D/Q 留级、200 次簇 bootstrap 的独立条件候选；N/D/Q 值与梯度、弹性、替代率、同源经验区间可调用。10 个上下文中 7 个为 CYJ 外生敏感性，机器字段明确标记。A 侧仍是 Q1 v1.2 13-target `p_policy=sensitivity_only`，不加进 B Loss。60/60 本人测试与 v4 精确 Git 对象 3 请求 consumer smoke 通过；CYJ 用 CHM pinned `92e0592` 求解器独立完成 330 个条件场景。B7 半合成、区间方法差异、函数族历史探索和 A/B 桥接缺失使 `ready_for_Q3=false`；CHM 本人消费验收仍待。远端发布状态需以实际 `ls-remote` 核验。

@@ -1,8 +1,9 @@
 # CYJ NDQP conditional scenario v5
 
 Status: `conditional_diagnostic=true`, `ready_for_Q3=false`, `formal_ready=false`.
-This new interface leaves immutable `cyj.chm.v4` unchanged. CHM v4 conditional
-owner acceptance is complete; this does not establish an A/B calibration.
+This new interface leaves immutable `cyj.chm.v4` unchanged. CYJ's local
+consumer checks passed; CHM owner acceptance of v4/v5 has not been recorded.
+Neither state establishes an A/B calibration.
 
 ## Exact inputs and provenance
 
