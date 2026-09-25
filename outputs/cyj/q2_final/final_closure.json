@@ -1,0 +1,59 @@
+{
+  "CHM_Q1_interaction_owner_signoff": "pending",
+  "CHM_v6_Q3_consumption_signoff": "pending",
+  "Q2_MODELING_COMPLETE_EXCEPT_PAPER": true,
+  "checks": {
+    "B1_to_B10_roles": true,
+    "Q1_interaction_bundle_SHA_and_130_rows": true,
+    "QA_raw_inequalities": true,
+    "V3_C1_to_C8_retained": true,
+    "equal_loss_roots_recomputed": true,
+    "final_manifest_SHA": true,
+    "independent_512_enumeration": true,
+    "no_Q2_raw_A_reads": true,
+    "three_Q1_hull_paths": true,
+    "three_Ridge_vs_interaction_policies": true,
+    "v6_four_fixtures": true
+  },
+  "claim_limit": "Interaction signs are fitted 1M Q1 model-basis diagnostics, not causal synergy or empirically calibrated B7 effects. Lambda/eta remain unidentified.",
+  "evidence": {
+    "Q1_derived_bundle_sha256": "b0dda7caac30513c0f37e74ccb143064606847fdc35fd7607c999ac2f8647ecb",
+    "Q1_hull_checked_transfer_points": 9,
+    "Q1_interaction_bundle_sha256": "608595491268cf859331f3f8b9d7618a9e86fef94928120dbfa6ded3082f600c",
+    "Q2_runtime_Q1_derived_reads": 31,
+    "Q2_runtime_original_A_reads": 0,
+    "QA_raw_constraint_residuals": {
+      "quality_direct__equal_13": {
+        "coverage_margin": 0.0,
+        "factor_over_B7_N_eta0": 0.8818074652316976,
+        "quality_margin": 2.7755575615628914e-17
+      },
+      "quality_direct_and_near__equal_13": {
+        "coverage_margin": 0.0,
+        "factor_over_B7_N_eta0": 0.8861071409425467,
+        "quality_margin": 1.3877787807814457e-17
+      }
+    },
+    "independent_main_conditional_loss": 2.192822814439578,
+    "independent_main_recipe_index": "136",
+    "interaction_rows": 130,
+    "max_equal_loss_root_residual": 4.440892098500626e-16,
+    "policy_form_comparisons": 3,
+    "v6_fixture_count": 4,
+    "validated_B_groups": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ]
+  },
+  "formal_scientific_ready_for_Q3": false,
+  "schema_version": "cyj.q2.final_closure.v1",
+  "scope": "conditional engineering model, source-bound validation and Q1-fitted domain interactions"
+}
