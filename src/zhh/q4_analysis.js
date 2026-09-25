@@ -2,7 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const repositoryRoot = path.resolve(__dirname, '..', '..');
 const dataRoot = path.join(repositoryRoot, 'data', 'raw', 'real_attachments', 'C_efficiency_evolution');
-const outputRoot = path.join(repositoryRoot, 'outputs', 'zhh');
+// v1 is a historical diagnostic. Current publication is q4_complete.py (v2).
+const outputRoot = path.join(repositoryRoot, 'outputs', 'zhh', 'legacy_baseline');
 fs.mkdirSync(outputRoot, { recursive: true });
 
 const benchmarkColumns = ['IFEval', 'BBH', 'MATH Lvl 5', 'GPQA', 'MUSR', 'MMLU-PRO'];
@@ -48,6 +49,7 @@ function readCsv(fileName) {
 }
 
 function number(value) {
+  if (value === null || value === undefined || String(value).trim() === '') return null;
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : null;
 }

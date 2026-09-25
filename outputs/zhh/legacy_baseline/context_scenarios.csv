@@ -1,0 +1,4 @@
+scenario,contextTokens,supportingModels,source
+low,2048,EleutherAI/pythia-70m;EleutherAI/pythia-160m;EleutherAI/pythia-410m;EleutherAI/pythia-1b;EleutherAI/pythia-1.4b;EleutherAI/pythia-2.8b;EleutherAI/pythia-6.9b;EleutherAI/pythia-12b;microsoft/phi-2;tiiuae/falcon-7b;tiiuae/falcon-40b;cerebras/Cerebras-GPT-111M;cerebras/Cerebras-GPT-256M;cerebras/Cerebras-GPT-590M;cerebras/Cerebras-GPT-1.3B;cerebras/Cerebras-GPT-2.7B;cerebras/Cerebras-GPT-6.7B;cerebras/Cerebras-GPT-13B,C7 model_architecture_metadata.csv observed max_position_embeddings
+medium,8192,meta-llama/Meta-Llama-3-8B;meta-llama/Meta-Llama-3-70B;google/gemma-2-2b;google/gemma-2-9b;google/gemma-2-27b;google/gemma-7b;microsoft/Phi-3-small-8k-instruct,C7 model_architecture_metadata.csv observed max_position_embeddings
+high,131072,meta-llama/Llama-3.1-8B,C7 model_architecture_metadata.csv observed max_position_embeddings

@@ -1,0 +1,2 @@
+# Preserve producer Git-object snapshots byte-for-byte for upstream hash checks.
+q4_v2/upstream_q3_* -text -eol

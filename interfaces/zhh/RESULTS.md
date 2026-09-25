@@ -1,34 +1,19 @@
-# zhh 接口结果 v1
+# zhh Q4 v2结果索引
 
-状态：已运行基线及开放性/模型类型敏感性，尚未进入 `main`。结果仅为短窗口关联。
+状态：已运行的完整条件答卷，尚未进入main；纯技术因果贡献、跨源Loss绝对坐标、未来覆盖率均未识别。
 
-## 给 chm 的 C7 情景
+- `outputs/zhh/Q4_FINAL_ANSWER_V2.md`：完整推导、数据角色、贡献、桥接、12/24月及局限。
+- `outputs/zhh/q4_results.json` / `q4_v2/results.json`：当前机器结果。
+- `outputs/zhh/frontier_forecast.csv`：16条主条件格；chat/领域微调12月算力对数增长减半点值53.488、范围40.409--65.959。范围是情景包络，非95%预测区间。
+- `q4_v2/c4_resource_audit.csv` / `c4_usable_resources.csv`：3523行审计、81主资源记录，实际使用Token数。
+- `q4_v2/historical_contributions.csv`：窗口/开放性/类型带符号分解及未解释项；占比不解释为因果技术份额。
+- `q4_v2/rolling_frontier_backtest_primary.csv`：主10折诊断，后训练组常数/趋势/动力学RMSE2.326/1.605/1.760；基础4折13.006/10.228/14.043，长期预测弱。
+- `q4_v2/bridge_validation.csv` / `bridge_source_diagnostics.csv` / `bridge_mappings.csv`：分层模型、来源、支持；formal仍unidentified。
+- `q4_v2/q3_bridge_sensitivity.csv`：固定Q3 v8的72条分级记录，33条在支持内允许显式同坐标假设换算，没有实证标定分数或联合CI。
+- `c8_bbh_task_aggregation.csv`：1860×24 BBH任务，宏平均/标准差/最弱任务中位49.401/16.934/14.000，4损坏JSON另列。
+- `context_scenarios.csv`：C7 2048/8192/131072外生Token接口，哈希保持。
+- `q4_v2/manifest.json` / `answer_manifest.json`：输入、代码、Q3、环境与输出哈希。
+- `paper/sections/zhh/q4.md` / `paper/latex/sections/zhh/q4.tex`：同步稿；`paper/latex/figures/zhh/`三图。
+- `experiments/zhh/20260926-q4-v2-full-review.md`：18阶段Gate和从零red-team。
 
-机器可读文件：`outputs/zhh/context_scenarios.csv`。
-
-| 情景 | 上下文长度（Token） | 依据 |
-|---|---:|---|
-| low | 2,048 | C7 实际观测 |
-| medium | 8,192 | C7 实际观测 |
-| high | 131,072 | C7 实际观测 |
-
-用于 Q3 时须把它们作为外生敏感性情景，不作为内点寻优变量。
-
-## 给 cyj/chm 的桥接约束
-
-- 高可比样本仅 7 条；75 条分级加权模型按 Loss 排序留出集 RMSE 为 7.06 Benchmark 分，`R²=-1.376`。
-- 因此 Q1–Q3 的 Loss 输出不能直接换算成确定的 Benchmark 增益。7.06 分是一次留出测试的 RMSE，不是可加减的误差界或 95% 预测半宽；按 Loss 来源留出的 RMSE 为 9.887 分。当前机器接口返回 `unidentified`，不得据此生成能力区间。
-- 完整数值和系数见 `outputs/zhh/q4_results.json` 的 `bridge` 字段。
-
-## Q4 结果文件
-
-- `outputs/zhh/q4_results.json`：全部口径、模型、验证和限制。
-- `outputs/zhh/c8_bbh_task_aggregation.csv`：1,860 个模型的 24 项 BBH 聚合。
-- `outputs/zhh/c8_parse_failures.csv`：4 个损坏 JSON 的文件级证据。
-- `outputs/zhh/frontier_forecast.csv`：算力放缓预测状态 `not_identified_for_compute_slowdown`，预测与区间字段为空。
-
-## 开放性和模型类型敏感性
-
-主扩展集排除了 Epoch 明确标为 `no`、但有 Hub License 的 6 条冲突记录，共 2,672 条；许可证只是开放权重的代理，不能证明权重可获取。仅纳入 Epoch 明确 `yes` 的严格集有 424 条。两集分别重跑了关联回归、窗口分解和时间留出，详见 `q4_results.json` 的 `openFilterSensitivity`。扩展集的绝对值归一规模份额为 43.85%，严格集为 48.97%；两组选择机制不同，这些份额均非技术贡献因果比例。
-
-扩展集中 pretrained 254 条的分组时间斜率为 0.431 分/月，non-pretrained 2,418 条为 1.115 分/月；含类型交互的拟合及每个模型仅保留最新记录的复核见 `typeSensitivity`。共同时间斜率不应用于正式 12 个月外推。
+Node旧基线及撤回预测只在legacy_baseline，不作为当前论文预测。接口调用规则详见CONTRACT.md。

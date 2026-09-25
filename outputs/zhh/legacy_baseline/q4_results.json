@@ -1,0 +1,374 @@
+{
+  "definitions": {
+    "capability": "Unweighted mean of the six C1/C2 benchmark scores, defined only for complete six-score cases.",
+    "openFilter": "Epoch open weights Yes or recognizable Hub license when Epoch status is not No. A license is an availability proxy, not proof of accessible weights.",
+    "timeAxis": "Leaderboard submission date; C1/C2 span is reported explicitly.",
+    "modelTypes": "pretrained versus non_pretrained from the Type field; non_pretrained includes chat, domain-finetuned, merges and multimodal entries.",
+    "contribution": "OLS score ~ log10(parameters in billions) + months since 2024-06 + non-pretrained indicator.",
+    "forecast": "Compute-slowdown forecast is withheld because no validated compute-to-parameter-frontier mapping is identified; a conditional time-only association is reported separately."
+  },
+  "audit": {
+    "leaderboardUsableOpenRows": 2672,
+    "leaderboardEligibleBeforeCompleteCase": 2672,
+    "leaderboardIncompleteSixScoreRowsExcluded": 0,
+    "explicitClosedLicenseConflicts": 6,
+    "explicitClosedRowsIncluded": 0,
+    "leaderboardMinDate": "2024-06-08",
+    "leaderboardMaxDate": "2025-03-13",
+    "pretrainedRows": 254,
+    "nonPretrainedRows": 2418,
+    "c8Directories": 1863,
+    "c8AggregatedDirectories": 1860,
+    "c8ParseFailuresEncountered": 4
+  },
+  "contribution": {
+    "coefficients": {
+      "intercept": 1.494774941724692,
+      "logParams": 13.717047332235294,
+      "month": 1.0723707530765954,
+      "nonPretrainedIndicator": 3.6482517524672002
+    },
+    "fitMetrics": {
+      "n": 2672,
+      "rmse": 7.671204547850304,
+      "mae": 5.9118303726420915,
+      "r2": 0.5043210083595111
+    },
+    "startProfile": {
+      "logParams": 1.8485216407506466,
+      "month": 1.0050108525769852,
+      "nonPretrainedIndicator": 0.803921568627451
+    },
+    "endProfile": {
+      "logParams": 1.3723964324231115,
+      "month": 8.366515049701645,
+      "nonPretrainedIndicator": 0.9322033898305084
+    },
+    "contributions": {
+      "scale": -6.5310320186991895,
+      "nonScaleTime": 7.894261799647089,
+      "modelTypeMix": 0.46800437901373826,
+      "scaleShareAbsolute": 0.43852153714728404,
+      "nonScaleShareAbsolute": 0.561478462852716
+    }
+  },
+  "openFilterSensitivity": {
+    "strictEpochYes": {
+      "n": 424,
+      "coefficients": {
+        "intercept": 0.3406405060802049,
+        "logParams": 14.492242532116952,
+        "month": 0.9711704486910758,
+        "nonPretrainedIndicator": 6.670796706151607
+      },
+      "fitMetrics": {
+        "n": 424,
+        "rmse": 8.66570415799072,
+        "mae": 6.709059939659781,
+        "r2": 0.47651046881921255
+      },
+      "contributions": {
+        "scale": -9.995179703606265,
+        "nonScaleTime": 7.353924052123905,
+        "modelTypeMix": 3.0630938280337725,
+        "scaleShareAbsolute": 0.4896670073170626,
+        "nonScaleShareAbsolute": 0.5103329926829375
+      },
+      "timeHoldout": {
+        "nTrain": 339,
+        "nTest": 85,
+        "rmse": 11.388108214028515,
+        "mae": 9.032555506350786,
+        "r2": 0.05155390474250943
+      },
+      "dateRange": [
+        "2024-06-08",
+        "2025-03-13"
+      ]
+    },
+    "licenseProxyExpanded": {
+      "n": 2672,
+      "coefficients": {
+        "intercept": 1.494774941724692,
+        "logParams": 13.717047332235294,
+        "month": 1.0723707530765954,
+        "nonPretrainedIndicator": 3.6482517524672002
+      },
+      "fitMetrics": {
+        "n": 2672,
+        "rmse": 7.671204547850304,
+        "mae": 5.9118303726420915,
+        "r2": 0.5043210083595111
+      },
+      "contributions": {
+        "scale": -6.5310320186991895,
+        "nonScaleTime": 7.894261799647089,
+        "modelTypeMix": 0.46800437901373826,
+        "scaleShareAbsolute": 0.43852153714728404,
+        "nonScaleShareAbsolute": 0.561478462852716
+      },
+      "timeHoldout": {
+        "nTrain": 2142,
+        "nTest": 530,
+        "rmse": 9.16210588678149,
+        "mae": 7.422109207992874,
+        "r2": 0.3961341671142361
+      },
+      "dateRange": [
+        "2024-06-08",
+        "2025-03-13"
+      ]
+    }
+  },
+  "typeSensitivity": {
+    "pretrained": {
+      "n": 254,
+      "coefficients": {
+        "intercept": 6.834700068584963,
+        "logParams": 7.007063880402648,
+        "month": 0.43123071935621105
+      },
+      "fitMetrics": {
+        "n": 254,
+        "rmse": 5.751914746099451,
+        "mae": 4.337078161771093,
+        "r2": 0.46562883919510667
+      }
+    },
+    "nonPretrained": {
+      "n": 2418,
+      "coefficients": {
+        "intercept": 3.1155495265797537,
+        "logParams": 15.756036421237454,
+        "month": 1.1147705179149727
+      },
+      "fitMetrics": {
+        "n": 2418,
+        "rmse": 7.615288483511443,
+        "mae": 5.859064764047688,
+        "r2": 0.4833733308255732
+      }
+    },
+    "interaction": {
+      "n": 2672,
+      "coefficients": {
+        "intercept": 6.834700068485478,
+        "logParams": 7.007063880481881,
+        "month": 0.4312307193695646,
+        "nonPretrainedIndicator": -3.7191505418929105,
+        "monthByType": 0.6835397985434234,
+        "logParamsByType": 8.74897254075613
+      },
+      "fitMetrics": {
+        "n": 2672,
+        "rmse": 7.45820743325861,
+        "mae": 5.714384899909393,
+        "r2": 0.5314647151724694
+      }
+    },
+    "latestModelRecord": {
+      "n": 2616,
+      "coefficients": {
+        "intercept": 1.4067349272830403,
+        "logParams": 13.797967493733003,
+        "month": 1.0799065948265354,
+        "nonPretrainedIndicator": 3.61027475306742
+      },
+      "fitMetrics": {
+        "n": 2616,
+        "rmse": 7.686932461486329,
+        "mae": 5.917908674271736,
+        "r2": 0.5035604351773961
+      }
+    }
+  },
+  "bridge": {
+    "highComparability": {
+      "coefficients": {
+        "intercept": -5.588303954150092,
+        "loss": 4.796485301823622,
+        "logParams": 1.5672267826158255
+      },
+      "metrics": {
+        "n": 7,
+        "rmse": 0.26053433104179613,
+        "mae": 0.19632874015443832,
+        "r2": 0.4871698279591513
+      }
+    },
+    "comparabilityWeighted": {
+      "coefficients": {
+        "intercept": -1.5008912850932035,
+        "loss": 4.00465932969448,
+        "logParams": 12.71323722558118
+      },
+      "metrics": {
+        "n": 75,
+        "rmse": 9.13016532919328,
+        "mae": 7.25728394482948,
+        "r2": 0.3856351998578058
+      }
+    },
+    "lossOrderedHoldout": {
+      "nTrain": 56,
+      "nTest": 19,
+      "rmse": 7.06003565485966,
+      "mae": 5.915519707636628,
+      "r2": -1.3758200924779738
+    },
+    "sourceHoldout": {
+      "nTest": 75,
+      "rmse": 9.887236986243915,
+      "mae": 7.833142467153212,
+      "r2": 0.2795249778932184
+    },
+    "nHigh": 7,
+    "nMedium": 68
+  },
+  "epochCompute": {
+    "annual": [
+      {
+        "year": 2019,
+        "n": 31,
+        "frontierLogCompute": 21.929761117107013
+      },
+      {
+        "year": 2020,
+        "n": 36,
+        "frontierLogCompute": 22.055850364120815
+      },
+      {
+        "year": 2021,
+        "n": 59,
+        "frontierLogCompute": 22.535331634125242
+      },
+      {
+        "year": 2022,
+        "n": 62,
+        "frontierLogCompute": 23.316098537344747
+      },
+      {
+        "year": 2023,
+        "n": 152,
+        "frontierLogCompute": 23.43568275875259
+      },
+      {
+        "year": 2024,
+        "n": 201,
+        "frontierLogCompute": 24.25265888950062
+      },
+      {
+        "year": 2025,
+        "n": 138,
+        "frontierLogCompute": 24.638747096402795
+      }
+    ],
+    "medianAnnualLogGrowth": 0.4327847384533019,
+    "recentAnnualLogGrowth": 0.38608820690217627
+  },
+  "externalTimeseries": {
+    "annual": [
+      {
+        "year": 2019,
+        "n": 1,
+        "p95Score": 5,
+        "maxScore": 5
+      },
+      {
+        "year": 2020,
+        "n": 1,
+        "p95Score": 50,
+        "maxScore": 50
+      },
+      {
+        "year": 2021,
+        "n": 2,
+        "p95Score": 4.85,
+        "maxScore": 5
+      },
+      {
+        "year": 2022,
+        "n": 7,
+        "p95Score": 33.5,
+        "maxScore": 35
+      },
+      {
+        "year": 2023,
+        "n": 13,
+        "p95Score": 28.999999999999986,
+        "maxScore": 35
+      },
+      {
+        "year": 2024,
+        "n": 2666,
+        "p95Score": 38.54,
+        "maxScore": 52.08
+      },
+      {
+        "year": 2025,
+        "n": 1902,
+        "p95Score": 41.248999999999995,
+        "maxScore": 47.22
+      }
+    ]
+  },
+  "forecast": {
+    "status": "not_identified_for_compute_slowdown",
+    "statusReason": "No validated mapping from the C4 compute frontier to the C1/C2 parameter frontier is available; adding compute growth to log10 parameter count is dimensionally unsupported.",
+    "model": {
+      "coefficients": {
+        "intercept": 1.494774941724692,
+        "logParams": 13.717047332235294,
+        "month": 1.0723707530765954,
+        "nonPretrainedIndicator": 3.6482517524672002
+      },
+      "metrics": {
+        "n": 2672,
+        "rmse": 7.671204547850304,
+        "mae": 5.9118303726420915,
+        "r2": 0.5043210083595111
+      }
+    },
+    "timeHoldout": {
+      "nTrain": 2142,
+      "nTest": 530,
+      "rmse": 9.16210588678149,
+      "mae": 7.422109207992874,
+      "r2": 0.3961341671142361
+    },
+    "currentLogParamsFrontier": 1.3723964324231115,
+    "conditionalTimeOnly": {
+      "horizonMonths": 12,
+      "predictedScore": 46.630453048983576,
+      "interpretation": "Conditional association forecast holding the current parameter frontier and model-type mix fixed; it is not a compute-slowdown forecast."
+    },
+    "predictions": []
+  },
+  "contexts": [
+    {
+      "scenario": "low",
+      "contextTokens": 2048,
+      "supportingModels": "EleutherAI/pythia-70m;EleutherAI/pythia-160m;EleutherAI/pythia-410m;EleutherAI/pythia-1b;EleutherAI/pythia-1.4b;EleutherAI/pythia-2.8b;EleutherAI/pythia-6.9b;EleutherAI/pythia-12b;microsoft/phi-2;tiiuae/falcon-7b;tiiuae/falcon-40b;cerebras/Cerebras-GPT-111M;cerebras/Cerebras-GPT-256M;cerebras/Cerebras-GPT-590M;cerebras/Cerebras-GPT-1.3B;cerebras/Cerebras-GPT-2.7B;cerebras/Cerebras-GPT-6.7B;cerebras/Cerebras-GPT-13B",
+      "source": "C7 model_architecture_metadata.csv observed max_position_embeddings"
+    },
+    {
+      "scenario": "medium",
+      "contextTokens": 8192,
+      "supportingModels": "meta-llama/Meta-Llama-3-8B;meta-llama/Meta-Llama-3-70B;google/gemma-2-2b;google/gemma-2-9b;google/gemma-2-27b;google/gemma-7b;microsoft/Phi-3-small-8k-instruct",
+      "source": "C7 model_architecture_metadata.csv observed max_position_embeddings"
+    },
+    {
+      "scenario": "high",
+      "contextTokens": 131072,
+      "supportingModels": "meta-llama/Llama-3.1-8B",
+      "source": "C7 model_architecture_metadata.csv observed max_position_embeddings"
+    }
+  ],
+  "limitations": [
+    "C1/C2 cover only 2024-06 to 2025-03; time coefficients are short-window associations, not causal estimates.",
+    "Open filtering based on licenses may include licenses with different redistribution or commercial restrictions.",
+    "The extended C3 series mixes historical sources and evaluation standards, so it is used only as an external consistency check.",
+    "Loss bridge values mix validation sets; medium-comparability rows receive lower weight and mapping uncertainty must propagate downstream.",
+    "Parameter count is an imperfect scale proxy for MoE and post-training-heavy models; C4 compute metadata is sparse."
+  ]
+}

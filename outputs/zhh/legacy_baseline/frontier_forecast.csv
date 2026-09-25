@@ -1,0 +1,2 @@
+scenario,status,predictedScore,lower95,upper95,note
+compute_slowdown,not_identified_for_compute_slowdown,,,,No validated mapping from the C4 compute frontier to the C1/C2 parameter frontier is available; adding compute growth to log10 parameter count is dimensionally unsupported.
