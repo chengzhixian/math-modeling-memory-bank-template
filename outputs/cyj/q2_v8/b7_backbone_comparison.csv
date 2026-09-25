@@ -1,0 +1,4 @@
+model,train_RMSE,parameter_count,AIC_descriptive,BIC_descriptive,selected_ridge,CV_scope,N_held_level_RMSE,N_nested_RMSE,D_held_level_RMSE,D_nested_RMSE,Q_held_level_RMSE,Q_nested_RMSE
+B1_fixed_backbone_plus_quality,0.048540124773653444,3,-2716.8280573389275,-2704.5003145906344,0.0,nested_ridge_selection_with_fixed_B1_backbone,0.04873824089979418,0.04873833203393279,0.04875064556264881,0.048750748848520875,0.04863864341420031,0.048638674550539204
+B7_joint_8_parameter,0.048410127570285066,8,-2707.241615845901,-2670.2583876010217,,fixed_full_family_held_level; nested_B7_selection_reported_separately,0.049763509365162197,,0.049007524581610465,,0.049351963100079825,
+B7_nested_family_selection,,,,,,published_train_only_family_selection_per_outer_fold,,0.04976350164863361,,0.04942940791800349,,0.04935196253678973

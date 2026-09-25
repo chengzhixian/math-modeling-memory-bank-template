@@ -1,0 +1,24 @@
+{
+  "schema_version": "cyj.ndqp.scenario.v8",
+  "mode": "baseline",
+  "N_params_B": 1.0,
+  "D_tokens_B": 100.0,
+  "p": {},
+  "weights": {
+    "arxiv": 0.07692307692307693,
+    "freelaw": 0.07692307692307693,
+    "pubmed_central": 0.07692307692307693,
+    "wikipedia_en": 0.07692307692307693,
+    "dm_mathematics": 0.07692307692307693,
+    "github": 0.07692307692307693,
+    "stackexchange": 0.07692307692307693,
+    "gutenberg_pg_19": 0.07692307692307693,
+    "pile_cc": 0.07692307692307693,
+    "ubuntu_irc": 0.07692307692307693,
+    "hackernews": 0.07692307692307693,
+    "pubmed_abstracts": 0.07692307692307693,
+    "uspto_backgrounds": 0.07692307692307693
+  },
+  "p_policy": "quality_direct_and_near",
+  "quality_mapping_policy": "direct_and_near"
+}

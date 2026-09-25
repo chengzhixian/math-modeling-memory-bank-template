@@ -1,0 +1,4 @@
+{
+  "exit_code": 2,
+  "error_contains": "quality bridge scale must lie in (0,2]"
+}

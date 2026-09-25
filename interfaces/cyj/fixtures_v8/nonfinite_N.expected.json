@@ -1,0 +1,4 @@
+{
+  "exit_code": 2,
+  "error_contains": "N_params_B must be a finite number"
+}

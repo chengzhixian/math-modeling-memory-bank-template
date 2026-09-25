@@ -1,0 +1,247 @@
+source,family,source_stratum,line_smaller,line_larger,observed_direction,model_direction,direction_agreement,both_points_in_v8_ND_support,role
+B4,Phi,,2,12,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Phi,,2,18,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Phi,,2,20,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Phi,,2,27,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Phi,,12,18,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Phi,,12,20,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Phi,,12,27,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Phi,,19,18,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Phi,,20,18,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Phi,,19,20,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Phi,,19,27,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,LLaMA,,4,3,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,LLaMA,,5,3,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,LLaMA,,13,3,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,LLaMA,,14,3,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,LLaMA,,3,48,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,LLaMA,,4,5,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,LLaMA,,13,4,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,LLaMA,,14,4,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,LLaMA,,4,48,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,LLaMA,,13,5,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,LLaMA,,14,5,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,LLaMA,,5,48,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,LLaMA,,13,48,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,LLaMA,,14,48,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Qwen2,,6,7,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Qwen2,,17,6,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Qwen2,,21,6,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Qwen2,,25,6,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Qwen2,,6,49,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Qwen2,,6,50,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Qwen2,,17,7,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Qwen2,,21,7,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Qwen2,,25,7,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Qwen2,,49,7,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Qwen2,,50,7,1.0,-1.0,False,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Qwen2,,17,21,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Qwen2,,17,25,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Qwen2,,17,49,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Qwen2,,17,50,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Qwen2,,25,21,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Qwen2,,21,49,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Qwen2,,21,50,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Qwen2,,25,49,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Qwen2,,25,50,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Qwen2,,49,50,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,8,9,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,8,10,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,11,8,-1.0,-1.0,True,True,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,15,8,-1.0,-1.0,True,True,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,8,16,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,24,8,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,26,8,-1.0,-1.0,True,True,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,10,9,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,11,9,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,15,9,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,16,9,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,24,9,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,26,9,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,11,10,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,15,10,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,10,16,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,24,10,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,26,10,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,11,15,-1.0,-1.0,True,True,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,11,16,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,24,11,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,11,26,-1.0,-1.0,True,True,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,15,16,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,24,15,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,15,26,-1.0,-1.0,True,True,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,24,16,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,26,16,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Pythia,,24,26,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Gemma,,22,23,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Gemma,,22,51,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Gemma,,23,51,1.0,-1.0,False,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,GPT2,,28,29,-1.0,-1.0,True,True,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,GPT2,,28,30,-1.0,-1.0,True,True,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,GPT2,,28,31,-1.0,-1.0,True,True,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,GPT2,,29,30,-1.0,-1.0,True,True,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,GPT2,,29,31,-1.0,-1.0,True,True,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,GPT2,,30,31,-1.0,-1.0,True,True,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,OPT,,32,33,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,OPT,,32,34,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,OPT,,32,35,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,OPT,,32,36,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,OPT,,32,37,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,OPT,,32,38,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,OPT,,33,34,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,OPT,,33,35,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,OPT,,33,36,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,OPT,,33,37,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,OPT,,33,38,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,OPT,,34,35,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,OPT,,34,36,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,OPT,,34,37,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,OPT,,34,38,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,OPT,,35,36,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,OPT,,35,37,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,OPT,,35,38,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,OPT,,36,37,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,OPT,,36,38,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,OPT,,37,38,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,BLOOM,,39,40,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,BLOOM,,39,41,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,BLOOM,,39,42,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,BLOOM,,40,41,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,BLOOM,,40,42,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,BLOOM,,41,42,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Falcon,,43,44,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Yi,,46,47,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Cerebras-GPT,,52,53,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Cerebras-GPT,,52,54,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Cerebras-GPT,,52,55,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Cerebras-GPT,,52,56,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Cerebras-GPT,,52,57,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Cerebras-GPT,,52,58,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Cerebras-GPT,,53,54,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Cerebras-GPT,,53,55,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Cerebras-GPT,,53,56,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Cerebras-GPT,,53,57,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Cerebras-GPT,,53,58,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Cerebras-GPT,,54,55,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Cerebras-GPT,,54,56,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Cerebras-GPT,,54,57,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Cerebras-GPT,,54,58,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Cerebras-GPT,,55,56,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Cerebras-GPT,,55,57,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Cerebras-GPT,,55,58,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Cerebras-GPT,,56,57,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Cerebras-GPT,,56,58,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B4,Cerebras-GPT,,57,58,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,3,4,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,3,5,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,3,6,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,3,7,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,3,8,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,3,9,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,3,10,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,4,5,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,4,6,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,4,7,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,4,8,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,4,9,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,4,10,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,5,6,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,5,7,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,5,8,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,5,9,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,5,10,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,6,7,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,6,8,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,6,9,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,6,10,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,7,8,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,7,9,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,7,10,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,8,9,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,8,10,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,GPT-3,Kaplan et al. 2020,9,10,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,11,12,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,11,13,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,11,14,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,11,15,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,11,16,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,11,17,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,11,18,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,11,19,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,12,13,-1.0,-1.0,True,True,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,12,14,-1.0,-1.0,True,True,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,12,15,-1.0,-1.0,True,True,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,12,16,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,12,17,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,12,18,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,12,19,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,13,14,-1.0,-1.0,True,True,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,13,15,-1.0,-1.0,True,True,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,13,16,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,13,17,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,13,18,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,13,19,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,14,15,-1.0,-1.0,True,True,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,14,16,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,14,17,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,14,18,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,14,19,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,15,16,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,15,17,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,15,18,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,15,19,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,16,17,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,16,18,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,16,19,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,17,18,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,17,19,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Chinchilla,Hoffmann et al. 2022,18,19,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Gopher,Hoffmann et al. 2022,20,21,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Gopher,Hoffmann et al. 2022,20,22,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Gopher,Hoffmann et al. 2022,20,23,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Gopher,Hoffmann et al. 2022,20,24,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Gopher,Hoffmann et al. 2022,20,25,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Gopher,Hoffmann et al. 2022,20,26,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Gopher,Hoffmann et al. 2022,21,22,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Gopher,Hoffmann et al. 2022,21,23,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Gopher,Hoffmann et al. 2022,21,24,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Gopher,Hoffmann et al. 2022,21,25,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Gopher,Hoffmann et al. 2022,21,26,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Gopher,Hoffmann et al. 2022,22,23,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Gopher,Hoffmann et al. 2022,22,24,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Gopher,Hoffmann et al. 2022,22,25,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Gopher,Hoffmann et al. 2022,22,26,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Gopher,Hoffmann et al. 2022,23,24,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Gopher,Hoffmann et al. 2022,23,25,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Gopher,Hoffmann et al. 2022,23,26,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Gopher,Hoffmann et al. 2022,24,25,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Gopher,Hoffmann et al. 2022,24,26,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,Gopher,Hoffmann et al. 2022,25,26,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,LLaMA,Touvron et al. 2023,27,28,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,LLaMA,Touvron et al. 2023,27,29,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,LLaMA,Touvron et al. 2023,27,30,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,LLaMA,Touvron et al. 2023,28,29,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,LLaMA,Touvron et al. 2023,28,30,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,LLaMA,Touvron et al. 2023,29,30,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,LLaMA-2,Touvron et al. 2023,31,32,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,LLaMA-2,Touvron et al. 2023,31,33,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,LLaMA-2,Touvron et al. 2023,32,33,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,PaLM,Chowdhery et al. 2022,34,35,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,PaLM,Chowdhery et al. 2022,34,36,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,PaLM,Chowdhery et al. 2022,35,36,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,OPT,Zhang et al. 2022,37,38,-1.0,-1.0,True,True,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,OPT,Zhang et al. 2022,37,39,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,OPT,Zhang et al. 2022,37,40,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,OPT,Zhang et al. 2022,37,41,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,OPT,Zhang et al. 2022,38,39,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,OPT,Zhang et al. 2022,38,40,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,OPT,Zhang et al. 2022,38,41,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,OPT,Zhang et al. 2022,39,40,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,OPT,Zhang et al. 2022,39,41,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,OPT,Zhang et al. 2022,40,41,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,BLOOM,Scao et al. 2022,42,43,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,BLOOM,Scao et al. 2022,42,44,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,BLOOM,Scao et al. 2022,42,45,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,BLOOM,Scao et al. 2022,43,44,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,BLOOM,Scao et al. 2022,43,45,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE
+B5,BLOOM,Scao et al. 2022,44,45,-1.0,-1.0,True,False,directional_description_not_common_Loss_coordinate_or_external_RMSE

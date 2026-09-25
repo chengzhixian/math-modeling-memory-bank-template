@@ -1,0 +1,26 @@
+{
+  "results": {
+    "B4": {
+      "inside_common_support": {
+        "pairs": 12,
+        "agreement": 12
+      },
+      "outside_support_stress": {
+        "pairs": 121,
+        "agreement": 119
+      }
+    },
+    "B5": {
+      "inside_common_support": {
+        "pairs": 7,
+        "agreement": 7
+      },
+      "outside_support_stress": {
+        "pairs": 106,
+        "agreement": 106
+      }
+    }
+  },
+  "same_loss_coordinate_verified": false,
+  "external_absolute_RMSE": null
+}
