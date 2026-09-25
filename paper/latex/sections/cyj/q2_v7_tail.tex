@@ -1,7 +1,7 @@
 \subsection{Q1 v2 配比效应与条件广义标度律}
 
-问题一正式发布版本为 \texttt{chm.q1.v2.0}，其清单 SHA256 为
-\texttt{c621f7e405106e42720f918f490235b5e8becefb0f7c8cb997736e96337117a9}。
+问题一正式发布版本为 \texttt{chm.q1.v2.0}；清单 SHA256 以前缀
+\texttt{c621f7e4} 标识，完整校验值见随结果发布的 \texttt{upstream\_pin.json}。
 我们只消费发布的模型系数、特征定义、512 条配方和 A1 主质量映射，不在本节重读原始附件 A。
 该模型对 13 个目标域各有 17 个配比主项和 10 个双线性交互项。
 以各目标模型自身的正参考预测 $R_k=\widehat L_{A,k}(\boldsymbol p_{\rm ref})$ 定义
@@ -45,8 +45,8 @@ CHM 在 13 域等权及两项质量政策下给出数值可行上界和 McCormic
 等权连续凸包可行候选的 $r_w=-0.115112$，条件 Loss 为 2.288234；
 direct 和 direct+near 政策的对应条件 Loss 分别为 2.316137 和 2.330034。
 最差目标保护策略最小化 $\max_k r_k$，它不是等权目标；其可行候选等权评估 Loss 为 2.487281。
-这些数值指向 \texttt{outputs/cyj/q2\_v7/policy\_solutions.csv}、
-\texttt{policy\_details.json} 和 CHM 的 \texttt{q1\_v2\_hull\_bounds/bounds.json}，
+这些数值可由本节结果目录的 \texttt{policy\_solutions.csv}、
+\texttt{policy\_details.json} 和 CHM 发布的凸包界表复核，
 不是联合 A/B 实测改进。
 
 固定 $N,D,Q_B,w$ 和相同有效可行域，$e^r$ 与 $1+r$ 都严格递增，
@@ -69,8 +69,8 @@ L_x=e^r(L_B)_x,\qquad
 并用小步长重新调用 predictor 核对。
 指数变换自身引入 $(\nabla r)(\nabla r)^\top$ 曲率，
 因此 Q1 的交互系数符号不能直接当作 Q2 的互补或因果作用。
-数值与方向可行性见 \texttt{domain\_transfer\_effects.csv}、
-\texttt{domain\_complementarity.csv}；在观测配方集上的连续方向只属于其凸包，不等于新的已观测配方。
+数值与方向可行性见领域转移、曲率两张结果表。
+在观测配方集上的连续方向只属于其凸包，不等于新的已观测配方。
 
 固定 $D,\boldsymbol p$，求提升 $Q_B$ 后相同 Loss 所需的 $N'$，
 式\eqref{eq:cyj-v7-baseline} 两边的指数因子消去，根与 B7 相同。
@@ -92,9 +92,8 @@ B4/B5 与 B1 的 Loss 坐标尚未证明可比，B10 为估算值。
 版本化接口为 \texttt{cyj.ndqp.scenario.v7}，声明
 \texttt{conditional\_on\_bridge\_assumptions=true} 和
 \texttt{not\_empirically\_calibrated=true}。
-固定政策文件、输入哈希、代码、环境与输出清单在
-\texttt{outputs/cyj/q2\_v7/}；Q2 运行期间的 Python 文件打开审计记录原始 A 为零次，
-其覆盖范围与限制由 \texttt{outputs/cyj/q2\_v7\_runtime\_audit.json} 说明。
+固定政策、输入哈希、环境与输出清单存于 Q2 v7 结果目录。
+Q2 运行期间的 Python 文件打开审计记录原始 A 为零次；审计文件同时说明覆盖范围与限制。
 CHM 的 Q3 消费验收和问题四能力映射是后续独立步骤；本节结论仅限所述假设、支持域和数据角色。
 
 \clearpage

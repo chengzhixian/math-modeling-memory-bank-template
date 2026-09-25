@@ -12,6 +12,7 @@ import numpy as np
 
 from chm_q1_v2_consumer import ROOT, SOURCE_COMMIT, sha256
 from ndqp_scenarios_v7 import BOUNDS, THETA, ConditionalV7, b7
+from q2_final_core import Q2Final
 
 OUT = ROOT / "outputs/cyj/q2_v7"
 N, D, Q = 1.0, 100.0, 0.5
@@ -26,7 +27,8 @@ def write_csv(name, rows):
     if not rows:
         raise ValueError(f"empty output: {name}")
     with (OUT / name).open("w", encoding="utf-8", newline="") as stream:
-        writer = csv.DictWriter(stream, fieldnames=list(rows[0]), lineterminator="\n")
+        fields = list(dict.fromkeys(key for row in rows for key in row))
+        writer = csv.DictWriter(stream, fieldnames=fields, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 
@@ -119,6 +121,30 @@ def substitution(n, d, q, delta):
             "residual": b7(root, d, q)[0] - target, "identical_to_frozen_B7": True}
 
 
+def substitution_sensitivity(model, p, weights, n, d, q, delta, eta):
+    if not BOUNDS[2][0] <= q + delta <= BOUNDS[2][1]:
+        return {"status": "target_Q_out_of_support"}
+    def value(n_trial, q_trial):
+        return model.predict_sensitivity(n_trial, d, q_trial, p, weights,
+                                         p_policy="observed_512", bridge_lambda=1,
+                                         eta=eta, bridge_model="exp_bridge")["Loss"]
+    target = value(n, q + delta)
+    lo, hi = BOUNDS[0]
+    flo, fhi = value(lo, q)-target, value(hi, q)-target
+    if flo*fhi > 0:
+        return {"status": "no_root_in_support", "endpoint_residuals": [flo, fhi]}
+    for _ in range(70):
+        mid = (lo+hi)/2
+        fm = value(mid, q)-target
+        if flo*fm <= 0:
+            hi, fhi = mid, fm
+        else:
+            lo, flo = mid, fm
+    root = (lo+hi)/2
+    return {"status": "root_in_support", "N_prime_B": root,
+            "residual": value(root, q)-target, "identical_to_frozen_B7": eta == 0}
+
+
 def main():
     import numpy
     import scipy
@@ -186,19 +212,22 @@ def main():
                                 "relative_difference_over_exp": (base["Loss"]-linear["Loss"])/base["Loss"],
                                 "p_choice_difference": 0, "ranking_difference": 0,
                                 "interpretation": "strict_monotonicity_identity_not_empirical_validation"})
-            for lam in (0, 0.5, 0.75, 1.0, 1.25, 1.5):
-                for eta in (0.0, 0.1, 0.2, 0.4):
-                    for form in ("exp_bridge", "linear_bridge"):
-                        try:
-                            val = model.predict_sensitivity(N, D, Q, p, w, p_policy=policy,
-                                                            bridge_lambda=lam, eta=eta, bridge_model=form)
-                            sensitivity.append({"policy": entry["policy"], "support": name, "lambda": lam,
-                                                "eta": eta, "bridge_model": form, "status": "valid",
-                                                "Loss": val["Loss"], "difference_from_baseline": val["difference_from_baseline"]})
-                        except ValueError as exc:
-                            sensitivity.append({"policy": entry["policy"], "support": name, "lambda": lam,
-                                                "eta": eta, "bridge_model": form, "status": str(exc),
-                                                "Loss": None, "difference_from_baseline": None})
+            for n_scenario in (0.1, 1.0, 10.0):
+                for lam in (0, 0.5, 0.75, 1.0, 1.25, 1.5):
+                    for eta in (0.0, 0.1, 0.2, 0.4):
+                        for form in ("exp_bridge", "linear_bridge"):
+                            try:
+                                val = model.predict_sensitivity(n_scenario, D, Q, p, w, p_policy=policy,
+                                                                bridge_lambda=lam, eta=eta, bridge_model=form)
+                                sensitivity.append({"policy": entry["policy"], "support": name,
+                                                    "N_params_B": n_scenario, "D_tokens_B": D, "Q_score": Q,
+                                                    "lambda": lam, "eta": eta, "bridge_model": form, "status": "valid",
+                                                    "Loss": val["Loss"], "difference_from_baseline": val["difference_from_baseline"]})
+                            except ValueError as exc:
+                                sensitivity.append({"policy": entry["policy"], "support": name,
+                                                    "N_params_B": n_scenario, "D_tokens_B": D, "Q_score": Q,
+                                                    "lambda": lam, "eta": eta, "bridge_model": form, "status": str(exc),
+                                                    "Loss": None, "difference_from_baseline": None})
             for qa_policy in ("quality_direct", "quality_direct_and_near"):
                 stats = q1.qa_stats(p, qa_policy)
                 quality_rows.append({"policy": entry["policy"], "support": name, "mapping": qa_policy,
@@ -249,20 +278,51 @@ def main():
     write_csv("marginals_elasticities.csv", marginal_rows)
     write_csv("domain_transfer_effects.csv", transfer_rows)
     write_csv("domain_complementarity.csv", curvature_rows)
-    write_csv("quality_vs_scale.csv", [{"N_B": N, "D_B": D, "Q_B": Q, "Delta_Q": delta, **substitution(N,D,Q,delta)}
-                                       for delta in (0.05,0.1,0.2)])
+    quality_scale_rows = []
+    for delta in (0.05, 0.1, 0.2, 0.6):
+        quality_scale_rows.append({"N_B": N, "D_B": D, "Q_B": Q, "Delta_Q": delta,
+                                   "eta": 0, "bridge_model": "exp_bridge", **substitution(N,D,Q,delta)})
+        quality_scale_rows.append({"N_B": N, "D_B": D, "Q_B": Q, "Delta_Q": delta,
+                                   "eta": 0.2, "bridge_model": "exp_bridge",
+                                   **substitution_sensitivity(model, policies[0]["observed_512"]["p"], equal,
+                                                              N,D,Q,delta,0.2)})
+    write_csv("quality_vs_scale.csv", quality_scale_rows)
     write_json("q1_consumer_audit.json", {"manifest_sha256": q1.manifest_sha256,
                                           "file_shas_verified": len(q1.upstream.paths),
                                           "domains": len(q1.domains), "targets": len(q1.targets),
                                           "pairs": len(q1.upstream.pairs), "recipes": len(q1.recipes),
                                           "unknown_Q_A_count": 11, "Q2_original_A_reads": 0})
+    old = Q2Final()
+    main = policies[0]
+    fixed_p = main["observed_512"]["p"]
+    old_fixed = old.evaluate(N, D, Q, fixed_p, equal, 1, 0, p_policy="observed_512")
+    new_linear = model.predict_sensitivity(N, D, Q, fixed_p, equal, p_policy="observed_512",
+                                           bridge_lambda=1, eta=0, bridge_model="linear_bridge")
+    new_exp = model.predict_baseline(N, D, Q, fixed_p, equal, p_policy="observed_512")
+    old_choice = old.optimize("convex_hull", weights=equal, lam=1, eta=0, N=N, D=D, Q_B=Q)
+    new_at_old = model.predict_baseline(N, D, Q, old_choice["p"], equal, p_policy="convex_hull")
     write_json("migration_audit.json", {"old_schema": "cyj.ndqp.scenario.v6",
                                          "new_schema": "cyj.ndqp.scenario.v7", "B7_parameters_unchanged": True,
-                                         "old_main_loss": None, "reason": "v6 has no unique unconditioned main Loss",
-                                         "comparison_status": "requires_fully_matched_v6_scenario",
-                                         "Q1_change": "ridge_v1_3_to_interaction_v2",
-                                         "QA_change": "A1_sample_primary", "bridge_change": "linear_conditional_to_exp_baseline",
-                                         "raw_A_reads": 0})
+                                         "B7_source_sha256": model.b7_sha256,
+                                         "old_Q1_manifest_sha256": sha256(old.bundle / "export_manifest.json"),
+                                         "new_Q1_manifest_sha256": q1.manifest_sha256,
+                                         "comparison_status": "matched_conditional_scenario",
+                                         "matched_inputs": {"N_params_B": N, "D_tokens_B": D, "Q_score": Q,
+                                                            "weights": equal, "lambda": 1, "eta": 0,
+                                                            "p": fixed_p, "p_policy": "observed_512"},
+                                         "fixed_p_losses": {"v6_ridge_linear": old_fixed["loss"],
+                                                            "v7_Q1_linear": new_linear["Loss"],
+                                                            "v7_Q1_exp": new_exp["Loss"]},
+                                         "fixed_p_differences": {"Q1_model_change_under_linear": new_linear["Loss"]-old_fixed["loss"],
+                                                                 "bridge_form_change_under_v7_Q1": new_exp["Loss"]-new_linear["Loss"]},
+                                         "reoptimized_decisions": {"v6_hull_p": old_choice["p"],
+                                                                   "v6_hull_loss": old_choice["conditional_loss"],
+                                                                   "v7_loss_at_v6_p": new_at_old["Loss"],
+                                                                   "v7_hull_candidate_p": main["continuous_hull"]["p"],
+                                                                   "v7_hull_candidate_loss": main["continuous_hull"]["baseline_loss"]},
+                                         "QA_change": "A1_sample_primary; not part of equal_13 comparison",
+                                         "raw_A_reads": 0,
+                                         "limitation": "v6 upstream bundle had pending CHM owner signoff; historical comparison only"})
     write_json("uncertainty_scope.json", {"cross_source_interval": None,
                                           "reason": "no paired A/B cross-source calibration",
                                           "grid_spread_is_confidence_interval": False})

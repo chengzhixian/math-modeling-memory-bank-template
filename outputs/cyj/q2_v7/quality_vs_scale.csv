@@ -1,4 +1,9 @@
-N_B,D_B,Q_B,Delta_Q,status,N_prime_B,residual,identical_to_frozen_B7
-1.0,100.0,0.5,0.05,root_in_support,1.1326958413285113,4.440892098500626e-16,True
-1.0,100.0,0.5,0.1,root_in_support,1.2885808326691728,4.440892098500626e-16,True
-1.0,100.0,0.5,0.2,root_in_support,1.6913830044085127,0.0,True
+N_B,D_B,Q_B,Delta_Q,eta,bridge_model,status,N_prime_B,residual,identical_to_frozen_B7
+1.0,100.0,0.5,0.05,0,exp_bridge,root_in_support,1.1326958413285113,4.440892098500626e-16,True
+1.0,100.0,0.5,0.05,0.2,exp_bridge,root_in_support,1.2294948815930407,0.0,False
+1.0,100.0,0.5,0.1,0,exp_bridge,root_in_support,1.2885808326691728,4.440892098500626e-16,True
+1.0,100.0,0.5,0.1,0.2,exp_bridge,root_in_support,1.5290873081027958,4.440892098500626e-16,False
+1.0,100.0,0.5,0.2,0,exp_bridge,root_in_support,1.6913830044085127,0.0,True
+1.0,100.0,0.5,0.2,0.2,exp_bridge,root_in_support,2.4590603506513533,0.0,False
+1.0,100.0,0.5,0.6,0,exp_bridge,target_Q_out_of_support,,,
+1.0,100.0,0.5,0.6,0.2,exp_bridge,target_Q_out_of_support,,,

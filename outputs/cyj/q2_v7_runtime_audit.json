@@ -6,8 +6,8 @@
   "scope": "Python open events during build_q2_v7 main; not OS subprocess file tracing",
   "builder": {
     "policy_rows": 12,
-    "sensitivity_rows": 480,
-    "manifest_sha256": "bac824661033a056622c53e2410dc473e25cc6f7bd3f937934d2e9a98169a2ec"
+    "sensitivity_rows": 1440,
+    "manifest_sha256": "f4c6b6d9ddcb716adc53a3893272e8186479e985b51648c9589f5b4b8fada3dc"
   },
-  "manifest_sha256": "bac824661033a056622c53e2410dc473e25cc6f7bd3f937934d2e9a98169a2ec"
+  "manifest_sha256": "f4c6b6d9ddcb716adc53a3893272e8186479e985b51648c9589f5b4b8fada3dc"
 }
