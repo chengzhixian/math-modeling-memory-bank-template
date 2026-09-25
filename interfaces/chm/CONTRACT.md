@@ -1,4 +1,6 @@
-# chm → cyj 当前 Q1 v2.0 主模型合同
+# chm Q1 v2.0 定型主模型合同
+
+Q1 自身题面答案已定型，权威结论见 outputs/chm/Q1_FINAL_ANSWER_V2.md。定型范围为附件 A 的工程质量代理、冲突处理、冻结交互配比代理、条件性配方决策及验证和压力测试；不扩大接口的跨规模或跨附件数值有效范围。
 
 2026-09-25 用户明确授权将交互模型升为主模型。默认入口为 `src/chm/q1_interface.py::Q1Interface`，冻结清单是 `interfaces/chm/q1_interface_v2.json`。原 v1.3 Ridge 改为历史比较基线，读取器在 `src/chm/q1_interface_v1_3.py`；旧接口与结果保持可复现。
 
