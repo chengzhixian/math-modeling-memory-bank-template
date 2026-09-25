@@ -12,7 +12,7 @@ from pathlib import Path
 
 import numpy as np
 
-from q1_interface import Q1Interface
+from q1_interface_v1_3 import Q1Interface
 from q1_mixture_final_audit import read_pairs
 
 ROOT = Path(__file__).resolve().parents[2]

@@ -38,7 +38,7 @@ def main():
         else:raise AssertionError('formal gate bypassed')
         # Q1 v1.3 changes the A quality proxy, but not the mixture coefficients/reference.
         from chm_adapter_v2 import load_q1
-        from q1_interface import Q1Interface
+        from q1_interface_v1_3 import Q1Interface
         old,_=load_q1();current=Q1Interface(ROOT)
         assert old.coefficients==current.coefficients and old.reference==current.reference
         compatibility={'old_schema':'chm.q1.v1.2','current_schema':'chm.q1.v1.3',

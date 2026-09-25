@@ -89,7 +89,7 @@ def solve_p_scenario(*, budget, context, target, lambda_loss, root=ROOT):
         )
 
     q1 = Q1Interface(root)
-    if target not in q1.coefficients:
+    if target not in q1.targets:
         raise ValueError("unknown Q1 target")
 
     lo, hi, product = feasible_n_interval(budget, context)
@@ -128,7 +128,9 @@ def solve_p_scenario(*, budget, context, target, lambda_loss, root=ROOT):
     cost = compute_coeff(context) * best["N_params_B"] * best["D_tokens_B"]
     best.update(
         {
-            "schema_version": "chm.q3.p_scenario.v2",
+            "schema_version": "chm.q3.p_scenario.v3",
+            "Q1_model_version": q1.manifest["schema_version"],
+            "Q1_manifest_sha256": q1.manifest_sha256,
             "status": "diagnostic_sensitivity_only",
             "ready_for_Q3": False,
             "budget_FLOPs": budget,
@@ -138,7 +140,7 @@ def solve_p_scenario(*, budget, context, target, lambda_loss, root=ROOT):
             "Q_policy": "Q=Q0; Q performance disabled",
             "p_support": "A4 observed training mixtures only (512 normalized rows)",
             "q1_mixture_coordinate": "A4_A5_1M_target_cross_entropy_contrast",
-            "q1_cross_scale_transfer": "not_identified_from_attachment_A",
+            "q1_cross_scale_transfer": "unidentified",
             "cost_FLOPs": float(cost),
             "budget_utilization": float(cost / budget),
             "cyj_loss_coordinate": (

@@ -14,7 +14,7 @@ import numpy as np
 from scipy.optimize import linprog
 
 from audit_cyj_q1_exports import check as audit_exports
-from q1_interface import Q1Interface
+from q1_interface_v1_3 import Q1Interface
 
 ROOT = Path(__file__).resolve().parents[2]
 BASE = ROOT / "outputs/chm/q1_exports"

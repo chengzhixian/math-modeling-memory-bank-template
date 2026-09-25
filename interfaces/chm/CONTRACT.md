@@ -1,3 +1,16 @@
+# chm → cyj 当前 Q1 v2.0 主模型合同
+
+2026-09-25 用户明确授权将交互模型升为主模型。默认入口为 \`src/chm/q1_interface.py::Q1Interface\`，冻结清单是 \`interfaces/chm/q1_interface_v2.json\`。原 v1.3 Ridge 改为历史比较基线，读取器在 \`src/chm/q1_interface_v1_3.py\`；旧接口与结果保持可复现。
+
+Q1 v2.0 对每个目标使用 17 个配比主项和 10 个按 A4 方差选定的二元乘积项，返回参考配方中心化的 1M Loss 对比。相对效应除以交互模型自身的正参考 Loss。新接口提供 \`predict(p)\`、\`relative_effect(p,target)\`、\`effect_vector(p)\`、\`gradient(p)\` 与 \`support(p)\`。默认拒绝凸包外推；若用于压力测试，须显式设置 \`allow_extrapolation=True\`。交互模型没有固定的 13×17 作用矩阵，\`interaction_matrix()\` 明确报错。
+
+质量主评分采用 A1 sample；A2/A3 extended 只做敏感性；11 个 inferred 域保持 null。模型、原始归一化配方、质量映射和验证结果均由 v2 manifest 固定 SHA256。
+
+默认配方决策 \`src/chm/q1_multiloss_decision.py\` 转交 \`q1_mixture_decision_v2.py\`，在 512 个已观测 A4 配方中精确枚举。调用者显式给出 13 目标权重，可选择加权或保护最差目标，并声明无约束、direct 或 direct+near 质量政策。结果在 \`outputs/chm/q1_v2_decisions/\`。**全局最优只针对这一有限候选集**；含交互项的凸包连续优化不继承线性规划的顶点最优结论。
+
+Q2 的 v2 条件复算在 \`outputs/chm/q2_interaction_scenarios_v2/\`，固定 cyj \`86526a1\` 的 B7 参数。这是 chm 侧复核，cyj 需在其本人分支明确锁定新 Q1 哈希并重新发布。Q3 的 A 侧配方诊断已改用 v2。旧 cyj v4/v6 和 Q3 数值按原消费版本保留；它们不能自动改称为 v2 下游结果。A/B Loss 桥接及质量共同坐标仍无成对标定，经验绝对 Loss 的 \`ready_for_Q3\` 为 false。
+
+## 以下为 v1.3 历史合同
 # chm → cyj Q1 生产者接口 v2.0
 
 日期：2026-09-24  

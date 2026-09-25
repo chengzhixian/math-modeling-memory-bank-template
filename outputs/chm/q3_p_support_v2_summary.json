@@ -1,0 +1,53 @@
+{
+  "schema_version": "chm.q3.p_support.v2",
+  "Q1_model_version": "chm.q1.v2.0",
+  "Q1_manifest_sha256": "c621f7e405106e42720f918f490235b5e8becefb0f7c8cb997736e96337117a9",
+  "status": "A_side_scenario_only",
+  "ready_for_Q3": false,
+  "target_panel": [
+    "pile_cc",
+    "wikipedia_en",
+    "arxiv",
+    "stackexchange",
+    "github"
+  ],
+  "optimization_support": "exact finite selection among observed A4 rows; no continuous hull optimality claim",
+  "single_target_best_indices": {
+    "pile_cc": "187",
+    "wikipedia_en": "171",
+    "arxiv": "3",
+    "stackexchange": "389",
+    "github": "423"
+  },
+  "robust_best": {
+    "standardized_mean": "113",
+    "standardized_minimax": "461",
+    "mean_rank": "461"
+  },
+  "all_five_improve_indices": [],
+  "all_five_improve_fraction": 0.0,
+  "pareto_front_count": 129,
+  "index_139_pareto": true,
+  "target_stats": {
+    "pile_cc": {
+      "mean": 0.08598065882924234,
+      "sd": 0.2922847124810158
+    },
+    "wikipedia_en": {
+      "mean": 0.04670853097538432,
+      "sd": 0.44056372926091886
+    },
+    "arxiv": {
+      "mean": 0.2827917794464429,
+      "sd": 0.7787337133662183
+    },
+    "stackexchange": {
+      "mean": 0.1718513288814384,
+      "sd": 0.6070770793461275
+    },
+    "github": {
+      "mean": 0.3197414832399428,
+      "sd": 0.858548185638128
+    }
+  }
+}

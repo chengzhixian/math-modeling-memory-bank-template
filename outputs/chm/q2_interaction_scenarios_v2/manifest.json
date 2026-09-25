@@ -1,0 +1,12 @@
+{
+  "schema_version": "chm.q2.interaction_scenarios.v2",
+  "Q1_version": "chm.q1.v2.0",
+  "Q1_manifest_sha256": "c621f7e405106e42720f918f490235b5e8becefb0f7c8cb997736e96337117a9",
+  "CYJ_B7_parameters_sha256": "d6f5b665d3806a322d0ebf87da46889822d2eff89324eacded6040383e7b6733",
+  "Q1_decision_support": "observed_A4_exact",
+  "formula": "L_B(N,D,Q_B)*(1+lambda*(N/1B)^(-eta)*sum_k w_k*m_k(p)/L_A_k_ref)",
+  "conditional_scenario_count": 3,
+  "conditional_scenarios_sha256": "f12a6e858ce54eebdfcedacf639adfa8fa188f94127e056e102785538de9dbd4",
+  "status": "CHM_RECALCULATION_PENDING_CYJ_REPUBLICATION",
+  "ready_for_Q3_empirical_absolute_loss": false
+}

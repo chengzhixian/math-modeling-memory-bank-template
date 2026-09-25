@@ -1,7 +1,4 @@
-"""Observed-support and robust mixture diagnostics for Q3.
-
-Uses the five-target CHM panel only. It never claims equivalence to B1 val_loss.
-"""
+"""Observed A4 support diagnostics using the Q1 v2 interaction producer."""
 from __future__ import annotations
 
 import csv
@@ -37,8 +34,7 @@ def load_a4(q1):
     return out
 
 def effect(q1,p,target):
-    row=q1.coefficients[target]
-    return sum(float(row[d])*(p[d]-q1.reference[d]) for d in q1.reference)
+    return q1.relative_effect(p,target)["delta_target_loss_1m"]
 
 def effective_domains(p):
     return math.exp(-sum(x*math.log(x) for x in p.values() if x>0))
@@ -77,11 +73,13 @@ def build(root=ROOT):
             pareto.append(r["index"])
     best_by_target={t:min(rec,key=lambda r:r["effects"][t])["index"] for t in TARGETS}
     return {
-      "schema_version":"chm.q3.p_support.v1",
+      "schema_version":"chm.q3.p_support.v2",
+      "Q1_model_version":q1.manifest["schema_version"],
+      "Q1_manifest_sha256":q1.manifest_sha256,
       "status":"A_side_scenario_only",
       "ready_for_Q3":False,
       "target_panel":TARGETS,
-      "linear_convex_hull_equivalence":"min linear effect over conv(A4) equals minimum over observed A4 vertices/rows",
+      "optimization_support":"exact finite selection among observed A4 rows; no continuous hull optimality claim",
       "single_target_best_indices":best_by_target,
       "robust_best":{
         "standardized_mean":min(rec,key=lambda r:r["mean_z"])["index"],
@@ -122,10 +120,10 @@ def compact_candidates(data):
 if __name__=="__main__":
     data=build()
     summary={k:v for k,v in data.items() if k!="records"}
-    out=ROOT/"outputs/chm/q3_p_support_summary.json"
+    out=ROOT/"outputs/chm/q3_p_support_v2_summary.json"
     out.write_text(json.dumps(summary,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     rows=compact_candidates(data)
-    csv_path=ROOT/"outputs/chm/q3_p_robust_candidates.csv"
+    csv_path=ROOT/"outputs/chm/q3_p_robust_candidates_v2.csv"
     with csv_path.open("w",newline="",encoding="utf-8") as f:
         w=csv.DictWriter(f,fieldnames=list(rows[0]))
         w.writeheader();w.writerows(rows)

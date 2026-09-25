@@ -152,7 +152,7 @@ D_i=\frac{\sum_{(j,k)\in\mathcal E_c(i)}|\rho_{jk}|\,|z^+_{ij}-z^+_{ik}|}{\sum_{
 
 \subsection{17 域配比与目标域 Loss 的关系}
 
-\subsubsection{组成约束与逐目标域 Ridge}
+\subsubsection{组成约束与逐目标域线性基线}
 
 A4 的每一行是 17 个训练域比例。由于原始 CSV 的三位小数舍入会使行和轻微偏离 1，建模前按行归一化，记
 \begin{equation}
@@ -162,7 +162,7 @@ p_{ij}\ge 0,\qquad
 \boldsymbol 1^\top\boldsymbol p_i=1.
 \label{eq:q1_simplex}
 \end{equation}
-A5 提供同一 \texttt{index} 下的 13 个目标验证域 Loss。不同目标域的 Loss 水平和波动尺度不同，因此不把 13 个原始 Loss 先求算术平均，而对每个目标域 $k$ 单独拟合。
+A5 提供同一 \texttt{index} 下的 13 个目标验证域 Loss。不同目标域的 Loss 水平和波动尺度不同，因此不把 13 个原始 Loss 先求算术平均，而对每个目标域 $k$ 单独拟合。下述 Ridge 用作可解释的线性对照，正式配比预测在后文的二阶交互主模型中给出。
 
 以 A4 归一化配方的均值为参考配方
 \begin{equation}
@@ -240,7 +240,7 @@ m_k(\boldsymbol p')-m_k(\boldsymbol p)
 
 已有文献对多域 Loss 的标准处理并不是先把各域 Loss 压缩成一个标量，而是先逐验证域建模，再在决策层按任务需求聚合。Data Mixing Laws 将第 $k$ 个验证域 Loss 写为训练配比的函数，并以训练域--验证域系数刻画跨域作用；BiMix 同样先保留逐域 Loss，再在配比约束下求解整体目标；DoReMi 则从最坏域 excess loss 出发构造鲁棒目标\cite{datamixinglaws2025,bimix2025,doremi2023}。本文不直接照搬这些论文的函数形式，而只采用与附件 A 数据结构一致的“逐维建模--向量决策”框架。
 
-将 13 个逐域 Ridge 联立，定义
+将 13 个逐域线性基线联立，定义
 \begin{equation}
 \widehat{\boldsymbol L}_{1M}(\boldsymbol p)
 =
@@ -281,80 +281,29 @@ m_k(\boldsymbol p')-m_k(\boldsymbol p)
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=.98\linewidth]{q1_interaction_heatmap.png}
-\caption{13 个验证域 $\times$ 17 个训练域的行归一化作用矩阵。颜色表示 Ridge 相对对比系数的方向与相对强度；不能将单个格点解释为独立因果效应。}
+\caption{线性基线的 13 个验证域 $\times$ 17 个训练域行归一化作用矩阵。颜色表示 Ridge 相对对比系数的方向与相对强度；不能将单个格点解释为交互主模型的固定边际效应。}
 \label{fig:q1_interaction}
 \end{figure}
 
-\subsubsection{多维 Loss 的决策层：标量化、鲁棒性与能力保护}
+\subsubsection{交互主模型与多目标配方决策}
 
-式\eqref{eq:q1_vector_effect}保留了 13 个目标域的信息，因此“怎样得到一个配比方案”应由决策目标决定，而不是预先把 13 个原始 Loss 强行平均。为避免线性代理在未观测的单纯形顶点上外推，本文将第一问的配比决策限制在 A4 已观测配方的凸包
+线性 Ridge 提供透明基线，但不能表达训练域之间的非加性关联。正式 Q1 配比预测改用每个目标域一个二阶交互代理。先在 A4 归一化配方上按方差选出五个训练域，从中构造十个二元乘积项；这一步不使用 Loss 标签。对第 $k$ 个验证域，主模型写成
 \begin{equation}
-\mathcal P_A
-=
-\operatorname{conv}
-\{\boldsymbol p_1,\ldots,\boldsymbol p_{512}\}.
-\label{eq:q1_observed_hull}
+\widehat L^{\mathrm{int}}_{k,1M}(\boldsymbol p)
+=a_k+\sum_{j=1}^{17}b_{kj}p_j
++\sum_{(u,v)\in\mathcal E}\gamma_{k,uv}p_up_v,
+\qquad |\mathcal E|=10 .
+\label{eq:q1_v2_interaction}
 \end{equation}
-任意 $\boldsymbol p\in\mathcal P_A$ 均可写为
-$\boldsymbol p=\sum_{i=1}^{512}\omega_i\boldsymbol p_i$，
-其中 $\omega_i\ge0$、$\sum_i\omega_i=1$。这一定义只使用题目已给的 A4 配方支持域，不额外规定人为上下界。
+各目标域在 A4+A5 内以七个固定正则强度做五折选择，再用全部 512 条训练数据拟合。为了检验特征选择的乐观偏差，另做五折外层留出和五折内层选择：每个内层训练折重新选五个高方差域。交互模型的外层预测在 13/13 目标上取得比线性 Ridge 更低的 RMSE；目标域中位 RMSE 分别为 0.4499 与 0.4921，训练均值常数基线为 0.7790。真实 A6--A11 的同条件比较中，1M、60M、1B 分别有 11/13、13/13、13/13 个目标的交互 RMSE 较低。然而模型形式曾受前期检验观察影响，外部检验不构成全新盲测；1B 的绝对 Loss 误差仍大。
 
-若后续任务给出 13 个验证域的重要性权重
-$\boldsymbol s\in\Delta^{12}$，则可按 Data Mixing Laws 的域聚合思想定义
-\begin{equation}
-J_{\boldsymbol s}(\boldsymbol p)
-=
-\sum_{k=1}^{13}s_k m_k(\boldsymbol p)
-=
-\boldsymbol s^\top
-\boldsymbol B(\boldsymbol p-\boldsymbol p_{\mathrm{ref}}).
-\label{eq:q1_scalarization}
-\end{equation}
-权重的来源严格分三种情况：若题目或下游任务给出验证域组成，直接采用已知权重；若没有任何偏好信息，可令 $s_k=1/13$ 作为“各能力等权”的对称情景；只有在另有总体 validation Loss 与 13 个域 Loss 的成对观测时，才有数据基础学习 $\boldsymbol s$。附件 A 没有总体 Loss 字段，因此本文不从 A1--A16 中反推一组所谓“最优权重”。
+主接口输出的 A 侧配比效应为 $m_k^{\mathrm{int}}(\boldsymbol p)=\widehat L^{\mathrm{int}}_{k,1M}(\boldsymbol p)-\widehat L^{\mathrm{int}}_{k,1M}(\boldsymbol p_{\mathrm{ref}})$。用于多目标决策的无量纲分数为 $r_k(\boldsymbol p)=m_k^{\mathrm{int}}(\boldsymbol p)/\widehat L^{\mathrm{int}}_{k,1M}(\boldsymbol p_{\mathrm{ref}})$；分母是该交互模型自身的正参考 Loss，只服务于 A 侧目标加权，不是 B 侧 Loss 标定。交互项使边际效应随当前配方变化；可行的两域转移斜率为 $\partial_j\widehat L_k^{\mathrm{int}}-\partial_r\widehat L_k^{\mathrm{int}}$，单个 $\gamma_{k,uv}$ 的符号不具有独立因果解释。
 
-若目标是避免某一能力域成为短板，可借鉴 DoReMi 的 worst-case excess-loss 思想，在本文参考配方坐标下定义
-\begin{equation}
-\min_{\boldsymbol p\in\mathcal P_A}
-\max_{k=1,\ldots,13}
-m_k(\boldsymbol p).
-\label{eq:q1_minimax}
-\end{equation}
-这里使用的是相对于同一参考配方的 Loss 增量，而非直接比较 13 个域的原始 Loss 绝对值；该式是本文基于已拟合代理构造的鲁棒决策准则，并不等同于重新实现 DoReMi 的在线 Group DRO 训练算法。
+当前正式配方候选集是 A4 已观测的 512 个配方 $\mathcal S_A=\{\boldsymbol p_1,\ldots,\boldsymbol p_{512}\}$。给定明确的权重 $\boldsymbol w\in\Delta^{12}$，程序精确枚举并求解 $\min_{\boldsymbol p\in\mathcal S_A}\sum_kw_kr_k(\boldsymbol p)$；保护最差域的情景求解 $\min_{\boldsymbol p\in\mathcal S_A}\max_{k:w_k>0}r_k(\boldsymbol p)$。质量政策仅在 A16 direct 或 direct+near 映射域上要求覆盖份额及条件质量不低于参考配方，主值使用 A1 sample；其余 11 个域的 $Q_A$ 保持未知。具体政策与权重由调用者显式声明。
 
-若任务更强调某个目标域 $q$，同时要求其他能力不明显退化，则写成
-\begin{equation}
-\begin{aligned}
-\min_{\boldsymbol p\in\mathcal P_A}\quad
-& m_q(\boldsymbol p),\\
-\text{s.t.}\quad
-& m_k(\boldsymbol p)\le\varepsilon_k,
-\qquad k\in\mathcal K_{\mathrm{protect}}.
-\end{aligned}
-\label{eq:q1_protected_domain}
-\end{equation}
-阈值 $\varepsilon_k$ 必须由题目要求、业务容忍度或独立估计的不确定性给出；附件 A 本身没有这些阈值，因此第一问只给出约束形式，不人为指定数值。
+等权情景下，无质量约束选 index 136；direct 政策选 index 301；direct+near 政策选 index 172。最差域保护的无约束情景选 index 477，arxiv 单目标选 index 3。这些结果是指定有限集合和政策下的精确最优；它们不等于整个连续凸包上的全局最优。二阶项使凸包内目标一般非凸，旧 Ridge 的线性规划顶点最优论证不再适用。完整 45 个情景及每个解的 17 维配方、13 目标预测、质量覆盖与输入哈希见 \texttt{outputs/chm/q1\_v2\_decisions/}。
 
-更一般地，问题可保留为 13 目标向量优化
-\begin{equation}
-\min_{\boldsymbol p\in\mathcal P_A}
-\boldsymbol m(\boldsymbol p)
-=
-\min_{\boldsymbol p\in\mathcal P_A}
-\left(
-m_1(\boldsymbol p),\ldots,m_{13}(\boldsymbol p)
-\right)^\top ,
-\label{eq:q1_pareto}
-\end{equation}
-其解集按 Pareto 支配关系定义。改变式\eqref{eq:q1_scalarization}中的 $\boldsymbol s$，或改变式\eqref{eq:q1_protected_domain}中的保护集合与阈值，可以扫描不同能力偏好下的可接受配方。BiMix 的约束配比求解提供了“先建立逐域 Loss，再在 $\sum_jp_j=1$ 下数值优化”的文献范式；但 BiMix 还显式依赖训练步数/数据量，而附件 A 没有相应 $D$ 字段，因此本文只借鉴其向量约束优化思想，不采用其双变量 Loss 律。
-
-上述几种决策口径互不替代：式\eqref{eq:q1_scalarization}回答“平均偏好”，式\eqref{eq:q1_minimax}回答“最坏能力保护”，式\eqref{eq:q1_protected_domain}回答“重点能力提升且不破坏保护域”，式\eqref{eq:q1_pareto}则保留全部多目标折衷。由于题目附件没有给出唯一的验证域权重或能力保护阈值，第一问不宣称存在一个由 A 数据唯一确定的“全局最优配比”。上述三个可标量化问题在 \(\mathcal P_A\) 的凸组合坐标中均可写成线性规划，本文将对应可复现求解器实现于 \texttt{src/chm/q1\_multiloss\_decision.py}；权重与保护阈值均要求调用者显式提供，程序不自动生成。
-
-为检验决策对目标偏好的依赖，我们另在\emph{已观测}的 512 个 A4 配方上扫描等权、13 域最坏相对损失以及 arxiv 单域三种情景。各域对比先除以其正的 1M 参考配方拟合 Loss，仅用于使不同目标域的情景权重可比较；该归一化不是 A/B Loss 桥接。冻结 Ridge 在三情景下分别选中 index 136、163、300；训练内构造的二阶候选分别选中 136、477、3。后两种偏好下候选配方变化，说明无任务权重时单一配比结论不稳；arxiv 单域选中配方的最大单域占比约为 0.90 或 0.68，不能直接写成覆盖所有能力的推荐。脚本、每个解的 17 维配方和质量覆盖见 \texttt{src/chm/q1\_third\_part\_review.py} 与相应 manifest。该比较只在 A 侧 1M 代理上进行，未替换正式 Ridge 接口。
-
-进一步固定相同的 Ridge 参考 Loss 为目标归一化分母，对等权、13 个单目标和 200 组固定随机权重共 214 个情景扫描。只在 512 个 A4 已观测配方中选择时，Ridge 与交互候选分别产生 42 与 47 个不同选择；不加质量约束时两模型选方一致率约 77.1\%，加入 direct 与 direct+near 质量约束后分别约 52.6\% 与 63.6\%。等权下 index 136 在两模型一致，但在全部权重情景中仅分别占 55.6\% 与 53.3\%。这些比例依赖本研究设定的权重情景分布，不是题目给定的真实需求分布；它们用于检验单一配方结论的脆弱性。
-
-质量约束须同时报告映射覆盖。A16 的 17 个训练域中，只有 3 个 direct、3 个 near-direct 可附带 A 侧质量代理，另 11 个 inferred 域没有数值质量；例如等权 Ridge 所选 index 136 的未知域权重为 0.5686。若把全配方质量写成 $Q(\boldsymbol p)=\sum_d p_dq_d$，这些未知域的 $q_d$ 可在不改变任何已观测质量行的情况下取不同值，进而改变配方的质量排序。因此不能用已映射域的条件均值冒充全配方质量，也不能以 $Q_A$ 代替 B7 的 $Q_{\mathrm{score}}$。后续以已映射域覆盖率与条件均值作为情景约束时，主口径须使用 \texttt{chm.q1.v1.3} 的 A1 sample 分数；A2/A3 的 arxiv/github extended 分数单列敏感性。两口径给出的约束最优混合权重并非完全相同，详见 Q1 导出审计。
-
+任务没有给出 13 域的唯一外生权重，且等权 index 136 的未知质量域占比为 0.5686，故不宣称它在所有目标和完整质量口径下全局最优。进一步在 214 个权重情景上的先前稳定性审计显示模型和质量政策均可改变配方；该审计使用共同的旧 Ridge 参考 Loss 进行模型比较，不能与新接口的交互自身归一化结果混写。Q1 v2.0 的生产者清单为 \texttt{interfaces/chm/q1\_interface\_v2.json}。
 \subsubsection{文献函数形式与本题主代理的关系}
 
 Data Mixing Laws 在固定模型规模与训练步数下采用
@@ -367,7 +316,7 @@ c_k+a_k
 \right)
 \label{eq:q1_dml_candidate}
 \end{equation}
-描述逐验证域 Loss\cite{datamixinglaws2025}。该式与本文 Ridge 的共同结构是“13 个验证域分别建模、共享同一 17 维配比输入”，但函数族不同。当前仓库中已完成并经过 A6--A11 检验的是 Ridge；尚未在相同五折协议和 held-out 集上完成式\eqref{eq:q1_dml_candidate}的独立拟合比较。因此本文不因文献中存在指数形式就未经本题数据验证地替换主模型。后续若比较两种函数，必须固定同一 A4+A5 训练/调参划分，并仅用 A6--A11 比较泛化误差和排序相关后再决定主模型。
+描述逐验证域 Loss\cite{datamixinglaws2025}。本文的交互主模型与该式都保留 13 个验证域，但函数族不同。现有证据比较的是本文二阶交互与线性 Ridge；文献中的指数形式未在相同训练和检验协议下拟合，因此不宣称它优于或劣于当前主模型。
 
 \subsubsection{冻结代理后的跨实验组排序验证}
 
@@ -385,11 +334,11 @@ L_{ik}^{(\ell)}
 \end{equation}
 这里的 $\widehat L_{k,1M}$ 始终是由 A4+A5 冻结得到的同一代理；A6--A11 只用于一次性检验。
 
-13 个目标域的结果见表\ref{tab:q1_rank}。
+表\ref{tab:q1_rank}保留此前线性基线的排序结果；交互主模型在 1M、60M、1B 真实检验组的逐目标 Spearman 中位数分别为 0.8512、0.8474、0.7912，逐目标记录见 Q1 v2 验证表。两个模型在 1B 的配方支持与绝对 Loss 误差限制相同。
 
 \begin{table}[htbp]
 \centering
-\caption{13 个目标域的 held-out 配方排序相关}
+\caption{线性 Ridge 基线的 13 个目标域 held-out 配方排序相关；交互主模型结果见正文}
 \label{tab:q1_rank}
 \begin{tabular}{lrrrr}
 \toprule
@@ -405,7 +354,7 @@ L_{ik}^{(\ell)}
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=.82\linewidth]{q1_domainwise_spearman_box.png}
-\caption{冻结的 1M Ridge 代理在三个真实检验组上的逐目标域排序表现。1B 使用不同的配方集合，因此其变化不能解释为纯参数规模效应。}
+\caption{线性 Ridge 基线在三个真实检验组上的逐目标域排序表现。1B 使用不同的配方集合，因此其变化不能解释为纯参数规模效应。}
 \label{fig:q1_rank}
 \end{figure}
 
@@ -445,7 +394,7 @@ A10 的 64 个 1B 配方与 A4/A6 的配方集合没有完全重复，因此 1B 
 
 因此第一问的主要可验证结论是“配方排序具有迁移信息”，而不是“1M Loss 幅度可以按某个 $N$ 的函数外推”。原先利用三个离散实验组拟合 $b_k(N)$ 和公共衰减指数 $\eta$ 的做法不再进入主模型：A 数据既没有与配方实验对应的 $D$，又只有三个模型规模位置，且 1B 的配方支持集与 1M/60M 不同，无法把斜率变化唯一归因于 $N$。
 
-作为模型形式敏感性，我们在 A4+A5 训练集内部先按配方方差固定 5 个训练域，再增加 10 个二元乘积项，按同一五折规则逐目标选择 Ridge 正则。冻结后在真实 A6--A11 三个检验组，候选绝对 RMSE 分别在 11/13、13/13、13/13 个目标上低于当前线性 Ridge；但 1B 组仍只有 11/13 个目标优于 A4 训练均值常数基线。乘积系数的符号只是所选组成基底下的拟合关联；在单纯形上增加两域比例还须从其他域移走质量，故不得将其解释为因果协同或可直接转移至 B7 的性能增益。该候选作为验收阶段的敏感性模型保留，正式生产者仍为 \texttt{chm.q1.v1.3} 线性 Ridge。
+正式交互主模型的 A4+A5 特征选择、逐目标拟合与决策见式\eqref{eq:q1_v2_interaction}。它在真实 A6--A11 三个检验组的绝对 RMSE 分别在 11/13、13/13、13/13 个目标上低于线性 Ridge；但 1B 组仍只有 11/13 个目标优于 A4 训练均值常数基线。乘积系数的符号只是所选组成基底下的拟合关联；在单纯形上增加两域比例还须从其他域移走质量，故不得将其解释为因果协同或可直接转移至 B7 的性能增益。正式 Q1 配比生产者为 \texttt{chm.q1.v2.0}。
 
 为在不查看 A6--A11 的条件下比较模型族，我们另做 A4+A5 五折外层留出、五折内层选正则；交互的五个域在每个内层训练折和外层训练折重选。512 条外层预测中，交互对 13/13 目标的 RMSE 均低于 Ridge 与外层训练均值基线，目标域中位 RMSE 为交互 0.4499、Ridge 0.4921、常数 0.7790。真实 1B 检验若按 A4 凸包拆为 17 条内、47 条外，交互在两组分别对 13/13 目标降低 RMSE；但排序相关在整个 1B 组仅 7/13 目标高于 Ridge。按 214 组目标权重在 1B 的 17 条域内候选上模拟\emph{候选集内部}选择，交互的实际遗憾中位数为 0.1597、Ridge 为 0.1924，前十分位命中率却分别为 32.7\% 与 33.6\%。因此“预测误差较小”不等同于“每种决策准则均较好”；交互形式也曾在前期检验后被研究，现有外测不再是一套完全未触碰的最终测试。完整逐目标指标、支持域分组和选方压力记录于本人实验台账。
 
@@ -459,7 +408,7 @@ A16 中仅有 3 个 direct、3 个 near-direct 域映射，其余 11 个为 infe
 
 \begin{enumerate}
   \item 七个质量域的 A 侧综合质量代理 $Q_A$、条件抽样区间及评分规则敏感性。$Q_A$ 是描述性复合指标，不等于附件 B6--B8 的原生 $Q_{\mathrm{score}}$。
-  \item 17 维配比的 13 个目标域 1M Ridge 代理，以及式\eqref{eq:q1_centered_effect}定义的 target-specific 相对配比效应 $m_k(\boldsymbol p)$。
+  \item 17 维配比的 13 个目标域 1M 二阶交互代理，以及式\eqref{eq:q1_v2_interaction}定义的 target-specific 相对配比效应 $m_k^{\mathrm{int}}(\boldsymbol p)$；线性 Ridge 作为基线保留。
   \item A6--A11 给出的跨实验组排序验证和 A12--A15 的 estimated/extrapolated 压力测试。
 \end{enumerate}
 
@@ -467,6 +416,6 @@ A16 中仅有 3 个 direct、3 个 near-direct 域映射，其余 11 个为 infe
 
 \subsection{本问结论与局限}
 
-在题目附件能够直接识别的范围内，问题一得到三点结论。第一，22 维质量信号可以构造透明的 A 侧综合质量代理，但其数值依赖明确的方向和权重假设，不能解释为客观质量真值；A2/A3 的非重叠记录支持 arxiv/github 域级结论在扩展样本上的稳定性，且多数负相关指标对在完整扩展与去重扩展中保持同号。第二，A4+A5 的逐目标域 Ridge 能在 held-out 1M、60M 和 1B 配方上保持明显的排序信息，其中 1M/60M 同配方真实 Loss 的中位 Spearman 为 0.9944。第三，绝对 Loss 的跨实验组误差和 1B 支持集变化表明，附件 A 不足以单独建立连续的配比尺度律。
+在题目附件能够直接识别的范围内，问题一得到三点结论。第一，22 维质量信号可以构造透明的 A 侧综合质量代理，但其数值依赖明确的方向和权重假设，不能解释为客观质量真值；A2/A3 的非重叠记录支持 arxiv/github 域级结论在扩展样本上的稳定性，且多数负相关指标对在完整扩展与去重扩展中保持同号。第二，A4+A5 的逐目标域二阶交互主模型在训练内嵌套验证和真实检验的预测误差上多数优于线性基线；1M/60M 同配方真实 Loss 的中位 Spearman 为 0.9944。第三，绝对 Loss 的跨实验组误差和 1B 支持集变化表明，附件 A 不足以单独建立连续的配比尺度律。
 
 因此，本问只输出“质量代理、配比相对效应、排序验证和映射边界”，把 $N$、$D$ 与 B-native 质量坐标上的广义 Loss 建模严格留给问题二，从而使四问之间的递进关系与题目提供的数据保持一致。
