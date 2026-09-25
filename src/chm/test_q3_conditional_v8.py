@@ -1,0 +1,107 @@
+"""Regression checks for the pinned v8 Q3 conditional calculation."""
+from __future__ import annotations
+
+import math
+from pathlib import Path
+import shutil
+import sys
+import tempfile
+import unittest
+
+from scipy.optimize import minimize
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from q3_conditional_v8 import main_grid, main_policy, observed_joint_grid, solve_fixed_p  # noqa: E402
+from q3_generic_solver import cost_and_grad  # noqa: E402
+from q3_v8_inputs import EXPORT, load_v8, verify_export  # noqa: E402
+
+
+class ConditionalV8Q3Tests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.model, cls.bounds = load_v8()
+        cls.policy = main_policy(cls.model)
+
+    def solve_main(self, budget=1e22, context=8192, family="power"):
+        return solve_fixed_p(self.model, self.bounds, self.policy["p"],
+                             self.policy["weights"], p_policy="observed_512",
+                             mapping_policy="direct_and_near", budget=budget,
+                             context=context, family=family, recipe_index="172")
+
+    def test_export_rejects_tampered_producer_file(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            for relative in (
+                "src/chm/q1_interface_v2.py", "src/cyj/chm_q1_v2_consumer.py",
+                "src/cyj/fit_b7_quality_extension_from_b1.py", "src/cyj/ndqp_scenarios_v8.py",
+                "interfaces/chm/q1_interface_v2.json", "outputs/chm/q1_v2_hull_bounds/bounds.json",
+                "outputs/cyj/classic/classic_fit.json", "outputs/cyj/q2_v8/b7_quality_extension.json",
+                "outputs/cyj/q2_v8/main_policy.json", "outputs/cyj/q2_v8/manifest.json",
+                "outputs/cyj/q2_v8/acceptance.json", "outputs/cyj/q2_v8_release_verification.json",
+            ):
+                destination = root / relative
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(EXPORT / relative, destination)
+            (root / "src/cyj/ndqp_scenarios_v8.py").write_text("tampered\n", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "differs from pinned Git object"):
+                verify_export(root)
+
+    def test_v8_main_smoke_and_cost(self):
+        row = self.solve_main()
+        self.assertEqual(row["status"], "conditional_v8_fixed_policy_feasible")
+        self.assertAlmostEqual(row["Q_B_proxy"], 0.6713607648391644, places=12)
+        self.assertAlmostEqual(row["conditional_bridge_loss"], 2.094421151267249, places=9)
+        self.assertLessEqual(row["C_total_FLOPs"], 1e22*(1+1e-9))
+        self.assertAlmostEqual(row["C_train_FLOPs"]+row["C_attention_FLOPs"]+
+                               row["C_quality_FLOPs"], row["C_total_FLOPs"], delta=1e9)
+        self.assertLessEqual(row["fixed_p_convex_gap"], 1e-8)
+
+    def test_independent_slsqp_matches_fixed_policy_reduction(self):
+        row = self.solve_main()
+        p, weights = self.policy["p"], self.policy["weights"]
+        q = row["Q_B_proxy"]
+        budget, context, family = 1e22, 8192, "power"
+
+        def objective(z):
+            n, d = map(math.exp, z)
+            result = self.model.predict_baseline_v8(n, d, p, weights, p_policy="observed_512")
+            return result["Loss"], [n*result["gradients"]["N_B"],
+                                    d*result["gradients"]["D_B"]]
+
+        def constraint(z):
+            n, d = map(math.exp, z)
+            cost, grad = cost_and_grad(n, d, q, .5, context, family)
+            return 1-cost/budget, [-n*grad[0]/budget, -d*grad[1]/budget]
+
+        result = minimize(objective, [math.log(1), math.log(100)], jac=True,
+                          method="SLSQP", bounds=[tuple(map(math.log, axis)) for axis in self.bounds[:2]],
+                          constraints=[{"type": "ineq", "fun": lambda z: constraint(z)[0],
+                                        "jac": lambda z: constraint(z)[1]}],
+                          options={"ftol": 1e-12, "maxiter": 1000})
+        self.assertTrue(result.success, result.message)
+        self.assertAlmostEqual(result.fun, row["conditional_bridge_loss"], delta=1e-8)
+
+    def test_declared_q1_primary_policy_is_below_q0(self):
+        from q3_joint_v7_check import policy_candidates
+        candidate = policy_candidates(self.model)[0]
+        result = solve_fixed_p(self.model, self.bounds, candidate["p"], candidate["weights"],
+                               p_policy=candidate["p_policy"], mapping_policy="direct_and_near",
+                               budget=1e22, context=8192, family="power")
+        self.assertEqual(result["status"], "policy_quality_below_Q0")
+        self.assertLess(result["Q_B_proxy"], .5)
+
+    def test_fixed_and_observed_joint_grid_roles(self):
+        fixed = main_grid(self.model, self.bounds, self.policy)
+        joint = observed_joint_grid(self.model, self.bounds, fixed)
+        self.assertEqual(len(fixed), 36)
+        self.assertEqual(len(joint), 36)
+        self.assertEqual(sum(r["status"] == "conditional_v8_fixed_policy_feasible" for r in fixed), 30)
+        self.assertEqual(sum(r["status"] == "conditional_v8_fixed_policy_feasible" for r in joint), 33)
+        self.assertEqual({r["eligible_observed_recipes"] for r in joint}, {87})
+        self.assertEqual({r["recipe_index"] for r in joint if r.get("recipe_index")}, {"172", "477"})
+        self.assertTrue(all(r.get("fixed_policy_regret") is None or r["fixed_policy_regret"] >= -1e-10
+                            for r in joint))
+
+
+if __name__ == "__main__":
+    unittest.main()
