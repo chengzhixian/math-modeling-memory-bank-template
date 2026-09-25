@@ -5,8 +5,8 @@
   "q3_consumer_interface_ready": true,
   "q3_consumer_verified_by_CHM": false,
   "cross_source_empirical_calibration_complete": false,
-  "release_remote_verified": false,
-  "status": "conditional_v8_competition_requirements_complete_pending_remote_and_owner_consumption",
+  "release_remote_verified": true,
+  "status": "conditional_v8_competition_requirements_complete_remote_verified_pending_CHM_consumption",
   "checks": {
     "B1_fixed_parameter_count": 5,
     "B7_quality_parameter_count": 3,
@@ -24,7 +24,10 @@
     "outputs/cyj/q2_v8/domain_pair_substitution.csv",
     "outputs/cyj/q2_v8/requirement_evidence.csv",
     "outputs/cyj/q2_v8_runtime_audit.json",
-    "interfaces/cyj/fixtures_v8/manifest.json"
+    "interfaces/cyj/fixtures_v8/manifest.json",
+    "outputs/cyj/q2_v8_release_verification.json"
   ],
-  "claim_limit": "uncalibrated_cross_source_quality_and_mixture_bridges; B3 interpolation and B4/B5 directions are not independent absolute validation"
+  "claim_limit": "uncalibrated_cross_source_quality_and_mixture_bridges; B3 interpolation and B4/B5 directions are not independent absolute validation",
+  "release_subject_commit": "615c078517379284f6b0504c568790a7975c6eda",
+  "release_evidence_path": "outputs/cyj/q2_v8_release_verification.json"
 }

@@ -13,10 +13,11 @@
     "build_q2_v8.py": "171aabed46b807f1c7c04e84e18d403432b805132f64767bd7f12e49ba9f6e17",
     "smoke_q3_v8.py": "e7e7e2c3c8f314d5267b96a5af39a6ec280ae64e2053cbb0bf12e6221964c29d",
     "finalize_q2_v8.py": "33787e21feb97a11f20d3881011b548b7a10babdb2514cabb90be4e9f75d9d95",
-    "audit_q2_v8.py": "1ec1d51f53b618913c16f92a7463ba73ed33d83ad451789acd2fd2e1614b883e"
+    "audit_q2_v8.py": "1ec1d51f53b618913c16f92a7463ba73ed33d83ad451789acd2fd2e1614b883e",
+    "verify_q2_v8_release.py": "5212b452a0216b16e2b25d5644ec8df5d103982c606e97b7e444738ba61bb2bd"
   },
   "files": {
-    "acceptance.json": "2cedb2f0b1c5ef1401189c7cc4df71d6324dbd562fcee1cedc5fe5eaf11d0fb3",
+    "acceptance.json": "65e5a5f2f657ff4bd431ec31e4cec0a8cee54bea40541dd339668c3e25cc9dec",
     "b2_b3_model_validation.csv": "5d3d2d2103bdd9b70508ca0c532298d6de2620e690402906d4fefacd2ce7ca45",
     "b2_b3_validation_summary.json": "19784022221bffaa83635f26379fd68bde03f098d8d2879692d0167c0642dd79",
     "b7_backbone_comparison.csv": "750bf618371d4a23f8daf36956859f5745a524cd865f0a5756c37e8ffdf15de6",

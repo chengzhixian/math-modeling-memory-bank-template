@@ -1,0 +1,11 @@
+{
+  "schema_version": "cyj.q2.v8.remote_verification.v1",
+  "status": "PASS",
+  "branch": "team/cyj-scaling",
+  "verified_subject_commit": "615c078517379284f6b0504c568790a7975c6eda",
+  "remote_subject_commit": "615c078517379284f6b0504c568790a7975c6eda",
+  "verified_at_utc": "2026-09-25T13:59:32.434705+00:00",
+  "subject_manifest_sha256": "4fa7edfebd8887a7c3b2f7f0b8521291169a50a4dea0c6ad0d44c3ee678ae646",
+  "subject_acceptance_sha256": "2cedb2f0b1c5ef1401189c7cc4df71d6324dbd562fcee1cedc5fe5eaf11d0fb3",
+  "scope": "accepted v8 subject commit verified on origin; release-record commit must be pushed and checked separately"
+}
