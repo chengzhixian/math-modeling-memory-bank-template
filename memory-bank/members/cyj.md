@@ -8,6 +8,8 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 更新时间：2026-09-24（北京时间，接口审查与状态降级）。角色 cyj，负责 Q2 与 Q3 理论；分支 `team/cyj-scaling`。Python 3.12.14 / Windows，环境见 `problem/cyj/environment.md`。
 
+2026-09-25 15:01 V3 Q2 执行第一检查点：按用户新任务书，在独立 `src/chm/export_q1_q2_bundle.py` Q1 导出阶段仿照 CHM 已发布归一化规则，仅读取 A4 原始配方而不重拟合模型，生成 `outputs/chm/q1_exports/q1_q2_bundle_v1/` 的 512×17 配方、五表及最新审计派生产物；Q2 代码尚未建立，也未读取任何 A 原始表。导出 manifest SHA256 `b0dda7caac30513c0f37e74ccb143064606847fdc35fd7607c999ac2f8647ecb`，生产源固定 Q1 `cdda1ad...` 与审计 `2450971...`。此增量包待 CHM 所有人签收，不能冒充原 v1.3 接口。交接见 `20260925-1501-q1-q2-export-checkpoint.md`。
+
 2026-09-25 评委导向任务书可行性复审：CHM 本人分支已有 `20260925-cyj-v4-owner-acceptance.md`，证明 v4 的 B7/NDQ 条件数值消费已签收；先前把 v4 与 v5 一起列为待验收是错误的。v5 配比扩展仍未签收。新任务书可以完善可复算的条件情景答卷，但不能仅凭现有 A/B 分离数据完成四变量联合效应的实证标定与外测；审查详见 `problem/cyj/20260925-judge-task-feasibility-review.md`。未启动任务书中的模型/优化新增工作。
 
 2026-09-25 14:01：本地/远端 `team/cyj-scaling` 已用非强推合并统一到 `2a8b03e2a26ef4eb25285cb89d14edf28d4ee316`，工作区当时干净；v5 代码、540 情景与四图已远端备份。复审发现 v5 文档错误声称 CHM 已验收 v4，现已纠正为待 CHM 所有人验收。CHM 新 `2450971` 配比凸包审计尚未发布 v1.4 消费合同，不能替代本人验收。完整四变量 Loss 仍不可识别，`ready_for_Q3=false`。本轮审查及交接见 `problem/cyj/20260925-v5-release-review.md`、`memory-bank/handoffs/cyj/20260925-1401-v5-release-review.md`；公共记忆由集成人维护。

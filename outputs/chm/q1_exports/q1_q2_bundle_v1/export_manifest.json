@@ -1,0 +1,68 @@
+{
+  "schema_version": "chm.q1.q2_bundle.v1",
+  "status": "Q1_derived_export_pending_CHM_owner_signoff",
+  "generation_command": "python -B src/chm/export_q1_q2_bundle.py",
+  "frozen_q1_commit": "cdda1ad62c5c7eb72b413c4228caeff87d2bad30",
+  "audit_commit": "2450971d15b7f6516d6db408759bf1b22f497808",
+  "frozen_q1_manifest_sha256": "925cf317c861e5f65d7f2ebdaebc693bc7f4b60d17d486488e87858bce4b5d80",
+  "source_A4_sha256": "04a32ef4ab594376bf90e11404c033668f887c351d6a03ad3744824c7296a2d8",
+  "source_files": {
+    "quality.csv": {
+      "commit": "cdda1ad62c5c7eb72b413c4228caeff87d2bad30",
+      "path": "outputs/chm/domain_quality.csv"
+    },
+    "mapping.csv": {
+      "commit": "cdda1ad62c5c7eb72b413c4228caeff87d2bad30",
+      "path": "outputs/chm/domain_mapping.csv"
+    },
+    "coefficients.csv": {
+      "commit": "cdda1ad62c5c7eb72b413c4228caeff87d2bad30",
+      "path": "outputs/chm/local_recheck_v1/mixture_effect_ridge_v0.csv"
+    },
+    "reference.csv": {
+      "commit": "cdda1ad62c5c7eb72b413c4228caeff87d2bad30",
+      "path": "outputs/chm/local_recheck_v1/mixture_reference_v0.csv"
+    },
+    "validation.csv": {
+      "commit": "cdda1ad62c5c7eb72b413c4228caeff87d2bad30",
+      "path": "outputs/chm/local_recheck_v1/q1_regmix_ridge_domainwise_metrics.csv"
+    },
+    "heldout_target_metrics.csv": {
+      "commit": "2450971d15b7f6516d6db408759bf1b22f497808",
+      "path": "outputs/chm/q1_mixture_final/heldout_target_metrics.csv"
+    },
+    "paired_scale_metrics.csv": {
+      "commit": "2450971d15b7f6516d6db408759bf1b22f497808",
+      "path": "outputs/chm/q1_mixture_final/same_mixture_1m_60m.csv"
+    },
+    "mixture_model_selection.csv": {
+      "commit": "2450971d15b7f6516d6db408759bf1b22f497808",
+      "path": "outputs/chm/q1_mixture_final/interaction_candidate_comparison.csv"
+    },
+    "composition_support.csv": {
+      "commit": "2450971d15b7f6516d6db408759bf1b22f497808",
+      "path": "outputs/chm/q1_mixture_final/composition_support.csv"
+    },
+    "q3_p_support_summary.json": {
+      "commit": "2450971d15b7f6516d6db408759bf1b22f497808",
+      "path": "outputs/chm/q3_p_support_summary.json"
+    }
+  },
+  "interaction_model": "diagnostic metrics only; full 13-target second-order coefficients unavailable",
+  "exporter_code_sha256": "4c519463acbb07a58303e015d20c684dbe2c9fd9d1cf42337aeff55e7ba1a33e",
+  "files_sha256": {
+    "coefficients.csv": "39e7661d1ec2b4c552715ff39d11ea32416afa3cd4013436d9f6351288a194fd",
+    "composition_support.csv": "6fa804087f5f3776602e276190c87e84b2a395b011687eb04ada2726627a2163",
+    "heldout_target_metrics.csv": "6832aec39a2f976466363c975bd1020d5c358b73e11cdb294cf139e19cd4fd23",
+    "mapping.csv": "960ff8094339473b0fd72c774774dbba3cae438f3fcb5b0fb4fdc8bf9e20006a",
+    "mixture_model_selection.csv": "a50df69cd38ba41691d0f038a0d830d61d8f88dc3c6cb003ae538fbd0a52d185",
+    "paired_scale_metrics.csv": "35c1139e4fb5a6b050fe5daa3131e05f325e748d41bd44e408e086a78de71e02",
+    "q3_p_support_summary.json": "b88527bd55a5ddc225818c3040b6a392421cb7bb4cf810527db765253c7641ff",
+    "qa_mapping.json": "212e7c6b39038bd63cbc7acf3248c89ead6240e6e7708b5a3e999c50ae58baa6",
+    "quality.csv": "ab7f13f9d0ff3d0683152d53933a89337cc3fadfefa9b2383772ea9fe3c2d976",
+    "recipe_manifest.json": "5c0acf5f0d3574e0b043cb0b5c21ed616c9ca4900cc89a5b68fef90a699941fe",
+    "recipes_512.csv": "9744030382b8ac87fbd838a0b34580d0debff5ea3fb23f0b8846ca7c91f0742d",
+    "reference.csv": "ee3e623419982d5cce284509d014954ca436e95445ff444c7c870bed42beafe8",
+    "validation.csv": "2d22d5b98dfe27c643b2f8ca3a29834b68767c08e0dc91fcaa06f2efcb694b20"
+  }
+}
