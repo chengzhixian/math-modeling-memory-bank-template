@@ -1,8 +1,10 @@
 # CYJ NDQP conditional scenario v5
 
 Status: `conditional_diagnostic=true`, `ready_for_Q3=false`, `formal_ready=false`.
-This new interface leaves immutable `cyj.chm.v4` unchanged. CYJ's local
-consumer checks passed; CHM owner acceptance of v4/v5 has not been recorded.
+This new interface leaves immutable `cyj.chm.v4` unchanged. CHM accepted v4
+for conditional B7/NDQ numerical consumption in
+`memory-bank/handoffs/chm/20260925-cyj-v4-owner-acceptance.md` on its own
+branch. CHM owner acceptance of the v5 p extension has not been recorded.
 Neither state establishes an A/B calibration.
 
 ## Exact inputs and provenance

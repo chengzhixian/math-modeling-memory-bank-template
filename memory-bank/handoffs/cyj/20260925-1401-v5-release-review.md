@@ -1,5 +1,7 @@
 # CYJ → CHM and integrator: v5 release and review
 
+**Erratum (2026-09-25):** CHM's own `memory-bank/handoffs/chm/20260925-cyj-v4-owner-acceptance.md` accepts v4 conditional B7/NDQ consumption. The pending owner check below refers only to the v5 p extension. This corrects the earlier v4/v5 wording; `ready_for_Q3=false` is unchanged.
+
 ## Task, input and immutable identities
 
 `CYJ_RELEASE_COMMIT=2a8b03e2a26ef4eb25285cb89d14edf28d4ee316` on `team/cyj-scaling`; local and `ls-remote` SHA matched and tree was clean. `CYJ_INTERFACE_SCHEMA=cyj.ndqp.scenario.v5`. `CHM_PRODUCER_COMMIT=cdda1ad62c5c7eb72b413c4228caeff87d2bad30` (`chm.q1.v1.3`), manifest SHA256 `925cf317c861e5f65d7f2ebdaebc693bc7f4b60d17d486488e87858bce4b5d80`. B7 and 17 B raw input hashes are in `outputs/cyj/q2_joint_scenarios/requirement_coverage.json`. This follow-up documentation correction does not change the released machine code.

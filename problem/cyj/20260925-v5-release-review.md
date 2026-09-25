@@ -1,5 +1,7 @@
 # CYJ v5 Q2/Q3 release review, 2026-09-25
 
+**Erratum (2026-09-25):** CHM's own `memory-bank/handoffs/chm/20260925-cyj-v4-owner-acceptance.md` verifies acceptance of the v4 conditional B7/NDQ numerical consumer. Statements below that v4 owner acceptance was pending are superseded. V5 p-extension acceptance and formal joint calibration remain pending. See `problem/cyj/20260925-judge-task-feasibility-review.md`.
+
 ## A. Scope and source gate
 
 Snapshot: local and remote `team/cyj-scaling@2a8b03e2a26ef4eb25285cb89d14edf28d4ee316`, clean tree; `origin/main@90ac2d871c1f1bb5b2ff390c1da775a2f382a76e`, merge base the same, 0 behind/76 ahead. Reviewed CYJ v4 native predictor, v5 conditional bridge, generated evidence, Q2/Q3 LaTeX and CHM release surface. Other members' implementations and official submission rules are outside scope.

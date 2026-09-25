@@ -1,5 +1,7 @@
 # CYJ → CHM joint B7 条件接口 v4
 
+**后续验收状态：**CHM 已在本人分支 `memory-bank/handoffs/chm/20260925-cyj-v4-owner-acceptance.md` 签收 v4 的 B7/NDQ 条件数值消费。下文“所有者验收未完成”仅记录当时的发布状态；正式 `ready_for_Q3` 仍为 false，v5 配比扩展尚未获得该签收。
+
 当前扩展上下文版的本地精确发布为 `team/cyj-scaling@3471530d91c8ee7eb709e5cd6c824eb9c423e0df`；manifest SHA256 `dcd50430b88cc754e1d8f43a3890013bcc45b07f877b315e9a812d2978fd41f7`，exact-object consumer smoke 对含 32768 token 的 3 个批量请求 PASS。前一版 `c11629a032fdca8c0a366b732227711410b305d9` 保留原三上下文接口复现；后续诊断脚本演进不改变各自的不可变提交身份。远端同步状态需以实际 `ls-remote` 核验。
 
 入口 `src/cyj/chm_adapter_v4.py::CHMAdapterV4(mode="conditional_diagnostic")`。本版把八参数联合约束最小二乘、200 次 N-D 簇 bootstrap 与嵌套留级残差接入接口；v3 精确发布保持历史两阶段参数，不在原位改写。
