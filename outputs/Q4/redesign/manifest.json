@@ -1,0 +1,164 @@
+{
+  "source_main": "b789e3fc02ba894c4787ea351f87e56fc4e7daa8",
+  "frozen_source": "ee23b200e9de7f78477d945b186233741bd3b8fd",
+  "upstream_Q3_commit": "c052b6918c3f77a2285622521d8abb1b429513be",
+  "producer": "frozen Q4 v3; no refit or forecast update",
+  "verified_frozen_outputs": [
+    "bridge_source_coordinate_models.csv",
+    "bridge_source_coordinate_validation.csv",
+    "c3_row_metric_audit.csv",
+    "c3_source_year_capability.csv",
+    "c3_source_year_dedup_sensitivity.csv",
+    "c3_source_year_task_profiles.csv",
+    "c4_annual_resource_comparison.csv",
+    "c4_resource_gate_comparison.csv",
+    "c4_wide_usable_resources.csv",
+    "c8_bbh_task_aggregation.csv",
+    "c8_parse_failures.csv",
+    "context_scenarios.csv",
+    "frontier_candidate_forecasts.csv",
+    "frontier_model_comparison.csv",
+    "frontier_model_error_stress.csv",
+    "frontier_parameters.csv",
+    "frontier_scenario_conditional_ranges.csv",
+    "frontier_scenario_union.csv",
+    "historical_common_cells.csv",
+    "historical_contribution_bootstrap.csv",
+    "historical_standardized_contributions.csv",
+    "interface.json",
+    "q3_bridge_conclusion_sensitivity.csv",
+    "q3_policy_ranking_stress.csv",
+    "q3_source_coordinate_stress.csv",
+    "results.json",
+    "rolling_two_month_frontier.csv"
+  ],
+  "inputs": {
+    "outputs\\Q4\\ANSWER.md": "913937920d448ec6508b32f5d45dbb8746edd29aaad8407315e72dda23fa75d0",
+    "outputs\\Q4\\bridge_source_coordinate_validation.csv": "88ee5eda2aaf4cad01bf4394620e1004bd01dfb526bea3ce5b0088dfa232fd36",
+    "outputs\\Q4\\c4_annual_resource_comparison.csv": "97a650cb2f15afdfdfeafadc0868e51c3efecffac0731388b6bc04c7ca403937",
+    "outputs\\Q4\\frontier_candidate_forecasts.csv": "84f2fd60611abbffb6b09dc5c1f779a7849f5268c25a0a9cbc7b118c497ead76",
+    "outputs\\Q4\\frontier_model_comparison.csv": "674c75a8f12b4b9fde8928938119296bfc8a86ea8873a073e2a8efef60e6e69d",
+    "outputs\\Q4\\frontier_scenario_union.csv": "3193da8f3f3d29512003d6af93cd364b7e1ce8a76d5998492d7b3b57fa501411",
+    "outputs\\Q4\\historical_standardized_contributions.csv": "21f60da5422cdc2d4405310443dbf62cb5009a272fded3f3e08cf4352a63fe40",
+    "outputs\\Q4\\manifest.json": "9ba69ff21c1ae41237d27b10c56887b536401f44d0e7d96d7ea0aa93c92ae0f9",
+    "outputs\\Q4\\prepared\\bridge_sample.csv": "ead8c15e7bfefa589978c855f17cd70141f99446738c78eb4dc939c958f842dd",
+    "outputs\\Q4\\prepared\\leaderboard_sample.csv": "281044f48cd5fb0a77ea726c17b6b57914fef6e5349ff442384ebe998489f700",
+    "outputs\\Q4\\q3_bridge_conclusion_sensitivity.csv": "42d5196760dfd64159f0090a6a3d94f5665c4ad76b82bb2a924c753c8e066347",
+    "outputs\\Q4\\results.json": "c38e7e1f93ac381fe7262bda502a157451a34c3f10bd994ca788038b3426f54c",
+    "outputs\\Q4\\rolling_two_month_frontier.csv": "f6f3556606bf074eef250991d1eedc070ae8e6bc9c14508c130560275e287c31"
+  },
+  "scripts": {
+    "src\\visualization\\q4_redesign.py": "8e29ba20ddeb8e170a4ddd8ab01d446f878c73ae6c7e8a6d571b2ca8d2c03408",
+    "src\\visualization\\q2_redesign.py": "917ef50a03393bb474acc353de381cbb1417c85c1fe297d6989e2fd2fdd1c11f"
+  },
+  "figures": [
+    {
+      "stem": "01_history",
+      "caption": "后训练 n=1,620，基座 n=204；仅使用冻结 C2 主样本，不混入 C3 异口径历史 Average。\n日期为提交时间，不能直接解释为发布时间或因果技术进步；当月 q90 不等于后续两月前沿定义。",
+      "size_inches": [
+        7.2,
+        6.8
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "02_contributions",
+      "caption": "后训练：−0.758 + 6.521 = 标准化增量 5.763；再加支持差额 −1.542 得全样本增量 4.222。\n规模内时间项包含 D、后训练、选择与评测变化，不能识别为纯技术贡献。负贡献及超过 100% 的份额不画饼图。",
+      "size_inches": [
+        7.2,
+        5.6
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "03_sensitivity",
+      "caption": "后训练三个分箱的规模项份额：−16.47%、−13.15%、−50.08%；主规格为 0.5 decade。\n主规格保留：后训练 313 / 423，基座 78 / 41（早 / 晚）；控制开发者后仅 6 / 8、3 / 2。\n这些规格诊断不能证明 D 与资源结构稳定，也不能把时间项转为因果技术贡献。",
+      "size_inches": [
+        7.2,
+        5.8
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "04_resources",
+      "caption": "冻结主筛选 81 条、宽筛选 93 条；计算量 q90 年增倍率分别为 4.901、3.986。\n图中 n 为各年记录数；N / D / C 是各自边际 q90，不能拼成一个真实模型或用于相乘复算。\n历史资源趋势是情景输入，不是技术贡献的因果估计。",
+      "size_inches": [
+        7.2,
+        5.1
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "05_backtests",
+      "caption": "后训练分位资源 RMSE 2.199 略优于均值资源 2.237；基座常数模型 RMSE 7.633 最低。\n全部候选测试 R² 为负；只有四个重叠窗口，模型选择与比较共用这些诊断，不构成独立盲测。\n点按起点先后轻微横向错开；不能将四个窗口当作独立重复实验。",
+      "size_inches": [
+        7.2,
+        5.8
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "06_forecasts",
+      "caption": "* 为四窗口诊断所选候选。后训练：起点 2025-03-13，目标 2026-03-13 / 2027-03-13。\n基座：起点 2025-03-09，目标 2026-03-09 / 2027-03-09；此处未用今天的数据重新预测。\n区间仅为固定情景的条件变动范围，无未来覆盖率校准；预测对象不是所有未来模型的最高能力。",
+      "size_inches": [
+        7.2,
+        6.6
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "07_uncertainty",
+      "caption": "12月固定范围 50.30–56.01；情景并集 37.75–72.24；偏差压力 31.59–78.40。\n黑点为分位资源点预测；并集还纳入候选模型与资源参数变化。偏差压力沿用历史最大绝对误差。\n三层均无未来覆盖率保证，不称作 95% 预测区间；偏差的长时距保持是假设。",
+      "size_inches": [
+        7.2,
+        5.8
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "08_growth_scenarios",
+      "caption": "历史主筛选对数年增长速率为 0.6903；“减半”作用于对数速率，不是算力直接减半。\n横轴为有序增长假设，连线仅作情景比较；不是实测未来轨迹或独立验证的因果算力收益。",
+      "size_inches": [
+        7.2,
+        4.8
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "09_bridge_validation",
+      "caption": "Qwen2 / Qwen2.5 留出 RMSE 7.048 / 2.655，优于各自常数；Pythia 0.538 劣于常数 0.426。\n样本小、Loss 来源标签未独立核验；不混合 training / validation / unspecified 坐标。\nQ3 Loss → C6 来源坐标的转换尚未经验标定，图中关系不能直接兑换为确定的未来能力。",
+      "size_inches": [
+        7.2,
+        6.9
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "10_bridge_stress",
+      "caption": "27 格假设：尺度 a∈{0.9,1,1.1}，偏移 b∈{−0.1,0,0.1}，上游 Loss 扰动∈{−0.05,0,0.05}。\n菱形为 a=1、b=0、扰动=0 名义点；线段是支持格的最小–最大范围，不是置信区间。\nQ4 冻结接口引用 Q3 @ c052b69 的固定配方 172，不是之后新增的配方联合优化结果。\n未支持格排除，不补零；此压力影响 Q3 兑换幅度，未直接作用于 C2 / C4 前沿预测。",
+      "size_inches": [
+        7.2,
+        5.5
+      ],
+      "dpi": 300
+    }
+  ],
+  "layout_audit": {
+    "01_history": [],
+    "02_contributions": [],
+    "03_sensitivity": [],
+    "04_resources": [],
+    "05_backtests": [],
+    "06_forecasts": [],
+    "07_uncertainty": [],
+    "08_growth_scenarios": [],
+    "09_bridge_validation": [],
+    "10_bridge_stress": []
+  },
+  "visual_review": "reviewed previews before vector export",
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "3.0.1"
+  }
+}

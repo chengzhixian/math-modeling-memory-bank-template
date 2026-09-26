@@ -1,0 +1,140 @@
+
+--- outputs\Q4\redesign\01_history.png ---
+  category: raster  ext: png  size: 335902 B
+  pixels: 2160x2040  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs\Q4\redesign\01_history.pdf ---
+  category: vector  ext: pdf  size: 73197 B
+  [WARN] PDF 中以下字体可能未嵌入: /EJWCFK+MicrosoftYaHei-Bold, /CNTFXP+MicrosoftYaHei. 导致他人电脑打开变成替代字体。
+  >>> verdict: WARN
+
+--- outputs\Q4\redesign\01_history.svg ---
+  category: vector  ext: svg  size: 219096 B
+  [PASS] 无问题。
+
+--- outputs\Q4\redesign\02_contributions.png ---
+  category: raster  ext: png  size: 207833 B
+  pixels: 2160x1680  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs\Q4\redesign\02_contributions.pdf ---
+  category: vector  ext: pdf  size: 56615 B
+  [WARN] PDF 中以下字体可能未嵌入: /JRACDQ+MicrosoftYaHei-Bold, /ERZPSJ+MicrosoftYaHei. 导致他人电脑打开变成替代字体。
+  >>> verdict: WARN
+
+--- outputs\Q4\redesign\02_contributions.svg ---
+  category: vector  ext: svg  size: 18176 B
+  [PASS] 无问题。
+
+--- outputs\Q4\redesign\03_sensitivity.png ---
+  category: raster  ext: png  size: 216128 B
+  pixels: 2160x1740  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs\Q4\redesign\03_sensitivity.pdf ---
+  category: vector  ext: pdf  size: 65085 B
+  [WARN] PDF 中以下字体可能未嵌入: /CCJNOX+MicrosoftYaHei-Bold, /SCENVN+MicrosoftYaHei. 导致他人电脑打开变成替代字体。
+  >>> verdict: WARN
+
+--- outputs\Q4\redesign\03_sensitivity.svg ---
+  category: vector  ext: svg  size: 20117 B
+  [PASS] 无问题。
+
+--- outputs\Q4\redesign\04_resources.png ---
+  category: raster  ext: png  size: 298653 B
+  pixels: 2160x1530  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs\Q4\redesign\04_resources.pdf ---
+  category: vector  ext: pdf  size: 67764 B
+  [WARN] PDF 中以下字体可能未嵌入: /ECWCQY+MicrosoftYaHei-Bold, /EPVNAZ+MicrosoftYaHei. 导致他人电脑打开变成替代字体。
+  >>> verdict: WARN
+
+--- outputs\Q4\redesign\04_resources.svg ---
+  category: vector  ext: svg  size: 32503 B
+  [PASS] 无问题。
+
+--- outputs\Q4\redesign\05_backtests.png ---
+  category: raster  ext: png  size: 245937 B
+  pixels: 2160x1740  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs\Q4\redesign\05_backtests.pdf ---
+  category: vector  ext: pdf  size: 69888 B
+  [WARN] PDF 中以下字体可能未嵌入: /GKJCFW+MicrosoftYaHei-Bold, /DPINUT+MicrosoftYaHei. 导致他人电脑打开变成替代字体。
+  >>> verdict: WARN
+
+--- outputs\Q4\redesign\05_backtests.svg ---
+  category: vector  ext: svg  size: 19665 B
+  [PASS] 无问题。
+
+--- outputs\Q4\redesign\06_forecasts.png ---
+  category: raster  ext: png  size: 244368 B
+  pixels: 2160x1980  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs\Q4\redesign\06_forecasts.pdf ---
+  category: vector  ext: pdf  size: 70152 B
+  [WARN] PDF 中以下字体可能未嵌入: /EPUSYM+MicrosoftYaHei-Bold, /GELOYF+MicrosoftYaHei. 导致他人电脑打开变成替代字体。
+  >>> verdict: WARN
+
+--- outputs\Q4\redesign\06_forecasts.svg ---
+  category: vector  ext: svg  size: 21688 B
+  [PASS] 无问题。
+
+--- outputs\Q4\redesign\07_uncertainty.png ---
+  category: raster  ext: png  size: 230207 B
+  pixels: 2160x1740  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs\Q4\redesign\07_uncertainty.pdf ---
+  category: vector  ext: pdf  size: 65156 B
+  [WARN] PDF 中以下字体可能未嵌入: /HFKCER+MicrosoftYaHei-Bold, /EREJSU+MicrosoftYaHei. 导致他人电脑打开变成替代字体。
+  >>> verdict: WARN
+
+--- outputs\Q4\redesign\07_uncertainty.svg ---
+  category: vector  ext: svg  size: 16257 B
+  [PASS] 无问题。
+
+--- outputs\Q4\redesign\08_growth_scenarios.png ---
+  category: raster  ext: png  size: 209366 B
+  pixels: 2160x1440  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs\Q4\redesign\08_growth_scenarios.pdf ---
+  category: vector  ext: pdf  size: 61446 B
+  [WARN] PDF 中以下字体可能未嵌入: /GJVASD+MicrosoftYaHei-Bold, /HPURZQ+MicrosoftYaHei. 导致他人电脑打开变成替代字体。
+  >>> verdict: WARN
+
+--- outputs\Q4\redesign\08_growth_scenarios.svg ---
+  category: vector  ext: svg  size: 12480 B
+  [PASS] 无问题。
+
+--- outputs\Q4\redesign\09_bridge_validation.png ---
+  category: raster  ext: png  size: 338779 B
+  pixels: 2160x2070  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs\Q4\redesign\09_bridge_validation.pdf ---
+  category: vector  ext: pdf  size: 63410 B
+  [WARN] PDF 中以下字体可能未嵌入: /EKMVKY+MicrosoftYaHei-Bold, /HGENFW+MicrosoftYaHei. 导致他人电脑打开变成替代字体。
+  >>> verdict: WARN
+
+--- outputs\Q4\redesign\09_bridge_validation.svg ---
+  category: vector  ext: svg  size: 34671 B
+  [PASS] 无问题。
+
+--- outputs\Q4\redesign\10_bridge_stress.png ---
+  category: raster  ext: png  size: 279440 B
+  pixels: 2160x1650  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs\Q4\redesign\10_bridge_stress.pdf ---
+  category: vector  ext: pdf  size: 73260 B
+  [WARN] PDF 中以下字体可能未嵌入: /WSMBTA+MicrosoftYaHei, /CIONJF+MicrosoftYaHei-Bold. 导致他人电脑打开变成替代字体。
+  >>> verdict: WARN
+
+--- outputs\Q4\redesign\10_bridge_stress.svg ---
+  category: vector  ext: svg  size: 16641 B
+  [PASS] 无问题。
