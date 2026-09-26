@@ -9,6 +9,8 @@ from scipy.optimize import linprog
 
 VERSION = "chm.q1.v2.0"
 MANIFEST = Path("interfaces/chm/q1_interface_v2.json")
+FROZEN_BUNDLE = Path("outputs/chm/q1_v2")
+CURATED_BUNDLE = Path("outputs/Q1")
 
 
 def _sha(path):
@@ -32,9 +34,16 @@ class Q1Interface:
             raise ValueError("invalid v2 file inventory")
         self.paths = {}
         for key, item in self.manifest["files"].items():
-            path = (self.root / item["path"]).resolve()
-            if not path.is_relative_to((self.root / "outputs/chm/q1_v2").resolve()):
+            frozen_path = (self.root / item["path"]).resolve()
+            frozen_root = (self.root / FROZEN_BUNDLE).resolve()
+            if not frozen_path.is_relative_to(frozen_root):
                 raise ValueError("release path escapes frozen v2 directory")
+            # Keep the published manifest byte-for-byte; main stores its checked
+            # content under the question directory while the producer branch
+            # retains the original paths.
+            path = (self.root / CURATED_BUNDLE / frozen_path.relative_to(frozen_root)).resolve()
+            if not path.is_relative_to((self.root / CURATED_BUNDLE).resolve()):
+                raise ValueError("curated path escapes Q1 directory")
             if _sha(path) != item["sha256"]:
                 raise ValueError(f"Q1 v2 identity mismatch: {key}")
             self.paths[key] = path

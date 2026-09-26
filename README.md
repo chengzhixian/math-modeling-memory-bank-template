@@ -12,6 +12,8 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 按问题进入 [Q1](outputs/Q1/README.md)、[Q2](outputs/Q2/README.md)、[Q3](outputs/Q3/README.md)。每个目录集中放置结论、核心验证与冻结来源；论文分节在 `paper/latex/sections/Q1`、`Q2`、`Q3`。Q2、Q3 的跨附件质量与 Loss 桥接属于明确的条件假设，结果须连同支持域和敏感性阅读。成员分支的中间表、缓存、历史模型和诊断 PDF 未纳入本次集成。
 
+按问题整理的核心实验、复现方式和审查记录见 [experiments](experiments/experiment-log.md)。
+
 ## 开始使用
 
 1. 先读 [三人协作流程](TEAM_WORKFLOW.md) 和 [任务计划](TASK_PLAN.md)，按用户指定分别由 chm/cyj/zhh 负责对应工作线。原始题面与数据来源见 `problem/SOURCES.md`，资料共享范围先核验。

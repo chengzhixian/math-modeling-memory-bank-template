@@ -20,6 +20,8 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 ## 文件归属
 
+集成人将验收后的 Q1–Q3 **main 发布副本**按问题收录于 `outputs/Q1`、`outputs/Q2`、`outputs/Q3` 和 `experiments/Q1`、`Q2`、`Q3`；下表的成员目录规则继续适用于个人分支的研究与完整生产日志。冻结清单中的原成员路径保留来源身份，main 的精简路径由问题目录索引说明。
+
 | 文件或目录 | 唯一日常写入者 |
 |---|---|
 | src/chm/、outputs/chm/、experiments/chm/、problem/chm/、interfaces/chm/ | chm |

@@ -103,12 +103,12 @@ $B<C_{\min}$ 时明确判不可行。可行时将目标化为 $\log N$ 的分段
 
 ## 7. 公开真实实验能检验到哪一步
 
-来源筛选和外测记录见 `outputs/Q3/EXTERNAL_VALIDATION.md`。RegMix 官方公开表就是赛题 A4–A11 来源，不能重复包装成独立验证；Data Mixing Laws、DataComp-LM 的域配比或质量/评测坐标与本题不一致。独立的 [mlfoundations/scaling 作者仓库](https://github.com/mlfoundations/scaling) 提供 104 个实际训练模型，固定提交 `a003c4913793ac2ae7ef87b28ecb562955d026d5`。42 个模型落在本问 B1/v8 共同 $N,D$ 支持域，每语料 14 个；用同一 Paloma C4 验证 Loss，只在各自 C4、RedPajama、RefinedWeb 训练语料内比较 B1 的 $N,D$ 排序，Spearman 为 0.9736、0.9868、0.9736。按训练成本 $6ND$ 的诊断预算 $10^{20}$、$10^{21}$ FLOPs，在预算真正筛掉候选的 6 组中，B1 所选离散模型与实际最低 Loss 模型 5 组一致；RefinedWeb 的 $10^{21}$ 组失败，实际 Loss regret 为 0.070515。
+来源筛选和外测记录见 `experiments/Q3/EXTERNAL_VALIDATION.md`。RegMix 官方公开表就是赛题 A4–A11 来源，不能重复包装成独立验证；Data Mixing Laws、DataComp-LM 的域配比或质量/评测坐标与本题不一致。独立的 [mlfoundations/scaling 作者仓库](https://github.com/mlfoundations/scaling) 提供 104 个实际训练模型，固定提交 `a003c4913793ac2ae7ef87b28ecb562955d026d5`。42 个模型落在本问 B1/v8 共同 $N,D$ 支持域，每语料 14 个；用同一 Paloma C4 验证 Loss，只在各自 C4、RedPajama、RefinedWeb 训练语料内比较 B1 的 $N,D$ 排序，Spearman 为 0.9736、0.9868、0.9736。按训练成本 $6ND$ 的诊断预算 $10^{20}$、$10^{21}$ FLOPs，在预算真正筛掉候选的 6 组中，B1 所选离散模型与实际最低 Loss 模型 5 组一致；RefinedWeb 的 $10^{21}$ 组失败，实际 Loss regret 为 0.070515。
 
 这是**真实公开数据对 $N,D$ 子结构的部分外测**。它没有 A4 17 域配比、可对齐 B7 的质量 $Q$ 或题面质量投入成本，且 OpenLM 与 Pythia 的绝对 Loss 坐标不同。因此完整跨附件 $N,D,Q,p$ 真实最优目前不能由这些公开记录验证；也不必为了赛题条件作答虚构配对数据或拼接不同来源的 Loss。可检验的未来条件是在同一可比训练体系记录 $N,D,p,Q$ 和共同验证 Loss，包含预算内多个竞争配置。
 
 ## 8. 复核与结论
 
-CYJ v8 的 18 组冻结接口样例已在 CHM 本机重放通过；CHM 固定策略中预算解与独立 SLSQP 的 Loss 差 $<10^{-8}$，固定策略使用浮点凸性下界，自由原生 $Q_B$ 模式的最大目标间隙约 $10^{-7}$。所有表逐格检查支持域、质量下限、三成本和、预算、有限性与条件性标记。`outputs/Q3/upstream_manifest.json` 固定 CYJ v8/Q1/B1/B7 身份、结果和代码哈希；其余详细审查见 `outputs/Q3/REVIEW.md`。
+CYJ v8 的 18 组冻结接口样例已在 CHM 本机重放通过；CHM 固定策略中预算解与独立 SLSQP 的 Loss 差 $<10^{-8}$，固定策略使用浮点凸性下界，自由原生 $Q_B$ 模式的最大目标间隙约 $10^{-7}$。所有表逐格检查支持域、质量下限、三成本和、预算、有限性与条件性标记。`outputs/Q3/upstream_manifest.json` 固定 CYJ v8/Q1/B1/B7 身份、结果和代码哈希；其余详细审查见 `experiments/Q3/REVIEW.md`。
 
 **最终回答：**在明确质量代理、配比桥、$Q_0$、成本函数、已观测配方集和共同支持域的条件下，最优资源配置及其预算/上下文转移已经求出，可以作为赛题第三问的完整条件性答案。低预算配方与转移点对跨源假设敏感，应连同情景条件一起报告。既不要求也不声称联合 95% 预测区间；不把半合成 B7、公开 N/D 部分外测或优化器数值精度说成真实训练的无条件四变量最优保证。

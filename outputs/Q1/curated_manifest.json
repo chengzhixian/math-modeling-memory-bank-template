@@ -7,15 +7,20 @@
     "ANSWER.md": "2ea08feb1b2656328e8d0e67731e154c3cf7b0422540dea53fc1dc0e0b516d8f",
     "conflict_validation.json": "82a04c3b745d0852cde40fd20232f709b379ed0151d2e4af95b6bd8cd33bada9",
     "decision_panel.csv": "b9d5c40166ba16588c04947f513c0752ea2e094ae732a50dfbae7c938dfaa372",
+    "domain_mapping.csv": "960ff8094339473b0fd72c774774dbba3cae438f3fcb5b0fb4fdc8bf9e20006a",
     "domain_quality.csv": "ab7f13f9d0ff3d0683152d53933a89337cc3fadfefa9b2383772ea9fe3c2d976",
     "estimated_stress.json": "495b072fbb877df3844b96a0aa21fcebb565cccc35eaee99767b8c1aab7651c8",
     "hull_bounds.json": "969f810c0bf54f03492afc243091c339aaf4b27aed5c2164c186e651c7589acc",
     "interaction_coefficients_13_targets.json": "92e2e64976b7618626ef5d07b253794f105b3b1beeaacc989f13045e6c422b04",
     "interaction_feature_definition.json": "b9cd7b0de3b1a424e9c43e0b50714ce0d3656f467e67480e4d9ee76f79fb21d5",
+    "interaction_fold_stability.csv": "a2eb9112ee4f1382eea73b9cd426fa43ef7bdf438596f982c4faec401b26450e",
     "numerical_signoff.json": "53bade84ae14c48a906a31f21259525c4ee7206df179a19c6061fdab0f946f3b",
+    "qa_mapping.json": "f36a8e7046d379cd50df55d2eb5c4cf49759191d7445a41d662ce422a4e366bb",
     "quality_robustness.json": "a8b81d376e8ae16053dfa73d63e0ed8a87a01dffed2a5158ee38cc5ad76b490b",
-    "README.md": "9947b485f1c430b490827526dc315ef4925055d9162ad533949af32274785353",
+    "README.md": "7105e8195a4b0f1de3e8630e51dac75221d7465e592b305b206ef477fce9acd2",
+    "recipes_512.csv": "9744030382b8ac87fbd838a0b34580d0debff5ea3fb23f0b8846ca7c91f0742d",
     "refit_stability.json": "17497c0f7b89ead4c1f10caa27992f5d27cf76d3396a6fb0e969aeddf0a43f34",
+    "targetwise_oof.csv": "c8e1076e644a3439cdd71909605e84678555f1e7f5927cdc3d327b5581101aa4",
     "targetwise_validation.csv": "4412c4302d4e850f85fdc84568261f02df2eedb5e329c915baf19f41d9f8d0ae"
   }
 }

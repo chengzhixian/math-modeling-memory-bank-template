@@ -16,7 +16,7 @@
 
 主支持域为 `conv(A4)`。调用者必须声明 13 目标权重及质量政策。加权目标为 `sum(w[k]*r[k](p))`；minimax 保护目标为 `max(r[k](p))`（仅取正权重目标）。质量政策只对 direct 或 direct+near 覆盖质量有定义，不能说全 17 域质量达标。
 
-`src/chm/q1_multiloss_decision.py::solve` 使用五个交互域的空间分支定界和十个双线性项的 McCormick LP 松弛；每个解返回浮点数值的全局下界、实际可行配方上界、剩余间隙和节点数。四个等权主情景记录于 `outputs/chm/q1_v2_hull_bounds/bounds.json`；其 SHA256 为 `b27939f9d3894a810ee2ec4336f5583fca95e551e318963ac81bfbe77c0dae70`。数值上下界间隙均小于 0.001，尚非严格区间算术证明。备用 `choose_observed` 精确枚举 512 个已有配方，详见 `outputs/chm/q1_v2_decisions/`；必须保留支持集标记，不能把 index 当作连续凸包全局最优。
+`src/chm/q1_multiloss_decision.py::solve` 使用五个交互域的空间分支定界和十个双线性项的 McCormick LP 松弛；每个解返回浮点数值的全局下界、实际可行配方上界、剩余间隙和节点数。四个等权主情景记录于 `outputs/Q1/hull_bounds.json`；main 的 Git LF 文件 SHA256 为 `969f810c0bf54f03492afc243091c339aaf4b27aed5c2164c186e651c7589acc`。旧签核中 `b27939f9d3894a810ee2ec4336f5583fca95e551e318963ac81bfbe77c0dae70` 是相同内容的 Windows CRLF 工作区字节哈希。数值上下界间隙均小于 0.001，尚非严格区间算术证明。备用 `choose_observed` 精确枚举 512 个已有配方，详见 `outputs/Q1/decision_panel.csv`；必须保留支持集标记，不能把 index 当作连续凸包全局最优。
 
 | 情景 | 连续可行目标上界 | 连续全局下界 | 最佳单条 A4 index / 目标 |
 |---|---:|---:|---|
