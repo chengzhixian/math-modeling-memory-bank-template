@@ -1,0 +1,15 @@
+{
+  "pdf": "H:\\研究生数模\\Huawei_Cup_2026_Mathematical_Modeling_latex-main\\output\\pdf\\论文_R2精简融合版.pdf",
+  "physical_pages": 47,
+  "pdf_sha256": "845e1645ffd80c48cbc2e62cb93f1d22f5e14968fff8d1e3fabd9485faaa02bb",
+  "appendix_B_physical_page": 45,
+  "checks": "PASS: stable references, no missing glyphs/overflow/open conditional; Q3 and abstract contain no R2; negative Q1 transfer diagnostics only in appendix; retained evidence and B.1 numbering",
+  "source_sha256": {
+    "appendix_q1_transfer.tex": "77ba4edcfe7828354f0009b3562aa88b99385c7550a6be9777c7571e987840b2",
+    "chapter4.tex": "3d5e6a020f0a185efe88c4ff2ac8fc07f0686fca8b568d698fb95683d6ac0ee5",
+    "chapter5.tex": "b6bd86ae569f1949b513e72f8110af2e55b7dcc2ef06f1a749f75e296328ecf5",
+    "chapter6.tex": "3fcaf8f430bb95edf4429e84ca7b27d538ec47ac77a1d10c0af2e826214c492c",
+    "chapter7.tex": "818cdfa0640573526b2c6add9504c3a8601ca442dba1a728d50ce2bbf5d629bd",
+    "example.tex": "1e3a0697236a75b2fe1d316eec7c2ed6d3ce00f2e31ef845601569b905b9322f"
+  }
+}

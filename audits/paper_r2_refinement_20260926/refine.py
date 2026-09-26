@@ -42,8 +42,7 @@ paragraph('chapter5.tex','为补充解释误差相对于数据波动的大小',
     '5.3.1 质量项验证','保留有效 R²、相对误差和基线比较，删除重复的汇总 RMSE 数字')
 
 old=next(p for p in texts['chapter5.tex'].split('\n\n') if p.startswith('本问用 B1 同源训练轨迹估计'))
-new=old.replace('B1 的 $R^2=0.999999816$ 只说明同源轨迹的近乎精确重构，B7 留水平的 $R^2=0.9791$--$0.9794$ 则支持半合成数据内部的质量项预测；二者均不构成四变量联合模型的真实外部验证。',
-    'B1 与 B7 的验证分别支持同源规模关系与半合成数据内部的质量关系，尚不能代替四变量联合模型的真实外部验证。')
+new=r'''本问以 B1 同源训练轨迹建立 $N$--$D$ 双幂律，以 B7 半合成数据估计质量项，再通过条件代理映射引入质量评分与配比响应。在共同数据范围及给定连接假设下，模型给出边际效用、质量与规模的等 Loss 换算及领域联合效应，为资源配置提供输入。现有验证支持组件内部的关系，B4/B5 仅支持下降方向一致；质量与配比效应可能重叠，跨附件连接仍需成对训练实验校准。'''
 replace('chapter5.tex',old,new,'5.9 本问小结','小结归纳证据范围，不重复验证段数值')
 
 q3=next(p for p in texts['chapter6.tex'].split('\n\n') if p.startswith('本问输出的是给定预算下的优化决策'))
@@ -84,6 +83,12 @@ changes.append(dict(id=len(changes)+1,file='appendix_q1_transfer.tex',location='
 replace('example.tex',r'\input{appendix_q3_recipes}',
         '\\input{appendix_q3_recipes}\n\\input{appendix_q1_transfer}',
         '主文件附录入口','在配方附录 A 之后装配诊断附录 B')
+paragraph('chapter5.tex','表\\ref{tab:q2-output}汇总',
+    r'''表\ref{tab:q2-output}汇总了本问输出。下一问在给定代理映射与共同支持范围内，以式\eqref{eq:q2-general}为目标，结合成本比较配置。使用时须明确质量机制、验证域权重与配比范围；固定配比下的额外质量处理另计成本，跨附件连接仍需成对实验检验。''',
+    '5.8 本问结果与后续衔接','压缩已在前文交代的使用条件，消除小结末行单独占页')
+replace('chapter5.tex',r'\includegraphics[width=0.88\linewidth]{figures/Q2/06_bridge_sensitivity.pdf}',
+    r'\includegraphics[width=0.72\linewidth]{figures/Q2/06_bridge_sensitivity.pdf}',
+    '5.7 图：映射敏感性','缩小独立三点图的显示尺寸，让小结完整排在同一页；图内数据不变')
 
 for n in names:
     assert (ROOT/n).read_text(encoding='utf-8')==(REV/'before'/n).read_text(encoding='utf-8'),f'Concurrent edit: {n}'
