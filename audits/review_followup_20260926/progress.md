@@ -7,3 +7,4 @@
 - 2026-09-26：新增 `evidence.py`/`computed_evidence.json`；逐格复算 Q2 联合判据、Q4 q90/最高值及 Q3→能力样例。
 - 2026-09-26：修改四问论文/答复、摘要、数据利用与 AI 说明；按 TDD 修复 Q2 fixture 浮点尾数比较；刷新当前 main 发布/精选清单。
 - 2026-09-26：原始附件 2,014/564436312 SHA256 PASS；Q2 fixture 18 PASS，Q3+CYJ 20、Q1 7、Q4 v3 13 测试 PASS；Q4 45 项哈希和论文静态完整性 PASS。待提交推送后核对远端 SHA。
+- 2026-09-26：main 变更提交 `712cb9f` 并推送；`ls-remote origin refs/heads/main` 与本地 HEAD 同为 `712cb9fb44b49abe1d24b9d0af399518baebeccc`。
