@@ -6,3 +6,5 @@
 重要发现：无质量约束连续解的 Mathematics 预测 Loss −0.09010146768555932，原代理收益不能直接当训练性能结论。图06诊断保留并突出显示；详见 experiments/visualization/20260926-q1-redesign-review.md。
 没有修改冻结结果表或论文总装。下次按用户审美反馈继续精修；模型负Loss问题需单独明确修复范围并重算证书/下游。
 本机解释器 C:/Users/Administrator/.codex/skill-runtimes/scientific-figures/Scripts/python.exe；中文字体 Microsoft YaHei。Git推送和远端SHA核验见实际工具结果，不能以此文件预写成功。
+
+检查点：首轮图册提交 2ed697979cb792a45820108cb8e9e644410c8fff 已推送并实际核对远端SHA一致。随后补记字体字节与数值校验；离散index136同样预测负数学Loss −0.10703351961843871。最终记录随下一提交继续同步。

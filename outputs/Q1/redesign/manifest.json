@@ -17,7 +17,8 @@
     "interaction_feature_definition.json": "b9cd7b0de3b1a424e9c43e0b50714ce0d3656f467e67480e4d9ee76f79fb21d5",
     "refit_replicate_choices.csv": "99502e5ecef0971cd2905c38998cc171315d9b1f2b709afb94c8387c73134a35",
     "targetwise_oof.csv": "c8e1076e644a3439cdd71909605e84678555f1e7f5927cdc3d327b5581101aa4",
-    "targetwise_validation.csv": "4412c4302d4e850f85fdc84568261f02df2eedb5e329c915baf19f41d9f8d0ae"
+    "targetwise_validation.csv": "4412c4302d4e850f85fdc84568261f02df2eedb5e329c915baf19f41d9f8d0ae",
+    "recipes_512.csv": "9744030382b8ac87fbd838a0b34580d0debff5ea3fb23f0b8846ca7c91f0742d"
   },
   "figures": [
     {
@@ -134,9 +135,116 @@
     "07_stability": [],
     "08_pair_contributions": []
   },
-  "visual_review": "pending",
+  "visual_review": {
+    "status": "passed",
+    "rounds": 2,
+    "method": "All eight PNGs inspected; axis/annotation spacing corrected in 01 and 07; 06 negative-Loss warning highlighted; final 02 colorbar added."
+  },
   "python": "3.12.14",
   "numpy": "2.3.5",
   "pandas": "3.0.1",
-  "matplotlib": "3.11.2"
+  "matplotlib": "3.11.2",
+  "verification": {
+    "simplex": "pass",
+    "pair_order": "pass",
+    "reference_loss": "pass",
+    "objective_recalculation": "pass",
+    "prediction_csv": "pass",
+    "png_dpi": "pass",
+    "pdf_font_embedding": {
+      "01_quality": [
+        {
+          "name": "CPWGJX+MicrosoftYaHei",
+          "embedded_bytes": 56792
+        },
+        {
+          "name": "EXASBL+MicrosoftYaHei-Bold",
+          "embedded_bytes": 13652
+        }
+      ],
+      "02_conflict": [
+        {
+          "name": "HATXAS+MicrosoftYaHei",
+          "embedded_bytes": 55860
+        },
+        {
+          "name": "XXVDUV+MicrosoftYaHei-Bold",
+          "embedded_bytes": 14636
+        }
+      ],
+      "03_validation": [
+        {
+          "name": "EXGXHH+MicrosoftYaHei",
+          "embedded_bytes": 50424
+        },
+        {
+          "name": "CPKACV+MicrosoftYaHei-Bold",
+          "embedded_bytes": 16860
+        }
+      ],
+      "04_rank_stress": [
+        {
+          "name": "YHHTUY+MicrosoftYaHei",
+          "embedded_bytes": 48240
+        },
+        {
+          "name": "KKOTKT+MicrosoftYaHei-Bold",
+          "embedded_bytes": 17992
+        }
+      ],
+      "05_recipes": [
+        {
+          "name": "DIZEHW+MicrosoftYaHei",
+          "embedded_bytes": 65456
+        },
+        {
+          "name": "CHFAFM+MicrosoftYaHei-Bold",
+          "embedded_bytes": 14772
+        }
+      ],
+      "06_policy_results": [
+        {
+          "name": "FTXBBR+MicrosoftYaHei",
+          "embedded_bytes": 58256
+        },
+        {
+          "name": "FNHBHI+MicrosoftYaHei-Bold",
+          "embedded_bytes": 15724
+        }
+      ],
+      "07_stability": [
+        {
+          "name": "BITCHA+MicrosoftYaHei",
+          "embedded_bytes": 60696
+        },
+        {
+          "name": "DCZHEZ+MicrosoftYaHei-Bold",
+          "embedded_bytes": 16400
+        }
+      ],
+      "08_pair_contributions": [
+        {
+          "name": "ILWQID+MicrosoftYaHei",
+          "embedded_bytes": 52460
+        },
+        {
+          "name": "EAVNWS+MicrosoftYaHei-Bold",
+          "embedded_bytes": 15120
+        }
+      ]
+    },
+    "scipilot_pdf_warning": "Type0 wrapper warning reviewed; embedded TrueType data confirmed",
+    "nonphysical_prediction": {
+      "target": "dm_mathematics",
+      "scenario": "unconstrained weighted continuous hull",
+      "predicted_loss": -0.09010146768555888,
+      "status": "flagged; model not repaired"
+    },
+    "nonphysical_observed_candidate": {
+      "index": 136,
+      "target": "dm_mathematics",
+      "predicted_loss": -0.10703351961843871,
+      "implication": "29/30 refit stability does not establish physical validity"
+    }
+  }
 }
