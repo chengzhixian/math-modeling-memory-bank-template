@@ -20,3 +20,7 @@
 1. 本机 A1 仍是 Git LFS 134 字节指针；`git lfs pull` 因 GitHub LFS HTTPS 连接超时失败，不能在本机重跑全量 A1–A3 或完整 2,014 文件校验。**chm** 在有网络的计算环境先拉取 LFS、执行 `scripts/verify_raw_data.ps1`，再复跑冻结 Q1 输出并比较 SHA。
 2. 本机项目 Python 缺 SciPy，不能调用 Q1Interface；**chm** 在既有可运行环境复验 `release_q1_v2.py`、`q1_hull_bounds_v2.py`、`audit_q1_v2_signoff.py`，核对公式、质量政策和新表格。
 3. **集成人** 在总稿使用此章节时，按最终章序调整编号，把 `q1_references.bib` 条目去重纳入公共书目，并完成 2026 年官方格式与匿名要求核验。第二章/第三章尚未完成，本章不引用二者。
+
+## 远端检查点状态
+
+本次论文与审查文件已形成本地提交 `f92ea8b`。提交前执行 `git fetch origin --prune` 失败，原因是 GitHub HTTPS 连接被重置；随后对当前 `codex/problem-restatement-20260926` 分支执行非强制 `git push`，仍因 `github.com:443` 无法连接而失败。因此本地提交（连同本分支此前两个未推送提交）**尚未远端备份**；下次网络可用时先 fetch 核对远端进度，再非强制 push 并以 `ls-remote` 对齐 SHA。不得将本地 commit 表述成上传成功。
