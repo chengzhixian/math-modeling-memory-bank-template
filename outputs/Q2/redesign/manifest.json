@@ -1,0 +1,96 @@
+{
+  "source_main": "a19039b5d11c91cf32e301dc85b2f4d50b5a75b7",
+  "model": "cyj.ndqp.scenario.v8",
+  "inputs": {
+    "data\\raw\\real_attachments\\B_scaling_laws\\pythia_training_log_existing.csv": "529a59644b0f57bf3a76037838b614bfedc35e58bb26b93052e34ffc63e454c2",
+    "outputs\\Q2\\b7_quality_extension.json": "30819a5931b0552c1ef207f52f489f9d4ecaf427166bec25a98ce7319ac3d07b",
+    "outputs\\Q2\\domain_pair_reference.json": "042eadf3c0a14c143a4f5976398e80d974a542999ea2924308e6b3ed09f391b9",
+    "outputs\\Q2\\domain_pair_substitution.csv": "0f3315dbf416b3612e8a33e79094436cd970d7c59f7bfa01520e39b554263099",
+    "outputs\\Q2\\marginals_elasticities.csv": "96a8815eb1bd4162bfba692a2651fa952b0c7bc16a04a3fbf9273f757090109a",
+    "outputs\\Q2\\model_coefficients.json": "3e0e10b845035f325d676660813f79908ba48014e1291598227f60a039832ada",
+    "outputs\\Q2\\model_definition.json": "e726af5caac50e14730a89b2b8ff4601b014aae06826685788595fb2cc005179",
+    "outputs\\Q2\\quality_bridge_sensitivity.csv": "f5b68e9207be61a473f91bbd8023045aa599927f99e64af9aee17060935354c9",
+    "outputs\\Q2\\quality_scale_local_tradeoff.csv": "7bb21f2b00b15bc555d25f1c41bab488808722de3de5f6cb18afd42d12ddeaee"
+  },
+  "figures": [
+    {
+      "stem": "01_baseline",
+      "caption": "冻结五参数骨架：$L_0 = E + A N^{-\\alpha} + B D^{-\\beta}$；同源 RMSE = 0.0001466。\n此图不表示真实跨模型家族的泛化精度；残差纵轴放大 1,000 倍。",
+      "size_inches": [
+        7.2,
+        4.8
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "02_scale_surface",
+      "caption": "范围：N ∈ [0.070542, 11.965825]，D ∈ [10, 299.893]；双对数坐标。\n此图仅为 B1 骨架，不包含质量项和配比项；等值线是模型预测，不是观测分组。",
+      "size_inches": [
+        7.2,
+        4.8
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "03_quality_validation",
+      "caption": "横线为各轴外层折的算术均值；散点不是独立实验重复，不作置信区间解释。\nB7 为 450 条半合成记录；此验证支持该条件形式，不证明真实跨数据源质量因果效应。",
+      "size_inches": [
+        7.2,
+        4.8
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "04_elasticities",
+      "caption": "曲线连接三个有序规模情景；正值表示该变量局部增加时，预测 Loss 下降。\n质量 q 为归一化工程代理；相同百分比变化不代表相同实际成本，也不表示因果优劣。",
+      "size_inches": [
+        7.2,
+        4.8
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "05_quality_tradeoff",
+      "caption": "所有新规模解均在正式支持域；比较质量代理的绝对增量，而非 5% / 10% 的相对增量。\n这是固定 p 的假想代理质量干预；不能解释为实际清洗数据即可节省相同比例算力。",
+      "size_inches": [
+        7.2,
+        4.8
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "06_bridge_sensitivity",
+      "caption": "图中范围为情景差异，不是统计置信区间；质量映射覆盖约 58.1%，未映射约 41.9%。\n质量与配比项的重复计数尚未识别；不能把默认映射当作已验证的跨数据源规律。",
+      "size_inches": [
+        7.2,
+        4.8
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "07_local_transfers",
+      "caption": "参考点为 512 个 A4 配方的均值，N = 1B、D = 100B、13 个目标等权；ε 为绝对份额。\n136 对均可双向局部转移；颜色不是有限转移收益，且不同方向的可行步长不同。\n这是条件模型的局部方向，不是领域因果效应，也不能沿同一颜色任意大幅调整配方。",
+      "size_inches": [
+        7.2,
+        7.3
+      ],
+      "dpi": 300
+    }
+  ],
+  "layout_audit": {
+    "01_baseline": [],
+    "02_scale_surface": [],
+    "03_quality_validation": [],
+    "04_elasticities": [],
+    "05_quality_tradeoff": [],
+    "06_bridge_sensitivity": [],
+    "07_local_transfers": []
+  },
+  "visual_review": "vectors exported after manual preview review",
+  "versions": {
+    "python": "3.12.14",
+    "matplotlib": "3.11.2",
+    "numpy": "2.3.5",
+    "pandas": "3.0.1"
+  }
+}
