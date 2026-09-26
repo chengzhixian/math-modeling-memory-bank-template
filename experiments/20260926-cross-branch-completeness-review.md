@@ -2,7 +2,7 @@
 
 ## A. 范围与版本
 
-按根目录 `REPOSITORY_REVIEW_PROTOCOL.md` 的 Stage 1–18 复查起点远端 main `2c7efccc53f367d20ac5db79cf569d87b31dc337`、CHM `integration/chm-q1-clean-20260923@c052b6918c3f77a2285622521d8abb1b429513be`、CYJ 起点 `team/cyj-scaling@74e678e319b58e2aab230a7b7233fa53f3053fa5`。审查期间 CYJ 前进到 `53b4fb51fc697d4e1584502b1fe66af40dd5242f`，新增 Q3 独立条件验收，已补充审查。CYJ Q2 冻结数值生产者仍为 `fd2dbb3b2002983430329cdb2ec6a275c2eed4f6`。本次在隔离工作树实施补录，不读取原本本机暂存区作为研究来源。对照文件树、冻结 manifest、论文 Q1–Q3 段落、题面可见正文和交接；只取核心证据，不合并个人分支。
+按根目录 `REPOSITORY_REVIEW_PROTOCOL.md` 的 Stage 1–18 复查起点远端 main `2c7efccc53f367d20ac5db79cf569d87b31dc337`、CHM `integration/chm-q1-clean-20260923@c052b6918c3f77a2285622521d8abb1b429513be`、CYJ 起点 `team/cyj-scaling@74e678e319b58e2aab230a7b7233fa53f3053fa5`。审查期间 CYJ 前进到 `53b4fb51fc697d4e1584502b1fe66af40dd5242f`，新增 Q3 独立条件验收，已补充审查；其后 `d5e05cedeba3b86abe4ab624239504a21d1abee4` 仅补远端同步交接和成员记忆，无新的数值文件。CYJ Q2 冻结数值生产者仍为 `fd2dbb3b2002983430329cdb2ec6a275c2eed4f6`。本次在隔离工作树实施补录，不读取原本本机暂存区作为研究来源。对照文件树、冻结 manifest、论文 Q1–Q3 段落、题面可见正文和交接；只取核心证据，不合并个人分支。
 
 ## B. 数据、变量与证据链
 
