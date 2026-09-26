@@ -10,9 +10,11 @@
 
 A1 含 51,230 条质量记录；A2、A3 分别给出 arxiv 的 17,523 条和 github 的 203,752 条扩展记录。A4+A5 是 512 组 1M 配方及对应的 13 维 Loss；A6+A7、A8+A9、A10+A11 分别为 1M、60M、1B 检验组；A12--A15 在数据说明中明确属于 estimated/extrapolated，只用于压力测试。配比表和 Loss 表均按 \texttt{index} 一一对应。
 
-需要特别限定的是，A4--A15 的配比表只给出 17 个比例，Loss 表只给出 13 个目标域 Loss；与这些配方实验相对应的训练数据量 $D$ 并未作为字段提供。模型规模 $1\mathrm{M}$、$60\mathrm{M}$、$1\mathrm{B}$ 仅由不同实验文件组标识。因此第一问可以检验“小模型配比代理在不同实验组上的排序是否保持”，但不能仅凭附件 A 识别连续的 $N$--$D$ 标度律，也不能把三个离散实验组拟合成普适的配比尺度衰减函数。基于这一可识别性边界，A6--A11 在本问中只承担冻结模型后的 held-out 验证，不再用于拟合额外的跨规模参数。
+需要特别限定的是，A4--A15 的配比表只给出 17 个比例，Loss 表只给出 13 个目标域 Loss；与这些配方实验相对应的训练数据量 $D$ 并未作为字段提供。模型规模 $1\mathrm{M}$、$60\mathrm{M}$、$1\mathrm{B}$ 仅由不同实验文件组标识。因此第一问可以检验“小模型配比代理在不同实验组上的排序是否保持”，但不能仅凭附件 A 识别连续的 $N$--$D$ 标度律，也不能把三个离散实验组拟合成普适的配比尺度衰减函数。A6--A11 不参与最终模型系数和正则强度拟合，也不用于拟合额外的跨规模参数。由于前期曾查看这些检验组并据此研究模型形式，其比较结果是外部样本上的已观察证据，而非完全未触碰的最终盲测；模型族选择另用 A4+A5 的嵌套交叉验证核对。
 
-\subsection{A 侧综合质量代理}
+本问由此分为两条相互关联的求解线：在质量信号上冻结样本评分规则，并以非重叠扩展记录检查领域评分和指标分歧；在配比实验上先建立逐目标域的 1M Loss 代理，再于实际观测配方的凸包内求解带明确质量政策的条件性配方。最终分别回答质量评价、冲突消解和配比效应三项要求。
+
+\subsection{质量数据处理与 A 侧综合质量代理}
 
 A1--A3 为每条文本提供 22 个量纲和含义不同的质量信号，却没有综合质量真值。本文先把列表压缩为标量，再在 A1 建立统一尺度和方向，形成可复现的描述性质量代理；由样本评分聚合为领域评分，最后用 A2/A3 全量扩展记录检验其迁移表现。该代理表示相对于 A1 的质量坐标，不能解释为客观质量标签。
 
@@ -105,10 +107,12 @@ github & 10000 & $-0.4854$ & $-0.5195$ & 7 & [$-0.5117$, $-0.4602$] \\
 \label{fig:q1_quality}
 \end{figure}
 
+图\ref{fig:q1_quality}的横轴是 A1 固定规则下的标准化评分，误差线仅表示条件抽样区间。book 和 arxiv 位于七域前列，github 位于末位；图中的分离不能解释为人工质量标签上的准确率。表\ref{tab:q1_quality}同时列出各域样本量，使 book 的小样本条件与排名一同呈现。
+
 完整 A2 arxiv 的 $Q_{A,d}$ 为 2.7253，A3 github 为 $-0.5055$；去重后的对应中位数为 2.7279 与 $-0.5063$。主评分保留全部 22 项。五个统计指标在 LOO 中出现方向翻转，其中全局 $|\rho|$ 最小的是大写字母行占比（0.0283）和高频三元字符占比（0.0406）；这只说明相对于本文锚点的单调方向证据较弱。删除全部五个翻号指标的压力测试使七域排序 Spearman 降到 0.8929；22 项完全等权为 0.9643，argmax 压缩为 1.0000。固定规则下的窄区间因此不能代替方法选择的稳健性检验。
 
 本轮另对 A1 按域固定分为 70\% 方向训练集和 30\% 排名评估集；前者分层重抽 100 次并重估 14 个统计字段的符号，后者始终不用于该次符号拟合。100 次中七域排序及各字段符号均未变；但留一领域已有五字段翻号，且八种合理评分规则的排名范围为 book/arxiv 第 1--2、c4/github 第 5--7。因此将固定规则下的抽样区间与方法选择导致的排名包络分别报告，后者不称为 95\% 置信区间。book 仅 171 条，尤其不能将评分当作外部质量真值。
-\subsubsection{指标冲突与扩展集复核}
+\subsection{质量指标冲突的定义、消解与检验}
 
 指标冲突不再引入额外的人造“冲突强度函数”，而直接使用标准的 Spearman 秩相关。对方向统一后的任意两指标 $j$、$r$，在质量域 $d$ 内计算
 \begin{equation}
@@ -141,16 +145,17 @@ github & DSIR wiki / 大写字母行占比 & $-0.3908$ \\
 
 \paragraph{冲突成因与冲突感知评价。} 对复制性冲突边，比较总体与七个 A1 域内的相关系数及校正后的显著性。若多个域内仍显著负相关，记为跨域重复模式；若仅总体负相关，记为领域混合模式；仅少数域显著则记为领域依赖模式。这是观测数据的模式分类，不能证明因果取舍。专业性评分与平均词长的总体相关为 $-0.4994$，七个域内均显著负相关；高频二元、三元字符占比的总体相关为 $-0.4844$，七域内也均显著负相关。指标语义和定向仍需谨慎解释。对最强冲突边另比较去除双侧各 1\% 极端值前后的相关，详见可复现结果表。
 
-最强的 10 条边在同时去除两指标两侧各 1\% 极端记录后仍全部为负；例如专业性评分与平均词长由 $-0.4994$ 变为 $-0.4990$，主要负相关不能归因于少数极端值。原 $Q_{A,i}$ 仍是质量代理。令 $\mathcal E_c$ 为 55 条复制性冲突边，以总体相关绝对值为权重，定义同一样本的指标分歧度
+最强的 10 条边在同时去除两指标两侧各 1\% 极端记录后仍全部为负；例如专业性评分与平均词长由 $-0.4994$ 变为 $-0.4990$，主要负相关不能归因于少数极端值。原 $Q_{A,i}$ 仍是质量代理。令 $\mathcal E_c$ 为 55 条复制性冲突边，$\rho_{jr}$ 为指标 $j,r$ 在 A1 总体的 Spearman 相关，以 $|\rho_{jr}|$ 为权重定义同一样本的指标分歧度
 \begin{equation}
-D_i=\frac{\sum_{(j,k)\in\mathcal E_c(i)}|\rho_{jk}|\,|z^+_{ij}-z^+_{ik}|}{\sum_{(j,k)\in\mathcal E_c(i)}|\rho_{jk}|},
-\qquad \mathcal E_c(i)=\{(j,k)\in\mathcal E_c:z^+_{ij},z^+_{ik}\text{均可用}\}.
+D_i=\frac{\sum_{(j,r)\in\mathcal E_c(i)}|\rho_{jr}|\,|z^+_{ij}-z^+_{ir}|}{\sum_{(j,r)\in\mathcal E_c(i)}|\rho_{jr}|},
+\qquad \mathcal E_c(i)=\{(j,r)\in\mathcal E_c:z^+_{ij},z^+_{ir}\text{均可用}\}.
+\label{eq:q1_disagreement}
 \end{equation}
 无可用边时 $D_i$ 记为缺失；主要评价结果是二维 $(Q_{A,i},D_i)$，不将高分歧直接扣为低质量。A1 的 book、arxiv、github、c4、commoncrawl、wikipedia、stackexchange 七域 $D$ 中位数分别为 2.580、2.292、1.999、1.903、1.512、1.471、1.202；去重扩展集中的 arxiv 和 github 分别为 2.332 和 2.003。四象限以 A1 的 $Q_A$ 与 $D$ 中位数划分，全指标标准差作为敏感性对照。$Q_A$ 和 $D$ 均为附件 A 坐标中的代理，不直接等同于 B 侧质量评分。
 
 \paragraph{冲突后的处理与原文核查。} 冻结 A1 的 $Q_A$ 中位数 0.0273 和 $D$ 第 75 百分位 2.0423。$D$ 高于阈值的记录进入复核标记，不直接减去质量分；低 $Q_A$ 只标记低优先级，不自动剔除。无可用冲突边时 $D$ 记缺失并触发复核，不伪装为零。A1 的保留、保留并复核、低优先级、低优先级并复核分别有 20384、5231、18038、7577 条；冻结阈值在去重 arxiv/github 扩展集的复核触发率分别为 69.04\% 和 47.08\%，说明阈值跨域触发率有明显变化。按域及 $(Q,D)$ 四象限固定哈希抽取 27 条，逐条以 ID、原始行号和内容 SHA 回读原文而不发布全文。arxiv 的一条低 $Q$ 高 $D$ 记录主要含 \TeX{} 宏定义，提示格式冲突；book 的一条高 $Q$ 高 $D$ 记录以版权信息开头且极长，提示高评分也需结构审查；c4 的低 $Q$ 低 $D$ 公告文本有明确事务信息，提示低分歧、低综合分不等于无使用价值。这些只是可复核案例，不是独立人工标签，也不能给出分类准确率。55 条边在 A1 选择并在去重 A2/A3 复制；各范围分别做 FDR 校正，不声称最终边集具有联合 5\% FDR 保证。
 
-\subsection{17 域配比与目标域 Loss 的关系}
+\subsection{17 域配比与目标域 Loss 的建模}
 
 \subsubsection{组成约束与逐目标域线性基线}
 
@@ -285,6 +290,8 @@ m_k(\boldsymbol p')-m_k(\boldsymbol p)
 \label{fig:q1_interaction}
 \end{figure}
 
+图\ref{fig:q1_interaction}的纵轴是目标验证域，横轴是训练域，颜色仅在每一行内部显示相对系数。各行的颜色变化说明同一训练域对不同目标域的\emph{线性对比关联}并不相同；颜色强弱不能跨行直接比较实际 Loss 改善，更不能替代下文交互模型的配方求解。
+
 \subsubsection{交互主模型与多目标配方决策}
 
 线性 Ridge 提供透明基线，但不能表达训练域之间的非加性关联。正式 Q1 配比预测改用每个目标域一个二阶交互代理。先在 A4 归一化配方上按方差选出五个训练域，从中构造十个二元乘积项；这一步不使用 Loss 标签。对第 $k$ 个验证域，主模型写成
@@ -299,13 +306,53 @@ m_k(\boldsymbol p')-m_k(\boldsymbol p)
 
 主接口输出的 A 侧配比效应为 $m_k^{\mathrm{int}}(\boldsymbol p)=\widehat L^{\mathrm{int}}_{k,1M}(\boldsymbol p)-\widehat L^{\mathrm{int}}_{k,1M}(\boldsymbol p_{\mathrm{ref}})$。用于多目标决策的无量纲分数为 $r_k(\boldsymbol p)=m_k^{\mathrm{int}}(\boldsymbol p)/\widehat L^{\mathrm{int}}_{k,1M}(\boldsymbol p_{\mathrm{ref}})$；分母是该交互模型自身的正参考 Loss，只服务于 A 侧目标加权，不是 B 侧 Loss 标定。交互项使边际效应随当前配方变化；可行的两域转移斜率为 $\partial_j\widehat L_k^{\mathrm{int}}-\partial_r\widehat L_k^{\mathrm{int}}$，单个 $\gamma_{k,uv}$ 的符号不具有独立因果解释。
 
-主决策支持域是 A4 已观测配方的凸包 $\mathcal P_A=\operatorname{conv}\{\boldsymbol p_1,\ldots,\boldsymbol p_{512}\}$。给定明确的权重 $\boldsymbol w\in\Delta^{12}$，求解 $\min_{\boldsymbol p\in\mathcal P_A}\sum_kw_kr_k(\boldsymbol p)$；保护最差域的情景求解 $\min_{\boldsymbol p\in\mathcal P_A}\max_{k:w_k>0}r_k(\boldsymbol p)$。质量政策仅在 A16 direct 或 direct+near 映射域上要求覆盖份额及条件质量不低于参考配方，主值使用 A1 sample；其余 11 个域的 $Q_A$ 保持未知。具体政策与权重由调用者显式声明。
+主决策支持域是 A4 已观测配方的凸包 $\mathcal P_A=\operatorname{conv}\{\boldsymbol p_1,\ldots,\boldsymbol p_{512}\}$。给定非负且和为 1 的 13 域权重 $\boldsymbol w$，等权情景取 $w_k=1/13$；其含义是每个目标域的\emph{相对} Loss 改善同等重要，而非把不同水平的原始 Loss 直接相加。保护最差目标域时，则最小化各有效域相对效应的最大值。
 
-二阶项使凸包内目标一般非凸，旧 Ridge 的线性规划顶点最优论证不再适用。本文将十个乘积项置于 McCormick 线性松弛中，对五个相关配比坐标做空间分支定界：每个节点的线性规划给出下界，其凸组合权重给出实际可行配方及上界。等权目标在无约束、direct、direct+near 三政策下的可行目标分别为 $-0.11511$、$-0.10299$、$-0.09701$；对应的全局下界分别为 $-0.11607$、$-0.10343$、$-0.09776$。最差域保护的无约束可行目标为 $-0.01978$、下界为 $-0.02078$。这四项数值上下界间隙均小于 0.001；它们是浮点线性规划的数值证据，不是严格区间算术证明。完整配方及节点数见 \texttt{outputs/chm/q1\_v2\_hull\_bounds/bounds.json}。
+质量约束只在 A16 中有直接依据的映射域上定义。令 $M$ 是政策选中的训练域集合：direct 政策含 3 域，direct+near 政策含 6 域；$Q_{A,j}$ 是这些域依 A16 映射取得的 A1 样本主评分。参考配方在该集合的覆盖份额及条件平均质量分别为
+\begin{equation}
+c_M^{\rm ref}=\sum_{j\in M}p_{{\rm ref},j},\qquad
+\bar Q_M^{\rm ref}=\frac{\sum_{j\in M}p_{{\rm ref},j}Q_{A,j}}{c_M^{\rm ref}}.
+\label{eq:q1_quality_reference}
+\end{equation}
+令 $c_M(\boldsymbol p)=\sum_{j\in M}p_j$。为使增加未知质量域份额或降低已覆盖部分的条件质量不能被误判为改进，要求 $c_M(\boldsymbol p)\ge c_M^{\rm ref}$ 且 $\sum_{j\in M}p_j(Q_{A,j}-\bar Q_M^{\rm ref})\ge0$。后式在前式成立时等价于已覆盖部分的条件平均质量不低于参考值；无约束政策不施加这两条条件。11 个 inferred 域没有被补成质量真值。
 
-为提供可直接使用的单条 A4 配方，另精确枚举 512 个已观测方案。在等权无约束、direct、direct+near 下分别选 index 136、301、172；最差域保护选 index 477，arxiv 单目标选 index 3。质量政策下连续凸组合明显改善有限集合目标，因此这些 index 只是备用离散方案；完整 45 个情景见 \texttt{outputs/chm/q1\_v2\_decisions/}。
+于是，给定权重与映射政策的完整条件性决策模型为
+\begin{equation}
+\begin{aligned}
+\min_{\boldsymbol p,\boldsymbol\omega}\quad &F_{\boldsymbol w}(\boldsymbol p)=\sum_{k=1}^{13}w_k r_k(\boldsymbol p)\\
+\text{s.t.}\quad &\boldsymbol p=\sum_{i=1}^{512}\omega_i\boldsymbol p_i,\quad
+\omega_i\ge0,\quad\sum_{i=1}^{512}\omega_i=1,\\
+&c_M(\boldsymbol p)\ge c_M^{\rm ref},\quad
+\sum_{j\in M}p_j(Q_{A,j}-\bar Q_M^{\rm ref})\ge0
+\quad\text{（采用质量政策时）}.
+\end{aligned}
+\label{eq:q1_complete_decision}
+\end{equation}
+其中 $\omega_i$ 是 A4 第 $i$ 个观测配方的凸组合权重，支持域约束同时保证 $p_j\ge0$ 与 $\sum_jp_j=1$。最差域情景把式\eqref{eq:q1_complete_decision}中的目标替换为 $\max_{k:w_k>0}r_k(\boldsymbol p)$，其余约束相同。这些质量条件是明确声明的决策政策，不是题目给出的硬性门槛或数据估计的全域质量约束。
 
-任务没有给出 13 域的唯一外生权重，且等权 index 136 的未知质量域占比为 0.5686，故不宣称它在所有目标和完整质量口径下全局最优。进一步在 214 个权重情景上的先前稳定性审计显示模型和质量政策均可改变配方；该审计使用共同的旧 Ridge 参考 Loss 进行模型比较，不能与新接口的交互自身归一化结果混写。Q1 v2.0 的生产者清单为 \texttt{interfaces/chm/q1\_interface\_v2.json}。
+二阶项使凸包内目标一般非凸，旧 Ridge 的线性规划顶点最优论证不再适用。本文将十个乘积项置于 McCormick 线性松弛中，对五个相关配比坐标做空间分支定界：每个节点的线性规划给出下界，由凸组合权重重建真实配方并计算可行上界；对最差域目标增加上图变量。最宽的交互坐标区间被二分，直到当前上下界间隙不超过 $10^{-3}$ 或达到节点上限。表\ref{tab:q1_decision_bounds}给出四个已完成的条件性情景；完整 17 维配方及节点数保存在求解输出中。
+
+\begin{table}[htbp]
+\centering\small
+\caption{A4 凸包内 Q1 v2.0 的条件性配方求解；目标为无量纲相对 Loss 变化，越小越好}
+\label{tab:q1_decision_bounds}
+\begin{tabular}{lrrrr}
+\toprule
+目标及质量政策 & 数值下界 & 可行目标上界 & 间隙 & 最优观测配方 index \\
+\midrule
+13 域等权，无质量约束 & $-0.116074$ & $-0.115112$ & $0.000962$ & 136 \\
+13 域等权，direct & $-0.103433$ & $-0.102992$ & $0.000441$ & 301 \\
+13 域等权，direct+near & $-0.097760$ & $-0.097010$ & $0.000750$ & 172 \\
+最差目标保护，无质量约束 & $-0.020780$ & $-0.019784$ & $0.000996$ & 477 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+四项间隙均不超过预设的 $0.001$，但下界来自浮点线性规划，不能当作严格区间算术证明。与无质量约束相比，加入 direct 或 direct+near 政策后等权可行目标上界分别上升约 $0.0121$ 和 $0.0181$，反映所声明质量限制与相对 Loss 优化之间的取舍；这不是质量提高必然增加真实 Loss 的因果结论。完整 17 维配方及约束残差随模型结果文件提交。
+
+为提供可直接使用的单条 A4 配方，另精确枚举 512 个已观测方案。在等权无约束、direct、direct+near 下分别选 index 136、301、172；最差域保护选 index 477，arxiv 单目标选 index 3。质量政策下连续凸组合明显改善有限集合目标，因此这些 index 只是备用离散方案；其他权重情景的配方列于结果附件。
+
+任务没有给出 13 域的唯一外生权重，且等权 index 136 的未知质量域占比为 0.5686，故不宣称它在所有目标和完整质量口径下全局最优。进一步在 214 个权重情景上的先前稳定性审计显示模型和质量政策均可改变配方；该审计使用共同的旧 Ridge 参考 Loss 进行模型比较，不能与新接口的交互自身归一化结果混写。正式配比代理版本为 Q1 v2.0。
 \subsubsection{文献函数形式与本题主代理的关系}
 
 Data Mixing Laws 在固定模型规模与训练步数下采用
@@ -320,21 +367,22 @@ c_k+a_k
 \end{equation}
 描述逐验证域 Loss\cite{datamixinglaws2025}。本文的交互主模型与该式都保留 13 个验证域，但函数族不同。现有证据比较的是本文二阶交互与线性 Ridge；文献中的指数形式未在相同训练和检验协议下拟合，因此不宣称它优于或劣于当前主模型。
 
+\subsection{配比模型的检验与适用范围}
 \subsubsection{冻结代理后的跨实验组排序验证}
 
 问题一需要判断 A4+A5 学到的配方关系在附件提供的其他实验组中是否仍有信息。由于不同规模的绝对 Loss 水平明显变化，且附件 A 不提供与配方实验对应的 $D$，验证指标采用只依赖排序的 Spearman 相关，而不拟合额外的尺度函数。对实验组
 $\ell\in\{1\mathrm{M},60\mathrm{M},1\mathrm{B}\}$，定义
 \begin{equation}
-\rho_{k,\ell}^{\mathrm{pred}}
+\rho_{k,\ell}^{(h)}
 =
 \rho_{\mathrm S}
 \left(
-\widehat L_{k,1M}(\boldsymbol p_i^{(\ell)}),
+\widehat L^{(h)}_{k,1M}(\boldsymbol p_i^{(\ell)}),
 L_{ik}^{(\ell)}
 \right).
 \label{eq:q1_rank_validation}
 \end{equation}
-这里的 $\widehat L_{k,1M}$ 始终是由 A4+A5 冻结得到的同一代理；A6--A11 只用于一次性检验。
+这里 $h\in\{\mathrm{Ridge},\mathrm{int}\}$ 指线性基线或二阶交互主模型，二者均由 A4+A5 拟合后固定，再分别用于三个检验组。检验组不进入这两套最终系数的拟合；如前所述，模型族曾受早期检验观察影响，故这些结果不称为最终盲测。
 
 表\ref{tab:q1_rank}保留此前线性基线的排序结果；交互主模型在 1M、60M、1B 真实检验组的逐目标 Spearman 中位数分别为 0.8512、0.8474、0.7912，逐目标记录见 Q1 v2 验证表。两个模型在 1B 的配方支持与绝对 Loss 误差限制相同。
 
@@ -359,6 +407,8 @@ L_{ik}^{(\ell)}
 \caption{线性 Ridge 基线在三个真实检验组上的逐目标域排序表现。1B 使用不同的配方集合，因此其变化不能解释为纯参数规模效应。}
 \label{fig:q1_rank}
 \end{figure}
+
+图\ref{fig:q1_rank}的横轴为 1M、60M、1B 检验组，纵轴是 13 个目标域的 Spearman 相关。线性基线在 1B 组的相关分布较低；交互主模型在该组的中位数为 0.7912，但其配方支持发生变化，不能把两个组的差异仅归于参数规模。
 
 A6 与 A8 使用完全相同的 256 条配方，因此还可以不依赖任何代理，直接比较两个实验组的真实 Loss 排序：
 \begin{equation}
@@ -414,9 +464,28 @@ A16 中仅有 3 个 direct、3 个 near-direct 域映射，其余 11 个为 infe
   \item A6--A11 给出的跨实验组排序验证和 A12--A15 的 estimated/extrapolated 压力测试。
 \end{enumerate}
 
-下游条件复算显式固定 Q1 v2.0 的交互系数与参考 Loss、cyj 的 B7 参数以及 $\lambda=1,\eta=0$；在 $N=1$B、$D=100$B、$Q_B=0.5$、13 域等权条件下，三种质量政策的连续凸包可行配方对应条件 B7 Loss 约为 2.271859、2.302976、2.318334。它们附有 Q1 目标的数值上下界，详见 \texttt{outputs/chm/q2\_interaction\_scenarios\_v2/}；此项是 chm 侧按固定 cyj 参数的重算，cyj 的正式新版消费仍需显式锁定 v2.0 清单哈希。Q3 的 A 侧配方诊断已消费 v2.0，旧 Q3 结果不自动继承新版配方数值。
-
 附件 A 没有提供 $Q_A\leftrightarrow Q_{\mathrm{score}}$ 的成对标定样本，也没有证明任一 Q1 目标域 Loss 与 B1 的 \texttt{val\_loss} 属于同一数值坐标。因此第一问不提供 $Q_A\to Q_{\mathrm{score}}$ 的数值映射，不把 $m_k(\boldsymbol p)$ 直接加到 B1 Loss，也不提供由 A 数据拟合的 $\eta$、$b_k(N)$ 或其他连续尺度传递参数。具体地，问题二条件情景中的桥接形式 $L_B=L_{B7}[1+\lambda(N/1\mathrm{B})^{-\eta}\sum_kw_km_k(\boldsymbol p)/L_{A,k,\mathrm{ref}}]$ 在参考配方满足 $m_k(\boldsymbol p_{\rm ref})=0$；因此任意 $\lambda,\eta$ 都复现同一 B 侧基线，单一 $N=1\mathrm{B}$ 情景又使 $\eta$ 消失。缺少配方与 B 侧同条件 Loss 的成对观测时，这两个桥接参数不可从现有附件识别。$N$、$D$、B-native $Q$ 与 Loss 的统一关系由问题二依据附件 B 独立建立；若后续需要把 $m_k(\boldsymbol p)$ 映射到 B 侧 Loss，必须额外给出可验证的 Loss 坐标桥接证据。
+
+\subsection{对问题一三项要求的回答}
+
+对照题目所列三项任务，表\ref{tab:q1_answer}将模型、结果与证据逐项对应。质量评分和冲突标记是附件 A 内部的工程评价；配比方案是在指定目标权重、映射政策与 A4 凸包下求得的条件性答案。
+
+\begin{table}[htbp]
+\centering\small
+\caption{问题一要求、求解结果与证据对应}
+\label{tab:q1_answer}
+\begin{tabular}{p{.16\linewidth}p{.47\linewidth}p{.27\linewidth}}
+\toprule
+原题要求 & 本问回答 & 主要证据 \\
+\midrule
+数据质量评价 & 22 项信号统一方向并构成 $Q_A$；A1 七域排序为 book、arxiv、commoncrawl、stackexchange、wikipedia、c4、github；A2/A3 全量及非重叠记录沿用同一评分规则。 & 表\ref{tab:q1_quality}、图\ref{fig:q1_quality}及扩展集对照。 \\
+质量冲突消解 & 231 对指标以秩相关检验，55 条 A1 显著负相关边在去重扩展集复现；以 $(Q_A,D)$ 标记高分歧文本并复核，不把分歧直接扣为低质量。 & 表\ref{tab:q1_conflict}、式\eqref{eq:q1_disagreement}及 27 条原文核查。 \\
+领域配比建模 & 17 域单纯形上的 13 个逐目标交互代理，经 A6--A11 比较；A4 凸包内等权无质量约束的可行相对目标为 $-0.115112$，质量政策改变候选；A12--A15 仅作估算压力测试。 & 式\eqref{eq:q1_v2_interaction}、表\ref{tab:q1_decision_bounds}、表\ref{tab:q1_rank}。 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+式\eqref{eq:q1_complete_decision}解出的目标变化是 1M 交互代理相对参考配方的预测值，不是已实现的大模型训练收益。A4 配方内的 512 方案精确枚举给出可直接复用的候选 index；连续凸包解及数值界见表\ref{tab:q1_decision_bounds}，两种支持集合的结果不可互换。外推表没有提供真实 10B/70B 训练验证，故不能据此宣称相同配方在这些规模上仍最优。
 
 \subsection{本问结论与局限}
 

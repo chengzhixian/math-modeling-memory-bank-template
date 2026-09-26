@@ -1,0 +1,11 @@
+% Standalone Q1 compilation entry; the integration owner keeps main.tex separate.
+% Compile from paper/latex with xelatex, bibtex, xelatex, xelatex.
+\documentclass[bwprint,withoutpreface]{gmcmthesis}
+\hypersetup{hidelinks}
+\graphicspath{{figures/}{figures/chm/}}
+\title{问题一：数据质量评价与训练数据配比效应}
+\begin{document}
+\input{sections/chm/q1.tex}
+\bibliographystyle{plainnat}
+\bibliography{sections/chm/q1_references}
+\end{document}
