@@ -1,0 +1,146 @@
+% !TEX program = xelatex
+% 第二章总技术路线图：独立可编译的 TikZ 源文件。
+% 变量沿用当前论文：领域配比记为 p；质量/配比跨附件衔接为条件情景，
+% 损失到能力的映射需传播误差。本图展示研究流程，不代表各环节均已验证。
+\documentclass[UTF8,a4paper,10pt]{ctexart}
+\usepackage[margin=9mm]{geometry}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+\tikzset{
+  flow/.style={-{Stealth[length=2mm,width=1.35mm]},line width=.43pt},
+  transfer/.style={-{Stealth[length=2.7mm,width=1.8mm]},line width=1.05pt},
+  module/.style={draw=black,line width=.38pt,fill=white,align=center,
+    inner xsep=1.4mm,inner ysep=.65mm,minimum height=7mm,
+    font=\fontsize{7.5}{8.7}\selectfont},
+  core/.style={module,double,double distance=.52pt,line width=.44pt},
+  result/.style={module,line width=.76pt},
+  region/.style={draw=black,densely dashed,line width=.5pt,rounded corners=0pt},
+  regiontitle/.style={fill=white,inner xsep=1.2mm,inner ysep=.2mm,
+    font=\bfseries\fontsize{9}{10}\selectfont},
+  smalllabel/.style={font=\fontsize{7}{8}\selectfont,fill=white,inner sep=.4mm}
+}
+
+\begin{document}
+\noindent\begin{tikzpicture}[x=1mm,y=1mm]
+\useasboundingbox (0,0) rectangle (192,278);
+
+% 目标层
+\node[font=\bfseries\fontsize{15}{17}\selectfont] at (96,270) {总技术路线图};
+\node[core,minimum width=145mm,minimum height=12mm,
+  font=\bfseries\fontsize{10}{11.5}\selectfont] (goal) at (96,255)
+  {有限算力下的大语言模型能力提升与资源配置};
+
+% 问题一：质量与领域结构
+\draw[region] (3,185) rectangle (189,246);
+\node[regiontitle,anchor=west] at (9,246) {问题一\quad 数据质量评价与领域配比分析};
+\node[module,minimum width=116mm] (q1in) at (96,235) {附件 A 训练语料\quad 质量指标\quad 配比实验};
+\node[module,minimum width=116mm] (q1pre) at (96,225) {数据清洗\quad 指标标准化\quad 样本/扩展数据划分};
+\node[module,minimum width=74mm,minimum height=10mm] (q1quality) at (53,211)
+  {质量评价：综合评分、冲突分析\\排序检验、扩展数据一致性};
+\node[module,minimum width=74mm,minimum height=10mm] (q1mix) at (139,211)
+  {领域配比：单域、组合效应\\交互作用与配比特征};
+\node[core,minimum width=97mm] (q1loss) at (96,198) {质量—配比—相对训练损失关系};
+\node[result,minimum width=97mm] (q1out) at (96,190) {$Q_A$、$\boldsymbol p$ 与相对损失效应\quad｜\quad 检验集验证};
+\draw[flow] (goal.south) -- (q1in.north);
+\draw[flow] (q1in) -- (q1pre);
+\draw[flow] (q1pre.south) -- ++(0,-2) -| (q1quality.north);
+\draw[flow] (q1pre.south) -- ++(0,-2) -| (q1mix.north);
+\draw[flow] (q1quality.south) -- ++(0,-1) -| (q1loss.north);
+\draw[flow] (q1mix.south) -- ++(0,-1) -| (q1loss.north);
+\draw[flow] (q1loss) -- (q1out);
+
+% 问题二：跨附件条件衔接与广义标度律
+\draw[region] (3,122) rectangle (189,182);
+\node[regiontitle,anchor=west] at (9,182) {问题二\quad 多因素广义标度律};
+\node[module,minimum width=116mm] (q2in) at (96,172)
+  {问题一的 $Q_A,\boldsymbol p$\quad +\quad 附件 B 训练记录};
+\node[module,minimum width=116mm] (q2vars) at (96,162)
+  {变量构造与口径校准：$N,D,Q,\boldsymbol p,L$};
+\node[core,minimum width=106mm,minimum height=9mm] (q2model) at (96,150)
+  {广义标度律\quad $\widehat L=f(N,D,Q,\boldsymbol p)$};
+\node[module,minimum width=76mm] (q2fit) at (53,138)
+  {参数估计\quad 轨迹/跨模型验证};
+\node[module,minimum width=76mm] (q2check) at (139,138)
+  {残差分析\quad 替代关系与外推边界};
+\node[result,minimum width=106mm] (q2out) at (96,128)
+  {有适用边界的条件损失预测};
+\draw[transfer] (q1out.south) -- (q2in.north);
+\draw[flow] (q2in) -- (q2vars);
+\draw[flow] (q2vars) -- (q2model);
+\draw[flow] (q2model.south) -- ++(0,-1) -| (q2fit.north);
+\draw[flow] (q2model.south) -- ++(0,-1) -| (q2check.north);
+\draw[flow] (q2fit.south) -- ++(0,-1) -| (q2out.north);
+\draw[flow] (q2check.south) -- ++(0,-1) -| (q2out.north);
+
+% 问题三：训练优化主线
+\draw[region] (3,19) rectangle (93,119);
+\node[regiontitle,anchor=west] at (8,119) {问题三\quad 训练优化主线};
+\node[module,minimum width=75mm] (q3in) at (48,108)
+  {广义标度律\quad +\quad 算力成本模型};
+\node[module,minimum width=25mm] (costtrain) at (18,96) {基础训练};
+\node[module,minimum width=25mm] (costquality) at (48,96) {质量提升};
+\node[module,minimum width=25mm] (costcontext) at (78,96) {长上下文};
+\node[module,minimum width=72mm] (budget) at (48,84) {算力预算约束};
+\node[core,minimum width=78mm,minimum height=15mm] (opt) at (48,68)
+  {约束优化\quad $\min\widehat L$\\[-.3mm]
+   $\scriptstyle C_{\rm train}+C_{\rm quality}+C_{\rm context}\leq C_{\rm budget}$};
+\node[module,minimum width=72mm] (solve) at (48,52)
+  {优化求解\quad 预算/质量成本敏感性};
+\node[result,minimum width=72mm] (q3out) at (48,40)
+  {$N^*,D^*,Q^*,\boldsymbol p^*$\quad（条件情景）};
+\node[module,minimum width=72mm] (critical) at (48,28)
+  {成本平衡分析\quad $\to$\quad 临界上下文长度};
+\draw[transfer] (48,122) -- (q3in.north);
+\draw[flow] (q3in.south) -- (48,102);
+\draw[flow] (18,102) -- (costtrain.north);
+\draw[flow] (48,102) -- (costquality.north);
+\draw[flow] (78,102) -- (costcontext.north);
+\draw[flow] (costtrain.south) -- ++(0,-2) -| (budget.north);
+\draw[flow] (costquality) -- (budget);
+\draw[flow] (costcontext.south) -- ++(0,-2) -| (budget.north);
+\draw[flow] (budget) -- (opt);
+\draw[flow] (opt) -- (solve);
+\draw[flow] (solve) -- (q3out);
+\draw[flow] (q3out) -- (critical);
+
+% 问题四：能力演进主线；由问题二与附件 C 共同驱动
+\draw[region] (99,19) rectangle (189,119);
+\node[regiontitle,anchor=west] at (104,119) {问题四\quad 能力演进主线};
+\node[module,minimum width=75mm] (q4in) at (144,108)
+  {附件 C 能力数据\quad +\quad 问题二损失/规模};
+\node[module,minimum width=75mm] (q4pre) at (144,97)
+  {历史记录整理\quad 指标统一};
+\node[module,minimum width=35mm] (history) at (121,84) {历史能力演进};
+\node[module,minimum width=35mm] (bridge) at (167,84) {损失—能力映射};
+\node[module,minimum width=35mm] (contrib) at (121,71)
+  {规模贡献\quad /\quad 技术贡献};
+\node[module,minimum width=35mm] (bridgeerr) at (167,71) {映射误差分析};
+\node[core,minimum width=75mm] (frontier) at (144,58) {能力前沿演进模型};
+\node[module,minimum width=75mm] (future) at (144,46) {未来 12 / 24 个月情景预测};
+\node[module,minimum width=75mm] (uncertainty) at (144,34) {预测不确定性与适用边界};
+\node[result,minimum width=75mm] (q4out) at (144,26) {未来能力前沿及预测区间};
+\draw[transfer] (144,122) -- (q4in.north);
+\draw[flow] (q4in) -- (q4pre);
+\draw[flow] (q4pre.south) -- ++(0,-1) -| (history.north);
+\draw[flow] (q4pre.south) -- ++(0,-1) -| (bridge.north);
+\draw[flow] (history) -- (contrib);
+\draw[flow] (bridge) -- (bridgeerr);
+\draw[flow] (contrib.south) -- ++(0,-1) -| (frontier.north);
+\draw[flow] (frontier) -- (future);
+\draw[flow] (future) -- (uncertainty);
+\draw[flow] (bridgeerr.south) -- ++(0,-2) -- (185,64) -- (185,34) -- (uncertainty.east);
+\draw[flow] (uncertainty) -- (q4out);
+
+% 两条主线在结论层汇合，问题三不作为问题四的必经输入。
+\node[result,minimum width=132mm,minimum height=10mm,
+  font=\bfseries\fontsize{8.7}{10}\selectfont] (final) at (96,8)
+  {有限算力下的资源配置与未来能力发展结论};
+\draw[flow] (critical.south) -- (48,17) -- (96,17) -- (final.north);
+\draw[flow] (q4out.south) -- (144,17) -- (96,17) -- (final.north);
+
+\end{tikzpicture}
+\end{document}
