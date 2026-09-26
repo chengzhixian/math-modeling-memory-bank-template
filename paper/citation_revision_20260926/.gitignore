@@ -1,0 +1,9 @@
+archive_input/
+QA/*.jpg
+QA/*.png
+QA/extracted_final.txt
+QA/pdf_text_diff.json
+revised_project/*.console.txt
+revised_project/*.bibconsole.txt
+revised_project/*.pdf
+source-cited.zip

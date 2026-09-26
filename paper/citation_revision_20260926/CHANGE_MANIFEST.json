@@ -1,0 +1,106 @@
+{
+  "body_unchanged": {
+    "chapter4.tex": true,
+    "chapter5.tex": true,
+    "chapter6.tex": true,
+    "chapter7.tex": true,
+    "example.tex": true,
+    "chapter1.tex": true,
+    "chapter2.tex": true,
+    "chapter3.tex": true,
+    "chapter8.tex": true
+  },
+  "insertions": [
+    {
+      "file": "chapter4.tex",
+      "anchor": "本问需要从质量信号中给出可比较的文本质量评分",
+      "keys": "fineweb2024",
+      "line": 10
+    },
+    {
+      "file": "chapter4.tex",
+      "anchor": "对 DSIR",
+      "keys": "dsir2023",
+      "line": 18
+    },
+    {
+      "file": "chapter4.tex",
+      "anchor": "考虑到领域组合可能影响训练效果",
+      "keys": "regmix2025,mixinglaws2025",
+      "line": 81
+    },
+    {
+      "file": "chapter5.tex",
+      "anchor": "B1 的 1176 条 Pythia",
+      "keys": "pythia2023",
+      "line": 12
+    },
+    {
+      "file": "chapter5.tex",
+      "anchor": "建立经典双幂律",
+      "keys": "hoffmann2022training",
+      "line": 18
+    },
+    {
+      "file": "chapter6.tex",
+      "anchor": "增加模型参数量、扩大训练数据量和提高数据质量都会改变验证集交叉熵损失（Loss）",
+      "keys": "hoffmann2022training,fineweb2024",
+      "line": 12
+    },
+    {
+      "file": "chapter6.tex",
+      "anchor": "长上下文直接挤占可分配给规模与训练量的预算",
+      "keys": "flashattention2022",
+      "line": 214
+    },
+    {
+      "file": "chapter6.tex",
+      "anchor": "公开的 OpenLM 训练记录",
+      "keys": "gadre2024",
+      "line": 285
+    },
+    {
+      "file": "chapter7.tex",
+      "anchor": "因此还需建立来源一致的 Loss--能力关系",
+      "keys": "gadre2024,observational2024",
+      "line": 12
+    },
+    {
+      "file": "chapter7.tex",
+      "anchor": "MUSR 和 MMLU-PRO",
+      "keys": "mmlupro2024",
+      "line": 19
+    },
+    {
+      "file": "chapter7.tex",
+      "anchor": "以 $\\tau=0.9$ 为目标的分位资源模型",
+      "keys": "koenker2017",
+      "line": 127
+    },
+    {
+      "file": "chapter7.tex",
+      "anchor": "每一轮仅用测试窗口开始前的提交版本和当时可见的 C4 资源记录拟合，再计算测试窗口误差",
+      "keys": "forecasting2021",
+      "line": 134
+    }
+  ],
+  "source_pdf": "example(2).pdf",
+  "source_archive": "Desktop/Huawei_Cup_2026_Mathematical_Modeling_latex-main.rar",
+  "original_sha256": {
+    "chapter4.tex": "2f3f80257730295de6ba977a3ca8f9e314cffa5a106b935d2c1b62b8a7aaec08",
+    "chapter5.tex": "3296a3c1d76098fef934a45c8365d37df99606783cbc90ce67085bbdbc020e06",
+    "chapter6.tex": "11450a91ae4cb425ef366c821e5a896e6b0011d58207951be46fdf6af3c2533f",
+    "chapter7.tex": "8793f42ba2abca729eec40624c43b2a942db5ebd6666db7e8e8f67bc1faa978d"
+  },
+  "template_fixes": [
+    "close optional cover conditional",
+    "LiSu to KaiTi fallback when missing"
+  ],
+  "bibliography_style": "clickable titles to verified URL or DOI; retain original numbered style",
+  "citation_insertions": 12,
+  "figures_unchanged": true,
+  "asset_files_verified": 42,
+  "final_pdf_pages": 46,
+  "final_reference_count": 13,
+  "final_pdf_sha256": "8259a41cbf32470d8bf94dc075225f8afc84fd18d8519881ca360e36bc84776f"
+}

@@ -1,0 +1,93 @@
+% !Mode:: "TeX:UTF-8"
+%!TEX program  = xelatex
+
+%\documentclass[bwprint,fontset=windows]{gmcmthesis}
+\documentclass[bwprint]{gmcmthesis}
+
+\hypersetup{hidelinks}
+\usepackage[framemethod=TikZ]{mdframed}
+
+%\usepackage{fontspec}  % for Consolas & Courier New
+%\lstset{basicstyle=\small\fontspec{Consolas}}
+%\lstset{basicstyle=\small\fontspec{Courier New}}
+%\setmonofont{Consolas}
+%\setcounter{tocdepth}{3}   % 调整目录深度
+
+\usepackage{subfig}
+\usepackage{siunitx}
+
+\usepackage{colortbl}
+\definecolor{color1}{rgb}{0.78,0.88,0.99}
+\definecolor{color2}{rgb}{0.36,0.62,0.84}
+%\definecolor{color3}{rgb}{0.8235,0.8706,0.9373}
+\definecolor{color3}{rgb}{0.88,0.92,0.96}
+\definecolor{color4}{rgb}{0.96,0.97,0.98}%{0.9176,0.9373,0.9686}
+
+% 算法
+\usepackage[noend]{algpseudocode}
+\usepackage{algorithmicx,algorithm}
+\floatname{algorithm}{算法}
+\renewcommand{\algorithmicrequire}{\textbf{输入:}}
+\renewcommand{\algorithmicensure}{\textbf{输出:}}
+
+%\numberwithin{equation}{section}
+%\numberwithin{figure}{section}
+%\numberwithin{table}{section}
+
+
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+
+
+%===================== 建模论文题目 ======================
+
+\title{训练数据质量、算力配置与开源大模型能力演进的联合建模}
+\baominghao{\hspace{6em} 20250900001} %参赛队号
+\schoolname{\hspace{5.8em} 学校名称填写} %学校名称
+\membera{\hspace{6em} 成员A} %队员A
+\memberb{\hspace{6em} 成员B} %队员B
+\memberc{\hspace{6em} 成员C} %队员C
+
+%=======================================================
+
+
+\begin{document}
+
+%生成标题
+\maketitle
+
+%填写摘要
+\begin{abstract}
+
+针对有限算力下大语言模型的训练数据选择、资源配置和能力预测问题，本文建立贯通数据质量、领域配比、标度关系和能力演进的模型。首先，对 22 项异质质量指标进行方向统一与稳健标准化，结合指标冲突构造文本评分和复核规则；利用 512 组训练配比建立 17 域二阶交互模型。该模型在 13 个验证域上的交叉验证 RMSE 中位数由线性岭回归的 0.4921 降至 0.4499。其次，基于真实训练轨迹拟合参数量与训练量的双幂律，再结合半合成质量记录和领域配比效应构造广义标度律。在指定配方、十亿参数和千亿 Token 的起始条件下，质量坐标提高 0.1 可使维持原预测 Loss 所需的参数量降至原来的约 76.7\%。
+
+在此基础上，本文将基础训练、质量处理与长上下文开销纳入同一预算，求解不同预算下的参数量、数据量和配比。在 8192 Token、幂函数质量成本下，低预算方案选择配方 477，中预算转为配方 172；注意力与基础训练成本相当的临界上下文为 30000 Token。最后，以六项 Benchmark 等权均分衡量开源模型能力，分解历史能力变化，并分别预测近期高分群与累计最高分。在算力对数增速减半的情景下，后训练模型未来 12、24 个月的近期第 90 百分位为 53.828、66.681 分，条件最高能力为 60.600、73.453 分。Loss 与能力的来源内映射可用于指定坐标假设下的训练方案比较。模型为训练数据筛选、资源投入及能力演进分析提供了定量依据。
+
+\keywords{大语言模型\quad 数据质量\quad 领域配比\quad 广义标度律\quad 算力优化\quad 能力前沿}
+
+\end{abstract}
+
+\pagestyle{plain}
+
+%目录 不推荐加
+\maketoc
+
+\clearpage
+
+
+\include{chapter1}
+\include{chapter4}
+\include{chapter5}
+\include{chapter6}
+\include{chapter7}
+
+
+\section{模型评价}
+
+本文的质量评价、配比预测、广义标度律和预算优化依次衔接，使训练数据选择与资源投入能够放在同一 Loss 目标下比较。质量评分通过扩展样本对照检验，二阶配比模型通过交叉验证及不同规模实验组比较；标度律利用训练轨迹和跨模型族下降方向检验，预算解则通过假设敏感性与公开模型的规模排序进行分析。能力预测同时报告近期高分群与累计最高分，避免两种目标混用。
+
+模型的数值解释随数据范围而变化。质量项来自半合成记录，第一问质量评分与第二问 Loss 的连接采用尺度映射；配比模型在个别连续方案中出现负预测 Loss，需在应用时收紧其范围。最高预算的资源配置达到已有数据上界，长期能力预测则依赖资源增长与近期尾差情景。今后若获得同一训练系统下的质量、配比、Loss 与 Benchmark 成对实验，可进一步校准跨问题连接并检验更大规模的配置。
+
+\bibliographystyle{gmcm}
+\bibliography{reference}
+\end{document}
