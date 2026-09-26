@@ -5,13 +5,13 @@
     "interfaces/Q1/q1_interface_v2.json": "c621f7e405106e42720f918f490235b5e8becefb0f7c8cb997736e96337117a9"
   },
   "paper_sha256": {
-    "paper/latex/sections/Q1/main.tex": "bc42cbc27860fdf3468e35672ebfdbd4f8eb33f8d40fccbcbbd508e61e74bced"
+    "paper/latex/sections/Q1/main.tex": "764f11cde0ea12f769cf7d30689f2f56737b3912e5d7f9e8cc26ecadd070f9a5"
   },
   "question": "Q1",
   "schema_version": "main.question_integration.v2",
   "scope": "current main answer, production evidence, interface and paper; reproducible process tables excluded",
   "sha256": {
-    "ANSWER.md": "c0504ad8e127804a0e1c65de0676b6bd97bf8b7acfd062f353afc892f98fbfa9",
+    "ANSWER.md": "bb9fe076a86034f91514462f87e6c476f3568498bfbbc3bec251e45629d88a3a",
     "README.md": "76e0edcb6b0b8b84defca5d0d0bbf1cca2cf1607e2e2af45c151f21ae9ab47ec",
     "conflict_validation.json": "82a04c3b745d0852cde40fd20232f709b379ed0151d2e4af95b6bd8cd33bada9",
     "decision_panel.csv": "b9d5c40166ba16588c04947f513c0752ea2e094ae732a50dfbae7c938dfaa372",

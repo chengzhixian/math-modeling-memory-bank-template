@@ -16,7 +16,7 @@
     "src/cyj/smoke_q3_v8.py": "d8e3dccce6e3900031c486bb12bd2f9a14b785ad8acb7c8f35024fcb4caac55a",
     "src/cyj/tests/test_ndqp_v8.py": "9b86e816f10b427d1ecef6b349a905cbcc34a9afd1f49a052e680e5629971f3b",
     "src/cyj/validate_b3_against_b1.py": "afc743f3bd05de80c7e271ce8fc43516da1a1b5bc3b1bda2660fd52b9d10b586",
-    "src/cyj/verify_v8_fixtures.py": "04357e1c85e1e8dac0abb4a23c1a779f5d8ac6bc1907c165ee26cae88164a92a"
+    "src/cyj/verify_v8_fixtures.py": "c5cd3891ba9f9109730c35cd3fecdfd5d056c7d76aeec0b89a05482924436e03"
   },
   "source_release": "team/cyj-scaling@fd2dbb3b2002983430329cdb2ec6a275c2eed4f6"
 }

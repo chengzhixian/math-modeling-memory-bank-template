@@ -3,11 +3,28 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 
 from chm_q1_v2_consumer import ROOT
 from ndqp_scenarios_v8 import ConditionalV8, request, unique
 
 OUT = ROOT / "interfaces/Q2/fixtures_v8"
+
+
+def matches_expected(expected, actual):
+    """Compare frozen structure and identity exactly, float results by roundoff."""
+    if type(expected) is not type(actual):
+        return False
+    if isinstance(expected, dict):
+        return expected.keys() == actual.keys() and all(
+            matches_expected(expected[key], actual[key]) for key in expected)
+    if isinstance(expected, list):
+        return len(expected) == len(actual) and all(
+            matches_expected(left, right) for left, right in zip(expected, actual))
+    if isinstance(expected, float):
+        return math.isfinite(expected) and math.isfinite(actual) and math.isclose(
+            expected, actual, rel_tol=1e-12, abs_tol=1e-12)
+    return expected == actual
 
 
 def main():
@@ -25,7 +42,7 @@ def main():
         try:
             payload = json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=unique)
             if expected["exit_code"] == 0:
-                if request(model, payload) != expected["result"]:
+                if not matches_expected(expected["result"], request(model, payload)):
                     raise ValueError("valid fixture output changed")
             else:
                 request(model, payload)
