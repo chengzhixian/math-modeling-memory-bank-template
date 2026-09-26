@@ -206,6 +206,10 @@ def anchor(rows, q=.9, window=2):
     return {'S':score,'N':10**high.logN.median(),'t':rows.t.max(),'n':len(recent),'end':end}
 
 
+def record_boundary(q90_score, historical_record, tail_gap):
+    return float(min(100, max(historical_record, q90_score + max(0, tail_gap))))
+
+
 def window_series(rows, q=.9):
     records=[]
     for month in sorted(rows.date.dt.strftime('%Y-%m').unique()):
@@ -348,6 +352,71 @@ def forecasts(rows, resource_summary, comparison):
     return {'parameters':parameters,'ranges':envelopes}
 
 
+def maximum_frontier(rows, versions, comparison):
+    selected={}
+    for typ in rows.type.unique():
+        candidates=[x for x in comparison if x['type']==typ and x['resource_gate']=='primary']
+        selected[typ]=min(candidates,key=lambda x:x['rmse'])['model'] if candidates else 'constant'
+    rolling_rows=pd.read_csv(OUT/'rolling_two_month_frontier.csv')
+    backtest=[]
+    for _,row in rolling_rows[rolling_rows.resource_gate.eq('primary')].iterrows():
+        if row.model!=selected[row.type]:
+            continue
+        group=versions[versions.type.eq(row.type)]
+        start=pd.Timestamp(row.test_start,tz='UTC')
+        stop=pd.Timestamp(row.test_end,tz='UTC')+pd.Timedelta(days=1)
+        train=group[group.date<start].sort_values(['date','source_row']).drop_duplicates('Model',keep='last')
+        test=group[(group.date>=start)&(group.date<stop)].sort_values(['date','source_row']).drop_duplicates('Model',keep='last')
+        prior_record=float(train.S.max())
+        actual_record=max(prior_record,float(test.S.max()))
+        for window in [1,2,3]:
+            recent=train[train.date>train.date.max()-pd.DateOffset(months=window)]
+            gap=max(0,float(recent.S.max()-recent.S.quantile(.9)))
+            backtest.append({'type':row.type,'origin':row.origin,'test_start':row.test_start,'test_end':row.test_end,
+                'q90_model':row.model,'tail_window_months':window,'q90_prediction':row.predicted_q90,
+                'tail_gap':gap,'prior_historical_record':prior_record,'persistence_prediction':prior_record,
+                'tail_gap_prediction':record_boundary(row.predicted_q90,prior_record,gap),
+                'actual_cumulative_record':actual_record,'target_definition':'cumulative_best_score_by_target_date'})
+    backtest_frame=pd.DataFrame(backtest)
+    save('frontier_maximum_backtest.csv',backtest_frame)
+    model_comparison=[]
+    for typ,group in backtest_frame.groupby('type'):
+        baseline=group.drop_duplicates(['origin','test_start','test_end'])
+        model_comparison.append({'type':typ,'model':'record_persistence','tail_window_months':None,
+            **old.metric(baseline.actual_cumulative_record,baseline.persistence_prediction),
+            'selection_status':'diagnostic_on_four_overlapping_two_month_windows'})
+        for window,window_rows in group.groupby('tail_window_months'):
+            model_comparison.append({'type':typ,'model':'q90_plus_tail_gap','tail_window_months':window,
+                **old.metric(window_rows.actual_cumulative_record,window_rows.tail_gap_prediction),
+                'selection_status':'conditional_boundary_scenario_not_selected_when_persistence_rmse_is_lower'})
+    save('frontier_maximum_model_comparison.csv',model_comparison)
+    q90_points=pd.read_csv(OUT/'frontier_candidate_forecasts.csv')
+    q90_points=q90_points[(q90_points.resource_gate=='primary') & q90_points.selected_by_diagnostic_rmse]
+    scenarios=[]
+    for typ,group in rows.groupby('type'):
+        historical_record=float(group.S.max())
+        gaps={}
+        for window in [1,2,3]:
+            recent=group[group.date>group.date.max()-pd.DateOffset(months=window)]
+            gaps[window]=max(0,float(recent.S.max()-recent.S.quantile(.9)))
+        for _,point in q90_points[q90_points.type.eq(typ)].iterrows():
+            scenarios.append({'type':typ,'origin':point.origin,'target_date':point.target_date,
+                'horizon_months':point.horizon_months,'compute_scenario':point.compute_scenario,
+                'q90_model':point.model,'q90_score':point.score,'historical_record_score':historical_record,
+                'tail_gap_window_months':2,'tail_gap_center':gaps[2],
+                'tail_gap_lower':min(gaps.values()),'tail_gap_upper':max(gaps.values()),
+                'record_persistence_baseline':historical_record,
+                'conditional_record_lower':record_boundary(point.score,historical_record,min(gaps.values())),
+                'conditional_record_center':record_boundary(point.score,historical_record,gaps[2]),
+                'conditional_record_upper':record_boundary(point.score,historical_record,max(gaps.values())),
+                'target_definition':'cumulative_best_score_by_target_date',
+                'status':'conditional_tail_gap_scenario_not_calibrated_prediction_interval'})
+    save('frontier_maximum_scenarios.csv',scenarios)
+    return {'target_definition':'cumulative_best_score_by_target_date','selected_q90_models':selected,
+        'backtest_rows':len(backtest),'scenario_rows':len(scenarios),
+        'interpretation':'record persistence is the empirical baseline; q90 plus recent tail gap is a separate conditional boundary scenario'}
+
+
 def fit_bridge(group):
     b=old.ols(group.Val_Loss.to_numpy(),old.logit(group.S))
     if b[1]>0:
@@ -380,7 +449,8 @@ def bridge():
             'monotone_LOO_R2':model_metrics['r2']})
         mappings.append({**tag,'a':b[0],'bLoss':b[1],'loss_min':group.Val_Loss.min(),
             'loss_max':group.Val_Loss.max(),'N_min_B':group.N_params_B.min(),'N_max_B':group.N_params_B.max(),
-            'diagnostic_primary_candidate':accepted,'cross_Q3_coordinate_status':'unidentified'})
+            'diagnostic_primary_candidate':accepted,'mapping_LOO_RMSE':model_metrics['rmse'],
+            'constant_LOO_RMSE':base_metrics['rmse'],'cross_Q3_coordinate_status':'unidentified'})
     save('bridge_source_coordinate_models.csv',mappings)
     save('bridge_source_coordinate_validation.csv',validation)
     return mappings,validation
@@ -398,7 +468,17 @@ def convert(mapping, loss, n, scale=1., offset=0.):
 
 
 def q3_bridge(mappings):
-    grid=pd.read_csv(V2/'upstream_q3_fixed_policy_grid.csv')
+    grids=[]
+    for filename,mode,quality_column in [
+        ('upstream_q3_fixed_policy_grid.csv','fixed_recipe','Q_B_proxy'),
+        ('upstream_q3_observed_joint_grid.csv','observed_joint_recipe','Q_B_proxy'),
+        ('upstream_q3_native_Q_sensitivity_grid.csv','independent_native_Q','Q_score')]:
+        table=pd.read_csv(V2/filename)
+        table['policy_mode']=mode
+        table['source_policy_row']=np.arange(len(table))
+        table['Q_coordinate_value']=table[quality_column]
+        grids.append(table)
+    grid=pd.concat(grids,ignore_index=True,sort=False)
     records=[]
     for mapping in mappings:
       for index,row in grid.iterrows():
@@ -410,7 +490,11 @@ def q3_bridge(mappings):
             baseline,base_status=convert(mapping,row.B1_backbone_loss,n,scale,offset)
             records.append({'policy_row':index,'coordinate_id':mapping['coordinate_id'],
                 'diagnostic_primary_candidate':mapping['diagnostic_primary_candidate'],
+                'mapping_LOO_RMSE':mapping['mapping_LOO_RMSE'],
+                'constant_LOO_RMSE':mapping['constant_LOO_RMSE'],
                 'budget_FLOPs':row.budget_FLOPs,'context_tokens':row.context_tokens,'quality_family':row.quality_family,
+                'policy_mode':row.policy_mode,'source_policy_row':row.source_policy_row,
+                'recipe_index':row.recipe_index,'Q_coordinate_value':row.Q_coordinate_value,
                 'producer_status':row.status,'coordinate_scale_assumed':scale,'coordinate_offset_assumed':offset,
                 'upstream_loss_stress_delta_assumed':upstream_delta,'N_params_B':n,'status':status,
                 'conditional_score':score,'conditional_backbone_reference_score':baseline,
@@ -424,7 +508,11 @@ def q3_bridge(mappings):
         summaries.append({'coordinate_id':coordinate,'policy_row':index,
             'budget_FLOPs':group.budget_FLOPs.iloc[0],'context_tokens':group.context_tokens.iloc[0],
             'quality_family':group.quality_family.iloc[0],
+            'policy_mode':group.policy_mode.iloc[0],'source_policy_row':group.source_policy_row.iloc[0],
+            'recipe_index':group.recipe_index.iloc[0],'Q_coordinate_value':group.Q_coordinate_value.iloc[0],
             'diagnostic_primary_candidate':group.diagnostic_primary_candidate.iloc[0],
+            'mapping_LOO_RMSE':group.mapping_LOO_RMSE.iloc[0],
+            'constant_LOO_RMSE':group.constant_LOO_RMSE.iloc[0],
             'supported_score_scenarios':len(scores),'supported_gain_scenarios':len(gains),'total_scenarios':len(group),
             'score_min':scores.min(),'score_max':scores.max(),'gain_min':gains.min(),'gain_max':gains.max(),
             'gain_sign_robust_within_supported_grid':bool((gains>0).all() or (gains<0).all()) if len(gains) else None,
@@ -434,7 +522,7 @@ def q3_bridge(mappings):
     save('q3_bridge_conclusion_sensitivity.csv',summaries)
     rankings=[]
     # Assess quality-cost policy ranking only where ALL compared candidates map.
-    keys=['coordinate_id','budget_FLOPs','context_tokens','coordinate_scale_assumed','coordinate_offset_assumed','upstream_loss_stress_delta_assumed']
+    keys=['coordinate_id','policy_mode','budget_FLOPs','context_tokens','coordinate_scale_assumed','coordinate_offset_assumed','upstream_loss_stress_delta_assumed']
     for key,g in frame.groupby(keys):
         feasible=g[g.producer_status.str.contains('feasible') & ~g.producer_status.str.contains('infeasible')]
         supported=feasible.conditional_score.notna().all()
@@ -448,6 +536,7 @@ def q3_bridge(mappings):
     save('q3_policy_ranking_stress.csv',rankings)
     return {'stress_rows':len(frame),'source_coordinate_models':len(mappings),
         'label_based_diagnostic_candidates':sum(x['diagnostic_primary_candidate'] for x in mappings),
+        'policy_mode_rows':grid.policy_mode.value_counts().to_dict(),
         'formal_cross_coordinate_status':'unidentified','stress_is_statistical_interval':False}
 
 
@@ -503,6 +592,8 @@ def main():
     print('Completed consistent two-month frontier backtest',flush=True)
     frontier=forecasts(rows,res_summary,comparison)
     print('Completed tail regressions, block bootstrap and scenario unions',flush=True)
+    maximum=maximum_frontier(rows,versions,comparison)
+    print('Completed cumulative-record frontier baseline and tail-gap scenarios',flush=True)
     mappings,validation=bridge()
     q3=q3_bridge(mappings)
     c3=c3_analysis()
@@ -510,17 +601,21 @@ def main():
         'ready_for_empirical_Q3_conversion':False,'conditional_mapping_policy':'explicit named C6 source coordinate and declared affine assumptions; source support required',
         'historical_target':'standardized six-task mean, separate from q90 forecast target',
         'technical_effect_identified':False,'frontier_target':'type-specific recent two-calendar-month q90, anchored conditional evolution',
+        'maximum_frontier_target':'type-specific cumulative best six-task score by target date; record persistence baseline plus conditional q90-tail-gap scenario',
         'frontier_model_selection':'lowest diagnostic two-month-window RMSE; four overlapping test windows per type, not blind selection',
         'forecast_origin':'latest observed submission per type; supplied per row',
         'paper_status':'Q4 integrated section uses v3 core conditional results'})
     results={'schema':'zhh.q4.core.v3','status':'core_remediation_with_explicit_unidentified_coordinates',
-        'resources':res_summary,'frontier_comparison':comparison,'frontier':frontier,'bridge':validation,'q3':q3,'c3':c3,
+        'resources':res_summary,'frontier_comparison':comparison,'frontier':frontier,'maximum_frontier':maximum,
+        'bridge':validation,'q3':q3,'c3':c3,
         'historical_uncertainty':contribution_uncertainty,
         'historical_primary':[x for x in historical if x['filter']=='primary' and x['window_months']==2 and x['bin_width_decades']==.5],
         'bridge_effect_on_direct_frontier':'Direct frontier uses C2 scores and C4 resources, no C6 or Q3 Loss input; bridge uncertainty changes Q3 score/gain/rank statements, not the independent direct-score forecasts.',
         'remaining':'Pure technical effect and Q3-to-C6 empirical Loss coordinate are not identified; long-horizon results are conditional scenarios.'}
     dump('results.json',results)
-    inputs=[V2/x for x in ['leaderboard_sample.csv','leaderboard_all_versions.csv','c4_resource_audit.csv','bridge_sample.csv','upstream_q3_fixed_policy_grid.csv','upstream_q3_manifest.json']]
+    inputs=[V2/x for x in ['leaderboard_sample.csv','leaderboard_all_versions.csv','c4_resource_audit.csv','bridge_sample.csv',
+        'upstream_q3_fixed_policy_grid.csv','upstream_q3_observed_joint_grid.csv',
+        'upstream_q3_native_Q_sensitivity_grid.csv','upstream_q3_manifest.json']]
     inputs += [DATA/x for x in ['epoch_all_ai_models.csv','leaderboard_extended_timeseries.csv']]
     inputs += [V2/'manifest.json', DATA/'leaderboard_enhanced.csv', DATA/'loss_benchmark_bridge_expanded.csv']
     inputs += [Path(__file__),ROOT/'src/zhh/q4_complete.py',ROOT/'src/zhh/test_q4_core_v3.py',

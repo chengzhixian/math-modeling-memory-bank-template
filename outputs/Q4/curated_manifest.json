@@ -1,6 +1,6 @@
 {
   "interface_sha256": {
-    "interfaces/Q4/CONTRACT.md": "e2f5bb2b1d0c8a4fcbc760905384d1c0586ebb08e8caab1f6f443dcc6f3ef3fb"
+    "interfaces/Q4/CONTRACT.md": "1be5e4a16caafce19074dae8f3c11c48a8ce1aca0e809c3affd79f6b2a252e3f"
   },
   "paper_sha256": {
     "paper/latex/sections/Q4/main.tex": "df84c7bd9810f4cc15cc80055112a2fec80a1cc94cead8903a32258728067ce6"
@@ -9,9 +9,9 @@
   "schema_version": "main.question_integration.v2",
   "scope": "current main answer, production evidence, interface and paper; reproducible process tables excluded",
   "sha256": {
-    "ANSWER.md": "913937920d448ec6508b32f5d45dbb8746edd29aaad8407315e72dda23fa75d0",
-    "README.md": "6e67ddd9866b7e640884254fc8f0f9af5f09e74c040dd52a0be66f6f44eeee5e",
-    "bridge_source_coordinate_models.csv": "806d47d845d3467d9e94280896201b83b426b46fd084c915decbdcba3485814b",
+    "ANSWER.md": "9cf4061ae8c024bb10180ab5ec9f006db68b51b0a1baefadb39096864155dcd2",
+    "README.md": "55985bf8ec30efc00e3dcc78c870e3368ac126bb7ec6f5228f00bc950fce94d8",
+    "bridge_source_coordinate_models.csv": "091074a44e64dc2e5aea73301b118b4d6ffe17ede35369c6efa431221fc69c17",
     "bridge_source_coordinate_validation.csv": "88ee5eda2aaf4cad01bf4394620e1004bd01dfb526bea3ce5b0088dfa232fd36",
     "c3_row_metric_audit.csv": "76e2e939a53bd4a3a157c00fb1b5b94ca887569953c6a71b3302af87f35fcfcb",
     "c3_source_year_capability.csv": "fecb4f9763c5a925b99a69c5d480fe0ce54f03c369b5ed792aa16fe8be14107b",
@@ -24,6 +24,9 @@
     "c8_parse_failures.csv": "1d3b735513e745daba224d8559d052ddd33dbd56ce8e7b874d65fffbdaf9923f",
     "context_scenarios.csv": "b494a8949a74133e779b683c8a46021b5e16308970150bd18e033553c6fc8608",
     "frontier_candidate_forecasts.csv": "84f2fd60611abbffb6b09dc5c1f779a7849f5268c25a0a9cbc7b118c497ead76",
+    "frontier_maximum_backtest.csv": "4cce36320525b7ba505fc59b6f9e7bf3db48de788879be97ac8d879681c37c08",
+    "frontier_maximum_model_comparison.csv": "031941f429a058c28e1e042fb5d5957692d6989b60915406a3ced161862cc8db",
+    "frontier_maximum_scenarios.csv": "368bd65ae7bfba680aef82150809e1f39657672830206619e5b55c2e8cfe613d",
     "frontier_model_comparison.csv": "674c75a8f12b4b9fde8928938119296bfc8a86ea8873a073e2a8efef60e6e69d",
     "frontier_model_error_stress.csv": "0d1679fe61795715a28544a5b220e6238cc93d5a1c04571a816112b85e1ebb6f",
     "frontier_parameters.csv": "db10429056531bdf455a02b23a2d63b29b015296e0eb504267895a8d344c0222",
@@ -32,19 +35,21 @@
     "historical_common_cells.csv": "c62204982e187bd73b6978e5703e302ebdb530fde09e6baceb9ab64a29759711",
     "historical_contribution_bootstrap.csv": "56a7414f45bc67015f0c11f4c3767c665549dc3519e11d6147cbadadb8d70342",
     "historical_standardized_contributions.csv": "21f60da5422cdc2d4405310443dbf62cb5009a272fded3f3e08cf4352a63fe40",
-    "interface.json": "8842179a113da3e0157ab338c51453a5ffd40d42b32e06473ae03b3e26d7ccb7",
-    "manifest.json": "9ba69ff21c1ae41237d27b10c56887b536401f44d0e7d96d7ea0aa93c92ae0f9",
+    "interface.json": "8efb8a0cfa39eecad18f30bfd8c2ec505d068a17f594979e853aa4ecc1b3d5e7",
+    "manifest.json": "c08544c6c681d5c906d3f24da53096e1439b174c7afd26cb7131af73046b8dd7",
     "prepared/bridge_sample.csv": "ead8c15e7bfefa589978c855f17cd70141f99446738c78eb4dc939c958f842dd",
     "prepared/c4_resource_audit.csv": "0001ad0484b5ade2f33f544e238d7695c54c04b39dd79aff17baae80fb7ae468",
     "prepared/leaderboard_all_versions.csv": "94750204998299d4969e716b025afb7daed11dfde3020b3b82278b7f3035cb12",
     "prepared/leaderboard_sample.csv": "281044f48cd5fb0a77ea726c17b6b57914fef6e5349ff442384ebe998489f700",
-    "prepared/manifest.json": "85c3353da8d295a6381af3970ed28e3ca0a255898ea1ac665a5053a9cb982221",
+    "prepared/manifest.json": "ebec789e78f0cbdbfed5e9561255df497a53104bc81ad15caa0fcf15425dce45",
     "prepared/upstream_q3_fixed_policy_grid.csv": "9e1ea053b5754ac903e2167caa9efb5c5b934e2eed96b4bbaf064f5a42c9d388",
     "prepared/upstream_q3_manifest.json": "a30703ceac1f0179f5c93e03b676b984581c3058c50ccfcdc3eb60dd27112000",
-    "q3_bridge_conclusion_sensitivity.csv": "42d5196760dfd64159f0090a6a3d94f5665c4ad76b82bb2a924c753c8e066347",
-    "q3_policy_ranking_stress.csv": "bb2d9aff77f09c8404aa3da5a7d19b6b612e1e43e9a56090b20538dbe7661eed",
-    "q3_source_coordinate_stress.csv": "53d7017abde035217d6345f5ad829482a70bc17a56f502b2ed75b6e242c8367c",
-    "results.json": "c38e7e1f93ac381fe7262bda502a157451a34c3f10bd994ca788038b3426f54c",
+    "prepared/upstream_q3_native_Q_sensitivity_grid.csv": "d8c6f006448fb5fb4fcddef0cf2f5e19e2f7e416014b5732bea080ced6dce527",
+    "prepared/upstream_q3_observed_joint_grid.csv": "8fc644e7b956a0e1b35bfcf219fd0573392a31e68e532d9248432661049af3da",
+    "q3_bridge_conclusion_sensitivity.csv": "7dfbaa2881cd112648c7841441bbade702ad16ce1ec10dfad850d5f0e3f619a3",
+    "q3_policy_ranking_stress.csv": "75352632c6337d150eadf17fdbec536af3a0d33d956802aa8311ca65fbd49935",
+    "q3_source_coordinate_stress.csv": "e0db642cfd51bc79b473a020d8b8e58396480fa3ff88a3343d4c5113da063783",
+    "results.json": "e5751200b8f770dbd4c0262aace572d7e654caf4a5bf57f824d6f4cf844af749",
     "rolling_two_month_frontier.csv": "f6f3556606bf074eef250991d1eedc070ae8e6bc9c14508c130560275e287c31"
   },
   "source_manifest_path": "experiments/Q4/source_manifest_v3.json",

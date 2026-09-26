@@ -7,8 +7,8 @@
 | C7/C8 整理 | `node src/zhh/q4_analysis.js` | `outputs/Q4/context_scenarios.csv`、`c8_bbh_task_aggregation.csv`、`c8_parse_failures.csv` | C7 是观测上下文情景；C8 不与 C2 强行配对 |
 | 能力及资源筛选 | `src/zhh/q4_complete.py` → `q4_core_v3.py` | `c4_resource_gate_comparison.csv`、`c3_row_metric_audit.csv`、`results.json` | 开放性为权重与许可证代理；C3 历史评分分来源，不拼成单轨迹 |
 | 历史贡献 | `q4_core_v3.py` | `historical_standardized_contributions.csv`、`historical_common_cells.csv`、`historical_contribution_bootstrap.csv` | 格内时间项不是已识别的纯技术因果份额 |
-| 两月前沿 | `q4_core_v3.py` | `frontier_model_comparison.csv`、`rolling_two_month_frontier.csv`、`frontier_scenario_union.csv` | 四个重叠窗口用于诊断和选择；长期区间没有覆盖率保证 |
-| Loss 与能力 | `q4_core_v3.py` | `bridge_source_coordinate_validation.csv`、`q3_source_coordinate_stress.csv`、`q3_policy_ranking_stress.csv` | Q3→C6 坐标未标定，4860 行为明示情景压力 |
+| 两月 q90 与累计最高边界 | `q4_core_v3.py` | `frontier_model_comparison.csv`、`frontier_maximum_backtest.csv`、`frontier_maximum_scenarios.csv` | 四个重叠窗口仅作诊断；纪录保持基线与 q90+尾差条件边界分开，长期范围没有覆盖率保证 |
+| Loss 与能力 | `q4_core_v3.py` | `bridge_source_coordinate_validation.csv`、`q3_source_coordinate_stress.csv`、`q3_policy_ranking_stress.csv` | Q3→C6 坐标未标定；固定、联立、独立质量三模式共 14580 行明示压力 |
 
 原分支 v2 论文与 v3 核心不一致，故当前 `paper/latex/sections/Q4/main.tex` 依据 v3 结果重写。`source_manifest_v2.json` 和 `source_manifest_v3.json` 只保留来源身份，不作为 main 当前生成清单；main 当前输入、代码和输出哈希由 `outputs/Q4/manifest.json` 核验。[设计](20260926-q4-core-v3-design.md)、[完整审查](20260926-q4-core-v3-review.md)、[验收澄清](20260926-q4-acceptance-clarification.md) 与[图表登记](FIGURES.md)记录原分支的范围和局限。
 

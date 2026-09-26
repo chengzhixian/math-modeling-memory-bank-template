@@ -79,6 +79,7 @@ def main(write: bool = False) -> None:
         if question == "Q4":
             allowed = {"bridge_sample.csv", "c4_resource_audit.csv", "leaderboard_all_versions.csv",
                        "leaderboard_sample.csv", "manifest.json", "upstream_q3_fixed_policy_grid.csv",
+                       "upstream_q3_observed_joint_grid.csv", "upstream_q3_native_Q_sensitivity_grid.csv",
                        "upstream_q3_manifest.json"}
             files = [p for p in files if p.parent != base / "prepared" or p.name in allowed]
         recorded = {p.relative_to(base).as_posix(): sha(p) for p in files}
