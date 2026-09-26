@@ -1,0 +1,142 @@
+{
+  "source_main": "a19039b5d11c91cf32e301dc85b2f4d50b5a75b7",
+  "model": "chm.q1.v2.0",
+  "palette": {
+    "primary": "#0072B2",
+    "positive_auxiliary": "#009E73",
+    "stress_or_adverse": "#E69F00"
+  },
+  "inputs": {
+    "ANSWER.md": "c0504ad8e127804a0e1c65de0676b6bd97bf8b7acfd062f353afc892f98fbfa9",
+    "conflict_validation.json": "82a04c3b745d0852cde40fd20232f709b379ed0151d2e4af95b6bd8cd33bada9",
+    "decision_panel.csv": "b9d5c40166ba16588c04947f513c0752ea2e094ae732a50dfbae7c938dfaa372",
+    "domain_quality.csv": "ab7f13f9d0ff3d0683152d53933a89337cc3fadfefa9b2383772ea9fe3c2d976",
+    "estimated_targetwise.csv": "e67dc1793233d108620028d5d76bc7daf49bade7fac32cf9f9bc539156dcd0e3",
+    "hull_bounds.json": "969f810c0bf54f03492afc243091c339aaf4b27aed5c2164c186e651c7589acc",
+    "interaction_coefficients_13_targets.json": "92e2e64976b7618626ef5d07b253794f105b3b1beeaacc989f13045e6c422b04",
+    "interaction_feature_definition.json": "b9cd7b0de3b1a424e9c43e0b50714ce0d3656f467e67480e4d9ee76f79fb21d5",
+    "refit_replicate_choices.csv": "99502e5ecef0971cd2905c38998cc171315d9b1f2b709afb94c8387c73134a35",
+    "targetwise_oof.csv": "c8e1076e644a3439cdd71909605e84678555f1e7f5927cdc3d327b5581101aa4",
+    "targetwise_validation.csv": "4412c4302d4e850f85fdc84568261f02df2eedb5e329c915baf19f41d9f8d0ae"
+  },
+  "figures": [
+    {
+      "stem": "01_quality",
+      "caption": "数据：A1 共 51,230 条；区间固定评分规则，不涵盖方法选择不确定性。\nQ_A 是工程评分代理；低分不等于文本无用或人工质量判定。",
+      "sources": [
+        "domain_quality.csv"
+      ],
+      "size_inches": [
+        7.2,
+        4.9
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "02_conflict",
+      "caption": "条数与阈值均来自 main 已发布结果；分歧高只触发复核，不机械扣减 Q_A。\n27 条文本案例用于解释规则，并非人工标签；55 条边是统计排序分歧。",
+      "sources": [
+        "conflict_validation.json",
+        "ANSWER.md"
+      ],
+      "size_inches": [
+        7.2,
+        4.8
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "03_validation",
+      "caption": "改善 = (Ridge RMSE − 交互 RMSE) / Ridge RMSE。每格来自一个目标域的配方误差。\nA6–A11 曾用于模型形式判断；1B 中 47/64 配方在训练凸包外。",
+      "sources": [
+        "targetwise_oof.csv",
+        "targetwise_validation.csv"
+      ],
+      "size_inches": [
+        7.2,
+        6.0
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "04_rank_stress",
+      "caption": "标注值为 13 目标域的中位数；目标域并非 13 次独立训练实验。\n右侧 10B/70B 由附件估算得到，不能称为真实大模型训练验证。",
+      "sources": [
+        "targetwise_validation.csv",
+        "estimated_targetwise.csv"
+      ],
+      "size_inches": [
+        7.2,
+        4.9
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "05_recipes",
+      "caption": "每列总和为 100%；“·”表示份额小于 0.5%，完整数值另存 CSV。\n这里展示连续凸包可行解；其位置不等于离散候选编号 136 / 301 / 172 / 477。",
+      "sources": [
+        "hull_bounds.json",
+        "interaction_feature_definition.json"
+      ],
+      "size_inches": [
+        7.2,
+        6.9
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "06_policy_results",
+      "caption": "第四列保护最差目标：最小预测下降 1.98%；与前三列平均目标不同。\n冻结 1M 代理的诊断；首列含非物理预测，须修正后再作收益结论。",
+      "sources": [
+        "hull_bounds.json",
+        "interaction_coefficients_13_targets.json"
+      ],
+      "size_inches": [
+        7.2,
+        6.0
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "07_stability",
+      "caption": "原离散候选依次为 136 / 301 / 172 / 477；无约束等权最稳定。\n重选频数不是连续凸包解的置信区间；质量约束与 minimax 需要报告情景敏感性。",
+      "sources": [
+        "refit_replicate_choices.csv",
+        "refit_stability.json"
+      ],
+      "size_inches": [
+        7.2,
+        4.8
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "08_pair_contributions",
+      "caption": "每格为 γ_uv × p_ref,u × p_ref,v / 参考预测 Loss；表示模型项的局部组成。\n不等于两域因果协同，也不等于增配两域的总效应；主项及配比转移同时影响 Loss。",
+      "sources": [
+        "interaction_coefficients_13_targets.json",
+        "interaction_feature_definition.json"
+      ],
+      "size_inches": [
+        7.2,
+        6.0
+      ],
+      "dpi": 300
+    }
+  ],
+  "layout_audit": {
+    "01_quality": [],
+    "02_conflict": [],
+    "03_validation": [],
+    "04_rank_stress": [],
+    "05_recipes": [],
+    "06_policy_results": [],
+    "07_stability": [],
+    "08_pair_contributions": []
+  },
+  "visual_review": "pending",
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "pandas": "3.0.1",
+  "matplotlib": "3.11.2"
+}

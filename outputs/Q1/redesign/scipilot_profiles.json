@@ -1,0 +1,4431 @@
+{
+  "domain_quality.csv": {
+    "source": "<DataFrame>",
+    "n_rows": 9,
+    "n_cols": 11,
+    "columns": {
+      "dataset_scope": {
+        "type": "unknown",
+        "n_total": 9,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "quality_domain": {
+        "type": "unknown",
+        "n_total": 9,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "n_rows": {
+        "type": "ordinal",
+        "n_total": 9,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 9,
+        "n_unique": 6,
+        "categories": [
+          [
+            "10000",
+            4
+          ],
+          [
+            "1419",
+            1
+          ],
+          [
+            "171",
+            1
+          ],
+          [
+            "9640",
+            1
+          ],
+          [
+            "17523",
+            1
+          ],
+          [
+            "203752",
+            1
+          ]
+        ],
+        "min_group_n": 1,
+        "max_group_n": 4,
+        "small_groups_flag": true
+      },
+      "Q": {
+        "type": "continuous",
+        "n_total": 9,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 9,
+        "mean": 0.8257109195550206,
+        "median": 0.2516700815385636,
+        "sd": 1.4983608379087043,
+        "min": -0.505484640415014,
+        "max": 2.918312769566993,
+        "skewness": 0.48803748071642084,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -4.792996470151293,
+        "outlier_hi": 7.1777075370285885,
+        "needs_log_axis": false
+      },
+      "Q_z_trimmed_mean": {
+        "type": "continuous",
+        "n_total": 9,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 9,
+        "mean": 0.8113311866907491,
+        "median": 0.2550083199308341,
+        "sd": 1.4927486300131443,
+        "min": -0.5267064685191463,
+        "max": 2.830765328320312,
+        "skewness": 0.474302665146631,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -4.85592275607301,
+        "outlier_hi": 7.235655446425408,
+        "needs_log_axis": false
+      },
+      "Q_equal22_median": {
+        "type": "continuous",
+        "n_total": 9,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 9,
+        "mean": 0.3125849424605346,
+        "median": 0.094238422985627,
+        "sd": 0.8406808318908998,
+        "min": -0.5881369440632838,
+        "max": 1.417941499619795,
+        "skewness": 0.3536276171149572,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -2.6110731331601054,
+        "outlier_hi": 3.737739200342711,
+        "needs_log_axis": false
+      },
+      "uncertainty_low": {
+        "type": "continuous",
+        "n_total": 9,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 9,
+        "mean": 0.7960786106283102,
+        "median": 0.237004618161363,
+        "sd": 1.4788684788750046,
+        "min": -0.5116698287970813,
+        "max": 2.787906367685655,
+        "skewness": 0.481341970207936,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -4.791821599300464,
+        "outlier_hi": 7.134529441496175,
+        "needs_log_axis": false
+      },
+      "uncertainty_high": {
+        "type": "continuous",
+        "n_total": 9,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 9,
+        "mean": 0.8472865416549786,
+        "median": 0.2660004837845429,
+        "sd": 1.5041362269599967,
+        "min": -0.4998948243423077,
+        "max": 2.9606246090215587,
+        "skewness": 0.4896566930725701,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -4.79925439078755,
+        "outlier_hi": 7.241505751848714,
+        "needs_log_axis": false
+      },
+      "Q_scale_definition": {
+        "type": "unknown",
+        "n_total": 9,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "missing_note": {
+        "type": "unknown",
+        "n_total": 9,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "score_version": {
+        "type": "unknown",
+        "n_total": 9,
+        "n_null": 0,
+        "missing_rate": 0.0
+      }
+    },
+    "correlation": {
+      "columns": [
+        "Q",
+        "Q_z_trimmed_mean",
+        "Q_equal22_median",
+        "uncertainty_low",
+        "uncertainty_high"
+      ],
+      "matrix": {
+        "Q": {
+          "Q": 1.0,
+          "Q_z_trimmed_mean": 1.0,
+          "Q_equal22_median": 0.992,
+          "uncertainty_low": 1.0,
+          "uncertainty_high": 1.0
+        },
+        "Q_z_trimmed_mean": {
+          "Q": 1.0,
+          "Q_z_trimmed_mean": 1.0,
+          "Q_equal22_median": 0.993,
+          "uncertainty_low": 1.0,
+          "uncertainty_high": 1.0
+        },
+        "Q_equal22_median": {
+          "Q": 0.992,
+          "Q_z_trimmed_mean": 0.993,
+          "Q_equal22_median": 1.0,
+          "uncertainty_low": 0.992,
+          "uncertainty_high": 0.991
+        },
+        "uncertainty_low": {
+          "Q": 1.0,
+          "Q_z_trimmed_mean": 1.0,
+          "Q_equal22_median": 0.992,
+          "uncertainty_low": 1.0,
+          "uncertainty_high": 1.0
+        },
+        "uncertainty_high": {
+          "Q": 1.0,
+          "Q_z_trimmed_mean": 1.0,
+          "Q_equal22_median": 0.991,
+          "uncertainty_low": 1.0,
+          "uncertainty_high": 1.0
+        }
+      },
+      "pairs_sorted": [
+        {
+          "a": "Q",
+          "b": "uncertainty_high",
+          "r": 0.9999736990295924,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "Q_z_trimmed_mean",
+          "b": "uncertainty_low",
+          "r": 0.9999414945384194,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "Q",
+          "b": "Q_z_trimmed_mean",
+          "r": 0.999761771518291,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "Q",
+          "b": "uncertainty_low",
+          "r": 0.9997504688728465,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "Q_z_trimmed_mean",
+          "b": "uncertainty_high",
+          "r": 0.9996635793309614,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "uncertainty_low",
+          "b": "uncertainty_high",
+          "r": 0.9996133140271763,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "Q_z_trimmed_mean",
+          "b": "Q_equal22_median",
+          "r": 0.9927465585636255,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "Q_equal22_median",
+          "b": "uncertainty_low",
+          "r": 0.9918887573674248,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "Q",
+          "b": "Q_equal22_median",
+          "r": 0.9915069329513104,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "Q_equal22_median",
+          "b": "uncertainty_high",
+          "r": 0.9914684704317792,
+          "magnitude": "very strong"
+        }
+      ]
+    },
+    "group_summary": null,
+    "warnings": [
+      "列 'n_rows' 至少有一个类别 n<10 — 小样本必须展示原始数据点，不要只画均值柱状图。"
+    ],
+    "suggestions": [
+      "分类 vs 连续，样本量充足 → 箱线图 / 小提琴图，或带误差棒的柱状图（误差棒说明 SD/SEM/CI）",
+      "≥3 个连续变量 → 相关性热力图（['Q', 'Q_z_trimmed_mean', 'Q_equal22_median', 'uncertainty_low', 'uncertainty_high']）或 pairplot 散点矩阵"
+    ]
+  },
+  "targetwise_validation.csv": {
+    "source": "<DataFrame>",
+    "n_rows": 117,
+    "n_cols": 18,
+    "columns": {
+      "scope": {
+        "type": "unknown",
+        "n_total": 117,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "support_group": {
+        "type": "unknown",
+        "n_total": 117,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "target": {
+        "type": "unknown",
+        "n_total": 117,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "n": {
+        "type": "ordinal",
+        "n_total": 117,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 117,
+        "n_unique": 6,
+        "categories": [
+          [
+            "256",
+            26
+          ],
+          [
+            "2",
+            26
+          ],
+          [
+            "254",
+            26
+          ],
+          [
+            "64",
+            13
+          ],
+          [
+            "17",
+            13
+          ],
+          [
+            "47",
+            13
+          ]
+        ],
+        "min_group_n": 13,
+        "max_group_n": 26,
+        "small_groups_flag": false
+      },
+      "ridge_rmse": {
+        "type": "continuous",
+        "n_total": 117,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 117,
+        "mean": 1.7831321945079621,
+        "median": 1.5581854773788024,
+        "sd": 1.2255038930078137,
+        "min": 0.144091063417989,
+        "max": 4.444544654474933,
+        "skewness": 0.36034676979376523,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -2.5810787729272944,
+        "outlier_hi": 5.928859890224932,
+        "needs_log_axis": "False"
+      },
+      "interaction_rmse": {
+        "type": "continuous",
+        "n_total": 117,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 117,
+        "mean": 1.6865511596814624,
+        "median": 1.5456209507201724,
+        "sd": 1.139351846012359,
+        "min": 0.1146969573154104,
+        "max": 4.087787619529036,
+        "skewness": 0.26485794278524394,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -2.5921186478771747,
+        "outlier_hi": 5.781858796796962,
+        "needs_log_axis": "False"
+      },
+      "constant_rmse": {
+        "type": "continuous",
+        "n_total": 117,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 117,
+        "mean": 1.8260648086893267,
+        "median": 1.614885492353693,
+        "sd": 1.11702691303837,
+        "min": 0.0931273710806833,
+        "max": 4.2473287917834535,
+        "skewness": 0.36580710642906833,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -2.017865244648113,
+        "outlier_hi": 5.605177753122494,
+        "needs_log_axis": "False"
+      },
+      "ridge_spearman": {
+        "type": "continuous",
+        "n_total": 117,
+        "n_null": 26,
+        "missing_rate": 0.2222222222222222,
+        "n": 91,
+        "mean": 0.7899764191067676,
+        "median": 0.8186790473557695,
+        "sd": 0.10381755840629414,
+        "min": 0.3799019607843137,
+        "max": 0.9534313725490198,
+        "skewness": -1.1117093064783239,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 3,
+        "outlier_lo": 0.5596206725351067,
+        "outlier_hi": 1.0543207133528114,
+        "needs_log_axis": "False"
+      },
+      "interaction_spearman": {
+        "type": "continuous",
+        "n_total": 117,
+        "n_null": 26,
+        "missing_rate": 0.2222222222222222,
+        "n": 91,
+        "mean": 0.8121268172341396,
+        "median": 0.8392617017624169,
+        "sd": 0.11405311041625613,
+        "min": 0.3112745098039216,
+        "max": 0.9950980392156864,
+        "skewness": -1.2951161470425652,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 3,
+        "outlier_lo": 0.551449224160274,
+        "outlier_hi": 1.0906682305964244,
+        "needs_log_axis": "False"
+      },
+      "ridge_mae": {
+        "type": "continuous",
+        "n_total": 117,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 117,
+        "mean": 1.7498883414822581,
+        "median": 1.5398217676966266,
+        "sd": 1.2395813065383583,
+        "min": 0.1239010849317305,
+        "max": 4.434194878293025,
+        "skewness": 0.3597515112827091,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -2.8415783581500116,
+        "outlier_hi": 6.079513978515527,
+        "needs_log_axis": "False"
+      },
+      "interaction_mae": {
+        "type": "continuous",
+        "n_total": 117,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 117,
+        "mean": 1.6529842236107763,
+        "median": 1.5132250860397858,
+        "sd": 1.150813482179777,
+        "min": 0.0846541264410047,
+        "max": 4.067436364289667,
+        "skewness": 0.26264105206158167,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -2.776221041996895,
+        "outlier_hi": 5.886953624020628,
+        "needs_log_axis": "False"
+      },
+      "ridge_bias": {
+        "type": "continuous",
+        "n_total": 117,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 117,
+        "mean": 1.6651897257266415,
+        "median": 1.5398217676966266,
+        "sd": 1.3291537439336576,
+        "min": -0.0133241740988718,
+        "max": 4.434194878293025,
+        "skewness": 0.2618864530610658,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -3.5831424709454702,
+        "outlier_hi": 6.524452446192802,
+        "needs_log_axis": false
+      },
+      "interaction_bias": {
+        "type": "continuous",
+        "n_total": 117,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 117,
+        "mean": 1.5686679149921599,
+        "median": 1.5132250860397858,
+        "sd": 1.2406593373391412,
+        "min": -0.0176639390582377,
+        "max": 4.067436364289667,
+        "skewness": 0.17330776433898068,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -3.591636303021756,
+        "outlier_hi": 6.376202780635545,
+        "needs_log_axis": false
+      },
+      "ridge_gain_vs_constant": {
+        "type": "continuous",
+        "n_total": 117,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 117,
+        "mean": 0.07021791837119093,
+        "median": 0.032017360509344,
+        "sd": 0.4184353709075116,
+        "min": -3.878624848913044,
+        "max": 0.6172640974742919,
+        "skewness": -7.040269951047803,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 1,
+        "outlier_lo": -0.4199437461522785,
+        "outlier_hi": 0.6475399349720871,
+        "needs_log_axis": false
+      },
+      "interaction_gain_vs_constant": {
+        "type": "continuous",
+        "n_total": 117,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 117,
+        "mean": 0.12115429901426751,
+        "median": 0.0564720555493026,
+        "sd": 0.3969467065817662,
+        "min": -3.5488642244107007,
+        "max": 0.6953409709544436,
+        "skewness": -6.582840518313994,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 1,
+        "outlier_lo": -0.3958229166696985,
+        "outlier_hi": 0.7369458293818103,
+        "needs_log_axis": false
+      },
+      "paired_mse_improvement": {
+        "type": "continuous",
+        "n_total": 117,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 117,
+        "mean": 0.5371014283619309,
+        "median": 0.08526764023729,
+        "sd": 0.8906087030437133,
+        "min": -0.0038634963661331,
+        "max": 4.677782390337153,
+        "skewness": 2.168489495591637,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 19,
+        "outlier_lo": -0.8080762997929442,
+        "outlier_hi": 1.3925972668608488,
+        "needs_log_axis": false
+      },
+      "paired_mse_bootstrap_low": {
+        "type": "continuous",
+        "n_total": 117,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 117,
+        "mean": 0.41325298046477654,
+        "median": 0.0324943453352907,
+        "sd": 0.7237382228631444,
+        "min": -0.1583945782710704,
+        "max": 3.4053373488131724,
+        "skewness": 2.0270588118982937,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 17,
+        "outlier_lo": -0.7124084299108977,
+        "outlier_hi": 1.1858205872707615,
+        "needs_log_axis": false
+      },
+      "paired_mse_bootstrap_high": {
+        "type": "continuous",
+        "n_total": 117,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 117,
+        "mean": 0.6590520861653976,
+        "median": 0.1516282904464239,
+        "sd": 1.0579973452090017,
+        "min": 0.0039244645583711,
+        "max": 5.892242298149095,
+        "skewness": 2.269298532460441,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 19,
+        "outlier_lo": -0.9452335958868493,
+        "outlier_hi": 1.6613292012397949,
+        "needs_log_axis": "True"
+      }
+    },
+    "correlation": {
+      "columns": [
+        "ridge_rmse",
+        "interaction_rmse",
+        "constant_rmse",
+        "ridge_spearman",
+        "interaction_spearman",
+        "ridge_mae",
+        "interaction_mae",
+        "ridge_bias",
+        "interaction_bias",
+        "ridge_gain_vs_constant",
+        "interaction_gain_vs_constant",
+        "paired_mse_improvement",
+        "paired_mse_bootstrap_low",
+        "paired_mse_bootstrap_high"
+      ],
+      "matrix": {
+        "ridge_rmse": {
+          "ridge_rmse": 1.0,
+          "interaction_rmse": 0.997,
+          "constant_rmse": 0.995,
+          "ridge_spearman": -0.438,
+          "interaction_spearman": -0.254,
+          "ridge_mae": 1.0,
+          "interaction_mae": 0.997,
+          "ridge_bias": 0.992,
+          "interaction_bias": 0.987,
+          "ridge_gain_vs_constant": -0.818,
+          "interaction_gain_vs_constant": -0.731,
+          "paired_mse_improvement": 0.79,
+          "paired_mse_bootstrap_low": 0.789,
+          "paired_mse_bootstrap_high": 0.789
+        },
+        "interaction_rmse": {
+          "ridge_rmse": 0.997,
+          "interaction_rmse": 1.0,
+          "constant_rmse": 0.992,
+          "ridge_spearman": -0.455,
+          "interaction_spearman": -0.282,
+          "ridge_mae": 0.997,
+          "interaction_mae": 1.0,
+          "ridge_bias": 0.99,
+          "interaction_bias": 0.99,
+          "ridge_gain_vs_constant": -0.836,
+          "interaction_gain_vs_constant": -0.76,
+          "paired_mse_improvement": 0.746,
+          "paired_mse_bootstrap_low": 0.745,
+          "paired_mse_bootstrap_high": 0.745
+        },
+        "constant_rmse": {
+          "ridge_rmse": 0.995,
+          "interaction_rmse": 0.992,
+          "constant_rmse": 1.0,
+          "ridge_spearman": -0.424,
+          "interaction_spearman": -0.228,
+          "ridge_mae": 0.994,
+          "interaction_mae": 0.99,
+          "ridge_bias": 0.98,
+          "interaction_bias": 0.974,
+          "ridge_gain_vs_constant": -0.786,
+          "interaction_gain_vs_constant": -0.696,
+          "paired_mse_improvement": 0.795,
+          "paired_mse_bootstrap_low": 0.795,
+          "paired_mse_bootstrap_high": 0.793
+        },
+        "ridge_spearman": {
+          "ridge_rmse": -0.438,
+          "interaction_rmse": -0.455,
+          "constant_rmse": -0.424,
+          "ridge_spearman": 1.0,
+          "interaction_spearman": 0.852,
+          "ridge_mae": -0.434,
+          "interaction_mae": -0.452,
+          "ridge_bias": -0.411,
+          "interaction_bias": -0.425,
+          "ridge_gain_vs_constant": 0.397,
+          "interaction_gain_vs_constant": 0.385,
+          "paired_mse_improvement": -0.196,
+          "paired_mse_bootstrap_low": -0.2,
+          "paired_mse_bootstrap_high": -0.194
+        },
+        "interaction_spearman": {
+          "ridge_rmse": -0.254,
+          "interaction_rmse": -0.282,
+          "constant_rmse": -0.228,
+          "ridge_spearman": 0.852,
+          "interaction_spearman": 1.0,
+          "ridge_mae": -0.251,
+          "interaction_mae": -0.279,
+          "ridge_bias": -0.235,
+          "interaction_bias": -0.26,
+          "ridge_gain_vs_constant": 0.313,
+          "interaction_gain_vs_constant": 0.337,
+          "paired_mse_improvement": 0.046,
+          "paired_mse_bootstrap_low": 0.037,
+          "paired_mse_bootstrap_high": 0.049
+        },
+        "ridge_mae": {
+          "ridge_rmse": 1.0,
+          "interaction_rmse": 0.997,
+          "constant_rmse": 0.994,
+          "ridge_spearman": -0.434,
+          "interaction_spearman": -0.251,
+          "ridge_mae": 1.0,
+          "interaction_mae": 0.997,
+          "ridge_bias": 0.993,
+          "interaction_bias": 0.988,
+          "ridge_gain_vs_constant": -0.819,
+          "interaction_gain_vs_constant": -0.731,
+          "paired_mse_improvement": 0.791,
+          "paired_mse_bootstrap_low": 0.79,
+          "paired_mse_bootstrap_high": 0.789
+        },
+        "interaction_mae": {
+          "ridge_rmse": 0.997,
+          "interaction_rmse": 1.0,
+          "constant_rmse": 0.99,
+          "ridge_spearman": -0.452,
+          "interaction_spearman": -0.279,
+          "ridge_mae": 0.997,
+          "interaction_mae": 1.0,
+          "ridge_bias": 0.992,
+          "interaction_bias": 0.992,
+          "ridge_gain_vs_constant": -0.837,
+          "interaction_gain_vs_constant": -0.761,
+          "paired_mse_improvement": 0.745,
+          "paired_mse_bootstrap_low": 0.744,
+          "paired_mse_bootstrap_high": 0.744
+        },
+        "ridge_bias": {
+          "ridge_rmse": 0.992,
+          "interaction_rmse": 0.99,
+          "constant_rmse": 0.98,
+          "ridge_spearman": -0.411,
+          "interaction_spearman": -0.235,
+          "ridge_mae": 0.993,
+          "interaction_mae": 0.992,
+          "ridge_bias": 1.0,
+          "interaction_bias": 0.998,
+          "ridge_gain_vs_constant": -0.84,
+          "interaction_gain_vs_constant": -0.757,
+          "paired_mse_improvement": 0.77,
+          "paired_mse_bootstrap_low": 0.77,
+          "paired_mse_bootstrap_high": 0.769
+        },
+        "interaction_bias": {
+          "ridge_rmse": 0.987,
+          "interaction_rmse": 0.99,
+          "constant_rmse": 0.974,
+          "ridge_spearman": -0.425,
+          "interaction_spearman": -0.26,
+          "ridge_mae": 0.988,
+          "interaction_mae": 0.992,
+          "ridge_bias": 0.998,
+          "interaction_bias": 1.0,
+          "ridge_gain_vs_constant": -0.857,
+          "interaction_gain_vs_constant": -0.784,
+          "paired_mse_improvement": 0.726,
+          "paired_mse_bootstrap_low": 0.725,
+          "paired_mse_bootstrap_high": 0.725
+        },
+        "ridge_gain_vs_constant": {
+          "ridge_rmse": -0.818,
+          "interaction_rmse": -0.836,
+          "constant_rmse": -0.786,
+          "ridge_spearman": 0.397,
+          "interaction_spearman": 0.313,
+          "ridge_mae": -0.819,
+          "interaction_mae": -0.837,
+          "ridge_bias": -0.84,
+          "interaction_bias": -0.857,
+          "ridge_gain_vs_constant": 1.0,
+          "interaction_gain_vs_constant": 0.982,
+          "paired_mse_improvement": -0.463,
+          "paired_mse_bootstrap_low": -0.456,
+          "paired_mse_bootstrap_high": -0.467
+        },
+        "interaction_gain_vs_constant": {
+          "ridge_rmse": -0.731,
+          "interaction_rmse": -0.76,
+          "constant_rmse": -0.696,
+          "ridge_spearman": 0.385,
+          "interaction_spearman": 0.337,
+          "ridge_mae": -0.731,
+          "interaction_mae": -0.761,
+          "ridge_bias": -0.757,
+          "interaction_bias": -0.784,
+          "ridge_gain_vs_constant": 0.982,
+          "interaction_gain_vs_constant": 1.0,
+          "paired_mse_improvement": -0.311,
+          "paired_mse_bootstrap_low": -0.302,
+          "paired_mse_bootstrap_high": -0.317
+        },
+        "paired_mse_improvement": {
+          "ridge_rmse": 0.79,
+          "interaction_rmse": 0.746,
+          "constant_rmse": 0.795,
+          "ridge_spearman": -0.196,
+          "interaction_spearman": 0.046,
+          "ridge_mae": 0.791,
+          "interaction_mae": 0.745,
+          "ridge_bias": 0.77,
+          "interaction_bias": 0.726,
+          "ridge_gain_vs_constant": -0.463,
+          "interaction_gain_vs_constant": -0.311,
+          "paired_mse_improvement": 1.0,
+          "paired_mse_bootstrap_low": 0.997,
+          "paired_mse_bootstrap_high": 0.999
+        },
+        "paired_mse_bootstrap_low": {
+          "ridge_rmse": 0.789,
+          "interaction_rmse": 0.745,
+          "constant_rmse": 0.795,
+          "ridge_spearman": -0.2,
+          "interaction_spearman": 0.037,
+          "ridge_mae": 0.79,
+          "interaction_mae": 0.744,
+          "ridge_bias": 0.77,
+          "interaction_bias": 0.725,
+          "ridge_gain_vs_constant": -0.456,
+          "interaction_gain_vs_constant": -0.302,
+          "paired_mse_improvement": 0.997,
+          "paired_mse_bootstrap_low": 1.0,
+          "paired_mse_bootstrap_high": 0.992
+        },
+        "paired_mse_bootstrap_high": {
+          "ridge_rmse": 0.789,
+          "interaction_rmse": 0.745,
+          "constant_rmse": 0.793,
+          "ridge_spearman": -0.194,
+          "interaction_spearman": 0.049,
+          "ridge_mae": 0.789,
+          "interaction_mae": 0.744,
+          "ridge_bias": 0.769,
+          "interaction_bias": 0.725,
+          "ridge_gain_vs_constant": -0.467,
+          "interaction_gain_vs_constant": -0.317,
+          "paired_mse_improvement": 0.999,
+          "paired_mse_bootstrap_low": 0.992,
+          "paired_mse_bootstrap_high": 1.0
+        }
+      },
+      "pairs_sorted": [
+        {
+          "a": "ridge_rmse",
+          "b": "ridge_mae",
+          "r": 0.9997532314228564,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "interaction_rmse",
+          "b": "interaction_mae",
+          "r": 0.9997136670263165,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "paired_mse_improvement",
+          "b": "paired_mse_bootstrap_high",
+          "r": 0.9986330225029355,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_bias",
+          "b": "interaction_bias",
+          "r": 0.9976043830010282,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_rmse",
+          "b": "interaction_rmse",
+          "r": 0.9974358332430237,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_mae",
+          "b": "interaction_mae",
+          "r": 0.9972585692615307,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_rmse",
+          "b": "interaction_mae",
+          "r": 0.9971187711706506,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "interaction_rmse",
+          "b": "ridge_mae",
+          "r": 0.9970559632488161,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "paired_mse_improvement",
+          "b": "paired_mse_bootstrap_low",
+          "r": 0.9969543863349405,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_rmse",
+          "b": "constant_rmse",
+          "r": 0.9953203259429623,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "constant_rmse",
+          "b": "ridge_mae",
+          "r": 0.9944459386376833,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_mae",
+          "b": "ridge_bias",
+          "r": 0.993105429175362,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "interaction_mae",
+          "b": "interaction_bias",
+          "r": 0.9921379409915998,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "interaction_mae",
+          "b": "ridge_bias",
+          "r": 0.9919272046054729,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_rmse",
+          "b": "ridge_bias",
+          "r": 0.9916804578924244,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "paired_mse_bootstrap_low",
+          "b": "paired_mse_bootstrap_high",
+          "r": 0.9916063347961639,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "interaction_rmse",
+          "b": "constant_rmse",
+          "r": 0.9915419799669775,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "interaction_rmse",
+          "b": "interaction_bias",
+          "r": 0.9904719531839218,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "constant_rmse",
+          "b": "interaction_mae",
+          "r": 0.9904482861408938,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "interaction_rmse",
+          "b": "ridge_bias",
+          "r": 0.9904242150221663,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_mae",
+          "b": "interaction_bias",
+          "r": 0.9882576541990398,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_rmse",
+          "b": "interaction_bias",
+          "r": 0.9868525090230389,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_gain_vs_constant",
+          "b": "interaction_gain_vs_constant",
+          "r": 0.9821640438269355,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "constant_rmse",
+          "b": "ridge_bias",
+          "r": 0.9803907020981069,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "constant_rmse",
+          "b": "interaction_bias",
+          "r": 0.9738694667810617,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "interaction_bias",
+          "b": "ridge_gain_vs_constant",
+          "r": -0.8565614261992035,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_spearman",
+          "b": "interaction_spearman",
+          "r": 0.8523121910652528,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_bias",
+          "b": "ridge_gain_vs_constant",
+          "r": -0.8400015101898587,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "interaction_mae",
+          "b": "ridge_gain_vs_constant",
+          "r": -0.8370664021089125,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "interaction_rmse",
+          "b": "ridge_gain_vs_constant",
+          "r": -0.8356679540521972,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_mae",
+          "b": "ridge_gain_vs_constant",
+          "r": -0.818767794804549,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_rmse",
+          "b": "ridge_gain_vs_constant",
+          "r": -0.8181274176369295,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "constant_rmse",
+          "b": "paired_mse_improvement",
+          "r": 0.7946499385413509,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "constant_rmse",
+          "b": "paired_mse_bootstrap_low",
+          "r": 0.7945201234525822,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "constant_rmse",
+          "b": "paired_mse_bootstrap_high",
+          "r": 0.7925188870116884,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_mae",
+          "b": "paired_mse_improvement",
+          "r": 0.7905438235397344,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_rmse",
+          "b": "paired_mse_improvement",
+          "r": 0.7902234639080353,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_mae",
+          "b": "paired_mse_bootstrap_low",
+          "r": 0.7900202412954441,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_rmse",
+          "b": "paired_mse_bootstrap_low",
+          "r": 0.7892845947506267,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_rmse",
+          "b": "paired_mse_bootstrap_high",
+          "r": 0.7889013148652316,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_mae",
+          "b": "paired_mse_bootstrap_high",
+          "r": 0.7888993788862723,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "constant_rmse",
+          "b": "ridge_gain_vs_constant",
+          "r": -0.7859326591329091,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "interaction_bias",
+          "b": "interaction_gain_vs_constant",
+          "r": -0.7841322975077898,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_bias",
+          "b": "paired_mse_improvement",
+          "r": 0.7702659808490431,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_bias",
+          "b": "paired_mse_bootstrap_low",
+          "r": 0.7697512055967581,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_bias",
+          "b": "paired_mse_bootstrap_high",
+          "r": 0.7686431502096954,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "interaction_mae",
+          "b": "interaction_gain_vs_constant",
+          "r": -0.7609742112001578,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "interaction_rmse",
+          "b": "interaction_gain_vs_constant",
+          "r": -0.7596134346910671,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_bias",
+          "b": "interaction_gain_vs_constant",
+          "r": -0.7570257893698025,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "interaction_rmse",
+          "b": "paired_mse_improvement",
+          "r": 0.7463274762104138,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "interaction_rmse",
+          "b": "paired_mse_bootstrap_high",
+          "r": 0.7454652169648321,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "interaction_rmse",
+          "b": "paired_mse_bootstrap_low",
+          "r": 0.7450665620063054,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "interaction_mae",
+          "b": "paired_mse_improvement",
+          "r": 0.7450304774923773,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "interaction_mae",
+          "b": "paired_mse_bootstrap_low",
+          "r": 0.7443186139264979,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "interaction_mae",
+          "b": "paired_mse_bootstrap_high",
+          "r": 0.7437749773466219,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_mae",
+          "b": "interaction_gain_vs_constant",
+          "r": -0.7312493944335599,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_rmse",
+          "b": "interaction_gain_vs_constant",
+          "r": -0.7308915364751549,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "interaction_bias",
+          "b": "paired_mse_improvement",
+          "r": 0.7261179629075534,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "interaction_bias",
+          "b": "paired_mse_bootstrap_low",
+          "r": 0.7254411800590486,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "interaction_bias",
+          "b": "paired_mse_bootstrap_high",
+          "r": 0.7248490970243063,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "constant_rmse",
+          "b": "interaction_gain_vs_constant",
+          "r": -0.6960034301184491,
+          "magnitude": "strong"
+        },
+        {
+          "a": "ridge_gain_vs_constant",
+          "b": "paired_mse_bootstrap_high",
+          "r": -0.46738985101374486,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "ridge_gain_vs_constant",
+          "b": "paired_mse_improvement",
+          "r": -0.46321386669708,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "ridge_gain_vs_constant",
+          "b": "paired_mse_bootstrap_low",
+          "r": -0.4560230617867925,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "interaction_rmse",
+          "b": "ridge_spearman",
+          "r": -0.45495531521594934,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "ridge_spearman",
+          "b": "interaction_mae",
+          "r": -0.4516194341349244,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "ridge_rmse",
+          "b": "ridge_spearman",
+          "r": -0.4377850514896796,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "ridge_spearman",
+          "b": "ridge_mae",
+          "r": -0.43369114984101775,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "ridge_spearman",
+          "b": "interaction_bias",
+          "r": -0.4253593427421966,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "constant_rmse",
+          "b": "ridge_spearman",
+          "r": -0.4239986674366308,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "ridge_spearman",
+          "b": "ridge_bias",
+          "r": -0.41092031760409115,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "ridge_spearman",
+          "b": "ridge_gain_vs_constant",
+          "r": 0.397216753098177,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "ridge_spearman",
+          "b": "interaction_gain_vs_constant",
+          "r": 0.3849831590882983,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "interaction_spearman",
+          "b": "interaction_gain_vs_constant",
+          "r": 0.3374040245426972,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "interaction_gain_vs_constant",
+          "b": "paired_mse_bootstrap_high",
+          "r": -0.3173224557903873,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "interaction_spearman",
+          "b": "ridge_gain_vs_constant",
+          "r": 0.3130717835477767,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "interaction_gain_vs_constant",
+          "b": "paired_mse_improvement",
+          "r": -0.31134417201356684,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "interaction_gain_vs_constant",
+          "b": "paired_mse_bootstrap_low",
+          "r": -0.30240902387270535,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "interaction_rmse",
+          "b": "interaction_spearman",
+          "r": -0.2818076783548612,
+          "magnitude": "weak"
+        },
+        {
+          "a": "interaction_spearman",
+          "b": "interaction_mae",
+          "r": -0.27942363595064673,
+          "magnitude": "weak"
+        },
+        {
+          "a": "interaction_spearman",
+          "b": "interaction_bias",
+          "r": -0.2595423483314437,
+          "magnitude": "weak"
+        },
+        {
+          "a": "ridge_rmse",
+          "b": "interaction_spearman",
+          "r": -0.25447119686244213,
+          "magnitude": "weak"
+        },
+        {
+          "a": "interaction_spearman",
+          "b": "ridge_mae",
+          "r": -0.2508266950695606,
+          "magnitude": "weak"
+        },
+        {
+          "a": "interaction_spearman",
+          "b": "ridge_bias",
+          "r": -0.23498038793966852,
+          "magnitude": "weak"
+        },
+        {
+          "a": "constant_rmse",
+          "b": "interaction_spearman",
+          "r": -0.22817457354583345,
+          "magnitude": "weak"
+        },
+        {
+          "a": "ridge_spearman",
+          "b": "paired_mse_bootstrap_low",
+          "r": -0.19950865477496293,
+          "magnitude": "weak"
+        },
+        {
+          "a": "ridge_spearman",
+          "b": "paired_mse_improvement",
+          "r": -0.19615599887131352,
+          "magnitude": "weak"
+        },
+        {
+          "a": "ridge_spearman",
+          "b": "paired_mse_bootstrap_high",
+          "r": -0.19358209765550694,
+          "magnitude": "weak"
+        },
+        {
+          "a": "interaction_spearman",
+          "b": "paired_mse_bootstrap_high",
+          "r": 0.04892931011047212,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "interaction_spearman",
+          "b": "paired_mse_improvement",
+          "r": 0.04567588840228446,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "interaction_spearman",
+          "b": "paired_mse_bootstrap_low",
+          "r": 0.03659591674213738,
+          "magnitude": "negligible"
+        }
+      ]
+    },
+    "group_summary": null,
+    "warnings": [
+      "列 'ridge_spearman' 缺失率 22% — 画图前考虑是否填补、剔除、或在图注中交代。",
+      "列 'interaction_spearman' 缺失率 22% — 画图前考虑是否填补、剔除、或在图注中交代。"
+    ],
+    "suggestions": [
+      "分类 vs 连续，样本量充足 → 箱线图 / 小提琴图，或带误差棒的柱状图（误差棒说明 SD/SEM/CI）",
+      "≥3 个连续变量 → 相关性热力图（['ridge_rmse', 'interaction_rmse', 'constant_rmse', 'ridge_spearman', 'interaction_spearman']）或 pairplot 散点矩阵",
+      "ridge_spearman 高度偏态（skew=-1.11）→ 考虑对数变换或小提琴图代替均值柱图",
+      "interaction_spearman 高度偏态（skew=-1.30）→ 考虑对数变换或小提琴图代替均值柱图",
+      "ridge_gain_vs_constant 高度偏态（skew=-7.04）→ 考虑对数变换或小提琴图代替均值柱图",
+      "interaction_gain_vs_constant 高度偏态（skew=-6.58）→ 考虑对数变换或小提琴图代替均值柱图",
+      "paired_mse_improvement 高度偏态（skew=2.17）→ 考虑对数变换或小提琴图代替均值柱图",
+      "paired_mse_bootstrap_low 高度偏态（skew=2.03）→ 考虑对数变换或小提琴图代替均值柱图",
+      "paired_mse_bootstrap_high 跨数个量级（0.00392 ~ 5.89）→ 用对数 y 轴"
+    ]
+  },
+  "targetwise_oof.csv": {
+    "source": "<DataFrame>",
+    "n_rows": 39,
+    "n_cols": 6,
+    "columns": {
+      "target": {
+        "type": "unknown",
+        "n_total": 39,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "model": {
+        "type": "unknown",
+        "n_total": 39,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "n_outer_predictions": {
+        "type": "ordinal",
+        "n_total": 39,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 39,
+        "n_unique": 1,
+        "categories": [
+          [
+            "512",
+            39
+          ]
+        ],
+        "min_group_n": 39,
+        "max_group_n": 39,
+        "small_groups_flag": false
+      },
+      "oof_rmse": {
+        "type": "continuous",
+        "n_total": 39,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 39,
+        "mean": 0.5756076755173581,
+        "median": 0.5291073294518748,
+        "sd": 0.33044343322148834,
+        "min": 0.1368826783921182,
+        "max": 1.5393434548179412,
+        "skewness": 0.8939284199610751,
+        "skew_label": "moderately skewed",
+        "n_outliers_iqr": 1,
+        "outlier_lo": -0.33048490586680546,
+        "outlier_hi": 1.349460697544817,
+        "needs_log_axis": "False"
+      },
+      "oof_mae": {
+        "type": "continuous",
+        "n_total": 39,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 39,
+        "mean": 0.4864757930046227,
+        "median": 0.4394321717304322,
+        "sd": 0.30382187426761365,
+        "min": 0.1111387182025601,
+        "max": 1.4469779909673592,
+        "skewness": 1.1477836696194905,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 1,
+        "outlier_lo": -0.31866196062540436,
+        "outlier_hi": 1.1712220385787724,
+        "needs_log_axis": "False"
+      },
+      "oof_spearman": {
+        "type": "continuous",
+        "n_total": 39,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 39,
+        "mean": 0.5208227456895316,
+        "median": 0.8042244595507032,
+        "sd": 0.44176319407995046,
+        "min": -0.1284675457900989,
+        "max": 0.914084315383207,
+        "skewness": -0.6491127246971152,
+        "skew_label": "moderately skewed",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -1.4581629108415646,
+        "outlier_hi": 2.251673232594592,
+        "needs_log_axis": false
+      }
+    },
+    "correlation": {
+      "columns": [
+        "oof_rmse",
+        "oof_mae",
+        "oof_spearman"
+      ],
+      "matrix": {
+        "oof_rmse": {
+          "oof_rmse": 1.0,
+          "oof_mae": 0.995,
+          "oof_spearman": -0.463
+        },
+        "oof_mae": {
+          "oof_rmse": 0.995,
+          "oof_mae": 1.0,
+          "oof_spearman": -0.448
+        },
+        "oof_spearman": {
+          "oof_rmse": -0.463,
+          "oof_mae": -0.448,
+          "oof_spearman": 1.0
+        }
+      },
+      "pairs_sorted": [
+        {
+          "a": "oof_rmse",
+          "b": "oof_mae",
+          "r": 0.9949548511076963,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "oof_rmse",
+          "b": "oof_spearman",
+          "r": -0.4632266281288824,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "oof_mae",
+          "b": "oof_spearman",
+          "r": -0.4484827323379768,
+          "magnitude": "moderate"
+        }
+      ]
+    },
+    "group_summary": null,
+    "warnings": [],
+    "suggestions": [
+      "分类 vs 连续，样本量充足 → 箱线图 / 小提琴图，或带误差棒的柱状图（误差棒说明 SD/SEM/CI）",
+      "≥3 个连续变量 → 相关性热力图（['oof_rmse', 'oof_mae', 'oof_spearman']）或 pairplot 散点矩阵",
+      "oof_mae 高度偏态（skew=1.15）→ 考虑对数变换或小提琴图代替均值柱图"
+    ]
+  },
+  "estimated_targetwise.csv": {
+    "source": "<DataFrame>",
+    "n_rows": 26,
+    "n_cols": 8,
+    "columns": {
+      "scope": {
+        "type": "unknown",
+        "n_total": 26,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "target": {
+        "type": "unknown",
+        "n_total": 26,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "n": {
+        "type": "ordinal",
+        "n_total": 26,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 26,
+        "n_unique": 1,
+        "categories": [
+          [
+            "63",
+            26
+          ]
+        ],
+        "min_group_n": 26,
+        "max_group_n": 26,
+        "small_groups_flag": false
+      },
+      "v2_spearman": {
+        "type": "continuous",
+        "n_total": 26,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 26,
+        "mean": 0.4439680252890055,
+        "median": 0.4437308658417134,
+        "sd": 0.18735318151122973,
+        "min": 0.0921178955453149,
+        "max": 0.7026689708141322,
+        "skewness": -0.319417648764409,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -0.06013057166891744,
+        "outlier_hi": 1.0005368683469724,
+        "needs_log_axis": "False"
+      },
+      "ridge_spearman": {
+        "type": "continuous",
+        "n_total": 26,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 26,
+        "mean": 0.45323732931235716,
+        "median": 0.47283293647129765,
+        "sd": 0.18695886738089698,
+        "min": 0.0948540706605222,
+        "max": 0.7125576036866359,
+        "skewness": -0.4454331108653416,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -0.04963540960950863,
+        "outlier_hi": 1.0085830890836778,
+        "needs_log_axis": "False"
+      },
+      "v2_rmse_absolute_cross_scale": {
+        "type": "continuous",
+        "n_total": 26,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 26,
+        "mean": 3.8085498121991823,
+        "median": 3.8140833166852914,
+        "sd": 0.42771351611452535,
+        "min": 2.802983299093576,
+        "max": 4.956290296714904,
+        "skewness": 0.23190527733631147,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 2,
+        "outlier_lo": 2.9902862665396017,
+        "outlier_hi": 4.578035490567807,
+        "needs_log_axis": "False"
+      },
+      "ridge_rmse_absolute_cross_scale": {
+        "type": "continuous",
+        "n_total": 26,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 26,
+        "mean": 3.7964287489485646,
+        "median": 3.8112062640569264,
+        "sd": 0.4253423723523741,
+        "min": 2.8247608915145936,
+        "max": 4.94763563845431,
+        "skewness": 0.31409617855616856,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 2,
+        "outlier_lo": 3.0018835626124796,
+        "outlier_hi": 4.555031866689558,
+        "needs_log_axis": "False"
+      },
+      "estimated_10B_70B_spearman": {
+        "type": "continuous",
+        "n_total": 26,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 26,
+        "mean": 0.9884736302533376,
+        "median": 0.9906874039938558,
+        "sd": 0.006098331448009274,
+        "min": 0.9754458392338524,
+        "max": 0.9964957757296466,
+        "skewness": -0.6218315223733353,
+        "skew_label": "moderately skewed",
+        "n_outliers_iqr": 0,
+        "outlier_lo": 0.9697820660522276,
+        "outlier_hi": 1.0049203149001533,
+        "needs_log_axis": "False"
+      }
+    },
+    "correlation": {
+      "columns": [
+        "v2_spearman",
+        "ridge_spearman",
+        "v2_rmse_absolute_cross_scale",
+        "ridge_rmse_absolute_cross_scale",
+        "estimated_10B_70B_spearman"
+      ],
+      "matrix": {
+        "v2_spearman": {
+          "v2_spearman": 1.0,
+          "ridge_spearman": 0.992,
+          "v2_rmse_absolute_cross_scale": -0.371,
+          "ridge_rmse_absolute_cross_scale": -0.396,
+          "estimated_10B_70B_spearman": -0.161
+        },
+        "ridge_spearman": {
+          "v2_spearman": 0.992,
+          "ridge_spearman": 1.0,
+          "v2_rmse_absolute_cross_scale": -0.419,
+          "ridge_rmse_absolute_cross_scale": -0.441,
+          "estimated_10B_70B_spearman": -0.135
+        },
+        "v2_rmse_absolute_cross_scale": {
+          "v2_spearman": -0.371,
+          "ridge_spearman": -0.419,
+          "v2_rmse_absolute_cross_scale": 1.0,
+          "ridge_rmse_absolute_cross_scale": 0.999,
+          "estimated_10B_70B_spearman": -0.401
+        },
+        "ridge_rmse_absolute_cross_scale": {
+          "v2_spearman": -0.396,
+          "ridge_spearman": -0.441,
+          "v2_rmse_absolute_cross_scale": 0.999,
+          "ridge_rmse_absolute_cross_scale": 1.0,
+          "estimated_10B_70B_spearman": -0.389
+        },
+        "estimated_10B_70B_spearman": {
+          "v2_spearman": -0.161,
+          "ridge_spearman": -0.135,
+          "v2_rmse_absolute_cross_scale": -0.401,
+          "ridge_rmse_absolute_cross_scale": -0.389,
+          "estimated_10B_70B_spearman": 1.0
+        }
+      },
+      "pairs_sorted": [
+        {
+          "a": "v2_rmse_absolute_cross_scale",
+          "b": "ridge_rmse_absolute_cross_scale",
+          "r": 0.9991178513191108,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "v2_spearman",
+          "b": "ridge_spearman",
+          "r": 0.9922996718637475,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "ridge_spearman",
+          "b": "ridge_rmse_absolute_cross_scale",
+          "r": -0.4412818813154402,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "ridge_spearman",
+          "b": "v2_rmse_absolute_cross_scale",
+          "r": -0.41894412144191484,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "v2_rmse_absolute_cross_scale",
+          "b": "estimated_10B_70B_spearman",
+          "r": -0.40138785268719074,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "v2_spearman",
+          "b": "ridge_rmse_absolute_cross_scale",
+          "r": -0.39585181727838353,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "ridge_rmse_absolute_cross_scale",
+          "b": "estimated_10B_70B_spearman",
+          "r": -0.38931053121152703,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "v2_spearman",
+          "b": "v2_rmse_absolute_cross_scale",
+          "r": -0.3707778359965423,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "v2_spearman",
+          "b": "estimated_10B_70B_spearman",
+          "r": -0.16065389186927256,
+          "magnitude": "weak"
+        },
+        {
+          "a": "ridge_spearman",
+          "b": "estimated_10B_70B_spearman",
+          "r": -0.13537550259746398,
+          "magnitude": "weak"
+        }
+      ]
+    },
+    "group_summary": null,
+    "warnings": [],
+    "suggestions": [
+      "分类 vs 连续，样本量充足 → 箱线图 / 小提琴图，或带误差棒的柱状图（误差棒说明 SD/SEM/CI）",
+      "≥3 个连续变量 → 相关性热力图（['v2_spearman', 'ridge_spearman', 'v2_rmse_absolute_cross_scale', 'ridge_rmse_absolute_cross_scale', 'estimated_10B_70B_spearman']）或 pairplot 散点矩阵"
+    ]
+  },
+  "decision_panel.csv": {
+    "source": "<DataFrame>",
+    "n_rows": 45,
+    "n_cols": 26,
+    "columns": {
+      "scenario": {
+        "type": "unknown",
+        "n_total": 45,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "mode": {
+        "type": "unknown",
+        "n_total": 45,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "quality_policy": {
+        "type": "unknown",
+        "n_total": 45,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "selected_index": {
+        "type": "continuous",
+        "n_total": 45,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 45,
+        "mean": 258.3777777777778,
+        "median": 301.0,
+        "sd": 159.34001507480914,
+        "min": 3.0,
+        "max": 511.0,
+        "skewness": -0.11169665000837696,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -243.5,
+        "outlier_hi": 768.5,
+        "needs_log_axis": "True"
+      },
+      "objective_relative": {
+        "type": "continuous",
+        "n_total": 45,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 45,
+        "mean": -0.27251656411507336,
+        "median": -0.2321259375095965,
+        "sd": 0.21368594427710472,
+        "min": -1.0279422380219967,
+        "max": 0.0399274683781916,
+        "skewness": -1.3234884008073406,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 2,
+        "outlier_lo": -0.7297060837904576,
+        "outlier_hi": 0.21526192196098318,
+        "needs_log_axis": false
+      },
+      "n_feasible": {
+        "type": "ordinal",
+        "n_total": 45,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 45,
+        "n_unique": 3,
+        "categories": [
+          [
+            "512",
+            15
+          ],
+          [
+            "91",
+            15
+          ],
+          [
+            "108",
+            15
+          ]
+        ],
+        "min_group_n": 15,
+        "max_group_n": 15,
+        "small_groups_flag": false
+      },
+      "quality_covered_mass": {
+        "type": "continuous",
+        "n_total": 45,
+        "n_null": 15,
+        "missing_rate": 0.3333333333333333,
+        "n": 30,
+        "mean": 0.6081374708290875,
+        "median": 0.5945,
+        "sd": 0.1827329554380644,
+        "min": 0.3446553446553447,
+        "max": 0.948,
+        "skewness": 0.1820326786888925,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": 0.109040975915976,
+        "outlier_hi": 1.1026073824823823,
+        "needs_log_axis": "False"
+      },
+      "quality_slack": {
+        "type": "continuous",
+        "n_total": 45,
+        "n_null": 15,
+        "missing_rate": 0.3333333333333333,
+        "n": 30,
+        "mean": 0.485855819902383,
+        "median": 0.3942596986864559,
+        "sd": 0.4105474101361792,
+        "min": 0.0041532229029447,
+        "max": 1.3594969504145231,
+        "skewness": 0.6152566625292984,
+        "skew_label": "moderately skewed",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -0.8062114001743877,
+        "outlier_hi": 1.5843532365058077,
+        "needs_log_axis": "True"
+      },
+      "unknown_QA_mass": {
+        "type": "continuous",
+        "n_total": 45,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 45,
+        "mean": 0.33328278229515756,
+        "median": 0.33,
+        "sd": 0.23472528860042416,
+        "min": 0.002,
+        "max": 0.995995995995996,
+        "skewness": 0.734451733334146,
+        "skew_label": "moderately skewed",
+        "n_outliers_iqr": 2,
+        "outlier_lo": -0.2578571428571429,
+        "outlier_hi": 0.8404285714285715,
+        "needs_log_axis": "True"
+      },
+      "arxiv": {
+        "type": "continuous",
+        "n_total": 45,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 45,
+        "mean": 0.229207919946709,
+        "median": 0.1538461538461538,
+        "sd": 0.2321498961406063,
+        "min": 0.0,
+        "max": 0.74,
+        "skewness": 0.6037554290501022,
+        "skew_label": "moderately skewed",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -0.5519430519430519,
+        "outlier_hi": 0.9225744225744226,
+        "needs_log_axis": false
+      },
+      "freelaw": {
+        "type": "continuous",
+        "n_total": 45,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 45,
+        "mean": 0.0494415343304232,
+        "median": 0.003003003003003,
+        "sd": 0.12124015329449843,
+        "min": 0.0,
+        "max": 0.592,
+        "skewness": 3.0916281890606343,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 4,
+        "outlier_lo": -0.039,
+        "outlier_hi": 0.065,
+        "needs_log_axis": false
+      },
+      "nih_exporter": {
+        "type": "continuous",
+        "n_total": 45,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 45,
+        "mean": 0.008203850559406107,
+        "median": 0.0,
+        "sd": 0.015538097574469844,
+        "min": 0.0,
+        "max": 0.058,
+        "skewness": 2.1534726006576497,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 4,
+        "outlier_lo": -0.019519519519519503,
+        "outlier_hi": 0.03253253253253251,
+        "needs_log_axis": false
+      },
+      "pubmed_central": {
+        "type": "continuous",
+        "n_total": 45,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 45,
+        "mean": 0.07595272381273709,
+        "median": 0.043,
+        "sd": 0.13907399670657228,
+        "min": 0.0,
+        "max": 0.7127127127127126,
+        "skewness": 3.0385182190188447,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 4,
+        "outlier_lo": -0.11062061062061075,
+        "outlier_hi": 0.18969568969568967,
+        "needs_log_axis": false
+      },
+      "wikipedia_en": {
+        "type": "continuous",
+        "n_total": 45,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 45,
+        "mean": 0.0539221343665788,
+        "median": 0.0019980019980019,
+        "sd": 0.1369690195245515,
+        "min": 0.0,
+        "max": 0.7087087087087087,
+        "skewness": 3.217014907322637,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 7,
+        "outlier_lo": -0.0315,
+        "outlier_hi": 0.052500000000000005,
+        "needs_log_axis": false
+      },
+      "dm_mathematics": {
+        "type": "continuous",
+        "n_total": 45,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 45,
+        "mean": 0.02458643603088046,
+        "median": 0.0009990009990009,
+        "sd": 0.06308710490234341,
+        "min": 0.0,
+        "max": 0.2252252252252252,
+        "skewness": 2.630250055962345,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 9,
+        "outlier_lo": -0.009009009009009,
+        "outlier_hi": 0.015015015015015,
+        "needs_log_axis": false
+      },
+      "github": {
+        "type": "continuous",
+        "n_total": 45,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 45,
+        "mean": 0.09201362949054231,
+        "median": 0.01,
+        "sd": 0.14667032873215619,
+        "min": 0.0,
+        "max": 0.77,
+        "skewness": 2.495508770465254,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 2,
+        "outlier_lo": -0.21599999999999997,
+        "outlier_hi": 0.36,
+        "needs_log_axis": false
+      },
+      "philpapers": {
+        "type": "continuous",
+        "n_total": 45,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 45,
+        "mean": 0.0029110231108900333,
+        "median": 0.0,
+        "sd": 0.007999579855733263,
+        "min": 0.0,
+        "max": 0.047,
+        "skewness": 4.063067381631868,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 11,
+        "outlier_lo": -0.0015015015015014998,
+        "outlier_hi": 0.0025025025025025,
+        "needs_log_axis": false
+      },
+      "stackexchange": {
+        "type": "continuous",
+        "n_total": 45,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 45,
+        "mean": 0.05519814186480853,
+        "median": 0.0,
+        "sd": 0.1767602781476763,
+        "min": 0.0,
+        "max": 0.998,
+        "skewness": 4.000746772535556,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 9,
+        "outlier_lo": -0.0075075075075075,
+        "outlier_hi": 0.0125125125125125,
+        "needs_log_axis": false
+      },
+      "enron_emails": {
+        "type": "continuous",
+        "n_total": 45,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 45,
+        "mean": 0.0024216683764255132,
+        "median": 0.0,
+        "sd": 0.005712902288155269,
+        "min": 0.0,
+        "max": 0.0239760239760239,
+        "skewness": 2.8376463866743586,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 9,
+        "outlier_lo": -0.0015,
+        "outlier_hi": 0.0025,
+        "needs_log_axis": false
+      },
+      "gutenberg_pg_19": {
+        "type": "continuous",
+        "n_total": 45,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 45,
+        "mean": 0.09189708226927122,
+        "median": 0.021,
+        "sd": 0.1353134168442845,
+        "min": 0.0,
+        "max": 0.4044044044044044,
+        "skewness": 1.2360404069235094,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 5,
+        "outlier_lo": -0.20700000000000002,
+        "outlier_hi": 0.34500000000000003,
+        "needs_log_axis": false
+      },
+      "pile_cc": {
+        "type": "continuous",
+        "n_total": 45,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 45,
+        "mean": 0.14447830976693246,
+        "median": 0.0239760239760239,
+        "sd": 0.21721274971431462,
+        "min": 0.0,
+        "max": 0.8441558441558442,
+        "skewness": 1.630611525697502,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 2,
+        "outlier_lo": -0.34814684814684804,
+        "outlier_hi": 0.5829140829140828,
+        "needs_log_axis": false
+      },
+      "ubuntu_irc": {
+        "type": "continuous",
+        "n_total": 45,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 45,
+        "mean": 0.0425895135213831,
+        "median": 0.003,
+        "sd": 0.06426811905630475,
+        "min": 0.0,
+        "max": 0.176,
+        "skewness": 1.1710973966477238,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 10,
+        "outlier_lo": -0.059940059940059846,
+        "outlier_hi": 0.09990009990009974,
+        "needs_log_axis": false
+      },
+      "europarl": {
+        "type": "continuous",
+        "n_total": 45,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 45,
+        "mean": 0.008574918108251423,
+        "median": 0.0,
+        "sd": 0.02339340805139425,
+        "min": 0.0,
+        "max": 0.1078921078921078,
+        "skewness": 2.903042362113563,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 7,
+        "outlier_lo": -0.0030030030030029995,
+        "outlier_hi": 0.005005005005005,
+        "needs_log_axis": false
+      },
+      "hackernews": {
+        "type": "continuous",
+        "n_total": 45,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 45,
+        "mean": 0.023326821482243954,
+        "median": 0.0,
+        "sd": 0.04089083544327391,
+        "min": 0.0,
+        "max": 0.1191191191191191,
+        "skewness": 1.6050900601303226,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 6,
+        "outlier_lo": -0.05694305694305685,
+        "outlier_hi": 0.09490509490509474,
+        "needs_log_axis": false
+      },
+      "pubmed_abstracts": {
+        "type": "continuous",
+        "n_total": 45,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 45,
+        "mean": 0.04893266367717464,
+        "median": 0.003,
+        "sd": 0.12432910886281684,
+        "min": 0.0,
+        "max": 0.5638722554890219,
+        "skewness": 3.206512903887521,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 4,
+        "outlier_lo": -0.04645354645354635,
+        "outlier_hi": 0.07742257742257724,
+        "needs_log_axis": false
+      },
+      "uspto_backgrounds": {
+        "type": "continuous",
+        "n_total": 45,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 45,
+        "mean": 0.04634162928534184,
+        "median": 0.002002002002002,
+        "sd": 0.1295245458698762,
+        "min": 0.0,
+        "max": 0.6723276723276723,
+        "skewness": 3.547355080260632,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 8,
+        "outlier_lo": -0.0315315315315315,
+        "outlier_hi": 0.0525525525525525,
+        "needs_log_axis": false
+      }
+    },
+    "correlation": {
+      "columns": [
+        "selected_index",
+        "objective_relative",
+        "quality_covered_mass",
+        "quality_slack",
+        "unknown_QA_mass",
+        "arxiv",
+        "freelaw",
+        "nih_exporter",
+        "pubmed_central",
+        "wikipedia_en",
+        "dm_mathematics",
+        "github",
+        "philpapers",
+        "stackexchange",
+        "enron_emails",
+        "gutenberg_pg_19",
+        "pile_cc",
+        "ubuntu_irc",
+        "europarl",
+        "hackernews",
+        "pubmed_abstracts",
+        "uspto_backgrounds"
+      ],
+      "matrix": {
+        "selected_index": {
+          "selected_index": 1.0,
+          "objective_relative": 0.377,
+          "quality_covered_mass": -0.151,
+          "quality_slack": -0.343,
+          "unknown_QA_mass": 0.118,
+          "arxiv": -0.037,
+          "freelaw": -0.213,
+          "nih_exporter": 0.187,
+          "pubmed_central": -0.007,
+          "wikipedia_en": 0.139,
+          "dm_mathematics": -0.146,
+          "github": 0.594,
+          "philpapers": 0.232,
+          "stackexchange": -0.002,
+          "enron_emails": -0.112,
+          "gutenberg_pg_19": -0.144,
+          "pile_cc": -0.33,
+          "ubuntu_irc": 0.237,
+          "europarl": -0.01,
+          "hackernews": 0.551,
+          "pubmed_abstracts": 0.241,
+          "uspto_backgrounds": -0.135
+        },
+        "objective_relative": {
+          "selected_index": 0.377,
+          "objective_relative": 1.0,
+          "quality_covered_mass": -0.218,
+          "quality_slack": -0.264,
+          "unknown_QA_mass": 0.129,
+          "arxiv": -0.184,
+          "freelaw": 0.001,
+          "nih_exporter": -0.015,
+          "pubmed_central": 0.11,
+          "wikipedia_en": 0.123,
+          "dm_mathematics": -0.66,
+          "github": 0.184,
+          "philpapers": -0.153,
+          "stackexchange": 0.053,
+          "enron_emails": -0.42,
+          "gutenberg_pg_19": -0.008,
+          "pile_cc": -0.095,
+          "ubuntu_irc": 0.074,
+          "europarl": 0.204,
+          "hackernews": 0.374,
+          "pubmed_abstracts": 0.079,
+          "uspto_backgrounds": 0.151
+        },
+        "quality_covered_mass": {
+          "selected_index": -0.151,
+          "objective_relative": -0.218,
+          "quality_covered_mass": 1.0,
+          "quality_slack": 0.11,
+          "unknown_QA_mass": -0.621,
+          "arxiv": 0.041,
+          "freelaw": -0.139,
+          "nih_exporter": -0.048,
+          "pubmed_central": -0.227,
+          "wikipedia_en": -0.029,
+          "dm_mathematics": 0.15,
+          "github": -0.02,
+          "philpapers": 0.143,
+          "stackexchange": 0.11,
+          "enron_emails": -0.132,
+          "gutenberg_pg_19": -0.11,
+          "pile_cc": 0.523,
+          "ubuntu_irc": -0.437,
+          "europarl": 0.136,
+          "hackernews": -0.155,
+          "pubmed_abstracts": -0.311,
+          "uspto_backgrounds": -0.131
+        },
+        "quality_slack": {
+          "selected_index": -0.343,
+          "objective_relative": -0.264,
+          "quality_covered_mass": 0.11,
+          "quality_slack": 1.0,
+          "unknown_QA_mass": -0.093,
+          "arxiv": 0.837,
+          "freelaw": 0.256,
+          "nih_exporter": -0.205,
+          "pubmed_central": 0.241,
+          "wikipedia_en": -0.187,
+          "dm_mathematics": 0.136,
+          "github": -0.299,
+          "philpapers": -0.071,
+          "stackexchange": -0.388,
+          "enron_emails": -0.068,
+          "gutenberg_pg_19": -0.381,
+          "pile_cc": -0.085,
+          "ubuntu_irc": -0.497,
+          "europarl": -0.177,
+          "hackernews": -0.217,
+          "pubmed_abstracts": -0.107,
+          "uspto_backgrounds": -0.177
+        },
+        "unknown_QA_mass": {
+          "selected_index": 0.118,
+          "objective_relative": 0.129,
+          "quality_covered_mass": -0.621,
+          "quality_slack": -0.093,
+          "unknown_QA_mass": 1.0,
+          "arxiv": -0.115,
+          "freelaw": 0.278,
+          "nih_exporter": 0.22,
+          "pubmed_central": 0.386,
+          "wikipedia_en": -0.036,
+          "dm_mathematics": 0.006,
+          "github": 0.104,
+          "philpapers": -0.295,
+          "stackexchange": -0.261,
+          "enron_emails": 0.255,
+          "gutenberg_pg_19": -0.082,
+          "pile_cc": -0.541,
+          "ubuntu_irc": 0.176,
+          "europarl": 0.039,
+          "hackernews": 0.131,
+          "pubmed_abstracts": 0.413,
+          "uspto_backgrounds": 0.356
+        },
+        "arxiv": {
+          "selected_index": -0.037,
+          "objective_relative": -0.184,
+          "quality_covered_mass": 0.041,
+          "quality_slack": 0.837,
+          "unknown_QA_mass": -0.115,
+          "arxiv": 1.0,
+          "freelaw": 0.236,
+          "nih_exporter": -0.321,
+          "pubmed_central": 0.272,
+          "wikipedia_en": -0.328,
+          "dm_mathematics": 0.027,
+          "github": -0.003,
+          "philpapers": 0.161,
+          "stackexchange": -0.243,
+          "enron_emails": -0.179,
+          "gutenberg_pg_19": -0.661,
+          "pile_cc": -0.207,
+          "ubuntu_irc": -0.419,
+          "europarl": -0.371,
+          "hackernews": -0.002,
+          "pubmed_abstracts": -0.06,
+          "uspto_backgrounds": -0.286
+        },
+        "freelaw": {
+          "selected_index": -0.213,
+          "objective_relative": 0.001,
+          "quality_covered_mass": -0.139,
+          "quality_slack": 0.256,
+          "unknown_QA_mass": 0.278,
+          "arxiv": 0.236,
+          "freelaw": 1.0,
+          "nih_exporter": -0.058,
+          "pubmed_central": -0.092,
+          "wikipedia_en": -0.147,
+          "dm_mathematics": -0.078,
+          "github": -0.076,
+          "philpapers": -0.097,
+          "stackexchange": -0.149,
+          "enron_emails": -0.162,
+          "gutenberg_pg_19": -0.129,
+          "pile_cc": -0.197,
+          "ubuntu_irc": -0.076,
+          "europarl": -0.119,
+          "hackernews": 0.013,
+          "pubmed_abstracts": -0.101,
+          "uspto_backgrounds": -0.147
+        },
+        "nih_exporter": {
+          "selected_index": 0.187,
+          "objective_relative": -0.015,
+          "quality_covered_mass": -0.048,
+          "quality_slack": -0.205,
+          "unknown_QA_mass": 0.22,
+          "arxiv": -0.321,
+          "freelaw": -0.058,
+          "nih_exporter": 1.0,
+          "pubmed_central": -0.037,
+          "wikipedia_en": 0.247,
+          "dm_mathematics": 0.177,
+          "github": 0.116,
+          "philpapers": -0.226,
+          "stackexchange": -0.136,
+          "enron_emails": -0.03,
+          "gutenberg_pg_19": 0.135,
+          "pile_cc": -0.039,
+          "ubuntu_irc": 0.375,
+          "europarl": 0.349,
+          "hackernews": 0.349,
+          "pubmed_abstracts": -0.049,
+          "uspto_backgrounds": -0.146
+        },
+        "pubmed_central": {
+          "selected_index": -0.007,
+          "objective_relative": 0.11,
+          "quality_covered_mass": -0.227,
+          "quality_slack": 0.241,
+          "unknown_QA_mass": 0.386,
+          "arxiv": 0.272,
+          "freelaw": -0.092,
+          "nih_exporter": -0.037,
+          "pubmed_central": 1.0,
+          "wikipedia_en": 0.048,
+          "dm_mathematics": -0.197,
+          "github": 0.012,
+          "philpapers": 0.021,
+          "stackexchange": -0.232,
+          "enron_emails": -0.183,
+          "gutenberg_pg_19": -0.33,
+          "pile_cc": -0.287,
+          "ubuntu_irc": -0.21,
+          "europarl": -0.121,
+          "hackernews": -0.084,
+          "pubmed_abstracts": -0.103,
+          "uspto_backgrounds": 0.013
+        },
+        "wikipedia_en": {
+          "selected_index": 0.139,
+          "objective_relative": 0.123,
+          "quality_covered_mass": -0.029,
+          "quality_slack": -0.187,
+          "unknown_QA_mass": -0.036,
+          "arxiv": -0.328,
+          "freelaw": -0.147,
+          "nih_exporter": 0.247,
+          "pubmed_central": 0.048,
+          "wikipedia_en": 1.0,
+          "dm_mathematics": -0.11,
+          "github": -0.106,
+          "philpapers": -0.102,
+          "stackexchange": -0.071,
+          "enron_emails": -0.135,
+          "gutenberg_pg_19": 0.204,
+          "pile_cc": -0.212,
+          "ubuntu_irc": 0.013,
+          "europarl": 0.458,
+          "hackernews": -0.171,
+          "pubmed_abstracts": -0.071,
+          "uspto_backgrounds": 0.079
+        },
+        "dm_mathematics": {
+          "selected_index": -0.146,
+          "objective_relative": -0.66,
+          "quality_covered_mass": 0.15,
+          "quality_slack": 0.136,
+          "unknown_QA_mass": 0.006,
+          "arxiv": 0.027,
+          "freelaw": -0.078,
+          "nih_exporter": 0.177,
+          "pubmed_central": -0.197,
+          "wikipedia_en": -0.11,
+          "dm_mathematics": 1.0,
+          "github": -0.223,
+          "philpapers": -0.151,
+          "stackexchange": 0.053,
+          "enron_emails": 0.428,
+          "gutenberg_pg_19": 0.004,
+          "pile_cc": 0.102,
+          "ubuntu_irc": -0.109,
+          "europarl": 0.076,
+          "hackernews": -0.131,
+          "pubmed_abstracts": -0.038,
+          "uspto_backgrounds": -0.132
+        },
+        "github": {
+          "selected_index": 0.594,
+          "objective_relative": 0.184,
+          "quality_covered_mass": -0.02,
+          "quality_slack": -0.299,
+          "unknown_QA_mass": 0.104,
+          "arxiv": -0.003,
+          "freelaw": -0.076,
+          "nih_exporter": 0.116,
+          "pubmed_central": 0.012,
+          "wikipedia_en": -0.106,
+          "dm_mathematics": -0.223,
+          "github": 1.0,
+          "philpapers": 0.626,
+          "stackexchange": -0.199,
+          "enron_emails": -0.197,
+          "gutenberg_pg_19": -0.011,
+          "pile_cc": -0.392,
+          "ubuntu_irc": 0.168,
+          "europarl": -0.174,
+          "hackernews": 0.567,
+          "pubmed_abstracts": -0.037,
+          "uspto_backgrounds": 0.068
+        },
+        "philpapers": {
+          "selected_index": 0.232,
+          "objective_relative": -0.153,
+          "quality_covered_mass": 0.143,
+          "quality_slack": -0.071,
+          "unknown_QA_mass": -0.295,
+          "arxiv": 0.161,
+          "freelaw": -0.097,
+          "nih_exporter": -0.226,
+          "pubmed_central": 0.021,
+          "wikipedia_en": -0.102,
+          "dm_mathematics": -0.151,
+          "github": 0.626,
+          "philpapers": 1.0,
+          "stackexchange": -0.079,
+          "enron_emails": -0.153,
+          "gutenberg_pg_19": 0.097,
+          "pile_cc": -0.199,
+          "ubuntu_irc": 0.073,
+          "europarl": -0.142,
+          "hackernews": -0.138,
+          "pubmed_abstracts": -0.135,
+          "uspto_backgrounds": -0.166
+        },
+        "stackexchange": {
+          "selected_index": -0.002,
+          "objective_relative": 0.053,
+          "quality_covered_mass": 0.11,
+          "quality_slack": -0.388,
+          "unknown_QA_mass": -0.261,
+          "arxiv": -0.243,
+          "freelaw": -0.149,
+          "nih_exporter": -0.136,
+          "pubmed_central": -0.232,
+          "wikipedia_en": -0.071,
+          "dm_mathematics": 0.053,
+          "github": -0.199,
+          "philpapers": -0.079,
+          "stackexchange": 1.0,
+          "enron_emails": -0.005,
+          "gutenberg_pg_19": -0.01,
+          "pile_cc": 0.018,
+          "ubuntu_irc": 0.238,
+          "europarl": 0.206,
+          "hackernews": -0.166,
+          "pubmed_abstracts": -0.123,
+          "uspto_backgrounds": -0.038
+        },
+        "enron_emails": {
+          "selected_index": -0.112,
+          "objective_relative": -0.42,
+          "quality_covered_mass": -0.132,
+          "quality_slack": -0.068,
+          "unknown_QA_mass": 0.255,
+          "arxiv": -0.179,
+          "freelaw": -0.162,
+          "nih_exporter": -0.03,
+          "pubmed_central": -0.183,
+          "wikipedia_en": -0.135,
+          "dm_mathematics": 0.428,
+          "github": -0.197,
+          "philpapers": -0.153,
+          "stackexchange": -0.005,
+          "enron_emails": 1.0,
+          "gutenberg_pg_19": 0.005,
+          "pile_cc": 0.154,
+          "ubuntu_irc": -0.09,
+          "europarl": -0.098,
+          "hackernews": -0.229,
+          "pubmed_abstracts": 0.692,
+          "uspto_backgrounds": 0.001
+        },
+        "gutenberg_pg_19": {
+          "selected_index": -0.144,
+          "objective_relative": -0.008,
+          "quality_covered_mass": -0.11,
+          "quality_slack": -0.381,
+          "unknown_QA_mass": -0.082,
+          "arxiv": -0.661,
+          "freelaw": -0.129,
+          "nih_exporter": 0.135,
+          "pubmed_central": -0.33,
+          "wikipedia_en": 0.204,
+          "dm_mathematics": 0.004,
+          "github": -0.011,
+          "philpapers": 0.097,
+          "stackexchange": -0.01,
+          "enron_emails": 0.005,
+          "gutenberg_pg_19": 1.0,
+          "pile_cc": -0.006,
+          "ubuntu_irc": 0.554,
+          "europarl": 0.327,
+          "hackernews": -0.085,
+          "pubmed_abstracts": -0.152,
+          "uspto_backgrounds": 0.11
+        },
+        "pile_cc": {
+          "selected_index": -0.33,
+          "objective_relative": -0.095,
+          "quality_covered_mass": 0.523,
+          "quality_slack": -0.085,
+          "unknown_QA_mass": -0.541,
+          "arxiv": -0.207,
+          "freelaw": -0.197,
+          "nih_exporter": -0.039,
+          "pubmed_central": -0.287,
+          "wikipedia_en": -0.212,
+          "dm_mathematics": 0.102,
+          "github": -0.392,
+          "philpapers": -0.199,
+          "stackexchange": 0.018,
+          "enron_emails": 0.154,
+          "gutenberg_pg_19": -0.006,
+          "pile_cc": 1.0,
+          "ubuntu_irc": -0.316,
+          "europarl": -0.151,
+          "hackernews": -0.133,
+          "pubmed_abstracts": -0.046,
+          "uspto_backgrounds": -0.119
+        },
+        "ubuntu_irc": {
+          "selected_index": 0.237,
+          "objective_relative": 0.074,
+          "quality_covered_mass": -0.437,
+          "quality_slack": -0.497,
+          "unknown_QA_mass": 0.176,
+          "arxiv": -0.419,
+          "freelaw": -0.076,
+          "nih_exporter": 0.375,
+          "pubmed_central": -0.21,
+          "wikipedia_en": 0.013,
+          "dm_mathematics": -0.109,
+          "github": 0.168,
+          "philpapers": 0.073,
+          "stackexchange": 0.238,
+          "enron_emails": -0.09,
+          "gutenberg_pg_19": 0.554,
+          "pile_cc": -0.316,
+          "ubuntu_irc": 1.0,
+          "europarl": 0.182,
+          "hackernews": 0.258,
+          "pubmed_abstracts": 0.018,
+          "uspto_backgrounds": -0.131
+        },
+        "europarl": {
+          "selected_index": -0.01,
+          "objective_relative": 0.204,
+          "quality_covered_mass": 0.136,
+          "quality_slack": -0.177,
+          "unknown_QA_mass": 0.039,
+          "arxiv": -0.371,
+          "freelaw": -0.119,
+          "nih_exporter": 0.349,
+          "pubmed_central": -0.121,
+          "wikipedia_en": 0.458,
+          "dm_mathematics": 0.076,
+          "github": -0.174,
+          "philpapers": -0.142,
+          "stackexchange": 0.206,
+          "enron_emails": -0.098,
+          "gutenberg_pg_19": 0.327,
+          "pile_cc": -0.151,
+          "ubuntu_irc": 0.182,
+          "europarl": 1.0,
+          "hackernews": -0.132,
+          "pubmed_abstracts": -0.054,
+          "uspto_backgrounds": -0.007
+        },
+        "hackernews": {
+          "selected_index": 0.551,
+          "objective_relative": 0.374,
+          "quality_covered_mass": -0.155,
+          "quality_slack": -0.217,
+          "unknown_QA_mass": 0.131,
+          "arxiv": -0.002,
+          "freelaw": 0.013,
+          "nih_exporter": 0.349,
+          "pubmed_central": -0.084,
+          "wikipedia_en": -0.171,
+          "dm_mathematics": -0.131,
+          "github": 0.567,
+          "philpapers": -0.138,
+          "stackexchange": -0.166,
+          "enron_emails": -0.229,
+          "gutenberg_pg_19": -0.085,
+          "pile_cc": -0.133,
+          "ubuntu_irc": 0.258,
+          "europarl": -0.132,
+          "hackernews": 1.0,
+          "pubmed_abstracts": -0.014,
+          "uspto_backgrounds": -0.158
+        },
+        "pubmed_abstracts": {
+          "selected_index": 0.241,
+          "objective_relative": 0.079,
+          "quality_covered_mass": -0.311,
+          "quality_slack": -0.107,
+          "unknown_QA_mass": 0.413,
+          "arxiv": -0.06,
+          "freelaw": -0.101,
+          "nih_exporter": -0.049,
+          "pubmed_central": -0.103,
+          "wikipedia_en": -0.071,
+          "dm_mathematics": -0.038,
+          "github": -0.037,
+          "philpapers": -0.135,
+          "stackexchange": -0.123,
+          "enron_emails": 0.692,
+          "gutenberg_pg_19": -0.152,
+          "pile_cc": -0.046,
+          "ubuntu_irc": 0.018,
+          "europarl": -0.054,
+          "hackernews": -0.014,
+          "pubmed_abstracts": 1.0,
+          "uspto_backgrounds": -0.074
+        },
+        "uspto_backgrounds": {
+          "selected_index": -0.135,
+          "objective_relative": 0.151,
+          "quality_covered_mass": -0.131,
+          "quality_slack": -0.177,
+          "unknown_QA_mass": 0.356,
+          "arxiv": -0.286,
+          "freelaw": -0.147,
+          "nih_exporter": -0.146,
+          "pubmed_central": 0.013,
+          "wikipedia_en": 0.079,
+          "dm_mathematics": -0.132,
+          "github": 0.068,
+          "philpapers": -0.166,
+          "stackexchange": -0.038,
+          "enron_emails": 0.001,
+          "gutenberg_pg_19": 0.11,
+          "pile_cc": -0.119,
+          "ubuntu_irc": -0.131,
+          "europarl": -0.007,
+          "hackernews": -0.158,
+          "pubmed_abstracts": -0.074,
+          "uspto_backgrounds": 1.0
+        }
+      },
+      "pairs_sorted": [
+        {
+          "a": "quality_slack",
+          "b": "arxiv",
+          "r": 0.8372255809282546,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "enron_emails",
+          "b": "pubmed_abstracts",
+          "r": 0.6923837186114994,
+          "magnitude": "strong"
+        },
+        {
+          "a": "arxiv",
+          "b": "gutenberg_pg_19",
+          "r": -0.6609212397549605,
+          "magnitude": "strong"
+        },
+        {
+          "a": "objective_relative",
+          "b": "dm_mathematics",
+          "r": -0.6598182817582832,
+          "magnitude": "strong"
+        },
+        {
+          "a": "github",
+          "b": "philpapers",
+          "r": 0.6255663008806559,
+          "magnitude": "strong"
+        },
+        {
+          "a": "quality_covered_mass",
+          "b": "unknown_QA_mass",
+          "r": -0.6212312392936706,
+          "magnitude": "strong"
+        },
+        {
+          "a": "selected_index",
+          "b": "github",
+          "r": 0.593652206146735,
+          "magnitude": "strong"
+        },
+        {
+          "a": "github",
+          "b": "hackernews",
+          "r": 0.5668494530928168,
+          "magnitude": "strong"
+        },
+        {
+          "a": "gutenberg_pg_19",
+          "b": "ubuntu_irc",
+          "r": 0.5543953928338823,
+          "magnitude": "strong"
+        },
+        {
+          "a": "selected_index",
+          "b": "hackernews",
+          "r": 0.5510556782359038,
+          "magnitude": "strong"
+        },
+        {
+          "a": "unknown_QA_mass",
+          "b": "pile_cc",
+          "r": -0.5411794904775777,
+          "magnitude": "strong"
+        },
+        {
+          "a": "quality_covered_mass",
+          "b": "pile_cc",
+          "r": 0.5226680258139221,
+          "magnitude": "strong"
+        },
+        {
+          "a": "quality_slack",
+          "b": "ubuntu_irc",
+          "r": -0.4968163958249102,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "wikipedia_en",
+          "b": "europarl",
+          "r": 0.4583011511412842,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "quality_covered_mass",
+          "b": "ubuntu_irc",
+          "r": -0.43679572680063866,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "dm_mathematics",
+          "b": "enron_emails",
+          "r": 0.42807045427571244,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "objective_relative",
+          "b": "enron_emails",
+          "r": -0.42004126536849584,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "arxiv",
+          "b": "ubuntu_irc",
+          "r": -0.4194714036067888,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "unknown_QA_mass",
+          "b": "pubmed_abstracts",
+          "r": 0.41342716561957304,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "github",
+          "b": "pile_cc",
+          "r": -0.3922363388312588,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "quality_slack",
+          "b": "stackexchange",
+          "r": -0.3879804312461425,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "unknown_QA_mass",
+          "b": "pubmed_central",
+          "r": 0.38599417255935703,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "quality_slack",
+          "b": "gutenberg_pg_19",
+          "r": -0.3812359855444945,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "selected_index",
+          "b": "objective_relative",
+          "r": 0.3768361541960396,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "nih_exporter",
+          "b": "ubuntu_irc",
+          "r": 0.3753573748001937,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "objective_relative",
+          "b": "hackernews",
+          "r": 0.37359503493634094,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "arxiv",
+          "b": "europarl",
+          "r": -0.3710367422672922,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "unknown_QA_mass",
+          "b": "uspto_backgrounds",
+          "r": 0.3561758283353203,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "nih_exporter",
+          "b": "hackernews",
+          "r": 0.34914494006898733,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "nih_exporter",
+          "b": "europarl",
+          "r": 0.34900634406472164,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "selected_index",
+          "b": "quality_slack",
+          "r": -0.34322327637344313,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "pubmed_central",
+          "b": "gutenberg_pg_19",
+          "r": -0.3304193387605747,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "selected_index",
+          "b": "pile_cc",
+          "r": -0.3304178897397629,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "arxiv",
+          "b": "wikipedia_en",
+          "r": -0.328156231552185,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "gutenberg_pg_19",
+          "b": "europarl",
+          "r": 0.327327971664143,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "arxiv",
+          "b": "nih_exporter",
+          "r": -0.3206669026565006,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "pile_cc",
+          "b": "ubuntu_irc",
+          "r": -0.31569356082441763,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "quality_covered_mass",
+          "b": "pubmed_abstracts",
+          "r": -0.31131070897940577,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "quality_slack",
+          "b": "github",
+          "r": -0.2991493656481384,
+          "magnitude": "weak"
+        },
+        {
+          "a": "unknown_QA_mass",
+          "b": "philpapers",
+          "r": -0.29507710543069,
+          "magnitude": "weak"
+        },
+        {
+          "a": "pubmed_central",
+          "b": "pile_cc",
+          "r": -0.28715372135828876,
+          "magnitude": "weak"
+        },
+        {
+          "a": "arxiv",
+          "b": "uspto_backgrounds",
+          "r": -0.2863894340705989,
+          "magnitude": "weak"
+        },
+        {
+          "a": "unknown_QA_mass",
+          "b": "freelaw",
+          "r": 0.2779597089424949,
+          "magnitude": "weak"
+        },
+        {
+          "a": "arxiv",
+          "b": "pubmed_central",
+          "r": 0.2715761543592344,
+          "magnitude": "weak"
+        },
+        {
+          "a": "objective_relative",
+          "b": "quality_slack",
+          "r": -0.26355744644188045,
+          "magnitude": "weak"
+        },
+        {
+          "a": "unknown_QA_mass",
+          "b": "stackexchange",
+          "r": -0.26072009002316937,
+          "magnitude": "weak"
+        },
+        {
+          "a": "ubuntu_irc",
+          "b": "hackernews",
+          "r": 0.2577954408021713,
+          "magnitude": "weak"
+        },
+        {
+          "a": "quality_slack",
+          "b": "freelaw",
+          "r": 0.25645242267073143,
+          "magnitude": "weak"
+        },
+        {
+          "a": "unknown_QA_mass",
+          "b": "enron_emails",
+          "r": 0.2545757524034942,
+          "magnitude": "weak"
+        },
+        {
+          "a": "nih_exporter",
+          "b": "wikipedia_en",
+          "r": 0.24664511608924866,
+          "magnitude": "weak"
+        },
+        {
+          "a": "arxiv",
+          "b": "stackexchange",
+          "r": -0.24320235631947748,
+          "magnitude": "weak"
+        },
+        {
+          "a": "selected_index",
+          "b": "pubmed_abstracts",
+          "r": 0.2410450975458978,
+          "magnitude": "weak"
+        },
+        {
+          "a": "quality_slack",
+          "b": "pubmed_central",
+          "r": 0.24080599367631392,
+          "magnitude": "weak"
+        },
+        {
+          "a": "stackexchange",
+          "b": "ubuntu_irc",
+          "r": 0.2384444800451359,
+          "magnitude": "weak"
+        },
+        {
+          "a": "selected_index",
+          "b": "ubuntu_irc",
+          "r": 0.23716092541295206,
+          "magnitude": "weak"
+        },
+        {
+          "a": "arxiv",
+          "b": "freelaw",
+          "r": 0.23588486199476094,
+          "magnitude": "weak"
+        },
+        {
+          "a": "selected_index",
+          "b": "philpapers",
+          "r": 0.23201740826145065,
+          "magnitude": "weak"
+        },
+        {
+          "a": "pubmed_central",
+          "b": "stackexchange",
+          "r": -0.23190393434029544,
+          "magnitude": "weak"
+        },
+        {
+          "a": "enron_emails",
+          "b": "hackernews",
+          "r": -0.22887638638394964,
+          "magnitude": "weak"
+        },
+        {
+          "a": "quality_covered_mass",
+          "b": "pubmed_central",
+          "r": -0.22661151523464343,
+          "magnitude": "weak"
+        },
+        {
+          "a": "nih_exporter",
+          "b": "philpapers",
+          "r": -0.2257722712933035,
+          "magnitude": "weak"
+        },
+        {
+          "a": "dm_mathematics",
+          "b": "github",
+          "r": -0.22276474074435423,
+          "magnitude": "weak"
+        },
+        {
+          "a": "unknown_QA_mass",
+          "b": "nih_exporter",
+          "r": 0.21952710783975396,
+          "magnitude": "weak"
+        },
+        {
+          "a": "objective_relative",
+          "b": "quality_covered_mass",
+          "r": -0.21849269220509515,
+          "magnitude": "weak"
+        },
+        {
+          "a": "quality_slack",
+          "b": "hackernews",
+          "r": -0.21747805015611563,
+          "magnitude": "weak"
+        },
+        {
+          "a": "selected_index",
+          "b": "freelaw",
+          "r": -0.21277255524769162,
+          "magnitude": "weak"
+        },
+        {
+          "a": "wikipedia_en",
+          "b": "pile_cc",
+          "r": -0.21227097753076365,
+          "magnitude": "weak"
+        },
+        {
+          "a": "pubmed_central",
+          "b": "ubuntu_irc",
+          "r": -0.20971890727335377,
+          "magnitude": "weak"
+        },
+        {
+          "a": "arxiv",
+          "b": "pile_cc",
+          "r": -0.20682545939158084,
+          "magnitude": "weak"
+        },
+        {
+          "a": "stackexchange",
+          "b": "europarl",
+          "r": 0.2058702715604889,
+          "magnitude": "weak"
+        },
+        {
+          "a": "quality_slack",
+          "b": "nih_exporter",
+          "r": -0.20498212612282232,
+          "magnitude": "weak"
+        },
+        {
+          "a": "wikipedia_en",
+          "b": "gutenberg_pg_19",
+          "r": 0.20438299080788458,
+          "magnitude": "weak"
+        },
+        {
+          "a": "objective_relative",
+          "b": "europarl",
+          "r": 0.20435587731252797,
+          "magnitude": "weak"
+        },
+        {
+          "a": "github",
+          "b": "stackexchange",
+          "r": -0.19943834087395196,
+          "magnitude": "weak"
+        },
+        {
+          "a": "philpapers",
+          "b": "pile_cc",
+          "r": -0.19941499171763058,
+          "magnitude": "weak"
+        },
+        {
+          "a": "github",
+          "b": "enron_emails",
+          "r": -0.1974746110894477,
+          "magnitude": "weak"
+        },
+        {
+          "a": "pubmed_central",
+          "b": "dm_mathematics",
+          "r": -0.19687701879122377,
+          "magnitude": "weak"
+        },
+        {
+          "a": "freelaw",
+          "b": "pile_cc",
+          "r": -0.19651580542669547,
+          "magnitude": "weak"
+        },
+        {
+          "a": "quality_slack",
+          "b": "wikipedia_en",
+          "r": -0.18716412377287533,
+          "magnitude": "weak"
+        },
+        {
+          "a": "selected_index",
+          "b": "nih_exporter",
+          "r": 0.18715873520271414,
+          "magnitude": "weak"
+        },
+        {
+          "a": "objective_relative",
+          "b": "github",
+          "r": 0.18422484300204456,
+          "magnitude": "weak"
+        },
+        {
+          "a": "objective_relative",
+          "b": "arxiv",
+          "r": -0.18402641014962776,
+          "magnitude": "weak"
+        },
+        {
+          "a": "pubmed_central",
+          "b": "enron_emails",
+          "r": -0.18334905644067612,
+          "magnitude": "weak"
+        },
+        {
+          "a": "ubuntu_irc",
+          "b": "europarl",
+          "r": 0.1815096755504298,
+          "magnitude": "weak"
+        },
+        {
+          "a": "arxiv",
+          "b": "enron_emails",
+          "r": -0.1794437336366001,
+          "magnitude": "weak"
+        },
+        {
+          "a": "nih_exporter",
+          "b": "dm_mathematics",
+          "r": 0.17739156944420217,
+          "magnitude": "weak"
+        },
+        {
+          "a": "quality_slack",
+          "b": "europarl",
+          "r": -0.17708816816507003,
+          "magnitude": "weak"
+        },
+        {
+          "a": "quality_slack",
+          "b": "uspto_backgrounds",
+          "r": -0.1768155953114701,
+          "magnitude": "weak"
+        },
+        {
+          "a": "unknown_QA_mass",
+          "b": "ubuntu_irc",
+          "r": 0.17591058133981266,
+          "magnitude": "weak"
+        },
+        {
+          "a": "github",
+          "b": "europarl",
+          "r": -0.174331129063402,
+          "magnitude": "weak"
+        },
+        {
+          "a": "wikipedia_en",
+          "b": "hackernews",
+          "r": -0.17052090812615722,
+          "magnitude": "weak"
+        },
+        {
+          "a": "github",
+          "b": "ubuntu_irc",
+          "r": 0.1677464315172512,
+          "magnitude": "weak"
+        },
+        {
+          "a": "stackexchange",
+          "b": "hackernews",
+          "r": -0.16637081445707902,
+          "magnitude": "weak"
+        },
+        {
+          "a": "philpapers",
+          "b": "uspto_backgrounds",
+          "r": -0.1662773301534457,
+          "magnitude": "weak"
+        },
+        {
+          "a": "freelaw",
+          "b": "enron_emails",
+          "r": -0.16246257907501202,
+          "magnitude": "weak"
+        },
+        {
+          "a": "arxiv",
+          "b": "philpapers",
+          "r": 0.16102278879978457,
+          "magnitude": "weak"
+        },
+        {
+          "a": "hackernews",
+          "b": "uspto_backgrounds",
+          "r": -0.1575558894033694,
+          "magnitude": "weak"
+        },
+        {
+          "a": "quality_covered_mass",
+          "b": "hackernews",
+          "r": -0.1547016829837486,
+          "magnitude": "weak"
+        },
+        {
+          "a": "enron_emails",
+          "b": "pile_cc",
+          "r": 0.15423746240188513,
+          "magnitude": "weak"
+        },
+        {
+          "a": "objective_relative",
+          "b": "philpapers",
+          "r": -0.15323929735668843,
+          "magnitude": "weak"
+        },
+        {
+          "a": "philpapers",
+          "b": "enron_emails",
+          "r": -0.15313595886711812,
+          "magnitude": "weak"
+        },
+        {
+          "a": "gutenberg_pg_19",
+          "b": "pubmed_abstracts",
+          "r": -0.15165204865975107,
+          "magnitude": "weak"
+        },
+        {
+          "a": "dm_mathematics",
+          "b": "philpapers",
+          "r": -0.1514993708717329,
+          "magnitude": "weak"
+        },
+        {
+          "a": "selected_index",
+          "b": "quality_covered_mass",
+          "r": -0.15116417397334178,
+          "magnitude": "weak"
+        },
+        {
+          "a": "objective_relative",
+          "b": "uspto_backgrounds",
+          "r": 0.15108699241296208,
+          "magnitude": "weak"
+        },
+        {
+          "a": "pile_cc",
+          "b": "europarl",
+          "r": -0.15073193348538683,
+          "magnitude": "weak"
+        },
+        {
+          "a": "quality_covered_mass",
+          "b": "dm_mathematics",
+          "r": 0.14976863289924877,
+          "magnitude": "weak"
+        },
+        {
+          "a": "freelaw",
+          "b": "stackexchange",
+          "r": -0.14874882063249525,
+          "magnitude": "weak"
+        },
+        {
+          "a": "freelaw",
+          "b": "uspto_backgrounds",
+          "r": -0.1474580998780812,
+          "magnitude": "weak"
+        },
+        {
+          "a": "freelaw",
+          "b": "wikipedia_en",
+          "r": -0.14660393433426627,
+          "magnitude": "weak"
+        },
+        {
+          "a": "selected_index",
+          "b": "dm_mathematics",
+          "r": -0.1461087522078783,
+          "magnitude": "weak"
+        },
+        {
+          "a": "nih_exporter",
+          "b": "uspto_backgrounds",
+          "r": -0.145957841796757,
+          "magnitude": "weak"
+        },
+        {
+          "a": "selected_index",
+          "b": "gutenberg_pg_19",
+          "r": -0.1440561619085929,
+          "magnitude": "weak"
+        },
+        {
+          "a": "quality_covered_mass",
+          "b": "philpapers",
+          "r": 0.14337316648360035,
+          "magnitude": "weak"
+        },
+        {
+          "a": "philpapers",
+          "b": "europarl",
+          "r": -0.14170406214321254,
+          "magnitude": "weak"
+        },
+        {
+          "a": "selected_index",
+          "b": "wikipedia_en",
+          "r": 0.13915079226784616,
+          "magnitude": "weak"
+        },
+        {
+          "a": "quality_covered_mass",
+          "b": "freelaw",
+          "r": -0.13894378984083344,
+          "magnitude": "weak"
+        },
+        {
+          "a": "philpapers",
+          "b": "hackernews",
+          "r": -0.1383080202274153,
+          "magnitude": "weak"
+        },
+        {
+          "a": "quality_slack",
+          "b": "dm_mathematics",
+          "r": 0.13583464619925203,
+          "magnitude": "weak"
+        },
+        {
+          "a": "nih_exporter",
+          "b": "stackexchange",
+          "r": -0.13572092102894961,
+          "magnitude": "weak"
+        },
+        {
+          "a": "quality_covered_mass",
+          "b": "europarl",
+          "r": 0.1355296213092727,
+          "magnitude": "weak"
+        },
+        {
+          "a": "wikipedia_en",
+          "b": "enron_emails",
+          "r": -0.1354651936721491,
+          "magnitude": "weak"
+        },
+        {
+          "a": "philpapers",
+          "b": "pubmed_abstracts",
+          "r": -0.13494182680098651,
+          "magnitude": "weak"
+        },
+        {
+          "a": "nih_exporter",
+          "b": "gutenberg_pg_19",
+          "r": 0.13476782732053005,
+          "magnitude": "weak"
+        },
+        {
+          "a": "selected_index",
+          "b": "uspto_backgrounds",
+          "r": -0.13468507996989232,
+          "magnitude": "weak"
+        },
+        {
+          "a": "pile_cc",
+          "b": "hackernews",
+          "r": -0.1333800918211477,
+          "magnitude": "weak"
+        },
+        {
+          "a": "dm_mathematics",
+          "b": "uspto_backgrounds",
+          "r": -0.1324941648977635,
+          "magnitude": "weak"
+        },
+        {
+          "a": "quality_covered_mass",
+          "b": "enron_emails",
+          "r": -0.13233165928826862,
+          "magnitude": "weak"
+        },
+        {
+          "a": "europarl",
+          "b": "hackernews",
+          "r": -0.13169724152992554,
+          "magnitude": "weak"
+        },
+        {
+          "a": "unknown_QA_mass",
+          "b": "hackernews",
+          "r": 0.1314610945108298,
+          "magnitude": "weak"
+        },
+        {
+          "a": "quality_covered_mass",
+          "b": "uspto_backgrounds",
+          "r": -0.13129047276640024,
+          "magnitude": "weak"
+        },
+        {
+          "a": "dm_mathematics",
+          "b": "hackernews",
+          "r": -0.131083874337727,
+          "magnitude": "weak"
+        },
+        {
+          "a": "ubuntu_irc",
+          "b": "uspto_backgrounds",
+          "r": -0.1309669845220225,
+          "magnitude": "weak"
+        },
+        {
+          "a": "objective_relative",
+          "b": "unknown_QA_mass",
+          "r": 0.12913756941235072,
+          "magnitude": "weak"
+        },
+        {
+          "a": "freelaw",
+          "b": "gutenberg_pg_19",
+          "r": -0.12898961151959976,
+          "magnitude": "weak"
+        },
+        {
+          "a": "objective_relative",
+          "b": "wikipedia_en",
+          "r": 0.12347099093592899,
+          "magnitude": "weak"
+        },
+        {
+          "a": "stackexchange",
+          "b": "pubmed_abstracts",
+          "r": -0.12343779877390486,
+          "magnitude": "weak"
+        },
+        {
+          "a": "pubmed_central",
+          "b": "europarl",
+          "r": -0.12141488199392175,
+          "magnitude": "weak"
+        },
+        {
+          "a": "pile_cc",
+          "b": "uspto_backgrounds",
+          "r": -0.11927344395971351,
+          "magnitude": "weak"
+        },
+        {
+          "a": "freelaw",
+          "b": "europarl",
+          "r": -0.11889013727607282,
+          "magnitude": "weak"
+        },
+        {
+          "a": "selected_index",
+          "b": "unknown_QA_mass",
+          "r": 0.11802750570424363,
+          "magnitude": "weak"
+        },
+        {
+          "a": "nih_exporter",
+          "b": "github",
+          "r": 0.11588715804485378,
+          "magnitude": "weak"
+        },
+        {
+          "a": "unknown_QA_mass",
+          "b": "arxiv",
+          "r": -0.11521804794511338,
+          "magnitude": "weak"
+        },
+        {
+          "a": "selected_index",
+          "b": "enron_emails",
+          "r": -0.1116841900510699,
+          "magnitude": "weak"
+        },
+        {
+          "a": "wikipedia_en",
+          "b": "dm_mathematics",
+          "r": -0.11044433277716213,
+          "magnitude": "weak"
+        },
+        {
+          "a": "quality_covered_mass",
+          "b": "quality_slack",
+          "r": 0.11042248646946332,
+          "magnitude": "weak"
+        },
+        {
+          "a": "quality_covered_mass",
+          "b": "stackexchange",
+          "r": 0.11027244556767277,
+          "magnitude": "weak"
+        },
+        {
+          "a": "quality_covered_mass",
+          "b": "gutenberg_pg_19",
+          "r": -0.11026322651440991,
+          "magnitude": "weak"
+        },
+        {
+          "a": "gutenberg_pg_19",
+          "b": "uspto_backgrounds",
+          "r": 0.1097062474557719,
+          "magnitude": "weak"
+        },
+        {
+          "a": "objective_relative",
+          "b": "pubmed_central",
+          "r": 0.1096540785222972,
+          "magnitude": "weak"
+        },
+        {
+          "a": "dm_mathematics",
+          "b": "ubuntu_irc",
+          "r": -0.10908468146128708,
+          "magnitude": "weak"
+        },
+        {
+          "a": "quality_slack",
+          "b": "pubmed_abstracts",
+          "r": -0.10692457655460956,
+          "magnitude": "weak"
+        },
+        {
+          "a": "wikipedia_en",
+          "b": "github",
+          "r": -0.10603761965890592,
+          "magnitude": "weak"
+        },
+        {
+          "a": "unknown_QA_mass",
+          "b": "github",
+          "r": 0.10421962715525687,
+          "magnitude": "weak"
+        },
+        {
+          "a": "pubmed_central",
+          "b": "pubmed_abstracts",
+          "r": -0.10316552873898983,
+          "magnitude": "weak"
+        },
+        {
+          "a": "dm_mathematics",
+          "b": "pile_cc",
+          "r": 0.10249108152177806,
+          "magnitude": "weak"
+        },
+        {
+          "a": "wikipedia_en",
+          "b": "philpapers",
+          "r": -0.10236548267709458,
+          "magnitude": "weak"
+        },
+        {
+          "a": "freelaw",
+          "b": "pubmed_abstracts",
+          "r": -0.10070229254656704,
+          "magnitude": "weak"
+        },
+        {
+          "a": "enron_emails",
+          "b": "europarl",
+          "r": -0.09773381709705027,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "philpapers",
+          "b": "gutenberg_pg_19",
+          "r": 0.09749292225961505,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "freelaw",
+          "b": "philpapers",
+          "r": -0.09709700371229539,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "objective_relative",
+          "b": "pile_cc",
+          "r": -0.09491063050173397,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "quality_slack",
+          "b": "unknown_QA_mass",
+          "r": -0.09291849239886323,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "freelaw",
+          "b": "pubmed_central",
+          "r": -0.0915209403254523,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "enron_emails",
+          "b": "ubuntu_irc",
+          "r": -0.09045420159138598,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "gutenberg_pg_19",
+          "b": "hackernews",
+          "r": -0.08494876294934496,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "quality_slack",
+          "b": "pile_cc",
+          "r": -0.08466514444879766,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "pubmed_central",
+          "b": "hackernews",
+          "r": -0.08417427827152277,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "unknown_QA_mass",
+          "b": "gutenberg_pg_19",
+          "r": -0.08171481358005032,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "wikipedia_en",
+          "b": "uspto_backgrounds",
+          "r": 0.07912828157306323,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "objective_relative",
+          "b": "pubmed_abstracts",
+          "r": 0.07898861807083696,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "philpapers",
+          "b": "stackexchange",
+          "r": -0.07861593202278924,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "freelaw",
+          "b": "dm_mathematics",
+          "r": -0.07769687082419706,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "dm_mathematics",
+          "b": "europarl",
+          "r": 0.07628251396530801,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "freelaw",
+          "b": "ubuntu_irc",
+          "r": -0.07592470744295494,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "freelaw",
+          "b": "github",
+          "r": -0.07568944124738974,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "objective_relative",
+          "b": "ubuntu_irc",
+          "r": 0.07433030626358415,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "pubmed_abstracts",
+          "b": "uspto_backgrounds",
+          "r": -0.07396082435141017,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "philpapers",
+          "b": "ubuntu_irc",
+          "r": 0.07317351008347804,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "wikipedia_en",
+          "b": "pubmed_abstracts",
+          "r": -0.07139591880914677,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "quality_slack",
+          "b": "philpapers",
+          "r": -0.07105706277393398,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "wikipedia_en",
+          "b": "stackexchange",
+          "r": -0.07071592824951607,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "quality_slack",
+          "b": "enron_emails",
+          "r": -0.06758630213444439,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "github",
+          "b": "uspto_backgrounds",
+          "r": 0.06751885834549713,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "arxiv",
+          "b": "pubmed_abstracts",
+          "r": -0.06012996601619232,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "freelaw",
+          "b": "nih_exporter",
+          "r": -0.05755106017241381,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "europarl",
+          "b": "pubmed_abstracts",
+          "r": -0.054055345004334024,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "objective_relative",
+          "b": "stackexchange",
+          "r": 0.05302106236624002,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "dm_mathematics",
+          "b": "stackexchange",
+          "r": 0.052608525143445606,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "nih_exporter",
+          "b": "pubmed_abstracts",
+          "r": -0.04942561668331234,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "pubmed_central",
+          "b": "wikipedia_en",
+          "r": 0.04786876797651787,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "quality_covered_mass",
+          "b": "nih_exporter",
+          "r": -0.04777507603444481,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "pile_cc",
+          "b": "pubmed_abstracts",
+          "r": -0.045746416775126204,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "quality_covered_mass",
+          "b": "arxiv",
+          "r": 0.040859644483855394,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "nih_exporter",
+          "b": "pile_cc",
+          "r": -0.03915102708211964,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "unknown_QA_mass",
+          "b": "europarl",
+          "r": 0.03892015283708518,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "stackexchange",
+          "b": "uspto_backgrounds",
+          "r": -0.03835203336640467,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "dm_mathematics",
+          "b": "pubmed_abstracts",
+          "r": -0.038185291940676935,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "nih_exporter",
+          "b": "pubmed_central",
+          "r": -0.03737774448478704,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "selected_index",
+          "b": "arxiv",
+          "r": -0.03674550692187755,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "github",
+          "b": "pubmed_abstracts",
+          "r": -0.036684388986139314,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "unknown_QA_mass",
+          "b": "wikipedia_en",
+          "r": -0.03622233543661528,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "nih_exporter",
+          "b": "enron_emails",
+          "r": -0.03018379754547216,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "quality_covered_mass",
+          "b": "wikipedia_en",
+          "r": -0.02894937027855615,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "arxiv",
+          "b": "dm_mathematics",
+          "r": 0.02707400799530151,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "pubmed_central",
+          "b": "philpapers",
+          "r": 0.02120491935160385,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "quality_covered_mass",
+          "b": "github",
+          "r": -0.020282122085496842,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "stackexchange",
+          "b": "pile_cc",
+          "r": 0.01762326842990479,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "ubuntu_irc",
+          "b": "pubmed_abstracts",
+          "r": 0.017586534949485,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "objective_relative",
+          "b": "nih_exporter",
+          "r": -0.014567156622461004,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "hackernews",
+          "b": "pubmed_abstracts",
+          "r": -0.01356573256556455,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "freelaw",
+          "b": "hackernews",
+          "r": 0.012721948003081055,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "pubmed_central",
+          "b": "uspto_backgrounds",
+          "r": 0.012716799304564994,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "wikipedia_en",
+          "b": "ubuntu_irc",
+          "r": 0.012533816331811741,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "pubmed_central",
+          "b": "github",
+          "r": 0.01183010545368086,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "github",
+          "b": "gutenberg_pg_19",
+          "r": -0.010849697417900086,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "selected_index",
+          "b": "europarl",
+          "r": -0.010469204043432621,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "stackexchange",
+          "b": "gutenberg_pg_19",
+          "r": -0.010151490794859419,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "objective_relative",
+          "b": "gutenberg_pg_19",
+          "r": -0.007707983601534195,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "europarl",
+          "b": "uspto_backgrounds",
+          "r": -0.007170882858982347,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "selected_index",
+          "b": "pubmed_central",
+          "r": -0.007063695251917939,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "gutenberg_pg_19",
+          "b": "pile_cc",
+          "r": -0.005877376447144914,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "unknown_QA_mass",
+          "b": "dm_mathematics",
+          "r": 0.005688080264077968,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "enron_emails",
+          "b": "gutenberg_pg_19",
+          "r": 0.005386672930713048,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "stackexchange",
+          "b": "enron_emails",
+          "r": -0.005360530865511896,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "dm_mathematics",
+          "b": "gutenberg_pg_19",
+          "r": 0.00357599851445454,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "arxiv",
+          "b": "github",
+          "r": -0.0032000404044608397,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "selected_index",
+          "b": "stackexchange",
+          "r": -0.0023045708809610018,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "arxiv",
+          "b": "hackernews",
+          "r": -0.0022514787736798224,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "enron_emails",
+          "b": "uspto_backgrounds",
+          "r": 0.0008352825574148931,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "objective_relative",
+          "b": "freelaw",
+          "r": 0.0007130941797477061,
+          "magnitude": "negligible"
+        }
+      ]
+    },
+    "group_summary": null,
+    "warnings": [
+      "列 'quality_covered_mass' 缺失率 33% — 画图前考虑是否填补、剔除、或在图注中交代。",
+      "列 'quality_slack' 缺失率 33% — 画图前考虑是否填补、剔除、或在图注中交代。"
+    ],
+    "suggestions": [
+      "分类 vs 连续，样本量充足 → 箱线图 / 小提琴图，或带误差棒的柱状图（误差棒说明 SD/SEM/CI）",
+      "≥3 个连续变量 → 相关性热力图（['selected_index', 'objective_relative', 'quality_covered_mass', 'quality_slack', 'unknown_QA_mass']）或 pairplot 散点矩阵",
+      "selected_index 跨数个量级（3 ~ 511）→ 用对数 y 轴",
+      "objective_relative 高度偏态（skew=-1.32）→ 考虑对数变换或小提琴图代替均值柱图",
+      "quality_slack 跨数个量级（0.00415 ~ 1.36）→ 用对数 y 轴",
+      "unknown_QA_mass 跨数个量级（0.002 ~ 0.996）→ 用对数 y 轴",
+      "freelaw 高度偏态（skew=3.09）→ 考虑对数变换或小提琴图代替均值柱图",
+      "nih_exporter 高度偏态（skew=2.15）→ 考虑对数变换或小提琴图代替均值柱图",
+      "pubmed_central 高度偏态（skew=3.04）→ 考虑对数变换或小提琴图代替均值柱图",
+      "wikipedia_en 高度偏态（skew=3.22）→ 考虑对数变换或小提琴图代替均值柱图",
+      "dm_mathematics 高度偏态（skew=2.63）→ 考虑对数变换或小提琴图代替均值柱图",
+      "github 高度偏态（skew=2.50）→ 考虑对数变换或小提琴图代替均值柱图",
+      "philpapers 高度偏态（skew=4.06）→ 考虑对数变换或小提琴图代替均值柱图",
+      "stackexchange 高度偏态（skew=4.00）→ 考虑对数变换或小提琴图代替均值柱图",
+      "enron_emails 高度偏态（skew=2.84）→ 考虑对数变换或小提琴图代替均值柱图",
+      "gutenberg_pg_19 高度偏态（skew=1.24）→ 考虑对数变换或小提琴图代替均值柱图",
+      "pile_cc 高度偏态（skew=1.63）→ 考虑对数变换或小提琴图代替均值柱图",
+      "ubuntu_irc 高度偏态（skew=1.17）→ 考虑对数变换或小提琴图代替均值柱图",
+      "europarl 高度偏态（skew=2.90）→ 考虑对数变换或小提琴图代替均值柱图",
+      "hackernews 高度偏态（skew=1.61）→ 考虑对数变换或小提琴图代替均值柱图",
+      "pubmed_abstracts 高度偏态（skew=3.21）→ 考虑对数变换或小提琴图代替均值柱图",
+      "uspto_backgrounds 高度偏态（skew=3.55）→ 考虑对数变换或小提琴图代替均值柱图"
+    ]
+  },
+  "refit_replicate_choices.csv": {
+    "source": "<DataFrame>",
+    "n_rows": 120,
+    "n_cols": 9,
+    "columns": {
+      "repeat": {
+        "type": "continuous",
+        "n_total": 120,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 120,
+        "mean": 14.5,
+        "median": 14.5,
+        "sd": 8.69173276668093,
+        "min": 0.0,
+        "max": 29.0,
+        "skewness": -5.921189464667501e-17,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -15.5,
+        "outlier_hi": 44.5,
+        "needs_log_axis": false
+      },
+      "policy": {
+        "type": "unknown",
+        "n_total": 120,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "selected_index": {
+        "type": "continuous",
+        "n_total": 120,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 120,
+        "mean": 208.20833333333334,
+        "median": 136.0,
+        "sd": 135.14896206326821,
+        "min": 84.0,
+        "max": 477.0,
+        "skewness": 0.9253604578294711,
+        "skew_label": "moderately skewed",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -209.0,
+        "outlier_hi": 607.0,
+        "needs_log_axis": "False"
+      },
+      "frozen_selected_index": {
+        "type": "ordinal",
+        "n_total": 120,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 120,
+        "n_unique": 4,
+        "categories": [
+          [
+            "136",
+            30
+          ],
+          [
+            "301",
+            30
+          ],
+          [
+            "172",
+            30
+          ],
+          [
+            "477",
+            30
+          ]
+        ],
+        "min_group_n": 30,
+        "max_group_n": 30,
+        "small_groups_flag": false
+      },
+      "same_as_frozen": {
+        "type": "boolean",
+        "n_total": 120,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 120,
+        "n_unique": 2,
+        "categories": [
+          [
+            "False",
+            61
+          ],
+          [
+            "True",
+            59
+          ]
+        ],
+        "min_group_n": 59,
+        "max_group_n": 61,
+        "small_groups_flag": false
+      },
+      "refit_regret_using_frozen_choice": {
+        "type": "continuous",
+        "n_total": 120,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 120,
+        "mean": 0.00825879966410802,
+        "median": 0.00103089962574465,
+        "sd": 0.014818003688900959,
+        "min": 0.0,
+        "max": 0.0908769698896139,
+        "skewness": 3.208675351174877,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 5,
+        "outlier_lo": -0.019154312195795102,
+        "outlier_hi": 0.0319238536596585,
+        "needs_log_axis": false
+      },
+      "frozen_regret_using_refit_choice": {
+        "type": "continuous",
+        "n_total": 120,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 120,
+        "mean": 0.007202232790361481,
+        "median": 6.151112186358193e-05,
+        "sd": 0.012006000917285509,
+        "min": 0.0,
+        "max": 0.0556922928315042,
+        "skewness": 1.9897543357530982,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 19,
+        "outlier_lo": -0.01526605960722495,
+        "outlier_hi": 0.02544343267870825,
+        "needs_log_axis": false
+      },
+      "selected_feature_domains": {
+        "type": "unknown",
+        "n_total": 120,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "chosen_alpha_13": {
+        "type": "unknown",
+        "n_total": 120,
+        "n_null": 0,
+        "missing_rate": 0.0
+      }
+    },
+    "correlation": {
+      "columns": [
+        "repeat",
+        "selected_index",
+        "refit_regret_using_frozen_choice",
+        "frozen_regret_using_refit_choice"
+      ],
+      "matrix": {
+        "repeat": {
+          "repeat": 1.0,
+          "selected_index": 0.187,
+          "refit_regret_using_frozen_choice": -0.254,
+          "frozen_regret_using_refit_choice": -0.334
+        },
+        "selected_index": {
+          "repeat": 0.187,
+          "selected_index": 1.0,
+          "refit_regret_using_frozen_choice": -0.097,
+          "frozen_regret_using_refit_choice": -0.262
+        },
+        "refit_regret_using_frozen_choice": {
+          "repeat": -0.254,
+          "selected_index": -0.097,
+          "refit_regret_using_frozen_choice": 1.0,
+          "frozen_regret_using_refit_choice": 0.588
+        },
+        "frozen_regret_using_refit_choice": {
+          "repeat": -0.334,
+          "selected_index": -0.262,
+          "refit_regret_using_frozen_choice": 0.588,
+          "frozen_regret_using_refit_choice": 1.0
+        }
+      },
+      "pairs_sorted": [
+        {
+          "a": "refit_regret_using_frozen_choice",
+          "b": "frozen_regret_using_refit_choice",
+          "r": 0.5875829588004479,
+          "magnitude": "strong"
+        },
+        {
+          "a": "repeat",
+          "b": "frozen_regret_using_refit_choice",
+          "r": -0.33398925544515773,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "selected_index",
+          "b": "frozen_regret_using_refit_choice",
+          "r": -0.26194175243536255,
+          "magnitude": "weak"
+        },
+        {
+          "a": "repeat",
+          "b": "refit_regret_using_frozen_choice",
+          "r": -0.2542149422008611,
+          "magnitude": "weak"
+        },
+        {
+          "a": "repeat",
+          "b": "selected_index",
+          "r": 0.18698838041367502,
+          "magnitude": "weak"
+        },
+        {
+          "a": "selected_index",
+          "b": "refit_regret_using_frozen_choice",
+          "r": -0.0966718470394492,
+          "magnitude": "negligible"
+        }
+      ]
+    },
+    "group_summary": null,
+    "warnings": [],
+    "suggestions": [
+      "分类 vs 连续，样本量充足 → 箱线图 / 小提琴图，或带误差棒的柱状图（误差棒说明 SD/SEM/CI）",
+      "≥3 个连续变量 → 相关性热力图（['repeat', 'selected_index', 'refit_regret_using_frozen_choice', 'frozen_regret_using_refit_choice']）或 pairplot 散点矩阵",
+      "refit_regret_using_frozen_choice 高度偏态（skew=3.21）→ 考虑对数变换或小提琴图代替均值柱图",
+      "frozen_regret_using_refit_choice 高度偏态（skew=1.99）→ 考虑对数变换或小提琴图代替均值柱图"
+    ]
+  }
+}
