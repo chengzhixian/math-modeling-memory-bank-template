@@ -2,7 +2,7 @@
   "auditable": true,
   "minimum_required_pt": 5,
   "minimum_found_pt": 5.25,
-  "text_run_count": 58,
+  "text_run_count": 62,
   "below_minimum_count": 0,
   "below_minimum": [],
   "warnings": []

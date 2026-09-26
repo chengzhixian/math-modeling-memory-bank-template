@@ -1,0 +1,412 @@
+{
+  "frozen_inputs": [
+    {
+      "file": "outputs/Q1/ANSWER.md",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q1/conflict_validation.json",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q1/domain_quality.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q1/estimated_decision_stress.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q1/estimated_targetwise.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q1/hull_bounds.json",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q1/interaction_coefficients_13_targets.json",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q1/recipes_512.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q1/refit_replicate_choices.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q1/targetwise_oof.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q1/targetwise_validation.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q2/b2_b3_model_validation.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q2/b7_backbone_comparison.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q2/b7_quality_extension.json",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q2/domain_pair_substitution.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q2/marginals_elasticities.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q2/model_coefficients.json",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q2/quality_bridge_sensitivity.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q2/quality_scale_local_tradeoff.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q2/scale_order_validation.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q3/assumption_official_grid.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q3/assumption_sensitivity.json",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q3/external_nd_budget_comparison.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q3/external_nd_runs.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q3/native_Q_sensitivity_grid.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q3/observed_budget_scan.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q3/observed_joint_grid.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q4/bridge_source_coordinate_models.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q4/c3_row_metric_audit.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q4/c4_annual_resource_comparison.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q4/c8_bbh_task_aggregation.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q4/frontier_candidate_forecasts.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q4/frontier_maximum_scenarios.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q4/frontier_model_comparison.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q4/frontier_scenario_union.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q4/historical_common_cells.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q4/historical_standardized_contributions.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q4/prepared/bridge_sample.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q4/q3_bridge_conclusion_sensitivity.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q4/rolling_two_month_frontier.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q4/context_scenarios.csv",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q3/ANSWER.md",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q3/curated_manifest.json",
+      "manifest_coverage": "not-listed; actual input SHA recorded"
+    },
+    {
+      "file": "outputs/Q4/ANSWER.md",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q4/curated_manifest.json",
+      "manifest_coverage": "not-listed; actual input SHA recorded"
+    },
+    {
+      "file": "outputs/Q1/curated_manifest.json",
+      "manifest_coverage": "not-listed; actual input SHA recorded"
+    },
+    {
+      "file": "outputs/Q2/ANSWER.md",
+      "frozen_sha256_match": true
+    },
+    {
+      "file": "outputs/Q2/curated_manifest.json",
+      "manifest_coverage": "not-listed; actual input SHA recorded"
+    }
+  ],
+  "exports": [
+    {
+      "stem": "Q1_01",
+      "width_mm": 183.0000055948893,
+      "tiff_dpi": [
+        600.0,
+        600.0
+      ],
+      "editable_svg_text": true
+    },
+    {
+      "stem": "Q1_02",
+      "width_mm": 183.0000055948893,
+      "tiff_dpi": [
+        600.0,
+        600.0
+      ],
+      "editable_svg_text": true
+    },
+    {
+      "stem": "Q1_03",
+      "width_mm": 183.0000055948893,
+      "tiff_dpi": [
+        600.0,
+        600.0
+      ],
+      "editable_svg_text": true
+    },
+    {
+      "stem": "Q1_04",
+      "width_mm": 183.0000055948893,
+      "tiff_dpi": [
+        600.0,
+        600.0
+      ],
+      "editable_svg_text": true
+    },
+    {
+      "stem": "Q1_05",
+      "width_mm": 183.0000055948893,
+      "tiff_dpi": [
+        600.0,
+        600.0
+      ],
+      "editable_svg_text": true
+    },
+    {
+      "stem": "Q1_06",
+      "width_mm": 183.0000055948893,
+      "tiff_dpi": [
+        600.0,
+        600.0
+      ],
+      "editable_svg_text": true
+    },
+    {
+      "stem": "Q2_01",
+      "width_mm": 183.0000055948893,
+      "tiff_dpi": [
+        600.0,
+        600.0
+      ],
+      "editable_svg_text": true
+    },
+    {
+      "stem": "Q2_02",
+      "width_mm": 183.0000055948893,
+      "tiff_dpi": [
+        600.0,
+        600.0
+      ],
+      "editable_svg_text": true
+    },
+    {
+      "stem": "Q2_03",
+      "width_mm": 183.0000055948893,
+      "tiff_dpi": [
+        600.0,
+        600.0
+      ],
+      "editable_svg_text": true
+    },
+    {
+      "stem": "Q2_04",
+      "width_mm": 183.0000055948893,
+      "tiff_dpi": [
+        600.0,
+        600.0
+      ],
+      "editable_svg_text": true
+    },
+    {
+      "stem": "Q2_05",
+      "width_mm": 183.0000055948893,
+      "tiff_dpi": [
+        600.0,
+        600.0
+      ],
+      "editable_svg_text": true
+    },
+    {
+      "stem": "Q3_01",
+      "width_mm": 183.0000055948893,
+      "tiff_dpi": [
+        600.0,
+        600.0
+      ],
+      "editable_svg_text": true
+    },
+    {
+      "stem": "Q3_02",
+      "width_mm": 183.0000055948893,
+      "tiff_dpi": [
+        600.0,
+        600.0
+      ],
+      "editable_svg_text": true
+    },
+    {
+      "stem": "Q3_03",
+      "width_mm": 183.0000055948893,
+      "tiff_dpi": [
+        600.0,
+        600.0
+      ],
+      "editable_svg_text": true
+    },
+    {
+      "stem": "Q3_04",
+      "width_mm": 183.0000055948893,
+      "tiff_dpi": [
+        600.0,
+        600.0
+      ],
+      "editable_svg_text": true
+    },
+    {
+      "stem": "Q3_05",
+      "width_mm": 183.0000055948893,
+      "tiff_dpi": [
+        600.0,
+        600.0
+      ],
+      "editable_svg_text": true
+    },
+    {
+      "stem": "Q3_06",
+      "width_mm": 183.0000055948893,
+      "tiff_dpi": [
+        600.0,
+        600.0
+      ],
+      "editable_svg_text": true
+    },
+    {
+      "stem": "Q4_01",
+      "width_mm": 183.0000055948893,
+      "tiff_dpi": [
+        600.0,
+        600.0
+      ],
+      "editable_svg_text": true
+    },
+    {
+      "stem": "Q4_02",
+      "width_mm": 183.0000055948893,
+      "tiff_dpi": [
+        600.0,
+        600.0
+      ],
+      "editable_svg_text": true
+    },
+    {
+      "stem": "Q4_03",
+      "width_mm": 183.0000055948893,
+      "tiff_dpi": [
+        600.0,
+        600.0
+      ],
+      "editable_svg_text": true
+    },
+    {
+      "stem": "Q4_04",
+      "width_mm": 183.0000055948893,
+      "tiff_dpi": [
+        600.0,
+        600.0
+      ],
+      "editable_svg_text": true
+    },
+    {
+      "stem": "Q4_05",
+      "width_mm": 183.0000055948893,
+      "tiff_dpi": [
+        600.0,
+        600.0
+      ],
+      "editable_svg_text": true
+    }
+  ],
+  "quantitative_checks": {
+    "negative_loss_diagnostic": -0.1070335196184395,
+    "all_power_recipe_categories": [
+      172.0,
+      368.0,
+      459.0,
+      477.0
+    ],
+    "Q1_improved_targets": {
+      "test_1B": 13,
+      "test_1m": 11,
+      "test_60m": 13
+    }
+  },
+  "figure_count": 22,
+  "status": "PASS"
+}

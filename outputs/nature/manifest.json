@@ -17,11 +17,13 @@
         "outputs/Q1/domain_quality.csv"
       ],
       "size_inches": [
-        7.204724409448819,
+        7.20472440945,
         5.1
       ],
       "dpi": 300,
-      "visual_review": "pending"
+      "visual_review": "PASS: qa/VISUAL_REVIEW.md",
+      "tiff_dpi": 600,
+      "raster_preview_dpi": 300
     },
     {
       "stem": "Q1_02",
@@ -37,11 +39,13 @@
         "outputs/Q1/conflict_validation.json"
       ],
       "size_inches": [
-        7.204724409448819,
+        7.20472440945,
         4.8
       ],
       "dpi": 300,
-      "visual_review": "pending"
+      "visual_review": "PASS: qa/VISUAL_REVIEW.md",
+      "tiff_dpi": 600,
+      "raster_preview_dpi": 300
     },
     {
       "stem": "Q1_03",
@@ -59,11 +63,13 @@
         "outputs/Q1/targetwise_validation.csv"
       ],
       "size_inches": [
-        7.204724409448819,
+        7.20472440945,
         6.5
       ],
       "dpi": 300,
-      "visual_review": "pending"
+      "visual_review": "PASS: qa/VISUAL_REVIEW.md",
+      "tiff_dpi": 600,
+      "raster_preview_dpi": 300
     },
     {
       "stem": "Q1_04",
@@ -81,11 +87,13 @@
         "outputs/Q1/refit_replicate_choices.csv"
       ],
       "size_inches": [
-        7.204724409448819,
+        7.20472440945,
         6.1
       ],
       "dpi": 300,
-      "visual_review": "pending"
+      "visual_review": "PASS: qa/VISUAL_REVIEW.md",
+      "tiff_dpi": 600,
+      "raster_preview_dpi": 300
     },
     {
       "stem": "Q1_05",
@@ -103,11 +111,35 @@
         "outputs/Q1/recipes_512.csv"
       ],
       "size_inches": [
-        7.204724409448819,
+        7.20472440945,
         6.0
       ],
       "dpi": 300,
-      "visual_review": "pending"
+      "visual_review": "PASS: qa/VISUAL_REVIEW.md",
+      "tiff_dpi": 600,
+      "raster_preview_dpi": 300
+    },
+    {
+      "stem": "Q1_06",
+      "claim": "扩展及去重保留领域评分方向，但不能算作独立质量真值验证。",
+      "legend": "A2/A3沿用A1归一化与固定聚合规则，不重新拟合标尺。去重值来自冻结ANSWER的四位小数摘要；A1可能与扩展重叠，各点不是独立重复。记录数与评分中位数分面展示，不用双Y轴。无去重评分区间，不伪造误差棒。",
+      "panel_roles": [
+        "冻结标尺迁移",
+        "样本覆盖与重叠限制"
+      ],
+      "archetype": "quantitative grid",
+      "sources": [
+        "outputs/Q1/ANSWER.md",
+        "outputs/Q1/domain_quality.csv"
+      ],
+      "size_inches": [
+        7.20472440945,
+        4.8
+      ],
+      "dpi": 300,
+      "visual_review": "PASS: qa/VISUAL_REVIEW.md",
+      "tiff_dpi": 600,
+      "raster_preview_dpi": 300
     },
     {
       "stem": "Q2_01",
@@ -122,11 +154,13 @@
         "outputs/Q2/model_coefficients.json"
       ],
       "size_inches": [
-        7.204724409448819,
+        7.20472440945,
         4.7
       ],
       "dpi": 300,
-      "visual_review": "pending"
+      "visual_review": "PASS: qa/VISUAL_REVIEW.md",
+      "tiff_dpi": 600,
+      "raster_preview_dpi": 300
     },
     {
       "stem": "Q2_02",
@@ -142,16 +176,18 @@
         "outputs/Q2/b7_quality_extension.json"
       ],
       "size_inches": [
-        7.204724409448819,
+        7.20472440945,
         5.0
       ],
       "dpi": 300,
-      "visual_review": "pending"
+      "visual_review": "PASS: qa/VISUAL_REVIEW.md",
+      "tiff_dpi": 600,
+      "raster_preview_dpi": 300
     },
     {
       "stem": "Q2_03",
       "claim": "固定配方的条件计算支持质量—规模替代，不证明质量可独立操控。",
-      "legend": "a，D=100B，固定示例配方，对原始三档N逐行计算；N=1B时提高质量0.10，旧质量等效需1.317062B。b，冻结局部弹性示例，均无统计区间。q(p)由配方决定；额外处理可控QB是另一工程机制，不把两机制混同。",
+      "legend": "a，D=100B，固定示例配方，对原始三档N逐行计算；N=1B时提高质量0.10，旧质量等效需1.317062B。N=10B时旧质量等效根超出支持域，蓝点留空，未补零或外推。b，冻结局部弹性示例，均无统计区间。q(p)由配方决定；额外处理可控QB是另一工程机制，不把两机制混同。",
       "panel_roles": [
         "等Loss有限变化替代",
         "局部敏感度"
@@ -162,11 +198,13 @@
         "outputs/Q2/quality_scale_local_tradeoff.csv"
       ],
       "size_inches": [
-        7.204724409448819,
+        7.20472440945,
         4.8
       ],
       "dpi": 300,
-      "visual_review": "pending"
+      "visual_review": "PASS: qa/VISUAL_REVIEW.md",
+      "tiff_dpi": 600,
+      "raster_preview_dpi": 300
     },
     {
       "stem": "Q2_04",
@@ -182,11 +220,13 @@
         "outputs/Q2/domain_pair_substitution.csv"
       ],
       "size_inches": [
-        7.204724409448819,
+        7.20472440945,
         6.3
       ],
       "dpi": 300,
-      "visual_review": "pending"
+      "visual_review": "PASS: qa/VISUAL_REVIEW.md",
+      "tiff_dpi": 600,
+      "raster_preview_dpi": 300
     },
     {
       "stem": "Q2_05",
@@ -203,11 +243,13 @@
         "outputs/Q2/scale_order_validation.csv"
       ],
       "size_inches": [
-        7.204724409448819,
+        7.20472440945,
         5.0
       ],
       "dpi": 300,
-      "visual_review": "pending"
+      "visual_review": "PASS: qa/VISUAL_REVIEW.md",
+      "tiff_dpi": 600,
+      "raster_preview_dpi": 300
     },
     {
       "stem": "Q3_01",
@@ -222,11 +264,13 @@
         "outputs/Q3/observed_joint_grid.csv"
       ],
       "size_inches": [
-        7.204724409448819,
+        7.20472440945,
         5.1
       ],
       "dpi": 300,
-      "visual_review": "pending"
+      "visual_review": "PASS: qa/VISUAL_REVIEW.md",
+      "tiff_dpi": 600,
+      "raster_preview_dpi": 300
     },
     {
       "stem": "Q3_02",
@@ -238,14 +282,17 @@
       ],
       "archetype": "quantitative grid",
       "sources": [
-        "outputs/Q3/observed_joint_grid.csv"
+        "outputs/Q3/observed_joint_grid.csv",
+        "outputs/Q4/context_scenarios.csv"
       ],
       "size_inches": [
-        7.204724409448819,
+        7.20472440945,
         4.9
       ],
       "dpi": 300,
-      "visual_review": "pending"
+      "visual_review": "PASS: qa/VISUAL_REVIEW.md",
+      "tiff_dpi": 600,
+      "raster_preview_dpi": 300
     },
     {
       "stem": "Q3_03",
@@ -261,11 +308,13 @@
         "outputs/Q3/observed_budget_scan.csv"
       ],
       "size_inches": [
-        7.204724409448819,
+        7.20472440945,
         5.1
       ],
       "dpi": 300,
-      "visual_review": "pending"
+      "visual_review": "PASS: qa/VISUAL_REVIEW.md",
+      "tiff_dpi": 600,
+      "raster_preview_dpi": 300
     },
     {
       "stem": "Q3_04",
@@ -281,11 +330,13 @@
         "outputs/Q3/assumption_sensitivity.json"
       ],
       "size_inches": [
-        7.204724409448819,
+        7.20472440945,
         5.7
       ],
       "dpi": 300,
-      "visual_review": "pending"
+      "visual_review": "PASS: qa/VISUAL_REVIEW.md",
+      "tiff_dpi": 600,
+      "raster_preview_dpi": 300
     },
     {
       "stem": "Q3_05",
@@ -301,11 +352,13 @@
         "outputs/Q3/observed_joint_grid.csv"
       ],
       "size_inches": [
-        7.204724409448819,
+        7.20472440945,
         5.0
       ],
       "dpi": 300,
-      "visual_review": "pending"
+      "visual_review": "PASS: qa/VISUAL_REVIEW.md",
+      "tiff_dpi": 600,
+      "raster_preview_dpi": 300
     },
     {
       "stem": "Q3_06",
@@ -321,19 +374,23 @@
         "outputs/Q3/external_nd_runs.csv"
       ],
       "size_inches": [
-        7.204724409448819,
+        7.20472440945,
         5.1
       ],
       "dpi": 300,
-      "visual_review": "pending"
+      "visual_review": "PASS: qa/VISUAL_REVIEW.md",
+      "tiff_dpi": 600,
+      "raster_preview_dpi": 300
     },
     {
       "stem": "Q4_01",
       "claim": "同规模时间变化解释部分历史上升，但没有识别纯技术因果效应。",
-      "legend": "主要过滤、首末各2个月、0.5 decade规模分箱，不控制开发者。a每点为共同层均分，面积反映层权重。b后训练规模−0.7579、时间6.5212、差额−1.5415，基座−3.7557/4.6356/−2.0716；前两项是标准化变化，第三项合为全样本变化。开发者控制仅保留极少记录；未排除数据量、选择或评估混杂，不使用因果术语。",
+      "legend": "主要过滤、首末各2个月、0.5 decade规模分箱，不控制开发者。a每点为共同层均分，面积反映层权重。b后训练规模−0.7579、时间6.5212、差额−1.5415，基座−3.7557/4.6356/−2.0716；前两项是标准化变化，第三项合为全样本变化。c，两月窗口的三分箱条件份额；规模−50.08%至−13.15%，时间113.15%至150.08%，带符号份额不是纯因果百分比。d，颜色表示类型，圆为早期、方为晚期；严格开发者控制仅保留后训练6/8、基座3/2条。未排除数据量、选择或评估混杂。",
       "panel_roles": [
         "共同支持中的变化",
-        "变化分解及覆盖限制"
+        "变化分解及覆盖限制",
+        "分箱敏感性",
+        "开发者控制的样本代价"
       ],
       "archetype": "quantitative grid",
       "sources": [
@@ -341,11 +398,13 @@
         "outputs/Q4/historical_standardized_contributions.csv"
       ],
       "size_inches": [
-        7.204724409448819,
-        5.0
+        7.20472440945,
+        6.8
       ],
       "dpi": 300,
-      "visual_review": "pending"
+      "visual_review": "PASS: qa/VISUAL_REVIEW.md",
+      "tiff_dpi": 600,
+      "raster_preview_dpi": 300
     },
     {
       "stem": "Q4_02",
@@ -361,11 +420,13 @@
         "outputs/Q4/rolling_two_month_frontier.csv"
       ],
       "size_inches": [
-        7.204724409448819,
+        7.20472440945,
         5.0
       ],
       "dpi": 300,
-      "visual_review": "pending"
+      "visual_review": "PASS: qa/VISUAL_REVIEW.md",
+      "tiff_dpi": 600,
+      "raster_preview_dpi": 300
     },
     {
       "stem": "Q4_03",
@@ -383,11 +444,13 @@
         "outputs/Q4/frontier_scenario_union.csv"
       ],
       "size_inches": [
-        7.204724409448819,
+        7.20472440945,
         5.8
       ],
       "dpi": 300,
-      "visual_review": "pending"
+      "visual_review": "PASS: qa/VISUAL_REVIEW.md",
+      "tiff_dpi": 600,
+      "raster_preview_dpi": 300
     },
     {
       "stem": "Q4_04",
@@ -406,11 +469,13 @@
         "outputs/Q4/q3_bridge_conclusion_sensitivity.csv"
       ],
       "size_inches": [
-        7.204724409448819,
+        7.20472440945,
         6.6
       ],
       "dpi": 300,
-      "visual_review": "pending"
+      "visual_review": "PASS: qa/VISUAL_REVIEW.md",
+      "tiff_dpi": 600,
+      "raster_preview_dpi": 300
     },
     {
       "stem": "Q4_05",
@@ -428,11 +493,13 @@
         "outputs/Q4/c8_bbh_task_aggregation.csv"
       ],
       "size_inches": [
-        7.204724409448819,
+        7.20472440945,
         5.2
       ],
       "dpi": 300,
-      "visual_review": "pending"
+      "visual_review": "PASS: qa/VISUAL_REVIEW.md",
+      "tiff_dpi": 600,
+      "raster_preview_dpi": 300
     }
   ],
   "inputs": {
@@ -477,7 +544,15 @@
     "outputs/Q4/historical_standardized_contributions.csv": "21f60da5422cdc2d4405310443dbf62cb5009a272fded3f3e08cf4352a63fe40",
     "outputs/Q4/prepared/bridge_sample.csv": "ead8c15e7bfefa589978c855f17cd70141f99446738c78eb4dc939c958f842dd",
     "outputs/Q4/q3_bridge_conclusion_sensitivity.csv": "7dfbaa2881cd112648c7841441bbade702ad16ce1ec10dfad850d5f0e3f619a3",
-    "outputs/Q4/rolling_two_month_frontier.csv": "f6f3556606bf074eef250991d1eedc070ae8e6bc9c14508c130560275e287c31"
+    "outputs/Q4/rolling_two_month_frontier.csv": "f6f3556606bf074eef250991d1eedc070ae8e6bc9c14508c130560275e287c31",
+    "outputs/Q4/context_scenarios.csv": "b494a8949a74133e779b683c8a46021b5e16308970150bd18e033553c6fc8608",
+    "outputs/Q3/ANSWER.md": "69455514888e9815e0459e0c734cd27ff1d9f6243870d5b8e2f8b18a334d7869",
+    "outputs/Q3/curated_manifest.json": "d9cded97bc50ed83b930ad8f013f5030dc8af432e937188a29492b8757108cbf",
+    "outputs/Q4/ANSWER.md": "a5a75ba9ab35fc5c42260b2ef8351b9b21367f9a9e539266e3f4d88f1d4eeada",
+    "outputs/Q4/curated_manifest.json": "f19a121fe61e9cc4bac45a51b1e5ba4143780d006170cc25da3c085ccaa04bc3",
+    "outputs/Q1/curated_manifest.json": "583130e1ac771e356235093e913c1d4fa0ba71407d7bb9ee75a209b70ea5967f",
+    "outputs/Q2/ANSWER.md": "61c000b1593fa54447fa6b64ca89782548cb64c61f32362623a056f3dd484891",
+    "outputs/Q2/curated_manifest.json": "f0da267c9aec295b2524aa8b31d65a2749cf267a31df70f6812e7edff51b727e"
   },
   "qa": {
     "Q1_01": {
@@ -669,7 +744,7 @@
         "contained_fill_overlays": 0,
         "contained_image_overlays": 0
       },
-      "minimum_font_pt": 6.5,
+      "minimum_font_pt": 5.25,
       "small_glyphs": 0
     },
     "Q4_01": {
@@ -678,10 +753,10 @@
       "collision_summary": {
         "fail": 0,
         "warn": 0,
-        "contained_fill_overlays": 0,
+        "contained_fill_overlays": 2,
         "contained_image_overlays": 0
       },
-      "minimum_font_pt": 7.5,
+      "minimum_font_pt": 5.25,
       "small_glyphs": 0
     },
     "Q4_02": {
@@ -726,12 +801,26 @@
       "collision_summary": {
         "fail": 0,
         "warn": 0,
-        "contained_fill_overlays": 0,
+        "contained_fill_overlays": 2,
         "contained_image_overlays": 0
       },
       "minimum_font_pt": 7.0,
       "small_glyphs": 0
+    },
+    "Q1_06": {
+      "alignment_verdict": "PASS",
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "minimum_font_pt": 5.25,
+      "small_glyphs": 0
     }
   },
-  "script_sha256": "2a4260b6024f2f4d1b3116f467228a591091d64cefc3c0f26f5d92218d11c0c1"
+  "script_sha256": "ad8af7ecef6806b8b8e790de3a883e58ddb1c9753ebd39ae0ff0ad23b9029e6a",
+  "review_script_sha256": "f86a244873cc68a2b18fb425c0e8e6fe93a069f61c4b0b30b37ed15a53b99603",
+  "panel_count": 53
 }

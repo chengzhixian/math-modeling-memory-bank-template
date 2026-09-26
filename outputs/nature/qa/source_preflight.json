@@ -2,12 +2,12 @@
   "source": "src\\visualization\\nature_answers.py",
   "backend": "python",
   "summary": {
-    "ready": false,
+    "ready": true,
     "strict": false,
     "counts": {
-      "PASS": 15,
-      "WARN": 5,
-      "FAIL": 1
+      "PASS": 19,
+      "WARN": 2,
+      "FAIL": 0
     }
   },
   "findings": [
@@ -56,11 +56,9 @@
     },
     {
       "check_id": "EDITABLE-TEXT",
-      "level": "FAIL",
-      "message": "Missing editable-text settings",
-      "evidence": [
-        "svg.fonttype='none'"
-      ]
+      "level": "PASS",
+      "message": "SVG and PDF editable-text settings are configured",
+      "evidence": []
     },
     {
       "check_id": "EXPORT-VECTOR",
@@ -70,22 +68,22 @@
     },
     {
       "check_id": "EXPORT-RASTER",
-      "level": "WARN",
-      "message": "PNG preview is present but no TIFF submission raster was found",
+      "level": "PASS",
+      "message": "TIFF raster export is present",
       "evidence": []
     },
     {
       "check_id": "RASTER-DPI",
-      "level": "WARN",
-      "message": "Raster export meets the 300 dpi floor but not the 600 dpi default",
+      "level": "PASS",
+      "message": "A raster export of at least 600 dpi is configured",
       "evidence": [
-        "300"
+        "600"
       ]
     },
     {
       "check_id": "FINAL-WIDTH",
-      "level": "WARN",
-      "message": "Detected width 4648.2 mm is not near the common 89/183 mm defaults; verify the target journal",
+      "level": "PASS",
+      "message": "Detected width 183.0 mm matches a common journal column width",
       "evidence": []
     },
     {

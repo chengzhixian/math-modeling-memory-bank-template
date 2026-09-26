@@ -21,8 +21,7 @@ from PIL import Image
 
 plt.rcParams['font.family']=['Arial','Microsoft YaHei']
 plt.rcParams['font.sans-serif']=['Arial','Microsoft YaHei','DejaVu Sans']
-plt.rcParams['svg.fonttype']='none'
-plt.rcParams.update({'pdf.fonttype':42,'ps.fonttype':42,'font.size':8.5,'axes.labelsize':8.5,
+plt.rcParams.update({'svg.fonttype':'none','pdf.fonttype':42,'ps.fonttype':42,'font.size':8.5,'axes.labelsize':8.5,
     'axes.titlesize':9,'xtick.labelsize':7.5,'ytick.labelsize':7.5,'legend.fontsize':7.5,
     'axes.spines.top':False,'axes.spines.right':False,'axes.linewidth':.65,'legend.frameon':False,
     'axes.unicode_minus':False,'figure.constrained_layout.use':False})
@@ -59,7 +58,7 @@ def extra(name):
 
 def start(q,number,title,height=4.6,rows=1,cols=2,ratios=None):
     CURRENT.clear()
-    fig=plt.figure(figsize=(183/25.4,height))
+    fig=plt.figure(figsize=(7.20472440945,height)) # 183 mm two-column width
     fig.subplots_adjust(left=.17,right=.96,bottom=.22,top=.82,wspace=.52,hspace=.66)
     fig.text(.035,.965,f'Q{q}  |  {title}',fontsize=11,weight='bold',va='top',color=INK)
     gs=fig.add_gridspec(rows,cols,width_ratios=ratios)
@@ -109,6 +108,7 @@ def finish(fig,stem,claim,legend,roles,excluded=()):
     a=require_matplotlib_panel_alignment(fig,json_out=OUT/'qa'/f'{stem}.alignment.json',exclude_axes=excluded,
         tolerance_pt=1.5,gutter_tolerance_pt=1.5,require_panel_labels=True,strict=True)
     fig.savefig(OUT/f'{stem}.png',dpi=300,facecolor='white')
+    fig.savefig(OUT/f'{stem}.tiff',dpi=600,facecolor='white',pil_kwargs={'compression':'tiff_lzw'})
     fig.savefig(OUT/f'{stem}.pdf',facecolor='white')
     fig.savefig(OUT/f'{stem}.svg',facecolor='white')
     svg=OUT/f'{stem}.svg';svg.write_text('\n'.join(x.rstrip() for x in svg.read_text(encoding='utf-8').splitlines())+'\n',encoding='utf-8')
@@ -118,6 +118,8 @@ def finish(fig,stem,claim,legend,roles,excluded=()):
     (OUT/'qa'/f'{stem}.text.json').write_text(json.dumps(t,ensure_ascii=False,indent=2),encoding='utf-8')
     QA[stem]={'alignment_verdict':a.get('verdict'),'collision_exit':exit_code(c),'collision_summary':c.get('summary'),
         'minimum_font_pt':t['minimum_found_pt'],'small_glyphs':t['below_minimum_count']}
+    if exit_code(c) or t['below_minimum_count']:
+        raise RuntimeError(f'{stem}: render QA failed')
     FIGURES.append({'stem':stem,'claim':claim,'legend':legend,'panel_roles':roles,'archetype':'quantitative grid',
         'sources':[str(p.relative_to(ROOT)).replace('\\','/') for p in sorted(CURRENT)],
         'size_inches':list(fig.get_size_inches()),'dpi':300,'visual_review':'pending'})
@@ -149,7 +151,7 @@ def q1_conflict():
     counts=[int(x.replace(',','')) for x in numbers.groups()];assert sum(counts)==51230
     ax=aa[0,0];panel(ax,'a','231 个指标对中的复制性冲突')
     ax.barh([0,1,2],[231,66,j['edge_count']],color=[PALE,GREY,BLUE],height=.5)
-    ax.set(yticks=[0,1,2],yticklabels=['全部指标对','A1 显著负相关','扩展集复现'],xlabel='指标对数',xlim=(0,255),ylim=(2.6,-.6));ax.set_xticks([0,55,66,150,231])
+    ax.set(yticks=[0,1,2],yticklabels=['全部指标对','A1 显著负相关','扩展集复现'],xlabel='指标对数',xlim=(0,255),ylim=(2.6,-.6));ax.set_xticks([0,50,100,150,200,250])
     ax=aa[0,1];panel(ax,'b','51,230 条文本的工程处置')
     ax.barh(range(4),counts,color=[BLUE,PLUM,GREY,PALE],height=.5)
     ax.set(yticks=range(4),yticklabels=['保留','保留并复核','低优先级','低优先级并复核'],xlabel='记录数',xlim=(0,23000),ylim=(3.6,-.6));ax.xaxis.set_major_locator(MaxNLocator(3))
@@ -227,6 +229,25 @@ def q1_stress():
         ['逐目标配方异质性及模型失真诊断','负向估算压力'],excluded=[cb])
 
 
+def q1_expansion():
+    fig,aa,s=start(1,6,'冻结评分规则在扩展数据上的表现',height=4.8)
+    d=read(1,'domain_quality.csv');p=ROOT/'outputs/Q1/ANSWER.md';READS.add(p);CURRENT.add(p)
+    answer=p.read_text(encoding='utf-8-sig')
+    for number in ['2.7279','0.5063','16,104','193,752']:assert number in answer
+    rows=[]
+    for k,domain in enumerate(['arxiv','github']):
+        a=d[(d.dataset_scope=='sample')&(d.quality_domain==domain)].iloc[0];b=d[(d.dataset_scope!='sample')&(d.quality_domain==domain)].iloc[0]
+        rows.extend([{'domain':domain,'scope':scope,'Q':q,'n':n} for scope,q,n in [('A1',a.Q,a.n_rows),('扩展全集',b.Q,b.n_rows),('去重扩展',[2.7279,-.5063][k],[16104,193752][k])]])
+        aa[0,0].plot(range(3),[a.Q,b.Q,[2.7279,-.5063][k]],color=[BLUE,PLUM][k],marker=['o','s'][k],lw=0,label=DOM_NAMES[domain])
+        aa[0,1].plot(range(3),[a.n_rows,b.n_rows,[16104,193752][k]],color=[BLUE,PLUM][k],marker=['o','s'][k],lw=0)
+    pd.DataFrame(rows).to_csv(OUT/'source_data/Q1_expansion.csv',index=False)
+    for k,ax in enumerate(aa.flat):
+        panel(ax,chr(97+k),['固定 A1 标尺的中位数','对应记录数及去重'][k]);ax.set(xticks=range(3),xticklabels=['A1','扩展全集','去重扩展'],xlim=(-.4,2.4))
+    aa[0,0].set(ylabel='Q_A 中位数',ylim=(-1,3.5));zero(aa[0,0]);aa[0,1].set(yscale='log',ylabel='记录数（对数轴）',ylim=(1000,300000))
+    fig.legend(*aa[0,0].get_legend_handles_labels(),loc='lower center',bbox_to_anchor=(.55,.04),ncol=2)
+    finish(fig,s,'扩展及去重保留领域评分方向，但不能算作独立质量真值验证。','A2/A3沿用A1归一化与固定聚合规则，不重新拟合标尺。去重值来自冻结ANSWER的四位小数摘要；A1可能与扩展重叠，各点不是独立重复。记录数与评分中位数分面展示，不用双Y轴。无去重评分区间，不伪造误差棒。',['冻结标尺迁移','样本覆盖与重叠限制'])
+
+
 def backbone(n,d):
     c=COEFF['B1_backbone'];return c['E']+c['A']*n**(-c['alpha'])+c['B']*d**(-c['beta'])
 
@@ -263,8 +284,8 @@ def q2_validation():
     for i,row in enumerate(c.itertuples()):
         cols=[f'{x}_held_level_RMSE' if i==1 else f'{x}_nested_RMSE' for x in ['N','D','Q']]
         vals=[getattr(row,k) for k in cols]
-        ax.plot(range(3),vals,color=[BLUE,GREY,PLUM][i],marker=['o','s','D'][i],lw=1,label=['固定B1：嵌套','八参数：固定形式','家族选择：嵌套'][i])
-    ax.set(xticks=range(3),xticklabels=['N','D','Q'],ylabel='留等级 RMSE',xlabel='留出变量');ax.set_ylim(bottom=0)
+        ax.scatter(np.arange(3)+(i-1)*.12,vals,color=[BLUE,GREY,PLUM][i],marker=['o','s','D'][i],s=24,label=['固定B1：嵌套','八参数：固定形式','家族选择：嵌套'][i])
+    ax.set(xticks=range(3),xticklabels=['N','D','Q'],ylabel='留等级 RMSE',xlabel='留出变量',ylim=(0,.06),xlim=(-.4,2.4))
     fig.legend(*ax.get_legend_handles_labels(),loc='lower center',bbox_to_anchor=(.56,.04),ncol=3,fontsize=7)
     finish(fig,s,'半合成同源的划分检验支持条件形式，不能替代跨附件真实质量干预。',
         'a，每个点为一折，横线为相应轴折均值，平均RMSE 0.048738/0.048751/0.048639；折共享数据，不视为独立重复。b，冻结对照表的外层留等级误差；缺失项表示上游未给出对应外层结果，不补零。B1留一规模组约1.46e−4仅支持同源重构；B6/B7重叠。',
@@ -285,7 +306,7 @@ def q2_tradeoff():
     fig.legend(*aa[0,0].get_legend_handles_labels(),loc='lower left',bbox_to_anchor=(.13,.03),fontsize=7)
     fig.legend(*ax.get_legend_handles_labels(),loc='lower right',bbox_to_anchor=(.95,.03),ncol=3,fontsize=7)
     finish(fig,s,'固定配方的条件计算支持质量—规模替代，不证明质量可独立操控。',
-        'a，D=100B，固定示例配方，对原始三档N逐行计算；N=1B时提高质量0.10，旧质量等效需1.317062B。b，冻结局部弹性示例，均无统计区间。q(p)由配方决定；额外处理可控QB是另一工程机制，不把两机制混同。',
+        'a，D=100B，固定示例配方，对原始三档N逐行计算；N=1B时提高质量0.10，旧质量等效需1.317062B。N=10B时旧质量等效根超出支持域，蓝点留空，未补零或外推。b，冻结局部弹性示例，均无统计区间。q(p)由配方决定；额外处理可控QB是另一工程机制，不把两机制混同。',
         ['等Loss有限变化替代','局部敏感度'])
 
 
@@ -346,7 +367,8 @@ def q3_resources():
 
 def q3_costs():
     fig,aa,s=start(3,2,'成本构成解释预算约束',height=4.9)
-    d=read(3,'observed_joint_grid.csv');g=feasible(d[(d.quality_family=='power')&(d.context_tokens==8192)&d.budget_FLOPs.isin(BUDGETS)]).sort_values('budget_FLOPs')
+    d=read(3,'observed_joint_grid.csv');context=read(4,'context_scenarios.csv');assert context.contextTokens.tolist()==CONTEXTS
+    g=feasible(d[(d.quality_family=='power')&(d.context_tokens==8192)&d.budget_FLOPs.isin(BUDGETS)]).sort_values('budget_FLOPs')
     ax=aa[0,0];panel(ax,'a','8192上下文的实际成本占比');left=np.zeros(len(g))
     for col,label,c in [('C_train_FLOPs','训练',BLUE),('C_attention_FLOPs','注意力',GREY),('C_quality_FLOPs','质量处理',PLUM)]:
         share=g[col]/g.C_total_FLOPs*100;ax.barh(range(len(g)),share,left=left,color=c,height=.45,label=label);left+=share
@@ -367,7 +389,8 @@ def q3_states():
     ax=aa[0,0];panel(ax,'a','幂成本的离散配方选择')
     for k,ctx in enumerate(CONTEXTS):
         g=feasible(d[(d.quality_family=='power')&(d.context_tokens==ctx)]).sort_values('budget_FLOPs')
-        for idx,c,m in [(477,PLUM,'s'),(172,BLUE,'o')]:
+        assert set(g.recipe_index.unique()).issubset({477,172,459,368})
+        for idx,c,m in [(477,PLUM,'s'),(172,BLUE,'o'),(459,GREY,'D'),(368,INK,'^')]:
             h=g[g.recipe_index==idx];ax.scatter(h.budget_FLOPs,np.full(len(h),k),color=c,marker=m,s=9,label=f'配方{idx}' if k==0 else None)
     budget_axis(ax);ax.set(yticks=range(3),yticklabels=['2048','8192','131072'],ylim=(-.5,2.5));ax.set_ylabel('上下文长度')
     ax=aa[0,1];panel(ax,'b','独立 Q_B 的数值状态区间')
@@ -375,7 +398,7 @@ def q3_states():
     for k,(label,c) in enumerate([('Q0 = 0.5',GREY),('内部解',PLUM),('Qmax = 1',BLUE)]):
         ax.hlines(k,bounds[k],bounds[k+1],color=c,lw=5)
     budget_axis(ax);ax.set(yticks=range(3),yticklabels=['下界','内部','上界'],ylim=(-.5,2.5));ax.set_ylabel('质量状态')
-    fig.legend(*aa[0,0].get_legend_handles_labels(),loc='lower left',bbox_to_anchor=(.13,.04),ncol=2)
+    fig.legend(*aa[0,0].get_legend_handles_labels(),loc='lower left',bbox_to_anchor=(.13,.025),ncol=2)
     finish(fig,s,'配方跳变是有限候选切换，独立质量处理的转折是另一模型机制。','a，161个对数预算点，三上下文，幂成本；空白表示不可行。不连接无序配方编号。b，固定172、8192上下文，native Q_B转折位于[1.22887598,1.22896234]×10^19和[1.08599453,1.08607084]×10^20；横线为数值状态范围，不是置信区间，边界相对宽度7.03e−5。不得称为真实训练相变。',['离散配方与可行性','独立质量的数值状态'])
 
 
@@ -389,7 +412,8 @@ def q3_assumptions():
         for k,b in enumerate(BUDGETS):
             v=z.loc[name,b]
             if pd.notna(v):ax.text(k,i,str(int(v)),ha='center',va='center',fontsize=8,color=BLUE if v==172 else PLUM)
-    ax.set(xticks=range(3),xticklabels=[r'$10^{19}$',r'$10^{22}$',r'$10^{24}$'],yticks=range(len(sc)),yticklabels=sc,ylim=(len(sc)-.5,-.5),xlim=(-.5,2.5),xlabel='预算（FLOPs）');ax.tick_params(axis='y',labelsize=6.5)
+    names=['基准','Q0 = 0.45','Q0 = 0.55','Q0 = 0.60','Q0 = 0.65','质量桥 ×0.5','质量桥 ×1.5','配比桥 λ=0','配比桥 λ=2']
+    ax.set(xticks=range(3),xticklabels=[r'$10^{19}$',r'$10^{22}$',r'$10^{24}$'],yticks=range(len(sc)),yticklabels=names,ylim=(len(sc)-.5,-.5),xlim=(-.5,2.5),xlabel='预算（FLOPs）');ax.tick_params(axis='y',labelsize=7.5)
     ax=aa[0,1];panel(ax,'b','全部27官方配置的改变数')
     c=pd.DataFrame(j['comparisons']);ax.barh(range(len(c)),c.changed_feasibility_or_recipe_cells,color=PLUM,height=.5)
     ax.set(yticks=range(len(c)),yticklabels=[],ylim=(len(c)-.5,-.5),xlim=(0,27),xlabel='相对基准发生改变的格数',xticks=[0,9,18,27])
@@ -418,15 +442,18 @@ def q3_external():
         ax.scatter(x,y,color=[BLUE,PLUM,GREY][k],marker=['o','s','D'][k],s=23,label=name)
     ax.plot([0,15],[0,15],color=PALE,lw=.8);ax.set(xlim=(0,15),ylim=(0,15),xlabel='B1 预测 Loss 排名',ylabel='OpenLM 实测 Loss 排名')
     ax=aa[0,1];panel(ax,'b','受限预算下的离散选择遗憾')
-    g=b[b.training_cost_budget_FLOPs.isin([1e20,1e21])].copy();labels=[f'{r.training_corpus}\n{int(np.log10(r.training_cost_budget_FLOPs))}' for r in g.itertuples()]
-    ax.barh(range(len(g)),g.observed_loss_regret_in_OpenLM_coordinates,color=BLUE,height=.5);ax.set(yticks=range(len(g)),yticklabels=labels,xlabel='实测 Loss 遗憾',xlim=(0,.08));ax.tick_params(axis='y',labelsize=6.5)
+    g=b[b.training_cost_budget_FLOPs.isin([1e20,1e21])].copy();short={'c4_original':'C4','rpj':'RedPajama','rw_original':'RefinedWeb'}
+    labels=[short[r.training_corpus]+'\n'+r'$10^{'+str(int(np.log10(r.training_cost_budget_FLOPs)))+'}$ FLOPs' for r in g.itertuples()]
+    ax.barh(range(len(g)),g.observed_loss_regret_in_OpenLM_coordinates,color=BLUE,height=.5);ax.scatter(g.observed_loss_regret_in_OpenLM_coordinates,range(len(g)),color=INK,s=15,zorder=3)
+    ax.set(yticks=range(len(g)),yticklabels=labels,xlabel='实测 Loss 遗憾',xlim=(-.004,.08));ax.tick_params(axis='y',labelsize=7.5)
     fig.legend(*aa[0,0].get_legend_handles_labels(),loc='lower left',bbox_to_anchor=(.12,.02),ncol=1,fontsize=7)
     finish(fig,s,'外部训练支持N–D排序及受限选择，尚不验证完整N–D–Q–配比机制。','a，三语料各14次真实公开训练，使用各语料内秩，不比较跨坐标绝对Loss。Spearman约0.9736/0.9868/0.9736。b，只保留10^20和10^21训练成本预算，6组中5组零遗憾；RefinedWeb另一组0.070515。仅训练成本、离散候选，不含质量、配方或注意力干预。',['全部外部训练秩一致性','受限离散决策检验'])
 
 
 def q4_history():
-    fig,aa,s=start(4,1,'历史变化先控制共同支持的构成',height=5.0)
+    fig,aa,s=start(4,1,'历史变化先控制共同支持的构成',height=6.8,rows=2)
     d=read(4,'historical_common_cells.csv');c=read(4,'historical_standardized_contributions.csv')
+    full=c.copy()
     d=d[(d['filter']=='primary')&(d.window_months==2)&(d.bin_width_decades==.5)&(~d.developer_control)]
     c=c[(c['filter']=='primary')&(c.window_months==2)&(c.bin_width_decades==.5)&(~c.developer_control)]
     ax=aa[0,0];panel(ax,'a','共同层内早期与晚期能力')
@@ -438,8 +465,20 @@ def q4_history():
     for k,t in enumerate(['non_pretrained','pretrained']):
         row=c[c.type==t].iloc[0];ax.scatter([row[x] for x in cols],np.arange(4)+k*.15-.075,color=[BLUE,PLUM][k],marker=['o','s'][k],s=25)
     ax.set(yticks=range(4),yticklabels=['规模分布','同规模时间变化','支持与构成差额','完整样本变化'],xlabel='能力变化（分）');zero(ax,True);ax.invert_yaxis()
+    ax=aa[1,0];panel(ax,'c','后训练的分箱敏感性')
+    g=full[(full['filter']=='primary')&(full.type=='non_pretrained')&(full.window_months==2)&(~full.developer_control)].sort_values('bin_width_decades')
+    for col,c0,m,label in [('scale_distribution_points',GREY,'o','规模项'),('within_scale_temporal_points',INK,'s','时间项')]:
+        ax.plot(g.bin_width_decades,g[col]/g.standardized_change*100,color=c0,marker=m,lw=1,label=label)
+    zero(ax);ax.set(xticks=[.25,.5,.75],xlabel='规模分箱宽度（decade）',ylabel='标准化变化份额（%）',ylim=(-60,160))
+    ax.legend(loc='center',bbox_to_anchor=(.5,.55))
+    ax=aa[1,1];panel(ax,'d','开发者控制后的共同样本')
+    for k,t in enumerate(['non_pretrained','pretrained']):
+        g=full[(full['filter']=='primary')&(full.type==t)&(full.window_months==2)&(full.bin_width_decades==.5)]
+        for row in g.itertuples():
+            x=int(row.developer_control);ax.scatter(x-.08+k*.16,row.retained_early,color=[BLUE,PLUM][k],marker='o',s=24);ax.scatter(x-.08+k*.16,row.retained_late,color=[BLUE,PLUM][k],marker='s',s=24)
+    ax.set(xticks=[0,1],xticklabels=['仅规模与类型','另控制开发者'],xlim=(-.3,1.3),yscale='log',ylim=(1,600),ylabel='早/晚期保留记录数')
     fig.legend(*aa[0,0].get_legend_handles_labels(),loc='lower center',bbox_to_anchor=(.55,.04),ncol=2)
-    finish(fig,s,'同规模时间变化解释部分历史上升，但没有识别纯技术因果效应。','主要过滤、首末各2个月、0.5 decade规模分箱，不控制开发者。a每点为共同层均分，面积反映层权重。b后训练规模−0.7579、时间6.5212、差额−1.5415，基座−3.7557/4.6356/−2.0716；前两项是标准化变化，第三项合为全样本变化。开发者控制仅保留极少记录；未排除数据量、选择或评估混杂，不使用因果术语。',['共同支持中的变化','变化分解及覆盖限制'])
+    finish(fig,s,'同规模时间变化解释部分历史上升，但没有识别纯技术因果效应。','主要过滤、首末各2个月、0.5 decade规模分箱，不控制开发者。a每点为共同层均分，面积反映层权重。b后训练规模−0.7579、时间6.5212、差额−1.5415，基座−3.7557/4.6356/−2.0716；前两项是标准化变化，第三项合为全样本变化。c，两月窗口的三分箱条件份额；规模−50.08%至−13.15%，时间113.15%至150.08%，带符号份额不是纯因果百分比。d，颜色表示类型，圆为早期、方为晚期；严格开发者控制仅保留后训练6/8、基座3/2条。未排除数据量、选择或评估混杂。',['共同支持中的变化','变化分解及覆盖限制','分箱敏感性','开发者控制的样本代价'])
 
 
 def q4_validation():
@@ -510,8 +549,9 @@ def q4_data_scope():
     ax.scatter(b.bbhMacroMean,b.bbhTaskSd,color=BLUE,s=4,alpha=.18,rasterized=True);ax.set(xlabel='BBH 24任务宏平均',ylabel='任务间标准差',xlim=(0,100),ylim=(0,40))
     ax=aa[0,1];panel(ax,'b','C3：Average与六任务均分')
     for k,(source,g) in enumerate(c.groupby('Source')):
-        ax.scatter(g.six_task_mean,g.Average,color=[BLUE,PLUM,GREY][k%3],marker=['o','s','D'][k%3],s=8,alpha=.3)
+        ax.scatter(g.six_task_mean,g.Average,color=[BLUE,PLUM,GREY][k%3],marker=['o','s','D'][k%3],s=8,alpha=.3,label='历史报告' if 'Historical' in source else '扩展排行榜')
     ax.plot([0,100],[0,100],color=PALE,lw=.8);ax.set(xlim=(0,100),ylim=(0,100),xlabel='重算六任务均分',ylabel='附件 Average')
+    ax.legend(loc='upper left',markerscale=2,fontsize=7)
     ax=aa[0,2];panel(ax,'c','C4：年度算力口径敏感性')
     for k,gate in enumerate(['primary','wide_ratio']):
         g=r[(r.resource_gate==gate)&r.year.between(2021,2024)&r.complete].sort_values('year')
@@ -530,7 +570,10 @@ def main():
     OUT.mkdir(parents=True,exist_ok=True);(OUT/'qa').mkdir(exist_ok=True);(OUT/'source_data').mkdir(exist_ok=True)
     COEFF=read(2,'model_coefficients.json')
     selected=[int(x) for x in args.questions.split(',')]
-    if 1 in selected:q1_quality();q1_conflict();q1_validation();q1_decisions();q1_stress()
+    for q in selected:
+        for name in ['ANSWER.md','curated_manifest.json']:
+            path=ROOT/f'outputs/Q{q}'/name;READS.add(path)
+    if 1 in selected:q1_quality();q1_conflict();q1_validation();q1_decisions();q1_stress();q1_expansion()
     if 2 in selected:q2_scaling();q2_validation();q2_tradeoff();q2_domains();q2_evidence()
     if 3 in selected:q3_resources();q3_costs();q3_states();q3_assumptions();q3_native();q3_external()
     if 4 in selected:q4_history();q4_validation();q4_forecasts();q4_bridge();q4_data_scope()
@@ -542,7 +585,7 @@ def main():
     (OUT/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')
     cards=[];legends=[]
     for f in manifest['figures']:
-        stem=f['stem'];cards.append(f'<section><h2>{stem} · {html.escape(f["claim"])}</h2><img src="{stem}.png" alt="{stem}"><p>{html.escape(f["legend"])}</p><a href="{stem}.pdf">PDF</a> · <a href="{stem}.svg">SVG</a></section>')
+        stem=f['stem'];cards.append(f'<section><h2>{stem} · {html.escape(f["claim"])}</h2><img src="{stem}.png" alt="{stem}"><p>{html.escape(f["legend"])}</p><a href="{stem}.pdf">PDF</a> · <a href="{stem}.svg">SVG</a> · <a href="{stem}.tiff">600 dpi TIFF</a> · <a href="{stem}_gray.png">灰度</a></section>')
         legends.append(f'## {stem} | {f["claim"]}\n\n{f["legend"]}\n\n面板角色：'+ '；'.join(f['panel_roles'])+'。\n')
     (OUT/'legends.md').write_text('# Q1–Q4 独立 Nature 图注\n\n'+'\n'.join(legends),encoding='utf-8')
     (OUT/'gallery.html').write_text('<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>Q1–Q4 Nature 图组</title><style>body{background:#f4f4f6;color:#272727;font:15px/1.8 Arial,"Microsoft YaHei",sans-serif}main{max-width:1100px;margin:auto}section{background:white;margin:32px 0;padding:22px}h2{font-size:18px}img{width:100%}a{color:#0F4D92}</style><main><h1>Q1–Q4 独立 Nature 图组</h1><p>按论证链组织的多面板科学图。冻结条件模型；范围、统计与局限见每张图注。</p>'+''.join(cards)+'</main></html>',encoding='utf-8')
