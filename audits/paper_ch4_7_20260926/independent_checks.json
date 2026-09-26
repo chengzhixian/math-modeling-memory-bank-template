@@ -1,0 +1,79 @@
+{
+  "q1_hull": [
+    {
+      "policy": "unconstrained",
+      "mode": "weighted",
+      "min_loss": -0.09010146768555932,
+      "negative_targets": {
+        "dm_mathematics": -0.09010146768555932
+      },
+      "objective": -0.11511193620251015,
+      "published_difference": -2.7755575615628914e-17
+    },
+    {
+      "policy": "quality_direct",
+      "mode": "weighted",
+      "min_loss": 0.2723879131762258,
+      "negative_targets": {},
+      "objective": -0.10299193866039923,
+      "published_difference": 2.7755575615628914e-17
+    },
+    {
+      "policy": "quality_direct_and_near",
+      "mode": "weighted",
+      "min_loss": 0.7282584446451128,
+      "negative_targets": {},
+      "objective": -0.09700975593037972,
+      "published_difference": 0.0
+    },
+    {
+      "policy": "unconstrained",
+      "mode": "minimax",
+      "min_loss": 3.750632297996568,
+      "negative_targets": {},
+      "objective": -0.019784221015100266,
+      "published_difference": -2.0816681711721685e-17
+    }
+  ],
+  "q1_discrete": [
+    {
+      "recipe": "136",
+      "min_loss": -0.1070335196184396,
+      "negative_targets": {
+        "dm_mathematics": -0.1070335196184396
+      }
+    },
+    {
+      "recipe": "301",
+      "min_loss": 3.467147552788472,
+      "negative_targets": {}
+    },
+    {
+      "recipe": "172",
+      "min_loss": 2.4043734864830686,
+      "negative_targets": {}
+    },
+    {
+      "recipe": "477",
+      "min_loss": 3.6403101684931096,
+      "negative_targets": {}
+    }
+  ],
+  "q3_grid": {
+    "feasible_rows": 33,
+    "max_errors": {
+      "loss_error": 0.0,
+      "cost_relative_error": 2.097152e-16,
+      "budget_excess_relative": 2.220446049250313e-16
+    }
+  },
+  "q4_forecast": {
+    "12": 53.82775678304621,
+    "24": 66.68097720974869
+  },
+  "q4_envelope_diagnostic": {
+    "meaning": "independent illustrative deterministic envelope, not production result nor confidence interval",
+    "lower": 51.23132307602695,
+    "upper": 79.61112407120305
+  }
+}
