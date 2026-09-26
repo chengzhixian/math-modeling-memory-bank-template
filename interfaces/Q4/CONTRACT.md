@@ -6,8 +6,9 @@ Machine-readable status: [`outputs/Q4/interface.json`](../../outputs/Q4/interfac
 |---|---|---|
 | `historical_target` | Standardized six-task mean within model type and common parameter cells | Conditional descriptive decomposition; within-cell time is not identified pure technology |
 | `frontier_target` | Type-specific recent two-calendar-month q90 score | Conditional 12/24-month scenario, not calibrated future coverage |
+| `maximum_frontier_target` | Type-specific cumulative best six-task score by target date | Record-persistence baseline plus separately labelled q90-tail-gap conditional boundary; never a calibrated interval |
 | `formal_cross_coordinate_status` | `unidentified` | No empirical Q3 Loss to C6 source-coordinate map |
 | `ready_for_empirical_Q3_conversion` | `false` | Formal consumer must reject unconditional conversion |
 | `conditional_mapping_policy` | Named C6 source, supported Loss/N, explicit affine assumption | Sensitivity only; return no score if source, support, or assumption is absent |
 
-The Q3 budget policies enter only the conditional conversion stress. Direct C2/C4 frontier forecasts do not consume Q3 Loss, so Q3-to-C6 uncertainty changes the ability gain/ranking statements, not those direct forecasts. All conditional assumptions, source grades, units and output statuses are retained in [`outputs/Q4/results.json`](../../outputs/Q4/results.json) and `q3_source_coordinate_stress.csv`.
+The Q3 budget policies enter only the conditional conversion stress. The frozen consumer now covers fixed recipe, observed-joint recipe, and independent native-Q modes; each row retains its policy mode, recipe, quality coordinate, source support result, and mapping LOO error. Direct C2/C4 frontier forecasts do not consume Q3 Loss, so Q3-to-C6 uncertainty changes the ability gain/ranking statements, not those direct forecasts. All conditional assumptions, source grades, units and output statuses are retained in [`outputs/Q4/results.json`](../../outputs/Q4/results.json) and `q3_source_coordinate_stress.csv`.

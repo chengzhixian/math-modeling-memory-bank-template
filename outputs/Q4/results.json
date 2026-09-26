@@ -701,6 +701,16 @@
       }
     ]
   },
+  "maximum_frontier": {
+    "target_definition": "cumulative_best_score_by_target_date",
+    "selected_q90_models": {
+      "pretrained": "constant",
+      "non_pretrained": "quantile_resource"
+    },
+    "backtest_rows": 24,
+    "scenario_rows": 16,
+    "interpretation": "record persistence is the empirical baseline; q90 plus recent tail gap is a separate conditional boundary scenario"
+  },
   "bridge": [
     {
       "coordinate_id": "BLOOM paper",
@@ -998,9 +1008,14 @@
     }
   ],
   "q3": {
-    "stress_rows": 4860,
+    "stress_rows": 14580,
     "source_coordinate_models": 5,
     "label_based_diagnostic_candidates": 2,
+    "policy_mode_rows": {
+      "fixed_recipe": 36,
+      "observed_joint_recipe": 36,
+      "independent_native_Q": 36
+    },
     "formal_cross_coordinate_status": "unidentified",
     "stress_is_statistical_interval": false
   },

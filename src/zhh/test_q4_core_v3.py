@@ -7,6 +7,11 @@ import q4_core_v3 as q4
 
 
 class CoreChecks(unittest.TestCase):
+    def test_record_boundary_preserves_history_and_adds_tail_gap(self):
+        self.assertEqual(q4.record_boundary(40, 51, 6), 51)
+        self.assertEqual(q4.record_boundary(55, 51, 6), 61)
+        self.assertEqual(q4.record_boundary(98, 95, 5), 100)
+
     def test_quantile_solver_recovers_line_despite_outliers(self):
         x=np.repeat([0.,1.,2.],6)
         y=1+2*x
@@ -110,6 +115,41 @@ class CoreChecks(unittest.TestCase):
         stopped=rows[rows.compute_scenario=='stopped']
         np.testing.assert_allclose(stopped.C_anchor_FLOPs_scenario,stopped.C_future_FLOPs_scenario)
         self.assertTrue(rows.time_extrapolation_observed_spans.gt(1).all())
+
+    def test_released_maximum_frontier_keeps_record_floor_and_baseline(self):
+        scenarios=pd.read_csv(q4.OUT/'frontier_maximum_scenarios.csv')
+        self.assertTrue(scenarios.target_definition.eq('cumulative_best_score_by_target_date').all())
+        self.assertTrue((scenarios.conditional_record_lower<=scenarios.conditional_record_center).all())
+        self.assertTrue((scenarios.conditional_record_center<=scenarios.conditional_record_upper).all())
+        self.assertTrue((scenarios.conditional_record_lower>=scenarios.historical_record_score).all())
+        self.assertTrue(scenarios.status.eq('conditional_tail_gap_scenario_not_calibrated_prediction_interval').all())
+        backtest=pd.read_csv(q4.OUT/'frontier_maximum_backtest.csv')
+        self.assertTrue((backtest.persistence_prediction==backtest.prior_historical_record).all())
+        self.assertTrue((backtest.actual_cumulative_record>=backtest.prior_historical_record).all())
+        comparison=pd.read_csv(q4.OUT/'frontier_maximum_model_comparison.csv')
+        self.assertTrue({'record_persistence','q90_plus_tail_gap'}<=set(comparison.model))
+
+    def test_released_q3_bridge_covers_joint_and_native_quality_modes(self):
+        stress=pd.read_csv(q4.OUT/'q3_source_coordinate_stress.csv')
+        self.assertEqual(set(stress.policy_mode),
+            {'fixed_recipe','observed_joint_recipe','independent_native_Q'})
+        nominal=stress[(stress.coordinate_scale_assumed==1)&
+            (stress.coordinate_offset_assumed==0)&
+            (stress.upstream_loss_stress_delta_assumed==0)&
+            stress.diagnostic_primary_candidate]
+        low_joint=nominal[(nominal.policy_mode=='observed_joint_recipe')&
+            (nominal.budget_FLOPs==1e19)&(nominal.context_tokens==8192)&
+            (nominal.quality_family=='power')]
+        self.assertEqual(set(low_joint.recipe_index),{477})
+        self.assertTrue(low_joint.status.eq('N_out_of_support').all())
+        native_mid=nominal[(nominal.policy_mode=='independent_native_Q')&
+            (nominal.budget_FLOPs==1e20)&(nominal.context_tokens==8192)&
+            (nominal.quality_family=='power')]
+        self.assertEqual(len(native_mid),2)
+        self.assertTrue(native_mid.status.eq('conditional_affine_coordinate_assumption').all())
+        self.assertTrue(native_mid.conditional_score.notna().all())
+        summaries=pd.read_csv(q4.OUT/'q3_bridge_conclusion_sensitivity.csv')
+        self.assertTrue(summaries.mapping_LOO_RMSE.notna().all())
 
 
 if __name__=='__main__':

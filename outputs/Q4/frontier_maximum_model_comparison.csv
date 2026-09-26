@@ -1,0 +1,9 @@
+type,model,tail_window_months,n,rmse,mae,r2,selection_status
+non_pretrained,record_persistence,,4,0.0,0.0,,diagnostic_on_four_overlapping_two_month_windows
+non_pretrained,q90_plus_tail_gap,1.0,4,3.37610982634758,1.68805491317379,,conditional_boundary_scenario_not_selected_when_persistence_rmse_is_lower
+non_pretrained,q90_plus_tail_gap,2.0,4,2.2536676598368834,1.5929176907220306,,conditional_boundary_scenario_not_selected_when_persistence_rmse_is_lower
+non_pretrained,q90_plus_tail_gap,3.0,4,3.68314275623908,3.2687905016783,,conditional_boundary_scenario_not_selected_when_persistence_rmse_is_lower
+pretrained,record_persistence,,4,0.0,0.0,,diagnostic_on_four_overlapping_two_month_windows
+pretrained,q90_plus_tail_gap,1.0,4,0.0,0.0,,conditional_boundary_scenario_not_selected_when_persistence_rmse_is_lower
+pretrained,q90_plus_tail_gap,2.0,4,0.0,0.0,,conditional_boundary_scenario_not_selected_when_persistence_rmse_is_lower
+pretrained,q90_plus_tail_gap,3.0,4,2.682852273926853,1.8374122277044176,,conditional_boundary_scenario_not_selected_when_persistence_rmse_is_lower

@@ -432,13 +432,15 @@ def bridge_analysis():
 def q3_sensitivity(bridge):
     ref=Q3_REF
     source=ROOT/'outputs/Q3'
-    for name in ['manifest.json','fixed_policy_grid.csv']:
+    snapshot_names=['fixed_policy_grid.csv','observed_joint_grid.csv','native_Q_sensitivity_grid.csv']
+    for name in ['manifest.json',*snapshot_names]:
         path=source/('upstream_manifest.json' if name=='manifest.json' else name)
         raw=path.read_bytes()
         (OUT/f'upstream_q3_{name}').write_bytes(raw)
     manifest=json.loads((OUT/'upstream_q3_manifest.json').read_text(encoding='utf-8'))
-    if sha(OUT/'upstream_q3_fixed_policy_grid.csv')!=manifest['output_files_sha256']['fixed_policy_grid.csv']:
-        raise ValueError('Q3 snapshot hash mismatch')
+    for name in snapshot_names:
+        if sha(OUT/f'upstream_q3_{name}')!=manifest['output_files_sha256'][name]:
+            raise ValueError(f'Q3 snapshot hash mismatch: {name}')
     table=pd.read_csv(OUT/'upstream_q3_fixed_policy_grid.csv')
     outputs=[]
     maps=[x for x in bridge['mappings'] if x['model']=='monotone_loss']
@@ -457,7 +459,8 @@ def q3_sensitivity(bridge):
             'joint_95_prediction_interval':None})
     pd.DataFrame(outputs).to_csv(OUT/'q3_bridge_sensitivity.csv',index=False,lineterminator='\n')
     return {'branch':'integration/chm-q1-clean-20260923','commit':ref,'manifest_hash':sha(OUT/'upstream_q3_manifest.json'),
-        'producer_release_subject':manifest['inputs']['release_subject'],'grid_hash':sha(OUT/'upstream_q3_fixed_policy_grid.csv'),
+        'producer_release_subject':manifest['inputs']['release_subject'],
+        'grid_hashes':{name:sha(OUT/f'upstream_q3_{name}') for name in snapshot_names},
         'producer_status':manifest['status'],'joint_95_prediction_interval':manifest['joint_prediction_interval_95'],
         'rows':len(outputs),'supported_assumption_rows':sum(x['assumption_score'] is not None for x in outputs),
         'scope':'Integrated Q3 v8 consumed only as explicit coordinate-equality sensitivity, not an empirical benchmark optimization result.'}
@@ -501,7 +504,8 @@ def main():
         'upstream':result['q3_consumption'],
         'output_sha256':{name:sha(OUT/name) for name in (
             'leaderboard_sample.csv','leaderboard_all_versions.csv','c4_resource_audit.csv',
-            'bridge_sample.csv','upstream_q3_fixed_policy_grid.csv','upstream_q3_manifest.json')},
+            'bridge_sample.csv','upstream_q3_fixed_policy_grid.csv','upstream_q3_observed_joint_grid.csv',
+            'upstream_q3_native_Q_sensitivity_grid.csv','upstream_q3_manifest.json')},
         'uncertainty_scope':'Scenario envelopes and conditional bootstrap. No calibrated prediction interval; Q3 joint interval unavailable.'})
     print(json.dumps(json_safe({'audit':audit,'resources':{k:res_info[k] for k in ['candidate_n','primary_n','loose_ratio_n','gC_log10_per_year']},
         'backtest':result['backtest'],'bridge':bridge['diagnostics'],'q3':result['q3_consumption']}),ensure_ascii=False,indent=2))
