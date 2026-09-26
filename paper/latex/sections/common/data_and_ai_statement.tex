@@ -1,0 +1,17 @@
+\section{数据利用清单与人工智能工具使用说明}
+\subsection{数据利用清单}
+表\ref{tab:data-use-list}按题面附件列出进入模型的主要数据、角色与输出位置。完整原始文件清单、文件字节数和 SHA256 由仓库\texttt{data/raw/F\_MANIFEST.json}固定；下表不把衍生、半合成和估算表误写为独立真实观测。
+\begin{table}[htbp]\centering\small
+\caption{主要数据利用清单；A/B/C 分别对应题面三个附件}
+\label{tab:data-use-list}
+\begin{tabular}{p{0.08\textwidth}p{0.35\textwidth}p{0.37\textwidth}p{0.10\textwidth}}\toprule
+附件 & 数据与角色 & 用途及限制 & 对应问题\\\midrule
+A & 文本质量信号、去重样本；RegMix 已观测配方与逐域 Loss；估算 10B/70B 表 & 质量代理、冲突复核与配方曲面；估算表仅作跨规模压力 & 一、二、三\\
+B & Pythia 真实训练轨迹 B1；半合成 B2/B7、插值 B3；B4/B5 同族表、B8 冲突审计、B9 元数据、B10 估算 Loss & 拟合 $N$--$D$ 骨架和条件质量项，检查形状、方向与外推；B6 包含于 B7，不独立测试 & 二、三\\
+C & 开放榜单 C1/C2、历史 C3、Epoch 资源 C4、Loss--Benchmark 桥 C6、架构 C7、BBH 子任务 C8 & 六任务能力、同格贡献、资源情景和来源内桥接；跨来源 Loss 未实测标定 & 三、四\\
+\bottomrule\end{tabular}
+\end{table}
+附件中的文件编号、筛选条件、数据量、缺失处理和可复算命令见各问章节及\texttt{outputs/Q1--Q4}；榜单和资源数据的公开来源分别为 Open LLM Leaderboard 2\cite{openllmv2} 与 Epoch AI Models Dataset\cite{epochmodels}，本研究使用的是题面所附截面，不把网站后来更新的版本混入估计。
+
+\subsection{人工智能工具使用说明}
+本项目使用 OpenAI Codex 辅助读取仓库、整理证据、编写和检查代码、生成论文初稿及交叉复核；所有公式、数据角色、数值和结论仍以题面可见内容、附件数据、程序输出及人工复核为准。早期 Gemini 生成的历史工作因无法可靠排除旧版数据说明隐藏文字影响已作废，相关模型、参数、数值及结论未进入本文。团队其他成员所用工具与范围仍需在最终提交前由本人确认并补全；本段当前只披露已核实的工具使用情况。

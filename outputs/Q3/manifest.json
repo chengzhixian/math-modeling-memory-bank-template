@@ -48,10 +48,10 @@
     "src/chm/q3_external_nd_audit.py": "797e57c977800061da8d3d62c07860d40e6b8ce855e4c975f8ec723b842dc1d5"
   },
   "paper_files_sha256": {
-    "paper/latex/sections/Q3/numerical.tex": "c228471b00f90b437bea3c8549262d63efe22b4a9ee3c1d708e75ff9def93f72",
+    "paper/latex/sections/Q3/numerical.tex": "763fe8fc7a7b6a3b67fad5dd4cbc0a76d6e3ddace48482e156505ec693d645bc",
     "paper/latex/sections/Q3/theory.tex": "a4202165eee1e285b4ea611189a0d2920e846795ff6448d5ff981b73c97b55fd",
     "paper/latex/figures/Q3/q3_v8_power_8192.png": "3a5b1d70ce803f6ef0edcfd3dadf4ebac97299d8ad9a045ada8bf0973c5394bc",
-    "outputs/Q3/ANSWER.md": "81a5a67727f160715a3f802ba6bf3a053dc073bbc04664bfe872d998e05748c7",
+    "outputs/Q3/ANSWER.md": "61c45c3266d9a7e5d140abdfbf928362e23065c5f93f17e1dfc495824f982310",
     "experiments/Q3/EXTERNAL_VALIDATION.md": "6b023e126e1b5fe662e391912976506d371a4852ba30dd3c8e922633a2f06584"
   },
   "counts": {

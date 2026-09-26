@@ -2,7 +2,7 @@
   "interface_sha256": {
     "interfaces/Q2/NDQP_SCENARIO_V8.md": "52c6ab5ef08409e1460660ac100e671d73dac8908dca42c738069175424c4875",
     "interfaces/Q2/README.md": "652b3550559e78adef0a7c29b00b3f071ba59d0c513b9744c1f4b445dca2249c",
-    "interfaces/Q2/code_manifest.json": "453d7e60d81b14bb648f700d5a337113d0904fc85caeabf5bfe7e2b0a88cfa86",
+    "interfaces/Q2/code_manifest.json": "a9c3ae21ad29d0849a9e50c3e4e15bb4f2b4c1928fec35081229eccf437b0069",
     "interfaces/Q2/fixtures_v8/baseline_direct.expected.json": "71af4809c797e1e455e57ab3fb7c1d49ce9a2ecd7fe81aa48ebe8113bb586be7",
     "interfaces/Q2/fixtures_v8/baseline_direct.request.json": "85ea8db8fe372889a1618b6c2cd67ac707ef0fc6f5e2c751bb1712ca7128a32c",
     "interfaces/Q2/fixtures_v8/baseline_main.expected.json": "3220fa1fe528e5db776d7ff2984ea16ef2c8a7cc2951afccff38cea77590ac78",
@@ -42,14 +42,15 @@
     "interfaces/Q2/fixtures_v8/zero_coverage.request.json": "9277f1e5f1c33f1f766858b61d1b1ff3c9f57b8685b0243c0bb3bbcab536c46e"
   },
   "paper_sha256": {
-    "paper/latex/sections/Q2/main.tex": "6ed0592dc403b5776db1ac0c28dd57dcbf25fb0e90f060b92750bddbe5525e87"
+    "paper/latex/sections/Q2/main.tex": "00e3f60fb3e574e7ce155ae1f09d5d4595ee26152ee106b578b07e83981c619c"
   },
   "question": "Q2",
   "schema_version": "main.question_integration.v2",
   "scope": "current main answer, production evidence, interface and paper; reproducible process tables excluded",
   "sha256": {
-    "ANSWER.md": "6e2bed3cf6cd845c00977bc7910213b6ac0c90b656aea5f3490c4bb9a30548d4",
+    "ANSWER.md": "61c000b1593fa54447fa6b64ca89782548cb64c61f32362623a056f3dd484891",
     "README.md": "9e07b53a394d49c3a12084b61b14bcff9b64b81a21085630b70219aa6fb86fa3",
+    "STATUS_CURRENT.md": "15dc4f5b3d316a17fe130057e9db0578c0ab6e09fa6a9cad6d67262040fa0442",
     "acceptance.json": "65e5a5f2f657ff4bd431ec31e4cec0a8cee54bea40541dd339668c3e25cc9dec",
     "b2_b3_model_validation.csv": "5d3d2d2103bdd9b70508ca0c532298d6de2620e690402906d4fefacd2ce7ca45",
     "b2_b3_validation_summary.json": "19784022221bffaa83635f26379fd68bde03f098d8d2879692d0167c0642dd79",
