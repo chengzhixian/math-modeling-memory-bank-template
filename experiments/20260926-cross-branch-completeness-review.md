@@ -2,7 +2,7 @@
 
 ## A. 范围与版本
 
-按根目录 `REPOSITORY_REVIEW_PROTOCOL.md` 的 Stage 1–18 复查远端 main `2c7efccc53f367d20ac5db79cf569d87b31dc337`、CHM `integration/chm-q1-clean-20260923@c052b6918c3f77a2285622521d8abb1b429513be`、CYJ `team/cyj-scaling@74e678e319b58e2aab230a7b7233fa53f3053fa5`。CYJ Q2 冻结数值生产者为 `fd2dbb3b2002983430329cdb2ec6a275c2eed4f6`。本次在隔离工作树实施补录，不读取原本本机暂存区作为研究来源。对照当前文件树、两个冻结 manifest、论文 Q1–Q3 段落、题面可见正文、交接与 CYJ 最新 Q3 验收清单；只取同字节核心证据，不合并个人分支。
+按根目录 `REPOSITORY_REVIEW_PROTOCOL.md` 的 Stage 1–18 复查起点远端 main `2c7efccc53f367d20ac5db79cf569d87b31dc337`、CHM `integration/chm-q1-clean-20260923@c052b6918c3f77a2285622521d8abb1b429513be`、CYJ 起点 `team/cyj-scaling@74e678e319b58e2aab230a7b7233fa53f3053fa5`。审查期间 CYJ 前进到 `53b4fb51fc697d4e1584502b1fe66af40dd5242f`，新增 Q3 独立条件验收，已补充审查。CYJ Q2 冻结数值生产者仍为 `fd2dbb3b2002983430329cdb2ec6a275c2eed4f6`。本次在隔离工作树实施补录，不读取原本本机暂存区作为研究来源。对照文件树、冻结 manifest、论文 Q1–Q3 段落、题面可见正文和交接；只取核心证据，不合并个人分支。
 
 ## B. 数据、变量与证据链
 
@@ -22,9 +22,9 @@ $Q_A\to Q_B$ 与 A 目标域相对 Loss 到 B 总体 Loss 均无成对标定；�
 - Q2 原 `acceptance.json` 和审查记录点名 B1 冻结拟合、B2/B3 逐组验证、规模顺序逐对验证、领域对参考点、运行访问审计、远端发布记录及 18 组接口样例；先前 main 只有摘要或引用路径。现补至 `outputs/Q2/`、`interfaces/Q2/`。B1 文件的早期 `draft_classic_baseline_not_validated_predictor` 状态仍保持原字节；正式 Q2 的条件验收来自后续 v8 发布，不改写这段历史标签。
 - Q3 `external_nd_audit.json` 登记的 42 个公开模型逐行记录，以及九个假设情景在官方预算下的 243 格表先前缺席。现补至 `outputs/Q3/`；公开外测限于各训练语料内的 $N,D$ 排序，绝不转换成跨附件四变量外测。
 
-### MAJOR：CYJ 对 CHM Q3 的独立联合验收尚未完成
+### MAJOR：CYJ 独立消费者验收在审查期间完成，已补录
 
-CYJ 最新 `74e678e` 只增加 `problem/cyj/CYJ_Q3_V8_JOINT_ACCEPTANCE_TASKS.md` 与交接待办，明确“创建清单不等于复算/签收”。CHM 的 Q3 v8 发布、测试和条件数值审查已存在，且主答卷可按该条件范围使用；本次将 main 答卷和公共记忆的验收措辞限定为“CHM 已发布、集成人核对，CYJ 独立消费者签收待完成”。要升级为双方联合验收，需要 CYJ 按其清单独立复算 36 格三模式、核对约束与哈希，并形成签收报告；本次不替 CYJ 预填结论。
+CYJ `74e678e` 当时只创建任务清单；新提交 `53b4fb5` 给出独立报告、原始来源审计及两份机器差异表。CYJ 分别复核固定、联立、原生质量三模式各 36 格（可行 30/33/33）和九情景 243 格；候选选择、可行状态一致，三模式 Loss 最大绝对差依次为 $4.44\cdot10^{-16}$、$4.44\cdot10^{-16}$、$2.31\cdot10^{-14}$。报告和三个 JSON 已按 Q3 收录，论文理论段同步了 CYJ 新增的质量准入解释。其签收只覆盖已冻结的条件模型和有限候选；公开 N/D 外测仅核验哈希，CYJ 本轮未在本机独立重跑外部数据。不可称 A/B 经验桥已验证。
 
 ### MINOR：尚无 Q3 `direct` 与 `direct_and_near` 全预算选方对照
 
@@ -36,7 +36,7 @@ CHM 的两张各约 0.8 MB、1449 行密集预算扫描，CYJ 的 v7/诊断缓�
 
 ## D. 核验范围和局限
 
-- 三份 `curated_manifest.json` 逐项校验：Q1 21、Q2 25、Q3 13 个文件；补录的来源 SHA 对应原摘要或 `upstream_manifest.json`。18 组 v8 fixtures 的 36 个请求／预期文件全部符合原 manifest。
+- 三份 `curated_manifest.json` 逐项校验：Q1 21、Q2 25、Q3 16 个文件；补录的来源 SHA 对应原摘要、`upstream_manifest.json` 或 CYJ `53b4fb5`。18 组 v8 fixtures 的 36 个请求／预期文件全部符合原 manifest。
 - Q1 重拟合 4 政策各 30 次，逐行重算 `same_choice_fraction` 与摘要一致；估算目标 26 行。Q2 B2/B3 逐组 15 行、规模方向 246 行，B1 身份在 Q2 与 Q3 清单中相同。
 - Q3 公开模型 42 行、每语料 14 行；用 Python 标准库重算三组 Spearman 为 0.973626、0.986813、0.973626，与冻结审计一致。九情景官方预算表 243 行、每情景 27 行，文件哈希符合 `assumption_sensitivity.json`。
 - 公式与代码对照：CYJ v8 的 `base()` 实现 $E+AN^{-\alpha}+BD^{-\beta}+(1-q)G$，`evaluate()` 实现 $\exp(r_w)$；CHM v8 的 `solve_fixed_p()` 实现 $C=D[(6\cdot10^{18}+2\cdot10^{14}L_c)N+10^9(g_c(q)-g_c(q_0))_+]$、支持域及 $q\ge q_0$ 政策。固定配方消去 $D$ 和 87 个 A4 候选枚举只证明已声明候选集内的数值结果。
@@ -44,4 +44,4 @@ CHM 的两张各约 0.8 MB、1449 行密集预算扫描，CYJ 的 v7/诊断缓�
 
 ## E. 判断
 
-同步遗漏的**核心证据文件**已补齐到按问题命名的目录，原文件字节和发布身份均保持不变；main 仍是精选成果库。Q1/Q2 和 CHM Q3 的结论只能按上表的数据角色、支持域与条件桥接使用。CYJ 独立 Q3 联合签收及跨质量映射政策的完整优化对照仍是明确的后续验证任务，不能写成已完成。
+同步遗漏的**核心证据文件**已补齐到按问题命名的目录，原文件字节和发布身份均保持不变；main 仍是精选成果库。Q1/Q2 和 CHM Q3 的结论只能按上表的数据角色、支持域与条件桥接使用。CYJ 已对 Q3 固定对象独立条件签收；跨质量映射政策的完整优化对照及公开外测的独立重跑仍是明确的后续验证任务。

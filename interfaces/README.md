@@ -4,7 +4,7 @@
 
 Q1 v2 清单 `interfaces/chm/q1_interface_v2.json` 保留原发布路径及 SHA256；main 的同字节九个输入现位于 `outputs/Q1/`，`src/chm/q1_interface_v2.py` 将原路径只读映射至该目录并逐文件复核哈希。个人生产分支仍使用原 `outputs/chm/q1_v2/` 路径，不能改写其冻结发布包。
 
-Q2 v8 的正式条件接口说明和 18 组冻结请求/预期样例已按问题归入 [`interfaces/Q2`](Q2/README.md)。原来源路径仍可由 `outputs/Q2/upstream_manifest.json` 和固定 CYJ 提交定位；CYJ 对 CHM Q3 v8 的独立消费者签收尚在其远端任务清单中。
+Q2 v8 的正式条件接口说明和 18 组冻结请求/预期样例已按问题归入 [`interfaces/Q2`](Q2/README.md)。原来源路径仍可由 `outputs/Q2/upstream_manifest.json` 和固定 CYJ 提交定位；CYJ 已在 `53b4fb5` 对 CHM Q3 v8 进行声明范围内的独立条件签收，证据见 `experiments/Q3/INDEPENDENT_ACCEPTANCE.md`。
 
 本文件由集成人维护；a/、b/、c/ 的接口说明由对应生产者维护。当前均为计划接口，没有真实结果；生产者与使用者须在 09-23 18:00 前核对字段后确认 v1。不得把建议字段当成已经存在的附件字段。
 
