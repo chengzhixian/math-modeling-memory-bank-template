@@ -8,7 +8,7 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 ## 2026-09-26 集成人当前状态
 
-本轮按用户桌面《分支成果集成到main方案.md》重新集成：隔离工作树 `codex/integrate-q1-q2-q3` 以当时远端 main `ace2bf0833fee186a0fb2d2940923d1ccaecac4f` 为基底，来源锁定远端 CHM `c052b6918c3f77a2285622521d8abb1b429513be`、CYJ `d5e05cedeba3b86abe4ab624239504a21d1abee4`、ZHH `ee23b200e9de7f78477d945b186233741bd3b8fd`。现已补齐四问按 Q 归类的当前代码、接口、关键实验、结果和 LaTeX 正文；Q1/Q2/Q3 数值与冻结结果复核相符，Q4 v3 45 项哈希及数值复核通过，原始资料 2,014 项校验通过。Q2/Q3 桥接、Q3 最优、Q4 未来覆盖均保留原有条件边界。完整协议审查和远端 main 同步仍进行中；远端状态必须以推送后 SHA 核验为准。
+本轮按用户桌面《分支成果集成到main方案.md》重新集成：隔离工作树 `codex/integrate-q1-q2-q3` 以当时远端 main `ace2bf0833fee186a0fb2d2940923d1ccaecac4f` 为基底，来源锁定远端 CHM `c052b6918c3f77a2285622521d8abb1b429513be`、CYJ `d5e05cedeba3b86abe4ab624239504a21d1abee4`、ZHH `ee23b200e9de7f78477d945b186233741bd3b8fd`。首个四问远端检查点 `863792e54eb3f9eb5c6da6993e685ee4126fe0b5` 已与远端集成分支 SHA 核对。四问当前代码、接口、关键实验和结果已按 Q 归类；独立工作树的 2,014 项原始资料、Q1/Q2/Q3 主链及 Q4 v3 45 项哈希门禁复核通过。复现中发现并修复 Q3 Windows CSV 换行导致 Q4 上游哈希拒绝，以及 Q4 生成清单误收 main 精选清单的循环问题，详见 `experiments/20260926-main-q1-q4-integration-review.md`。Q2/Q3 桥接、Q3 最优、Q4 未来覆盖仍是条件结果。用户本轮要求优先完成四问 main 集成，论文编译/排版留待后续；最终远端 main 状态以推送后 SHA 核验为准。
 
 Q1–Q3 的精简成果按问题放在 `outputs/Q1`、`outputs/Q2`、`outputs/Q3`，论文推导按现有 LaTeX 结构放在 `paper/latex/sections/Q1`、`Q2`、`Q3`。本次来源为远端 CHM `c052b6918c3f77a2285622521d8abb1b429513be`、CYJ `046abaeede95868827fd001dcfee62eb58614eaa`，其中 Q2/Q3 消费的 v8 冻结生产者为 `fd2dbb3b2002983430329cdb2ec6a275c2eed4f6`。Q1 仅识别附件 A 内质量代理与配比相对效应；Q2 的 A/B 桥接及 Q3 四变量最优均是指定假设和支持域内的**条件结果**。Q3 已有完整条件作答、结构转移和部分外测，不得表述为真实训练的无条件联合最优。各目录 `curated_manifest.json` 指向精简文件哈希，`upstream_manifest.json` 指向原发布包。此前下文的“当前个人分支状态”和旧计划是当时快照，以本节及新交接为准。
 

@@ -20,7 +20,7 @@
     "outputs/Q4/prepared/manifest.json": "85c3353da8d295a6381af3970ed28e3ca0a255898ea1ac665a5053a9cb982221",
     "data/raw/real_attachments/C_efficiency_evolution/leaderboard_enhanced.csv": "d8ae5b1e00f36bf17adb0c3fbf88c60edd54298625d2db1aa744b2b001202799",
     "data/raw/real_attachments/C_efficiency_evolution/loss_benchmark_bridge_expanded.csv": "e175462233c2b856e2878c603055b4ed70135f021300f912852af1bb485ba4fd",
-    "src/zhh/q4_core_v3.py": "79becf00a93045d60433955c3f1736813936f5a782cf83b29bd06e4d416ca153",
+    "src/zhh/q4_core_v3.py": "8e1e02638f1e9cce72b6ee0cab348eda17da86ee28dad28b9b83533859023863",
     "src/zhh/q4_complete.py": "f12911d91eb7a6129601a42ba4c2845b6fdc0ee12cf2849854b3abba49db721a",
     "src/zhh/test_q4_core_v3.py": "093cb97ccad7ce99f32b5df753d91160932c2d944745a562cca1cb65ccb4ba05",
     "src/zhh/verify_q4_core_v3.py": "ed6388986adbccb3c4c668bf393d04f76c755acf8de15708537dae8ba402820f",

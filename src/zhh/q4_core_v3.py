@@ -530,7 +530,7 @@ def main():
     dump('manifest.json',{'schema':'zhh.q4.core.v3.manifest','source_commit':'ee23b200e9de7f78477d945b186233741bd3b8fd','seed':SEED,
         'command':'python -B src/zhh/q4_core_v3.py','versions':{'numpy':np.__version__,'pandas':pd.__version__,'scipy':scipy.__version__},
         'input_sha256':{str(x.relative_to(ROOT)).replace('\\','/'):old.sha(x) for x in inputs},
-        'output_sha256':{x.name:old.sha(x) for x in sorted(OUT.iterdir()) if x.suffix in ['.csv','.json'] and x.name!='manifest.json'},
+        'output_sha256':{x.name:old.sha(x) for x in sorted(OUT.iterdir()) if x.suffix in ['.csv','.json'] and x.name not in {'manifest.json','curated_manifest.json'}},
         'paper_updated':True,'paper_section':'paper/latex/sections/Q4/main.tex',
         'upstream_Q3_commit':old.Q3_REF,'bootstrap_blocks':80,
         'uncertainty':'union of per-assumption 5--95% bootstrap ranges, no calibrated future coverage; coordinate stress assumptions are not confidence intervals'})
