@@ -1,0 +1,35 @@
+{
+  "pdf": "H:\\研究生数模\\Huawei_Cup_2026_Mathematical_Modeling_latex-main\\output\\pdf\\论文_R2补充版.pdf",
+  "pdf_sha256": "06b8cb45063876f4834f4c19e318dd368fb01d4c26ea6cb2f530db6e7621065f",
+  "physical_page_count": 48,
+  "science_changes": 15,
+  "compilation_changes": 3,
+  "source_model_sha": "c6b36c08b5a85c81a3889d48d50c26ac136a048b",
+  "checks": "No overfull boxes, missing glyphs, unresolved references/citations, changed labels, open conditionals or ?? markers",
+  "sources": {
+    "chapter4.tex": {
+      "before_sha256": "efdd9974aa79ea4269b6e0db5d40517c1ec2823978a5bbdc059d802b2130d64c",
+      "after_sha256": "3ca8791600436d14c4546dbe9d705fc2becd603becbb1601691ad6bab6ebac41"
+    },
+    "chapter5.tex": {
+      "before_sha256": "8254b2ea3cfad90b5338fa1b3faa34706614fbb7deec76258be78ef5549069cd",
+      "after_sha256": "41208cae4260223b195cd64f8fbdfffab38451be7868b16fac9a0345d9ca8474"
+    },
+    "chapter6.tex": {
+      "before_sha256": "c5ced45d026ca4246f33501d9cd42348e6786774dbdad4d35046f14f5cbd0fe5",
+      "after_sha256": "4642b6dfc3d4f3834872d70002b3de84297f66524d5e616efb674e3a42fb227f"
+    },
+    "chapter7.tex": {
+      "before_sha256": "0a1ffec749028150b5bb2ddc9a67dc241a67aa655634feede2ac71a483fb424e",
+      "after_sha256": "47feed61785d07ef2ed5bdecf0bc17d8b24aeaaa2cf3eda2b59f1bd32f611ee7"
+    },
+    "example.tex": {
+      "before_sha256": "b6d1118c4f56edc27765a6ede7026f0eaba98ebf1cb1fad0912b2c943f269145",
+      "after_sha256": "232e4f7581ae84f7afd7ab8c19d45bbdf73147c5728429e90156453e69347206"
+    },
+    "gmcmthesis.cls": {
+      "before_sha256": "edec6406e91930ea6e6d2ab8232bbb6a4e073b4ad89d3b7890627c37f9461cfc",
+      "after_sha256": "8bed29d01702f521f34ec91a7a8ed1064e6f3d4d2bc9991834d0f00acefdb1a5"
+    }
+  }
+}

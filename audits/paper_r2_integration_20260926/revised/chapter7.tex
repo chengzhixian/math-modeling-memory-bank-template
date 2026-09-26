@@ -1,0 +1,361 @@
+% 本章对应赛题问题四。事实依据：仓库 main@f3a49d4 的 Q4 实现、实验与输出。
+% 图件由用户提供；所列未来月份均从附件中的最后提交日期起算。
+\setcounter{section}{6}
+\section{问题四：能力演进的代理分析与前沿情景}
+\label{sec:q4}
+\setcounter{equation}{0}
+\setcounter{figure}{0}
+\setcounter{table}{0}
+
+\subsection{问题分析与数据整理}
+
+本问需要回答两个相互关联的问题：历史能力增长中，模型参数规模分布变化与同参数格内的变化分别占多少；若算力增速放缓，未来一至两年开源模型的近期高分群和累计最高分可能怎样变化。前三问以交叉熵 Loss 度量模型表现，而本问以多项 Benchmark 得分度量能力，因此还需考察来源内的条件 Loss--能力映射\cite{gadre2024,observational2024}，分析前述配置在指定能力坐标下的相对表现。
+
+令模型 $i$ 的综合能力为 C2 六项得分的等权均值
+\begin{equation}
+ S_i=\frac{1}{6}\sum_{k=1}^{6}s_{ik},\qquad 0\leq S_i\leq100,
+ \label{eq:q4-score}
+\end{equation}
+六项分别为 IFEval\cite{ifeval2023}、BBH\cite{bbh2023}、MATH Lvl 5\cite{math2021}、GPQA\cite{gpqa2024}、MUSR\cite{musr2024} 和 MMLU-PRO\cite{mmlupro2024}。仅当六项均有有效得分时计算 $S_i$。时间轴采用榜单提交日；模型类型分为基础预训练和后训练两组，后者包含 chat 与领域微调。开放模型筛选排除明确标注不开放权重的记录，并结合权重及许可证标签；严格开放和许可证口径另作敏感性比较。许可证标签只能作为开放可用性的筛选依据，具体研究与复现权限仍由对应许可证决定。对同名模型在当期分析中保留最新提交版本，但计算历次最高分时保留所有历史版本。
+
+表\ref{tab:q4-data}概括本问的数据角色。C2 去重后的扩展开放集合为 2616 个模型，其中主分析使用基础预训练 204 个、后训练 1620 个。C3 的 4599 行记录来自不同评分来源和年份；其中历史报告的 26 行原有 Average 与式\eqref{eq:q4-score}所算六任务均值的平均绝对差为 9.101 分，因此按来源、年份和任务分别分析，不把不同口径的 Average 拼接成同一能力曲线。C8 的 1860 个可解析模型均有 24 项 BBH 任务结果。逐模型聚合后，BBH 宏平均的中位数为 49.40 分，而任务最低分的中位数为 14 分，1368 个模型至少有一项任务低于 20 分，说明综合均分会掩盖任务短板。C7 提供 2048、8192 和 131072 Token 三档已观察到的上下文长度，作为与第三问衔接的配置情景；最高一档仅有一个对应模型，不用于估计上下文长度的独立能力效应。
+
+\begin{table}[htbp]
+ \centering\small
+ \caption{问题四的数据来源与分析用途}
+ \label{tab:q4-data}
+ \begin{tabular}{lp{4.0cm}p{6.4cm}}
+ \toprule
+ 来源 & 数据性质 & 本问用途\\
+ \midrule
+ C2 & 六项能力得分、类型、提交日、开放标签 & 定义能力、历史分解、前沿回测及预测\\
+ C3 & 多来源历史能力记录 & 分来源和逐任务考察长期变化，核对评分口径\\
+ C4 & 参数量、训练量、算力与开放权重信息 & 估计资源增长情景并比较筛选口径\\
+ C6 & Loss 与能力的成对记录 & 在各自来源内建立条件 Loss--能力映射\\
+ C7 & 模型架构及上下文长度记录 & 确定跨问题配置所用的上下文情景\\
+ C8 & BBH 原始逐任务结果 & 检查任务分布与均分掩盖的短板\\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+在 C3 的同一现代榜单来源内，2024 年和截至附件截点的 2025 年提交样本，六任务均分的第 90 百分位分别为 35.108 和 39.665 分；其中 MATH Lvl 5 的单任务第 90 百分位由 32.175 升至 45.846 分。按上述重复键去重后，两年六任务第 90 百分位为 35.100 和 39.626 分，变化很小。历史论文报告组则存在较高的任务零值比例与不同的 Average 口径，故它用于观察各项任务的历史覆盖和得分差异，不与现代榜单直接拼接预测。
+
+C4 的 3523 条资源记录中，$N,C,D$ 均为正且有限的有 850 条。进一步按生成式语言任务、显式开放权重、Token 单位、基础模型、架构和来源可靠性筛选，并以 $C/(6\times10^{18}ND)\in[0.5,2]$ 检查资源单位的一致性，得到主集合 81 条；将最后一项放宽为 $[0.1,10]$，得到 93 条。这里 $N,D$ 分别以十亿参数和十亿 Token 计，$C$ 为 FLOPs。计算量有些本就由 $N,D$ 估算，因此上述比值用于核对口径。对 2021--2024 年各年算力的第 90 百分位取常用对数并拟合年度趋势，主集合的年增速为 $g_C=0.690315$ 个十进对数单位，即年倍率约 4.901；放宽集合分别为 0.600552 和 3.986。图\ref{fig:q4-resources}显示两种筛选下的资源变化。后续把这些速率作为未来投入情景，不直接解释为能力增长的因果系数。
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.84\linewidth]{figures/Q4/04_resources.pdf}
+ \caption{两种筛选口径下的历史算力、参数量和训练量上沿}
+ \label{fig:q4-resources}
+\end{figure}
+
+\subsection{历史能力变化的标准化分解}
+
+\subsubsection{规模分布与同格变化}
+
+为比较规模扩张和其余变化，在相同模型类型内分别取最早与最晚的两个月样本，按 $\log_{10}N$ 划分参数格，要求每格两期均至少有两个模型。后训练组中的 chat 与领域微调先分别处理，再使用两期合并样本形成固定类型权重 $\pi_g$。设 $w_{gjt}$ 为类型 $g$ 内参数格 $j$ 在时期 $t$ 的样本权重，$m_{gjt}$ 为该格能力均值，定义共同支持上的标准化均值 $\bar S_t^{\rm std}=\sum_g\pi_g\sum_jw_{gjt}m_{gjt}$。对 $\bar S_1^{\rm std}-\bar S_0^{\rm std}$ 作对称分解：
+\begin{align}
+ \Delta_{\rm scale}
+ &=\frac12\sum_g\pi_g\sum_j(w_{gj1}-w_{gj0})(m_{gj1}+m_{gj0}),
+ \label{eq:q4-scale-term}\\
+ \Delta_{\rm within}
+ &=\frac12\sum_g\pi_g\sum_j(w_{gj1}+w_{gj0})(m_{gj1}-m_{gj0}),
+ \label{eq:q4-within-term}\\
+ \Delta_{\rm std}&=\bar S_1^{\rm std}-\bar S_0^{\rm std}=\Delta_{\rm scale}+\Delta_{\rm within},\nonumber\\
+ \Delta_{\rm gap}&=\Delta_{\rm full}-\Delta_{\rm std}.
+ \label{eq:q4-gap}
+\end{align}
+第一项是样本在参数格间移动所对应的规模分布代理贡献，第二项是相同参数格内的非规模剩余代理贡献（同格能力变化项）；全样本与共同支持结果之差单独留在 $\Delta_{\rm gap}$。这一恒等式只分解观测到的得分变化，不能将同格项识别为纯技术进步。
+
+表\ref{tab:q4-decomp}给出 $0.5$ decade 参数格的主结果。后训练组的共同支持均分由 18.937 升至 24.700，增量 5.763 分；规模分布代理项为 $-0.758$ 分，同格能力变化项为 $6.521$ 分。相对标准化增量，两项带符号份额分别为 $-13.15\%$ 和 $113.15\%$。超过 100\% 的份额源于规模分布项的反向抵消。这些数值是给定分组与共同支持条件下的描述性分解，不是规模或技术的因果贡献。附件缺少与 C2 逐模型对齐的 $D$ 及训练过程信息；同格剩余项可能同时包含训练数据、后训练、模型架构、评测与样本选择，以及其他未观测因素的影响。基础组的标准化增量仅 0.880 分，其比例对小分母较敏感，表中保留分值而不汇总总体百分比。图\ref{fig:q4-contributions}展示三项如何组成全样本增量。
+
+\begin{table}[htbp]
+ \centering\small
+ \caption{两月窗口、$0.5$ decade 参数格下的能力变化代理分解（分）}
+ \label{tab:q4-decomp}
+ \begin{tabular}{lrrrrrr}
+ \toprule
+ 类型 & \makecell{共同支持\\早/晚} & 标准化变化 & \makecell{规模分布\\代理项} & \makecell{同格剩余\\代理项} & 支持差 & 全样本变化\\
+ \midrule
+ 后训练 & 313/423 & 5.763 & $-0.758$ & 6.521 & $-1.542$ & 4.222\\
+ 基础预训练 & 78/41 & 0.880 & $-3.756$ & 4.636 & $-2.072$ & $-1.192$\\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.84\linewidth]{figures/Q4/02_contributions.pdf}
+ \caption{两类模型历史能力变化的规模分布代理项、同格剩余代理项及支持差}
+ \label{fig:q4-contributions}
+\end{figure}
+
+\subsubsection{分解结果的敏感性}
+
+改变参数格宽与样本窗口可考察分解对共同支持划分的依赖。在两月窗口下，后训练组采用 $0.25$、$0.50$、$0.75$ decade 参数格时，规模分布份额依次为 $-16.47\%$、$-13.15\%$、$-50.08\%$：在主开放口径内符号相同，幅度变化明显，见图\ref{fig:q4-decomp-sensitivity}。再以开发者为抽样块重复抽取\cite{cluster2023} 80 次，主格宽下参数分布项的第 5 至第 95 百分位为 $-2.329$ 至 $0.257$ 分，跨过零；同格项对应为 $4.679$ 至 $8.460$ 分。若进一步只比较相同开发者的共同参数格，后训练组两期仅保留 6 和 8 个模型，难以据此估计总体中排除开发者差异后的变化。
+
+开放模型的筛选口径也会改变代理分解。表\ref{tab:q4-open-sensitivity}在相同的两月窗口和 $0.5$ decade 参数格下比较三种口径。主口径与明确标注开放权重的严格口径中，规模分布代理项均为负；仅按宽许可证标签筛选时，该项转为正值。这说明 $-13.15\%$ 只是主样本条件下的规模分布代理份额，不能视为所有开放筛选方式下不变的比例；三种口径的同格剩余代理项均为正。结合抽样结果，历史得分提高的主要数值部分表现为同参数格内的变化，但无法从中分离训练数据、后训练、架构或入榜选择等因素。
+
+\begin{table}[htbp]
+ \centering\small
+ \caption{开放筛选口径对后训练组代理分解的影响（两月窗口，$0.5$ decade）}
+ \label{tab:q4-open-sensitivity}
+ \begin{tabular}{lrrrrr}
+ \toprule
+ 筛选口径 & \makecell{共同支持\\早/晚} & 标准化变化 & \makecell{规模分布\\代理项} & \makecell{同格剩余\\代理项} & \makecell{规模代理\\份额}\\
+ \midrule
+ 主口径 & 313/423 & 5.763 & $-0.758$ & 6.521 & $-13.15\%$\\
+ 明确开放权重 & 31/58 & 6.758 & $-0.362$ & 7.121 & $-5.36\%$\\
+ 宽许可证标签 & 184/317 & 7.236 & 0.391 & 6.845 & $5.40\%$\\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.84\linewidth]{figures/Q4/03_sensitivity.pdf}
+ \caption{参数格宽度变化下的规模分布与同格变化代理项}
+ \label{fig:q4-decomp-sensitivity}
+\end{figure}
+
+\subsection{算力放缓下的能力前沿}
+
+\subsubsection{预测对象与模型比较}
+
+为描述高分模型群的典型上沿，令 $F_t$ 为同类型模型在截至 $t$ 的最近两个自然月中，式\eqref{eq:q4-score}的第 90 百分位。采用两个月窗口可以降低单个极端记录的影响，同时保留近期变化。观测截点处，后训练组 $F_0=40.445$ 分，基础预训练组为 21.032 分。本文对二者分别预测，并在下一节单独处理“截至目标日的累计最高分”。
+
+设 $z_i=\operatorname{logit}(S_i/100)$，$t_i$ 为距统一基日的月数\cite{islr2021}；对恰为 0 或 100 分的边界值，先将得分比例限制在 $[0.001,0.999]$ 内。分别建立常数基线、两月前沿趋势、均值资源模型，以及以 $\tau=0.9$ 为目标的分位资源模型\cite{koenker2017}。最后一种模型求解
+\begin{equation}
+ \min_{a_{\rm q},b_N,b_t}\sum_i\psi_{0.9}
+ \left[z_i-a_{\rm q}-b_N\log_{10}N_i-b_tt_i\right],\qquad
+ \psi_\tau(u)=u\{\tau-\mathbf1(u<0)\},
+ \label{eq:q4-quantile-fit}
+\end{equation}
+并采用线性规划得到系数。均值资源模型使用相同解释变量拟合均值关系，两月趋势仅利用历史 $F_t$ 的时间轨迹。四个候选都以未来两个完整自然月的 $F_t$ 为比较目标：每一轮仅用测试窗口开始前的提交版本和当时可见的 C4 资源记录拟合，再计算测试窗口误差\cite{forecasting2021}。
+
+表\ref{tab:q4-backtest}与图\ref{fig:q4-backtests}给出四个滚动窗口的结果。后训练组分位资源模型 RMSE 为 2.199 分，略低于均值资源模型的 2.237；相对预测时可用的历史常数基线 3.737 分，RMSE 降低约 41.1\%，说明其在这些窗口内提供了相对增益。但按式\eqref{eq:prediction-metrics}汇总四窗预测，$R^2=-0.7500$、MAPE 为 5.32\%，平方误差仍高于事后用四窗观测均值预测。两种参照使用的信息不同，故“优于历史常数基线”与“$R^2<0$”可以同时成立。基础预训练组以常数模型的 RMSE 7.633 分最低，但其 $R^2=-12.2321$、MAPE 为 32.97\%，仅表示它在候选中误差最小，绝对预测表现仍较弱。全部候选的测试 $R^2$ 均为负值，且四个窗口存在重叠；这些指标用于模型比较和误差诊断，尚不足以支持长期预测精度，故下文的 12、24 个月结果作为资源假设下的条件情景。
+
+\begin{table}[htbp]
+ \centering\small
+ \caption{最近两月能力前沿的四窗口滚动预测 RMSE（分）与 $R^2$}
+ \label{tab:q4-backtest}
+ \begin{tabular}{llrrrr}
+ \toprule
+ 类型 & 指标 & 常数 & 两月趋势 & 均值资源 & 分位资源\\
+ \midrule
+ 后训练 & RMSE & 3.737 & 3.053 & 2.237 & 2.199\\
+ & $R^2$ & $-4.0520$ & $-2.3723$ & $-0.8114$ & $-0.7500$\\
+ 基础预训练 & RMSE & 7.633 & 9.571 & 9.763 & 10.561\\
+ & $R^2$ & $-12.2321$ & $-19.8040$ & $-20.6451$ & $-24.3303$\\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.85\linewidth]{figures/Q4/05_backtests.pdf}
+ \caption{两类模型的最近两月能力前沿滚动预测误差}
+ \label{fig:q4-backtests}
+\end{figure}
+
+\subsubsection{资源配置情景与前沿预测}
+
+后训练组采用分位资源模型作为主情景。设 $g_C$ 为 C4 的年算力对数增长率，$\chi$ 为未来增长倍率；取 $\chi=1,1/2,1/4,0$ 分别表示沿历史速率、增速减半、增速降至四分之一和停止增长。令 $\eta=0.5$ 表示新增资源的一半按十进对数分配给参数量，其余对应训练量；令 $\theta_{\rm time}=0.5$ 为未来时间项的保留系数。以当前两月 $F_0$ 为锚，预测式为
+\begin{equation}
+ \begin{aligned}
+ \widehat F(T_{\rm pred};\chi)
+ &=100\,\operatorname{sigmoid}\!\Bigl[
+ \operatorname{logit}(F_0/100)\\
+ &\quad+b_N\eta\chi g_C\frac{T_{\rm pred}}{12}
+ +\theta_{\rm time}b_tT_{\rm pred}\Bigr],\\
+ \operatorname{sigmoid}(x)&=\frac{1}{1+e^{-x}}.
+ \end{aligned}
+ \label{eq:q4-frontier-forecast}
+\end{equation}
+其中 $T_{\rm pred}$ 为距观测截点的月份。C2 未提供逐模型训练量，故 $\eta$ 是资源分配情景而非由能力数据单独估计的参数。算力增速减半指年对数速率由 0.6903 降至约 0.3452，年倍率由 4.901 降至约 2.214。
+
+后训练组的最后观测日为 2025 年 3 月 13 日。按增速减半，2026 年 3 月 13 日的 12 个月 $F$ 预测为 53.828 分，2027 年 3 月 13 日的 24 个月预测为 66.681 分；其余增长情景列于表\ref{tab:q4-growth}。将 C4 资源核对范围由主口径放宽后，后训练组分位资源模型的四窗 RMSE 为 2.195 分，增速减半时的 12、24 个月预测为 53.222 和 65.591 分，与主口径接近。基础组最后观测日为 2025 年 3 月 9 日，短期比较选择了常数模型，对应的两月第 90 百分位参考值为 21.032 分。图\ref{fig:q4-forecasts}并列显示两类模型的预测。所列日期均从附件观测截点起算。
+
+\begin{table}[htbp]
+ \centering\small
+ \caption{后训练模型在不同算力增长情景下的两月第 90 百分位预测（分）}
+ \label{tab:q4-growth}
+ \begin{tabular}{lrrrr}
+ \toprule
+ 预测期限 & 停止增长 & 历史增速的四分之一 & 历史增速减半 & 保持历史增速\\
+ \midrule
+ 12 个月 & 49.157 & 51.496 & 53.828 & 58.432\\
+ 24 个月 & 57.921 & 62.403 & 66.681 & 74.422\\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.86\linewidth]{figures/Q4/06_forecasts.pdf}
+ \caption{算力增速减半时两类模型的 12 个月与 24 个月前沿情景}
+ \label{fig:q4-forecasts}
+\end{figure}
+
+\subsubsection{情景范围与外推程度}
+
+为区分参数扰动和建模情景，先按开发者为单位重复抽取 80 次，在固定增速减半、资源分配及时间保留系数下重新估计，得到后训练组 12 个月的第 5 至第 95 百分位范围 $50.302$--$56.007$ 分，24 个月为 $61.983$--$69.805$ 分。随后改变候选模型、资源筛选、增长速率、$\eta$、$\theta_{\rm time}$、近期窗口及分位水平，取各情景条件范围的并集；最后将四窗口最大绝对误差作为固定偏差压力叠加。表\ref{tab:q4-uncertainty}与图\ref{fig:q4-uncertainty}显示三层范围逐步扩大。它们分别回答“固定参数下怎样波动”“合理情景改变后差多少”“若延续已见偏差会怎样”，尚未用未来观测校准覆盖率。
+
+\begin{table}[htbp]
+ \centering\small
+ \caption{后训练模型、算力增速减半下的三层条件范围（分）}
+ \label{tab:q4-uncertainty}
+ \begin{tabular}{lrrr}
+ \toprule
+ 期限 & 固定情景块抽样 & 多情景条件并集 & 叠加固定偏差压力\\
+ \midrule
+ 12 个月 & 50.302--56.007 & 37.755--72.236 & 31.590--78.400\\
+ 24 个月 & 61.983--69.805 & 37.755--90.640 & 31.590--96.805\\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.85\linewidth]{figures/Q4/07_uncertainty.pdf}
+ \caption{固定情景、多情景与偏差压力下的能力前沿范围}
+ \label{fig:q4-uncertainty}
+\end{figure}
+
+24 个月预测期限约为后训练组已观测时间跨度的 2.64 倍，因此表中长期范围随模型和情景变化显著扩大。近期第 90 百分位描述的是高分模型群，并不直接回答“截至未来目标日的最高分”，下节另给出纪录保持基线与条件上尾情景。
+
+\subsection{截至目标日的累计最高分情景}
+
+令 $R_t=\max_{i:d_i\leq t}S_i$ 表示截止日期 $t$ 以前，同一开放筛选和模型类型下所有已提交版本的累计最高分。它至少保持已达到的历史纪录。以纪录保持作为基线，并在式\eqref{eq:q4-frontier-forecast}的第 90 百分位预测之上，加入近期最高分相对第 90 百分位的差额，构造另一种条件上尾情景：
+\begin{equation}
+ \widehat R^{\rm base}_{t+T_{\rm pred}}=R_t,\qquad
+ \widehat R^{\rm tail}_{t+T_{\rm pred}}(w)=
+ \min\!\left\{100,\max\left[R_t,
+ \widehat F(T_{\rm pred};\chi)+\Delta_{\rm tail}(w)\right]\right\},
+ \label{eq:q4-maximum}
+\end{equation}
+其中 $\Delta_{\rm tail}(w)$ 是最近 $w$ 个月样本最高分与同期第 90 百分位之差，主情景用 $w=2$，并以 1、3 个月比较尾差变化。两项分别表示“不刷新纪录”的经验基线和“近期上尾差额继续存在”的条件方案。
+
+四个重叠的两月回测窗口均未刷新此前累计纪录，故纪录保持基线在这些窗口的 RMSE 为 0；后训练组 1、2、3 月尾差方案的 RMSE 分别为 3.376、2.254、3.683 分，均未优于纪录保持基线。由于窗口重叠且样本很少，现有回测不足以证明尾差机制能比纪录保持更好地预测长期破纪录事件。算力增速减半时，后训练组当前累计最高分为 51.231；固定前述近期前沿预测及资源情景、采用两月尾差时，12、24 个月的条件上尾结果分别为 60.600 和 73.453 分。这是指定模型与情景下的条件预测，不是未来最高分的确定值。仅将尾差窗口改为 1 或 3 个月，相应数值范围为 60.474--61.203 与 73.327--74.057 分；这些窄范围只反映固定前沿点上的尾差取法，未计入上游前沿模型、资源增长情景及参数估计的不确定性，亦非预测误差区间。基础预训练组当前累计最高分 38.441，在其常数前沿情景下两期均保持该值，见表\ref{tab:q4-maximum}和图\ref{fig:q4-maximum}。
+
+\begin{table}[htbp]
+ \centering\small
+ \caption{算力增速减半时的近期高分群、纪录保持基线与条件上尾情景（分）}
+ \label{tab:q4-maximum}
+ \begin{tabular}{lrrrrr}
+ \toprule
+ 类型 & 纪录保持基线 & 12 月 $F$ & 12 月条件上尾 & 24 月 $F$ & 24 月条件上尾\\
+ \midrule
+ 后训练 & 51.231 & 53.828 & 60.600 & 66.681 & 73.453\\
+ 基础预训练 & 38.441 & 21.032 & 38.441 & 21.032 & 38.441\\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.85\linewidth]{figures/Q4/11_maximum_boundary.pdf}
+ \caption{最近两月高分群、纪录保持基线和条件累计最高分情景}
+ \label{fig:q4-maximum}
+\end{figure}
+
+\subsection{Loss 与能力得分的条件映射}
+
+\subsubsection{来源内单调映射及检验}
+
+C6 的 Loss 来自不同模型、验证语料和训练阶段。将来源及 Loss 类型分别保留，在每个具有成对记录的来源 $\nu$ 内建立有界的单调条件映射
+\begin{equation}
+ \operatorname{logit}\!\left(\frac{S}{100}\right)
+ =a_{\nu}+b_{\nu}\ell_{\nu},\qquad b_{\nu}\leq0,
+ \label{eq:q4-bridge}
+\end{equation}
+其中 $\ell_{\nu}$ 为该来源记录的 Loss；给定拟合系数后，按 $S=100/[1+\exp\{-(a_{\nu}+b_{\nu}\ell_{\nu})\}]$ 换算得分。若估计斜率不满足 Loss 降低、能力提高的方向，模型退回来源内常数关系。对来源内每条记录依次留出、重拟合并预测\cite{islr2021}，同时与常数关系比较。表\ref{tab:q4-bridge-validation}列出具有 validation 标签的三个主要来源的全样本拟合系数、实际观测支持范围及逐点留出误差，图\ref{fig:q4-bridge-validation}展示拟合与检验。各来源的单调映射仅在其自身观测到的 Loss 与参数规模支持范围内使用；第三问配置只有在变换后的 Loss 和参数规模同时落入相应来源支持域时，才进行能力得分换算。Qwen2 和 Qwen2.5\cite{qwen22024,qwen252024} 的单调关系在各自来源内的留一误差小于常数对照，汇总留一预测的 $R^2$ 分别为 0.2071 和 0.9508，但样本分别仅有 4 和 6 条；Pythia 的 7 条记录对应 $R^2=-1.1865$，留一误差反而大于常数对照。因此，附件中的 Loss--能力预测关系具有明显的来源差异：Qwen2.5 的来源内预测较好，Qwen2 的解释能力较有限，Pythia 当前映射未显示预测优势。Pythia 在附件内属于同模型、同验证集的高可比组，Qwen2 与 Qwen2.5 属于验证集不同的中等可比组；这些来源标签尚未由原报告逐项独立核实。这里的检验只支持来源内比较，既不验证跨来源迁移，也未标定第三问 Loss 与 C6 Loss 的数值坐标。
+
+\begin{table}[htbp]
+ \centering\footnotesize
+ \setlength{\tabcolsep}{3pt}
+ \caption{C6 来源内条件 Loss--能力映射的系数、支持范围与逐点留出 RMSE（分）}
+ \label{tab:q4-bridge-validation}
+ \begin{tabular}{@{}lrrrllrr@{}}
+ \toprule
+ 来源 & $n$ & $a_{\nu}$ & $b_{\nu}$ & \makecell{Loss\\支持范围} & \makecell{$N$ 支持范围\\（十亿参数）} & \makecell{单调映射\\LOO RMSE} & \makecell{常数基线\\LOO RMSE}\\
+ \midrule
+ Pythia validation & 7 & $-2.441680$ & $-0.163876$ & 2.0933--2.5978 & 0.162405--11.965825 & 0.538 & 0.426\\
+ Qwen2 validation & 4 & 2.230994 & $-1.659249$ & 1.90--2.84 & 0.494--57.409 & 7.048 & 10.708\\
+ Qwen2.5 validation & 6 & 3.801774 & $-2.249794$ & 1.85--2.81 & 0.500--72.706 & 2.655 & 15.074\\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.85\linewidth]{figures/Q4/09_bridge_validation.pdf}
+ \caption{C6 各来源的条件 Loss--能力关系及来源内逐点留出误差}
+ \label{fig:q4-bridge-validation}
+\end{figure}
+
+\subsubsection{第三问配置的条件能力换算}
+
+第三问输出的 Loss 与 C6 各来源的 Loss 尚无成对标定，因此本节不能构成从训练配置到实测能力的经验闭环。为考察条件换算对坐标差异的敏感程度，分别给出正尺度、偏移及上游预测扰动情景
+\begin{equation}
+ \ell_{\nu}=\kappa\{\widehat L_{\rm Q3}+\delta_{\rm up}\}+\xi,
+ \quad \kappa\in\{0.9,1,1.1\},\quad
+ \xi\in\{-0.1,0,0.1\},\quad
+ \delta_{\rm up}\in\{-0.05,0,0.05\}.
+ \label{eq:q4-coordinate}
+\end{equation}
+仅当 $N$ 及变换后的 $\ell_{\nu}$ 都位于该来源的观测范围，才代入式\eqref{eq:q4-bridge}。对第三问固定配方、已观测配方联立和独立质量三类配置，分别在五种可拟合的 C6 来源内施加 27 组坐标与上游 Loss 扰动。这是连接假设的压力情景，不是新增训练实验；所得区间反映假设改变后的结果范围。
+
+以 8192 Token、幂函数质量成本、$10^{22}$ FLOPs 下第三问选择的配方 172 为例，其预测 Loss 为 2.094421。表\ref{tab:q4-bridge-stress}和图\ref{fig:q4-bridge-stress}展示 Qwen2 与 Qwen2.5 两个来源内有观测支持的条件换算。取 $\kappa=1,\xi=\delta_{\rm up}=0$，条件得分分别为 22.371 与 28.695；改变坐标假设后，前者在 22/27 个可换算情景中为 13.601--27.462，后者在 23/27 个情景中为 15.057--39.197。与相同 $N$ 的规模主干模型相比，这些可换算情景中的条件得分差保持正值，但差值由单调映射与输入 Loss 排序共同导出，不能作为独立的能力增益验证；其幅度与来源内留出误差处于相近量级，真实差异仍需同坐标实验检验。
+
+\begin{table}[htbp]
+ \centering\small
+ \caption{$10^{22}$ FLOPs 下配方 172 的来源内条件得分与坐标压力范围（分）}
+ \label{tab:q4-bridge-stress}
+ \begin{tabular}{lrrrr}
+ \toprule
+ C6 来源 & 可换算格 & 条件得分 & 情景范围 & 对规模主干的条件差\\
+ \midrule
+ Qwen2 validation & 22/27 & 22.371 & 13.601--27.462 & 0.322--3.596\\
+ Qwen2.5 validation & 23/27 & 28.695 & 15.057--39.197 & 0.473--5.734\\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.85\linewidth]{figures/Q4/10_bridge_stress.pdf}
+ \caption{配方 172 在不同 Loss 坐标假设下的条件得分与条件差值}
+ \label{fig:q4-bridge-stress}
+\end{figure}
+
+图\ref{fig:q4-policy-bridge}进一步把第三问的三种投入方式放在相同来源坐标情景中比较。$10^{19}$ FLOPs 下固定配方 172 在部分成本设置中不可行；8192 Token、幂成本下联立配方 477 的 $N=0.0873$ 十亿，独立质量方案的 $N=0.1309$ 十亿，均低于 Qwen2 与 Qwen2.5 来源中的最小参数量，故该预算没有相应条件得分。到 $10^{22}$ 和 $10^{24}$ FLOPs，固定配方与联立配置均选择配方 172，二者在相同情景下得分重合。独立质量方案在 $10^{22}$ FLOPs 下的条件得分为 Qwen2 的 24.489 和 Qwen2.5 的 32.081 分；它改变了质量输入机制，数值差异应与这一前提同时阅读。扩展到全部配方、成本与来源组合时，部分方案相对规模主干的条件差在坐标变化中改变符号，方案间排序也会改变。单调映射下的排序保持主要由函数形式决定，不能独立验证第三问方案的能力收益。因此，第三问方案的得分比较须与来源和坐标假设一同给出；直接由 C2/C4 拟合的能力前沿式\eqref{eq:q4-frontier-forecast}则不涉及这一换算。
+
+\begin{center}
+ \includegraphics[width=0.80\linewidth]{figures/Q4/12_policy_bridge.pdf}
+ \captionof{figure}{三种第三问资源配置在两种 C6 来源及指定坐标下的条件得分}
+ \label{fig:q4-policy-bridge}
+\end{center}
+
+\subsection{本问输出与结果讨论}
+
+表\ref{tab:q4-output}汇总历史代理分解、条件预测与第三问方案换算，并注明各结果的使用条件。
+
+\begin{table}[htbp]
+ \centering\small
+ \caption{问题四的代理结果、条件情景及跨问题使用方式}
+ \label{tab:q4-output}
+ \begin{tabular}{p{2.5cm}p{4.2cm}p{5.8cm}}
+ \toprule
+ 结果 & 数值或模型 & 使用方式\\
+ \midrule
+ 历史能力代理分解 & 后训练组规模分布项 $-0.758$ 分，同格剩余项 6.521 分 & 描述共同支持样本的变化；同格项不是纯技术贡献\\
+ 近期高分群 & 增速减半时 12/24 月第 90 百分位 53.828/66.681 分 & 作为后训练模型资源情景下的能力预测\\
+ 累计最高分情景 & 纪录保持基线 51.231 分；条件上尾 60.600/73.453 分 & 回测尚未证明上尾情景优于基线；数值依赖前沿与尾差假设\\
+ Loss--能力条件映射 & C6 来源内单调关系及逐点留出误差 & 仅作来源内检验；第三问 Loss 与 C6 坐标尚未标定\\
+ 配方条件换算 & 配方 172 的两来源条件得分 22.371/28.695 分 & 仅在明示 Loss 坐标假设下作相对比较，非实测收益\\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+综上，参数格标准化分解给出了历史能力变化的规模分布代理贡献与非规模剩余代理贡献，后者仍包含多种未观测因素。后训练主模型在短期回测中优于历史常数基线，但 $R^2=-0.7500$，基础组所选常数模型为 $-12.2321$，因此资源情景模型只给出近期高分群的条件预测；累计最高分同时保留纪录保持基线与条件上尾情景，现有回测不足以证明后者优于基线。来源内 Loss--能力条件映射可在明示坐标假设下比较第三问配置，尚不能验证现实训练中的能力收益。这些结果为开源模型能力演进与资源配置提供有使用条件的参考。

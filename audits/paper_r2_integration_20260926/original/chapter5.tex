@@ -1,0 +1,279 @@
+\setcounter{section}{4}
+\section{问题二：跨维度数据融合与广义标度律}
+\label{sec:q2}
+\setcounter{equation}{0}
+\setcounter{figure}{0}
+\setcounter{table}{0}
+
+\subsection{问题分析}
+
+经典标度律以模型参数量 $N$ 和训练数据量 $D$ 描述验证集交叉熵损失（Loss）\cite{kaplan2020scaling,hoffmann2022training}，但未反映数据质量和训练领域组成。本问将第一问的质量评分与配比关系接入规模模型，考察各因素的条件边际效用及质量与规模的替代关系。附件 A 与附件 B 来自不同实验，质量指标和 Loss 口径也不相同；因此两者的连接是为联合分析构造的条件代理映射，尚无 A/B 成对实验直接标定，也不应解释为已识别的因果关系。
+
+全文令 $N$ 以十亿参数、$D$ 以十亿 Token 计。B1 的 1176 条 Pythia\cite{pythia2023} 训练记录用于估计 $N$--$D$ 标度律；B7 的 450 条半合成记录用于估计质量项。B6 的实验点包含于 B7，B8 的质量变化趋势与 B7 不一致，因此二者不重复用于本次质量拟合。B2、B3 检查不同轨迹上的变化趋势，B4、B5 比较跨模型族及文献数据中的下降方向；B9、B10 用于讨论大规模外推，B11、B12 提供模型族和检查点的辅助信息。第一问的质量评分和 17 维训练配比通过其已有结果引入，本问不重新处理附件 A 的原始数据。
+
+\subsection{经典标度律的建立}
+
+\subsubsection{模型形式与参数估计}
+
+以 B1 的模型参数量、累计训练 Token 数和验证 Loss 为观测量，建立经典双幂律\cite{hoffmann2022training}
+\begin{equation}
+ L_0(N,D)=E+A N^{-\alpha}+B D^{-\beta},
+ \qquad E,A,B,\alpha,\beta>0.
+ \label{eq:q2-classic}
+\end{equation}
+其中 $E$ 表示规模继续增大时的渐近项，两个幂律项分别描述参数量与训练量带来的 Loss 变化。为避免某一参数规模的密集检查点主导拟合，对 B1 的八个模型规模组赋予相同总权重，以对数 Loss 残差的 Huber\cite{huber2020} 损失估计参数，并在正参数约束下采用多起点搜索。所得结果为
+\begin{equation}
+ L_0(N,D)=1.689838+0.353969N^{-0.339985}
+              +1.240275D^{-0.279892}.
+ \label{eq:q2-classic-fit}
+\end{equation}
+两个指数均为正，因此在模型考察范围内，增加 $N$ 或 $D$ 都会降低预测 Loss。
+
+B1 全样本 RMSE 为 $1.466\times10^{-4}$；按模型规模留一组检验的平均 RMSE 为 $1.461\times10^{-4}$，各规模组最后 30\% 训练阶段留出的 RMSE 为 $1.160\times10^{-4}$。作为形式对照，直接对 $\ln N$ 和 $\ln D$ 作线性回归的全样本 RMSE 为 0.1030，明显高于双幂律。图\ref{fig:q2-baseline}展示了拟合值与记录值的关系。上述低误差说明式\eqref{eq:q2-classic-fit}对附件 B1 的同源训练轨迹具有较好的拟合一致性；这些检验不能直接证明它对现实大模型或其他训练系统具有同等预测精度。图\ref{fig:q2-scale-surface}进一步给出其在主要取值范围内的 Loss 曲面：当其中一项资源已经较大时，继续增加该项资源所带来的下降逐渐变缓。
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.90\linewidth]{figures/Q2/01_baseline.pdf}
+ \caption{经典标度律对 B1 同源训练记录的拟合值与残差}
+ \label{fig:q2-baseline}
+\end{figure}
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.88\linewidth]{figures/Q2/02_scale_surface.pdf}
+ \caption{经典标度律在模型参数量与训练量范围内的预测 Loss 曲面}
+ \label{fig:q2-scale-surface}
+\end{figure}
+
+\subsubsection{规模关系的跨数据检验}
+
+将式\eqref{eq:q2-classic-fit}用于 B3 的八条 Pythia 插值轨迹和 B2 的七条 Cerebras 半合成轨迹，按各轨迹自身尺度计算的平均归一化 RMSE 分别为 0.001892 和 0.004370；相应的配对排序一致率为 0.9991 和 0.9855。B4 与 B5 主要用于检查方向一致性：在共同规模范围内可比较的同族规模配对分别有 12 对和 7 对，Loss 下降方向全部一致。现有结果支持 Loss 随规模变化的趋势一致性，但不足以证明当前五参数模型优于其他单调模型。各来源的验证语料和 Loss 口径未统一，跨来源结果不用于声称模型的数值泛化精度。
+
+\subsection{数据质量与领域配比的融合}
+
+\subsubsection{质量项的估计}
+
+B7 提供了具有质量评分 $Q_B$ 的半合成实验。在相同 $(N,D)$ 组合下检查质量与 Loss 的关系时，单一固定质量斜率难以描述全部规模水平，组级误差约为 0.1078。为使质量效应随规模改变，并保持 B1 的规模参数不变，本文在式\eqref{eq:q2-classic-fit}上添加质量项：
+\begin{align}
+ L_B(N,D,Q_B)&=L_0(N,D)+(1-Q_B)G(N,D),\label{eq:q2-quality}\\
+ G(N,D)&=G_0+G_N\ln N+G_D\ln(D/100).\label{eq:q2-gain}
+\end{align}
+为使广义标度律在参考质量状态下退化为经典标度律，本文将 $Q_B=1$ 设为建模参考坐标：此时质量项为零。它是质量尺度约定，不是 B1 数据证明的最高或完美质量状态。$G(N,D)$ 允许质量效应随规模和训练量变化。固定 B1 的五个参数，仅用 B7 估计得到
+\begin{equation}
+ G(N,D)=0.371703-0.061115\ln N-0.014961\ln(D/100).
+ \label{eq:q2-gain-fit}
+\end{equation}
+在 B7 考察的矩形范围内，$G(N,D)$ 的最小值为 0.193184，故提高 $Q_B$ 对应预测 Loss 下降。B7 的 450 条数据并非独立的大模型训练实测，式\eqref{eq:q2-gain-fit}描述的是该半合成数据所体现的质量变化规律。
+
+为检验质量项，分别留出一个 $N$、$D$ 或 $Q_B$ 水平，重新选择正则强度并估计参数。24 个外层折的平均 RMSE 依次为 0.048738、0.048751、0.048639，三种留出方式得到相近结果，见图\ref{fig:q2-quality-validation}。表\ref{tab:q2-quality-models}将三参数质量扩展与在 B7 上联合估计全部八个参数的方案并列展示。后者训练误差略小，但留出水平上的误差较大；固定 B1 主干也使两组数据各自承担的估计任务更清楚。两种方案的留出选参流程不同，表中比较用于判断模型复杂度与误差的取舍。
+
+\begin{table}[htbp]
+ \centering\small
+ \caption{B7 半合成数据中两种质量扩展方式的预测误差（RMSE）}
+ \label{tab:q2-quality-models}
+ \begin{tabular}{lrrrr}
+ \toprule
+ 模型 & 训练样本 & 留 $N$ 水平 & 留 $D$ 水平 & 留 $Q_B$ 水平\\
+ \midrule
+ 固定 B1，仅估计三项质量参数 & 0.048540 & 0.048738 & 0.048751 & 0.048639\\
+ B7 联合估计八项参数 & 0.048410 & 0.049764 & 0.049008 & 0.049352\\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.88\linewidth]{figures/Q2/03_quality_validation.pdf}
+ \caption{B7 半合成数据中按规模、训练量和质量水平留出的预测误差}
+ \label{fig:q2-quality-validation}
+\end{figure}
+
+\subsubsection{质量评分与配比效应的连接}
+
+第一问给出的来源域质量评分记为 $q_{A,j}$，17 个训练域的配比为 $\boldsymbol p=(p_1,\ldots,p_{17})^\mathsf T$。根据 A16 的参考映射，取具有直接映射或近似直接映射的六个训练域组成集合 $\mathcal M$，并按其在配比中的份额计算平均质量：
+\begin{equation}
+ Q_A(\boldsymbol p)=
+ \frac{\sum_{j\in\mathcal M}p_jq_{A,j}}
+      {\sum_{j\in\mathcal M}p_j},
+ \qquad \sum_{j\in\mathcal M}p_j>0.
+ \label{eq:q2-qa}
+\end{equation}
+没有对应质量评分的训练域不补造数值。由于 $Q_A$ 与 B7 的 $Q_B$ 采用不同尺度，以六个可映射领域评分的最小值 $q_{\min}$ 和最大值 $q_{\max}$ 定义保序映射
+\begin{equation}
+ q(\boldsymbol p)=\Pi_{[0.1,1]}\!\left[
+ 0.1+0.9\frac{Q_A(\boldsymbol p)-q_{\min}}
+ {q_{\max}-q_{\min}}\right],
+ \label{eq:q2-quality-map}
+\end{equation}
+其中 $\Pi_{[0.1,1]}$ 表示将数值限制在 B7 的质量范围内。$Q_A(\boldsymbol p)\mapsto q(\boldsymbol p)$ 是跨附件的条件代理映射，只保留第一问评分的相对次序，并非由 A/B 成对实验标定的真实质量转换。参考配比对应 $Q_A=0.783104$、$q=0.435406$；映射斜率将在后文作敏感性分析。
+
+记第一问对第 $k$ 个验证域的配比预测为 $\widehat L_{A,k}(\boldsymbol p)$，以 A4 的平均配比 $\boldsymbol p_{\mathrm{ref}}$ 为参照，构造相对变化
+\begin{equation}
+ r_k(\boldsymbol p)=
+ \frac{\widehat L_{A,k}(\boldsymbol p)
+       -\widehat L_{A,k}(\boldsymbol p_{\mathrm{ref}})}
+      {\widehat L_{A,k}(\boldsymbol p_{\mathrm{ref}})},
+ \qquad
+ r_{\boldsymbol w}(\boldsymbol p)=\sum_{k=1}^{13}w_kr_k(\boldsymbol p),
+ \quad \sum_{k=1}^{13}w_k=1,\ w_k\geqslant0.
+ \label{eq:q2-mixture-effect}
+\end{equation}
+权重 $w_k$ 表示对 13 个验证域的重视程度，主结果取等权。$r_{\boldsymbol w}(\boldsymbol p_{\mathrm{ref}})=0$，因此参考配比为跨来源连接提供了明确的零变化点。将该相对效应转成乘性修正仍需下文的条件代理假设。
+
+\subsubsection{广义标度律}
+
+将规模、质量和配比三部分结合，得到本问的广义标度律：
+\begin{equation}
+ \boxed{\widehat L(N,D,q,\boldsymbol p;\boldsymbol w)
+ =\left[L_0(N,D)+(1-q)G(N,D)\right]
+       \exp\!\bigl\{r_{\boldsymbol w}(\boldsymbol p)\bigr\}.}
+ \label{eq:q2-general}
+\end{equation}
+在依据第一问质量评分的主情景中，$q=q(\boldsymbol p)$，质量随配比共同变化；讨论额外改善数据质量时，则固定配比，把 $q$ 作为单独变化的质量坐标。指数形式使配比修正为正，并使参考配比的修正系数等于 1。$q=1$ 是与 $Q_B=1$ 对应的建模参考坐标；若同时取参考配比，式\eqref{eq:q2-general}按构造退化为式\eqref{eq:q2-classic}，不表示数据证明了完美质量状态。
+
+式\eqref{eq:q2-quality-map}的 $Q_A\mapsto q$ 与式\eqref{eq:q2-general}的 $r_{\boldsymbol w}(\boldsymbol p)\mapsto\exp\{r_{\boldsymbol w}(\boldsymbol p)\}$ 均为连接不同附件的条件代理映射。它们是可由未来 A/B 成对训练实验检验的假设，而非已由当前数据直接识别的因果关系。两项均受配比影响，质量效应与配比效应可能重叠，故不能把两项修正直接解释为互不重叠的贡献；后文仅在给定映射假设下讨论预测值和局部变化。
+
+模型在共同数据范围内考察 $N\in[0.070542,11.965825]$、$D\in[10,299.893]$、$q\in[0.1,1]$，配比取 A4 原始配方或其凸包内的可行点。B7 中有 240 条记录的 $N$ 或 $D$ 位于 B1 的范围之外；它们参与质量项估计，但最终预测采用两组数据的共同范围。以 $N=1$、$D=100$、13 个验证域等权为例，在满足直接及近似直接映射质量条件的 108 个原始配方中，配方 172 的 $Q_A=1.675449$、$q=0.671361$，条件预测 Loss 为 2.344348。该数值仅展示给定代理映射假设时四类因素如何进入同一计算框架。
+
+\subsection{边际效用与弹性}
+
+为比较四类因素的局部作用，设 $L_{\rm adj}=L_0+(1-q)G$、$K_{\rm mix}=\exp\{r_{\boldsymbol w}(\boldsymbol p)\}$。固定配比和质量坐标时，式\eqref{eq:q2-general}对规模、训练量与质量的偏导数为
+\begin{align}
+ \frac{\partial\widehat L}{\partial N}
+ &=K_{\rm mix}\left[-\alpha AN^{-\alpha-1}
+             +(1-q)\frac{G_N}{N}\right],\label{eq:q2-marginal-n}\\
+ \frac{\partial\widehat L}{\partial D}
+ &=K_{\rm mix}\left[-\beta BD^{-\beta-1}
+             +(1-q)\frac{G_D}{D}\right],\label{eq:q2-marginal-d}\\
+ \frac{\partial\widehat L}{\partial q}&=-K_{\rm mix}G(N,D).\label{eq:q2-marginal-q}
+\end{align}
+若质量由配比决定，则沿第 $j$ 个训练域的份额方向还有
+\begin{equation}
+ \frac{\partial\widehat L}{\partial p_j}
+ =K_{\rm mix}\left[L_{\rm adj}\frac{\partial r_{\boldsymbol w}}{\partial p_j}
+       -G\frac{\partial q}{\partial p_j}\right].
+ \label{eq:q2-marginal-p}
+\end{equation}
+式\eqref{eq:q2-marginal-p}在给定代理映射下计入配比变化对质量坐标及验证域 Loss 的两条途径；由于两项可能重叠，该分解不等于独立的因果贡献。配比总和恒为 1，故后续分析采用一个领域增加、另一个领域减少的可行方向。
+
+定义 Loss 下降弹性 $\varepsilon_x=-x(\partial\widehat L/\partial x)/\widehat L$。它表示 $x$ 局部增加 1\% 时，Loss 约下降 $\varepsilon_x$\%。取上一节的配方 172、$D=100$、$q=0.671361$，结果见表\ref{tab:q2-elasticity}与图\ref{fig:q2-elasticity}。当 $N$ 从 0.1 增至 10 时，参数弹性由 0.0953 降至 0.0331，而质量弹性由 0.1157 降至 0.0683；同一配方下，参数量的相对边际收益随规模增加而减弱。
+
+\begin{table}[htbp]
+ \centering\small
+ \caption{固定配方、$D=100$ 时各因素的局部 Loss 下降弹性}
+ \label{tab:q2-elasticity}
+ \begin{tabular}{rrrrr}
+ \toprule
+ $N$（十亿参数） & 预测 Loss & $\varepsilon_N$ & $\varepsilon_D$ & $\varepsilon_q$\\
+ \midrule
+ 0.1 & 2.780596 & 0.095267 & 0.033814 & 0.115662\\
+ 1 & 2.344348 & 0.055998 & 0.040106 & 0.099511\\
+ 10 & 2.121466 & 0.033091 & 0.044320 & 0.068334\\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.86\linewidth]{figures/Q2/04_elasticities.pdf}
+ \caption{固定训练量和配比时参数量、训练量与质量的局部弹性}
+ \label{fig:q2-elasticity}
+\end{figure}
+
+弹性比较的是相同百分比变化，并未考虑资源成本。若提高参数量和质量的边际成本分别为 $C_N$、$C_q$，则同一位置每单位成本带来的 Loss 降低量分别为 $-\widehat L_N/C_N$ 与 $-\widehat L_q/C_q$。前者较大时增加参数量更合算，后者较大时改善质量更合算。这一判据为加入具体质量处理成本后的资源分配提供了直接依据。
+
+\subsection{质量提升与模型规模的替代}
+
+固定 $D$ 与配比，令质量坐标发生独立变化，并沿等 Loss 曲线对式\eqref{eq:q2-general}求微分，可得
+\begin{equation}
+ \frac{\mathrm dN}{\mathrm dq}
+ =-\frac{\widehat L_q}{\widehat L_N}.
+ \label{eq:q2-tradeoff}
+\end{equation}
+在所考察的范围内，$\widehat L_q$ 与 $\widehat L_N$ 均为负，因此 $\mathrm dN/\mathrm dq<0$：提高质量后，可以用较小的模型维持原有 Loss。对于有限增量 $\Delta q$，应分别求解“旧质量下扩模达到同样 Loss”和“提高质量后缩模维持原 Loss”两个方程：
+\begin{equation}
+ \begin{aligned}
+ \widehat L(N_{\mathrm{eq}},D,q,\boldsymbol p)
+   &=\widehat L(N,D,q+\Delta q,\boldsymbol p),\\
+ \widehat L(N_{\mathrm{new}},D,q+\Delta q,\boldsymbol p)
+   &=\widehat L(N,D,q,\boldsymbol p).
+ \end{aligned}
+ \label{eq:q2-finite-tradeoff}
+\end{equation}
+
+以配方 172、$D=100$、$N=1$、$q=0.671361$ 为例，若质量增加 0.10，旧质量下需将参数量增至 $1.317062$ 才能达到相同的预测 Loss；若保持原 Loss 不变，提高质量后参数量可降至 $0.766704$，减少约 23.3\%。质量仅增加 0.05 时，相应的等价扩模为 $1.144490$，维持原 Loss 的规模为 $0.875789$。图\ref{fig:q2-tradeoff}给出三个初始规模下的缩模比例，表明质量改善与参数扩张的替代幅度会随初始模型规模变化。若初始 $N=10$，质量增加 0.10 后，旧质量下的等价扩模已没有共同取值范围内的解，因此这种比较也受模型规模范围约束。
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.89\linewidth]{figures/Q2/05_quality_tradeoff.pdf}
+ \caption{固定训练量与配比时，质量提高后维持原 Loss 所需的模型规模变化}
+ \label{fig:q2-tradeoff}
+\end{figure}
+
+这一计算对应固定配比、独立改变质量坐标的模型情景，所得缩模比例是条件等 Loss 换算，不是实际训练实验测得的替代率。主模型中的 $q(\boldsymbol p)$ 则随配比确定；实际改变数据质量时，还须区分配比调整与额外数据处理。
+
+\subsection{训练领域的替代与互补}
+
+领域配比处于 $\sum_jp_j=1$ 的单纯形上，单独改变一个 $p_j$ 会破坏配比约束。若从训练域 $j$ 向域 $i$ 转移比例 $\epsilon$，即 $\boldsymbol p(\epsilon)=\boldsymbol p+\epsilon(\boldsymbol e_i-\boldsymbol e_j)$，则起点的 Loss 变化率为
+\begin{equation}
+ \left.\frac{\mathrm d\widehat L}{\mathrm d\epsilon}\right|_{\epsilon=0}
+ =\frac{\partial\widehat L}{\partial p_i}
+  -\frac{\partial\widehat L}{\partial p_j}.
+ \label{eq:q2-transfer}
+\end{equation}
+在 A4 的平均配比、$N=1$、$D=100$ 及验证域等权的条件下，计算了全部 $\binom{17}{2}=136$ 对领域的局部转移方向，并在 A4 配方凸包内确定可行转移范围。图\ref{fig:q2-transfers}显示，转移效果取决于份额来自哪个领域、流向哪个领域。例如从 FreeLaw 向 arXiv 转移时，起点导数为 $-0.444104$；从 Wikipedia 向 arXiv 转移时为 $-0.769184$，两者都对应起点附近的预测 Loss 下降，但下降幅度不同。
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.94\linewidth]{figures/Q2/07_local_transfers.pdf}
+ \caption{平均训练配比附近不同领域间可行转移的局部 Loss 变化方向}
+ \label{fig:q2-transfers}
+\end{figure}
+
+为比较两个领域联合增加的作用，固定 Pile-CC 作为份额来源，分别从中转出 $\delta$ 给领域 $i$、给领域 $j$，以及同时给两者。令 $\boldsymbol p_i=\boldsymbol p+\delta(\boldsymbol e_i-\boldsymbol e_k)$、$\boldsymbol p_j=\boldsymbol p+\delta(\boldsymbol e_j-\boldsymbol e_k)$、$\boldsymbol p_{ij}=\boldsymbol p+\delta(\boldsymbol e_i+\boldsymbol e_j-2\boldsymbol e_k)$，其中 $k$ 表示 Pile-CC。定义联合效应
+\begin{equation}
+ I_{ij\mid k}(\delta)
+ =\widehat L(\boldsymbol p_{ij})-\widehat L(\boldsymbol p_i)
+  -\widehat L(\boldsymbol p_j)+\widehat L(\boldsymbol p),
+ \label{eq:q2-pair-effect}
+\end{equation}
+此处省略固定的 $N,D$ 及验证域权重，计算时质量随配比按式\eqref{eq:q2-quality-map}更新。若 $I_{ij\mid k}<0$，联合增加两域比两次单独增加的 Loss 变化之和更有利，可称为该补偿方式下的互补；$I_{ij\mid k}>0$ 则表现为替代。
+
+取 $\delta=0.005$，Gutenberg 与 EuroParl 的联合效应为 $-1.844\times10^{-5}$，而 arXiv 与 FreeLaw 为 $+1.172\times10^{-5}$，分别呈现互补和替代。前一组在所检验的转移步长及映射强度变化下保持相同符号；后一组的判断会随配比影响强度而变化。这说明领域关系是相对于参考配比、转移方向和份额来源而言的，不能仅凭单个交互系数确定。
+
+\subsection{映射敏感性与结果讨论}
+
+跨来源融合中，条件代理映射的斜率会影响最终数值。固定配方 172、$N=1$、$D=100$，将式\eqref{eq:q2-quality-map}相对参考质量的斜率分别设为主方案的 0.5、1 和 1.5 倍，得到 $q=0.5534$、$0.6714$、$0.7893$，相应预测 Loss 为 2.3853、2.3443、2.3034，见图\ref{fig:q2-bridge}。在保持质量排序不变时，映射幅度仍明显影响条件预测 Loss。示例配方中可映射领域占比约为 58.1\%，其余领域仍通过第一问的相对配比效应进入模型；两项修正的重叠程度无法由现有附件直接分辨。
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.88\linewidth]{figures/Q2/06_bridge_sensitivity.pdf}
+ \caption{条件代理映射斜率变化对同一训练配方预测 Loss 的影响}
+ \label{fig:q2-bridge}
+\end{figure}
+
+B9 提供的大模型资料有助于确定外推所涉及的规模量级；B10 的 128 条 Loss 为估算值，其中模型参数量全部超过 B1 的最大值，约 79.7\% 的训练量也超过 B1 上界。虽然估算 Loss 与 B1 曲线的描述性 RMSE 约为 0.00110，两者数值接近仍主要反映估算表的构造关系。因此，B10 用于观察既有函数形式在较大规模下的变化；随着模型规模和数据分布改变，质量映射及配比效应仍需新的成对实验进一步校准。
+
+\subsection{本问结果与后续衔接}
+
+表\ref{tab:q2-output}汇总了本问形成的主要数学量。下一问可以在条件代理映射成立的前提下，将式\eqref{eq:q2-general}作为给定资源配置的预测 Loss 目标，再结合成本函数比较方案。使用时需同时指定质量变化方式、验证域权重与配比范围：主情景的质量由配比确定；额外提高质量的情景则需为固定配比下的质量变化另计成本。跨附件映射及质量、配比效应的重叠仍待成对训练实验检验。
+
+\begin{table}[htbp]
+ \centering\small
+ \caption{第二问的主要结果及资源配置中的用途}
+ \label{tab:q2-output}
+ \begin{tabular}{p{0.21\linewidth}p{0.34\linewidth}p{0.35\linewidth}}
+ \toprule
+ 数学量 & 估计或构造依据 & 后续用途\\
+ \midrule
+ $L_0(N,D)$ & B1 同源训练轨迹估计的五参数双幂律 & 计算附件支持范围内的基础 Loss\\
+ $G(N,D)$、$q$ & B7 半合成质量项及条件代理质量映射 & 在给定映射下比较质量投入\\
+ $r_{\boldsymbol w}(\boldsymbol p)$ & 第一问的 13 个验证域相对配比效应 & 在给定代理修正下比较配比\\
+ $\widehat L$ 及边际量 & 共同范围内的条件广义标度律与偏导数 & 结合算力成本比较模型情景\\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\subsection{本问小结}
+
+本问用 B1 同源训练轨迹估计 $N$--$D$ 双幂律，并以 B7 半合成数据估计质量项。第一问评分到质量坐标、相对配比效应到乘性修正的连接均是可检验的条件代理映射；质量与配比效应可能重叠。在这些假设及共同数据范围内，广义标度律给出局部变化、质量与规模的条件等 Loss 换算，以及领域转移和联合效应。B4/B5 支持下降方向一致性，尚不能区分五参数模型与其他单调模型；B1 的低 RMSE 也只表明同源轨迹的拟合一致性。上述条件结果为后续资源配置提供模型输入，仍需成对训练实验校准跨附件连接。

@@ -1,0 +1,338 @@
+% 本章对应赛题问题三。事实依据：仓库 main@f3a49d4 的 Q3 实现、实验与输出。
+% 图件由用户提供；N、D 均以十亿为单位。
+\setcounter{section}{5}
+\section{问题三：算力约束下的多维资源联合优化与结构性转移}
+\label{sec:q3}
+\setcounter{equation}{0}
+\setcounter{figure}{0}
+\setcounter{table}{0}
+
+\subsection{问题分析}
+
+在给定算力预算下，增加模型参数量、扩大训练数据量和提高数据质量都会改变验证集交叉熵损失（Loss）\cite{hoffmann2022training,fineweb2024}，同时占用不同的算力。训练领域配比还会改变数据的综合质量和目标域表现。因此，本问需要在同一成本约束下比较这些投入方式，并判断预算增加后最优配置是否发生改变。上下文长度由任务和模型架构决定，本文依据附件 C7 选取 $2048$、$8192$ 和 $131072$ Token 作为外生情景，分别求解资源配置。
+
+第二问已建立参数量 $N$、训练量 $D$、质量和配比到 Loss 的预测关系，可作为本问的目标函数。这里 $N$ 以十亿参数计，$D$ 以十亿 Token 计。第一问的配比观测来自附件 A4，第二问的规模与质量关系分别由 B1 的真实训练记录和 B7 的半合成记录估计。由于附件 A、B 没有同时观测四类因素及同一口径 Loss 的配对实验，本问采用第二问给出的跨来源连接方式，在明确的配比候选范围内求解，并以不同质量机制和假设情景考察结果变化。
+
+表\ref{tab:q3-data-roles}列出各组数据在本问中的作用。B1 与 B7 分别支持规模项和质量项的估计，C7 提供上下文长度的离散情景；附件 A 则提供实际观察过的配比及其相对表现。B7 与 B8 在部分相同坐标上的质量变化趋势不一致，因此本问沿用第二问基于 B7 建立的质量项，不将 B8 混入同一条质量曲线。
+
+\begin{table}[htbp]
+ \centering\small
+ \caption{问题三所用数据与模型输入的对应关系}
+ \label{tab:q3-data-roles}
+ \begin{tabular}{lp{4.0cm}p{6.1cm}}
+ \toprule
+ 来源 & 数据性质与规模 & 本问作用\\
+ \midrule
+ A1、A4、A5 & 质量信号；512 组 17 域配比与 13 个目标域 Loss & 形成配方候选、质量评分及相对配比效应\\
+ B1 & 1176 条真实训练记录 & 提供 $N,D$ 双幂标度关系\\
+ B7 & 450 条半合成质量记录 & 提供随规模变化的质量项与独立质量情景\\
+ C7 & 45 条模型架构元数据 & 选取外生上下文长度，不用于拟合连续注意力成本\\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\subsection{资源配置模型}
+
+\subsubsection{预测目标与决策变量}
+
+令 $\boldsymbol p=(p_1,\ldots,p_{17})$ 表示 17 个训练领域的配比，$\sum_i p_i=1$。沿用第二问式\eqref{eq:q2-general}，主方案的预测 Loss 写为
+\begin{equation}
+ \widehat L(N,D,\boldsymbol p)
+ =\left[L_0(N,D)+\{1-q(\boldsymbol p)\}G(N,D)\right]
+   \exp\{r_{\boldsymbol w}(\boldsymbol p)\},
+ \label{eq:q3-objective}
+\end{equation}
+其中 $L_0$ 为 B1 的双幂标度律，$G$ 为 B7 的规模相关质量项；$q(\boldsymbol p)$ 由第一问六个可映射领域的质量评分经式\eqref{eq:q2-quality-map}得到，$r_{\boldsymbol w}$ 是第一问 13 个目标域等权平均的相对配比效应。两项都随 $\boldsymbol p$ 改变，因此主方案中的质量不是独立于配比的另一项自由决策。预测采用第二问的共同取值范围
+\begin{equation}
+ N\in[0.070542,11.965825],\qquad
+ D\in[10,299.893],\qquad q\in[0.1,1].
+ \label{eq:q3-support}
+\end{equation}
+
+配比以 A4 的已观测方案为候选，避免在没有相应实验的连续配比空间中寻优。配方编号 172、477 均为 A4 的离散候选配方编号，并非第一问在凸包内求得的连续优化解；其完整 17 维向量见\ref{sec:appendix-q3-recipes}。第一问仅作边界诊断的无约束配方 136 在本问映射下有 $q\approx0.386$，低于设定的质量基线，不进入最终候选集。本文以满足直接及近似直接质量映射、且 $q(\boldsymbol p)\geq Q_0$ 的 87 个已观测配方组成集合 $\mathcal P$；配方 172 的 $q=0.671361$，作为固定配比对照。令 $Q_0=0.5$，这一基线是本问的情景设定。
+
+\subsubsection{训练、质量与长上下文成本}
+
+依据题面三项成本，将总预算记为 $C_{\max}$，上下文长度记为 $L_{\rm ctx}$。在上述十亿单位下，成本函数为
+\begin{align}
+ C_{\rm train}&=6\times10^{18}ND,\nonumber\\
+ C_{\rm quality}&=10^9D\,[g(q)-g(Q_0)]_+,\nonumber\\
+ C_{\rm attn}&=2\times10^{14}NDL_{\rm ctx},\nonumber\\
+ C_{\rm total}&=C_{\rm train}+C_{\rm quality}+C_{\rm attn}
+                  \leq C_{\max},
+ \label{eq:q3-cost}
+\end{align}
+其中 $[x]_+=\max\{x,0\}$ 表示正部函数，用于保证额外质量处理成本非负。
+训练与注意力成本随 $ND$ 增加，质量处理成本还取决于所选配方对应的质量水平。
+按照赛题给定的质量处理成本形式，本文分别比较指数型、幂函数型和对数型三种成本函数：
+\begin{equation}
+ \begin{aligned}
+ g_{\rm exp}(q)&=10^7e^{6q},\\
+ g_{\rm pow}(q)&=5\times10^9q^4,\\
+ g_{\rm log}(q)&=2\times10^9\ln(1+10q).
+ \end{aligned}
+ \label{eq:q3-cost-families}
+\end{equation}
+式\eqref{eq:q3-cost-families}中的 $g$ 表示质量处理的算力成本，与第二问的质量评分映射 $q(\boldsymbol p)$ 含义不同。
+
+综上，对每一组预算、上下文和质量成本形式，求解
+\begin{equation}
+ \begin{aligned}
+ \min_{N,D,\boldsymbol p}\quad &\widehat L(N,D,\boldsymbol p),\\
+ \text{s.t.}\quad &C_{\rm total}(N,D,q(\boldsymbol p);L_{\rm ctx})\leq C_{\max},\\
+ &\boldsymbol p\in\mathcal P,\quad q(\boldsymbol p)\geq Q_0,\\
+ &(N,D,q)\text{ 满足式\eqref{eq:q3-support}}.
+ \end{aligned}
+ \label{eq:q3-program}
+\end{equation}
+本文主要考察 $10^{19}$、$10^{22}$、$10^{24}$ FLOPs 三档预算，并增加 $10^{20}$ FLOPs 用于观察过渡过程。
+
+\subsection{模型求解与结构转移识别}
+
+固定一个配方后，$q$ 与配比修正项均为常数。记
+$c(L_{\rm ctx})=6\times10^{18}+2\times10^{14}L_{\rm ctx}$，
+$h(q)=10^9[g(q)-g(Q_0)]_+$，成本约束化为
+$D\{c(L_{\rm ctx})N+h(q)\}\leq C_{\max}$。
+在式\eqref{eq:q3-support}范围内，第二问拟合的 $A,B,\alpha,\beta$ 均为正，且 $G(N,D)>0$。固定配方后，记 $K=\exp\{r_{\boldsymbol w}(\boldsymbol p)\}>0$，由式\eqref{eq:q2-classic-fit}、\eqref{eq:q2-gain-fit}可得
+\begin{align}
+ \frac{1}{K}\frac{\partial\widehat L}{\partial N}
+ &=-A\alpha N^{-\alpha-1}-\frac{(1-q)0.061115}{N}<0,\nonumber\\
+ \frac{1}{K}\frac{\partial\widehat L}{\partial D}
+ &=-B\beta D^{-\beta-1}-\frac{(1-q)0.014961}{D}<0.
+ \label{eq:q3-monotonicity}
+\end{align}
+因此给定 $N$ 时应取预算和训练量上界允许的最大 $D$：
+\begin{equation}
+ D^*(N)=\min\!\left\{D_{\max},
+ \frac{C_{\max}}{c(L_{\rm ctx})N+h(q)}\right\},\qquad
+ C_{\min}=D_{\min}\{c(L_{\rm ctx})N_{\min}+h(q)\}.
+ \label{eq:q3-reduction}
+\end{equation}
+若 $C_{\max}<C_{\min}$，该配方在给定情景下不可行。否则令 $x=\ln N$，只需搜索
+$x\in[\ln N_{\min},\,\ln\min\{N_{\max},(C_{\max}/D_{\min}-h)/c\}]$；
+$D^*(N)$ 在 $N=(C_{\max}/D_{\max}-h)/c$（若该点落入可行区间）处由 $D_{\max}$ 分支转为预算约束分支。前一分支的目标关于 $x$ 的二阶导数为 $KA\alpha^2e^{-\alpha x}>0$。后一分支令 $y=\ln D^*(e^x)$、$t=ce^x/(ce^x+h)$，则 $y'=-t$、$y''=-t(1-t)$，从而
+\begin{equation}
+ \frac{1}{K}\frac{\mathrm d^2\widehat L}{\mathrm dx^2}
+ =A\alpha^2e^{-\alpha x}
+ +B\beta^2e^{-\beta y}t^2
+ +\left[B\beta e^{-\beta y}+(1-q)0.014961\right]t(1-t)>0.
+ \label{eq:q3-piecewise-convexity}
+\end{equation}
+这里 $c,h\geq0$ 且 $0<t\leq1$，所以每段严格凸。分别检查可行区间端点、分段交界点，并在各段导数异号时二分求零点；导数同号的段由端点给出最小值。导数二分以 $\ln N$ 括区宽度不超过 $10^{-6}$ 为终止准则，预算状态转移的二分则在预算括区相对宽度不超过 $10^{-4}$ 时停止；最终比较各段候选的原始目标值。对 $\mathcal P$ 中每个可行配方重复求解，选择预测 Loss 最小者。这样得到的是 87 个已观测候选中的最优配置。
+
+这一降维过程还便于解释资源取舍。固定配方且质量高于基线时，三种连续变量的边际成本分别为
+\begin{equation}
+ \frac{\partial C}{\partial N}=c(L_{\rm ctx})D,\qquad
+ \frac{\partial C}{\partial D}=c(L_{\rm ctx})N+h(q),\qquad
+ \frac{\partial C}{\partial q}=10^9Dg'(q).
+ \label{eq:q3-marginal-cost}
+\end{equation}
+当预算约束起作用且变量处于内部时，单位算力带来的 Loss 下降可由 $-\partial\widehat L/\partial x$ 与相应边际成本之比比较\cite{wright2022}。主方案中 $q=q(\boldsymbol p)$，改变一个领域占比会同时改变质量项与配比项，因此实际求解仍以完整式\eqref{eq:q3-objective}逐配方比较。对于固定配方、可独立提高 $Q_B$ 的方案，则在式\eqref{eq:q3-reduction}的基础上对 $Q_B\in[Q_0,1]$ 逐段求界并细化，每个质量区间的候选点均按上述方法优化 $N,D$，再比较区间端点和内部候选；质量区间宽度不超过 $10^{-4}$ 时停止细化，同时检查活跃约束与成本。这使独立质量方案与主方案采用各自一致的变量关系。
+
+为明确“结构性转移”，定义预算 $C$ 下的配置状态为
+\begin{equation}
+ \mathcal X(C)=\bigl(I_{\rm feasible}(C),\,j^*(C),\,
+ I_{N_{\min}},I_{N_{\max}},I_{D_{\min}},I_{D_{\max}},I_{\rm budget}\bigr),
+ \label{eq:q3-state}
+\end{equation}
+其中 $j^*$ 为最优已观测配方编号，各 $I$ 表示相应约束是否起作用。当可行性、配方或活跃约束改变时，认为资源配置发生结构性转移；单纯的成本占比连续变化不构成新的状态。对每种上下文和成本函数，在 $10^{19}$ 至 $10^{24}$ FLOPs 取 161 个对数等距预算点，随后对相邻异状态点二分定位。固定配方与配比联立的预算扫描共得到 82 个转移括区，其中前者 33 个、后者 49 个。
+
+\subsection{最优配置及成本影响}
+
+\subsubsection{三档预算下的资源选择}
+
+表\ref{tab:q3-config}给出幂函数质量成本下，三档预算与 C7 三种上下文组合的求解结果。低预算时短上下文选择配方 477，训练量处于下界；其主要非零领域份额为 arXiv 35.5\%、GitHub 21.2\%、HackerNews 11.9\%、PubMed Central 7.7\% 和 Pile-CC 5.7\%。中预算时配方转为 172，参数量与训练量同步增加；该配方主要由 Gutenberg 33.0\%、Wikipedia 17.5\%、EuroParl 10.8\%、Ubuntu IRC 9.3\% 和 DM Mathematics 6.7\% 组成。以上为 A4 原始舍入份额，模型计算时按附录\ref{sec:appendix-q3-recipes}归一化。最高预算已达到式\eqref{eq:q3-support}的 $N,D$ 上界，三种上下文因而得到相同的预测 Loss。图\ref{fig:q3-configuration}概括了这一变化。
+
+\begin{table}[htbp]
+ \centering\small
+ \caption{幂函数质量成本下的配比联立配置（$N,D$ 为十亿单位）}
+ \label{tab:q3-config}
+ \begin{tabular}{rrrrrrr}
+ \toprule
+ 预算/FLOPs & 上下文/Token & 配方 & $N$ & $D$ & $q$ & 预测 Loss\\
+ \midrule
+ $10^{19}$ & 2048 & 477 & 0.104 & 10.000 & 0.600 & 3.1551\\
+ $10^{19}$ & 8192 & 477 & 0.087 & 10.000 & 0.600 & 3.2038\\
+ $10^{19}$ & 131072 & \multicolumn{5}{c}{共同取值范围内不可行}\\
+ $10^{22}$ & 2048 & 172 & 7.291 & 210.799 & 0.671 & 2.0809\\
+ $10^{22}$ & 8192 & 172 & 6.661 & 193.874 & 0.671 & 2.0944\\
+ $10^{22}$ & 131072 & 172 & 3.214 & 95.943 & 0.671 & 2.2179\\
+ $10^{24}$ & 2048 & 172 & 11.966 & 299.893 & 0.671 & 2.0195\\
+ $10^{24}$ & 8192 & 172 & 11.966 & 299.893 & 0.671 & 2.0195\\
+ $10^{24}$ & 131072 & 172 & 11.966 & 299.893 & 0.671 & 2.0195\\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.86\linewidth]{figures/Q3/01_configuration.pdf}
+ \caption{三档预算与三种上下文下的配比联立配置}
+ \label{fig:q3-configuration}
+\end{figure}
+
+固定配方 172 的 36 个预算、上下文和成本函数组合中有 30 个可行；允许在 87 个配方中选择后，可行组合增至 33 个。这说明配比调整在低预算下不仅改变 Loss，也能够通过改变质量成本使某些配置进入可行范围。在 8192 Token、幂成本下，最优配方于 $[1.610535,1.610648]\times10^{19}$ FLOPs 内由 477 切换为 172，见图\ref{fig:q3-switch}。低预算阶段，质量成本较低的配方有利于满足预算；预算放宽后，配方 172 的综合预测表现占优。
+
+预算扫描的分辨率会影响短暂状态的识别。将每组扫描由 81 点加密至 161 点后，131072 Token 情景在可行性边缘出现若干短暂配方状态；粗网格会漏过它们。故本文以加密扫描及二分得到的预算区间报告转移位置，不将图\ref{fig:q3-switch}中的切换推广为所有上下文下的唯一转移。
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.84\linewidth]{figures/Q3/03_recipe_switch.pdf}
+ \caption{8192 Token、幂函数成本下最优配方的预算切换}
+ \label{fig:q3-switch}
+\end{figure}
+
+\subsubsection{质量成本形式与预算分解}
+
+质量成本函数改变了低预算时各配方的相对代价。8192 Token、$10^{19}$ FLOPs 下，指数成本选配方 172，预测 Loss 为 3.12884；幂函数和对数成本均选配方 477，Loss 分别为 3.20379 和 3.19274。到 $10^{22}$ FLOPs，三种函数均选配方 172，Loss 依次为 2.09389、2.09442 和 2.09411。图\ref{fig:q3-families}以各预算自身的局部坐标显示这一差异。可见成本形式主要影响低预算的配方选择；在中预算时，方案趋于一致。
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.84\linewidth]{figures/Q3/05_cost_families.pdf}
+ \caption{不同质量成本函数对低、中预算配置的影响}
+ \label{fig:q3-families}
+\end{figure}
+
+图\ref{fig:q3-cost-allocation}将预算分为基础训练、注意力、质量处理和未使用部分。$10^{19}$ 与 $10^{22}$ FLOPs 的可行最优配置基本用满预算，而 $10^{24}$ FLOPs 时，幂成本下三个上下文的使用率分别为 2.32\%、2.76\% 和 11.58\%。在当前模型支持范围、$N,D$ 上下界及离散候选配方约束下，最优解触及支持边界，因此预算未完全使用；这一结果不能外推为现实中继续投入算力没有收益。
+
+表\ref{tab:q3-cost-shares}从中选取 8192 Token 的三档预算，列出与表\ref{tab:q3-config}对应的成本分解。低预算中质量处理占 33.3\%，中预算降至 1.4\%，基础训练和注意力开销成为主要部分；高预算的未使用比例达到 97.2\%，与变量触及支持上界相一致。表中各项均以对应预算为分母，便于直接比较资源去向。
+
+\begin{table}[htbp]
+ \centering\small
+ \caption{8192 Token、幂函数成本下的预算分解（占预算的百分比）}
+ \label{tab:q3-cost-shares}
+ \begin{tabular}{rrrrr}
+ \toprule
+ 预算/FLOPs & 基础训练 & 注意力 & 质量处理 & 未使用\\
+ \midrule
+ $10^{19}$ & 52.36\% & 14.30\% & 33.34\% & 0.00\%\\
+ $10^{22}$ & 77.48\% & 21.16\% & 1.36\% & 0.00\%\\
+ $10^{24}$ & 2.15\% & 0.59\% & 0.02\% & 97.24\%\\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.86\linewidth]{figures/Q3/04_cost_allocation.pdf}
+ \caption{幂函数质量成本下三项开销及未使用预算的比例}
+ \label{fig:q3-cost-allocation}
+\end{figure}
+
+\subsection{上下文长度与独立质量投入}
+
+\subsubsection{长上下文的临界长度}
+
+由式\eqref{eq:q3-cost}可直接得到
+\begin{equation}
+ \frac{C_{\rm attn}}{C_{\rm train}}
+ =\frac{2\times10^{14}L_{\rm ctx}}{6\times10^{18}}
+ =\frac{L_{\rm ctx}}{30000},\qquad
+ L_{\rm ctx}^{\rm crit}=30000\ \text{Token}.
+ \label{eq:q3-context-critical}
+\end{equation}
+因此，C7 的 2048、8192、131072 Token 三种情景下，注意力与基础训练成本之比分别为 0.0683、0.2731 和 4.3691。图\ref{fig:q3-context}给出了代数关系。在中预算、幂成本下，将上下文由 2048 延长至 131072 Token，最优 $N$ 从 7.291 降至 3.214，$D$ 从 210.799 降至 95.943，预测 Loss 从 2.0809 升至 2.2179。长上下文直接挤占可分配给规模与训练量的预算\cite{flashattention2022}；低预算的最长上下文则在共同取值范围内不可行。临界长度描述两项成本相等的位置，131072 Token 情景在 C7 中的观测支持较稀疏。
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.84\linewidth]{figures/Q3/06_context_cost.pdf}
+ \caption{上下文长度与注意力成本相对基础训练成本的关系}
+ \label{fig:q3-context}
+\end{figure}
+
+\subsubsection{固定配比下的独立质量选择}
+
+主模型通过改变配比影响质量。为考察另一种投入方式，再固定配方 172，把 B7 中的质量坐标 $Q_B\in[Q_0,1]$ 作为可独立提高的变量，以式\eqref{eq:q3-cost}计入相应成本。此时目标为 $[L_0(N,D)+(1-Q_B)G(N,D)]\exp\{r_{\boldsymbol w}(\boldsymbol p_{172})\}$，联合选择 $N,D,Q_B$。在 8192 Token、幂成本下，结果如表\ref{tab:q3-independent}及图\ref{fig:q3-independent}所示。
+
+\begin{table}[htbp]
+ \centering\small
+ \caption{固定配方 172、独立提高质量时的配置（8192 Token，幂成本）}
+ \label{tab:q3-independent}
+ \begin{tabular}{rrrrrl}
+ \toprule
+ 预算/FLOPs & $N$ & $D$ & $Q_B$ & 预测 Loss & 主要配置特征\\
+ \midrule
+ $10^{19}$ & 0.1309 & 10.000 & 0.500 & 3.0969 & 质量处于基线\\
+ $10^{20}$ & 0.7628 & 10.000 & 0.973 & 2.5618 & 训练量仍在下界\\
+ $10^{22}$ & 5.2587 & 222.936 & 1.000 & 2.0232 & 质量达到上界\\
+ $10^{24}$ & 11.9658 & 299.893 & 1.000 & 1.9570 & 三项达到上界\\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+低预算下先满足最低训练量，质量保持在 $Q_0$；预算升至 $10^{20}$ FLOPs 时，质量提高而训练量仍为 10；中预算时，质量达到上界且训练量显著增加。这展示了允许独立质量处理后，不同资源进入最优配置的先后次序。该方案以质量处理能够改变 B7 质量坐标为前提，与主方案的“配比决定质量”构成两种不同资源机制下的条件情景。两者尚未由同一四变量干预实验统一标定，因此表中 Loss 的差值不能解释为现实中质量处理的净收益。
+
+进一步扫描独立质量方案的预算，得到两个约束状态的转换区间：
+\begin{align}
+ Q_B\text{ 离开基线：}\quad
+ C&\in[1.228876,1.228962]\times10^{19}\ \text{FLOPs},\nonumber\\
+ Q_B\text{ 接近上界：}\quad
+ C&\in[1.085995,1.086071]\times10^{20}\ \text{FLOPs}.
+ \label{eq:q3-native-transitions}
+\end{align}
+这两个区间解释了表\ref{tab:q3-independent}中质量先保持基线、再快速增加、最终达到上界的过程。将求解精度提高一个数量级后，区间两侧的质量状态保持一致；区间位置仍由 B7 的半合成质量关系和所选成本函数决定。
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.86\linewidth]{figures/Q3/08_independent_quality.pdf}
+ \caption{配比决定质量与固定配比下独立质量投入的配置轨迹}
+ \label{fig:q3-independent}
+\end{figure}
+
+\subsection{假设敏感性与模型检验}
+
+\subsubsection{配方选择的敏感性}
+
+第一问质量评分与 B7 质量坐标的连接、基线质量及配比效应幅度都会影响成本和预测 Loss。为检验选择的稳定性，分别改变 $Q_0$、质量映射斜率倍数 $s$ 和配比效应倍数 $\lambda$，其余条件保持主情景。图\ref{fig:q3-assumptions}汇总九种单因素情景在三档预算、三种上下文和三类成本函数组成的 27 个格上的结果。
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.86\linewidth]{figures/Q3/07_assumptions.pdf}
+ \caption{质量基线、评分映射与配比效应变化对最优配方的影响}
+ \label{fig:q3-assumptions}
+\end{figure}
+
+各情景均有 24 个格可行，但低预算配方对假设较敏感。主情景在 8192 Token、幂成本下选 477；当 $Q_0=0.60$ 时，由于配方 477 的质量约为 0.599515，方案改为 475；$Q_0=0.65$ 时改为 172。将配比效应设为零，即 $\lambda=0$，27 格中的 24 个可行格均改变所选配方。这表明预算及成本约束决定可行范围，而配比效应的设定对配方排序具有较大影响。
+
+配方切换的预算位置也随假设改变：$Q_0=0.55$ 时，上述 8192 Token、幂成本下的 $477\to172$ 切换提前至约 $[1.46552,1.46560]\times10^{19}$ FLOPs；将配比效应倍数设为 $\lambda=2$ 时，进一步提前至约 $[1.28214,1.28221]\times10^{19}$ FLOPs。质量映射斜率增至 1.5 倍时，低预算先选择 97，再经历 97、477、172 的连续切换。由此可见，中预算配方在多数情景下相对稳定，低预算的配方编号与切换点则需要随质量映射假设一同报告。
+
+\subsubsection{数值求解的复算}
+
+对固定配方、配比联立和独立质量三种方案，分别在 36 个预算、上下文和成本函数组合上独立复算。三组可行状态数为 30、33、33；复算所得的可行性与配方选择均一致，预测 Loss 的最大差低于 $10^{-12}$。这支持了降维求解与独立质量搜索的数值一致性。
+
+\subsubsection{外部实验的排序检验}
+
+进一步利用公开的 OpenLM 训练记录\cite{gadre2024}检验规模项的排序能力。104 个实际训练模型中，42 个落在本问 $N,D$ 的共同范围内；按 C4、RedPajama 和 RefinedWeb 三种训练语料\cite{c42020,redpajama2024,refinedweb2023}各取 14 个，用同一 Paloma C4 验证集\cite{paloma2024}的观测 Loss 比较 B1 规模模型的预测排序。图\ref{fig:q3-external}中，三个语料组的 Spearman 相关系数依次为 0.9736、0.9868 和 0.9736。在使预算真正筛除部分候选的 6 组离散选择中，按规模模型选出的方案有 5 组与最低观测 Loss 一致；RefinedWeb 的 $10^{21}$ FLOPs 组未命中，观测 Loss 差为 0.0705。
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.86\linewidth]{figures/Q3/09_external_ranks.pdf}
+ \caption{公开训练模型中参数量与训练量预测排序的外部检验}
+ \label{fig:q3-external}
+\end{figure}
+
+这一检验表明 $N,D$ 规模关系在独立训练记录中保持了较好的相对排序，也揭示了个别预算组的选择偏差。公开记录没有与本问 17 域配比及质量评分相对应的观测量，因此配方及独立质量投入的数值仍应结合新的联合训练实验进一步校准。
+
+\clearpage
+\subsection{本问输出与后续衔接}
+
+表\ref{tab:q3-output}汇总本问向后续能力分析提供的三类配置。每一行方案均包含预算、上下文、成本形式、可行状态、所选 $N,D$、配方或质量坐标、三项成本及预测 Loss。固定配方与配比联立使用由配比决定的 $q(\boldsymbol p)$；独立质量方案使用 B7 的 $Q_B$，两者是不同资源机制下的条件情景，其 Loss 差值不代表已实证识别的质量投入净收益。问题四若将这些配置与能力指标联系，还需处理不同验证 Loss 与评测分数之间的映射；本问的预算解本身提供的是资源配置和相应的条件 Loss。
+
+\begin{table}[htbp]
+ \centering\small
+ \caption{问题三的配置结果及其后续用途}
+ \label{tab:q3-output}
+ \begin{tabular}{lp{4.0cm}cp{5.0cm}}
+ \toprule
+ 方案 & 决策变量 & 可行格数 & 输出含义\\
+ \midrule
+ 固定配方 172 & $N,D$；$q(\boldsymbol p_{172})$ 固定 & 30/36 & 比较预算、上下文与成本形式的规模选择\\
+ 已观测配方联立 & $N,D,\boldsymbol p\in\mathcal P$；$q$ 随配比变化 & 33/36 & 给出 87 个候选中的配方与规模配置\\
+ 独立质量投入 & $N,D,Q_B$；配方 172 固定 & 33/36 & 比较单独提高质量时的资源分配次序\\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\subsection{本问小结}
+
+本问将第二问的广义标度律与训练、质量处理和长上下文三项成本结合，在三个数量级的算力预算下求得配比、模型规模和训练量的配置。幂成本主情景显示：低预算选择配方 477 并维持最低训练量；中预算转向配方 172，同时扩展 $N,D$；高预算达到现有数据的共同支持上界。质量成本形式影响低预算的配方选择；上下文达到 30000 Token 时，注意力成本与基础训练成本相当。独立质量投入方案还揭示了从质量基线到质量上界的两个预算转移。重复求解、假设敏感性和公开模型的排序检验共同说明了数值配置的稳定部分与对跨来源假设较敏感的部分，为后续能力分析提供了带有明确变量口径的资源方案。
