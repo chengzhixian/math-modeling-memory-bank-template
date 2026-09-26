@@ -12,7 +12,7 @@ from q1_quality_analysis import (QUALITY_FIELDS, add_quality_scores, apply_robus
 from q1_conflict_aware import ROOT, conflict_degree
 
 VERSION = "chm.q1.conflict_resolution.v1"
-OUT = ROOT / "outputs/chm/q1_conflict_resolution_v1"
+OUT = ROOT / "data/processed/Q1/conflict_resolution"
 
 
 def decide(q, d, q_cut, d_cut):
@@ -79,11 +79,11 @@ def content_fingerprints(path, selected):
 
 
 def main():
-    base = ROOT / "outputs/chm"
+    base = ROOT / "data/processed/Q1/quality"
     manifest = json.loads((base / "quality_analysis_manifest_v0.json").read_text(encoding="utf-8"))
     params = pd.read_csv(base / "quality_metric_preprocessing_v0.csv")[["metric", "median", "scale"]]
     orientation = pd.read_csv(base / "quality_orientation_primary_v1.csv")
-    edges = pd.read_csv(base / "conflict_aware_v1/conflict_graph.csv").query("stable_conflict == True")
+    edges = pd.read_csv(ROOT / "data/processed/Q1/conflict_aware/conflict_graph.csv").query("stable_conflict == True")
     if len(edges) != 55:
         raise ValueError("frozen conflict graph must have 55 edges")
     a1, a2, a3 = resolve_default_paths()
@@ -149,7 +149,7 @@ def main():
         selection_limit="A1 selected graph and A1 thresholds are descriptive; A2/A3 nonoverlap test is only for two domains",
         input_sha256={name: hashlib.sha256(path.read_bytes()).hexdigest() for name, path in {
             "A1": ROOT / a1,
-            "conflict_graph": base / "conflict_aware_v1/conflict_graph.csv",
+            "conflict_graph": ROOT / "data/processed/Q1/conflict_aware/conflict_graph.csv",
             "preprocessing": base / "quality_metric_preprocessing_v0.csv",
             "orientation": base / "quality_orientation_primary_v1.csv"}.items()})
     (OUT / "manifest.json").write_text(json.dumps(release, ensure_ascii=False, indent=2), encoding="utf-8")

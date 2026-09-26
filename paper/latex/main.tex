@@ -1,31 +1,30 @@
 % !TEX program = xelatex
-% Integration owner: zhh. Members edit only their own sections/* files.
-% Draft uses withoutpreface pending the 2026 official cover and anonymity rules.
+% Integrated four-question conditional answer. Submission cover rules require final human check.
 \documentclass[bwprint,withoutpreface]{gmcmthesis}
 \hypersetup{hidelinks}
 \usepackage{float}
 \usepackage{siunitx}
-\graphicspath{{figures/}{figures/Q1/}{figures/Q2/}{figures/Q3/}}
-\title{论文题目（待填写）}
+\graphicspath{{figures/}{figures/Q1/}{figures/Q2/}{figures/Q3/}{figures/Q4/}}
+\title{算力约束下提升大语言模型能力的资源配置建模}
 
 \begin{document}
 \maketitle
 \begin{abstract}
-\input{sections/zhh/abstract.tex}
-\keywords{关键词一\quad 关键词二\quad 关键词三}
+\input{sections/common/abstract.tex}
+\keywords{数据质量\quad 标度律\quad 资源配置\quad 条件预测}
 \end{abstract}
 \maketoc
 \clearpage
 
-\input{sections/zhh/problem_statement.tex}
-\input{sections/zhh/assumptions_symbols.tex}
+\input{sections/common/problem_statement.tex}
+\input{sections/common/assumptions_symbols.tex}
 \input{sections/Q1/main.tex}
 \input{sections/Q2/main.tex}
 \section{问题三}
 \input{sections/Q3/theory.tex}
 \input{sections/Q3/numerical.tex}
-\input{sections/zhh/q4.tex}
-\input{sections/zhh/discussion.tex}
+\input{sections/Q4/main.tex}
+\input{sections/common/discussion.tex}
 
 \bibliographystyle{gmcm}
 \bibliography{references}

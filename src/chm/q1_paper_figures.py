@@ -11,7 +11,7 @@ import pandas as pd
 
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "paper/sections/chm/figures"
+OUT = ROOT / "paper/latex/figures/Q1"
 BLUE, ORANGE, GREY = "#245A81", "#D47B3D", "#637381"
 
 
@@ -30,7 +30,7 @@ def style():
 
 
 def quality_figure():
-    data = pd.read_csv(ROOT / "outputs/chm/domain_quality_v0.csv")
+    data = pd.read_csv(ROOT / "data/processed/Q1/quality/domain_quality_v0.csv")
     data = data[data.dataset_scope.eq("sample")].sort_values("Q_z_median")
     y = np.arange(len(data))
     med = data.Q_z_median.to_numpy()
@@ -49,7 +49,7 @@ def quality_figure():
 
 
 def ablation_figure():
-    data = pd.read_csv(ROOT / "outputs/chm/ablation_v1/mixture_ablation_summary.csv")
+    data = pd.read_csv(ROOT / "data/processed/Q1/ablation_v1/mixture_ablation_summary.csv")
     labels = ["1M", "60M", "1B"]
     x = np.arange(3)
     improvement = 100 * (data.median_no_mixture_rmse - data.median_full_rmse) / data.median_no_mixture_rmse

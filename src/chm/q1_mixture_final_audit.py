@@ -16,8 +16,8 @@ from q1_regmix_domainwise import PAIR_FILES, RIDGE_GRID, SEED, metric_name, norm
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "data/raw/real_attachments/A_data_value/regmix_tables"
-OUT = ROOT / "outputs/chm/q1_mixture_final"
-COEF = ROOT / "outputs/chm/local_recheck_v1/mixture_effect_ridge_v0.csv"
+OUT = ROOT / "data/processed/Q1/mixture_final"
+COEF = ROOT / "data/processed/Q1/regmix/mixture_effect_ridge_v0.csv"
 
 
 def sha(path):

@@ -20,7 +20,7 @@ from q1_mixture_final_audit import read_pairs
 from q1_regmix_domainwise import RIDGE_GRID
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "outputs/chm/q1_nested_model_comparison_v1"
+OUT = ROOT / "data/processed/Q1/nested_model"
 
 
 def sha(path: Path) -> str:

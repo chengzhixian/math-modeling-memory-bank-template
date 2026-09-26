@@ -1,0 +1,56 @@
+{
+  "schema_version": "chm.q1.v2.0",
+  "producer": "chm",
+  "status": "USER_AUTHORIZED_PRIMARY_A_SIDE_MODEL",
+  "hash_mode": "sha256_utf8_lf",
+  "files": {
+    "model": {
+      "path": "outputs/chm/q1_v2/interaction_coefficients_13_targets.json",
+      "sha256": "92e2e64976b7618626ef5d07b253794f105b3b1beeaacc989f13045e6c422b04"
+    },
+    "features": {
+      "path": "outputs/chm/q1_v2/interaction_feature_definition.json",
+      "sha256": "b9cd7b0de3b1a424e9c43e0b50714ce0d3656f467e67480e4d9ee76f79fb21d5"
+    },
+    "recipes": {
+      "path": "outputs/chm/q1_v2/recipes_512.csv",
+      "sha256": "9744030382b8ac87fbd838a0b34580d0debff5ea3fb23f0b8846ca7c91f0742d"
+    },
+    "quality": {
+      "path": "outputs/chm/q1_v2/domain_quality.csv",
+      "sha256": "ab7f13f9d0ff3d0683152d53933a89337cc3fadfefa9b2383772ea9fe3c2d976"
+    },
+    "mapping": {
+      "path": "outputs/chm/q1_v2/domain_mapping.csv",
+      "sha256": "960ff8094339473b0fd72c774774dbba3cae438f3fcb5b0fb4fdc8bf9e20006a"
+    },
+    "validation": {
+      "path": "outputs/chm/q1_v2/targetwise_validation.csv",
+      "sha256": "4412c4302d4e850f85fdc84568261f02df2eedb5e329c915baf19f41d9f8d0ae"
+    },
+    "nested_cv": {
+      "path": "outputs/chm/q1_v2/targetwise_oof.csv",
+      "sha256": "c8e1076e644a3439cdd71909605e84678555f1e7f5927cdc3d327b5581101aa4"
+    },
+    "fold_stability": {
+      "path": "outputs/chm/q1_v2/interaction_fold_stability.csv",
+      "sha256": "a2eb9112ee4f1382eea73b9cd426fa43ef7bdf438596f982c4faec401b26450e"
+    },
+    "qa_mapping": {
+      "path": "outputs/chm/q1_v2/qa_mapping.json",
+      "sha256": "f36a8e7046d379cd50df55d2eb5c4cf49759191d7445a41d662ce422a4e366bb"
+    }
+  },
+  "model_family": "17_main_plus_10_pair_products_targetwise_L2_regularized",
+  "predecessor": "chm.q1.v1.3",
+  "breaking_change": true,
+  "normalization": "delta divided by each interaction model's positive fitted reference Loss",
+  "default_support": "convex_hull_of_normalized_A4_512_recipes",
+  "quality_coordinate": "A1_sample_composite_proxy; extended_only_sensitivity; 11_unknown_null",
+  "cross_scale_transfer": "unidentified",
+  "A_B_bridge": "unidentified",
+  "ready_for_Q3_empirical_absolute_loss": false,
+  "authorization": "user explicitly requested primary-model replacement on 2026-09-25",
+  "source_interaction_manifest_sha256": "87d61b1df53f1370ec31d8da483930579c3bfe71f5436185e125ce3e40512c40",
+  "reproduce": "python -B src/chm/release_q1_v2.py"
+}

@@ -13,7 +13,7 @@ import numpy as np
 from q1_interface import Q1Interface
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "outputs/chm/q1_v2_decisions"
+OUT = ROOT / "data/processed/Q1/decisions"
 POLICIES = ("unconstrained", "quality_direct", "quality_direct_and_near")
 
 

@@ -104,7 +104,7 @@ def fig_interaction_heatmap(coefficients, out, matrix_out=None):
     ax.set_ylabel("Validation target")
     ax.set_title("Row-normalized 13 x 17 Ridge interaction matrix")
     cbar = fig.colorbar(im, ax=ax, fraction=0.03, pad=0.02)
-    cbar.set_label(r"$\\tilde{B}_{k,j}=\\beta_{k,j}/\\max_r|\\beta_{k,r}|$")
+    cbar.set_label(r"$\tilde{B}_{k,j}=\beta_{k,j}/\max_r|\beta_{k,r}|$")
     fig.tight_layout()
     fig.savefig(out, dpi=300)
     plt.close(fig)
@@ -123,13 +123,12 @@ def top_targets(df):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output-root", type=Path, default=Path("outputs/chm/local_recheck_v1"))
-    parser.add_argument("--figure-dir", type=Path, default=Path("paper/sections/chm/figures"))
+    parser.add_argument("--output-root", type=Path, default=Path("data/processed/Q1/regmix"))
+    parser.add_argument("--figure-dir", type=Path, default=Path("paper/latex/figures/Q1"))
     args = parser.parse_args()
 
     metrics = pd.read_csv(args.output_root / "q1_regmix_ridge_domainwise_metrics.csv")
     direct = pd.read_csv(args.output_root / "q1_regmix_direct_scale_rank_stability.csv")
-    coefficients = pd.read_csv(args.output_root / "mixture_effect_ridge_v0.csv")
 
     args.figure_dir.mkdir(parents=True, exist_ok=True)
     args.output_root.mkdir(parents=True, exist_ok=True)
@@ -145,30 +144,18 @@ def main():
         metrics,
         args.figure_dir / "q1_domainwise_spearman_box.png",
     )
-    fig_domainwise_lines(
-        metrics,
-        args.figure_dir / "q1_domainwise_spearman_lines.png",
-    )
     fig_direct_rank_stability(
         direct,
         args.figure_dir / "q1_direct_rank_stability_1m_60m.png",
-    )
-    fig_interaction_heatmap(
-        coefficients,
-        args.figure_dir / "q1_interaction_heatmap.png",
-        args.output_root / "q1_interaction_matrix_row_normalized.csv",
     )
 
     inputs = [
         args.output_root / "q1_regmix_ridge_domainwise_metrics.csv",
         args.output_root / "q1_regmix_direct_scale_rank_stability.csv",
-        args.output_root / "mixture_effect_ridge_v0.csv",
     ]
     figure_paths = [
         args.figure_dir / "q1_domainwise_spearman_box.png",
-        args.figure_dir / "q1_domainwise_spearman_lines.png",
         args.figure_dir / "q1_direct_rank_stability_1m_60m.png",
-        args.figure_dir / "q1_interaction_heatmap.png",
     ]
     provenance = {
         "output_root": str(args.output_root),
@@ -184,7 +171,7 @@ def main():
             "it is not an additional fitted model or causal matrix."
         ),
     }
-    (args.figure_dir / "q1_figures_manifest.json").write_text(
+    (args.output_root / "q1_figures_manifest.json").write_text(
         json.dumps(provenance, ensure_ascii=False, indent=2), encoding="utf-8"
     )
 

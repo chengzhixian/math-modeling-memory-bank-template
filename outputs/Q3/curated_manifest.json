@@ -1,24 +1,38 @@
 {
-  "schema_version": "question_curated_bundle.v1",
+  "interface_sha256": {
+    "interfaces/Q3/README.md": "dce66eab8f3a218b7181fdd5dcf8261f90a7eb3d3ec4c3b5e27ada59125f6cd4"
+  },
+  "paper_sha256": {
+    "paper/latex/sections/Q3/numerical.tex": "c228471b00f90b437bea3c8549262d63efe22b4a9ee3c1d708e75ff9def93f72",
+    "paper/latex/sections/Q3/theory.tex": "a4202165eee1e285b4ea611189a0d2920e846795ff6448d5ff981b73c97b55fd"
+  },
   "question": "Q3",
-  "source_commit": "c052b6918c3f77a2285622521d8abb1b429513be",
-  "scope": "selected core answer, derivation and validation; upstream release contains full records",
+  "schema_version": "main.question_integration.v2",
+  "scope": "current main answer, production evidence, interface and paper; reproducible process tables excluded",
   "sha256": {
-    "ANSWER.md": "81a5a67727f160715a3f802ba6bf3a053dc073bbc04664bfe872d998e05748c7",
+    "ANSWER.md": "b3bf9b655d74af2ad1a2a641cedca154f318e6823bcc1600a383ff674fa369a4",
+    "README.md": "f8a83f7e7b652f26679df49aa79e21eed7a93a46ebf69a1d72b440e07681ec3d",
+    "assumption_8192_power_scan.csv": "8166eede7de422f3aa11db92765d8994079d498be94af7f297007885bee1ff95",
+    "assumption_8192_power_transitions.csv": "607fe0e0d4201ad89ab6387e1544b052aa4368e3f1c567ed9b4862598eba5771",
+    "assumption_official_grid.csv": "4947a515502ab448516133d028175ab9e371c366e8684fcd7c7b237ee7854696",
     "assumption_sensitivity.json": "c57ea1fa659401ec610765ec248839cba13ba45667fb04bea485e43a9cbe2b1d",
     "external_nd_audit.json": "04ff8e296cddc1ad9ed42307f23217c06151e90ebc5207470c8981ac8afaa1b4",
     "external_nd_budget_comparison.csv": "bc08f0aafd9c11cff3862581a07a43ccb975e057bb7eaa5af6bd4611aae28a37",
-    "fixed_policy_grid.csv": "9e1ea053b5754ac903e2167caa9efb5c5b934e2eed96b4bbaf064f5a42c9d388",
-    "native_Q_sensitivity_grid.csv": "d8c6f006448fb5fb4fcddef0cf2f5e19e2f7e416014b5732bea080ced6dce527",
-    "observed_joint_grid.csv": "8fc644e7b956a0e1b35bfcf219fd0573392a31e68e532d9248432661049af3da",
-    "README.md": "8d2bdc3b925cf861b4921f238a4fc162fe243e75ebe1ddd6d794d403b6f5372c",
-    "transition_resolution.json": "b255a0d2cada18d7cde9ae8313bd6a29b5310152a398c1facace94430e5a1316",
-    "transitions.csv": "68cf3fb6cc20cda0c5c563da2b92707c41ad008645234e29c56d2baf0a0c5997",
-    "upstream_manifest.json": "a30703ceac1f0179f5c93e03b676b984581c3058c50ccfcdc3eb60dd27112000",
     "external_nd_runs.csv": "d7dc42d26734ec8bce48a84d5981016f6e59f689fb1bdf1177163e5cfdee79d1",
-    "assumption_official_grid.csv": "4947a515502ab448516133d028175ab9e371c366e8684fcd7c7b237ee7854696",
+    "fixed_budget_scan.csv": "2492491c19620d42e0e1f7e6925e29e369beb9de3b50eea113365a1d9281b563",
+    "fixed_policy_grid.csv": "9e1ea053b5754ac903e2167caa9efb5c5b934e2eed96b4bbaf064f5a42c9d388",
     "independent_grid_audit.json": "41265fe7405229962a572cbf62204b4cc06820b3063471e3f691b1dd8792f63d",
     "independent_sensitivity_audit.json": "57ef2d7e5b40bc8d8cdaf7e9a73a7b6f03d6cab40c2675a87556ca5817b3d16b",
-    "independent_source_audit.json": "9e2ac42daea95a9fe73dbec4e055b4368a48d12f9245c6b31eaf548726ee715d"
-  }
+    "independent_source_audit.json": "9e2ac42daea95a9fe73dbec4e055b4368a48d12f9245c6b31eaf548726ee715d",
+    "manifest.json": "a545d2af0b146d53321e8f99a1f28da823d451dd48e687ab87a2d73e41e24256",
+    "native_Q_sensitivity_grid.csv": "d8c6f006448fb5fb4fcddef0cf2f5e19e2f7e416014b5732bea080ced6dce527",
+    "observed_budget_scan.csv": "69fed2eba936343096e7df0f927c670eb504e7f9e3b8fece11badfe6b85031db",
+    "observed_joint_grid.csv": "8fc644e7b956a0e1b35bfcf219fd0573392a31e68e532d9248432661049af3da",
+    "transition_resolution.json": "b255a0d2cada18d7cde9ae8313bd6a29b5310152a398c1facace94430e5a1316",
+    "transitions.csv": "68cf3fb6cc20cda0c5c563da2b92707c41ad008645234e29c56d2baf0a0c5997",
+    "upstream_manifest.json": "a30703ceac1f0179f5c93e03b676b984581c3058c50ccfcdc3eb60dd27112000"
+  },
+  "source_manifest_path": "outputs/Q3/upstream_manifest.json",
+  "source_manifest_sha256": "a30703ceac1f0179f5c93e03b676b984581c3058c50ccfcdc3eb60dd27112000",
+  "source_release": "integration/chm-q1-clean-20260923@c052b6918c3f77a2285622521d8abb1b429513be"
 }

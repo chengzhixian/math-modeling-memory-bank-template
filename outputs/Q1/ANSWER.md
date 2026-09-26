@@ -63,4 +63,4 @@ A12–A15 的 10B/70B Loss 是附件外推估算，不是真实大模型训练�
 
 问题一可以宣称已解决：题面要求的质量评分与扩展核对、冲突定义与处理、配比—Loss 建模、A6–A11 检验、A12–A15 估算外推讨论，以及配方约束下的求解和敏感性分析，均有代码与数值证据。可发表的结论是“在给定工程评分、交互代理、目标权重、质量政策与 A4 支持范围下，得到可复现的条件性配方决策”。不把该结论改写为无条件唯一最优、人工质量准确率或真实大模型外推验证。
 
-复现索引：主模型 interfaces/chm/q1_interface_v2.json；模型对照 outputs/Q1/targetwise_validation.csv；数值决策 outputs/Q1/hull_bounds.json；签核 outputs/Q1/numerical_signoff.json；估算压力 outputs/Q1/estimated_stress.json；重拟合敏感性 outputs/Q1/refit_stability.json。
+复现索引：主模型 interfaces/Q1/q1_interface_v2.json；模型对照 outputs/Q1/targetwise_validation.csv；数值决策 outputs/Q1/hull_bounds.json；签核 outputs/Q1/numerical_signoff.json；估算压力 outputs/Q1/estimated_stress.json；重拟合敏感性 outputs/Q1/refit_stability.json。

@@ -1,0 +1,43 @@
+{
+  "schema": "zhh.q4.conditional.v2",
+  "seed": 20260926,
+  "code_base_commit": "main_integrated_tree",
+  "code_sha256": "f12911d91eb7a6129601a42ba4c2845b6fdc0ee12cf2849854b3abba49db721a",
+  "input_sha256": {
+    "data/raw/real_attachments/C_efficiency_evolution/leaderboard_enhanced.csv": "d8ae5b1e00f36bf17adb0c3fbf88c60edd54298625d2db1aa744b2b001202799",
+    "data/raw/real_attachments/C_efficiency_evolution/epoch_all_ai_models.csv": "0b98a01bcb8d96958745b6fbe505416c38f719948d9029b38ff6233425c0e1c1",
+    "data/raw/real_attachments/C_efficiency_evolution/loss_benchmark_bridge_expanded.csv": "e175462233c2b856e2878c603055b4ed70135f021300f912852af1bb485ba4fd",
+    "data/raw/real_attachments/C_efficiency_evolution/leaderboard_extended_timeseries.csv": "ab2b5715b2945ebdeeabfb18e8d040f7c68d8c76bd02c01e446959218bfcd184",
+    "outputs/Q4/c8_bbh_task_aggregation.csv": "eb31d167d2e0a4b5e2133b71688788f89050e031d70fcb73783f04e49e52553a",
+    "problem/readable/DATA_DESCRIPTION_VISIBLE.md": "a681506d30ab7bf59b69916b83ddae991c34e12cf60fa2b4430f1609a5bfab2b",
+    "src/zhh/q4_complete.py": "f12911d91eb7a6129601a42ba4c2845b6fdc0ee12cf2849854b3abba49db721a"
+  },
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "pandas": "3.0.1",
+  "commands": [
+    "node src/zhh/q4_analysis.js",
+    "python -B src/zhh/q4_complete.py"
+  ],
+  "upstream": {
+    "branch": "integration/chm-q1-clean-20260923",
+    "commit": "c052b6918c3f77a2285622521d8abb1b429513be",
+    "manifest_hash": "a30703ceac1f0179f5c93e03b676b984581c3058c50ccfcdc3eb60dd27112000",
+    "producer_release_subject": "615c078517379284f6b0504c568790a7975c6eda",
+    "grid_hash": "9e1ea053b5754ac903e2167caa9efb5c5b934e2eed96b4bbaf064f5a42c9d388",
+    "producer_status": "conditional_problem_answer_not_empirically_calibrated",
+    "joint_95_prediction_interval": null,
+    "rows": 72,
+    "supported_assumption_rows": 33,
+    "scope": "Integrated Q3 v8 consumed only as explicit coordinate-equality sensitivity, not an empirical benchmark optimization result."
+  },
+  "output_sha256": {
+    "leaderboard_sample.csv": "281044f48cd5fb0a77ea726c17b6b57914fef6e5349ff442384ebe998489f700",
+    "leaderboard_all_versions.csv": "94750204998299d4969e716b025afb7daed11dfde3020b3b82278b7f3035cb12",
+    "c4_resource_audit.csv": "0001ad0484b5ade2f33f544e238d7695c54c04b39dd79aff17baae80fb7ae468",
+    "bridge_sample.csv": "ead8c15e7bfefa589978c855f17cd70141f99446738c78eb4dc939c958f842dd",
+    "upstream_q3_fixed_policy_grid.csv": "9e1ea053b5754ac903e2167caa9efb5c5b934e2eed96b4bbaf064f5a42c9d388",
+    "upstream_q3_manifest.json": "a30703ceac1f0179f5c93e03b676b984581c3058c50ccfcdc3eb60dd27112000"
+  },
+  "uncertainty_scope": "Scenario envelopes and conditional bootstrap. No calibrated prediction interval; Q3 joint interval unavailable."
+}

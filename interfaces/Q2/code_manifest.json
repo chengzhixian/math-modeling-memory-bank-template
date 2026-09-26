@@ -1,0 +1,22 @@
+{
+  "schema": "main.q2.integrated.code.v1",
+  "sha256": {
+    "src/cyj/audit_b4_b5_comparability.py": "2ffc4ee3e12b7fed5c6848f9cfca6423718684b55ca3b766cf4b4c2b86b8307f",
+    "src/cyj/audit_b_scaling_laws.py": "59c1cfa83eb076927e226f79c1ecfeffdad23ac74326ebb183df9fe134e9697b",
+    "src/cyj/build_q2_v8.py": "294bbf523d1cd30753df778c7d231c6946091a2e6fcd4164ce361ce373d617d8",
+    "src/cyj/chm_q1_v2_consumer.py": "3534977ad3bd4e2cc7f06e4a7466c12292335fe692142511af00144e71920cb6",
+    "src/cyj/diagnose_b_quality.py": "4b949e3bd63e4537b934729bea343345b3d96033569fd13ccf6bb4078f496a17",
+    "src/cyj/fit_b7_quality_extension_from_b1.py": "06951bfca27c9a1e4efb417041a2e03c1b5fad10a4ef4f8fe71b4653eccd9170",
+    "src/cyj/fit_classic_scaling.py": "8d90b91158b58e3e4b917488714cb9935901be469f1d95119dac134a4936ac15",
+    "src/cyj/ndqp_scenarios_v8.py": "927d173963eafaf0de9413f81b71d68cc3432c11ee8029c6a02eb48dd31ba529",
+    "src/cyj/prepare_scaling_data.py": "cf8c8f41185c881faa93ac42854cd44d8d604f3b90f20eea65d328d60934a56d",
+    "src/cyj/quality_scaling.py": "f33691ca778bd09eebad8c4ff134b1686d64ca433b279e2e2c35bd1fddb6219d",
+    "src/cyj/scaling_common.py": "1fd6c6bd34e27a7f177224c3e43a236f4f241605fcee681d53a4db827867507d",
+    "src/cyj/scaling_provenance.py": "99489cb476f2f3f2e068f0f4672a151d9e0ff05f19ae32104561f0ab2a0b8c72",
+    "src/cyj/smoke_q3_v8.py": "d8e3dccce6e3900031c486bb12bd2f9a14b785ad8acb7c8f35024fcb4caac55a",
+    "src/cyj/tests/test_ndqp_v8.py": "9b86e816f10b427d1ecef6b349a905cbcc34a9afd1f49a052e680e5629971f3b",
+    "src/cyj/validate_b3_against_b1.py": "afc743f3bd05de80c7e271ce8fc43516da1a1b5bc3b1bda2660fd52b9d10b586",
+    "src/cyj/verify_v8_fixtures.py": "04357e1c85e1e8dac0abb4a23c1a779f5d8ac6bc1907c165ee26cae88164a92a"
+  },
+  "source_release": "team/cyj-scaling@fd2dbb3b2002983430329cdb2ec6a275c2eed4f6"
+}

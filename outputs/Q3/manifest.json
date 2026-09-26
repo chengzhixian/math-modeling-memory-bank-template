@@ -1,0 +1,98 @@
+{
+  "schema_version": "chm.q3.conditional_v8.release.v1",
+  "status": "conditional_problem_answer_not_empirically_calibrated",
+  "producer_branch": "integration/chm-q1-clean-20260923",
+  "inputs": {
+    "Q2_source_commit": "fd2dbb3b2002983430329cdb2ec6a275c2eed4f6",
+    "Q1_manifest_sha256": "c621f7e405106e42720f918f490235b5e8becefb0f7c8cb997736e96337117a9",
+    "B1_fit_sha256": "9b0e381fbc0ea84bb37d63ccb273733f3a03a0c2a834e8ef52cdb75c45bc6ead",
+    "B7_quality_fit_sha256": "30819a5931b0552c1ef207f52f489f9d4ecaf427166bec25a98ce7319ac3d07b"
+  },
+  "input_files_sha256": {
+    "src/chm/q1_interface_v2.py": "ae25d92aa2119fd52797305f7b15cf66a7b88c8627c817b640d66e92a09d4ca2",
+    "src/cyj/chm_q1_v2_consumer.py": "3534977ad3bd4e2cc7f06e4a7466c12292335fe692142511af00144e71920cb6",
+    "src/cyj/fit_b7_quality_extension_from_b1.py": "06951bfca27c9a1e4efb417041a2e03c1b5fad10a4ef4f8fe71b4653eccd9170",
+    "src/cyj/ndqp_scenarios_v8.py": "927d173963eafaf0de9413f81b71d68cc3432c11ee8029c6a02eb48dd31ba529",
+    "interfaces/Q1/q1_interface_v2.json": "c621f7e405106e42720f918f490235b5e8becefb0f7c8cb997736e96337117a9",
+    "outputs/Q1/hull_bounds.json": "969f810c0bf54f03492afc243091c339aaf4b27aed5c2164c186e651c7589acc",
+    "outputs/Q2/classic_fit.json": "9b0e381fbc0ea84bb37d63ccb273733f3a03a0c2a834e8ef52cdb75c45bc6ead",
+    "outputs/Q2/b7_quality_extension.json": "30819a5931b0552c1ef207f52f489f9d4ecaf427166bec25a98ce7319ac3d07b",
+    "outputs/Q2/main_policy.json": "1429c82b33fcb17f9aa0ed42ea8d63deba9370864e1030dd39b87df32067ddc6",
+    "outputs/Q2/acceptance.json": "65e5a5f2f657ff4bd431ec31e4cec0a8cee54bea40541dd339668c3e25cc9dec"
+  },
+  "output_files_sha256": {
+    "fixed_policy_grid.csv": "9e1ea053b5754ac903e2167caa9efb5c5b934e2eed96b4bbaf064f5a42c9d388",
+    "observed_joint_grid.csv": "8fc644e7b956a0e1b35bfcf219fd0573392a31e68e532d9248432661049af3da",
+    "native_Q_sensitivity_grid.csv": "d8c6f006448fb5fb4fcddef0cf2f5e19e2f7e416014b5732bea080ced6dce527",
+    "fixed_budget_scan.csv": "2492491c19620d42e0e1f7e6925e29e369beb9de3b50eea113365a1d9281b563",
+    "observed_budget_scan.csv": "69fed2eba936343096e7df0f927c670eb504e7f9e3b8fece11badfe6b85031db",
+    "transitions.csv": "68cf3fb6cc20cda0c5c563da2b92707c41ad008645234e29c56d2baf0a0c5997",
+    "transition_resolution.json": "b255a0d2cada18d7cde9ae8313bd6a29b5310152a398c1facace94430e5a1316",
+    "assumption_official_grid.csv": "4947a515502ab448516133d028175ab9e371c366e8684fcd7c7b237ee7854696",
+    "assumption_8192_power_scan.csv": "8166eede7de422f3aa11db92765d8994079d498be94af7f297007885bee1ff95",
+    "assumption_8192_power_transitions.csv": "607fe0e0d4201ad89ab6387e1544b052aa4368e3f1c567ed9b4862598eba5771",
+    "assumption_sensitivity.json": "c57ea1fa659401ec610765ec248839cba13ba45667fb04bea485e43a9cbe2b1d",
+    "external_nd_runs.csv": "d7dc42d26734ec8bce48a84d5981016f6e59f689fb1bdf1177163e5cfdee79d1",
+    "external_nd_budget_comparison.csv": "bc08f0aafd9c11cff3862581a07a43ccb975e057bb7eaa5af6bd4611aae28a37",
+    "external_nd_audit.json": "04ff8e296cddc1ad9ed42307f23217c06151e90ebc5207470c8981ac8afaa1b4"
+  },
+  "code_files_sha256": {
+    "src/chm/q3_v8_inputs.py": "0d4fc6ccc5462400dfb07ae3eb72354d155db49ce48b5a5a09a9350515a8e1d4",
+    "src/chm/q3_conditional_v8.py": "ed97028588405243d89c357ea81547bc2603878865c321f18daeaa99e54a560e",
+    "src/chm/q3_native_q_solver.py": "0c92fb3aac6b125838c50e1083b7df0e311943dee30a1357bd47dca35e73b569",
+    "src/chm/q3_v8_transition_scan.py": "6d699646af6743075256243927b31d4fc35331f806e19d2469bb72f2d3846051",
+    "src/chm/q3_v8_publish.py": "846dcbae0957aa0456b1e3d9ecfc65904154a6070a87d0592e2a2565fe6b14ee",
+    "src/chm/test_q3_conditional_v8.py": "ab5bfad85d4b2485e96edcdcee84e3e0ef743ac22a96ef80ea3c2cceb5cf11b2",
+    "src/chm/plot_q3_v8.py": "463ad91151634ef97574c7e7ac394d50d39dd3b541523d4fcfe0fb1d1c7e3262",
+    "src/chm/q3_v8_assumption_sensitivity.py": "e5ba57043ee9b4ad39535ecc1d83560c7fcf13e37401b44596dd9b9b4e78852d",
+    "src/chm/q3_external_nd_audit.py": "797e57c977800061da8d3d62c07860d40e6b8ce855e4c975f8ec723b842dc1d5"
+  },
+  "paper_files_sha256": {
+    "paper/latex/sections/Q3/numerical.tex": "c228471b00f90b437bea3c8549262d63efe22b4a9ee3c1d708e75ff9def93f72",
+    "paper/latex/sections/Q3/theory.tex": "a4202165eee1e285b4ea611189a0d2920e846795ff6448d5ff981b73c97b55fd",
+    "paper/latex/figures/Q3/q3_v8_power_8192.png": "3a5b1d70ce803f6ef0edcfd3dadf4ebac97299d8ad9a045ada8bf0973c5394bc",
+    "outputs/Q3/ANSWER.md": "81a5a67727f160715a3f802ba6bf3a053dc073bbc04664bfe872d998e05748c7",
+    "experiments/Q3/EXTERNAL_VALIDATION.md": "6b023e126e1b5fe662e391912976506d371a4852ba30dd3c8e922633a2f06584"
+  },
+  "counts": {
+    "fixed_feasible": 30,
+    "observed_joint_feasible": 33,
+    "native_Q_sensitivity_feasible": 33,
+    "transition_brackets": 82,
+    "fixed_recipe": "172",
+    "assumption_scenarios": 9,
+    "external_common_support_models": 42,
+    "official_budget_count": 3
+  },
+  "data_roles": {
+    "B1": "fixed_backbone_training",
+    "B7": "semi_synthetic_quality_fit_and_nested_CV",
+    "A4_A5": "Q1_frozen_training_only",
+    "A6_A11": "Q1_prior_same_project_check_not_blind_final_test",
+    "C7": "observed_external_context_scenarios",
+    "B10": "estimated_stress_not_validation"
+  },
+  "units": {
+    "N": "billion_parameters",
+    "D": "billion_tokens",
+    "context": "tokens",
+    "cost": "FLOPs"
+  },
+  "Q0": 0.5,
+  "quality_proxy": "uncalibrated_monotone_A_to_B_assumption",
+  "assumption_sensitivity": "nine_one_factor_scenarios_not_confidence_intervals",
+  "external_validation": "independent_real_N_D_rank_only_not_full_Q3_optimum",
+  "cross_source_empirical_calibration_complete": false,
+  "joint_prediction_interval_95": null,
+  "optimization_bound_scope": "floating_point_fixed_policy_convex_and_native_Q_certificate_only",
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "scipy": "1.18.1",
+  "commands": [
+    "python -B src/chm/q3_conditional_v8.py",
+    "python -B src/chm/q3_v8_transition_scan.py",
+    "python -B src/chm/q3_v8_assumption_sensitivity.py",
+    "python -B src/chm/q3_external_nd_audit.py",
+    "python -B src/chm/q3_v8_publish.py"
+  ]
+}

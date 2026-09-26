@@ -8,8 +8,8 @@ from q1_interface import Q1Interface
 from q1_mixture_decision_v2 import quality_constraints
 
 ROOT = Path(__file__).resolve().parents[2]
-SOURCE = ROOT / "outputs/chm/q1_v2_hull_bounds/bounds.json"
-OUT = ROOT / "outputs/chm/q1_v2_signoff/audit.json"
+SOURCE = ROOT / "outputs/Q1/hull_bounds.json"
+OUT = ROOT / "data/processed/Q1/signoff/audit.json"
 
 
 def audit():

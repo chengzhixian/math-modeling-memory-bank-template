@@ -13,6 +13,10 @@ __pycache__/
 .mypy_cache/
 .ruff_cache/
 .venv/
+.deps/
+.planning/
+.upstream/
+.build/
 venv/
 .vscode/
 .idea/
@@ -27,3 +31,24 @@ Thumbs.db
 data/private/
 data/processed/*
 !data/processed/.gitkeep
+
+# Q4 v3 consumes only these six prepared tables; the v2 work tables regenerate.
+outputs/Q4/prepared/*
+!outputs/Q4/prepared/bridge_sample.csv
+!outputs/Q4/prepared/c4_resource_audit.csv
+!outputs/Q4/prepared/leaderboard_all_versions.csv
+!outputs/Q4/prepared/leaderboard_sample.csv
+!outputs/Q4/prepared/manifest.json
+!outputs/Q4/prepared/upstream_q3_fixed_policy_grid.csv
+!outputs/Q4/prepared/upstream_q3_manifest.json
+
+# LaTeX build products
+*.aux
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.log
+*.out
+*.synctex.gz
+*.toc

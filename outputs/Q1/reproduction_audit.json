@@ -1,0 +1,91 @@
+{
+  "status": "verified_from_raw_A4_A5_A6_A11",
+  "source_raw_sha256": {
+    "est_mixture_10b.csv": "880c7ca1ebef470422e2b93d9bfcd0976db7db4e34ea57047518d95fe43327d1",
+    "est_mixture_70b.csv": "880c7ca1ebef470422e2b93d9bfcd0976db7db4e34ea57047518d95fe43327d1",
+    "est_pile_loss_10b.csv": "226457581f3f59e15e44d8f72dee31fa7492c821699725fef47627d82cf34c0d",
+    "est_pile_loss_70b.csv": "d0883b2d1a44da9386a6d629a3623c724ee291cba1ac87b6d1079e5377307682",
+    "test_mixture_1B.csv": "dd38052949c0a5f84165bdcb3ae3a331c7f07efd9bb83848bd579dfc4ce75a2c",
+    "test_mixture_1m.csv": "197267b7d6f15367e2f46c881e564c35b0d34e51b1754bb09d07e650cf8e1ce8",
+    "test_mixture_60m.csv": "197267b7d6f15367e2f46c881e564c35b0d34e51b1754bb09d07e650cf8e1ce8",
+    "test_pile_loss_1B.csv": "b2451e2b7fa15400688edc39e4d32f21ccbe0fb356e07d62a0e9ccddf247114f",
+    "test_pile_loss_1m.csv": "e027b1674f60140a65a87b5e4a59ab5f09dc33e8fd02c080682678074b160f53",
+    "test_pile_loss_60m.csv": "8fe69d59ab7dd4fae4736459f4265ec93c7ed1ad1eca407346052560edc72b5b",
+    "train_mixture_1m.csv": "04a32ef4ab594376bf90e11404c033668f887c351d6a03ad3744824c7296a2d8",
+    "train_pile_loss_1m.csv": "49a959aa07ce5c20831d5abe3a7896ff0cd90a398bd407c8913fd5588be0465a"
+  },
+  "released_model_sha256": "92e2e64976b7618626ef5d07b253794f105b3b1beeaacc989f13045e6c422b04",
+  "seed": null,
+  "targets": {
+    "arxiv": {
+      "alpha": 0.01,
+      "cv_rmse": 0.683447163676869,
+      "max_coefficient_difference": 1.0791367799356522e-13
+    },
+    "freelaw": {
+      "alpha": 0.01,
+      "cv_rmse": 0.4227207714690313,
+      "max_coefficient_difference": 8.304468224196171e-14
+    },
+    "pubmed_central": {
+      "alpha": 0.01,
+      "cv_rmse": 0.5476240682050717,
+      "max_coefficient_difference": 9.980904991380157e-14
+    },
+    "wikipedia_en": {
+      "alpha": 0.1,
+      "cv_rmse": 0.2933173779045809,
+      "max_coefficient_difference": 4.551914400963142e-15
+    },
+    "dm_mathematics": {
+      "alpha": 0.1,
+      "cv_rmse": 1.2184707390759038,
+      "max_coefficient_difference": 2.2648549702353193e-14
+    },
+    "github": {
+      "alpha": 0.01,
+      "cv_rmse": 0.6353849024109965,
+      "max_coefficient_difference": 1.98507876802978e-13
+    },
+    "stackexchange": {
+      "alpha": 0.01,
+      "cv_rmse": 0.5037020653542099,
+      "max_coefficient_difference": 2.0805579481475434e-13
+    },
+    "gutenberg_pg_19": {
+      "alpha": 0.01,
+      "cv_rmse": 0.243311715275572,
+      "max_coefficient_difference": 5.2013948703688584e-14
+    },
+    "pile_cc": {
+      "alpha": 0.01,
+      "cv_rmse": 0.13437529229360937,
+      "max_coefficient_difference": 6.245004513516506e-14
+    },
+    "ubuntu_irc": {
+      "alpha": 0.01,
+      "cv_rmse": 0.6950774640474309,
+      "max_coefficient_difference": 1.249000902703301e-13
+    },
+    "hackernews": {
+      "alpha": 0.001,
+      "cv_rmse": 0.1944194314091739,
+      "max_coefficient_difference": 6.140574160262702e-13
+    },
+    "pubmed_abstracts": {
+      "alpha": 0.1,
+      "cv_rmse": 0.30145577111046523,
+      "max_coefficient_difference": 6.38378239159465e-15
+    },
+    "uspto_backgrounds": {
+      "alpha": 0.1,
+      "cv_rmse": 0.27558484002117634,
+      "max_coefficient_difference": 7.105427357601002e-15
+    }
+  },
+  "max_coefficient_difference": 6.140574160262702e-13,
+  "max_cv_difference": 2.220446049250313e-16,
+  "heldout_max_rmse_difference": 4.440892098500626e-16,
+  "heldout_max_spearman_difference": 0.0,
+  "note": "A6-A11 were used in original form selection; metrics are real held-out group comparisons, not an untouched final blind test."
+}

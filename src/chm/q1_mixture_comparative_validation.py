@@ -16,12 +16,12 @@ from scipy.stats import spearmanr
 from q1_mixture_final_audit import read_pairs
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "outputs/chm/q1_mixture_comparison_v1"
-COEF = ROOT / "outputs/chm/local_recheck_v1/mixture_effect_ridge_v0.csv"
-INTER = ROOT / "outputs/chm/q1_exports/q1_interaction_bundle_v1/interaction_coefficients_13_targets.json"
-SUPPORT = ROOT / "outputs/chm/q1_mixture_final/composition_support.csv"
-SOURCE_METRICS = ROOT / "outputs/chm/q1_mixture_final/heldout_target_metrics.csv"
-SOURCE_CANDIDATE = ROOT / "outputs/chm/q1_mixture_final/interaction_candidate_comparison.csv"
+OUT = ROOT / "data/processed/Q1/comparative_validation"
+COEF = ROOT / "data/processed/Q1/regmix/mixture_effect_ridge_v0.csv"
+INTER = ROOT / "outputs/Q1/interaction_coefficients_13_targets.json"
+SUPPORT = ROOT / "data/processed/Q1/mixture_final/composition_support.csv"
+SOURCE_METRICS = ROOT / "data/processed/Q1/mixture_final/heldout_target_metrics.csv"
+SOURCE_CANDIDATE = ROOT / "data/processed/Q1/mixture_final/interaction_candidate_comparison.csv"
 
 
 def sha(path: Path) -> str:
