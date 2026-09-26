@@ -16,3 +16,5 @@
 4. **集成人：**`origin/main@0d1b511c014bc1558b1bfc226b72ba1b534a01da` 已选择性吸纳 Q1–Q3；将本次 CYJ 理论修订和审查结论择优迁入 main，重核精简 manifest、全稿编译与公共记忆。CYJ 个人分支未直接改公共六文件或 CHM 目录；分支尚未合并 main，以保留本次冻结消费和角色文件边界。
 
 检查点主提交 `81f4651c656fdf48580dd375821716cf2c09c5cf` 已在本地创建。三次推送 `team/cyj-scaling` 均因 GitHub HTTPS 443 连接重置/无法连接失败；本地 `origin/team/cyj-scaling` 仍为 `74e678e319b58e2aab230a7b7233fa53f3053fa5`，**尚未完成远程备份**。网络恢复后先 fetch 检查分叉，再推送并用 `ls-remote` 核对 SHA。个人分支两遍 XeLaTeX 编译通过（29 页）；两处 overfull 在 CHM Q1 旧段落，非本次 CYJ Q3 理论变更。
+
+**后续上传更正：**本机 Git HTTPS 持续不可达，已改用 GitHub 连接器按同一文件树上传。连接器远端提交 `53b4fb51fc697d4e1584502b1fe66af40dd5242f` 的树为 `79a96ef9fcd1bea9296a11e48ec24a5079cc7cbe`，与原本地 HEAD 树完全相同；远端 `team/cyj-scaling` 已回读为该提交。已把本地 CYJ 分支对齐到同一提交且工作树干净，上段“尚未完成”是上传前的故障记录。
