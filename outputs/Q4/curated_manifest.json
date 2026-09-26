@@ -9,7 +9,7 @@
   "schema_version": "main.question_integration.v2",
   "scope": "current main answer, production evidence, interface and paper; reproducible process tables excluded",
   "sha256": {
-    "ANSWER.md": "9cf4061ae8c024bb10180ab5ec9f006db68b51b0a1baefadb39096864155dcd2",
+    "ANSWER.md": "a5a75ba9ab35fc5c42260b2ef8351b9b21367f9a9e539266e3f4d88f1d4eeada",
     "README.md": "55985bf8ec30efc00e3dcc78c870e3368ac126bb7ec6f5228f00bc950fce94d8",
     "bridge_source_coordinate_models.csv": "091074a44e64dc2e5aea73301b118b4d6ffe17ede35369c6efa431221fc69c17",
     "bridge_source_coordinate_validation.csv": "88ee5eda2aaf4cad01bf4394620e1004bd01dfb526bea3ce5b0088dfa232fd36",
@@ -36,7 +36,7 @@
     "historical_contribution_bootstrap.csv": "56a7414f45bc67015f0c11f4c3767c665549dc3519e11d6147cbadadb8d70342",
     "historical_standardized_contributions.csv": "21f60da5422cdc2d4405310443dbf62cb5009a272fded3f3e08cf4352a63fe40",
     "interface.json": "8efb8a0cfa39eecad18f30bfd8c2ec505d068a17f594979e853aa4ecc1b3d5e7",
-    "manifest.json": "c08544c6c681d5c906d3f24da53096e1439b174c7afd26cb7131af73046b8dd7",
+    "manifest.json": "8382da6b0c56ac1eac5df3f40af33b95cf0a31e44a68ff647bcf4df7fd2e6be4",
     "prepared/bridge_sample.csv": "ead8c15e7bfefa589978c855f17cd70141f99446738c78eb4dc939c958f842dd",
     "prepared/c4_resource_audit.csv": "0001ad0484b5ade2f33f544e238d7695c54c04b39dd79aff17baae80fb7ae468",
     "prepared/leaderboard_all_versions.csv": "94750204998299d4969e716b025afb7daed11dfde3020b3b82278b7f3035cb12",

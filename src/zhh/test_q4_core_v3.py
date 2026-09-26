@@ -7,10 +7,22 @@ import q4_core_v3 as q4
 
 
 class CoreChecks(unittest.TestCase):
+    def test_cumulative_record_keeps_earlier_high_scoring_model_version(self):
+        versions=pd.DataFrame({
+            'Model':['org/revised','org/revised','org/other','org/broken'],
+            'date':pd.to_datetime(['2024-09-01','2024-10-01','2024-11-01','2024-10-15'],utc=True),
+            'S':[60.,40.,55.,float('inf')]})
+        self.assertEqual(q4.historical_record_at(versions,pd.Timestamp('2024-11-01',tz='UTC')),60.)
+        self.assertEqual(q4.historical_record_at(versions,pd.Timestamp('2024-12-01',tz='UTC')),60.)
+
     def test_record_boundary_preserves_history_and_adds_tail_gap(self):
         self.assertEqual(q4.record_boundary(40, 51, 6), 51)
         self.assertEqual(q4.record_boundary(55, 51, 6), 61)
         self.assertEqual(q4.record_boundary(98, 95, 5), 100)
+        with self.assertRaises(ValueError):
+            q4.record_boundary(float('nan'),51,6)
+        with self.assertRaises(ValueError):
+            q4.record_boundary(55,51,float('inf'))
 
     def test_quantile_solver_recovers_line_despite_outliers(self):
         x=np.repeat([0.,1.,2.],6)

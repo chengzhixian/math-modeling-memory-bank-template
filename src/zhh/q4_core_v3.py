@@ -207,7 +207,18 @@ def anchor(rows, q=.9, window=2):
 
 
 def record_boundary(q90_score, historical_record, tail_gap):
+    if not np.isfinite([q90_score,historical_record,tail_gap]).all():
+        raise ValueError('record boundary requires finite inputs')
     return float(min(100, max(historical_record, q90_score + max(0, tail_gap))))
+
+
+def historical_record_at(versions, end_exclusive):
+    """Best submitted version before a cutoff, including superseded versions."""
+    scores=versions.loc[versions.date<end_exclusive,'S']
+    scores=scores[np.isfinite(scores.to_numpy(dtype=float))]
+    if scores.empty:
+        raise ValueError('no finite historical score before cutoff')
+    return float(scores.max())
 
 
 def window_series(rows, q=.9):
@@ -366,9 +377,8 @@ def maximum_frontier(rows, versions, comparison):
         start=pd.Timestamp(row.test_start,tz='UTC')
         stop=pd.Timestamp(row.test_end,tz='UTC')+pd.Timedelta(days=1)
         train=group[group.date<start].sort_values(['date','source_row']).drop_duplicates('Model',keep='last')
-        test=group[(group.date>=start)&(group.date<stop)].sort_values(['date','source_row']).drop_duplicates('Model',keep='last')
-        prior_record=float(train.S.max())
-        actual_record=max(prior_record,float(test.S.max()))
+        prior_record=historical_record_at(group,start)
+        actual_record=historical_record_at(group,stop)
         for window in [1,2,3]:
             recent=train[train.date>train.date.max()-pd.DateOffset(months=window)]
             gap=max(0,float(recent.S.max()-recent.S.quantile(.9)))
@@ -394,7 +404,8 @@ def maximum_frontier(rows, versions, comparison):
     q90_points=q90_points[(q90_points.resource_gate=='primary') & q90_points.selected_by_diagnostic_rmse]
     scenarios=[]
     for typ,group in rows.groupby('type'):
-        historical_record=float(group.S.max())
+        historical_record=historical_record_at(versions[versions.type.eq(typ)],
+            group.date.max()+pd.Timedelta(days=1))
         gaps={}
         for window in [1,2,3]:
             recent=group[group.date>group.date.max()-pd.DateOffset(months=window)]

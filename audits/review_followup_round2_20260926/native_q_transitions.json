@@ -1,0 +1,91 @@
+{
+  "scope": "fixed_recipe_172_native_QB_8192_tokens_power_cost",
+  "model": "CYJ_v8_B7_semi_synthetic_conditional",
+  "Q0": 0.5,
+  "Qmax": 1.0,
+  "coarse_budgets": 49,
+  "relative_bracket_tolerance": 0.0001,
+  "transitions": [
+    {
+      "budget_left_FLOPs": 1.2288759833690485e+19,
+      "budget_right_FLOPs": 1.2289623386833646e+19,
+      "state_left": "Q0",
+      "state_right": "interior",
+      "Q_left": 0.5,
+      "Q_right": 0.50000935788808,
+      "relative_width": 7.027178941143575e-05
+    },
+    {
+      "budget_left_FLOPs": 1.085994527349254e+20,
+      "budget_right_FLOPs": 1.086070842127982e+20,
+      "state_left": "interior",
+      "state_right": "Qmax",
+      "Q_left": 0.9999761581420898,
+      "Q_right": 0.9999992847442627,
+      "relative_width": 7.027178941143575e-05
+    }
+  ],
+  "tolerance_checks": [
+    {
+      "budget_FLOPs": 1.222774564466352e+19,
+      "outcomes": [
+        {
+          "certificate_tolerance": 1e-07,
+          "state": "Q0",
+          "Q_score": 0.5
+        },
+        {
+          "certificate_tolerance": 1e-08,
+          "state": "Q0",
+          "Q_score": 0.5
+        }
+      ]
+    },
+    {
+      "budget_FLOPs": 1.2350637560690287e+19,
+      "outcomes": [
+        {
+          "certificate_tolerance": 1e-07,
+          "state": "interior",
+          "Q_score": 0.5007268312697376
+        },
+        {
+          "certificate_tolerance": 1e-08,
+          "state": "interior",
+          "Q_score": 0.5007268008363157
+        }
+      ]
+    },
+    {
+      "budget_FLOPs": 1.080602520647953e+20,
+      "outcomes": [
+        {
+          "certificate_tolerance": 1e-07,
+          "state": "interior",
+          "Q_score": 0.9983426332473755
+        },
+        {
+          "certificate_tolerance": 1e-08,
+          "state": "interior",
+          "Q_score": 0.9983426630496979
+        }
+      ]
+    },
+    {
+      "budget_FLOPs": 1.0914628474886359e+20,
+      "outcomes": [
+        {
+          "certificate_tolerance": 1e-07,
+          "state": "Qmax",
+          "Q_score": 1.0
+        },
+        {
+          "certificate_tolerance": 1e-08,
+          "state": "Qmax",
+          "Q_score": 1.0
+        }
+      ]
+    }
+  ],
+  "claim_limit": "numerical_state_brackets_within_declared_support_not_real_training_thresholds"
+}
