@@ -1,0 +1,737 @@
+{
+  "source_main": "f3a49d4e006a70db18d8ed667ebe33a4a7ff6d9f",
+  "backend": "Python",
+  "skill": "nature-figure",
+  "independent_design": true,
+  "figures": [
+    {
+      "stem": "Q1_01",
+      "claim": "评分在固定规则内可复现，但聚合规则和尺度不能当成人工真值。",
+      "legend": "a，A1 51,230条记录的七域中位数；横线为发布表中固定评分规则的抽样区间，未覆盖方法选择不确定性。b，同一七域的三种汇总口径，只用于规则比较，不能解释为同一标尺的独立测量。A2/A3使用冻结规则，扩展全集中位数2.7253/−0.5055，去重值2.7279/−0.5063。",
+      "panel_roles": [
+        "领域差异与固定规则范围",
+        "聚合规则敏感性"
+      ],
+      "archetype": "quantitative grid",
+      "sources": [
+        "outputs/Q1/domain_quality.csv"
+      ],
+      "size_inches": [
+        7.204724409448819,
+        5.1
+      ],
+      "dpi": 300,
+      "visual_review": "pending"
+    },
+    {
+      "stem": "Q1_02",
+      "claim": "复制性指标分歧支持二维评分和人工复核，而不支持自动判定文本错误。",
+      "legend": "a，22指标共231对；分范围BH-FDR=0.05，A1 66对显著负相关，55对在去重扩展集复现。b，Q_A阈值0.0273、分歧D第75百分位阈值2.0423下的处置计数；高分歧不扣Q_A。27个案例不是人工质量标签，没有准确率检验；分布四象限的D中位数不得替代复核阈值。",
+      "panel_roles": [
+        "冲突复制证据",
+        "工程处置覆盖"
+      ],
+      "archetype": "quantitative grid",
+      "sources": [
+        "outputs/Q1/ANSWER.md",
+        "outputs/Q1/conflict_validation.json"
+      ],
+      "size_inches": [
+        7.204724409448819,
+        4.8
+      ],
+      "dpi": 300,
+      "visual_review": "pending"
+    },
+    {
+      "stem": "Q1_03",
+      "claim": "逐目标配对比较支持交互代理优于线性基线，但已观察检验不能称为盲测。",
+      "legend": "a–d，每点为一个目标域，n=13；对角线表示两模型RMSE相同。嵌套五折13/13更低；1M、60M、1B分别11/13、13/13更低。A6/A8共享256配方；检验组曾用于形式判断。1B 47/64配方超出A4凸包。这里只核对冻结结果，不把相关性、误差或同配方计数当作独立训练重复。",
+      "panel_roles": [
+        "训练内嵌套配对误差",
+        "1M已观察检验",
+        "60M已观察检验",
+        "1B支持转移检验"
+      ],
+      "archetype": "quantitative grid",
+      "sources": [
+        "outputs/Q1/targetwise_oof.csv",
+        "outputs/Q1/targetwise_validation.csv"
+      ],
+      "size_inches": [
+        7.204724409448819,
+        6.5
+      ],
+      "dpi": 300,
+      "visual_review": "pending"
+    },
+    {
+      "stem": "Q1_04",
+      "claim": "不同政策给出不同条件配方，数值精度和训练扰动稳定性必须分别报告。",
+      "legend": "a，512个观测候选中的136/301/172/477，仅是有限集最优，非连续凸包解编号。配比列全部17域，无隐藏列。b，四种目标的浮点下界与可行上界，间隙均<0.001，不是统计区间或严格数学证书；Minimax与等权目标含义不同。c，30次无放回80%行重拟合，原候选重选29/10/13/7次；灰段为其他候选，无置信区间解释。",
+      "panel_roles": [
+        "完整构成",
+        "条件优化数值界",
+        "训练扰动稳定性"
+      ],
+      "archetype": "quantitative grid",
+      "sources": [
+        "outputs/Q1/hull_bounds.json",
+        "outputs/Q1/recipes_512.csv",
+        "outputs/Q1/refit_replicate_choices.csv"
+      ],
+      "size_inches": [
+        7.204724409448819,
+        6.1
+      ],
+      "dpi": 300,
+      "visual_review": "pending"
+    },
+    {
+      "stem": "Q1_05",
+      "claim": "目标域响应不同，估算大模型表不能支持配方排序无条件外推。",
+      "legend": "a，从冻结13目标模型复算四个已观测候选相对参考响应，非观测干预；域间绝对Loss不同，使用各自参考归一化。诊断发现Mathematics在136处预测Loss为负，表明代理的绝对物理解释有局限，未裁零或修复。b，两组各13目标、63配方的estimated排序；交互中位相关0.4915/0.3941，低于Ridge 0.5136/0.4148。两模型选16，在估算表均排61/63；这些不是10B/70B真实训练验证。",
+      "panel_roles": [
+        "逐目标配方异质性及模型失真诊断",
+        "负向估算压力"
+      ],
+      "archetype": "quantitative grid",
+      "sources": [
+        "outputs/Q1/estimated_decision_stress.csv",
+        "outputs/Q1/estimated_targetwise.csv",
+        "outputs/Q1/interaction_coefficients_13_targets.json",
+        "outputs/Q1/recipes_512.csv"
+      ],
+      "size_inches": [
+        7.204724409448819,
+        6.0
+      ],
+      "dpi": 300,
+      "visual_review": "pending"
+    },
+    {
+      "stem": "Q2_01",
+      "claim": "冻结解析骨架与半合成质量扩展可在共同支持域内计算条件响应。",
+      "legend": "a，L0=E+AN^(−α)+BD^(−β)，B1 1176条同源Pythia记录，N/D以十亿计。b，LB=L0+(1−QB)G，G为450条半合成B7在固定B1骨架上的三参数扩展。每格为解析计算，不是重复实验或新的拟合。绘制范围为正式共同N/D支持矩形，不外推。",
+      "panel_roles": [
+        "解析骨架的资源响应",
+        "质量扩展的空间异质性"
+      ],
+      "archetype": "quantitative grid",
+      "sources": [
+        "outputs/Q2/model_coefficients.json"
+      ],
+      "size_inches": [
+        7.204724409448819,
+        4.7
+      ],
+      "dpi": 300,
+      "visual_review": "pending"
+    },
+    {
+      "stem": "Q2_02",
+      "claim": "半合成同源的划分检验支持条件形式，不能替代跨附件真实质量干预。",
+      "legend": "a，每个点为一折，横线为相应轴折均值，平均RMSE 0.048738/0.048751/0.048639；折共享数据，不视为独立重复。b，冻结对照表的外层留等级误差；缺失项表示上游未给出对应外层结果，不补零。B1留一规模组约1.46e−4仅支持同源重构；B6/B7重叠。",
+      "panel_roles": [
+        "24折离散误差",
+        "不同结构基线"
+      ],
+      "archetype": "quantitative grid",
+      "sources": [
+        "outputs/Q2/b7_backbone_comparison.csv",
+        "outputs/Q2/b7_quality_extension.json"
+      ],
+      "size_inches": [
+        7.204724409448819,
+        5.0
+      ],
+      "dpi": 300,
+      "visual_review": "pending"
+    },
+    {
+      "stem": "Q2_03",
+      "claim": "固定配方的条件计算支持质量—规模替代，不证明质量可独立操控。",
+      "legend": "a，D=100B，固定示例配方，对原始三档N逐行计算；N=1B时提高质量0.10，旧质量等效需1.317062B。b，冻结局部弹性示例，均无统计区间。q(p)由配方决定；额外处理可控QB是另一工程机制，不把两机制混同。",
+      "panel_roles": [
+        "等Loss有限变化替代",
+        "局部敏感度"
+      ],
+      "archetype": "quantitative grid",
+      "sources": [
+        "outputs/Q2/marginals_elasticities.csv",
+        "outputs/Q2/quality_scale_local_tradeoff.csv"
+      ],
+      "size_inches": [
+        7.204724409448819,
+        4.8
+      ],
+      "dpi": 300,
+      "visual_review": "pending"
+    },
+    {
+      "stem": "Q2_04",
+      "claim": "领域作用依赖补偿方向与桥强度，不能从环境交叉偏导直接判因果互补。",
+      "legend": "a，A4平均配比处全部136对可行局部转移；转移矩阵反对称，对角为不转移。方向限凸包可行步长，未独立标定质量桥。b，固定Pile-CC补偿、各域+0.005后的联合对比；负值是该操作下互补，正值是替代。λ=1为−1.844e−5/+1.172e−5；arXiv/FreeLaw在λ=0翻号。确定性假设诊断，无置信区间。",
+      "panel_roles": [
+        "组成约束下的可行梯度",
+        "组合操作的桥强度敏感性"
+      ],
+      "archetype": "quantitative grid",
+      "sources": [
+        "audits/review_followup_20260926/computed_evidence.json",
+        "outputs/Q2/domain_pair_substitution.csv"
+      ],
+      "size_inches": [
+        7.204724409448819,
+        6.3
+      ],
+      "dpi": 300,
+      "visual_review": "pending"
+    },
+    {
+      "stem": "Q2_05",
+      "claim": "轨迹、同族方向与桥压力分别支持有限结论，不能合成为真实跨族绝对精度。",
+      "legend": "a，15条曲线各一点评估；B2/B3用于轨迹形状及插值一致性，不是独立同Loss坐标外测。B4/B5支持内同族方向12/12与7/7，不能辨别多数单调模型。B10 128条estimated记录全部超过B1规模上界，不作真实验证。b，三种确定性桥假设示例2.385343/2.344348/2.303352；没有A/B成对标定或统计区间。",
+      "panel_roles": [
+        "轨迹与支持比例",
+        "跨附件假设幅度"
+      ],
+      "archetype": "quantitative grid",
+      "sources": [
+        "outputs/Q2/b2_b3_model_validation.csv",
+        "outputs/Q2/quality_bridge_sensitivity.csv",
+        "outputs/Q2/scale_order_validation.csv"
+      ],
+      "size_inches": [
+        7.204724409448819,
+        5.0
+      ],
+      "dpi": 300,
+      "visual_review": "pending"
+    },
+    {
+      "stem": "Q3_01",
+      "claim": "低预算受到上下文成本约束，高预算受到支持上界约束。",
+      "legend": "幂成本、Q0=0.5、87个满足质量约束的观测候选，官方预算10^19/10^22/10^24。线仅连接有序预算配置；131072上下文在低预算不可行，未补零。高预算N/D达到共同支持上界，不能解释为真实最优停止扩张。全部为条件模型优化。",
+      "panel_roles": [
+        "N–D资源轨迹",
+        "目标响应与不可行缺口"
+      ],
+      "archetype": "quantitative grid",
+      "sources": [
+        "outputs/Q3/observed_joint_grid.csv"
+      ],
+      "size_inches": [
+        7.204724409448819,
+        5.1
+      ],
+      "dpi": 300,
+      "visual_review": "pending"
+    },
+    {
+      "stem": "Q3_02",
+      "claim": "长上下文提高注意力成本，成本形式改变可负担的配置。",
+      "legend": "a，分母是实际C_total，不是预算；10^24预算利用率约2.76%，不能把未花预算算成成本份额。b，固定10^22预算，各点分别优化其候选配方和N/D。成本函数属于题设工程假设，没有观测重复或误差区间。",
+      "panel_roles": [
+        "预算支出的机制组成",
+        "成本形式敏感性"
+      ],
+      "archetype": "quantitative grid",
+      "sources": [
+        "outputs/Q3/observed_joint_grid.csv"
+      ],
+      "size_inches": [
+        7.204724409448819,
+        4.9
+      ],
+      "dpi": 300,
+      "visual_review": "pending"
+    },
+    {
+      "stem": "Q3_03",
+      "claim": "配方跳变是有限候选切换，独立质量处理的转折是另一模型机制。",
+      "legend": "a，161个对数预算点，三上下文，幂成本；空白表示不可行。不连接无序配方编号。b，固定172、8192上下文，native Q_B转折位于[1.22887598,1.22896234]×10^19和[1.08599453,1.08607084]×10^20；横线为数值状态范围，不是置信区间，边界相对宽度7.03e−5。不得称为真实训练相变。",
+      "panel_roles": [
+        "离散配方与可行性",
+        "独立质量的数值状态"
+      ],
+      "archetype": "quantitative grid",
+      "sources": [
+        "audits/review_followup_round2_20260926/native_q_transitions.json",
+        "outputs/Q3/observed_budget_scan.csv"
+      ],
+      "size_inches": [
+        7.204724409448819,
+        5.1
+      ],
+      "dpi": 300,
+      "visual_review": "pending"
+    },
+    {
+      "stem": "Q3_04",
+      "claim": "跨附件桥假设直接影响决策，不能只展示单一基准。",
+      "legend": "九种预先给定工程情景，共243=9×27官方配置；a固定幂成本、8192上下文，仅编号展示类别，空白不可行。b合并可行性与配方改变，分母27，非重复实验。桥斜率、λ及Q0没有真实成对标定；这些范围不是概率或置信区间。",
+      "panel_roles": [
+        "假设对具体配方的影响",
+        "全部配置覆盖"
+      ],
+      "archetype": "quantitative grid",
+      "sources": [
+        "outputs/Q3/assumption_official_grid.csv",
+        "outputs/Q3/assumption_sensitivity.json"
+      ],
+      "size_inches": [
+        7.204724409448819,
+        5.7
+      ],
+      "dpi": 300,
+      "visual_review": "pending"
+    },
+    {
+      "stem": "Q3_05",
+      "claim": "独立质量处理是声明机制的敏感性分支，不能替代观测配方证据。",
+      "legend": "8192上下文、幂成本，官方三预算及10^20诊断预算。线连接四个有序离散预算，不推断连续路径。独立处理固定172配方，QB可在0.5–1优化；配方代理来自未标定A→B桥。native低预算QB=0.5、中高预算接近1；两分支都为条件计算。",
+      "panel_roles": [
+        "两机制资源分配",
+        "两机制质量变化"
+      ],
+      "archetype": "quantitative grid",
+      "sources": [
+        "outputs/Q3/native_Q_sensitivity_grid.csv",
+        "outputs/Q3/observed_joint_grid.csv"
+      ],
+      "size_inches": [
+        7.204724409448819,
+        5.0
+      ],
+      "dpi": 300,
+      "visual_review": "pending"
+    },
+    {
+      "stem": "Q3_06",
+      "claim": "外部训练支持N–D排序及受限选择，尚不验证完整N–D–Q–配比机制。",
+      "legend": "a，三语料各14次真实公开训练，使用各语料内秩，不比较跨坐标绝对Loss。Spearman约0.9736/0.9868/0.9736。b，只保留10^20和10^21训练成本预算，6组中5组零遗憾；RefinedWeb另一组0.070515。仅训练成本、离散候选，不含质量、配方或注意力干预。",
+      "panel_roles": [
+        "全部外部训练秩一致性",
+        "受限离散决策检验"
+      ],
+      "archetype": "quantitative grid",
+      "sources": [
+        "outputs/Q3/external_nd_budget_comparison.csv",
+        "outputs/Q3/external_nd_runs.csv"
+      ],
+      "size_inches": [
+        7.204724409448819,
+        5.1
+      ],
+      "dpi": 300,
+      "visual_review": "pending"
+    },
+    {
+      "stem": "Q4_01",
+      "claim": "同规模时间变化解释部分历史上升，但没有识别纯技术因果效应。",
+      "legend": "主要过滤、首末各2个月、0.5 decade规模分箱，不控制开发者。a每点为共同层均分，面积反映层权重。b后训练规模−0.7579、时间6.5212、差额−1.5415，基座−3.7557/4.6356/−2.0716；前两项是标准化变化，第三项合为全样本变化。开发者控制仅保留极少记录；未排除数据量、选择或评估混杂，不使用因果术语。",
+      "panel_roles": [
+        "共同支持中的变化",
+        "变化分解及覆盖限制"
+      ],
+      "archetype": "quantitative grid",
+      "sources": [
+        "outputs/Q4/historical_common_cells.csv",
+        "outputs/Q4/historical_standardized_contributions.csv"
+      ],
+      "size_inches": [
+        7.204724409448819,
+        5.0
+      ],
+      "dpi": 300,
+      "visual_review": "pending"
+    },
+    {
+      "stem": "Q4_02",
+      "claim": "后训练的分位资源形式短期误差较低，基座常数形式更稳，但各模型R²仍为负。",
+      "legend": "每格是一个起点的未来2个月残差，各模型同4窗口；不是独立训练重复，不给显著性或覆盖率结论。后训练RMSE2.1992，基座常数7.6331，基座分位资源10.561；形式选择和检验共享短期数据。12/24个月情景不由此获得长期准确性保证。",
+      "panel_roles": [
+        "后训练误差结构",
+        "基座误差结构"
+      ],
+      "archetype": "quantitative grid",
+      "sources": [
+        "outputs/Q4/frontier_model_comparison.csv",
+        "outputs/Q4/rolling_two_month_frontier.csv"
+      ],
+      "size_inches": [
+        7.204724409448819,
+        5.0
+      ],
+      "dpi": 300,
+      "visual_review": "pending"
+    },
+    {
+      "stem": "Q4_03",
+      "claim": "最高纪录需要尾部假设；情景范围没有长期预测覆盖率保证。",
+      "legend": "预测起点固定在2025年3月，不是当前日期。半速算力下后训练12/24个月q90为53.8278/66.6810，最高纪录情景60.6000/73.4532；基座q90约21.0319而累计纪录保持38.441。q90细线为固定假设5–95%条件自助范围；紫线累计最高加入尾差，不能当同一统计目标。c仅后训练24个月，范围61.9828–69.8046、37.7548–90.6216、31.5900–96.7864；不是置信区间。四回测窗口无新纪录，纪录延续基线RMSE=0，尾差动态尚未验证优于它。",
+      "panel_roles": [
+        "后训练两种目标",
+        "基座两种目标",
+        "范围来源分层"
+      ],
+      "archetype": "quantitative grid",
+      "sources": [
+        "outputs/Q4/frontier_candidate_forecasts.csv",
+        "outputs/Q4/frontier_maximum_scenarios.csv",
+        "outputs/Q4/frontier_scenario_union.csv"
+      ],
+      "size_inches": [
+        7.204724409448819,
+        5.8
+      ],
+      "dpi": 300,
+      "visual_review": "pending"
+    },
+    {
+      "stem": "Q4_04",
+      "claim": "来源内映射可诊断，Q3 Loss到能力的跨来源坐标仍未识别。",
+      "legend": "a/b分别n=4/6，点为C6记录，曲线为冻结logistic映射，不跨Loss坐标混拟合；留一RMSE7.0475/2.6553，比常数10.7083/15.0745低。Pythia映射不优于常数，排除为主桥。c，缺失表示无支持或不可行，不补零；固定与联合在支持预算均选172而重合。d，27种确定性坐标及上游压力组合的支持内范围，22/23种支持；黑点为名义桥。不是统计区间、真实能力训练结果或未来前沿预测。",
+      "panel_roles": [
+        "Qwen2来源证据",
+        "Qwen2.5来源证据",
+        "三机制条件兑换",
+        "坐标和上游假设范围"
+      ],
+      "archetype": "quantitative grid",
+      "sources": [
+        "outputs/Q4/bridge_source_coordinate_models.csv",
+        "outputs/Q4/prepared/bridge_sample.csv",
+        "outputs/Q4/q3_bridge_conclusion_sensitivity.csv"
+      ],
+      "size_inches": [
+        7.204724409448819,
+        6.6
+      ],
+      "dpi": 300,
+      "visual_review": "pending"
+    },
+    {
+      "stem": "Q4_05",
+      "claim": "不同附件任务、年代与门控不能直接拼成统一能力曲线。",
+      "legend": "a，1860个成功解析结果各一点，24任务等权；标准差是任务差异而非模型均分置信区间，4个解析失败单列。b，4599行全列，混合来源只核对指标，不作为同口径时间轨迹；26历史行Average与六均分绝对差均值9.101。c，只画2021–24完整年份，两门控年度资源增长倍数4.901/3.986；严格样本81、宽口径93。未改写原始附件。",
+      "panel_roles": [
+        "BBH任务异质性",
+        "评分口径审计",
+        "资源门控敏感性"
+      ],
+      "archetype": "quantitative grid",
+      "sources": [
+        "outputs/Q4/c3_row_metric_audit.csv",
+        "outputs/Q4/c4_annual_resource_comparison.csv",
+        "outputs/Q4/c8_bbh_task_aggregation.csv"
+      ],
+      "size_inches": [
+        7.204724409448819,
+        5.2
+      ],
+      "dpi": 300,
+      "visual_review": "pending"
+    }
+  ],
+  "inputs": {
+    "audits/review_followup_20260926/computed_evidence.json": "97612b5230ccebfd888f1ec51282612e82027ded38c4d308611cf5fb623d8dc5",
+    "outputs/Q1/ANSWER.md": "bb9fe076a86034f91514462f87e6c476f3568498bfbbc3bec251e45629d88a3a",
+    "outputs/Q1/conflict_validation.json": "82a04c3b745d0852cde40fd20232f709b379ed0151d2e4af95b6bd8cd33bada9",
+    "outputs/Q1/domain_quality.csv": "ab7f13f9d0ff3d0683152d53933a89337cc3fadfefa9b2383772ea9fe3c2d976",
+    "outputs/Q1/estimated_decision_stress.csv": "b404f2f6ac183c3254160e42730ddd21ab9a0327a3945586b755b1a82e7ace68",
+    "outputs/Q1/estimated_targetwise.csv": "e67dc1793233d108620028d5d76bc7daf49bade7fac32cf9f9bc539156dcd0e3",
+    "outputs/Q1/hull_bounds.json": "969f810c0bf54f03492afc243091c339aaf4b27aed5c2164c186e651c7589acc",
+    "outputs/Q1/interaction_coefficients_13_targets.json": "92e2e64976b7618626ef5d07b253794f105b3b1beeaacc989f13045e6c422b04",
+    "outputs/Q1/recipes_512.csv": "9744030382b8ac87fbd838a0b34580d0debff5ea3fb23f0b8846ca7c91f0742d",
+    "outputs/Q1/refit_replicate_choices.csv": "99502e5ecef0971cd2905c38998cc171315d9b1f2b709afb94c8387c73134a35",
+    "outputs/Q1/targetwise_oof.csv": "c8e1076e644a3439cdd71909605e84678555f1e7f5927cdc3d327b5581101aa4",
+    "outputs/Q1/targetwise_validation.csv": "4412c4302d4e850f85fdc84568261f02df2eedb5e329c915baf19f41d9f8d0ae",
+    "outputs/Q2/b2_b3_model_validation.csv": "5d3d2d2103bdd9b70508ca0c532298d6de2620e690402906d4fefacd2ce7ca45",
+    "outputs/Q2/b7_backbone_comparison.csv": "750bf618371d4a23f8daf36956859f5745a524cd865f0a5756c37e8ffdf15de6",
+    "outputs/Q2/b7_quality_extension.json": "30819a5931b0552c1ef207f52f489f9d4ecaf427166bec25a98ce7319ac3d07b",
+    "outputs/Q2/domain_pair_substitution.csv": "0f3315dbf416b3612e8a33e79094436cd970d7c59f7bfa01520e39b554263099",
+    "outputs/Q2/marginals_elasticities.csv": "96a8815eb1bd4162bfba692a2651fa952b0c7bc16a04a3fbf9273f757090109a",
+    "outputs/Q2/model_coefficients.json": "3e0e10b845035f325d676660813f79908ba48014e1291598227f60a039832ada",
+    "outputs/Q2/quality_bridge_sensitivity.csv": "f5b68e9207be61a473f91bbd8023045aa599927f99e64af9aee17060935354c9",
+    "outputs/Q2/quality_scale_local_tradeoff.csv": "7bb21f2b00b15bc555d25f1c41bab488808722de3de5f6cb18afd42d12ddeaee",
+    "outputs/Q2/scale_order_validation.csv": "88391026a0716bc466a0535e4ac9d75e4ede96a6c3d4637a5e8ce719c611bf58",
+    "audits/review_followup_round2_20260926/native_q_transitions.json": "abfc91d661d100049e71a9adbd55d6ec8a7f4f6606bee3b34469d1ac61aa16fd",
+    "outputs/Q3/assumption_official_grid.csv": "4947a515502ab448516133d028175ab9e371c366e8684fcd7c7b237ee7854696",
+    "outputs/Q3/assumption_sensitivity.json": "c57ea1fa659401ec610765ec248839cba13ba45667fb04bea485e43a9cbe2b1d",
+    "outputs/Q3/external_nd_budget_comparison.csv": "bc08f0aafd9c11cff3862581a07a43ccb975e057bb7eaa5af6bd4611aae28a37",
+    "outputs/Q3/external_nd_runs.csv": "d7dc42d26734ec8bce48a84d5981016f6e59f689fb1bdf1177163e5cfdee79d1",
+    "outputs/Q3/native_Q_sensitivity_grid.csv": "d8c6f006448fb5fb4fcddef0cf2f5e19e2f7e416014b5732bea080ced6dce527",
+    "outputs/Q3/observed_budget_scan.csv": "69fed2eba936343096e7df0f927c670eb504e7f9e3b8fece11badfe6b85031db",
+    "outputs/Q3/observed_joint_grid.csv": "8fc644e7b956a0e1b35bfcf219fd0573392a31e68e532d9248432661049af3da",
+    "outputs/Q4/bridge_source_coordinate_models.csv": "091074a44e64dc2e5aea73301b118b4d6ffe17ede35369c6efa431221fc69c17",
+    "outputs/Q4/c3_row_metric_audit.csv": "76e2e939a53bd4a3a157c00fb1b5b94ca887569953c6a71b3302af87f35fcfcb",
+    "outputs/Q4/c4_annual_resource_comparison.csv": "97a650cb2f15afdfdfeafadc0868e51c3efecffac0731388b6bc04c7ca403937",
+    "outputs/Q4/c8_bbh_task_aggregation.csv": "eb31d167d2e0a4b5e2133b71688788f89050e031d70fcb73783f04e49e52553a",
+    "outputs/Q4/frontier_candidate_forecasts.csv": "84f2fd60611abbffb6b09dc5c1f779a7849f5268c25a0a9cbc7b118c497ead76",
+    "outputs/Q4/frontier_maximum_scenarios.csv": "368bd65ae7bfba680aef82150809e1f39657672830206619e5b55c2e8cfe613d",
+    "outputs/Q4/frontier_model_comparison.csv": "674c75a8f12b4b9fde8928938119296bfc8a86ea8873a073e2a8efef60e6e69d",
+    "outputs/Q4/frontier_scenario_union.csv": "3193da8f3f3d29512003d6af93cd364b7e1ce8a76d5998492d7b3b57fa501411",
+    "outputs/Q4/historical_common_cells.csv": "c62204982e187bd73b6978e5703e302ebdb530fde09e6baceb9ab64a29759711",
+    "outputs/Q4/historical_standardized_contributions.csv": "21f60da5422cdc2d4405310443dbf62cb5009a272fded3f3e08cf4352a63fe40",
+    "outputs/Q4/prepared/bridge_sample.csv": "ead8c15e7bfefa589978c855f17cd70141f99446738c78eb4dc939c958f842dd",
+    "outputs/Q4/q3_bridge_conclusion_sensitivity.csv": "7dfbaa2881cd112648c7841441bbade702ad16ce1ec10dfad850d5f0e3f619a3",
+    "outputs/Q4/rolling_two_month_frontier.csv": "f6f3556606bf074eef250991d1eedc070ae8e6bc9c14508c130560275e287c31"
+  },
+  "qa": {
+    "Q1_01": {
+      "alignment_verdict": "PASS",
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "minimum_font_pt": 7.5,
+      "small_glyphs": 0
+    },
+    "Q1_02": {
+      "alignment_verdict": "PASS",
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "minimum_font_pt": 7.5,
+      "small_glyphs": 0
+    },
+    "Q1_03": {
+      "alignment_verdict": "PASS",
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "minimum_font_pt": 7.5,
+      "small_glyphs": 0
+    },
+    "Q1_04": {
+      "alignment_verdict": "PASS",
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "minimum_font_pt": 7.5,
+      "small_glyphs": 0
+    },
+    "Q1_05": {
+      "alignment_verdict": "PASS",
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "minimum_font_pt": 7.5,
+      "small_glyphs": 0
+    },
+    "Q2_01": {
+      "alignment_verdict": "PASS",
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "minimum_font_pt": 7.5,
+      "small_glyphs": 0
+    },
+    "Q2_02": {
+      "alignment_verdict": "PASS",
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "minimum_font_pt": 7.0,
+      "small_glyphs": 0
+    },
+    "Q2_03": {
+      "alignment_verdict": "PASS",
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "minimum_font_pt": 7.0,
+      "small_glyphs": 0
+    },
+    "Q2_04": {
+      "alignment_verdict": "PASS",
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "minimum_font_pt": 6.0,
+      "small_glyphs": 0
+    },
+    "Q2_05": {
+      "alignment_verdict": "PASS",
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "minimum_font_pt": 7.5,
+      "small_glyphs": 0
+    },
+    "Q3_01": {
+      "alignment_verdict": "PASS",
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "minimum_font_pt": 5.25,
+      "small_glyphs": 0
+    },
+    "Q3_02": {
+      "alignment_verdict": "PASS",
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "minimum_font_pt": 5.25,
+      "small_glyphs": 0
+    },
+    "Q3_03": {
+      "alignment_verdict": "PASS",
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "minimum_font_pt": 5.25,
+      "small_glyphs": 0
+    },
+    "Q3_04": {
+      "alignment_verdict": "PASS",
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 27,
+        "contained_image_overlays": 0
+      },
+      "minimum_font_pt": 5.25,
+      "small_glyphs": 0
+    },
+    "Q3_05": {
+      "alignment_verdict": "PASS",
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "minimum_font_pt": 5.25,
+      "small_glyphs": 0
+    },
+    "Q3_06": {
+      "alignment_verdict": "PASS",
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "minimum_font_pt": 6.5,
+      "small_glyphs": 0
+    },
+    "Q4_01": {
+      "alignment_verdict": "PASS",
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "minimum_font_pt": 7.5,
+      "small_glyphs": 0
+    },
+    "Q4_02": {
+      "alignment_verdict": "PASS",
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "minimum_font_pt": 7.5,
+      "small_glyphs": 0
+    },
+    "Q4_03": {
+      "alignment_verdict": "PASS",
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "minimum_font_pt": 7.5,
+      "small_glyphs": 0
+    },
+    "Q4_04": {
+      "alignment_verdict": "PASS",
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "minimum_font_pt": 5.25,
+      "small_glyphs": 0
+    },
+    "Q4_05": {
+      "alignment_verdict": "PASS",
+      "collision_exit": 0,
+      "collision_summary": {
+        "fail": 0,
+        "warn": 0,
+        "contained_fill_overlays": 0,
+        "contained_image_overlays": 0
+      },
+      "minimum_font_pt": 7.0,
+      "small_glyphs": 0
+    }
+  },
+  "script_sha256": "2a4260b6024f2f4d1b3116f467228a591091d64cefc3c0f26f5d92218d11c0c1"
+}

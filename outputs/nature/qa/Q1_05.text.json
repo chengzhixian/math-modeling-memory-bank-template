@@ -1,0 +1,9 @@
+{
+  "auditable": true,
+  "minimum_required_pt": 5,
+  "minimum_found_pt": 7.5,
+  "text_run_count": 55,
+  "below_minimum_count": 0,
+  "below_minimum": [],
+  "warnings": []
+}
