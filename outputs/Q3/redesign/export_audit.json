@@ -1,0 +1,672 @@
+{
+  "01_configuration.pdf": {
+    "issues": [
+      [
+        "WARN",
+        "PDF 中以下字体可能未嵌入: /DVJCIF+DejaVuSans, /FMTUEY+MicrosoftYaHei, /TUUPZT+MicrosoftYaHei-Bold. 导致他人电脑打开变成替代字体。"
+      ]
+    ],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\01_configuration.pdf",
+      "ext": "pdf",
+      "size_bytes": 70369,
+      "category": "vector"
+    },
+    "font_embedding": [
+      {
+        "name": "DVJCIF+DejaVuSans",
+        "subtype": "Type0",
+        "embedded_bytes": 4640
+      },
+      {
+        "name": "FMTUEY+MicrosoftYaHei",
+        "subtype": "Type0",
+        "embedded_bytes": 57272
+      },
+      {
+        "name": "TUUPZT+MicrosoftYaHei-Bold",
+        "subtype": "Type0",
+        "embedded_bytes": 13020
+      }
+    ],
+    "font_warning_resolution": "Type0 descendant fonts independently verified via nonempty embedded font bytes; checker false positive."
+  },
+  "01_configuration.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\01_configuration.png",
+      "ext": "png",
+      "size_bytes": 280954,
+      "category": "raster",
+      "size_px": [
+        2160,
+        1800
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "01_configuration.svg": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\01_configuration.svg",
+      "ext": "svg",
+      "size_bytes": 62387,
+      "category": "vector"
+    }
+  },
+  "01_configuration_gray.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\01_configuration_gray.png",
+      "ext": "png",
+      "size_bytes": 123770,
+      "category": "raster",
+      "size_px": [
+        2160,
+        1800
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "02_budget_paths.pdf": {
+    "issues": [
+      [
+        "WARN",
+        "PDF 中以下字体可能未嵌入: /DVJCIF+DejaVuSans, /FEOBCY+MicrosoftYaHei, /HKDXTZ+MicrosoftYaHei-Bold. 导致他人电脑打开变成替代字体。"
+      ]
+    ],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\02_budget_paths.pdf",
+      "ext": "pdf",
+      "size_bytes": 69843,
+      "category": "vector"
+    },
+    "font_embedding": [
+      {
+        "name": "DVJCIF+DejaVuSans",
+        "subtype": "Type0",
+        "embedded_bytes": 4640
+      },
+      {
+        "name": "FEOBCY+MicrosoftYaHei",
+        "subtype": "Type0",
+        "embedded_bytes": 54756
+      },
+      {
+        "name": "HKDXTZ+MicrosoftYaHei-Bold",
+        "subtype": "Type0",
+        "embedded_bytes": 18408
+      }
+    ],
+    "font_warning_resolution": "Type0 descendant fonts independently verified via nonempty embedded font bytes; checker false positive."
+  },
+  "02_budget_paths.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\02_budget_paths.png",
+      "ext": "png",
+      "size_bytes": 313044,
+      "category": "raster",
+      "size_px": [
+        2160,
+        2220
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "02_budget_paths.svg": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\02_budget_paths.svg",
+      "ext": "svg",
+      "size_bytes": 66809,
+      "category": "vector"
+    }
+  },
+  "02_budget_paths_gray.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\02_budget_paths_gray.png",
+      "ext": "png",
+      "size_bytes": 135731,
+      "category": "raster",
+      "size_px": [
+        2160,
+        2220
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "03_recipe_switch.pdf": {
+    "issues": [
+      [
+        "WARN",
+        "PDF 中以下字体可能未嵌入: /CPNOOF+DejaVuSans, /DKCISQ+MicrosoftYaHei-Bold, /FVIIQC+MicrosoftYaHei. 导致他人电脑打开变成替代字体。"
+      ]
+    ],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\03_recipe_switch.pdf",
+      "ext": "pdf",
+      "size_bytes": 59992,
+      "category": "vector"
+    },
+    "font_embedding": [
+      {
+        "name": "CPNOOF+DejaVuSans",
+        "subtype": "Type0",
+        "embedded_bytes": 4884
+      },
+      {
+        "name": "FVIIQC+MicrosoftYaHei",
+        "subtype": "Type0",
+        "embedded_bytes": 51972
+      },
+      {
+        "name": "DKCISQ+MicrosoftYaHei-Bold",
+        "subtype": "Type0",
+        "embedded_bytes": 15888
+      }
+    ],
+    "font_warning_resolution": "Type0 descendant fonts independently verified via nonempty embedded font bytes; checker false positive."
+  },
+  "03_recipe_switch.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\03_recipe_switch.png",
+      "ext": "png",
+      "size_bytes": 232882,
+      "category": "raster",
+      "size_px": [
+        2160,
+        1860
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "03_recipe_switch.svg": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\03_recipe_switch.svg",
+      "ext": "svg",
+      "size_bytes": 20768,
+      "category": "vector"
+    }
+  },
+  "03_recipe_switch_gray.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\03_recipe_switch_gray.png",
+      "ext": "png",
+      "size_bytes": 103054,
+      "category": "raster",
+      "size_px": [
+        2160,
+        1860
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "04_cost_allocation.pdf": {
+    "issues": [
+      [
+        "WARN",
+        "PDF 中以下字体可能未嵌入: /DVJCIF+DejaVuSans, /DQUMVI+MicrosoftYaHei-Bold, /GQZHHA+MicrosoftYaHei. 导致他人电脑打开变成替代字体。"
+      ]
+    ],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\04_cost_allocation.pdf",
+      "ext": "pdf",
+      "size_bytes": 59717,
+      "category": "vector"
+    },
+    "font_embedding": [
+      {
+        "name": "DVJCIF+DejaVuSans",
+        "subtype": "Type0",
+        "embedded_bytes": 4640
+      },
+      {
+        "name": "GQZHHA+MicrosoftYaHei",
+        "subtype": "Type0",
+        "embedded_bytes": 53780
+      },
+      {
+        "name": "DQUMVI+MicrosoftYaHei-Bold",
+        "subtype": "Type0",
+        "embedded_bytes": 13676
+      }
+    ],
+    "font_warning_resolution": "Type0 descendant fonts independently verified via nonempty embedded font bytes; checker false positive."
+  },
+  "04_cost_allocation.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\04_cost_allocation.png",
+      "ext": "png",
+      "size_bytes": 221999,
+      "category": "raster",
+      "size_px": [
+        2160,
+        1800
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "04_cost_allocation.svg": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\04_cost_allocation.svg",
+      "ext": "svg",
+      "size_bytes": 35191,
+      "category": "vector"
+    }
+  },
+  "04_cost_allocation_gray.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\04_cost_allocation_gray.png",
+      "ext": "png",
+      "size_bytes": 99158,
+      "category": "raster",
+      "size_px": [
+        2160,
+        1800
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "05_cost_families.pdf": {
+    "issues": [
+      [
+        "WARN",
+        "PDF 中以下字体可能未嵌入: /FCDTRM+MicrosoftYaHei, /LPLDII+DejaVuSans, /GGVBGU+MicrosoftYaHei-Bold. 导致他人电脑打开变成替代字体。"
+      ]
+    ],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\05_cost_families.pdf",
+      "ext": "pdf",
+      "size_bytes": 51467,
+      "category": "vector"
+    },
+    "font_embedding": [
+      {
+        "name": "LPLDII+DejaVuSans",
+        "subtype": "Type0",
+        "embedded_bytes": 4432
+      },
+      {
+        "name": "FCDTRM+MicrosoftYaHei",
+        "subtype": "Type0",
+        "embedded_bytes": 41788
+      },
+      {
+        "name": "GGVBGU+MicrosoftYaHei-Bold",
+        "subtype": "Type0",
+        "embedded_bytes": 15592
+      }
+    ],
+    "font_warning_resolution": "Type0 descendant fonts independently verified via nonempty embedded font bytes; checker false positive."
+  },
+  "05_cost_families.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\05_cost_families.png",
+      "ext": "png",
+      "size_bytes": 196153,
+      "category": "raster",
+      "size_px": [
+        2160,
+        1440
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "05_cost_families.svg": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\05_cost_families.svg",
+      "ext": "svg",
+      "size_bytes": 14692,
+      "category": "vector"
+    }
+  },
+  "05_cost_families_gray.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\05_cost_families_gray.png",
+      "ext": "png",
+      "size_bytes": 90104,
+      "category": "raster",
+      "size_px": [
+        2160,
+        1440
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "06_context_cost.pdf": {
+    "issues": [
+      [
+        "WARN",
+        "PDF 中以下字体可能未嵌入: /DIENAC+MicrosoftYaHei-Bold, /FIJWGN+MicrosoftYaHei. 导致他人电脑打开变成替代字体。"
+      ]
+    ],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\06_context_cost.pdf",
+      "ext": "pdf",
+      "size_bytes": 55745,
+      "category": "vector"
+    },
+    "font_embedding": [
+      {
+        "name": "FIJWGN+MicrosoftYaHei",
+        "subtype": "Type0",
+        "embedded_bytes": 51844
+      },
+      {
+        "name": "DIENAC+MicrosoftYaHei-Bold",
+        "subtype": "Type0",
+        "embedded_bytes": 17000
+      }
+    ],
+    "font_warning_resolution": "Type0 descendant fonts independently verified via nonempty embedded font bytes; checker false positive."
+  },
+  "06_context_cost.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\06_context_cost.png",
+      "ext": "png",
+      "size_bytes": 216724,
+      "category": "raster",
+      "size_px": [
+        2160,
+        1440
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "06_context_cost.svg": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\06_context_cost.svg",
+      "ext": "svg",
+      "size_bytes": 18046,
+      "category": "vector"
+    }
+  },
+  "06_context_cost_gray.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\06_context_cost_gray.png",
+      "ext": "png",
+      "size_bytes": 94686,
+      "category": "raster",
+      "size_px": [
+        2160,
+        1440
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "07_assumptions.pdf": {
+    "issues": [
+      [
+        "WARN",
+        "PDF 中以下字体可能未嵌入: /PXZFDC+DejaVuSans, /ZGQLNX+MicrosoftYaHei-Bold, /GSIVYC+DejaVuSans-Oblique, /DAOOJG+MicrosoftYaHei. 导致他人电脑打开变成替代字体。"
+      ]
+    ],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\07_assumptions.pdf",
+      "ext": "pdf",
+      "size_bytes": 65810,
+      "category": "vector"
+    },
+    "font_embedding": [
+      {
+        "name": "GSIVYC+DejaVuSans-Oblique",
+        "subtype": "Type0",
+        "embedded_bytes": 3728
+      },
+      {
+        "name": "PXZFDC+DejaVuSans",
+        "subtype": "Type0",
+        "embedded_bytes": 5028
+      },
+      {
+        "name": "DAOOJG+MicrosoftYaHei",
+        "subtype": "Type0",
+        "embedded_bytes": 54728
+      },
+      {
+        "name": "ZGQLNX+MicrosoftYaHei-Bold",
+        "subtype": "Type0",
+        "embedded_bytes": 16348
+      }
+    ],
+    "font_warning_resolution": "Type0 descendant fonts independently verified via nonempty embedded font bytes; checker false positive."
+  },
+  "07_assumptions.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\07_assumptions.png",
+      "ext": "png",
+      "size_bytes": 215579,
+      "category": "raster",
+      "size_px": [
+        2160,
+        1740
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "07_assumptions.svg": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\07_assumptions.svg",
+      "ext": "svg",
+      "size_bytes": 21529,
+      "category": "vector"
+    }
+  },
+  "07_assumptions_gray.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\07_assumptions_gray.png",
+      "ext": "png",
+      "size_bytes": 98685,
+      "category": "raster",
+      "size_px": [
+        2160,
+        1740
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "08_independent_quality.pdf": {
+    "issues": [
+      [
+        "WARN",
+        "PDF 中以下字体可能未嵌入: /DVJCIF+DejaVuSans, /DGPIQZ+MicrosoftYaHei, /FHNROM+MicrosoftYaHei-Bold. 导致他人电脑打开变成替代字体。"
+      ]
+    ],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\08_independent_quality.pdf",
+      "ext": "pdf",
+      "size_bytes": 73894,
+      "category": "vector"
+    },
+    "font_embedding": [
+      {
+        "name": "DVJCIF+DejaVuSans",
+        "subtype": "Type0",
+        "embedded_bytes": 4640
+      },
+      {
+        "name": "DGPIQZ+MicrosoftYaHei",
+        "subtype": "Type0",
+        "embedded_bytes": 64036
+      },
+      {
+        "name": "FHNROM+MicrosoftYaHei-Bold",
+        "subtype": "Type0",
+        "embedded_bytes": 17076
+      }
+    ],
+    "font_warning_resolution": "Type0 descendant fonts independently verified via nonempty embedded font bytes; checker false positive."
+  },
+  "08_independent_quality.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\08_independent_quality.png",
+      "ext": "png",
+      "size_bytes": 313854,
+      "category": "raster",
+      "size_px": [
+        2160,
+        2040
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "08_independent_quality.svg": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\08_independent_quality.svg",
+      "ext": "svg",
+      "size_bytes": 81390,
+      "category": "vector"
+    }
+  },
+  "08_independent_quality_gray.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\08_independent_quality_gray.png",
+      "ext": "png",
+      "size_bytes": 139432,
+      "category": "raster",
+      "size_px": [
+        2160,
+        2040
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "09_external_ranks.pdf": {
+    "issues": [
+      [
+        "WARN",
+        "PDF 中以下字体可能未嵌入: /JVQIUY+MicrosoftYaHei, /GNOLRF+MicrosoftYaHei-Bold. 导致他人电脑打开变成替代字体。"
+      ]
+    ],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\09_external_ranks.pdf",
+      "ext": "pdf",
+      "size_bytes": 59678,
+      "category": "vector"
+    },
+    "font_embedding": [
+      {
+        "name": "JVQIUY+MicrosoftYaHei",
+        "subtype": "Type0",
+        "embedded_bytes": 58156
+      },
+      {
+        "name": "GNOLRF+MicrosoftYaHei-Bold",
+        "subtype": "Type0",
+        "embedded_bytes": 14400
+      }
+    ],
+    "font_warning_resolution": "Type0 descendant fonts independently verified via nonempty embedded font bytes; checker false positive."
+  },
+  "09_external_ranks.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\09_external_ranks.png",
+      "ext": "png",
+      "size_bytes": 268335,
+      "category": "raster",
+      "size_px": [
+        2160,
+        1440
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "09_external_ranks.svg": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\09_external_ranks.svg",
+      "ext": "svg",
+      "size_bytes": 22727,
+      "category": "vector"
+    }
+  },
+  "09_external_ranks_gray.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q3\\redesign\\09_external_ranks_gray.png",
+      "ext": "png",
+      "size_bytes": 120661,
+      "category": "raster",
+      "size_px": [
+        2160,
+        1440
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  }
+}

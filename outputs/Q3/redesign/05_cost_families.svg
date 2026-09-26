@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="518.4pt" height="345.6pt" viewBox="0 0 518.4 345.6" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-09-26T12:12:42.141332</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 345.6
+L 518.4 345.6
+L 518.4 0
+L 0 0
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 72.576 252.288
+L 250.374347 252.288
+L 250.374347 72.576
+L 72.576 72.576
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 138.714894 252.288
+L 138.714894 72.576
+" clip-path="url(#pe6d82ac32c)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_2"/>
+     <g id="text_1">
+      <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #243746" x="138.714894" y="263.784094" transform="rotate(-0 138.714894 263.784094)">3.15</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <path d="M 208.486262 252.288
+L 208.486262 72.576
+" clip-path="url(#pe6d82ac32c)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_4"/>
+     <g id="text_2">
+      <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #243746" x="208.486262" y="263.784094" transform="rotate(-0 208.486262 263.784094)">3.20</text>
+     </g>
+    </g>
+    <g id="text_3">
+     <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #243746" x="161.475174" y="282.518937" transform="rotate(-0 161.475174 282.518937)">条件预测 Loss（局部放大）</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_5"/>
+     <g id="text_4">
+      <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: end; fill: #243746" x="67.576" y="110.783618" transform="rotate(-0 67.576 110.783618)">指数成本</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_6"/>
+     <g id="text_5">
+      <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: end; fill: #243746" x="67.576" y="164.428991" transform="rotate(-0 67.576 164.428991)">幂成本</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_7"/>
+     <g id="text_6">
+      <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: end; fill: #243746" x="67.576" y="218.074364" transform="rotate(-0 67.576 218.074364)">对数成本</text>
+     </g>
+    </g>
+   </g>
+   <g id="PathCollection_1">
+    <defs>
+     <path id="mab5397ed94" d="M 0 3.162278
+C 0.838646 3.162278 1.643056 2.82908 2.236068 2.236068
+C 2.82908 1.643056 3.162278 0.838646 3.162278 0
+C 3.162278 -0.838646 2.82908 -1.643056 2.236068 -2.236068
+C 1.643056 -2.82908 0.838646 -3.162278 0 -3.162278
+C -0.838646 -3.162278 -1.643056 -2.82908 -2.236068 -2.236068
+C -2.82908 -1.643056 -3.162278 -0.838646 -3.162278 0
+C -3.162278 0.838646 -2.82908 1.643056 -2.236068 2.236068
+C -1.643056 2.82908 -0.838646 3.162278 0 3.162278
+z
+" style="stroke: #0072b2"/>
+    </defs>
+    <g clip-path="url(#pe6d82ac32c)">
+     <use xlink:href="#mab5397ed94" x="109.181542" y="107.445493" style="fill: #0072b2; stroke: #0072b2"/>
+    </g>
+   </g>
+   <g id="PathCollection_2">
+    <defs>
+     <path id="mf8bbfdffee" d="M -3.162278 3.162278
+L 3.162278 3.162278
+L 3.162278 -3.162278
+L -3.162278 -3.162278
+z
+" style="stroke: #0072b2"/>
+    </defs>
+    <g clip-path="url(#pe6d82ac32c)">
+     <use xlink:href="#mf8bbfdffee" x="213.768805" y="161.090866" style="fill: #0072b2; stroke: #0072b2"/>
+    </g>
+   </g>
+   <g id="PathCollection_3">
+    <defs>
+     <path id="m4f80a25427" d="M 0 -3.162278
+L -3.162278 3.162278
+L 3.162278 3.162278
+z
+" style="stroke: #0072b2"/>
+    </defs>
+    <g clip-path="url(#pe6d82ac32c)">
+     <use xlink:href="#m4f80a25427" x="198.359851" y="214.736239" style="fill: #0072b2; stroke: #0072b2"/>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 72.576 252.288
+L 72.576 72.576
+" style="fill: none; stroke: #cad5dd; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 72.576 252.288
+L 250.374347 252.288
+" style="fill: none; stroke: #cad5dd; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 7.8px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #243746" x="109.181542" y="95.64351" transform="rotate(-0 109.181542 95.64351)">3.128836</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 7.8px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #243746" x="213.768805" y="149.288884" transform="rotate(-0 213.768805 149.288884)">3.203786</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 7.8px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #243746" x="198.359851" y="202.934257" transform="rotate(-0 198.359851 202.934257)">3.192743</text>
+   </g>
+   <g id="text_10">
+    <!-- 预算 $10^{19}$ FLOPs -->
+    <g style="fill: #243746" transform="translate(123.025174 60.576)">
+     <text>
+      <tspan x="0" y="-0.674688" style="font-size: 10px; font-family: 'Microsoft YaHei'; fill: #243746">预</tspan>
+      <tspan x="10" y="-0.674688" style="font-size: 10px; font-family: 'Microsoft YaHei'; fill: #243746">算</tspan>
+      <tspan x="20" y="-0.674688" style="font-size: 10px; font-family: 'Microsoft YaHei'; fill: #243746"> </tspan>
+      <tspan x="44.959961" y="-0.674688" style="font-size: 10px; font-family: 'Microsoft YaHei'; fill: #243746"> </tspan>
+      <tspan x="47.918945" y="-0.674688" style="font-size: 10px; font-family: 'Microsoft YaHei'; fill: #243746">F</tspan>
+      <tspan x="53.231445" y="-0.674688" style="font-size: 10px; font-family: 'Microsoft YaHei'; fill: #243746">L</tspan>
+      <tspan x="58.363281" y="-0.674688" style="font-size: 10px; font-family: 'Microsoft YaHei'; fill: #243746">O</tspan>
+      <tspan x="66.512695" y="-0.674688" style="font-size: 10px; font-family: 'Microsoft YaHei'; fill: #243746">P</tspan>
+      <tspan x="72.630859" y="-0.674688" style="font-size: 10px; font-family: 'Microsoft YaHei'; fill: #243746">s</tspan>
+      <tspan x="22.958984" y="-0.674688" style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #243746">1</tspan>
+      <tspan x="29.321289" y="-0.674688" style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #243746">0</tspan>
+      <tspan x="35.779297" y="-4.804688" style="font-size: 7px; font-family: 'DejaVu Sans'; fill: #243746">1</tspan>
+      <tspan x="40.23291" y="-4.804688" style="font-size: 7px; font-family: 'DejaVu Sans'; fill: #243746">9</tspan>
+     </text>
+    </g>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_5">
+    <path d="M 325.049653 252.288
+L 502.848 252.288
+L 502.848 72.576
+L 325.049653 72.576
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_3">
+    <g id="xtick_3">
+     <g id="line2d_8">
+      <path d="M 382.665649 252.288
+L 382.665649 72.576
+" clip-path="url(#p4c954fa41e)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_9"/>
+     <g id="text_11">
+      <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #243746" x="382.665649" y="263.784094" transform="rotate(-0 382.665649 263.784094)">2.0940</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_10">
+      <path d="M 481.889865 252.288
+L 481.889865 72.576
+" clip-path="url(#p4c954fa41e)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_11"/>
+     <g id="text_12">
+      <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #243746" x="481.889865" y="263.784094" transform="rotate(-0 481.889865 263.784094)">2.0945</text>
+     </g>
+    </g>
+    <g id="text_13">
+     <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #243746" x="413.948826" y="282.518937" transform="rotate(-0 413.948826 282.518937)">条件预测 Loss（局部放大）</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_4">
+    <g id="ytick_4">
+     <g id="line2d_12"/>
+     <g id="text_14">
+      <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: end; fill: #243746" x="320.049653" y="110.783618" transform="rotate(-0 320.049653 110.783618)">指数成本</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_13"/>
+     <g id="text_15">
+      <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: end; fill: #243746" x="320.049653" y="164.428991" transform="rotate(-0 320.049653 164.428991)">幂成本</text>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_14"/>
+     <g id="text_16">
+      <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: end; fill: #243746" x="320.049653" y="218.074364" transform="rotate(-0 320.049653 218.074364)">对数成本</text>
+     </g>
+    </g>
+   </g>
+   <g id="PathCollection_4">
+    <g clip-path="url(#p4c954fa41e)">
+     <use xlink:href="#mab5397ed94" x="361.655195" y="107.445493" style="fill: #0072b2; stroke: #0072b2"/>
+    </g>
+   </g>
+   <g id="PathCollection_5">
+    <g clip-path="url(#p4c954fa41e)">
+     <use xlink:href="#mf8bbfdffee" x="466.242458" y="161.090866" style="fill: #0072b2; stroke: #0072b2"/>
+    </g>
+   </g>
+   <g id="PathCollection_6">
+    <g clip-path="url(#p4c954fa41e)">
+     <use xlink:href="#m4f80a25427" x="405.077969" y="214.736239" style="fill: #0072b2; stroke: #0072b2"/>
+    </g>
+   </g>
+   <g id="patch_6">
+    <path d="M 325.049653 252.288
+L 325.049653 72.576
+" style="fill: none; stroke: #cad5dd; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 325.049653 252.288
+L 502.848 252.288
+" style="fill: none; stroke: #cad5dd; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 7.8px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #243746" x="361.655195" y="95.64351" transform="rotate(-0 361.655195 95.64351)">2.093894</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 7.8px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #243746" x="466.242458" y="149.288884" transform="rotate(-0 466.242458 149.288884)">2.094421</text>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 7.8px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #243746" x="405.077969" y="202.934257" transform="rotate(-0 405.077969 202.934257)">2.094113</text>
+   </g>
+   <g id="text_20">
+    <!-- 预算 $10^{22}$ FLOPs -->
+    <g style="fill: #243746" transform="translate(375.498826 60.576)">
+     <text>
+      <tspan x="0" y="-0.674688" style="font-size: 10px; font-family: 'Microsoft YaHei'; fill: #243746">预</tspan>
+      <tspan x="10" y="-0.674688" style="font-size: 10px; font-family: 'Microsoft YaHei'; fill: #243746">算</tspan>
+      <tspan x="20" y="-0.674688" style="font-size: 10px; font-family: 'Microsoft YaHei'; fill: #243746"> </tspan>
+      <tspan x="44.959961" y="-0.674688" style="font-size: 10px; font-family: 'Microsoft YaHei'; fill: #243746"> </tspan>
+      <tspan x="47.918945" y="-0.674688" style="font-size: 10px; font-family: 'Microsoft YaHei'; fill: #243746">F</tspan>
+      <tspan x="53.231445" y="-0.674688" style="font-size: 10px; font-family: 'Microsoft YaHei'; fill: #243746">L</tspan>
+      <tspan x="58.363281" y="-0.674688" style="font-size: 10px; font-family: 'Microsoft YaHei'; fill: #243746">O</tspan>
+      <tspan x="66.512695" y="-0.674688" style="font-size: 10px; font-family: 'Microsoft YaHei'; fill: #243746">P</tspan>
+      <tspan x="72.630859" y="-0.674688" style="font-size: 10px; font-family: 'Microsoft YaHei'; fill: #243746">s</tspan>
+      <tspan x="22.958984" y="-0.674688" style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #243746">1</tspan>
+      <tspan x="29.321289" y="-0.674688" style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #243746">0</tspan>
+      <tspan x="35.779297" y="-4.804688" style="font-size: 7px; font-family: 'DejaVu Sans'; fill: #243746">2</tspan>
+      <tspan x="40.23291" y="-4.804688" style="font-size: 7px; font-family: 'DejaVu Sans'; fill: #243746">2</tspan>
+     </text>
+    </g>
+   </g>
+  </g>
+  <g id="text_21">
+   <text style="font-weight: 700; font-size: 14px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #243746" x="12.96" y="16.922125" transform="rotate(-0 12.96 16.922125)">05  质量成本形式会影响条件配置</text>
+  </g>
+  <g id="text_22">
+   <text style="font-size: 8.5px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #718096" x="12.96" y="29.245119" transform="rotate(-0 12.96 29.245119)">8192 Token；分开显示低预算与中预算，横轴为明确放大的 Loss 局部范围</text>
+  </g>
+  <g id="text_23">
+   <text style="font-size: 7.5px; font-family: 'Microsoft YaHei'; fill: #718096" transform="translate(12.96 319.772219)">低预算指数成本选择 172，幂 / 对数成本选择 477；中预算三族均选择 172。</text>
+   <text style="font-size: 7.5px; font-family: 'Microsoft YaHei'; fill: #718096" transform="translate(12.96 332.978591)">两面板横轴范围不同；10^24 FLOPs 下三族都触及 N、D 上界，得到相同条件 Loss。</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pe6d82ac32c">
+   <rect x="72.576" y="72.576" width="177.798347" height="179.712"/>
+  </clipPath>
+  <clipPath id="p4c954fa41e">
+   <rect x="325.049653" y="72.576" width="177.798347" height="179.712"/>
+  </clipPath>
+ </defs>
+</svg>

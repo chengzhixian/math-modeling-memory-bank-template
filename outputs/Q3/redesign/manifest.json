@@ -1,0 +1,124 @@
+{
+  "source_main": "b789e3fc02ba894c4787ea351f87e56fc4e7daa8",
+  "model": "chm.q3.conditional_v8.release.v1",
+  "producer": "frozen CSVs; no refit or optimization",
+  "inputs": {
+    "outputs\\Q3\\ANSWER.md": "61c45c3266d9a7e5d140abdfbf928362e23065c5f93f17e1dfc495824f982310",
+    "outputs\\Q3\\assumption_official_grid.csv": "4947a515502ab448516133d028175ab9e371c366e8684fcd7c7b237ee7854696",
+    "outputs\\Q3\\assumption_sensitivity.json": "c57ea1fa659401ec610765ec248839cba13ba45667fb04bea485e43a9cbe2b1d",
+    "outputs\\Q3\\curated_manifest.json": "c1989b05f965f71d8829d25a983e9f40ce18e984b5eabfc6752e8f0b0b3f88b6",
+    "outputs\\Q3\\external_nd_audit.json": "04ff8e296cddc1ad9ed42307f23217c06151e90ebc5207470c8981ac8afaa1b4",
+    "outputs\\Q3\\external_nd_budget_comparison.csv": "bc08f0aafd9c11cff3862581a07a43ccb975e057bb7eaa5af6bd4611aae28a37",
+    "outputs\\Q3\\external_nd_runs.csv": "d7dc42d26734ec8bce48a84d5981016f6e59f689fb1bdf1177163e5cfdee79d1",
+    "outputs\\Q3\\fixed_budget_scan.csv": "2492491c19620d42e0e1f7e6925e29e369beb9de3b50eea113365a1d9281b563",
+    "outputs\\Q3\\manifest.json": "de8be3b4283e15b0fbdfe8b8bd8bf1232ec11dd2de30895ce517d29d9082ca6d",
+    "outputs\\Q3\\native_Q_sensitivity_grid.csv": "d8c6f006448fb5fb4fcddef0cf2f5e19e2f7e416014b5732bea080ced6dce527",
+    "outputs\\Q3\\observed_budget_scan.csv": "69fed2eba936343096e7df0f927c670eb504e7f9e3b8fece11badfe6b85031db",
+    "outputs\\Q3\\observed_joint_grid.csv": "8fc644e7b956a0e1b35bfcf219fd0573392a31e68e532d9248432661049af3da",
+    "outputs\\Q3\\transitions.csv": "68cf3fb6cc20cda0c5c563da2b92707c41ad008645234e29c56d2baf0a0c5997"
+  },
+  "scripts": {
+    "src\\visualization\\q3_redesign.py": "d07252f0dd793d9028aa57dd199664ca60ddf05ec571df1d92efe66c8778bac5",
+    "src\\visualization\\q2_redesign.py": "917ef50a03393bb474acc353de381cbb1417c85c1fe297d6989e2fd2fdd1c11f"
+  },
+  "figures": [
+    {
+      "stem": "01_configuration",
+      "caption": "候选为 87 个符合质量与映射政策的已观测 A4 配方；不是连续凸包全局最优。\n最高预算触及 N、D 支持上界；不可行格不填零。质量随配方确定，跨源桥尚未标定。",
+      "size_inches": [
+        7.2,
+        6.0
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "02_budget_paths",
+      "caption": "每条曲线来自 161 个对数预算点；缺失段为支持域内不可行，不跨缺口连线。\n灰虚线为 N、D 上限；平台由支持范围限制形成，不说明域外投入没有价值。",
+      "size_inches": [
+        7.2,
+        7.4
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "03_recipe_switch",
+      "caption": "切换括区：[1.610535, 1.610648] × 10^19 FLOPs；橙线为括区中点，仅作定位。\nq 为配方决定的代理，不是独立干预；数值状态转移不等于真实训练的物理相变。",
+      "size_inches": [
+        7.2,
+        6.2
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "04_cost_allocation",
+      "caption": "左侧：预算 FLOPs · 上下文 Token；右侧为总预算使用率，不是各项成本占比。\n最高预算的灰色部分主要来自 N、D 支持上限；不可行状态不解释为零成本。",
+      "size_inches": [
+        7.2,
+        6.0
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "05_cost_families",
+      "caption": "低预算指数成本选择 172，幂 / 对数成本选择 477；中预算三族均选择 172。\n两面板横轴范围不同；10^24 FLOPs 下三族都触及 N、D 上界，得到相同条件 Loss。",
+      "size_inches": [
+        7.2,
+        4.8
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "06_context_cost",
+      "caption": "彩色标记对应 C7 提供的外生上下文情景；连续线来自成本代理的代数式。\n临界长度不是观测能力阈值；此比值不包含质量投入，131072 Token 的 C7 支持稀疏。",
+      "size_inches": [
+        7.2,
+        4.8
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "07_assumptions",
+      "caption": "全部指定情景仍为 24 / 27 格可行；λ=0 时所有 24 个可行格的推荐配方均改变。\n右侧为 8192 Token、幂成本下的低 / 中预算配方；情景不代表置信区间或概率分布。\nQ0 为质量基线；s 为质量映射斜率倍数；λ 为配比桥强度。",
+      "size_inches": [
+        7.2,
+        5.8
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "08_independent_quality",
+      "caption": "10^20 为额外诊断预算；其余三档为题面预算。独立 Q_B 使用 B7 半合成质量坐标。\n两方案的质量生成机制及配方限制不同；原生质量敏感性不证明 A 侧质量可被独立操控。",
+      "size_inches": [
+        7.2,
+        6.8
+      ],
+      "dpi": 300
+    },
+    {
+      "stem": "09_external_ranks",
+      "caption": "排名 1 表示最低 Loss；对角虚线为排名一致。预算筛选真正限制候选的 6 组中命中 5 组。\nRefinedWeb 的 10^21 组未命中，实测 Loss regret≈0.0705；外测不含可对齐 Q / p。\n仅复算冻结公开表的排序与选择，不是完整 N、D、Q、p 最优的真实实验验证。",
+      "size_inches": [
+        7.2,
+        4.8
+      ],
+      "dpi": 300
+    }
+  ],
+  "layout_audit": {
+    "01_configuration": [],
+    "02_budget_paths": [],
+    "03_recipe_switch": [],
+    "04_cost_allocation": [],
+    "05_cost_families": [],
+    "06_context_cost": [],
+    "07_assumptions": [],
+    "08_independent_quality": [],
+    "09_external_ranks": []
+  },
+  "visual_review": "reviewed previews before vector export",
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "3.0.1"
+  }
+}

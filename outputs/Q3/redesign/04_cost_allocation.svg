@@ -1,0 +1,738 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="518.4pt" height="432pt" viewBox="0 0 518.4 432" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-09-26T12:12:40.891881</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 432
+L 518.4 432
+L 518.4 0
+L 0 0
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 108.864 336.96
+L 435.456 336.96
+L 435.456 90.72
+L 108.864 90.72
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 108.864 336.96
+L 108.864 90.72
+" clip-path="url(#pd452739dbd)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_2"/>
+     <g id="text_1">
+      <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #243746" x="108.864" y="348.456094" transform="rotate(-0 108.864 348.456094)">0</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <path d="M 174.1824 336.96
+L 174.1824 90.72
+" clip-path="url(#pd452739dbd)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_4"/>
+     <g id="text_2">
+      <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #243746" x="174.1824" y="348.456094" transform="rotate(-0 174.1824 348.456094)">20</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_5">
+      <path d="M 239.5008 336.96
+L 239.5008 90.72
+" clip-path="url(#pd452739dbd)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6"/>
+     <g id="text_3">
+      <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #243746" x="239.5008" y="348.456094" transform="rotate(-0 239.5008 348.456094)">40</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_7">
+      <path d="M 304.8192 336.96
+L 304.8192 90.72
+" clip-path="url(#pd452739dbd)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_8"/>
+     <g id="text_4">
+      <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #243746" x="304.8192" y="348.456094" transform="rotate(-0 304.8192 348.456094)">60</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_9">
+      <path d="M 370.1376 336.96
+L 370.1376 90.72
+" clip-path="url(#pd452739dbd)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_10"/>
+     <g id="text_5">
+      <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #243746" x="370.1376" y="348.456094" transform="rotate(-0 370.1376 348.456094)">80</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_11">
+      <path d="M 435.456 336.96
+L 435.456 90.72
+" clip-path="url(#pd452739dbd)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_12"/>
+     <g id="text_6">
+      <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #243746" x="435.456" y="348.456094" transform="rotate(-0 435.456 348.456094)">100</text>
+     </g>
+    </g>
+    <g id="text_7">
+     <text style="font-size: 9px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #243746" x="272.16" y="362.002656" transform="rotate(-0 272.16 362.002656)">占给定预算比例（%）</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_13"/>
+     <g id="text_8">
+      <!-- $10^{19}$ · 2,048 -->
+      <g style="fill: #243746" transform="translate(58.904 110.53913)">
+       <text>
+        <tspan x="0" y="-0.53975" style="font-size: 8px; font-family: 'DejaVu Sans'; fill: #243746">1</tspan>
+        <tspan x="5.089844" y="-0.53975" style="font-size: 8px; font-family: 'DejaVu Sans'; fill: #243746">0</tspan>
+        <tspan x="10.25625" y="-3.84375" style="font-size: 5.6px; font-family: 'DejaVu Sans'; fill: #243746">1</tspan>
+        <tspan x="13.819141" y="-3.84375" style="font-size: 5.6px; font-family: 'DejaVu Sans'; fill: #243746">9</tspan>
+        <tspan x="17.600781" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746"> </tspan>
+        <tspan x="19.967969" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">·</tspan>
+        <tspan x="21.89375" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746"> </tspan>
+        <tspan x="24.260938" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">2</tspan>
+        <tspan x="28.952344" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">,</tspan>
+        <tspan x="30.878125" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">0</tspan>
+        <tspan x="35.569531" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">4</tspan>
+        <tspan x="40.260937" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">8</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_14"/>
+     <g id="text_9">
+      <!-- $10^{19}$ · 8,192 -->
+      <g style="fill: #243746" transform="translate(58.904 137.304348)">
+       <text>
+        <tspan x="0" y="-0.53975" style="font-size: 8px; font-family: 'DejaVu Sans'; fill: #243746">1</tspan>
+        <tspan x="5.089844" y="-0.53975" style="font-size: 8px; font-family: 'DejaVu Sans'; fill: #243746">0</tspan>
+        <tspan x="10.25625" y="-3.84375" style="font-size: 5.6px; font-family: 'DejaVu Sans'; fill: #243746">1</tspan>
+        <tspan x="13.819141" y="-3.84375" style="font-size: 5.6px; font-family: 'DejaVu Sans'; fill: #243746">9</tspan>
+        <tspan x="17.600781" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746"> </tspan>
+        <tspan x="19.967969" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">·</tspan>
+        <tspan x="21.89375" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746"> </tspan>
+        <tspan x="24.260938" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">8</tspan>
+        <tspan x="28.952344" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">,</tspan>
+        <tspan x="30.878125" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">1</tspan>
+        <tspan x="35.569531" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">9</tspan>
+        <tspan x="40.260937" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">2</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_15"/>
+     <g id="text_10">
+      <!-- $10^{19}$ · 131,072 -->
+      <g style="fill: #243746" transform="translate(49.464 164.069565)">
+       <text>
+        <tspan x="0" y="-0.53975" style="font-size: 8px; font-family: 'DejaVu Sans'; fill: #243746">1</tspan>
+        <tspan x="5.089844" y="-0.53975" style="font-size: 8px; font-family: 'DejaVu Sans'; fill: #243746">0</tspan>
+        <tspan x="10.25625" y="-3.84375" style="font-size: 5.6px; font-family: 'DejaVu Sans'; fill: #243746">1</tspan>
+        <tspan x="13.819141" y="-3.84375" style="font-size: 5.6px; font-family: 'DejaVu Sans'; fill: #243746">9</tspan>
+        <tspan x="17.600781" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746"> </tspan>
+        <tspan x="19.967969" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">·</tspan>
+        <tspan x="21.89375" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746"> </tspan>
+        <tspan x="24.260938" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">1</tspan>
+        <tspan x="28.952344" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">3</tspan>
+        <tspan x="33.64375" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">1</tspan>
+        <tspan x="38.335156" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">,</tspan>
+        <tspan x="40.260937" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">0</tspan>
+        <tspan x="44.952344" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">7</tspan>
+        <tspan x="49.64375" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">2</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_16"/>
+     <g id="text_11">
+      <!-- $10^{22}$ · 2,048 -->
+      <g style="fill: #243746" transform="translate(58.904 190.834783)">
+       <text>
+        <tspan x="0" y="-0.53975" style="font-size: 8px; font-family: 'DejaVu Sans'; fill: #243746">1</tspan>
+        <tspan x="5.089844" y="-0.53975" style="font-size: 8px; font-family: 'DejaVu Sans'; fill: #243746">0</tspan>
+        <tspan x="10.25625" y="-3.84375" style="font-size: 5.6px; font-family: 'DejaVu Sans'; fill: #243746">2</tspan>
+        <tspan x="13.819141" y="-3.84375" style="font-size: 5.6px; font-family: 'DejaVu Sans'; fill: #243746">2</tspan>
+        <tspan x="17.600781" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746"> </tspan>
+        <tspan x="19.967969" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">·</tspan>
+        <tspan x="21.89375" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746"> </tspan>
+        <tspan x="24.260938" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">2</tspan>
+        <tspan x="28.952344" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">,</tspan>
+        <tspan x="30.878125" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">0</tspan>
+        <tspan x="35.569531" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">4</tspan>
+        <tspan x="40.260937" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">8</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_17"/>
+     <g id="text_12">
+      <!-- $10^{22}$ · 8,192 -->
+      <g style="fill: #243746" transform="translate(58.904 217.6)">
+       <text>
+        <tspan x="0" y="-0.53975" style="font-size: 8px; font-family: 'DejaVu Sans'; fill: #243746">1</tspan>
+        <tspan x="5.089844" y="-0.53975" style="font-size: 8px; font-family: 'DejaVu Sans'; fill: #243746">0</tspan>
+        <tspan x="10.25625" y="-3.84375" style="font-size: 5.6px; font-family: 'DejaVu Sans'; fill: #243746">2</tspan>
+        <tspan x="13.819141" y="-3.84375" style="font-size: 5.6px; font-family: 'DejaVu Sans'; fill: #243746">2</tspan>
+        <tspan x="17.600781" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746"> </tspan>
+        <tspan x="19.967969" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">·</tspan>
+        <tspan x="21.89375" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746"> </tspan>
+        <tspan x="24.260938" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">8</tspan>
+        <tspan x="28.952344" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">,</tspan>
+        <tspan x="30.878125" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">1</tspan>
+        <tspan x="35.569531" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">9</tspan>
+        <tspan x="40.260937" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">2</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_18"/>
+     <g id="text_13">
+      <!-- $10^{22}$ · 131,072 -->
+      <g style="fill: #243746" transform="translate(49.464 244.365217)">
+       <text>
+        <tspan x="0" y="-0.53975" style="font-size: 8px; font-family: 'DejaVu Sans'; fill: #243746">1</tspan>
+        <tspan x="5.089844" y="-0.53975" style="font-size: 8px; font-family: 'DejaVu Sans'; fill: #243746">0</tspan>
+        <tspan x="10.25625" y="-3.84375" style="font-size: 5.6px; font-family: 'DejaVu Sans'; fill: #243746">2</tspan>
+        <tspan x="13.819141" y="-3.84375" style="font-size: 5.6px; font-family: 'DejaVu Sans'; fill: #243746">2</tspan>
+        <tspan x="17.600781" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746"> </tspan>
+        <tspan x="19.967969" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">·</tspan>
+        <tspan x="21.89375" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746"> </tspan>
+        <tspan x="24.260938" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">1</tspan>
+        <tspan x="28.952344" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">3</tspan>
+        <tspan x="33.64375" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">1</tspan>
+        <tspan x="38.335156" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">,</tspan>
+        <tspan x="40.260937" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">0</tspan>
+        <tspan x="44.952344" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">7</tspan>
+        <tspan x="49.64375" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">2</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_7">
+     <g id="line2d_19"/>
+     <g id="text_14">
+      <!-- $10^{24}$ · 2,048 -->
+      <g style="fill: #243746" transform="translate(58.904 271.130435)">
+       <text>
+        <tspan x="0" y="-0.53975" style="font-size: 8px; font-family: 'DejaVu Sans'; fill: #243746">1</tspan>
+        <tspan x="5.089844" y="-0.53975" style="font-size: 8px; font-family: 'DejaVu Sans'; fill: #243746">0</tspan>
+        <tspan x="10.25625" y="-3.84375" style="font-size: 5.6px; font-family: 'DejaVu Sans'; fill: #243746">2</tspan>
+        <tspan x="13.819141" y="-3.84375" style="font-size: 5.6px; font-family: 'DejaVu Sans'; fill: #243746">4</tspan>
+        <tspan x="17.600781" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746"> </tspan>
+        <tspan x="19.967969" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">·</tspan>
+        <tspan x="21.89375" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746"> </tspan>
+        <tspan x="24.260938" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">2</tspan>
+        <tspan x="28.952344" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">,</tspan>
+        <tspan x="30.878125" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">0</tspan>
+        <tspan x="35.569531" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">4</tspan>
+        <tspan x="40.260937" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">8</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_8">
+     <g id="line2d_20"/>
+     <g id="text_15">
+      <!-- $10^{24}$ · 8,192 -->
+      <g style="fill: #243746" transform="translate(58.904 297.895652)">
+       <text>
+        <tspan x="0" y="-0.53975" style="font-size: 8px; font-family: 'DejaVu Sans'; fill: #243746">1</tspan>
+        <tspan x="5.089844" y="-0.53975" style="font-size: 8px; font-family: 'DejaVu Sans'; fill: #243746">0</tspan>
+        <tspan x="10.25625" y="-3.84375" style="font-size: 5.6px; font-family: 'DejaVu Sans'; fill: #243746">2</tspan>
+        <tspan x="13.819141" y="-3.84375" style="font-size: 5.6px; font-family: 'DejaVu Sans'; fill: #243746">4</tspan>
+        <tspan x="17.600781" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746"> </tspan>
+        <tspan x="19.967969" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">·</tspan>
+        <tspan x="21.89375" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746"> </tspan>
+        <tspan x="24.260938" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">8</tspan>
+        <tspan x="28.952344" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">,</tspan>
+        <tspan x="30.878125" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">1</tspan>
+        <tspan x="35.569531" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">9</tspan>
+        <tspan x="40.260937" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">2</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_9">
+     <g id="line2d_21"/>
+     <g id="text_16">
+      <!-- $10^{24}$ · 131,072 -->
+      <g style="fill: #243746" transform="translate(49.464 324.66087)">
+       <text>
+        <tspan x="0" y="-0.53975" style="font-size: 8px; font-family: 'DejaVu Sans'; fill: #243746">1</tspan>
+        <tspan x="5.089844" y="-0.53975" style="font-size: 8px; font-family: 'DejaVu Sans'; fill: #243746">0</tspan>
+        <tspan x="10.25625" y="-3.84375" style="font-size: 5.6px; font-family: 'DejaVu Sans'; fill: #243746">2</tspan>
+        <tspan x="13.819141" y="-3.84375" style="font-size: 5.6px; font-family: 'DejaVu Sans'; fill: #243746">4</tspan>
+        <tspan x="17.600781" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746"> </tspan>
+        <tspan x="19.967969" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">·</tspan>
+        <tspan x="21.89375" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746"> </tspan>
+        <tspan x="24.260938" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">1</tspan>
+        <tspan x="28.952344" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">3</tspan>
+        <tspan x="33.64375" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">1</tspan>
+        <tspan x="38.335156" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">,</tspan>
+        <tspan x="40.260937" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">0</tspan>
+        <tspan x="44.952344" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">7</tspan>
+        <tspan x="49.64375" y="-0.53975" style="font-size: 8px; font-family: 'Microsoft YaHei'; fill: #243746">2</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 108.864 98.481913
+L 312.65509 98.481913
+L 312.65509 115.076348
+L 108.864 115.076348
+z
+" clip-path="url(#pd452739dbd)" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 312.65509 98.481913
+L 326.567229 98.481913
+L 326.567229 115.076348
+L 312.65509 115.076348
+z
+" clip-path="url(#pd452739dbd)" style="fill: #009e73; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 326.567229 98.481913
+L 435.456 98.481913
+L 435.456 115.076348
+L 326.567229 115.076348
+z
+" clip-path="url(#pd452739dbd)" style="fill: #e69f00; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 435.456 98.481913
+L 435.456 98.481913
+L 435.456 115.076348
+L 435.456 115.076348
+z
+" clip-path="url(#pd452739dbd)" style="fill: #dce4eb; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 108.864 125.24713
+L 279.870935 125.24713
+L 279.870935 141.841565
+L 108.864 141.841565
+z
+" clip-path="url(#pd452739dbd)" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 279.870935 125.24713
+L 326.567229 125.24713
+L 326.567229 141.841565
+L 279.870935 141.841565
+z
+" clip-path="url(#pd452739dbd)" style="fill: #009e73; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 326.567229 125.24713
+L 435.456 125.24713
+L 435.456 141.841565
+L 326.567229 141.841565
+z
+" clip-path="url(#pd452739dbd)" style="fill: #e69f00; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 435.456 125.24713
+L 435.456 125.24713
+L 435.456 141.841565
+L 435.456 141.841565
+z
+" clip-path="url(#pd452739dbd)" style="fill: #dce4eb; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 108.864 152.012348
+L 435.456 152.012348
+L 435.456 168.606783
+L 108.864 168.606783
+z
+" clip-path="url(#pd452739dbd)" style="fill: url(#hfacd8babe8); stroke: #cbd5df; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 108.864 178.777565
+L 410.053166 178.777565
+L 410.053166 195.372
+L 108.864 195.372
+z
+" clip-path="url(#pd452739dbd)" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 410.053166 178.777565
+L 430.614346 178.777565
+L 430.614346 195.372
+L 410.053166 195.372
+z
+" clip-path="url(#pd452739dbd)" style="fill: #009e73; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_14">
+    <path d="M 430.614346 178.777565
+L 435.456 178.777565
+L 435.456 195.372
+L 430.614346 195.372
+z
+" clip-path="url(#pd452739dbd)" style="fill: #e69f00; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_15">
+    <path d="M 435.456 178.777565
+L 435.456 178.777565
+L 435.456 195.372
+L 435.456 195.372
+z
+" clip-path="url(#pd452739dbd)" style="fill: #dce4eb; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_16">
+    <path d="M 108.864 205.542783
+L 361.905807 205.542783
+L 361.905807 222.137217
+L 108.864 222.137217
+z
+" clip-path="url(#pd452739dbd)" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_17">
+    <path d="M 361.905807 205.542783
+L 431.00309 205.542783
+L 431.00309 222.137217
+L 361.905807 222.137217
+z
+" clip-path="url(#pd452739dbd)" style="fill: #009e73; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_18">
+    <path d="M 431.00309 205.542783
+L 435.456 205.542783
+L 435.456 222.137217
+L 431.00309 222.137217
+z
+" clip-path="url(#pd452739dbd)" style="fill: #e69f00; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_19">
+    <path d="M 435.456 205.542783
+L 435.456 205.542783
+L 435.456 222.137217
+L 435.456 222.137217
+z
+" clip-path="url(#pd452739dbd)" style="fill: #dce4eb; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_20">
+    <path d="M 108.864 232.308
+L 169.282017 232.308
+L 169.282017 248.902435
+L 108.864 248.902435
+z
+" clip-path="url(#pd452739dbd)" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_21">
+    <path d="M 169.282017 232.308
+L 433.25236 232.308
+L 433.25236 248.902435
+L 169.282017 248.902435
+z
+" clip-path="url(#pd452739dbd)" style="fill: #009e73; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_22">
+    <path d="M 433.25236 232.308
+L 435.456 232.308
+L 435.456 248.902435
+L 433.25236 248.902435
+z
+" clip-path="url(#pd452739dbd)" style="fill: #e69f00; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_23">
+    <path d="M 435.456 232.308
+L 435.456 232.308
+L 435.456 248.902435
+L 435.456 248.902435
+z
+" clip-path="url(#pd452739dbd)" style="fill: #dce4eb; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_24">
+    <path d="M 108.864 259.073217
+L 115.895788 259.073217
+L 115.895788 275.667652
+L 108.864 275.667652
+z
+" clip-path="url(#pd452739dbd)" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_25">
+    <path d="M 115.895788 259.073217
+L 116.375825 259.073217
+L 116.375825 275.667652
+L 115.895788 275.667652
+z
+" clip-path="url(#pd452739dbd)" style="fill: #009e73; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_26">
+    <path d="M 116.375825 259.073217
+L 116.444704 259.073217
+L 116.444704 275.667652
+L 116.375825 275.667652
+z
+" clip-path="url(#pd452739dbd)" style="fill: #e69f00; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_27">
+    <path d="M 116.444704 259.073217
+L 435.456 259.073217
+L 435.456 275.667652
+L 116.444704 275.667652
+z
+" clip-path="url(#pd452739dbd)" style="fill: #dce4eb; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_28">
+    <path d="M 108.864 285.838435
+L 115.895788 285.838435
+L 115.895788 302.43287
+L 108.864 302.43287
+z
+" clip-path="url(#pd452739dbd)" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_29">
+    <path d="M 115.895788 285.838435
+L 117.815935 285.838435
+L 117.815935 302.43287
+L 115.895788 302.43287
+z
+" clip-path="url(#pd452739dbd)" style="fill: #009e73; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_30">
+    <path d="M 117.815935 285.838435
+L 117.884815 285.838435
+L 117.884815 302.43287
+L 117.815935 302.43287
+z
+" clip-path="url(#pd452739dbd)" style="fill: #e69f00; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_31">
+    <path d="M 117.884815 285.838435
+L 435.456 285.838435
+L 435.456 302.43287
+L 117.884815 302.43287
+z
+" clip-path="url(#pd452739dbd)" style="fill: #dce4eb; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_32">
+    <path d="M 108.864 312.603652
+L 115.895788 312.603652
+L 115.895788 329.198087
+L 108.864 329.198087
+z
+" clip-path="url(#pd452739dbd)" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_33">
+    <path d="M 115.895788 312.603652
+L 146.618139 312.603652
+L 146.618139 329.198087
+L 115.895788 329.198087
+z
+" clip-path="url(#pd452739dbd)" style="fill: #009e73; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_34">
+    <path d="M 146.618139 312.603652
+L 146.687018 312.603652
+L 146.687018 329.198087
+L 146.618139 329.198087
+z
+" clip-path="url(#pd452739dbd)" style="fill: #e69f00; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_35">
+    <path d="M 146.687018 312.603652
+L 435.456 312.603652
+L 435.456 329.198087
+L 146.687018 329.198087
+z
+" clip-path="url(#pd452739dbd)" style="fill: #dce4eb; stroke: #ffffff; stroke-width: 0.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="line2d_22">
+    <path d="M 108.864 173.692174
+L 435.456 173.692174
+" clip-path="url(#pd452739dbd)" style="fill: none; stroke: #e8eef2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_23">
+    <path d="M 108.864 253.987826
+L 435.456 253.987826
+" clip-path="url(#pd452739dbd)" style="fill: none; stroke: #e8eef2; stroke-linecap: square"/>
+   </g>
+   <g id="patch_36">
+    <path d="M 108.864 336.96
+L 108.864 90.72
+" style="fill: none; stroke: #cad5dd; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_37">
+    <path d="M 108.864 336.96
+L 435.456 336.96
+" style="fill: none; stroke: #cad5dd; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #243746" x="441.98784" y="109.013505" transform="rotate(-0 441.98784 109.013505)">100.00%</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #243746" x="441.98784" y="135.778723" transform="rotate(-0 441.98784 135.778723)">100.00%</text>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: middle; fill: #718096" x="272.16" y="162.637768" transform="rotate(-0 272.16 162.637768)">支持域内不可行</text>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #243746" x="441.98784" y="189.309158" transform="rotate(-0 441.98784 189.309158)">100.00%</text>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #243746" x="441.98784" y="216.074375" transform="rotate(-0 441.98784 216.074375)">100.00%</text>
+   </g>
+   <g id="text_22">
+    <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #243746" x="441.98784" y="242.839592" transform="rotate(-0 441.98784 242.839592)">100.00%</text>
+   </g>
+   <g id="text_23">
+    <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #243746" x="441.98784" y="269.60481" transform="rotate(-0 441.98784 269.60481)">2.32%</text>
+   </g>
+   <g id="text_24">
+    <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #243746" x="441.98784" y="296.370027" transform="rotate(-0 441.98784 296.370027)">2.76%</text>
+   </g>
+   <g id="text_25">
+    <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #243746" x="441.98784" y="323.135245" transform="rotate(-0 441.98784 323.135245)">11.58%</text>
+   </g>
+  </g>
+  <g id="text_26">
+   <text style="font-weight: 700; font-size: 14px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #243746" x="12.96" y="18.176563" transform="rotate(-0 12.96 18.176563)">04  三项成本与未使用预算的分配</text>
+  </g>
+  <g id="text_27">
+   <text style="font-size: 8.5px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #718096" x="12.96" y="34.798625" transform="rotate(-0 12.96 34.798625)">幂成本；所有色块均以给定预算为分母，保留支持上限造成的未使用部分</text>
+  </g>
+  <g id="text_28">
+   <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #718096" x="440.64" y="84.24" transform="rotate(-0 440.64 84.24)">使用率</text>
+  </g>
+  <g id="text_29">
+   <text style="font-size: 7.5px; font-family: 'Microsoft YaHei'; fill: #718096" transform="translate(12.96 404.030383)">左侧：预算 FLOPs · 上下文 Token；右侧为总预算使用率，不是各项成本占比。</text>
+   <text style="font-size: 7.5px; font-family: 'Microsoft YaHei'; fill: #718096" transform="translate(12.96 417.236755)">最高预算的灰色部分主要来自 N、D 支持上限；不可行状态不解释为零成本。</text>
+  </g>
+  <g id="legend_1">
+   <g id="patch_38">
+    <path d="M 155.136 66.372656
+L 171.136 66.372656
+L 171.136 60.772656
+L 155.136 60.772656
+z
+" style="fill: #0072b2"/>
+   </g>
+   <g id="text_30">
+    <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #243746" x="177.536" y="66.372656" transform="rotate(-0 177.536 66.372656)">基础训练</text>
+   </g>
+   <g id="patch_39">
+    <path d="M 225.536 66.372656
+L 241.536 66.372656
+L 241.536 60.772656
+L 225.536 60.772656
+z
+" style="fill: #009e73"/>
+   </g>
+   <g id="text_31">
+    <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #243746" x="247.936" y="66.372656" transform="rotate(-0 247.936 66.372656)">注意力</text>
+   </g>
+   <g id="patch_40">
+    <path d="M 287.936 66.372656
+L 303.936 66.372656
+L 303.936 60.772656
+L 287.936 60.772656
+z
+" style="fill: #e69f00"/>
+   </g>
+   <g id="text_32">
+    <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #243746" x="310.336" y="66.372656" transform="rotate(-0 310.336 66.372656)">质量投入</text>
+   </g>
+   <g id="patch_41">
+    <path d="M 358.336 66.372656
+L 374.336 66.372656
+L 374.336 60.772656
+L 358.336 60.772656
+z
+" style="fill: #dce4eb"/>
+   </g>
+   <g id="text_33">
+    <text style="font-size: 8px; font-family: 'Microsoft YaHei'; text-anchor: start; fill: #243746" x="380.736" y="66.372656" transform="rotate(-0 380.736 66.372656)">未使用</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pd452739dbd">
+   <rect x="108.864" y="90.72" width="326.592" height="246.24"/>
+  </clipPath>
+ </defs>
+ <defs>
+  <pattern id="hfacd8babe8" patternUnits="userSpaceOnUse" x="0" y="0" width="72" height="72">
+   <rect x="0" y="0" width="73" height="73" fill="#edf1f4"/>
+   <path d="M -36 36
+L 36 -36
+M -32 40
+L 40 -32
+M -28 44
+L 44 -28
+M -24 48
+L 48 -24
+M -20 52
+L 52 -20
+M -16 56
+L 56 -16
+M -12 60
+L 60 -12
+M -8 64
+L 64 -8
+M -4 68
+L 68 -4
+M 0 72
+L 72 0
+M 4 76
+L 76 4
+M 8 80
+L 80 8
+M 12 84
+L 84 12
+M 16 88
+L 88 16
+M 20 92
+L 92 20
+M 24 96
+L 96 24
+M 28 100
+L 100 28
+M 32 104
+L 104 32
+M 36 108
+L 108 36
+" style="fill: #cbd5df; stroke: #cbd5df; stroke-width: 1.0; stroke-linecap: butt; stroke-linejoin: miter"/>
+  </pattern>
+ </defs>
+</svg>

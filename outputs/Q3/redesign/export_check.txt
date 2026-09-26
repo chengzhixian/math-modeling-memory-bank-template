@@ -1,0 +1,171 @@
+
+--- outputs/Q3/redesign\01_configuration.png ---
+  category: raster  ext: png  size: 280954 B
+  pixels: 2160x1800  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs/Q3/redesign\01_configuration_gray.png ---
+  category: raster  ext: png  size: 123770 B
+  pixels: 2160x1800  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs/Q3/redesign\02_budget_paths.png ---
+  category: raster  ext: png  size: 313044 B
+  pixels: 2160x2220  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs/Q3/redesign\02_budget_paths_gray.png ---
+  category: raster  ext: png  size: 135731 B
+  pixels: 2160x2220  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs/Q3/redesign\03_recipe_switch.png ---
+  category: raster  ext: png  size: 232882 B
+  pixels: 2160x1860  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs/Q3/redesign\03_recipe_switch_gray.png ---
+  category: raster  ext: png  size: 103054 B
+  pixels: 2160x1860  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs/Q3/redesign\04_cost_allocation.png ---
+  category: raster  ext: png  size: 221999 B
+  pixels: 2160x1800  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs/Q3/redesign\04_cost_allocation_gray.png ---
+  category: raster  ext: png  size: 99158 B
+  pixels: 2160x1800  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs/Q3/redesign\05_cost_families.png ---
+  category: raster  ext: png  size: 196153 B
+  pixels: 2160x1440  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs/Q3/redesign\05_cost_families_gray.png ---
+  category: raster  ext: png  size: 90104 B
+  pixels: 2160x1440  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs/Q3/redesign\06_context_cost.png ---
+  category: raster  ext: png  size: 216724 B
+  pixels: 2160x1440  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs/Q3/redesign\06_context_cost_gray.png ---
+  category: raster  ext: png  size: 94686 B
+  pixels: 2160x1440  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs/Q3/redesign\07_assumptions.png ---
+  category: raster  ext: png  size: 215579 B
+  pixels: 2160x1740  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs/Q3/redesign\07_assumptions_gray.png ---
+  category: raster  ext: png  size: 98685 B
+  pixels: 2160x1740  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs/Q3/redesign\08_independent_quality.png ---
+  category: raster  ext: png  size: 313854 B
+  pixels: 2160x2040  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs/Q3/redesign\08_independent_quality_gray.png ---
+  category: raster  ext: png  size: 139432 B
+  pixels: 2160x2040  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs/Q3/redesign\09_external_ranks.png ---
+  category: raster  ext: png  size: 268335 B
+  pixels: 2160x1440  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs/Q3/redesign\09_external_ranks_gray.png ---
+  category: raster  ext: png  size: 120661 B
+  pixels: 2160x1440  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs/Q3/redesign\01_configuration.pdf ---
+  category: vector  ext: pdf  size: 70369 B
+  [WARN] PDF 中以下字体可能未嵌入: /TUUPZT+MicrosoftYaHei-Bold, /DVJCIF+DejaVuSans, /FMTUEY+MicrosoftYaHei. 导致他人电脑打开变成替代字体。
+  >>> verdict: WARN
+
+--- outputs/Q3/redesign\02_budget_paths.pdf ---
+  category: vector  ext: pdf  size: 69843 B
+  [WARN] PDF 中以下字体可能未嵌入: /HKDXTZ+MicrosoftYaHei-Bold, /FEOBCY+MicrosoftYaHei, /DVJCIF+DejaVuSans. 导致他人电脑打开变成替代字体。
+  >>> verdict: WARN
+
+--- outputs/Q3/redesign\03_recipe_switch.pdf ---
+  category: vector  ext: pdf  size: 59992 B
+  [WARN] PDF 中以下字体可能未嵌入: /FVIIQC+MicrosoftYaHei, /CPNOOF+DejaVuSans, /DKCISQ+MicrosoftYaHei-Bold. 导致他人电脑打开变成替代字体。
+  >>> verdict: WARN
+
+--- outputs/Q3/redesign\04_cost_allocation.pdf ---
+  category: vector  ext: pdf  size: 59717 B
+  [WARN] PDF 中以下字体可能未嵌入: /DQUMVI+MicrosoftYaHei-Bold, /DVJCIF+DejaVuSans, /GQZHHA+MicrosoftYaHei. 导致他人电脑打开变成替代字体。
+  >>> verdict: WARN
+
+--- outputs/Q3/redesign\05_cost_families.pdf ---
+  category: vector  ext: pdf  size: 51467 B
+  [WARN] PDF 中以下字体可能未嵌入: /LPLDII+DejaVuSans, /FCDTRM+MicrosoftYaHei, /GGVBGU+MicrosoftYaHei-Bold. 导致他人电脑打开变成替代字体。
+  >>> verdict: WARN
+
+--- outputs/Q3/redesign\06_context_cost.pdf ---
+  category: vector  ext: pdf  size: 55745 B
+  [WARN] PDF 中以下字体可能未嵌入: /DIENAC+MicrosoftYaHei-Bold, /FIJWGN+MicrosoftYaHei. 导致他人电脑打开变成替代字体。
+  >>> verdict: WARN
+
+--- outputs/Q3/redesign\07_assumptions.pdf ---
+  category: vector  ext: pdf  size: 65810 B
+  [WARN] PDF 中以下字体可能未嵌入: /DAOOJG+MicrosoftYaHei, /ZGQLNX+MicrosoftYaHei-Bold, /GSIVYC+DejaVuSans-Oblique, /PXZFDC+DejaVuSans. 导致他人电脑打开变成替代字体。
+  >>> verdict: WARN
+
+--- outputs/Q3/redesign\08_independent_quality.pdf ---
+  category: vector  ext: pdf  size: 73894 B
+  [WARN] PDF 中以下字体可能未嵌入: /FHNROM+MicrosoftYaHei-Bold, /DVJCIF+DejaVuSans, /DGPIQZ+MicrosoftYaHei. 导致他人电脑打开变成替代字体。
+  >>> verdict: WARN
+
+--- outputs/Q3/redesign\09_external_ranks.pdf ---
+  category: vector  ext: pdf  size: 59678 B
+  [WARN] PDF 中以下字体可能未嵌入: /GNOLRF+MicrosoftYaHei-Bold, /JVQIUY+MicrosoftYaHei. 导致他人电脑打开变成替代字体。
+  >>> verdict: WARN
+
+--- outputs/Q3/redesign\01_configuration.svg ---
+  category: vector  ext: svg  size: 62387 B
+  [PASS] 无问题。
+
+--- outputs/Q3/redesign\02_budget_paths.svg ---
+  category: vector  ext: svg  size: 66809 B
+  [PASS] 无问题。
+
+--- outputs/Q3/redesign\03_recipe_switch.svg ---
+  category: vector  ext: svg  size: 20768 B
+  [PASS] 无问题。
+
+--- outputs/Q3/redesign\04_cost_allocation.svg ---
+  category: vector  ext: svg  size: 35191 B
+  [PASS] 无问题。
+
+--- outputs/Q3/redesign\05_cost_families.svg ---
+  category: vector  ext: svg  size: 14692 B
+  [PASS] 无问题。
+
+--- outputs/Q3/redesign\06_context_cost.svg ---
+  category: vector  ext: svg  size: 18046 B
+  [PASS] 无问题。
+
+--- outputs/Q3/redesign\07_assumptions.svg ---
+  category: vector  ext: svg  size: 21529 B
+  [PASS] 无问题。
+
+--- outputs/Q3/redesign\08_independent_quality.svg ---
+  category: vector  ext: svg  size: 81390 B
+  [PASS] 无问题。
+
+--- outputs/Q3/redesign\09_external_ranks.svg ---
+  category: vector  ext: svg  size: 22727 B
+  [PASS] 无问题。
