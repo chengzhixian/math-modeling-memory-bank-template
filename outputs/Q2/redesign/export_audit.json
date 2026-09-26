@@ -1,0 +1,512 @@
+{
+  "01_baseline.pdf": {
+    "issues": [
+      [
+        "WARN",
+        "PDF 中以下字体可能未嵌入: /EXIKQB+MicrosoftYaHei-Bold, /FRFOKX+DejaVuSans-Oblique, /GAHIVW+DejaVuSans, /EVTHEU+MicrosoftYaHei. 导致他人电脑打开变成替代字体。"
+      ]
+    ],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\01_baseline.pdf",
+      "ext": "pdf",
+      "size_bytes": 83664,
+      "category": "vector"
+    },
+    "font_embedding": [
+      {
+        "name": "FRFOKX+DejaVuSans-Oblique",
+        "subtype": "Type0",
+        "embedded_bytes": 4576
+      },
+      {
+        "name": "GAHIVW+DejaVuSans",
+        "subtype": "Type0",
+        "embedded_bytes": 4728
+      },
+      {
+        "name": "EVTHEU+MicrosoftYaHei",
+        "subtype": "Type0",
+        "embedded_bytes": 56720
+      },
+      {
+        "name": "EXIKQB+MicrosoftYaHei-Bold",
+        "subtype": "Type0",
+        "embedded_bytes": 14080
+      }
+    ],
+    "font_warning_resolution": "Type0 descendant fonts verified by extracted embedded font bytes; checker false positive."
+  },
+  "01_baseline.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\01_baseline.png",
+      "ext": "png",
+      "size_bytes": 342640,
+      "category": "raster",
+      "size_px": [
+        2160,
+        1440
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "01_baseline.svg": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\01_baseline.svg",
+      "ext": "svg",
+      "size_bytes": 382677,
+      "category": "vector"
+    }
+  },
+  "01_baseline_gray.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\01_baseline_gray.png",
+      "ext": "png",
+      "size_bytes": 142411,
+      "category": "raster",
+      "size_px": [
+        2160,
+        1440
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "02_scale_surface.pdf": {
+    "issues": [
+      [
+        "WARN",
+        "PDF 中以下字体可能未嵌入: /EJVCJV+MicrosoftYaHei, /GZAAWY+DejaVuSans, /DOXZFS+MicrosoftYaHei-Bold, /CMLERN+DejaVuSans-Oblique. 导致他人电脑打开变成替代字体。"
+      ]
+    ],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\02_scale_surface.pdf",
+      "ext": "pdf",
+      "size_bytes": 853382,
+      "category": "vector"
+    },
+    "font_embedding": [
+      {
+        "name": "CMLERN+DejaVuSans-Oblique",
+        "subtype": "Type0",
+        "embedded_bytes": 3040
+      },
+      {
+        "name": "GZAAWY+DejaVuSans",
+        "subtype": "Type0",
+        "embedded_bytes": 3812
+      },
+      {
+        "name": "EJVCJV+MicrosoftYaHei",
+        "subtype": "Type0",
+        "embedded_bytes": 47100
+      },
+      {
+        "name": "DOXZFS+MicrosoftYaHei-Bold",
+        "subtype": "Type0",
+        "embedded_bytes": 16552
+      }
+    ],
+    "font_warning_resolution": "Type0 descendant fonts verified by extracted embedded font bytes; checker false positive."
+  },
+  "02_scale_surface.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\02_scale_surface.png",
+      "ext": "png",
+      "size_bytes": 268731,
+      "category": "raster",
+      "size_px": [
+        2160,
+        1440
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "02_scale_surface.svg": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\02_scale_surface.svg",
+      "ext": "svg",
+      "size_bytes": 5223012,
+      "category": "vector"
+    }
+  },
+  "02_scale_surface_gray.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\02_scale_surface_gray.png",
+      "ext": "png",
+      "size_bytes": 114199,
+      "category": "raster",
+      "size_px": [
+        2160,
+        1440
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "03_quality_validation.pdf": {
+    "issues": [
+      [
+        "WARN",
+        "PDF 中以下字体可能未嵌入: /EEKLKO+MicrosoftYaHei, /HCLXTS+MicrosoftYaHei-Bold. 导致他人电脑打开变成替代字体。"
+      ]
+    ],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\03_quality_validation.pdf",
+      "ext": "pdf",
+      "size_bytes": 60682,
+      "category": "vector"
+    },
+    "font_embedding": [
+      {
+        "name": "EEKLKO+MicrosoftYaHei",
+        "subtype": "Type0",
+        "embedded_bytes": 60508
+      },
+      {
+        "name": "HCLXTS+MicrosoftYaHei-Bold",
+        "subtype": "Type0",
+        "embedded_bytes": 15296
+      }
+    ],
+    "font_warning_resolution": "Type0 descendant fonts verified by extracted embedded font bytes; checker false positive."
+  },
+  "03_quality_validation.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\03_quality_validation.png",
+      "ext": "png",
+      "size_bytes": 174389,
+      "category": "raster",
+      "size_px": [
+        2160,
+        1440
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "03_quality_validation.svg": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\03_quality_validation.svg",
+      "ext": "svg",
+      "size_bytes": 12953,
+      "category": "vector"
+    }
+  },
+  "03_quality_validation_gray.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\03_quality_validation_gray.png",
+      "ext": "png",
+      "size_bytes": 81190,
+      "category": "raster",
+      "size_px": [
+        2160,
+        1440
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "04_elasticities.pdf": {
+    "issues": [
+      [
+        "WARN",
+        "PDF 中以下字体可能未嵌入: /CRFVTP+MicrosoftYaHei, /CEMBZT+MicrosoftYaHei-Bold. 导致他人电脑打开变成替代字体。"
+      ]
+    ],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\04_elasticities.pdf",
+      "ext": "pdf",
+      "size_bytes": 57678,
+      "category": "vector"
+    },
+    "font_embedding": [
+      {
+        "name": "CRFVTP+MicrosoftYaHei",
+        "subtype": "Type0",
+        "embedded_bytes": 54888
+      },
+      {
+        "name": "CEMBZT+MicrosoftYaHei-Bold",
+        "subtype": "Type0",
+        "embedded_bytes": 15656
+      }
+    ],
+    "font_warning_resolution": "Type0 descendant fonts verified by extracted embedded font bytes; checker false positive."
+  },
+  "04_elasticities.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\04_elasticities.png",
+      "ext": "png",
+      "size_bytes": 197797,
+      "category": "raster",
+      "size_px": [
+        2160,
+        1440
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "04_elasticities.svg": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\04_elasticities.svg",
+      "ext": "svg",
+      "size_bytes": 16453,
+      "category": "vector"
+    }
+  },
+  "04_elasticities_gray.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\04_elasticities_gray.png",
+      "ext": "png",
+      "size_bytes": 88407,
+      "category": "raster",
+      "size_px": [
+        2160,
+        1440
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "05_quality_tradeoff.pdf": {
+    "issues": [
+      [
+        "WARN",
+        "PDF 中以下字体可能未嵌入: /CHNFDA+MicrosoftYaHei, /BFTRUE+MicrosoftYaHei-Bold. 导致他人电脑打开变成替代字体。"
+      ]
+    ],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\05_quality_tradeoff.pdf",
+      "ext": "pdf",
+      "size_bytes": 55244,
+      "category": "vector"
+    },
+    "font_embedding": [
+      {
+        "name": "CHNFDA+MicrosoftYaHei",
+        "subtype": "Type0",
+        "embedded_bytes": 50468
+      },
+      {
+        "name": "BFTRUE+MicrosoftYaHei-Bold",
+        "subtype": "Type0",
+        "embedded_bytes": 17288
+      }
+    ],
+    "font_warning_resolution": "Type0 descendant fonts verified by extracted embedded font bytes; checker false positive."
+  },
+  "05_quality_tradeoff.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\05_quality_tradeoff.png",
+      "ext": "png",
+      "size_bytes": 166236,
+      "category": "raster",
+      "size_px": [
+        2160,
+        1440
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "05_quality_tradeoff.svg": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\05_quality_tradeoff.svg",
+      "ext": "svg",
+      "size_bytes": 11630,
+      "category": "vector"
+    }
+  },
+  "05_quality_tradeoff_gray.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\05_quality_tradeoff_gray.png",
+      "ext": "png",
+      "size_bytes": 76315,
+      "category": "raster",
+      "size_px": [
+        2160,
+        1440
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "06_bridge_sensitivity.pdf": {
+    "issues": [
+      [
+        "WARN",
+        "PDF 中以下字体可能未嵌入: /FMJITX+MicrosoftYaHei, /EIMEBK+MicrosoftYaHei-Bold. 导致他人电脑打开变成替代字体。"
+      ]
+    ],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\06_bridge_sensitivity.pdf",
+      "ext": "pdf",
+      "size_bytes": 58992,
+      "category": "vector"
+    },
+    "font_embedding": [
+      {
+        "name": "FMJITX+MicrosoftYaHei",
+        "subtype": "Type0",
+        "embedded_bytes": 58380
+      },
+      {
+        "name": "EIMEBK+MicrosoftYaHei-Bold",
+        "subtype": "Type0",
+        "embedded_bytes": 16016
+      }
+    ],
+    "font_warning_resolution": "Type0 descendant fonts verified by extracted embedded font bytes; checker false positive."
+  },
+  "06_bridge_sensitivity.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\06_bridge_sensitivity.png",
+      "ext": "png",
+      "size_bytes": 172173,
+      "category": "raster",
+      "size_px": [
+        2160,
+        1440
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "06_bridge_sensitivity.svg": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\06_bridge_sensitivity.svg",
+      "ext": "svg",
+      "size_bytes": 10343,
+      "category": "vector"
+    }
+  },
+  "06_bridge_sensitivity_gray.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\06_bridge_sensitivity_gray.png",
+      "ext": "png",
+      "size_bytes": 80616,
+      "category": "raster",
+      "size_px": [
+        2160,
+        1440
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "07_local_transfers.pdf": {
+    "issues": [
+      [
+        "WARN",
+        "PDF 中以下字体可能未嵌入: /FECQUN+MicrosoftYaHei, /COQBJZ+MicrosoftYaHei-Bold. 导致他人电脑打开变成替代字体。"
+      ]
+    ],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\07_local_transfers.pdf",
+      "ext": "pdf",
+      "size_bytes": 75191,
+      "category": "vector"
+    },
+    "font_embedding": [
+      {
+        "name": "FECQUN+MicrosoftYaHei",
+        "subtype": "Type0",
+        "embedded_bytes": 65256
+      },
+      {
+        "name": "COQBJZ+MicrosoftYaHei-Bold",
+        "subtype": "Type0",
+        "embedded_bytes": 15136
+      }
+    ],
+    "font_warning_resolution": "Type0 descendant fonts verified by extracted embedded font bytes; checker false positive."
+  },
+  "07_local_transfers.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\07_local_transfers.png",
+      "ext": "png",
+      "size_bytes": 280003,
+      "category": "raster",
+      "size_px": [
+        2160,
+        2190
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  },
+  "07_local_transfers.svg": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\07_local_transfers.svg",
+      "ext": "svg",
+      "size_bytes": 83770,
+      "category": "vector"
+    }
+  },
+  "07_local_transfers_gray.png": {
+    "issues": [],
+    "info": {
+      "path": "outputs\\Q2\\redesign\\07_local_transfers_gray.png",
+      "ext": "png",
+      "size_bytes": 126702,
+      "category": "raster",
+      "size_px": [
+        2160,
+        2190
+      ],
+      "dpi": [
+        299.9994,
+        299.9994
+      ]
+    }
+  }
+}

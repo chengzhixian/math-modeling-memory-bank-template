@@ -1,0 +1,1972 @@
+{
+  "marginals_elasticities.csv": {
+    "source": "<DataFrame>",
+    "n_rows": 3,
+    "n_cols": 16,
+    "columns": {
+      "policy": {
+        "type": "unknown",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "N_params_B": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": 3.6999999999999997,
+        "median": 1.0,
+        "sd": 5.474486277268398,
+        "min": 0.1,
+        "max": 10.0,
+        "skewness": 0.37323013334189237,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "D_tokens_B": {
+        "type": "ordinal",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "n_unique": 1,
+        "categories": [
+          [
+            "100.0",
+            3
+          ]
+        ],
+        "min_group_n": 3,
+        "max_group_n": 3,
+        "small_groups_flag": true
+      },
+      "Q_A_mapped": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": 1.6754490814383753,
+        "median": 1.6754490814383751,
+        "sd": 2.7194799110210365e-16,
+        "min": 1.6754490814383751,
+        "max": 1.6754490814383751,
+        "skewness": -0.5443310539518176,
+        "skew_label": "moderately skewed",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "Q_B_proxy": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": 0.6713607648391644,
+        "median": 0.6713607648391644,
+        "sd": 0.0,
+        "min": 0.6713607648391644,
+        "max": 0.6713607648391644,
+        "skewness": 0.0,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "Loss": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": 2.415469822942455,
+        "median": 2.3443478102094826,
+        "sd": 0.3352712758269403,
+        "min": 2.121465854117049,
+        "max": 2.780595804500833,
+        "skewness": 0.20258669893087242,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "N_marginal": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": -0.9290960376908215,
+        "median": -0.1312797106749185,
+        "sd": 1.4907655466190453,
+        "min": -2.648988208008288,
+        "max": -0.0070201943892578,
+        "skewness": -0.38189391826472024,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "D_marginal": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": -0.0009402271872188,
+        "median": -0.0009402271872188,
+        "sd": 0.0,
+        "min": -0.0009402271872188,
+        "max": -0.0009402271872188,
+        "skewness": 0.0,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "quality_proxy_marginal": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": -0.34748570764667935,
+        "median": -0.3474857076466794,
+        "sd": 0.13155387502855853,
+        "min": -0.4790395826752379,
+        "max": -0.2159318326181208,
+        "skewness": 2.220446049250313e-16,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "Q_A_mapped_marginal": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": -0.09188251155866793,
+        "median": -0.0918825115586679,
+        "sd": 0.034785604636118045,
+        "min": -0.126668116194786,
+        "max": -0.0570969069225499,
+        "skewness": -8.881784197001252e-16,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "N_elasticity": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": -0.06145218843725846,
+        "median": -0.0559983932858443,
+        "sd": 0.03144458366196927,
+        "min": -0.0952669281785034,
+        "max": -0.0330912438474277,
+        "skewness": -0.16822402326199357,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "D_elasticity": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": -0.039413233262530434,
+        "median": -0.0401061302902338,
+        "sd": 0.005287073050523756,
+        "min": -0.0443196945826017,
+        "max": -0.0338138749147558,
+        "skewness": 0.12880401687832135,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "quality_proxy_elasticity": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": -0.09450219505359436,
+        "median": -0.0995109468997721,
+        "sd": 0.024058137529576133,
+        "min": -0.1156616794474436,
+        "max": -0.0683339588135674,
+        "skewness": 0.19916959417414623,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "Q_A_mapped_elasticity": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": -0.06236100196667869,
+        "median": -0.0656662244914355,
+        "sd": 0.01587571125671392,
+        "min": -0.0763239225861458,
+        "max": -0.0450928588224548,
+        "skewness": 0.19916959417414817,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "p_marginal_min": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": -0.9778358723549903,
+        "median": -0.9490441007899578,
+        "sd": 0.13572526444335403,
+        "min": -1.1256469852513131,
+        "max": -0.8588165310236997,
+        "skewness": -0.2025866989308727,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "p_marginal_max": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": 0.7662770210289124,
+        "median": 0.7537689779978619,
+        "sd": 0.187550968882286,
+        "min": 0.5852931522194976,
+        "max": 0.9597689328693776,
+        "skewness": 0.0663948071826093,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      }
+    },
+    "correlation": null,
+    "group_summary": null,
+    "warnings": [
+      "列 'D_tokens_B' 至少有一个类别 n<10 — 小样本必须展示原始数据点，不要只画均值柱状图。"
+    ],
+    "suggestions": [
+      "分类 vs 连续，样本量充足 → 箱线图 / 小提琴图，或带误差棒的柱状图（误差棒说明 SD/SEM/CI）",
+      "≥3 个连续变量 → 相关性热力图（['N_params_B', 'Q_A_mapped', 'Q_B_proxy', 'Loss', 'N_marginal']）或 pairplot 散点矩阵"
+    ]
+  },
+  "quality_scale_local_tradeoff.csv": {
+    "source": "<DataFrame>",
+    "n_rows": 3,
+    "n_cols": 15,
+    "columns": {
+      "policy": {
+        "type": "unknown",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "N_params_B": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": 3.6999999999999997,
+        "median": 1.0,
+        "sd": 5.474486277268398,
+        "min": 0.1,
+        "max": 10.0,
+        "skewness": 0.37323013334189237,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "D_tokens_B": {
+        "type": "ordinal",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "n_unique": 1,
+        "categories": [
+          [
+            "100.0",
+            3
+          ]
+        ],
+        "min_group_n": 3,
+        "max_group_n": 3,
+        "small_groups_flag": true
+      },
+      "Q_B_proxy": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": 0.6713607648391644,
+        "median": 0.6713607648391644,
+        "sd": 0.0,
+        "min": 0.6713607648391644,
+        "max": 0.6713607648391644,
+        "skewness": 0.0,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "dN_dQproxy": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": -11.195472754718883,
+        "median": -2.6469109800762824,
+        "sd": 16.987034803922622,
+        "min": -30.758668584524425,
+        "max": -0.1808386995559397,
+        "skewness": -0.37579430981905143,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "dlnN_dlnQproxy": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": -1.6853761943810737,
+        "median": -1.7770321800451954,
+        "sd": 0.43280912680353706,
+        "min": -2.06501632663407,
+        "max": -1.2140800764639554,
+        "skewness": 0.20227284349077831,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "equivalent_oldQ_N_delta_0_05": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": 4.317243060482352,
+        "median": 1.1444896523903785,
+        "sd": 6.412515288918593,
+        "min": 0.1096074078625995,
+        "max": 11.69763212119408,
+        "skewness": 0.37365298958805804,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "equivalent_oldQ_N_delta_0_05_status": {
+        "type": "unknown",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "equivalent_oldQ_N_delta_0_1": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 1,
+        "missing_rate": 0.3333333333333333,
+        "n": 2,
+        "mean": 0.7187642432992337,
+        "median": 0.7187642432992337,
+        "sd": 0.8461208748612209,
+        "min": 0.1204664349813702,
+        "max": 1.3170620516170972,
+        "skewness": NaN,
+        "skew_label": "unknown",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "equivalent_oldQ_N_delta_0_1_status": {
+        "type": "unknown",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "constant_L_newQ_N_delta_0_05": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": 3.171241687556117,
+        "median": 0.8757890549480776,
+        "sd": 4.671647507722658,
+        "min": 0.0913843742910038,
+        "max": 8.54655163342927,
+        "skewness": 0.37272819332854096,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "constant_L_newQ_N_delta_0_05_status": {
+        "type": "unknown",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "constant_L_newQ_N_delta_0_1": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": 2.7029486718473197,
+        "median": 0.7667037305683884,
+        "sd": 3.9600461765745587,
+        "min": 0.0835675026096642,
+        "max": 7.258574782363906,
+        "skewness": 0.37205429320161754,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "constant_L_newQ_N_delta_0_1_status": {
+        "type": "unknown",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "scope": {
+        "type": "unknown",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0
+      }
+    },
+    "correlation": null,
+    "group_summary": null,
+    "warnings": [
+      "列 'D_tokens_B' 至少有一个类别 n<10 — 小样本必须展示原始数据点，不要只画均值柱状图。",
+      "列 'equivalent_oldQ_N_delta_0_1' 缺失率 33% — 画图前考虑是否填补、剔除、或在图注中交代。"
+    ],
+    "suggestions": [
+      "分类 vs 连续，样本量充足 → 箱线图 / 小提琴图，或带误差棒的柱状图（误差棒说明 SD/SEM/CI）",
+      "≥3 个连续变量 → 相关性热力图（['N_params_B', 'Q_B_proxy', 'dN_dQproxy', 'dlnN_dlnQproxy', 'equivalent_oldQ_N_delta_0_05']）或 pairplot 散点矩阵"
+    ]
+  },
+  "quality_bridge_sensitivity.csv": {
+    "source": "<DataFrame>",
+    "n_rows": 3,
+    "n_cols": 8,
+    "columns": {
+      "quality_bridge_scenario": {
+        "type": "unknown",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "scale": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": 1.0,
+        "median": 1.0,
+        "sd": 0.5,
+        "min": 0.5,
+        "max": 1.5,
+        "skewness": 0.0,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "Q_A_mapped": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": 1.6754490814383753,
+        "median": 1.6754490814383751,
+        "sd": 2.7194799110210365e-16,
+        "min": 1.6754490814383751,
+        "max": 1.6754490814383751,
+        "skewness": -0.5443310539518176,
+        "skew_label": "moderately skewed",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "Q_B_proxy": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": 0.6713607648391644,
+        "median": 0.6713607648391644,
+        "sd": 0.11797743964665797,
+        "min": 0.5533833251925064,
+        "max": 0.7893382044858224,
+        "skewness": 0.0,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "mapped_coverage": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": 0.5814185814185814,
+        "median": 0.5814185814185814,
+        "sd": 0.0,
+        "min": 0.5814185814185814,
+        "max": 0.5814185814185814,
+        "skewness": 0.0,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "unmapped_mass": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": 0.4185814185814185,
+        "median": 0.4185814185814185,
+        "sd": 0.0,
+        "min": 0.4185814185814185,
+        "max": 0.4185814185814185,
+        "skewness": 0.0,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "Loss": {
+        "type": "continuous",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "mean": 2.3443478102094826,
+        "median": 2.3443478102094826,
+        "sd": 0.04099547410196247,
+        "min": 2.3033523361075203,
+        "max": 2.3853432843114453,
+        "skewness": 1.0769163338864018e-14,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": NaN,
+        "outlier_hi": NaN,
+        "needs_log_axis": false
+      },
+      "empirically_calibrated": {
+        "type": "boolean",
+        "n_total": 3,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 3,
+        "n_unique": 1,
+        "categories": [
+          [
+            "False",
+            3
+          ]
+        ],
+        "min_group_n": 3,
+        "max_group_n": 3,
+        "small_groups_flag": true
+      }
+    },
+    "correlation": null,
+    "group_summary": null,
+    "warnings": [
+      "列 'empirically_calibrated' 至少有一个类别 n<10 — 小样本必须展示原始数据点，不要只画均值柱状图。"
+    ],
+    "suggestions": [
+      "分类 vs 连续，样本量充足 → 箱线图 / 小提琴图，或带误差棒的柱状图（误差棒说明 SD/SEM/CI）",
+      "≥3 个连续变量 → 相关性热力图（['scale', 'Q_A_mapped', 'Q_B_proxy', 'mapped_coverage', 'unmapped_mass']）或 pairplot 散点矩阵"
+    ]
+  },
+  "domain_pair_substitution.csv": {
+    "source": "<DataFrame>",
+    "n_rows": 136,
+    "n_cols": 11,
+    "columns": {
+      "domain_i": {
+        "type": "unknown",
+        "n_total": 136,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "domain_j": {
+        "type": "unknown",
+        "n_total": 136,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "transfer_direction": {
+        "type": "unknown",
+        "n_total": 136,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "dLoss_depsilon": {
+        "type": "continuous",
+        "n_total": 136,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 136,
+        "mean": 0.02475141279211231,
+        "median": 0.0070757622955672,
+        "sd": 0.6813510432143238,
+        "min": -1.3989933951866964,
+        "max": 1.5689471941239468,
+        "skewness": 0.08583392372385641,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -1.8526383543476672,
+        "outlier_hi": 1.901472054369325,
+        "needs_log_axis": false
+      },
+      "favorable_direction": {
+        "type": "unknown",
+        "n_total": 136,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "feasible_epsilon_max": {
+        "type": "continuous",
+        "n_total": 136,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 136,
+        "mean": 0.0449887810734817,
+        "median": 0.038594964260831296,
+        "sd": 0.037343682977072384,
+        "min": 0.0022110330434062,
+        "max": 0.1194875977918861,
+        "skewness": 0.6390114068202503,
+        "skew_label": "moderately skewed",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -0.08077397223467556,
+        "outlier_hi": 0.16858879306854324,
+        "needs_log_axis": "False"
+      },
+      "reverse_feasible_epsilon_max": {
+        "type": "continuous",
+        "n_total": 136,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 136,
+        "mean": 0.05749837893090158,
+        "median": 0.0469149442475353,
+        "sd": 0.04294929177607389,
+        "min": 0.0022110330434062,
+        "max": 0.1194875977918856,
+        "skewness": 0.04745345116585309,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -0.11437243307750133,
+        "outlier_hi": 0.2245862278065862,
+        "needs_log_axis": "False"
+      },
+      "hull_equation_residual_max": {
+        "type": "continuous",
+        "n_total": 136,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 136,
+        "mean": 3.141386507539015e-14,
+        "median": 1.9567680809018384e-15,
+        "sd": 1.0973581948829919e-13,
+        "min": 2.775557561562892e-17,
+        "max": 7.897710263549129e-13,
+        "skewness": 5.213002487433247,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 23,
+        "outlier_lo": -1.1454379111874857e-14,
+        "outlier_hi": 2.0533921785137466e-14,
+        "needs_log_axis": "True"
+      },
+      "evaluation_point": {
+        "type": "unknown",
+        "n_total": 136,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "quality_bridge": {
+        "type": "unknown",
+        "n_total": 136,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "claim_scope": {
+        "type": "unknown",
+        "n_total": 136,
+        "n_null": 0,
+        "missing_rate": 0.0
+      }
+    },
+    "correlation": {
+      "columns": [
+        "dLoss_depsilon",
+        "feasible_epsilon_max",
+        "reverse_feasible_epsilon_max",
+        "hull_equation_residual_max"
+      ],
+      "matrix": {
+        "dLoss_depsilon": {
+          "dLoss_depsilon": 1.0,
+          "feasible_epsilon_max": -0.426,
+          "reverse_feasible_epsilon_max": 0.263,
+          "hull_equation_residual_max": -0.069
+        },
+        "feasible_epsilon_max": {
+          "dLoss_depsilon": -0.426,
+          "feasible_epsilon_max": 1.0,
+          "reverse_feasible_epsilon_max": 0.423,
+          "hull_equation_residual_max": 0.281
+        },
+        "reverse_feasible_epsilon_max": {
+          "dLoss_depsilon": 0.263,
+          "feasible_epsilon_max": 0.423,
+          "reverse_feasible_epsilon_max": 1.0,
+          "hull_equation_residual_max": 0.28
+        },
+        "hull_equation_residual_max": {
+          "dLoss_depsilon": -0.069,
+          "feasible_epsilon_max": 0.281,
+          "reverse_feasible_epsilon_max": 0.28,
+          "hull_equation_residual_max": 1.0
+        }
+      },
+      "pairs_sorted": [
+        {
+          "a": "dLoss_depsilon",
+          "b": "feasible_epsilon_max",
+          "r": -0.4258273180281574,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "feasible_epsilon_max",
+          "b": "reverse_feasible_epsilon_max",
+          "r": 0.4231096846455864,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "feasible_epsilon_max",
+          "b": "hull_equation_residual_max",
+          "r": 0.2813864386222705,
+          "magnitude": "weak"
+        },
+        {
+          "a": "reverse_feasible_epsilon_max",
+          "b": "hull_equation_residual_max",
+          "r": 0.28038827759358387,
+          "magnitude": "weak"
+        },
+        {
+          "a": "dLoss_depsilon",
+          "b": "reverse_feasible_epsilon_max",
+          "r": 0.26348656391537423,
+          "magnitude": "weak"
+        },
+        {
+          "a": "dLoss_depsilon",
+          "b": "hull_equation_residual_max",
+          "r": -0.06924276543684443,
+          "magnitude": "negligible"
+        }
+      ]
+    },
+    "group_summary": null,
+    "warnings": [],
+    "suggestions": [
+      "≥3 个连续变量 → 相关性热力图（['dLoss_depsilon', 'feasible_epsilon_max', 'reverse_feasible_epsilon_max', 'hull_equation_residual_max']）或 pairplot 散点矩阵",
+      "单个连续变量 dLoss_depsilon → 直方图 / KDE / 箱线图看分布",
+      "hull_equation_residual_max 跨数个量级（2.78e-17 ~ 7.9e-13）→ 用对数 y 轴"
+    ]
+  },
+  "B1_raw": {
+    "source": "<DataFrame>",
+    "n_rows": 1176,
+    "n_cols": 15,
+    "columns": {
+      "run_id": {
+        "type": "continuous",
+        "n_total": 1176,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 1176,
+        "mean": 620.0,
+        "median": 620.0,
+        "sd": 355.5519149931823,
+        "min": 8.0,
+        "max": 1232.0,
+        "skewness": 0.0,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -604.0,
+        "outlier_hi": 1844.0,
+        "needs_log_axis": "True"
+      },
+      "N_params_B": {
+        "type": "continuous",
+        "n_total": 1176,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 1176,
+        "mean": 3.088587875,
+        "median": 1.2285255,
+        "sd": 3.9540796283990525,
+        "min": 0.070542,
+        "max": 11.965825,
+        "skewness": 1.3510427197895984,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 147,
+        "outlier_lo": -4.835179875000001,
+        "outlier_hi": 8.984921125,
+        "needs_log_axis": "True"
+      },
+      "D_tokens_B": {
+        "type": "continuous",
+        "n_total": 1176,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 1176,
+        "mean": 146.89993197278912,
+        "median": 146.801,
+        "sd": 88.86260085059625,
+        "min": 0.134,
+        "max": 299.893,
+        "skewness": 0.006058472749253679,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -163.57750000000004,
+        "outlier_hi": 457.17850000000004,
+        "needs_log_axis": "True"
+      },
+      "C_FLOPs_1e21": {
+        "type": "continuous",
+        "n_total": 1176,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 1176,
+        "mean": 2.722279761904762,
+        "median": 0.7321,
+        "sd": 4.3930306619519115,
+        "min": 0.0001,
+        "max": 21.5308,
+        "skewness": 2.272115804604298,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 159,
+        "outlier_lo": -4.013075,
+        "outlier_hi": 7.069525,
+        "needs_log_axis": "True"
+      },
+      "steps": {
+        "type": "continuous",
+        "n_total": 1176,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 1176,
+        "mean": 70047.3469387755,
+        "median": 70000.0,
+        "sd": 42372.9836550587,
+        "min": 64.0,
+        "max": 143000.0,
+        "skewness": 0.006058608197557094,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -78000.0,
+        "outlier_hi": 218000.0,
+        "needs_log_axis": "True"
+      },
+      "batch_tokens_M": {
+        "type": "continuous",
+        "n_total": 1176,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 1176,
+        "mean": 2.0998639455782317,
+        "median": 2.1,
+        "sd": 0.0011589545151124967,
+        "min": 2.09,
+        "max": 2.1,
+        "skewness": -8.386540639371823,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 16,
+        "outlier_lo": 2.1,
+        "outlier_hi": 2.1,
+        "needs_log_axis": "False"
+      },
+      "lr": {
+        "type": "continuous",
+        "n_total": 1176,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 1176,
+        "mean": 0.00024562499999999997,
+        "median": 0.000239,
+        "sd": 4.1348375923237436e-05,
+        "min": 0.00019,
+        "max": 0.000318,
+        "skewness": 0.36828970330723804,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": 0.000129375,
+        "outlier_hi": 0.000358375,
+        "needs_log_axis": "False"
+      },
+      "wd": {
+        "type": "continuous",
+        "n_total": 1176,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 1176,
+        "mean": 0.05547704081632654,
+        "median": 0.056,
+        "sd": 0.0250138919717865,
+        "min": 0.01,
+        "max": 0.1,
+        "skewness": -0.027029503755926932,
+        "skew_label": "approximately symmetric",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -0.02649999999999999,
+        "outlier_hi": 0.13749999999999998,
+        "needs_log_axis": "False"
+      },
+      "precision": {
+        "type": "unknown",
+        "n_total": 1176,
+        "n_null": 0,
+        "missing_rate": 0.0
+      },
+      "gpu_days": {
+        "type": "continuous",
+        "n_total": 1176,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 1176,
+        "mean": 100.9875850340136,
+        "median": 27.15,
+        "sd": 162.96567073229505,
+        "min": 0.0,
+        "max": 798.7,
+        "skewness": 2.27208380546374,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 159,
+        "outlier_lo": -148.8625,
+        "outlier_hi": 262.2375,
+        "needs_log_axis": false
+      },
+      "step_time_ms": {
+        "type": "continuous",
+        "n_total": 1176,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 1176,
+        "mean": 532.2125,
+        "median": 417.70000000000005,
+        "sd": 397.6023476387839,
+        "min": 100.4,
+        "max": 1307.4,
+        "skewness": 0.7937378906942121,
+        "skew_label": "moderately skewed",
+        "n_outliers_iqr": 0,
+        "outlier_lo": -532.1874999999999,
+        "outlier_hi": 1471.9125,
+        "needs_log_axis": "False"
+      },
+      "train_loss": {
+        "type": "continuous",
+        "n_total": 1176,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 1176,
+        "mean": 2.3541622448979593,
+        "median": 2.2634,
+        "sd": 0.3292577922742894,
+        "min": 1.943,
+        "max": 4.4729,
+        "skewness": 2.0705299111699773,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 35,
+        "outlier_lo": 1.566175,
+        "outlier_hi": 3.068575,
+        "needs_log_axis": "False"
+      },
+      "val_loss": {
+        "type": "continuous",
+        "n_total": 1176,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 1176,
+        "mean": 2.4768346938775507,
+        "median": 2.37425,
+        "sd": 0.3422078025702969,
+        "min": 2.0933,
+        "max": 4.7388,
+        "skewness": 2.112859360393022,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 33,
+        "outlier_lo": 1.6542750000000002,
+        "outlier_hi": 3.224475,
+        "needs_log_axis": "False"
+      },
+      "ppl": {
+        "type": "continuous",
+        "n_total": 1176,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 1176,
+        "mean": 12.869634353741498,
+        "median": 10.745000000000001,
+        "sd": 7.585489896675891,
+        "min": 8.11,
+        "max": 114.3,
+        "skewness": 6.303243063376299,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 52,
+        "outlier_lo": 2.621249999999999,
+        "outlier_hi": 20.751250000000002,
+        "needs_log_axis": "False"
+      },
+      "grad_norm_avg": {
+        "type": "continuous",
+        "n_total": 1176,
+        "n_null": 0,
+        "missing_rate": 0.0,
+        "n": 1176,
+        "mean": 1.5869124149659863,
+        "median": 1.0095,
+        "sd": 2.4535196033937097,
+        "min": 0.392,
+        "max": 25.788,
+        "skewness": 4.909256817254565,
+        "skew_label": "highly skewed",
+        "n_outliers_iqr": 80,
+        "outlier_lo": 0.18637499999999985,
+        "outlier_hi": 1.8993750000000003,
+        "needs_log_axis": "False"
+      }
+    },
+    "correlation": {
+      "columns": [
+        "run_id",
+        "N_params_B",
+        "D_tokens_B",
+        "C_FLOPs_1e21",
+        "steps",
+        "batch_tokens_M",
+        "lr",
+        "wd",
+        "gpu_days",
+        "step_time_ms",
+        "train_loss",
+        "val_loss",
+        "ppl",
+        "grad_norm_avg"
+      ],
+      "matrix": {
+        "run_id": {
+          "run_id": 1.0,
+          "N_params_B": 0.851,
+          "D_tokens_B": 0.119,
+          "C_FLOPs_1e21": 0.72,
+          "steps": 0.119,
+          "batch_tokens_M": 0.024,
+          "lr": -0.981,
+          "wd": -0.005,
+          "gpu_days": 0.72,
+          "step_time_ms": 0.945,
+          "train_loss": -0.691,
+          "val_loss": -0.694,
+          "ppl": -0.437,
+          "grad_norm_avg": -0.006
+        },
+        "N_params_B": {
+          "run_id": 0.851,
+          "N_params_B": 1.0,
+          "D_tokens_B": 0.0,
+          "C_FLOPs_1e21": 0.793,
+          "steps": 0.0,
+          "batch_tokens_M": 0.0,
+          "lr": -0.796,
+          "wd": 0.032,
+          "gpu_days": 0.793,
+          "step_time_ms": 0.972,
+          "train_loss": -0.473,
+          "val_loss": -0.473,
+          "ppl": -0.274,
+          "grad_norm_avg": 0.002
+        },
+        "D_tokens_B": {
+          "run_id": 0.119,
+          "N_params_B": 0.0,
+          "D_tokens_B": 1.0,
+          "C_FLOPs_1e21": 0.375,
+          "steps": 1.0,
+          "batch_tokens_M": 0.194,
+          "lr": -0.0,
+          "wd": -0.072,
+          "gpu_days": 0.375,
+          "step_time_ms": 0.0,
+          "train_loss": -0.422,
+          "val_loss": -0.424,
+          "ppl": -0.356,
+          "grad_norm_avg": 0.007
+        },
+        "C_FLOPs_1e21": {
+          "run_id": 0.72,
+          "N_params_B": 0.793,
+          "D_tokens_B": 0.375,
+          "C_FLOPs_1e21": 1.0,
+          "steps": 0.375,
+          "batch_tokens_M": 0.073,
+          "lr": -0.631,
+          "wd": -0.008,
+          "gpu_days": 1.0,
+          "step_time_ms": 0.771,
+          "train_loss": -0.535,
+          "val_loss": -0.534,
+          "ppl": -0.323,
+          "grad_norm_avg": 0.005
+        },
+        "steps": {
+          "run_id": 0.119,
+          "N_params_B": 0.0,
+          "D_tokens_B": 1.0,
+          "C_FLOPs_1e21": 0.375,
+          "steps": 1.0,
+          "batch_tokens_M": 0.194,
+          "lr": -0.0,
+          "wd": -0.072,
+          "gpu_days": 0.375,
+          "step_time_ms": 0.0,
+          "train_loss": -0.422,
+          "val_loss": -0.424,
+          "ppl": -0.356,
+          "grad_norm_avg": 0.007
+        },
+        "batch_tokens_M": {
+          "run_id": 0.024,
+          "N_params_B": 0.0,
+          "D_tokens_B": 0.194,
+          "C_FLOPs_1e21": 0.073,
+          "steps": 0.194,
+          "batch_tokens_M": 1.0,
+          "lr": -0.0,
+          "wd": -0.015,
+          "gpu_days": 0.073,
+          "step_time_ms": 0.0,
+          "train_loss": -0.544,
+          "val_loss": -0.551,
+          "ppl": -0.763,
+          "grad_norm_avg": 0.027
+        },
+        "lr": {
+          "run_id": -0.981,
+          "N_params_B": -0.796,
+          "D_tokens_B": -0.0,
+          "C_FLOPs_1e21": -0.631,
+          "steps": -0.0,
+          "batch_tokens_M": -0.0,
+          "lr": 1.0,
+          "wd": 0.009,
+          "gpu_days": -0.631,
+          "step_time_ms": -0.91,
+          "train_loss": 0.667,
+          "val_loss": 0.672,
+          "ppl": 0.418,
+          "grad_norm_avg": 0.008
+        },
+        "wd": {
+          "run_id": -0.005,
+          "N_params_B": 0.032,
+          "D_tokens_B": -0.072,
+          "C_FLOPs_1e21": -0.008,
+          "steps": -0.072,
+          "batch_tokens_M": -0.015,
+          "lr": 0.009,
+          "wd": 1.0,
+          "gpu_days": -0.008,
+          "step_time_ms": 0.02,
+          "train_loss": 0.046,
+          "val_loss": 0.047,
+          "ppl": 0.045,
+          "grad_norm_avg": -0.029
+        },
+        "gpu_days": {
+          "run_id": 0.72,
+          "N_params_B": 0.793,
+          "D_tokens_B": 0.375,
+          "C_FLOPs_1e21": 1.0,
+          "steps": 0.375,
+          "batch_tokens_M": 0.073,
+          "lr": -0.631,
+          "wd": -0.008,
+          "gpu_days": 1.0,
+          "step_time_ms": 0.771,
+          "train_loss": -0.535,
+          "val_loss": -0.534,
+          "ppl": -0.324,
+          "grad_norm_avg": 0.005
+        },
+        "step_time_ms": {
+          "run_id": 0.945,
+          "N_params_B": 0.972,
+          "D_tokens_B": 0.0,
+          "C_FLOPs_1e21": 0.771,
+          "steps": 0.0,
+          "batch_tokens_M": 0.0,
+          "lr": -0.91,
+          "wd": 0.02,
+          "gpu_days": 0.771,
+          "step_time_ms": 1.0,
+          "train_loss": -0.565,
+          "val_loss": -0.566,
+          "ppl": -0.337,
+          "grad_norm_avg": -0.0
+        },
+        "train_loss": {
+          "run_id": -0.691,
+          "N_params_B": -0.473,
+          "D_tokens_B": -0.422,
+          "C_FLOPs_1e21": -0.535,
+          "steps": -0.422,
+          "batch_tokens_M": -0.544,
+          "lr": 0.667,
+          "wd": 0.046,
+          "gpu_days": -0.535,
+          "step_time_ms": -0.565,
+          "train_loss": 1.0,
+          "val_loss": 0.991,
+          "ppl": 0.897,
+          "grad_norm_avg": -0.023
+        },
+        "val_loss": {
+          "run_id": -0.694,
+          "N_params_B": -0.473,
+          "D_tokens_B": -0.424,
+          "C_FLOPs_1e21": -0.534,
+          "steps": -0.424,
+          "batch_tokens_M": -0.551,
+          "lr": 0.672,
+          "wd": 0.047,
+          "gpu_days": -0.534,
+          "step_time_ms": -0.566,
+          "train_loss": 0.991,
+          "val_loss": 1.0,
+          "ppl": 0.905,
+          "grad_norm_avg": -0.021
+        },
+        "ppl": {
+          "run_id": -0.437,
+          "N_params_B": -0.274,
+          "D_tokens_B": -0.356,
+          "C_FLOPs_1e21": -0.323,
+          "steps": -0.356,
+          "batch_tokens_M": -0.763,
+          "lr": 0.418,
+          "wd": 0.045,
+          "gpu_days": -0.324,
+          "step_time_ms": -0.337,
+          "train_loss": 0.897,
+          "val_loss": 0.905,
+          "ppl": 1.0,
+          "grad_norm_avg": -0.026
+        },
+        "grad_norm_avg": {
+          "run_id": -0.006,
+          "N_params_B": 0.002,
+          "D_tokens_B": 0.007,
+          "C_FLOPs_1e21": 0.005,
+          "steps": 0.007,
+          "batch_tokens_M": 0.027,
+          "lr": 0.008,
+          "wd": -0.029,
+          "gpu_days": 0.005,
+          "step_time_ms": -0.0,
+          "train_loss": -0.023,
+          "val_loss": -0.021,
+          "ppl": -0.026,
+          "grad_norm_avg": 1.0
+        }
+      },
+      "pairs_sorted": [
+        {
+          "a": "D_tokens_B",
+          "b": "steps",
+          "r": 0.9999999999946817,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "C_FLOPs_1e21",
+          "b": "gpu_days",
+          "r": 0.9999999842329629,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "train_loss",
+          "b": "val_loss",
+          "r": 0.9911995809931032,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "run_id",
+          "b": "lr",
+          "r": -0.9809130570550391,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "N_params_B",
+          "b": "step_time_ms",
+          "r": 0.9716198002343961,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "run_id",
+          "b": "step_time_ms",
+          "r": 0.9450073706129306,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "lr",
+          "b": "step_time_ms",
+          "r": -0.9101049898086147,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "val_loss",
+          "b": "ppl",
+          "r": 0.9053515399951021,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "train_loss",
+          "b": "ppl",
+          "r": 0.8973777281638513,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "run_id",
+          "b": "N_params_B",
+          "r": 0.8514171836255823,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "N_params_B",
+          "b": "lr",
+          "r": -0.7957262499643609,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "N_params_B",
+          "b": "C_FLOPs_1e21",
+          "r": 0.7933301396932856,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "N_params_B",
+          "b": "gpu_days",
+          "r": 0.7933299892416128,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "gpu_days",
+          "b": "step_time_ms",
+          "r": 0.7708162264571754,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "C_FLOPs_1e21",
+          "b": "step_time_ms",
+          "r": 0.77081527469285,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "batch_tokens_M",
+          "b": "ppl",
+          "r": -0.7628832557154943,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "run_id",
+          "b": "gpu_days",
+          "r": 0.7202137849409532,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "run_id",
+          "b": "C_FLOPs_1e21",
+          "r": 0.7202110369861418,
+          "magnitude": "very strong"
+        },
+        {
+          "a": "run_id",
+          "b": "val_loss",
+          "r": -0.6944478931086392,
+          "magnitude": "strong"
+        },
+        {
+          "a": "run_id",
+          "b": "train_loss",
+          "r": -0.6907014812492877,
+          "magnitude": "strong"
+        },
+        {
+          "a": "lr",
+          "b": "val_loss",
+          "r": 0.671918577345061,
+          "magnitude": "strong"
+        },
+        {
+          "a": "lr",
+          "b": "train_loss",
+          "r": 0.6673101874752241,
+          "magnitude": "strong"
+        },
+        {
+          "a": "lr",
+          "b": "gpu_days",
+          "r": -0.6312752482326713,
+          "magnitude": "strong"
+        },
+        {
+          "a": "C_FLOPs_1e21",
+          "b": "lr",
+          "r": -0.6312736080193877,
+          "magnitude": "strong"
+        },
+        {
+          "a": "step_time_ms",
+          "b": "val_loss",
+          "r": -0.566114653587039,
+          "magnitude": "strong"
+        },
+        {
+          "a": "step_time_ms",
+          "b": "train_loss",
+          "r": -0.5651329878563301,
+          "magnitude": "strong"
+        },
+        {
+          "a": "batch_tokens_M",
+          "b": "val_loss",
+          "r": -0.551080624623526,
+          "magnitude": "strong"
+        },
+        {
+          "a": "batch_tokens_M",
+          "b": "train_loss",
+          "r": -0.5439389827667899,
+          "magnitude": "strong"
+        },
+        {
+          "a": "gpu_days",
+          "b": "train_loss",
+          "r": -0.5346418668430347,
+          "magnitude": "strong"
+        },
+        {
+          "a": "C_FLOPs_1e21",
+          "b": "train_loss",
+          "r": -0.5346372694480244,
+          "magnitude": "strong"
+        },
+        {
+          "a": "gpu_days",
+          "b": "val_loss",
+          "r": -0.5338436094668124,
+          "magnitude": "strong"
+        },
+        {
+          "a": "C_FLOPs_1e21",
+          "b": "val_loss",
+          "r": -0.5338390979024337,
+          "magnitude": "strong"
+        },
+        {
+          "a": "N_params_B",
+          "b": "train_loss",
+          "r": -0.47315469698488916,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "N_params_B",
+          "b": "val_loss",
+          "r": -0.4725212618608022,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "run_id",
+          "b": "ppl",
+          "r": -0.4374283277346056,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "D_tokens_B",
+          "b": "val_loss",
+          "r": -0.4240740802219513,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "steps",
+          "b": "val_loss",
+          "r": -0.42407393404225324,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "D_tokens_B",
+          "b": "train_loss",
+          "r": -0.42153561840518056,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "steps",
+          "b": "train_loss",
+          "r": -0.4215354711404404,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "lr",
+          "b": "ppl",
+          "r": 0.4176899268797775,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "steps",
+          "b": "gpu_days",
+          "r": 0.3748597874738502,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "D_tokens_B",
+          "b": "gpu_days",
+          "r": 0.374859787463145,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "D_tokens_B",
+          "b": "C_FLOPs_1e21",
+          "r": 0.3748573889195798,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "C_FLOPs_1e21",
+          "b": "steps",
+          "r": 0.37485738891755027,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "D_tokens_B",
+          "b": "ppl",
+          "r": -0.3559622304579795,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "steps",
+          "b": "ppl",
+          "r": -0.3559620113658075,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "step_time_ms",
+          "b": "ppl",
+          "r": -0.336984345052765,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "gpu_days",
+          "b": "ppl",
+          "r": -0.3235014155902636,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "C_FLOPs_1e21",
+          "b": "ppl",
+          "r": -0.32349615087022987,
+          "magnitude": "moderate"
+        },
+        {
+          "a": "N_params_B",
+          "b": "ppl",
+          "r": -0.2743589895483443,
+          "magnitude": "weak"
+        },
+        {
+          "a": "D_tokens_B",
+          "b": "batch_tokens_M",
+          "r": 0.19396512747167463,
+          "magnitude": "weak"
+        },
+        {
+          "a": "steps",
+          "b": "batch_tokens_M",
+          "r": 0.19396472729165617,
+          "magnitude": "weak"
+        },
+        {
+          "a": "run_id",
+          "b": "D_tokens_B",
+          "r": 0.11939508510966816,
+          "magnitude": "weak"
+        },
+        {
+          "a": "run_id",
+          "b": "steps",
+          "r": 0.11939508486614613,
+          "magnitude": "weak"
+        },
+        {
+          "a": "batch_tokens_M",
+          "b": "gpu_days",
+          "r": 0.07271028795298054,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "C_FLOPs_1e21",
+          "b": "batch_tokens_M",
+          "r": 0.07270940219623023,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "steps",
+          "b": "wd",
+          "r": -0.07204026816558855,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "D_tokens_B",
+          "b": "wd",
+          "r": -0.07204014500739694,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "wd",
+          "b": "val_loss",
+          "r": 0.047424585240831506,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "wd",
+          "b": "train_loss",
+          "r": 0.046352893278797234,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "wd",
+          "b": "ppl",
+          "r": 0.044984139051021325,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "N_params_B",
+          "b": "wd",
+          "r": 0.03154211221549455,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "wd",
+          "b": "grad_norm_avg",
+          "r": -0.029071408632522982,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "batch_tokens_M",
+          "b": "grad_norm_avg",
+          "r": 0.02652871972624953,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "ppl",
+          "b": "grad_norm_avg",
+          "r": -0.026108035054942955,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "run_id",
+          "b": "batch_tokens_M",
+          "r": 0.023958008175583197,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "train_loss",
+          "b": "grad_norm_avg",
+          "r": -0.022814146240971413,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "val_loss",
+          "b": "grad_norm_avg",
+          "r": -0.0210143951027425,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "wd",
+          "b": "step_time_ms",
+          "r": 0.019678095625293608,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "batch_tokens_M",
+          "b": "wd",
+          "r": -0.015080009225823273,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "lr",
+          "b": "wd",
+          "r": 0.008522600045704142,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "C_FLOPs_1e21",
+          "b": "wd",
+          "r": -0.007940730330029065,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "wd",
+          "b": "gpu_days",
+          "r": -0.007932673643045868,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "lr",
+          "b": "grad_norm_avg",
+          "r": 0.007584021749973534,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "D_tokens_B",
+          "b": "grad_norm_avg",
+          "r": 0.006783729249967247,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "steps",
+          "b": "grad_norm_avg",
+          "r": 0.006783610017889223,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "run_id",
+          "b": "grad_norm_avg",
+          "r": -0.005740699685935098,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "run_id",
+          "b": "wd",
+          "r": -0.005110552955679053,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "C_FLOPs_1e21",
+          "b": "grad_norm_avg",
+          "r": 0.004528436494681175,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "gpu_days",
+          "b": "grad_norm_avg",
+          "r": 0.004524651883232701,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "N_params_B",
+          "b": "grad_norm_avg",
+          "r": 0.0016143250602233099,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "step_time_ms",
+          "b": "grad_norm_avg",
+          "r": -0.0001909316721537631,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "batch_tokens_M",
+          "b": "lr",
+          "r": -4.894177524802374e-13,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "batch_tokens_M",
+          "b": "step_time_ms",
+          "r": 4.685530286728757e-13,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "N_params_B",
+          "b": "batch_tokens_M",
+          "r": 3.847546946293362e-13,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "steps",
+          "b": "lr",
+          "r": -2.054922418241981e-15,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "D_tokens_B",
+          "b": "lr",
+          "r": -1.5220358551038992e-15,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "steps",
+          "b": "step_time_ms",
+          "r": 1.0982458035339338e-15,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "N_params_B",
+          "b": "steps",
+          "r": 9.934524878055686e-16,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "D_tokens_B",
+          "b": "step_time_ms",
+          "r": 1.33899110587709e-16,
+          "magnitude": "negligible"
+        },
+        {
+          "a": "N_params_B",
+          "b": "D_tokens_B",
+          "r": 1.239140074345667e-16,
+          "magnitude": "negligible"
+        }
+      ]
+    },
+    "group_summary": {
+      "by": [
+        "N_params_B"
+      ],
+      "n_groups": 8,
+      "min_n_per_group": 147,
+      "max_n_per_group": 147,
+      "median_n_per_group": 147,
+      "small_groups_flag": false,
+      "tiny_groups_flag": false,
+      "per_group_counts": [
+        [
+          "0.070542",
+          147
+        ],
+        [
+          "0.162405",
+          147
+        ],
+        [
+          "0.409009",
+          147
+        ],
+        [
+          "1.040867",
+          147
+        ],
+        [
+          "1.416184",
+          147
+        ],
+        [
+          "2.782831",
+          147
+        ],
+        [
+          "6.86104",
+          147
+        ],
+        [
+          "11.965825",
+          147
+        ]
+      ]
+    },
+    "warnings": [],
+    "suggestions": [
+      "≥3 个连续变量 → 相关性热力图（['run_id', 'N_params_B', 'D_tokens_B', 'C_FLOPs_1e21', 'steps']）或 pairplot 散点矩阵",
+      "单个连续变量 run_id → 直方图 / KDE / 箱线图看分布",
+      "run_id 跨数个量级（8 ~ 1.23e+03）→ 用对数 y 轴",
+      "N_params_B 跨数个量级（0.0705 ~ 12）→ 用对数 y 轴",
+      "D_tokens_B 跨数个量级（0.134 ~ 300）→ 用对数 y 轴",
+      "C_FLOPs_1e21 跨数个量级（0.0001 ~ 21.5）→ 用对数 y 轴",
+      "steps 跨数个量级（64 ~ 1.43e+05）→ 用对数 y 轴",
+      "batch_tokens_M 高度偏态（skew=-8.39）→ 考虑对数变换或小提琴图代替均值柱图",
+      "gpu_days 高度偏态（skew=2.27）→ 考虑对数变换或小提琴图代替均值柱图",
+      "train_loss 高度偏态（skew=2.07）→ 考虑对数变换或小提琴图代替均值柱图",
+      "val_loss 高度偏态（skew=2.11）→ 考虑对数变换或小提琴图代替均值柱图",
+      "ppl 高度偏态（skew=6.30）→ 考虑对数变换或小提琴图代替均值柱图",
+      "grad_norm_avg 高度偏态（skew=4.91）→ 考虑对数变换或小提琴图代替均值柱图"
+    ]
+  }
+}
