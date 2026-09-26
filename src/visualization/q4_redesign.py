@@ -17,7 +17,7 @@ import q2_redesign as style
 ROOT=Path(__file__).resolve().parents[2]
 SOURCE=ROOT/'outputs/Q4'
 OUT=SOURCE/'redesign'
-MAIN='b789e3fc02ba894c4787ea351f87e56fc4e7daa8'
+MAIN='4098b8c6ca0b91b7ecd35e9251d08710dc0d6098'
 TYPES=['non_pretrained','pretrained']
 TYPE_NAMES=['后训练模型','基座模型']
 MODELS=['constant','frontier_trend','mean_resource','quantile_resource']
@@ -207,7 +207,7 @@ def bridge():
 
 def bridge_stress():
     d=csv('q3_bridge_conclusion_sensitivity.csv')
-    s=d[(d.context_tokens==8192)&(d.budget_FLOPs==1e22)&(d.quality_family=='power')&d.diagnostic_primary_candidate]
+    s=d[(d.context_tokens==8192)&(d.budget_FLOPs==1e22)&(d.quality_family=='power')&(d.policy_mode=='fixed_recipe')&d.diagnostic_primary_candidate]
     fig=base('10  Q3 配方的能力兑换对跨源坐标假设敏感','固定配方 172、8192 Token、预算 10^22 FLOPs；只显示两个候选来源中有支持的情景',size=(7.2,5.5),margins=(.16,.95,.30,.78))
     axes=fig.subplots(1,2,gridspec_kw={'wspace':.40})
     for i,(coord,name,c) in enumerate(zip(COORDS[1:],['Qwen2','Qwen2.5'],[style.BLUE,style.TEAL])):
@@ -225,7 +225,61 @@ def bridge_stress():
     axes[0].set(xlim=(0,45),xlabel='假设兑换的六任务均分（分）',title='支持情景范围与名义点')
     axes[0].set_yticklabels(['Qwen2\n22/27 有支持','Qwen2.5\n23/27 有支持'],fontsize=7)
     axes[1].set(xlim=(0,7),xlabel='相对同 N / D 骨架的条件增益（分）',title='支持情景中的增益范围')
-    finish(fig,'10_bridge_stress','27 格假设：尺度 a∈{0.9,1,1.1}，偏移 b∈{−0.1,0,0.1}，上游 Loss 扰动∈{−0.05,0,0.05}。\n菱形为 a=1、b=0、扰动=0 名义点；线段是支持格的最小–最大范围，不是置信区间。\nQ4 冻结接口引用 Q3 @ c052b69 的固定配方 172，不是之后新增的配方联合优化结果。\n未支持格排除，不补零；此压力影响 Q3 兑换幅度，未直接作用于 C2 / C4 前沿预测。')
+    finish(fig,'10_bridge_stress','27 格假设：尺度 a∈{0.9,1,1.1}，偏移 b∈{−0.1,0,0.1}，上游 Loss 扰动∈{−0.05,0,0.05}。\n菱形为 a=1、b=0、扰动=0 名义点；线段是支持格的最小–最大范围，不是置信区间。\n此图选固定配方 172；同预算联立推荐也为 172、对应分数相同，三模式完整对比见图12。\n未支持格排除，不补零；此压力影响 Q3 兑换幅度，未直接作用于 C2 / C4 前沿预测。')
+
+
+def maximum_boundary():
+    d=csv('frontier_maximum_scenarios.csv');b=csv('frontier_maximum_backtest.csv');comp=csv('frontier_maximum_model_comparison.csv')
+    fig=base('11  最高能力边界与 q90 前沿是两个预测对象','算力增速减半：累计纪录不会因较弱提交下降；条件上尾 = max(历史纪录, q90 + 尾差)',size=(7.2,7.8),margins=(.12,.96,.22,.80))
+    gs=fig.add_gridspec(2,2,hspace=.55,wspace=.32)
+    for i,(typ,name) in enumerate(zip(TYPES,TYPE_NAMES)):
+        ax=fig.add_subplot(gs[0,i]);s=d[(d.type==typ)&(d.compute_scenario=='half')].sort_values('horizon_months')
+        ax.axhline(s.historical_record_score.iloc[0],color=style.GREY,ls=':',lw=1.2,label='纪录保持')
+        ax.plot([12,24],s.q90_score,color=style.ORANGE,marker='^',ls='--',lw=1.2,label='q90 前沿')
+        ax.errorbar([12,24],s.conditional_record_center,yerr=[s.conditional_record_center-s.conditional_record_lower,s.conditional_record_upper-s.conditional_record_center],color=style.BLUE,marker='o',lw=1.5,capsize=4,label='条件最高边界')
+        for row in s.itertuples():ax.annotate(f'{row.conditional_record_center:.2f}',(row.horizon_months,row.conditional_record_center),xytext=(0,7),textcoords='offset points',fontsize=8,ha='center',color=style.BLUE)
+        expected=np.maximum(s.historical_record_score,s.q90_score+s.tail_gap_center)
+        if not np.allclose(expected,s.conditional_record_center):raise ValueError('Maximum boundary formula mismatch')
+        ax.set(title=name,xticks=[12,24],xlim=(9,27),ylim=(0,85),xlabel='距 2025-03 起点（月）');clean(ax)
+        if i==0:ax.set_ylabel('六任务均分（分）')
+    ax=fig.add_subplot(gs[1,:])
+    for typ,name,color,marker,offset in zip(TYPES,TYPE_NAMES,[style.BLUE,style.TEAL],['o','s'],[-.14,.14]):
+        for k,window in enumerate([None,1,2,3]):
+            s=b[b.type==typ]
+            if window is None:
+                s=s[s.tail_window_months==2];err=s.persistence_prediction-s.actual_cumulative_record
+                row=comp[(comp.type==typ)&(comp.model=='record_persistence')].iloc[0]
+            else:
+                s=s[s.tail_window_months==window];err=s.tail_gap_prediction-s.actual_cumulative_record
+                row=comp[(comp.type==typ)&(comp.model=='q90_plus_tail_gap')&(comp.tail_window_months==window)].iloc[0]
+            if len(s)!=4 or not np.isclose(np.sqrt(np.mean(err**2)),row.rmse):raise ValueError('Maximum backtest mismatch')
+            ax.scatter(k+offset+np.linspace(-.045,.045,4),err,color=color,marker=marker,s=25,label=name if k==0 else None,zorder=3)
+    ax.axhline(0,color=style.GREY,ls='--',lw=.8);ax.set(xticks=range(4),xticklabels=['纪录保持','上尾 · 1月尾差','上尾 · 2月尾差','上尾 · 3月尾差'],ylabel='累计最高预测误差（分）',title='四个两月窗口的最高边界回测',ylim=(-.6,8.5));clean(ax);ax.legend(frameon=False,fontsize=7,loc='upper right')
+    fig.legend(*fig.axes[0].get_legend_handles_labels(),loc='lower center',bbox_to_anchor=(.54,.135),ncol=3,frameon=False,fontsize=7.5)
+    finish(fig,'11_maximum_boundary','后训练历史纪录 51.231；12 / 24月条件最高边界 60.600 / 73.453，基座保持 38.441。\n上图误差棒为最近 1–3月尾差敏感性，不是统计置信区间。下图每点为一个重叠测试窗口。\n四个窗口均未刷新纪录，纪录保持 RMSE=0；动态上尾未优于它，不能据此保证未来不创新高。\n预测起点与图06一致；提交频率、评测口径、开放筛选或尾差结构变化时，上尾情景可能失效。')
+
+
+def policy_bridge_comparison():
+    d=csv('q3_bridge_conclusion_sensitivity.csv')
+    s=d[(d.context_tokens==8192)&(d.quality_family=='power')&d.diagnostic_primary_candidate]
+    fig=base('12  三种 Q3 投入方案的名义能力兑换与支持缺口','8192 Token、幂成本；a=1、b=0、扰动=0；每点为假设兑换，不是实测 Benchmark',size=(7.2,5.8),margins=(.12,.96,.29,.80))
+    axes=fig.subplots(1,2,sharey=True,gridspec_kw={'wspace':.28})
+    modes=['fixed_recipe','observed_joint_recipe','independent_native_Q']
+    names=['固定配方','配方联立','独立质量']
+    for ax,coord,name in zip(axes,COORDS[1:],['Qwen2 validation','Qwen2.5 validation']):
+        for mode,label,c,m,off in zip(modes,names,[style.BLUE,style.TEAL,style.ORANGE],['o','s','^'],[-.15,0,.15]):
+            g=s[s.coordinate_id.eq(coord)&s.policy_mode.eq(mode)].sort_values('budget_FLOPs')
+            if len(g)!=4:raise ValueError('Missing bridge mode/budget')
+            for i,row in enumerate(g.itertuples()):
+                if np.isfinite(row.nominal_score):
+                    ax.scatter(i+off,row.nominal_score,s=35,color=c,marker=m,label=label if i==1 else None,zorder=3)
+                    if mode=='independent_native_Q':ax.annotate(f'{row.nominal_score:.1f}',(i+off,row.nominal_score),xytext=(3,8),textcoords='offset points',fontsize=7,color=c)
+                elif row.supported_score_scenarios!=0:raise ValueError('Unexpected nonnominal support state')
+        ax.text(0,.23,'固定：不可行\n联立 / 独立：\nN 超出支持',transform=ax.get_xaxis_transform(),ha='center',fontsize=7,color=style.GREY,linespacing=1.8,bbox={'facecolor':'white','edgecolor':style.LIGHT,'pad':4})
+        ax.set(xticks=range(4),xticklabels=[r'$10^{19}$',r'$10^{20}$',r'$10^{22}$',r'$10^{24}$'],xlabel='预算（FLOPs）',title=name,ylim=(0,45),xlim=(-.45,3.45));clean(ax)
+    axes[0].set_ylabel('假设兑换的六任务均分（分）')
+    fig.legend(*axes[0].get_legend_handles_labels(),loc='lower center',bbox_to_anchor=(.54,.18),ncol=3,frameon=False,fontsize=8)
+    finish(fig,'12_policy_bridge','横向错开便于看见同预算的点；10^20 是诊断预算。支持预算中，固定与联立同为配方172、分数重合。\n10^19 联立配方477的 N=0.0873B、独立质量 N=0.1309B，均低于两条来源 N 下限；缺口不补零。\n两桥留出 RMSE 为 7.048 / 2.655 分，未作 Q3 跨坐标经验标定；名义分差不能当作实测改善。')
 
 
 def main():
@@ -247,9 +301,9 @@ def main():
         f=SOURCE/name;raw=f.read_bytes()
         if sha not in [hashlib.sha256(raw).hexdigest(),hashlib.sha256(raw.replace(b'\r\n',b'\n')).hexdigest()]:raise ValueError(f'Frozen Q4 hash mismatch: {name}')
         verified.append(name)
-    profiles={name:profile_data(csv(name)) for name in ['prepared/leaderboard_sample.csv','historical_standardized_contributions.csv','rolling_two_month_frontier.csv','frontier_candidate_forecasts.csv','prepared/bridge_sample.csv','q3_bridge_conclusion_sensitivity.csv']}
+    profiles={name:profile_data(csv(name)) for name in ['prepared/leaderboard_sample.csv','historical_standardized_contributions.csv','rolling_two_month_frontier.csv','frontier_candidate_forecasts.csv','prepared/bridge_sample.csv','q3_bridge_conclusion_sensitivity.csv','frontier_maximum_scenarios.csv','frontier_maximum_backtest.csv']}
     (OUT/'scipilot_profiles.json').write_text(json.dumps(profiles,ensure_ascii=False,indent=2,default=str),encoding='utf-8')
-    history();contributions();sensitivity();resources();backtests();forecasts();uncertainty();growth_scenarios();bridge();bridge_stress()
+    history();contributions();sensitivity();resources();backtests();forecasts();uncertainty();growth_scenarios();bridge();bridge_stress();maximum_boundary();policy_bridge_comparison()
     for f in style.INPUTS:
         key=str(f.relative_to(ROOT)).replace('\\','/')
         sha=frozen['input_sha256'].get(key)
@@ -259,7 +313,7 @@ def main():
     cards=[]
     for f in style.FIGURES:
         s=f['stem'];cards.append(f'<section><img src="{s}.png" alt="{s}"><p>{html.escape(f["caption"]).replace(chr(10),"<br>")}</p><a href="{s}.pdf">PDF</a> · <a href="{s}.svg">SVG</a></section>')
-    (OUT/'gallery.html').write_text('<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>Q4 结果图册</title><style>body{margin:0;background:#edf2f6;color:#243746;font:16px/1.7 "Microsoft YaHei",sans-serif}main{max-width:1020px;margin:30px auto;padding:0 20px}section{background:white;margin:24px 0;padding:22px;border-radius:12px}img{width:100%}p{font-size:14px;color:#536674}a{color:#0072B2}</style><main><h1>Q4 结果图册</h1><p>main @ b789e3f 的冻结 Q4 v3 结果。历史分解是条件关联；未来预测起点为 2025 年 3 月。与 Q1–Q3 同一分支、版式和配色。</p>'+''.join(cards)+'</main></html>',encoding='utf-8')
+    (OUT/'gallery.html').write_text('<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>Q4 结果图册</title><style>body{margin:0;background:#edf2f6;color:#243746;font:16px/1.7 "Microsoft YaHei",sans-serif}main{max-width:1020px;margin:30px auto;padding:0 20px}section{background:white;margin:24px 0;padding:22px;border-radius:12px}img{width:100%}p{font-size:14px;color:#536674}a{color:#0072B2}</style><main><h1>Q4 结果图册</h1><p>main @ 4098b8c 的冻结 Q4 v3 结果，含累计最高边界及三模式桥接。历史分解是条件关联；未来预测起点为 2025 年 3 月。与 Q1–Q3 同一分支、版式和配色。</p>'+''.join(cards)+'</main></html>',encoding='utf-8')
     style.INPUTS.add(SOURCE/'ANSWER.md')
     manifest={'source_main':MAIN,'frozen_source':frozen['source_commit'],'upstream_Q3_commit':frozen['upstream_Q3_commit'],'producer':'frozen Q4 v3; no refit or forecast update','verified_frozen_outputs':verified,
         'inputs':{str(f.relative_to(ROOT)):hashlib.sha256(f.read_bytes()).hexdigest() for f in sorted(style.INPUTS)},

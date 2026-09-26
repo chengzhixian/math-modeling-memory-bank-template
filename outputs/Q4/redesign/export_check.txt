@@ -76,7 +76,7 @@
 
 --- outputs\Q4\redesign\06_forecasts.pdf ---
   category: vector  ext: pdf  size: 70152 B
-  [WARN] PDF 中以下字体可能未嵌入: /EPUSYM+MicrosoftYaHei-Bold, /GELOYF+MicrosoftYaHei. 导致他人电脑打开变成替代字体。
+  [WARN] PDF 中以下字体可能未嵌入: /GELOYF+MicrosoftYaHei, /EPUSYM+MicrosoftYaHei-Bold. 导致他人电脑打开变成替代字体。
   >>> verdict: WARN
 
 --- outputs\Q4\redesign\06_forecasts.svg ---
@@ -104,7 +104,7 @@
 
 --- outputs\Q4\redesign\08_growth_scenarios.pdf ---
   category: vector  ext: pdf  size: 61446 B
-  [WARN] PDF 中以下字体可能未嵌入: /GJVASD+MicrosoftYaHei-Bold, /HPURZQ+MicrosoftYaHei. 导致他人电脑打开变成替代字体。
+  [WARN] PDF 中以下字体可能未嵌入: /HPURZQ+MicrosoftYaHei, /GJVASD+MicrosoftYaHei-Bold. 导致他人电脑打开变成替代字体。
   >>> verdict: WARN
 
 --- outputs\Q4\redesign\08_growth_scenarios.svg ---
@@ -126,15 +126,43 @@
   [PASS] 无问题。
 
 --- outputs\Q4\redesign\10_bridge_stress.png ---
-  category: raster  ext: png  size: 279440 B
+  category: raster  ext: png  size: 279643 B
   pixels: 2160x1650  dpi: (299.9994, 299.9994)
   [PASS] 无问题。
 
 --- outputs\Q4\redesign\10_bridge_stress.pdf ---
-  category: vector  ext: pdf  size: 73260 B
-  [WARN] PDF 中以下字体可能未嵌入: /WSMBTA+MicrosoftYaHei, /CIONJF+MicrosoftYaHei-Bold. 导致他人电脑打开变成替代字体。
+  category: vector  ext: pdf  size: 75078 B
+  [WARN] PDF 中以下字体可能未嵌入: /CIONJF+MicrosoftYaHei-Bold, /BHZCYE+MicrosoftYaHei. 导致他人电脑打开变成替代字体。
   >>> verdict: WARN
 
 --- outputs\Q4\redesign\10_bridge_stress.svg ---
-  category: vector  ext: svg  size: 16641 B
+  category: vector  ext: svg  size: 16651 B
+  [PASS] 无问题。
+
+--- outputs\Q4\redesign\11_maximum_boundary.png ---
+  category: raster  ext: png  size: 323853 B
+  pixels: 2160x2340  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs\Q4\redesign\11_maximum_boundary.pdf ---
+  category: vector  ext: pdf  size: 84059 B
+  [WARN] PDF 中以下字体可能未嵌入: /EQIHXQ+MicrosoftYaHei, /LKOYVQ+MicrosoftYaHei-Bold. 导致他人电脑打开变成替代字体。
+  >>> verdict: WARN
+
+--- outputs\Q4\redesign\11_maximum_boundary.svg ---
+  category: vector  ext: svg  size: 29670 B
+  [PASS] 无问题。
+
+--- outputs\Q4\redesign\12_policy_bridge.png ---
+  category: raster  ext: png  size: 265597 B
+  pixels: 2160x1740  dpi: (299.9994, 299.9994)
+  [PASS] 无问题。
+
+--- outputs\Q4\redesign\12_policy_bridge.pdf ---
+  category: vector  ext: pdf  size: 72039 B
+  [WARN] PDF 中以下字体可能未嵌入: /FYIYCJ+MicrosoftYaHei, /HDGMAC+MicrosoftYaHei-Bold, /DVJCIF+DejaVuSans. 导致他人电脑打开变成替代字体。
+  >>> verdict: WARN
+
+--- outputs\Q4\redesign\12_policy_bridge.svg ---
+  category: vector  ext: svg  size: 26406 B
   [PASS] 无问题。

@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-09-26T12:57:05.805940</dc:date>
+    <dc:date>2026-09-26T13:05:01.032492</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -42,7 +42,7 @@ z
      <g id="line2d_1">
       <path d="M 82.944 277.2
 L 82.944 87.12
-" clip-path="url(#pe72c58af7b)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
+" clip-path="url(#pb2aee7786b)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
      </g>
      <g id="line2d_2"/>
      <g id="text_1">
@@ -53,7 +53,7 @@ L 82.944 87.12
      <g id="line2d_3">
       <path d="M 120.864 277.2
 L 120.864 87.12
-" clip-path="url(#pe72c58af7b)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
+" clip-path="url(#pb2aee7786b)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
      </g>
      <g id="line2d_4"/>
      <g id="text_2">
@@ -64,7 +64,7 @@ L 120.864 87.12
      <g id="line2d_5">
       <path d="M 158.784 277.2
 L 158.784 87.12
-" clip-path="url(#pe72c58af7b)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
+" clip-path="url(#pb2aee7786b)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
      </g>
      <g id="line2d_6"/>
      <g id="text_3">
@@ -75,7 +75,7 @@ L 158.784 87.12
      <g id="line2d_7">
       <path d="M 196.704 277.2
 L 196.704 87.12
-" clip-path="url(#pe72c58af7b)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
+" clip-path="url(#pb2aee7786b)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
      </g>
      <g id="line2d_8"/>
      <g id="text_4">
@@ -86,7 +86,7 @@ L 196.704 87.12
      <g id="line2d_9">
       <path d="M 234.624 277.2
 L 234.624 87.12
-" clip-path="url(#pe72c58af7b)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
+" clip-path="url(#pb2aee7786b)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
      </g>
      <g id="line2d_10"/>
      <g id="text_5">
@@ -116,12 +116,12 @@ L 234.624 87.12
    <g id="LineCollection_1">
     <path d="M 134.517242 144.970435
 L 187.078831 144.970435
-" clip-path="url(#pe72c58af7b)" style="fill: none; stroke: #0072b2; stroke-width: 4"/>
+" clip-path="url(#pb2aee7786b)" style="fill: none; stroke: #0072b2; stroke-width: 4"/>
    </g>
    <g id="LineCollection_2">
     <path d="M 140.039005 227.613913
 L 231.578943 227.613913
-" clip-path="url(#pe72c58af7b)" style="fill: none; stroke: #009e73; stroke-width: 4"/>
+" clip-path="url(#pb2aee7786b)" style="fill: none; stroke: #009e73; stroke-width: 4"/>
    </g>
    <g id="patch_3">
     <path d="M 82.944 277.2
@@ -135,15 +135,15 @@ L 253.584 277.2
    </g>
    <g id="PathCollection_1">
     <defs>
-     <path id="m2a7591aa7a" d="M 0 4.743416
+     <path id="me17fa30ac9" d="M 0 4.743416
 L 4.743416 0
 L 0 -4.743416
 L -4.743416 0
 z
 " style="stroke: #0072b2"/>
     </defs>
-    <g clip-path="url(#pe72c58af7b)">
-     <use xlink:href="#m2a7591aa7a" x="167.775074" y="144.970435" style="fill: #0072b2; stroke: #0072b2"/>
+    <g clip-path="url(#pb2aee7786b)">
+     <use xlink:href="#me17fa30ac9" x="167.775074" y="144.970435" style="fill: #0072b2; stroke: #0072b2"/>
     </g>
    </g>
    <g id="text_9">
@@ -154,15 +154,15 @@ z
    </g>
    <g id="PathCollection_2">
     <defs>
-     <path id="m1afea6e5d8" d="M 0 4.743416
+     <path id="mfacc7a7018" d="M 0 4.743416
 L 4.743416 0
 L 0 -4.743416
 L -4.743416 0
 z
 " style="stroke: #009e73"/>
     </defs>
-    <g clip-path="url(#pe72c58af7b)">
-     <use xlink:href="#m1afea6e5d8" x="191.755611" y="227.613913" style="fill: #009e73; stroke: #009e73"/>
+    <g clip-path="url(#pb2aee7786b)">
+     <use xlink:href="#mfacc7a7018" x="191.755611" y="227.613913" style="fill: #009e73; stroke: #009e73"/>
     </g>
    </g>
    <g id="text_11">
@@ -189,7 +189,7 @@ z
      <g id="line2d_13">
       <path d="M 321.84 277.2
 L 321.84 87.12
-" clip-path="url(#p0357bff28c)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
+" clip-path="url(#p7ac2ee8ebe)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
      </g>
      <g id="line2d_14"/>
      <g id="text_14">
@@ -200,7 +200,7 @@ L 321.84 87.12
      <g id="line2d_15">
       <path d="M 346.217143 277.2
 L 346.217143 87.12
-" clip-path="url(#p0357bff28c)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
+" clip-path="url(#p7ac2ee8ebe)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
      </g>
      <g id="line2d_16"/>
      <g id="text_15">
@@ -211,7 +211,7 @@ L 346.217143 87.12
      <g id="line2d_17">
       <path d="M 370.594286 277.2
 L 370.594286 87.12
-" clip-path="url(#p0357bff28c)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
+" clip-path="url(#p7ac2ee8ebe)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
      </g>
      <g id="line2d_18"/>
      <g id="text_16">
@@ -222,7 +222,7 @@ L 370.594286 87.12
      <g id="line2d_19">
       <path d="M 394.971429 277.2
 L 394.971429 87.12
-" clip-path="url(#p0357bff28c)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
+" clip-path="url(#p7ac2ee8ebe)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
      </g>
      <g id="line2d_20"/>
      <g id="text_17">
@@ -233,7 +233,7 @@ L 394.971429 87.12
      <g id="line2d_21">
       <path d="M 419.348571 277.2
 L 419.348571 87.12
-" clip-path="url(#p0357bff28c)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
+" clip-path="url(#p7ac2ee8ebe)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
      </g>
      <g id="line2d_22"/>
      <g id="text_18">
@@ -244,7 +244,7 @@ L 419.348571 87.12
      <g id="line2d_23">
       <path d="M 443.725714 277.2
 L 443.725714 87.12
-" clip-path="url(#p0357bff28c)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
+" clip-path="url(#p7ac2ee8ebe)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
      </g>
      <g id="line2d_24"/>
      <g id="text_19">
@@ -255,7 +255,7 @@ L 443.725714 87.12
      <g id="line2d_25">
       <path d="M 468.102857 277.2
 L 468.102857 87.12
-" clip-path="url(#p0357bff28c)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
+" clip-path="url(#p7ac2ee8ebe)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
      </g>
      <g id="line2d_26"/>
      <g id="text_20">
@@ -266,7 +266,7 @@ L 468.102857 87.12
      <g id="line2d_27">
       <path d="M 492.48 277.2
 L 492.48 87.12
-" clip-path="url(#p0357bff28c)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
+" clip-path="url(#p7ac2ee8ebe)" style="fill: none; stroke: #e8eef2; stroke-width: 0.7; stroke-linecap: square"/>
      </g>
      <g id="line2d_28"/>
      <g id="text_21">
@@ -294,33 +294,33 @@ L 492.48 87.12
    <g id="LineCollection_3">
     <path d="M 329.681318 144.970435
 L 409.492 144.970435
-" clip-path="url(#p0357bff28c)" style="fill: none; stroke: #0072b2; stroke-width: 4"/>
+" clip-path="url(#p7ac2ee8ebe)" style="fill: none; stroke: #0072b2; stroke-width: 4"/>
    </g>
    <g id="line2d_31">
     <defs>
-     <path id="mf8618037fc" d="M 0 5
+     <path id="m03377bf73e" d="M 0 5
 L 0 -5
 " style="stroke: #0072b2"/>
     </defs>
-    <g clip-path="url(#p0357bff28c)">
-     <use xlink:href="#mf8618037fc" x="329.681318" y="144.970435" style="fill: #0072b2; stroke: #0072b2"/>
-     <use xlink:href="#mf8618037fc" x="409.492" y="144.970435" style="fill: #0072b2; stroke: #0072b2"/>
+    <g clip-path="url(#p7ac2ee8ebe)">
+     <use xlink:href="#m03377bf73e" x="329.681318" y="144.970435" style="fill: #0072b2; stroke: #0072b2"/>
+     <use xlink:href="#m03377bf73e" x="409.492" y="144.970435" style="fill: #0072b2; stroke: #0072b2"/>
     </g>
    </g>
    <g id="LineCollection_4">
     <path d="M 333.376809 227.613913
 L 461.619445 227.613913
-" clip-path="url(#p0357bff28c)" style="fill: none; stroke: #009e73; stroke-width: 4"/>
+" clip-path="url(#p7ac2ee8ebe)" style="fill: none; stroke: #009e73; stroke-width: 4"/>
    </g>
    <g id="line2d_32">
     <defs>
-     <path id="m18f1301359" d="M 0 5
+     <path id="m5d6b26f406" d="M 0 5
 L 0 -5
 " style="stroke: #009e73"/>
     </defs>
-    <g clip-path="url(#p0357bff28c)">
-     <use xlink:href="#m18f1301359" x="333.376809" y="227.613913" style="fill: #009e73; stroke: #009e73"/>
-     <use xlink:href="#m18f1301359" x="461.619445" y="227.613913" style="fill: #009e73; stroke: #009e73"/>
+    <g clip-path="url(#p7ac2ee8ebe)">
+     <use xlink:href="#m5d6b26f406" x="333.376809" y="227.613913" style="fill: #009e73; stroke: #009e73"/>
+     <use xlink:href="#m5d6b26f406" x="461.619445" y="227.613913" style="fill: #009e73; stroke: #009e73"/>
     </g>
    </g>
    <g id="patch_6">
@@ -358,15 +358,15 @@ L 492.48 277.2
   <g id="text_32">
    <text style="font-size: 7.5px; font-family: 'Microsoft YaHei'; fill: #718096" transform="translate(12.96 342.467834)">27 格假设：尺度 a∈{0.9,1,1.1}，偏移 b∈{−0.1,0,0.1}，上游 Loss 扰动∈{−0.05,0,0.05}。</text>
    <text style="font-size: 7.5px; font-family: 'Microsoft YaHei'; fill: #718096" transform="translate(12.96 355.745691)">菱形为 a=1、b=0、扰动=0 名义点；线段是支持格的最小–最大范围，不是置信区间。</text>
-   <text style="font-size: 7.5px; font-family: 'Microsoft YaHei'; fill: #718096" transform="translate(12.96 368.941516)">Q4 冻结接口引用 Q3 @ c052b69 的固定配方 172，不是之后新增的配方联合优化结果。</text>
+   <text style="font-size: 7.5px; font-family: 'Microsoft YaHei'; fill: #718096" transform="translate(12.96 368.941516)">此图选固定配方 172；同预算联立推荐也为 172、对应分数相同，三模式完整对比见图12。</text>
    <text style="font-size: 7.5px; font-family: 'Microsoft YaHei'; fill: #718096" transform="translate(12.96 382.129724)">未支持格排除，不补零；此压力影响 Q3 兑换幅度，未直接作用于 C2 / C4 前沿预测。</text>
   </g>
  </g>
  <defs>
-  <clipPath id="pe72c58af7b">
+  <clipPath id="pb2aee7786b">
    <rect x="82.944" y="87.12" width="170.64" height="190.08"/>
   </clipPath>
-  <clipPath id="p0357bff28c">
+  <clipPath id="p7ac2ee8ebe">
    <rect x="321.84" y="87.12" width="170.64" height="190.08"/>
   </clipPath>
  </defs>

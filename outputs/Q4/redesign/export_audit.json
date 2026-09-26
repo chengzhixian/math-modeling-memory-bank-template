@@ -21,7 +21,7 @@
       "issues": [
         [
           "WARN",
-          "PDF 中以下字体可能未嵌入: /EJWCFK+MicrosoftYaHei-Bold, /CNTFXP+MicrosoftYaHei. 导致他人电脑打开变成替代字体。"
+          "PDF 中以下字体可能未嵌入: /CNTFXP+MicrosoftYaHei, /EJWCFK+MicrosoftYaHei-Bold. 导致他人电脑打开变成替代字体。"
         ]
       ],
       "info": {
@@ -79,7 +79,7 @@
       "issues": [
         [
           "WARN",
-          "PDF 中以下字体可能未嵌入: /JRACDQ+MicrosoftYaHei-Bold, /ERZPSJ+MicrosoftYaHei. 导致他人电脑打开变成替代字体。"
+          "PDF 中以下字体可能未嵌入: /ERZPSJ+MicrosoftYaHei, /JRACDQ+MicrosoftYaHei-Bold. 导致他人电脑打开变成替代字体。"
         ]
       ],
       "info": {
@@ -137,7 +137,7 @@
       "issues": [
         [
           "WARN",
-          "PDF 中以下字体可能未嵌入: /SCENVN+MicrosoftYaHei, /CCJNOX+MicrosoftYaHei-Bold. 导致他人电脑打开变成替代字体。"
+          "PDF 中以下字体可能未嵌入: /CCJNOX+MicrosoftYaHei-Bold, /SCENVN+MicrosoftYaHei. 导致他人电脑打开变成替代字体。"
         ]
       ],
       "info": {
@@ -253,7 +253,7 @@
       "issues": [
         [
           "WARN",
-          "PDF 中以下字体可能未嵌入: /DPINUT+MicrosoftYaHei, /GKJCFW+MicrosoftYaHei-Bold. 导致他人电脑打开变成替代字体。"
+          "PDF 中以下字体可能未嵌入: /GKJCFW+MicrosoftYaHei-Bold, /DPINUT+MicrosoftYaHei. 导致他人电脑打开变成替代字体。"
         ]
       ],
       "info": {
@@ -369,7 +369,7 @@
       "issues": [
         [
           "WARN",
-          "PDF 中以下字体可能未嵌入: /HFKCER+MicrosoftYaHei-Bold, /EREJSU+MicrosoftYaHei. 导致他人电脑打开变成替代字体。"
+          "PDF 中以下字体可能未嵌入: /EREJSU+MicrosoftYaHei, /HFKCER+MicrosoftYaHei-Bold. 导致他人电脑打开变成替代字体。"
         ]
       ],
       "info": {
@@ -485,7 +485,7 @@
       "issues": [
         [
           "WARN",
-          "PDF 中以下字体可能未嵌入: /EKMVKY+MicrosoftYaHei-Bold, /HGENFW+MicrosoftYaHei. 导致他人电脑打开变成替代字体。"
+          "PDF 中以下字体可能未嵌入: /HGENFW+MicrosoftYaHei, /EKMVKY+MicrosoftYaHei-Bold. 导致他人电脑打开变成替代字体。"
         ]
       ],
       "info": {
@@ -527,7 +527,7 @@
       "info": {
         "path": "outputs\\Q4\\redesign\\10_bridge_stress.png",
         "ext": "png",
-        "size_bytes": 279440,
+        "size_bytes": 279643,
         "category": "raster",
         "size_px": [
           2160,
@@ -543,13 +543,13 @@
       "issues": [
         [
           "WARN",
-          "PDF 中以下字体可能未嵌入: /WSMBTA+MicrosoftYaHei, /CIONJF+MicrosoftYaHei-Bold. 导致他人电脑打开变成替代字体。"
+          "PDF 中以下字体可能未嵌入: /CIONJF+MicrosoftYaHei-Bold, /BHZCYE+MicrosoftYaHei. 导致他人电脑打开变成替代字体。"
         ]
       ],
       "info": {
         "path": "outputs\\Q4\\redesign\\10_bridge_stress.pdf",
         "ext": "pdf",
-        "size_bytes": 73260,
+        "size_bytes": 75078,
         "category": "vector"
       }
     },
@@ -558,7 +558,7 @@
       "info": {
         "path": "outputs\\Q4\\redesign\\10_bridge_stress.svg",
         "ext": "svg",
-        "size_bytes": 16641,
+        "size_bytes": 16651,
         "category": "vector"
       }
     },
@@ -568,14 +568,135 @@
     ],
     "embedded_fonts": [
       {
-        "name": "WSMBTA+MicrosoftYaHei",
+        "name": "BHZCYE+MicrosoftYaHei",
         "type": "Type0",
-        "embedded_bytes": 74308
+        "embedded_bytes": 76732
       },
       {
         "name": "CIONJF+MicrosoftYaHei-Bold",
         "type": "Type0",
         "embedded_bytes": 18188
+      }
+    ]
+  },
+  "11_maximum_boundary": {
+    "png": {
+      "issues": [],
+      "info": {
+        "path": "outputs\\Q4\\redesign\\11_maximum_boundary.png",
+        "ext": "png",
+        "size_bytes": 323853,
+        "category": "raster",
+        "size_px": [
+          2160,
+          2340
+        ],
+        "dpi": [
+          299.9994,
+          299.9994
+        ]
+      }
+    },
+    "pdf": {
+      "issues": [
+        [
+          "WARN",
+          "PDF 中以下字体可能未嵌入: /EQIHXQ+MicrosoftYaHei, /LKOYVQ+MicrosoftYaHei-Bold. 导致他人电脑打开变成替代字体。"
+        ]
+      ],
+      "info": {
+        "path": "outputs\\Q4\\redesign\\11_maximum_boundary.pdf",
+        "ext": "pdf",
+        "size_bytes": 84059,
+        "category": "vector"
+      }
+    },
+    "svg": {
+      "issues": [],
+      "info": {
+        "path": "outputs\\Q4\\redesign\\11_maximum_boundary.svg",
+        "ext": "svg",
+        "size_bytes": 29670,
+        "category": "vector"
+      }
+    },
+    "pixels": [
+      2160,
+      2340
+    ],
+    "embedded_fonts": [
+      {
+        "name": "EQIHXQ+MicrosoftYaHei",
+        "type": "Type0",
+        "embedded_bytes": 85212
+      },
+      {
+        "name": "LKOYVQ+MicrosoftYaHei-Bold",
+        "type": "Type0",
+        "embedded_bytes": 17360
+      }
+    ]
+  },
+  "12_policy_bridge": {
+    "png": {
+      "issues": [],
+      "info": {
+        "path": "outputs\\Q4\\redesign\\12_policy_bridge.png",
+        "ext": "png",
+        "size_bytes": 265597,
+        "category": "raster",
+        "size_px": [
+          2160,
+          1740
+        ],
+        "dpi": [
+          299.9994,
+          299.9994
+        ]
+      }
+    },
+    "pdf": {
+      "issues": [
+        [
+          "WARN",
+          "PDF 中以下字体可能未嵌入: /DVJCIF+DejaVuSans, /FYIYCJ+MicrosoftYaHei, /HDGMAC+MicrosoftYaHei-Bold. 导致他人电脑打开变成替代字体。"
+        ]
+      ],
+      "info": {
+        "path": "outputs\\Q4\\redesign\\12_policy_bridge.pdf",
+        "ext": "pdf",
+        "size_bytes": 72039,
+        "category": "vector"
+      }
+    },
+    "svg": {
+      "issues": [],
+      "info": {
+        "path": "outputs\\Q4\\redesign\\12_policy_bridge.svg",
+        "ext": "svg",
+        "size_bytes": 26406,
+        "category": "vector"
+      }
+    },
+    "pixels": [
+      2160,
+      1740
+    ],
+    "embedded_fonts": [
+      {
+        "name": "DVJCIF+DejaVuSans",
+        "type": "Type0",
+        "embedded_bytes": 4640
+      },
+      {
+        "name": "FYIYCJ+MicrosoftYaHei",
+        "type": "Type0",
+        "embedded_bytes": 65728
+      },
+      {
+        "name": "HDGMAC+MicrosoftYaHei-Bold",
+        "type": "Type0",
+        "embedded_bytes": 16936
       }
     ]
   }

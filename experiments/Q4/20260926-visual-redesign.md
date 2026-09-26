@@ -1,6 +1,6 @@
 # Q4 绘图复核记录
 
-在统一绘图分支 `visual/q1-redesign-20260926`、工作树 `H:/研究生数模/q1-visual-redesign` 完成 10 张 Q4 v3 图。远程 main `b789e3f` 已在当前分支，没有新建分支或工作树。
+在统一绘图分支 `visual/q1-redesign-20260926`、工作树 `H:/研究生数模/q1-visual-redesign` 完成 12 张 Q4 v3 图。远程 main `4098b8c` 已在当前分支，没有新建分支或工作树。任务中同步了刚更新的 main，增加累计最高边界与三模式桥接图。
 
 ## SciPilot 判断
 
@@ -8,18 +8,19 @@
 
 ## 数值和图形核对
 
-- 冻结 manifest 27 个输出 hash 通过；使用的 prepared 输入 hash 通过，允许 Git 换行规范化。
+- 冻结 manifest 30 个输出 hash 通过；使用的 prepared 输入 hash 通过，允许 Git 换行规范化。
 - C2 三种主类别的 204 / 1620 条逐行六任务均分通过。
 - 两类主规格规模项 + 时间项 + 支持差额与全样本变化闭合。
 - 主资源筛选两类型 × 四候选四窗口 RMSE 复算与发表表一致。
 - C4 gate 使用 `primary / wide_ratio`；N / D 原始对数转换到十亿单位，不能误读为已经是 B 单位。
-- Q4 桥引用 Q3 `c052b69` 固定配方 172，图10保留该版本；没有借重画之名更新桥结果。
+- Q4 桥 manifest 保留 Q3 `c052b69` 字段，实际表来自最新 main 刷新；图10明确选固定配方172，图12补上最新三模式名义结果。没有借重画之名重新标定桥。
 - 10 张 PNG 已读图，修正图04图例与横轴标题重叠、图06末行边界裁切、图09连线遮挡点；读图补上图10名义值与支持数。
-- 布局检查十图全部无问题；灰度图03形状编码可辨识。
-- 30 个 PNG / PDF / SVG 主导出 strict 检查无 FAIL。PDF checker 的字体 WARN 是 Type0 嵌入检查局限；PyMuPDF 逐字体提取非零字节、无 Type3，十份 PDF 均无位图。SVG 无 base64；PNG 300 dpi 尺寸正确；图06实际 PDF 渲染已读图。
+- 图11累计最高边界公式、四窗口最高边界 RMSE 复算通过；新增图11/12与更新图10实际PNG读图通过。
+- 布局检查十二图全部无问题；灰度图03形状编码可辨识。
+- 36 个 PNG / PDF / SVG 主导出 strict 检查无 FAIL。PDF checker 的字体 WARN 是 Type0 嵌入检查局限；PyMuPDF 逐字体提取非零字节、无 Type3，十二份 PDF 均无位图。SVG 无 base64；PNG 300 dpi 尺寸正确；图06 / 11实际 PDF 渲染已读图。
 
 ## 交付与范围
 
-`outputs/Q4/redesign/`：10 张图的 PNG / PDF / SVG / 灰度共40份，图册、README、输入剖析、冻结来源及布局 manifest、导出审计、实际 PDF 复核图。脚本 `src/visualization/q4_redesign.py` 复用 Q2 样式。
+`outputs/Q4/redesign/`：12 张图的 PNG / PDF / SVG / 灰度共48份，图册、README、输入剖析、冻结来源及布局 manifest、导出审计、实际 PDF 复核图。脚本 `src/visualization/q4_redesign.py` 复用 Q2 样式。
 
 本次为冻结结果绘图复核，不宣称重跑统计模型、因果识别、Loss 经验标定、未来验证或论文图替换。当前 Q4 主文仍为原集成版本；新图供集成人选用。
