@@ -1,0 +1,25 @@
+{
+  "p": {
+    "arxiv": 0.1130225258326927,
+    "freelaw": 0.09682483215202778,
+    "nih_exporter": 0.005889680217095942,
+    "pubmed_central": 0.11375419105058358,
+    "wikipedia_en": 0.07507775607983626,
+    "dm_mathematics": 0.02546285409705039,
+    "github": 0.11070066007050916,
+    "philpapers": 0.005487697351193028,
+    "stackexchange": 0.09943242344413022,
+    "enron_emails": 0.0022110330434062255,
+    "gutenberg_pg_19": 0.04691494424753537,
+    "pile_cc": 0.11948759779188563,
+    "ubuntu_irc": 0.01959999828400589,
+    "europarl": 0.01273706475403153,
+    "hackernews": 0.011650822378108681,
+    "pubmed_abstracts": 0.0661811661125716,
+    "uspto_backgrounds": 0.0755647530933359
+  },
+  "Loss": 2.595436990598807,
+  "mapped_coverage": 0.5646359074665893,
+  "pair_count": 136,
+  "all_pairs_hull_feasible_in_both_directions": true
+}

@@ -12,6 +12,8 @@ Q1–Q3 的精简成果按问题放在 `outputs/Q1`、`outputs/Q2`、`outputs/Q3
 
 2026-09-26 后续整理：main 的旧 `outputs/chm` 目录经逐文件核对后清理；正式 Q1 v2 清单仍保持原 SHA，九个输入的同字节副本集中于 `outputs/Q1` 并由读取器复核。Q1–Q3 的关键实验方法与验证记录进入 `experiments/Q1`、`Q2`、`Q3`，索引见 `experiments/experiment-log.md`；个人分支继续保存全量运行中间文件。CYJ 最新远端 `74e678e319b58e2aab230a7b7233fa53f3053fa5` 只追加 Q3 合作计划，Q2 v8 数值生产者不变。
 
+本轮远端三分支复查又补入 Q1 逐次重拟合及估算压力记录、Q2 的 B1 冻结输入和逐项验证及 18 组接口样例、Q3 的官方预算假设逐格表及 42 个公开模型外测逐行表。精确发现和核验见 `experiments/20260926-cross-branch-completeness-review.md`。CYJ `74e678e` 的 Q3 联合验收仍是待执行清单；CHM 发布的完整条件答案不等于 CYJ 独立签收已完成。
+
 更新时间：2026-09-23（北京时间）。阶段：F 题启动、三人并行协作初始化。
 
 > 2026-09-24 论文入口更新：`paper/latex/main.tex` 是第二十二届华为杯模板基础上的整体协作初稿，Q1 已迁入 `sections/chm/q1.tex` 并附五图，其余问保持清晰占位；写入权按 `paper/latex/README.md` 和 `TEAM_WORKFLOW.md` 分配。2026 年官方格式及本机缺少 XeLaTeX 导致的 PDF 编译均尚待核验。

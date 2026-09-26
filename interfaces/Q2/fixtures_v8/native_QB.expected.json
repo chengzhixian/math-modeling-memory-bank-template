@@ -1,0 +1,87 @@
+{
+  "exit_code": 0,
+  "result": {
+    "schema_version": "cyj.ndqp.scenario.v8",
+    "Loss": 2.403893226842496,
+    "NDQ_loss": 2.571427168099458,
+    "B1_backbone_loss": 2.385575696163953,
+    "quality_gain_G": 0.3717029438710098,
+    "Q_B_proxy_or_native": 0.5,
+    "quality_mode": "native_QB_sensitivity",
+    "quality_mapping_policy": null,
+    "Q_A_mapped": null,
+    "mapped_coverage": null,
+    "unmapped_mass": null,
+    "quality_bridge": null,
+    "Q1_weighted_effect": -0.06737146220598264,
+    "mixture_bridge_factor": 0.9348478761773423,
+    "mixture_bridge_lambda": 1.0,
+    "mixture_bridge_eta": 0.0,
+    "bridge_model": "exp_bridge",
+    "gradients": {
+      "N_B": -0.14107008615812675,
+      "D_B": -0.0009641942637849605,
+      "Q_B_proxy_or_native": -0.3474857076466794,
+      "Q_A_mapped": null,
+      "p_ambient": {
+        "arxiv": 0.43514611167182066,
+        "freelaw": 0.4594225066811875,
+        "nih_exporter": -0.2664498896571241,
+        "pubmed_central": 0.44424823872772307,
+        "wikipedia_en": 0.3062843912965845,
+        "dm_mathematics": -0.4395976035907577,
+        "github": 0.4227664371126139,
+        "philpapers": -0.9483759257514369,
+        "stackexchange": 0.23796334485309167,
+        "enron_emails": -0.9731494089436962,
+        "gutenberg_pg_19": 0.1750098807200292,
+        "pile_cc": 0.3560333386519444,
+        "ubuntu_irc": -0.5590671752997162,
+        "europarl": -0.18129810457113713,
+        "hackernews": -0.5716608434428359,
+        "pubmed_abstracts": 0.23852516814605057,
+        "uspto_backgrounds": 0.3225979967025432
+      }
+    },
+    "elasticities_signed": {
+      "N": -0.058684006670055695,
+      "D": -0.040109695930689304,
+      "Q_B_proxy_or_native": -0.07227561186299038,
+      "Q_A_mapped": null
+    },
+    "p_support": {
+      "in_A4_hull": true,
+      "observed_index": "172",
+      "residual": 0.0,
+      "quality": {
+        "policy": "quality_direct_and_near",
+        "covered_mass": 0.5814185814185814,
+        "unmapped_mass": 0.4185814185814185,
+        "weighted_Q_A_numerator": 0.9741372281689653,
+        "mean_Q_A_on_mapped": 1.6754490814383751,
+        "reference_covered_mass": 0.5646359074665894,
+        "reference_mean_Q_A": 0.7831035543837233,
+        "coverage_margin": 0.016782673951991955,
+        "quality_margin": 0.518826270475332,
+        "eligible": true,
+        "unknown_Q_A_count": 11,
+        "Q_A_to_Q_B_mapping": "unidentified"
+      },
+      "mode": "quality_direct_and_near"
+    },
+    "Q1_manifest_sha256": "c621f7e405106e42720f918f490235b5e8becefb0f7c8cb997736e96337117a9",
+    "B1_fit_sha256": "9b0e381fbc0ea84bb37d63ccb273733f3a03a0c2a834e8ef52cdb75c45bc6ead",
+    "B7_quality_fit_sha256": "30819a5931b0552c1ef207f52f489f9d4ecaf427166bec25a98ce7319ac3d07b",
+    "units": {
+      "N": "billion_parameters",
+      "D": "billion_tokens",
+      "Loss": "conditional_cross_entropy",
+      "Q_A": "Q1_native_score",
+      "Q_B_proxy": "B7_native_score_proxy"
+    },
+    "conditional_on_quality_and_mixture_bridges": true,
+    "empirically_calibrated_A_to_B": false,
+    "Q_A_equals_Q_B_empirical_fact": false,
+    "quality_and_mixture_double_counting_not_identified": true
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "exit_code": 2,
+  "error_contains": "p must contain exactly 17 numeric named proportions"
+}

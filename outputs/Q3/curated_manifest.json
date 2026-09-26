@@ -4,16 +4,18 @@
   "source_commit": "c052b6918c3f77a2285622521d8abb1b429513be",
   "scope": "selected core answer, derivation and validation; upstream release contains full records",
   "sha256": {
-    "ANSWER.md": "2477b0b3c9a82921204b19422cee5a8451719d6f7355f9146972cc2e467e84ae",
+    "ANSWER.md": "bb9beab8162e352a0abcebd1eb2544bb9d924c69aaf1a2fafd2b04e4fea6d22e",
     "assumption_sensitivity.json": "c57ea1fa659401ec610765ec248839cba13ba45667fb04bea485e43a9cbe2b1d",
     "external_nd_audit.json": "04ff8e296cddc1ad9ed42307f23217c06151e90ebc5207470c8981ac8afaa1b4",
     "external_nd_budget_comparison.csv": "bc08f0aafd9c11cff3862581a07a43ccb975e057bb7eaa5af6bd4611aae28a37",
     "fixed_policy_grid.csv": "9e1ea053b5754ac903e2167caa9efb5c5b934e2eed96b4bbaf064f5a42c9d388",
     "native_Q_sensitivity_grid.csv": "d8c6f006448fb5fb4fcddef0cf2f5e19e2f7e416014b5732bea080ced6dce527",
     "observed_joint_grid.csv": "8fc644e7b956a0e1b35bfcf219fd0573392a31e68e532d9248432661049af3da",
-    "README.md": "d8be9ff3bbdee2002739509024cd6f278b74eddc3874a81fd22116b4b54b9147",
+    "README.md": "9c72458f73f4ecdfe081e1ad492f03f5c82cd26364e3f308fd49fba34c0f7bac",
     "transition_resolution.json": "b255a0d2cada18d7cde9ae8313bd6a29b5310152a398c1facace94430e5a1316",
     "transitions.csv": "68cf3fb6cc20cda0c5c563da2b92707c41ad008645234e29c56d2baf0a0c5997",
-    "upstream_manifest.json": "a30703ceac1f0179f5c93e03b676b984581c3058c50ccfcdc3eb60dd27112000"
+    "upstream_manifest.json": "a30703ceac1f0179f5c93e03b676b984581c3058c50ccfcdc3eb60dd27112000",
+    "external_nd_runs.csv": "d7dc42d26734ec8bce48a84d5981016f6e59f689fb1bdf1177163e5cfdee79d1",
+    "assumption_official_grid.csv": "4947a515502ab448516133d028175ab9e371c366e8684fcd7c7b237ee7854696"
   }
 }

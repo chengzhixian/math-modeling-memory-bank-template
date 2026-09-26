@@ -5,3 +5,5 @@
 - [v8 论文与数据完整审查](V8_REVIEW.md)：题面映射、变量来源、识别边界、公式与代码、数值、验证和 red-team。该审查写于 CHM 正式 Q3 消费之前，其中“Q3 待验收”是当时状态；后续 Q3 验收见 `experiments/Q3/REVIEW.md`。
 
 两份原始 CYJ 记录来自 `team/cyj-scaling@74e678e319b58e2aab230a7b7233fa53f3053fa5`，其内 `outputs/cyj/...` 路径指向来源分支的全量发布包；main 精简文件在 [`outputs/Q2`](../../outputs/Q2/README.md)。正式 v8 数值生产者为 `fd2dbb3b2002983430329cdb2ec6a275c2eed4f6`。
+
+复查同步时补入 B1 冻结拟合、B2/B3 和规模顺序的逐项验证、领域对参考点，以及 [v8 接口样例](../../interfaces/Q2/README.md)。这些是原审查及发布记录明确引用的证据，保留了来源文件 SHA256；完整生产脚本仍按来源提交和 `outputs/Q2/upstream_manifest.json` 定位。

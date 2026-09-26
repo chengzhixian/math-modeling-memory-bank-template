@@ -1,0 +1,4 @@
+{
+  "exit_code": 2,
+  "error_contains": "baseline rejects native Q_B and bridge overrides"
+}

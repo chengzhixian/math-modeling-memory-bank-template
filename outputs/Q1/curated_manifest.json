@@ -17,10 +17,13 @@
     "numerical_signoff.json": "53bade84ae14c48a906a31f21259525c4ee7206df179a19c6061fdab0f946f3b",
     "qa_mapping.json": "f36a8e7046d379cd50df55d2eb5c4cf49759191d7445a41d662ce422a4e366bb",
     "quality_robustness.json": "a8b81d376e8ae16053dfa73d63e0ed8a87a01dffed2a5158ee38cc5ad76b490b",
-    "README.md": "7105e8195a4b0f1de3e8630e51dac75221d7465e592b305b206ef477fce9acd2",
+    "README.md": "40c8dee4be58e9fda5936426728ead1c791bd29f73bda819d531ed4153a283b8",
     "recipes_512.csv": "9744030382b8ac87fbd838a0b34580d0debff5ea3fb23f0b8846ca7c91f0742d",
     "refit_stability.json": "17497c0f7b89ead4c1f10caa27992f5d27cf76d3396a6fb0e969aeddf0a43f34",
     "targetwise_oof.csv": "c8e1076e644a3439cdd71909605e84678555f1e7f5927cdc3d327b5581101aa4",
-    "targetwise_validation.csv": "4412c4302d4e850f85fdc84568261f02df2eedb5e329c915baf19f41d9f8d0ae"
+    "targetwise_validation.csv": "4412c4302d4e850f85fdc84568261f02df2eedb5e329c915baf19f41d9f8d0ae",
+    "refit_replicate_choices.csv": "99502e5ecef0971cd2905c38998cc171315d9b1f2b709afb94c8387c73134a35",
+    "estimated_targetwise.csv": "e67dc1793233d108620028d5d76bc7daf49bade7fac32cf9f9bc539156dcd0e3",
+    "estimated_decision_stress.csv": "b404f2f6ac183c3254160e42730ddd21ab9a0327a3945586b755b1a82e7ace68"
   }
 }

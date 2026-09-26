@@ -6,6 +6,7 @@
 - `recipes_512.csv`、`domain_mapping.csv`、`qa_mapping.json`、`targetwise_oof.csv`、`interaction_fold_stability.csv`：冻结接口所需的配方、映射与折级证据。
 - `hull_bounds.json`、`numerical_signoff.json`：四种政策的连续凸包数值界及独立重算。
 - `estimated_stress.json`、`refit_stability.json`：估算外推压力和重新拟合选方敏感性。
+- `estimated_targetwise.csv`、`estimated_decision_stress.csv`、`refit_replicate_choices.csv`：上述摘要明确引用的逐目标与逐次验证记录。
 - `decision_panel.csv`：45 个情景的离散备用配方；`curated_manifest.json` 校验本目录精简文件。
 - [核心实验与复核](../../experiments/Q1/CORE_VALIDATION.md)：输入角色、方法、验证设计、复现和科学边界。
 

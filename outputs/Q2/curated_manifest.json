@@ -19,9 +19,15 @@
     "model_definition.json": "e726af5caac50e14730a89b2b8ff4601b014aae06826685788595fb2cc005179",
     "quality_bridge_sensitivity.csv": "f5b68e9207be61a473f91bbd8023045aa599927f99e64af9aee17060935354c9",
     "quality_scale_local_tradeoff.csv": "7bb21f2b00b15bc555d25f1c41bab488808722de3de5f6cb18afd42d12ddeaee",
-    "README.md": "419b407967da2bf35fcd8242cc4b2957106b35ae50d206b01c1a68fce1454b0a",
+    "README.md": "9cd47e2b421f0d4790321c38f7a0611e8a5257526c3e6bf6c2e36b4801815fdc",
     "requirement_evidence.csv": "291602eff5b5e1d510e0565fd0e2c2ece83e5a8af06af7f879f5b15db1eee9ec",
     "scale_order_validation_summary.json": "7971f8d3a28e103dfd89b5529931a22059ba0a140ce689e2a3b698dec1cf37f4",
-    "upstream_manifest.json": "b834e78ddca57ff3a1957fe4f5c927f56491162c9c82cdd687f5b734a831a170"
+    "upstream_manifest.json": "b834e78ddca57ff3a1957fe4f5c927f56491162c9c82cdd687f5b734a831a170",
+    "classic_fit.json": "9b0e381fbc0ea84bb37d63ccb273733f3a03a0c2a834e8ef52cdb75c45bc6ead",
+    "b2_b3_model_validation.csv": "5d3d2d2103bdd9b70508ca0c532298d6de2620e690402906d4fefacd2ce7ca45",
+    "scale_order_validation.csv": "88391026a0716bc466a0535e4ac9d75e4ede96a6c3d4637a5e8ce719c611bf58",
+    "domain_pair_reference.json": "042eadf3c0a14c143a4f5976398e80d974a542999ea2924308e6b3ed09f391b9",
+    "q2_v8_runtime_audit.json": "22846f6d1af9ee23ac5af20bb4edf12386ccd27a11023899c9372d08d199a2ab",
+    "q2_v8_release_verification.json": "91463211bc373133842a620de564accf012ba247db53764afbc965c9286067b3"
   }
 }
