@@ -1,0 +1,264 @@
+{
+  "reviewed_main": "c6b36c08b5a85c81a3889d48d50c26ac136a048b",
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "scipy": "1.18.1"
+  },
+  "evaluation_code_sha256": "6bf591697a7960a33980868c3e1f7cbc2170bacb0575f3207ddbd5630fbf4375",
+  "random_seed": null,
+  "independent_solver": "JSON equations + bounded scalar search on logN; native Q uses 101-point scan with all sampled local minima refined; no production solver imported",
+  "configuration": {
+    "fixed": {
+      "cells": 36,
+      "feasible": 30,
+      "feasibility_agreement": true,
+      "max_independent_loss_difference": 8.881784197001252e-16,
+      "max_published_certificate_gap": 0.0,
+      "max_budget_overrun": 2.220446049250313e-16,
+      "max_cost_relative_recompute_error": 4.194304e-16
+    },
+    "joint": {
+      "cells": 36,
+      "feasible": 33,
+      "feasibility_agreement": true,
+      "max_independent_loss_difference": 8.881784197001252e-16,
+      "max_published_certificate_gap": 0.0,
+      "max_budget_overrun": 2.220446049250313e-16,
+      "max_cost_relative_recompute_error": 6.144e-16
+    },
+    "native": {
+      "cells": 36,
+      "feasible": 33,
+      "feasibility_agreement": true,
+      "max_independent_loss_difference": 2.398081733190338e-14,
+      "max_published_certificate_gap": 9.999987193864969e-08,
+      "max_budget_overrun": 2.220446049250313e-16,
+      "max_cost_relative_recompute_error": 4.096e-16
+    },
+    "simple_baselines": {
+      "D_at_min": {
+        "n": 30,
+        "median_model_loss_reduction_percent": 10.496561437721262,
+        "max_model_loss_reduction_percent": 16.162353663401305
+      },
+      "N_at_min": {
+        "n": 30,
+        "median_model_loss_reduction_percent": 22.688174662010805,
+        "max_model_loss_reduction_percent": 27.5822071817594
+      }
+    },
+    "joint_vs_fixed": {
+      "comparable_cells": 30,
+      "strictly_better_cells": 1,
+      "max_improvement_percent": 0.1747443260454072,
+      "newly_feasible_cells": 3
+    },
+    "high_budget_utilization": {
+      "fixed": {
+        "min_percent": 2.31088171118927,
+        "max_percent": 11.581122103650223
+      },
+      "joint": {
+        "min_percent": 2.31088171118927,
+        "max_percent": 11.581122103650223
+      },
+      "native": {
+        "min_percent": 2.3364190856824782,
+        "max_percent": 11.700606481110185
+      }
+    }
+  },
+  "sensitivity": [
+    {
+      "scenario": "baseline",
+      "scenario_feasible_cells": 24,
+      "changed_recipe_cells": 0,
+      "matching_recipe_fraction": 1.0,
+      "nominal_configurations_still_feasible": 24,
+      "nominal_configurations_infeasible_under_scenario": 0,
+      "nominal_recipe_with_reoptimized_ND_infeasible": 0,
+      "max_nominal_recipe_reoptimized_relative_regret_percent": 0.0,
+      "max_nominal_relative_regret_percent": 2.0025432309888914e-14,
+      "max_independent_loss_difference": 8.881784197001252e-16
+    },
+    {
+      "scenario": "Q0_0p45",
+      "scenario_feasible_cells": 24,
+      "changed_recipe_cells": 4,
+      "matching_recipe_fraction": 0.8333333333333334,
+      "nominal_configurations_still_feasible": 9,
+      "nominal_configurations_infeasible_under_scenario": 15,
+      "nominal_recipe_with_reoptimized_ND_infeasible": 1,
+      "max_nominal_recipe_reoptimized_relative_regret_percent": 2.0944885756862157,
+      "max_nominal_relative_regret_percent": 0.0,
+      "max_independent_loss_difference": 8.881784197001252e-16
+    },
+    {
+      "scenario": "Q0_0p55",
+      "scenario_feasible_cells": 24,
+      "changed_recipe_cells": 2,
+      "matching_recipe_fraction": 0.9166666666666666,
+      "nominal_configurations_still_feasible": 24,
+      "nominal_configurations_infeasible_under_scenario": 0,
+      "nominal_recipe_with_reoptimized_ND_infeasible": 0,
+      "max_nominal_recipe_reoptimized_relative_regret_percent": 0.5680413136512725,
+      "max_nominal_relative_regret_percent": 2.3141168018623453,
+      "max_independent_loss_difference": 8.881784197001252e-16
+    },
+    {
+      "scenario": "Q0_0p60",
+      "scenario_feasible_cells": 24,
+      "changed_recipe_cells": 4,
+      "matching_recipe_fraction": 0.8333333333333334,
+      "nominal_configurations_still_feasible": 20,
+      "nominal_configurations_infeasible_under_scenario": 4,
+      "nominal_recipe_with_reoptimized_ND_infeasible": 4,
+      "max_nominal_recipe_reoptimized_relative_regret_percent": 0.0,
+      "max_nominal_relative_regret_percent": 2.0251464140000737,
+      "max_independent_loss_difference": 8.881784197001252e-16
+    },
+    {
+      "scenario": "Q0_0p65",
+      "scenario_feasible_cells": 24,
+      "changed_recipe_cells": 4,
+      "matching_recipe_fraction": 0.8333333333333334,
+      "nominal_configurations_still_feasible": 20,
+      "nominal_configurations_infeasible_under_scenario": 4,
+      "nominal_recipe_with_reoptimized_ND_infeasible": 4,
+      "max_nominal_recipe_reoptimized_relative_regret_percent": 0.0,
+      "max_nominal_relative_regret_percent": 3.291974863849069,
+      "max_independent_loss_difference": 8.881784197001252e-16
+    },
+    {
+      "scenario": "quality_scale_0p5",
+      "scenario_feasible_cells": 24,
+      "changed_recipe_cells": 4,
+      "matching_recipe_fraction": 0.8333333333333334,
+      "nominal_configurations_still_feasible": 24,
+      "nominal_configurations_infeasible_under_scenario": 0,
+      "nominal_recipe_with_reoptimized_ND_infeasible": 0,
+      "max_nominal_recipe_reoptimized_relative_regret_percent": 1.1464422931366467,
+      "max_nominal_relative_regret_percent": 4.270045237741458,
+      "max_independent_loss_difference": 8.881784197001252e-16
+    },
+    {
+      "scenario": "quality_scale_1p5",
+      "scenario_feasible_cells": 24,
+      "changed_recipe_cells": 9,
+      "matching_recipe_fraction": 0.625,
+      "nominal_configurations_still_feasible": 9,
+      "nominal_configurations_infeasible_under_scenario": 15,
+      "nominal_recipe_with_reoptimized_ND_infeasible": 5,
+      "max_nominal_recipe_reoptimized_relative_regret_percent": 2.700625190421361,
+      "max_nominal_relative_regret_percent": 0.0,
+      "max_independent_loss_difference": 8.881784197001252e-16
+    },
+    {
+      "scenario": "mixture_lambda_0",
+      "scenario_feasible_cells": 24,
+      "changed_recipe_cells": 24,
+      "matching_recipe_fraction": 0.0,
+      "nominal_configurations_still_feasible": 24,
+      "nominal_configurations_infeasible_under_scenario": 0,
+      "nominal_recipe_with_reoptimized_ND_infeasible": 0,
+      "max_nominal_recipe_reoptimized_relative_regret_percent": 3.6097679420266733,
+      "max_nominal_relative_regret_percent": 3.6097679420266733,
+      "max_independent_loss_difference": 8.881784197001252e-16
+    },
+    {
+      "scenario": "mixture_lambda_2",
+      "scenario_feasible_cells": 24,
+      "changed_recipe_cells": 1,
+      "matching_recipe_fraction": 0.9583333333333334,
+      "nominal_configurations_still_feasible": 24,
+      "nominal_configurations_infeasible_under_scenario": 0,
+      "nominal_recipe_with_reoptimized_ND_infeasible": 0,
+      "max_nominal_recipe_reoptimized_relative_regret_percent": 1.3856389159545577,
+      "max_nominal_relative_regret_percent": 1.3856389159545577,
+      "max_independent_loss_difference": 1.7763568394002505e-15
+    }
+  ],
+  "external": {
+    "correlations": [
+      {
+        "corpus": "c4_original",
+        "n": 14,
+        "spearman": 0.9736263736263736
+      },
+      {
+        "corpus": "rpj",
+        "n": 14,
+        "spearman": 0.9868131868131869
+      },
+      {
+        "corpus": "rw_original",
+        "n": 14,
+        "spearman": 0.9736263736263736
+      }
+    ],
+    "informative_budget_comparisons": 6,
+    "top1_hits": 5,
+    "top2_hits": 6,
+    "max_observed_regret": 0.070514669243527,
+    "mean_observed_regret": 0.011752444873921167,
+    "max_observed_relative_regret_percent": 2.5129271063757375,
+    "scope": "Frozen 42-row public real-training observation table; N,D and training-cost only; no empirical full Q,p or attention validation"
+  },
+  "transitions": {
+    "published_brackets": 82,
+    "max_relative_width": 7.027178941143575e-05,
+    "key_recipe_transition_budget": [
+      1.6105351762871962e+19,
+      1.6106483514759438e+19
+    ],
+    "independent_endpoint_and_half_percent_neighbor_recipes": [
+      477,
+      172,
+      477,
+      172
+    ],
+    "best_vs_second_loss_margins": [
+      8.648868369931506e-06,
+      1.9900865200206397e-06,
+      0.0007727320830719364,
+      0.0007520535217522273
+    ],
+    "coarse_grid_disagreement_groups": [
+      {
+        "scenario": "observed_joint",
+        "context_tokens": 131072,
+        "quality_family": "exponential"
+      },
+      {
+        "scenario": "observed_joint",
+        "context_tokens": 131072,
+        "quality_family": "power"
+      },
+      {
+        "scenario": "observed_joint",
+        "context_tokens": 131072,
+        "quality_family": "logarithmic"
+      }
+    ],
+    "caution": "Numerical brackets of conditional model states; no empirical physical phase transition"
+  },
+  "input_sha256": {
+    "outputs/Q2/model_coefficients.json": "3e0e10b845035f325d676660813f79908ba48014e1291598227f60a039832ada",
+    "outputs/Q2/model_definition.json": "e726af5caac50e14730a89b2b8ff4601b014aae06826685788595fb2cc005179",
+    "outputs/Q1/interaction_feature_definition.json": "b9cd7b0de3b1a424e9c43e0b50714ce0d3656f467e67480e4d9ee76f79fb21d5",
+    "outputs/Q1/interaction_coefficients_13_targets.json": "92e2e64976b7618626ef5d07b253794f105b3b1beeaacc989f13045e6c422b04",
+    "outputs/Q1/recipes_512.csv": "9744030382b8ac87fbd838a0b34580d0debff5ea3fb23f0b8846ca7c91f0742d",
+    "outputs/Q2/main_policy.json": "1429c82b33fcb17f9aa0ed42ea8d63deba9370864e1030dd39b87df32067ddc6",
+    "outputs/Q1/qa_mapping.json": "f36a8e7046d379cd50df55d2eb5c4cf49759191d7445a41d662ce422a4e366bb",
+    "outputs/Q3/fixed_policy_grid.csv": "9e1ea053b5754ac903e2167caa9efb5c5b934e2eed96b4bbaf064f5a42c9d388",
+    "outputs/Q3/observed_joint_grid.csv": "8fc644e7b956a0e1b35bfcf219fd0573392a31e68e532d9248432661049af3da",
+    "outputs/Q3/native_Q_sensitivity_grid.csv": "d8c6f006448fb5fb4fcddef0cf2f5e19e2f7e416014b5732bea080ced6dce527",
+    "outputs/Q3/assumption_official_grid.csv": "4947a515502ab448516133d028175ab9e371c366e8684fcd7c7b237ee7854696",
+    "outputs/Q3/external_nd_runs.csv": "d7dc42d26734ec8bce48a84d5981016f6e59f689fb1bdf1177163e5cfdee79d1",
+    "outputs/Q3/external_nd_budget_comparison.csv": "bc08f0aafd9c11cff3862581a07a43ccb975e057bb7eaa5af6bd4611aae28a37",
+    "outputs/Q3/transitions.csv": "68cf3fb6cc20cda0c5c563da2b92707c41ad008645234e29c56d2baf0a0c5997",
+    "outputs/Q3/transition_resolution.json": "b255a0d2cada18d7cde9ae8313bd6a29b5310152a398c1facace94430e5a1316"
+  }
+}

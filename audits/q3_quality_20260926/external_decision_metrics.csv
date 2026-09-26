@@ -1,0 +1,7 @@
+corpus,budget,n_candidates,selected_model,observed_best,top1_match,observed_rank_of_selection,observed_loss_regret,observed_relative_regret_percent,regret_over_candidate_loss_range
+c4_original,1e+20,9,c4_original-d=1024_l=24_h=8-4.0,c4_original-d=1024_l=24_h=8-4.0,True,1,0.0,0.0,0.0
+c4_original,1e+21,13,c4_original-open_lm_1b-4.0,c4_original-open_lm_1b-4.0,True,1,0.0,0.0,0.0
+rpj,1e+20,9,rpj-d=1024_l=24_h=8-4.0,rpj-d=1024_l=24_h=8-4.0,True,1,0.0,0.0,0.0
+rpj,1e+21,13,rpj-d=1024_l=24_h=8-32.0,rpj-d=1024_l=24_h=8-32.0,True,1,0.0,0.0,0.0
+rw_original,1e+20,9,rw_original-d=1024_l=24_h=8-4.0,rw_original-d=1024_l=24_h=8-4.0,True,1,0.0,0.0,0.0
+rw_original,1e+21,13,rw_original-d=1024_l=24_h=8-32.0,rw_original-open_lm_1b-1.0,False,2,0.070514669243527,2.5129271063757375,0.08871877251958037
