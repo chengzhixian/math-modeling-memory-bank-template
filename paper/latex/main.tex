@@ -5,7 +5,7 @@
 \hypersetup{hidelinks}
 \usepackage{float}
 \usepackage{siunitx}
-\graphicspath{{figures/}{figures/chm/}}
+\graphicspath{{figures/}{figures/Q1/}{figures/Q2/}{figures/Q3/}}
 \title{论文题目（待填写）}
 
 \begin{document}
@@ -19,13 +19,14 @@
 
 \input{sections/zhh/problem_statement.tex}
 \input{sections/zhh/assumptions_symbols.tex}
-\input{sections/chm/q1.tex}
-\input{sections/cyj/q2.tex}
+\input{sections/Q1/main.tex}
+\input{sections/Q2/main.tex}
 \section{问题三}
-\input{sections/cyj/q3_theory.tex}
-\input{sections/chm/q3_numerical.tex}
+\input{sections/Q3/theory.tex}
+\input{sections/Q3/numerical.tex}
 \input{sections/zhh/q4.tex}
 \input{sections/zhh/discussion.tex}
 
-% Add citations and \bibliography{references} after references.bib is populated.
+\bibliographystyle{gmcm}
+\bibliography{references}
 \end{document}

@@ -1,0 +1,34 @@
+{
+  "schema_version": "cyj.b2_b3_model_validation.v1",
+  "summary": {
+    "B3": {
+      "trajectories": 8,
+      "mean_normalized_RMSE": 0.0018918031269255532,
+      "median_Spearman_r": 0.9999835479332533,
+      "overall_pairwise_concordance": 0.9991232148654661
+    },
+    "B2": {
+      "trajectories": 7,
+      "mean_normalized_RMSE": 0.004369586609632358,
+      "median_Spearman_r": 0.9979173968404175,
+      "overall_pairwise_concordance": 0.9854873530744422
+    }
+  },
+  "input_sha256": {
+    "cerebras_training_log.csv": "178f878cad2cb31e4ec104c670553de23818197876d824a113fdb911125951a6",
+    "training_trajectories/pythia_0.070542B_trajectory.csv": "19663f2f14d62af377377962ec8f794148450bfb278fdbeb2452f4641fe6a440",
+    "training_trajectories/pythia_0.162405B_trajectory.csv": "8e2b78cde966b0a3e8b6272935c3f3dcccc5a54e94bb7db79ded2fd8fdf5a124",
+    "training_trajectories/pythia_0.409009B_trajectory.csv": "8c803195d475d8ff320afd90887ae48cec6463f4d01a2264c6680611ed9db170",
+    "training_trajectories/pythia_1.040867B_trajectory.csv": "bb73b2852db183bee3d76c76f55e2bdcc292d7ed0881cb27966525b56afcafc0",
+    "training_trajectories/pythia_1.416184B_trajectory.csv": "cd0d718747fb6048cb474066dbf35f64ef852f59cba2886484cbdf14bc68a02f",
+    "training_trajectories/pythia_11.965825B_trajectory.csv": "e223b3d48bc4fef3cbc03fd583ff7aef87e474903d829f6c417310cb99fa7b5e",
+    "training_trajectories/pythia_2.782831B_trajectory.csv": "552f03249b69234009eb028b3296d6bd1b1cb3a52c0d3a84a669baa0e3179482",
+    "training_trajectories/pythia_6.86104B_trajectory.csv": "8814c8414fddc914444c74e6cf8da02e3e156a0d7fb8acea6c5da05e438bf054"
+  },
+  "B1_fit_sha256": "9b0e381fbc0ea84bb37d63ccb273733f3a03a0c2a834e8ef52cdb75c45bc6ead",
+  "interpretation": {
+    "B3": "quantitative interpolation trajectory consistency; derived from B1-style Pythia curves, not independent experiment",
+    "B2": "semi-synthetic different-family shape stress; many D points outside B1 support and Loss coordinates not independently aligned"
+  },
+  "absolute_cross_source_RMSE_claim": null
+}

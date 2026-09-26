@@ -1,0 +1,30 @@
+{
+  "schema_version": "chm.q3.v8.transition_resolution.v1",
+  "scan_points_per_context_family": 161,
+  "coarse_points_per_context_family": 81,
+  "target_bracket_relative_width": 0.0001,
+  "coarse_fine_signature_disagreements": [
+    {
+      "scenario": "observed_joint",
+      "context_tokens": 131072,
+      "quality_family": "exponential"
+    },
+    {
+      "scenario": "observed_joint",
+      "context_tokens": 131072,
+      "quality_family": "power"
+    },
+    {
+      "scenario": "observed_joint",
+      "context_tokens": 131072,
+      "quality_family": "logarithmic"
+    }
+  ],
+  "fixed_scan_rows": 1449,
+  "joint_scan_rows": 1449,
+  "transition_brackets": 82,
+  "fixed_scan_sha256": "2492491c19620d42e0e1f7e6925e29e369beb9de3b50eea113365a1d9281b563",
+  "joint_scan_sha256": "69fed2eba936343096e7df0f927c670eb504e7f9e3b8fece11badfe6b85031db",
+  "transitions_sha256": "68cf3fb6cc20cda0c5c563da2b92707c41ad008645234e29c56d2baf0a0c5997",
+  "claim_limit": "sampled_and_bisected_numeric_active_sets_not_a_physical_transition_proof"
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": "cyj.ndqp.scenario.v8",
+  "formula": "(B1_E+B1_A*N^-alpha+B1_B*D^-beta+(1-Q_B_proxy)*G(N,D))*exp(r_w(p))",
+  "quality_proxy": "Q1 mapped Q_A normalized by frozen mapped-domain min/max to B7 [0.1,1]",
+  "Q1_quality_mapping": "direct_and_near",
+  "Q_A_to_Q_B_empirically_calibrated": false,
+  "mixture_bridge_empirically_calibrated": false,
+  "quality_and_mixture_double_counting_identified": false,
+  "formal_support": [
+    [
+      0.070542,
+      11.965825
+    ],
+    [
+      10.0,
+      299.893
+    ],
+    [
+      0.1,
+      1.0
+    ]
+  ],
+  "p_support": "observed_A4_or_A4_convex_hull",
+  "reference_anchor": {
+    "p_ref_r_w": -2.5620531337503614e-17,
+    "Q_A_reference": 0.7831035543837233,
+    "Q_B_proxy_reference": 0.43540588554584847,
+    "Loss_at_reference": 2.595436990598807
+  }
+}

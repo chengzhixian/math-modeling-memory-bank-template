@@ -8,6 +8,10 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 本仓库用 Markdown 保存团队共享记忆，供不同成员、电脑和 AI 工具接力。2026-09-23 已确定选择 F 题《算力约束下提升大语言模型能力的资源配置建模》，并初始化六个记忆文件。每日安排与验收点见 [TASK_PLAN.md](TASK_PLAN.md)，当前接力见 [activeContext.md](memory-bank/activeContext.md)。用户指定提交期限为北京时间 2026-09-27 12:00，内部目标为 10:30 前完成提交。原始设计说明见 [AI_TEAM_COLLABORATION_GUIDE.md](AI_TEAM_COLLABORATION_GUIDE.md)。
 
+## Q1–Q3 已集成成果
+
+按问题进入 [Q1](outputs/Q1/README.md)、[Q2](outputs/Q2/README.md)、[Q3](outputs/Q3/README.md)。每个目录集中放置结论、核心验证与冻结来源；论文分节在 `paper/latex/sections/Q1`、`Q2`、`Q3`。Q2、Q3 的跨附件质量与 Loss 桥接属于明确的条件假设，结果须连同支持域和敏感性阅读。成员分支的中间表、缓存、历史模型和诊断 PDF 未纳入本次集成。
+
 ## 开始使用
 
 1. 先读 [三人协作流程](TEAM_WORKFLOW.md) 和 [任务计划](TASK_PLAN.md)，按用户指定分别由 chm/cyj/zhh 负责对应工作线。原始题面与数据来源见 `problem/SOURCES.md`，资料共享范围先核验。
@@ -41,7 +45,7 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 | `experiments/` | 参数、运行命令、指标和结论的实验记录 |
 | `outputs/` | 需要交付或供论文引用的图表、结果 |
 | `paper/` | 论文草稿、图表说明与最终稿 |
-| [`paper/latex/`](paper/latex/README.md) | 第二十二届华为杯 LaTeX 模板归档、空白协作总稿与分工说明；个人初稿留在成员分支 |
+| [`paper/latex/`](paper/latex/README.md) | 模板归档、Q1–Q3 按问题组织的论文分节与协作总稿 |
 | [`references/award_papers/`](references/award_papers/README.md) | chm、cyj、zhh 共用的近五年公开优秀论文清单，含可直接下载的 PDF 原文链接和阅读笔记 |
 
 目录里的 `.gitkeep` 仅用于保留空目录。请按实际题目增删代码和文件；不要把没有运行过的结果写进记忆或论文。
@@ -61,4 +65,3 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 当用户或团队成员要求“审查/review/audit”远程分支、本地仓库、代码、数学模型、问题、结果或论文结论时，必须先读取根目录 `REPOSITORY_REVIEW_PROTOCOL.md` 并执行完整流程。不得只做 diff、lint、测试或数值复算。
 
 核心要求：先做变量来源与 identifiability，再拟合；冻结 train/validation/test/extrapolated 角色；检查 overlap/leakage/support shift；核对文献适用条件、公式与代码、baseline/敏感性、结论等级和跨附件接口；最后做一次从零 red-team。若数据不能识别某参数，必须明确写 unidentified，而不是为了模型完整性补造。
-

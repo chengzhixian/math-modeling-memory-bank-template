@@ -1,16 +1,16 @@
-# 2026 F 题 LaTeX 空白协作模板
+# F 题 LaTeX 协作稿
 
-本目录以用户提供的第二十二届华为杯 LaTeX 模板为基础。`template_source/` 保存原件；`gmcmthesis.cls` 为工作版，修复原类文件条件块。工作版优先使用原模板的 `LiSu`（隶书）；本机没有该字体时仅对这几处标题回退为楷书，安装正版 `SimLi.ttf` 后会自动恢复隶书。**本分支只保留空白总稿与各成员占位章节，不包含 chm 第一问初稿或结果图。** chm 的初稿、图和编译 PDF 保存在 `integration/chm-q1-clean-20260923`。
+`main.tex` 汇集 `sections/Q1/main.tex`、`sections/Q2/main.tex`、`sections/Q3/theory.tex`、`sections/Q3/numerical.tex` 及现有 Q4/公共章节。对应图位于 `figures/Q1`、`figures/Q2`、`figures/Q3`。各问结论与冻结证据入口见 `outputs/Q1`、`outputs/Q2`、`outputs/Q3`。Q4 和公共段落仍由其负责人更新，不把当前总稿当作提交终稿。
 
-| 文件 | 唯一写入负责人 |
-|---|---|
-| `sections/chm/*`、`figures/chm/*` | chm |
-| `sections/cyj/*` | cyj |
-| `sections/zhh/*` | zhh |
-| `main.tex`、`gmcmthesis.cls`、`references.bib`、最终提交 PDF | 集成人（建议 zhh） |
+`template_source/` 保存用户提供的第二十二届华为杯原模板；工作版 `gmcmthesis.cls` 修复条件块，字体不可用时回退。2026 年正式封面、匿名、文件命名与提交规则仍须按当届官方要求核对。
 
-各成员在自己分支写稿并交接，集成人串行合入；不要同时改主文件。新增宏包、公共符号和文献由成员提出，集成人统一加入。
+有 XeLaTeX 与 BibTeX 的环境从本目录依次运行：
 
-本机已验证 MiKTeX 25.12、XeLaTeX 和 BibTeX 可用。新终端在 `paper/latex/` 运行 `xelatex -interaction=nonstopmode -halt-on-error main.tex`；有文献引用时再运行 `bibtex main`，随后运行 XeLaTeX 两次。首次编译缺少宏包时 MiKTeX 会按用户配置自动安装。构建生成的 `.aux`、`.log`、`.toc`、本地 PDF 等文件不进入 main。chm 分支的 `output/chm-q1-draft.pdf` 是经过页面检查的阶段初稿。
+```powershell
+xelatex -interaction=nonstopmode -halt-on-error main.tex
+bibtex main
+xelatex -interaction=nonstopmode -halt-on-error main.tex
+xelatex -interaction=nonstopmode -halt-on-error main.tex
+```
 
-此模板源自 2025 年第二十二届；2026 年正式提交前须核对当届官方封面、匿名、页面和上传规则。当前 `withoutpreface` 只为公开协作稿使用，不代表正式提交版式。`template_source/makefiles.bat` 会遍历全部 `.tex`，不适合本多文件项目；应从 `main.tex` 编译。
+构建产生的临时文件和 PDF 不进入本次 main 同步。总稿的 Q1–Q3 只陈述已在各自来源和审查中支持的条件结论；所有跨源假设及支持域限制必须保留。
