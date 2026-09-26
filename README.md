@@ -8,11 +8,11 @@ Gemini 历史提交 `fd55147`、`80c7ea5`、`6086964` 的工作因无法可靠�
 
 本仓库用 Markdown 保存团队共享记忆，供不同成员、电脑和 AI 工具接力。2026-09-23 已确定选择 F 题《算力约束下提升大语言模型能力的资源配置建模》，并初始化六个记忆文件。每日安排与验收点见 [TASK_PLAN.md](TASK_PLAN.md)，当前接力见 [activeContext.md](memory-bank/activeContext.md)。用户指定提交期限为北京时间 2026-09-27 12:00，内部目标为 10:30 前完成提交。原始设计说明见 [AI_TEAM_COLLABORATION_GUIDE.md](AI_TEAM_COLLABORATION_GUIDE.md)。
 
-## Q1–Q3 已集成成果
+## Q1–Q4 已集成成果
 
-按问题进入 [Q1](outputs/Q1/README.md)、[Q2](outputs/Q2/README.md)、[Q3](outputs/Q3/README.md)。每个目录集中放置结论、核心验证与冻结来源；论文分节在 `paper/latex/sections/Q1`、`Q2`、`Q3`。Q2、Q3 的跨附件质量与 Loss 桥接属于明确的条件假设，结果须连同支持域和敏感性阅读。成员分支的中间表、缓存、历史模型和诊断 PDF 未纳入本次集成。
+按问题进入 [Q1](outputs/Q1/README.md)、[Q2](outputs/Q2/README.md)、[Q3](outputs/Q3/README.md)、[Q4](outputs/Q4/README.md)。每个目录集中放置答案、核心结果、验证与冻结来源；对应的接口在 `interfaces/Q1` 至 `Q4`，复现入口和实验在 `experiments/Q1` 至 `Q4`，当前生产代码在 `src/chm`、`src/cyj`、`src/zhh`。Q2/Q3 的跨附件桥接、Q3 联合最优和 Q4 未来能力范围均须连同支持域及条件假设阅读。成员分支的中间表、缓存、历史模型和诊断 PDF 未纳入本次集成。
 
-按问题整理的核心实验、复现方式和审查记录见 [experiments](experiments/experiment-log.md)。
+按问题整理的核心实验、复现方式和审查记录见 [experiments](experiments/experiment-log.md) 及 [四问集成审查](experiments/20260926-main-q1-q4-integration-review.md)。
 
 ## 开始使用
 
