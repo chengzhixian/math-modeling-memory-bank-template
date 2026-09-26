@@ -1,5 +1,16 @@
 # cyj 交付约定 v1.13（joint B7 条件交付）
 
+**2026-09-26 v8 条件消费签收：**当前正式 Q2→Q3 入口是
+[`NDQP_SCENARIO_V8.md`](NDQP_SCENARIO_V8.md) 的
+`cyj.ndqp.scenario.v8`，冻结生产者文件树为 `fd2dbb3b2002983430329cdb2ec6a275c2eed4f6`。
+CHM 的 Q3 v8 发布提交 `c052b6918c3f77a2285622521d8abb1b429513be`
+已消费这一文件树；CYJ 独立复核三模式各 36 格和九个假设情景 243 格，
+结果见 [`20260926-q3-v8-independent-acceptance.md`](../../problem/cyj/20260926-q3-v8-independent-acceptance.md)。
+**`q3_v8_conditionally_consumable=true`，`empirical_cross_source_validated=false`。**
+这里的可消费仅指冻结的 Q1 v2、Q2 v8、题面代理成本及明示跨源假设下的
+有限候选数值答案。下文历史 `ready_for_Q3=false` 属于旧 v4/v5 合同，
+不得当作 v8 的机器状态，也不得反向改写旧版生成 JSON。
+
 **2026-09-25 v5 增补：**[NDQP_SCENARIO_V5.md](NDQP_SCENARIO_V5.md) 是独立的 `cyj.ndqp.scenario.v5` 四变量条件情景入口，固定 CHM `chm.q1.v1.3@cdda1ad62c5c7eb72b413c4228caeff87d2bad30`。`lambda`、`eta`、权重均由调用者明确给出，A/B Loss 桥接与质量映射未识别；默认 `ready_for_Q3=false`。它不取代下述 B7 原生 `cyj.chm.v4`，也不将情景预测当作正式四维经验律。CHM 已签收 v4 条件数值消费；v5 配比扩展仍待本人验收。精确发布见 `memory-bank/handoffs/cyj/20260925-1401-v5-release-review.md`。
 
 **状态更正：**下文旧段落中的“CHM 本人消费验收仍待”是 v4 发布当时的状态；CHM 后续在本人分支 `memory-bank/handoffs/chm/20260925-cyj-v4-owner-acceptance.md` 完成条件 NDQ 签收。该签收不包含 v5。

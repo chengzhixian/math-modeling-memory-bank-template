@@ -1,0 +1,1 @@
+EXIT 1: q3_external_nd_audit.py requires .upstream/scaling-external at a003c4913793ac2ae7ef87b28ecb562955d026d5; exact external source directory absent in the pinned worktree. Published output hashes verified, external computation not rerun.

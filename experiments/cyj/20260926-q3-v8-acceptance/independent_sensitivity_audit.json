@@ -1,0 +1,67 @@
+{
+  "identity": {
+    "commit": "c052b6918c3f77a2285622521d8abb1b429513be",
+    "manifest_sha256": "a30703ceac1f0179f5c93e03b676b984581c3058c50ccfcdc3eb60dd27112000",
+    "checked_files": 41
+  },
+  "scenario_counts": {
+    "baseline": {
+      "cells": 27,
+      "eligible": 87,
+      "feasible": 24,
+      "selected_172": 20
+    },
+    "Q0_0p45": {
+      "cells": 27,
+      "eligible": 101,
+      "feasible": 24,
+      "selected_172": 20
+    },
+    "Q0_0p55": {
+      "cells": 27,
+      "eligible": 82,
+      "feasible": 24,
+      "selected_172": 22
+    },
+    "Q0_0p60": {
+      "cells": 27,
+      "eligible": 73,
+      "feasible": 24,
+      "selected_172": 23
+    },
+    "Q0_0p65": {
+      "cells": 27,
+      "eligible": 60,
+      "feasible": 24,
+      "selected_172": 24
+    },
+    "quality_scale_0p5": {
+      "cells": 27,
+      "eligible": 79,
+      "feasible": 24,
+      "selected_172": 24
+    },
+    "quality_scale_1p5": {
+      "cells": 27,
+      "eligible": 93,
+      "feasible": 24,
+      "selected_172": 15
+    },
+    "mixture_lambda_0": {
+      "cells": 27,
+      "eligible": 87,
+      "feasible": 24,
+      "selected_172": 0
+    },
+    "mixture_lambda_2": {
+      "cells": 27,
+      "eligible": 87,
+      "feasible": 24,
+      "selected_172": 21
+    }
+  },
+  "published_cells": 243,
+  "max_absolute_loss_error": 4.440892098500626e-16,
+  "mismatches": [],
+  "status": "PASS"
+}
