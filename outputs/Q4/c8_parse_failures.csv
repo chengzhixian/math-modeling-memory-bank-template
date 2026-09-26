@@ -1,0 +1,5 @@
+modelDirectory,file,reason
+DreadPoor_Winter_Dawn-8B-TIES,results_2025-02-13T18-27-04.338360.json,Unterminated string in JSON at position 65536 (line 1453 column 170)
+FINGU-AI_Chocolatine-Fusion-14B,results_2025-02-13T18-27-04.338360.json,Unterminated string in JSON at position 49152 (line 1162 column 1015)
+Intel_neural-chat-7b-v3-3,results_2025-02-13T18-27-04.338360.json,Unterminated string in JSON at position 49152 (line 1194 column 23)
+L-RAGE_3_PRYMMAL-ECE-7B-SLERP-V1,results_2025-02-13T18-27-04.338360.json,Expected double-quoted property name in JSON at position 45805 (line 1090 column 4)

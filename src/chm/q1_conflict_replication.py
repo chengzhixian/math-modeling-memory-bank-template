@@ -10,8 +10,8 @@ import json
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[2]
-EXT=ROOT/"outputs/chm/quality_conflict_extended_v0.csv"
-NON=ROOT/"outputs/chm/quality_conflict_nonoverlap_v0.csv"
+EXT=ROOT/"data/processed/Q1/quality/quality_conflict_extended_v0.csv"
+NON=ROOT/"data/processed/Q1/quality/quality_conflict_nonoverlap_v0.csv"
 
 def read(path):
     with path.open(encoding="utf-8-sig",newline="") as f:
@@ -60,9 +60,9 @@ def main():
     shared.sort(key=lambda r:r["min_abs_across_domains_scopes"],reverse=True)
     summary["shared_triple_negative_pairs"]=len(shared)
     summary["interpretation"]="replication/effect-size evidence only; no bootstrap CI or FDR claim"
-    (ROOT/"outputs/chm/quality_conflict_replication_summary.json").write_text(
+    (ROOT/"data/processed/Q1/quality/quality_conflict_replication_summary.json").write_text(
       json.dumps(summary,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-    with (ROOT/"outputs/chm/quality_conflict_shared_robust.csv").open("w",newline="",encoding="utf-8") as f:
+    with (ROOT/"data/processed/Q1/quality/quality_conflict_shared_robust.csv").open("w",newline="",encoding="utf-8") as f:
         w=csv.DictWriter(f,fieldnames=list(shared[0]))
         w.writeheader();w.writerows(shared)
     print(json.dumps(summary,ensure_ascii=False))

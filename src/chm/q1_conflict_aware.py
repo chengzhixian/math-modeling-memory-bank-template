@@ -15,7 +15,7 @@ from q1_quality_analysis import (QUALITY_FIELDS, SEED, read_jsonl_xz, robust_par
                                  add_quality_scores, resolve_default_paths)
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "outputs/chm/conflict_aware_v1"
+OUT = ROOT / "data/processed/Q1/conflict_aware"
 MIN_N = 30
 ALPHA = 0.05
 

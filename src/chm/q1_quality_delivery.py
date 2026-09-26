@@ -1,11 +1,17 @@
 """Build the descriptive Q interface and evidence summary from executed outputs."""
 from pathlib import Path
+import argparse
 import pandas as pd
 from scipy.stats import spearmanr
 
 
 def main():
-    root = Path('outputs/chm')
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--input-dir', type=Path, default=Path('data/processed/Q1/quality'))
+    parser.add_argument('--output-dir', type=Path, default=Path('data/processed/Q1/quality'))
+    args = parser.parse_args()
+    root = args.input_dir
+    args.output_dir.mkdir(parents=True, exist_ok=True)
     q = pd.read_csv(root / 'domain_quality_v0.csv')
     audit = pd.read_csv(root / 'quality_data_audit_v0.csv')
     missing = audit.groupby(['dataset_scope', 'quality_domain']).missing.sum()
@@ -14,11 +20,11 @@ def main():
     delivery['missing_note'] = [f'{int(missing.loc[(r.dataset_scope, r.quality_domain)])} missing metric cells; available-value family means'
                                 for r in q.itertuples()]
     delivery['score_version'] = 'q1_global_spearman_all22_v1'
-    delivery.to_csv(root / 'domain_quality.csv', index=False)
+    delivery.to_csv(args.output_dir / 'domain_quality.csv', index=False)
     mapping = pd.read_csv('data/raw/real_attachments/A_data_value/domain_mapping_guide.csv')
     mapping['mapping_weight_or_rule'] = mapping.mapping_type.map({'direct': 'same-name domain median', 'near_direct': 'proxy domain median; sensitivity required', 'inferred': 'unknown; no numeric imputation'})
     mapping['mapping_confidence'] = mapping.mapping_type.map({'direct': 'name match only; not population identity', 'near_direct': 'semantic proxy', 'inferred': 'unknown'})
-    mapping.to_csv(root / 'domain_mapping.csv', index=False)
+    mapping.to_csv(args.output_dir / 'domain_mapping.csv', index=False)
     sample = q[q.dataset_scope == 'sample'].sort_values('Q_z_median', ascending=False)
     sensitivity = pd.read_csv(root / 'quality_list_compression_sensitivity_v0.csv')
     equal_rho = spearmanr(sample.Q_z_median, sample.Q_equal22_median).statistic
@@ -48,8 +54,7 @@ def main():
              './.venv/Scripts/python.exe src/chm/q1_quality_delivery.py',
              './.venv/Scripts/python.exe -m unittest discover -s src/chm -p test_q1_quality_analysis.py', '```', '',
              '公开字段语义已于 2026-09-23 复核：https://huggingface.co/datasets/opendatalab/SlimPajama-Meta-rater 。未使用历史隐藏文字。']
-    Path('experiments/chm/20260923-q1-local-quality.md').write_text('\n'.join(text)+'\n', encoding='utf-8')
-    print('Saved descriptive quality interface, mapping and experiment report.')
+    print('Saved descriptive quality and domain mapping tables.')
 
 
 if __name__ == '__main__':

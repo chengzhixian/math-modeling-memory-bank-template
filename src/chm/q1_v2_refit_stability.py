@@ -18,7 +18,7 @@ from q1_mixture_final_audit import read_pairs
 from q1_mixture_decision_v2 import quality_constraints
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "outputs/chm/q1_v2_refit_stability"
+OUT = ROOT / "data/processed/Q1/refit_stability"
 SEED = 20260925
 REPEATS = 30
 ALPHAS = (0.001, 0.01, 0.1, 1., 10., 100., 1000.)

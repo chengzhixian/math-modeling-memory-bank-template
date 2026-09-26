@@ -1,0 +1,9 @@
+source,year,n,Average_mean,Average_q90,six_task_mean,six_task_q90,N_median_B,dedup_policy
+Historical (papers/reports),2019,1,5.0,5.0,4.1000000000000005,4.1000000000000005,1.5,last CSV row within Model/Year/Source; not chronological latest
+Historical (papers/reports),2020,1,50.0,50.0,7.666666666666667,7.666666666666667,175.0,last CSV row within Model/Year/Source; not chronological latest
+Historical (papers/reports),2021,2,3.5,4.7,0.9916666666666667,1.1183333333333334,4.35,last CSV row within Model/Year/Source; not chronological latest
+Historical (papers/reports),2022,7,16.0,32.0,5.130952380952381,12.693333333333344,30.0,last CSV row within Model/Year/Source; not chronological latest
+Historical (papers/reports),2023,13,12.923076923076923,24.000000000000004,4.916666666666666,8.453333333333333,12.0,last CSV row within Model/Year/Source; not chronological latest
+Historical (papers/reports),2024,2,5.5,7.5,2.1500000000000004,2.4833333333333334,4.5,last CSV row within Model/Year/Source; not chronological latest
+Open LLM Leaderboard,2024,2603,21.17842873607376,35.10000000000001,21.17846839619931,35.09972235627073,8.03,last CSV row within Model/Year/Source; not chronological latest
+Open LLM Leaderboard,2025,1891,22.781454257006878,39.63,22.78144418106957,39.62574720619401,8.03,last CSV row within Model/Year/Source; not chronological latest

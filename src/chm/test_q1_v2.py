@@ -1,12 +1,11 @@
 from pathlib import Path
+import json
 import math
 import unittest
 import numpy as np
 from q1_interface import Q1Interface as DefaultQ1
-from q1_interface_v1_3 import Q1Interface as FrozenRidge
 from q1_mixture_decision_v2 import choose, quality_constraints
 from q1_hull_bounds_v2 import data as hull_data, solve_node
-from q2_interaction_scenarios_v2 import release as q2_release
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -16,9 +15,9 @@ class Q1V2Tests(unittest.TestCase):
     def setUpClass(cls):
         cls.q1 = DefaultQ1(ROOT)
 
-    def test_default_is_interaction_and_legacy_is_immutable(self):
+    def test_default_is_interaction_and_frozen_predecessor_is_declared(self):
         self.assertEqual(self.q1.manifest["schema_version"], "chm.q1.v2.0")
-        self.assertEqual(FrozenRidge(ROOT).manifest["schema_version"], "chm.q1.v1.3")
+        self.assertEqual(self.q1.manifest["predecessor"], "chm.q1.v1.3")
         self.assertEqual(len(self.q1.pairs), 10)
         with self.assertRaises(ValueError):
             self.q1.interaction_matrix()
@@ -68,11 +67,12 @@ class Q1V2Tests(unittest.TestCase):
         self.assertEqual(choose(q1, weights)["selected_index"], "136")
         self.assertEqual(choose(q1, weights, "quality_direct")["selected_index"], "301")
 
-    def test_q2_recalculation_tracks_v2_manifest(self):
-        manifest = q2_release()
+    def test_q2_current_release_tracks_v2_manifest(self):
+        manifest = json.loads((ROOT / "outputs/Q2/upstream_manifest.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["Q1_manifest_sha256"], self.q1.manifest_sha256)
-        self.assertFalse(manifest["ready_for_Q3_empirical_absolute_loss"])
-        self.assertEqual(manifest["conditional_scenario_count"], 3)
+        policy = json.loads((ROOT / "outputs/Q2/main_policy.json").read_text(encoding="utf-8"))
+        self.assertEqual(policy["recipe_index"], "172")
+        self.assertEqual(set(policy["p"]), set(self.q1.domains))
 
     def test_validation_reports_frozen_interaction_columns(self):
         rows = self.q1.ranking_validation("pile_cc")

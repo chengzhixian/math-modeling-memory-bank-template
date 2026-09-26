@@ -11,7 +11,7 @@ from q1_quality_analysis import (DSIR_FIELDS, MODEL_FIELDS, QUALITY_FIELDS, RPS_
                                  resolve_default_paths)
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "outputs/chm/q1_quality_robustness_final"
+OUT = ROOT / "data/processed/Q1/quality_robustness"
 REPS = 100
 TRAIN_FRACTION = 0.7
 
@@ -32,7 +32,7 @@ def domain_rank(scores):
 
 
 def main():
-    base = ROOT / "outputs/chm"
+    base = ROOT / "data/processed/Q1/quality"
     quality_manifest = json.loads((base / "quality_analysis_manifest_v0.json").read_text(encoding="utf-8"))
     a1, _, _ = resolve_default_paths()
     raw = read_jsonl_xz(ROOT / a1)
@@ -87,11 +87,11 @@ def main():
     old = pd.read_csv(base / "quality_orientation_sensitivity_v1.csv")
     panels.append(old[["variant", "domain", "rank"]])
     for file, variants in [
-        ("quality_review_v1/quality_orientation_filter_sensitivity_v1.csv",
+        ("../quality_review/quality_orientation_filter_sensitivity_v1.csv",
          {"rank_stable_loo": "stable_loo", "rank_stable_consensus": "stable_consensus"}),
-        ("quality_review_v1/quality_qurater_component_sensitivity_v1.csv",
+        ("../quality_review/quality_qurater_component_sensitivity_v1.csv",
          {"rank_qurater_component": "qurater_component_standardized"}),
-        ("quality_review_v1/quality_domain_balanced_standardization_v1.csv",
+        ("../quality_review/quality_domain_balanced_standardization_v1.csv",
          {"rank_domain_balanced": "domain_balanced_standardization"})]:
         source = pd.read_csv(base / file).rename(columns={"_source_domain": "domain"})
         for column, label in variants.items():

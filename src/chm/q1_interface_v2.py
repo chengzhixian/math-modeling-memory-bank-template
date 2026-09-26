@@ -8,7 +8,7 @@ import numpy as np
 from scipy.optimize import linprog
 
 VERSION = "chm.q1.v2.0"
-MANIFEST = Path("interfaces/chm/q1_interface_v2.json")
+MANIFEST = Path("interfaces/Q1/q1_interface_v2.json")
 FROZEN_BUNDLE = Path("outputs/chm/q1_v2")
 CURATED_BUNDLE = Path("outputs/Q1")
 

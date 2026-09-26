@@ -1,0 +1,77 @@
+{
+  "schema_version": "cyj.q3.v8.fixed_p_smoke.v1",
+  "status": "local_fixed_p_quality_proxy_cost_smoke_pass",
+  "CHM_owner_acceptance": false,
+  "global_joint_Q3_optimum": false,
+  "not_empirically_calibrated": true,
+  "budget_FLOPs": 1e+22,
+  "context_tokens": 8192,
+  "quality_cost_family": "power",
+  "Q0": 0.5,
+  "p_policy": "observed_512_plus_quality_direct_and_near",
+  "recipe_index": "172",
+  "quality_from_Q1": true,
+  "starts": 4,
+  "solution": {
+    "start": 0,
+    "solver_success": true,
+    "primal_feasible": true,
+    "N_params_B": 6.66065527863228,
+    "D_tokens_B": 193.87353557427727,
+    "Q_B_proxy": 0.6713607648391644,
+    "Loss": 2.094421151267249,
+    "cost_FLOPs": 1.0000000000007487e+22,
+    "budget_utilization": 1.0000000000007487,
+    "message": "Optimization terminated successfully"
+  },
+  "trials": [
+    {
+      "start": 0,
+      "solver_success": true,
+      "primal_feasible": true,
+      "N_params_B": 6.66065527863228,
+      "D_tokens_B": 193.87353557427727,
+      "Q_B_proxy": 0.6713607648391644,
+      "Loss": 2.094421151267249,
+      "cost_FLOPs": 1.0000000000007487e+22,
+      "budget_utilization": 1.0000000000007487,
+      "message": "Optimization terminated successfully"
+    },
+    {
+      "start": 1,
+      "solver_success": true,
+      "primal_feasible": true,
+      "N_params_B": 6.660655429729465,
+      "D_tokens_B": 193.87353123606997,
+      "Q_B_proxy": 0.6713607648391644,
+      "Loss": 2.0944211512673077,
+      "cost_FLOPs": 1.0000000000000027e+22,
+      "budget_utilization": 1.0000000000000027,
+      "message": "Optimization terminated successfully"
+    },
+    {
+      "start": 2,
+      "solver_success": true,
+      "primal_feasible": true,
+      "N_params_B": 6.66065542929743,
+      "D_tokens_B": 193.87353124847348,
+      "Q_B_proxy": 0.6713607648391644,
+      "Loss": 2.0944211512673077,
+      "cost_FLOPs": 1.0000000000000006e+22,
+      "budget_utilization": 1.0000000000000007,
+      "message": "Optimization terminated successfully"
+    },
+    {
+      "start": 3,
+      "solver_success": true,
+      "primal_feasible": true,
+      "N_params_B": 6.6606554314071404,
+      "D_tokens_B": 193.87353118790276,
+      "Q_B_proxy": 0.6713607648391644,
+      "Loss": 2.0944211512673077,
+      "cost_FLOPs": 1.0000000000000004e+22,
+      "budget_utilization": 1.0000000000000004,
+      "message": "Optimization terminated successfully"
+    }
+  ]
+}

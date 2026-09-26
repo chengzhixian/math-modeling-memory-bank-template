@@ -7,8 +7,8 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[2]
-SOURCE = ROOT / "outputs/chm/local_recheck_v1/mixture_effect_ridge_v0.csv"
-OUTPUT = ROOT / "paper/latex/figures/chm/q1_interaction_heatmap.png"
+SOURCE = ROOT / "data/processed/Q1/regmix/mixture_effect_ridge_v0.csv"
+OUTPUT = ROOT / "paper/latex/figures/Q1/q1_interaction_heatmap.png"
 
 
 def blend(a, b, t):

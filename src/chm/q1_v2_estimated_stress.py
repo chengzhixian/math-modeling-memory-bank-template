@@ -14,8 +14,8 @@ from q1_interface import Q1Interface
 from q1_mixture_final_audit import read_pairs, DATA
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "outputs/chm/q1_v2_estimated_stress"
-RIDGE = ROOT / "outputs/chm/local_recheck_v1/mixture_effect_ridge_v0.csv"
+OUT = ROOT / "data/processed/Q1/estimated_stress"
+RIDGE = ROOT / "data/processed/Q1/regmix/mixture_effect_ridge_v0.csv"
 FILES = ("est_mixture_10b.csv", "est_pile_loss_10b.csv",
          "est_mixture_70b.csv", "est_pile_loss_70b.csv")
 

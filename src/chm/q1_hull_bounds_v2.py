@@ -15,7 +15,7 @@ from q1_interface import Q1Interface
 from q1_mixture_decision_v2 import choose, POLICIES
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "outputs/chm/q1_v2_hull_bounds"
+OUT = ROOT / "data/processed/Q1/hull_bounds"
 
 
 def data(q1, policy, weights, mode):

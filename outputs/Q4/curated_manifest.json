@@ -1,0 +1,53 @@
+{
+  "interface_sha256": {
+    "interfaces/Q4/CONTRACT.md": "e2f5bb2b1d0c8a4fcbc760905384d1c0586ebb08e8caab1f6f443dcc6f3ef3fb"
+  },
+  "paper_sha256": {
+    "paper/latex/sections/Q4/main.tex": "3b80798924f2e00a8770502a8f379cd4252e6a56f38fc7d46aef09d703133a6e"
+  },
+  "question": "Q4",
+  "schema_version": "main.question_integration.v2",
+  "scope": "current main answer, production evidence, interface and paper; reproducible process tables excluded",
+  "sha256": {
+    "ANSWER.md": "3ebf268af3ebb5ae2757940e970b97420c3474be702e1f28e995f472497aa3cf",
+    "README.md": "6e67ddd9866b7e640884254fc8f0f9af5f09e74c040dd52a0be66f6f44eeee5e",
+    "bridge_source_coordinate_models.csv": "806d47d845d3467d9e94280896201b83b426b46fd084c915decbdcba3485814b",
+    "bridge_source_coordinate_validation.csv": "88ee5eda2aaf4cad01bf4394620e1004bd01dfb526bea3ce5b0088dfa232fd36",
+    "c3_row_metric_audit.csv": "76e2e939a53bd4a3a157c00fb1b5b94ca887569953c6a71b3302af87f35fcfcb",
+    "c3_source_year_capability.csv": "fecb4f9763c5a925b99a69c5d480fe0ce54f03c369b5ed792aa16fe8be14107b",
+    "c3_source_year_dedup_sensitivity.csv": "eee6de3293b22ba1a40054c8aecf24d9cf3ac9c4ad4240c3de8c4a3496f43333",
+    "c3_source_year_task_profiles.csv": "c8230939e8c1485cff83abb88f1a732294fdf13ebfdf033cbb8373f52f6fbc07",
+    "c4_annual_resource_comparison.csv": "97a650cb2f15afdfdfeafadc0868e51c3efecffac0731388b6bc04c7ca403937",
+    "c4_resource_gate_comparison.csv": "1ec7f869165331e21e7acf0f1719bfda71a0548e5f3c83de1a135d3dd357a18e",
+    "c4_wide_usable_resources.csv": "e262f51a1179b2f74e7198d3438147a532f8d946e6f3a25788dbd7733a56128c",
+    "c8_bbh_task_aggregation.csv": "eb31d167d2e0a4b5e2133b71688788f89050e031d70fcb73783f04e49e52553a",
+    "c8_parse_failures.csv": "1d3b735513e745daba224d8559d052ddd33dbd56ce8e7b874d65fffbdaf9923f",
+    "context_scenarios.csv": "b494a8949a74133e779b683c8a46021b5e16308970150bd18e033553c6fc8608",
+    "frontier_candidate_forecasts.csv": "84f2fd60611abbffb6b09dc5c1f779a7849f5268c25a0a9cbc7b118c497ead76",
+    "frontier_model_comparison.csv": "674c75a8f12b4b9fde8928938119296bfc8a86ea8873a073e2a8efef60e6e69d",
+    "frontier_model_error_stress.csv": "0d1679fe61795715a28544a5b220e6238cc93d5a1c04571a816112b85e1ebb6f",
+    "frontier_parameters.csv": "db10429056531bdf455a02b23a2d63b29b015296e0eb504267895a8d344c0222",
+    "frontier_scenario_conditional_ranges.csv": "4c894c8c9cb90f75d0e7acec812e803413c6fc4e065f8cf657f6a6565002abf7",
+    "frontier_scenario_union.csv": "3193da8f3f3d29512003d6af93cd364b7e1ce8a76d5998492d7b3b57fa501411",
+    "historical_common_cells.csv": "c62204982e187bd73b6978e5703e302ebdb530fde09e6baceb9ab64a29759711",
+    "historical_contribution_bootstrap.csv": "56a7414f45bc67015f0c11f4c3767c665549dc3519e11d6147cbadadb8d70342",
+    "historical_standardized_contributions.csv": "21f60da5422cdc2d4405310443dbf62cb5009a272fded3f3e08cf4352a63fe40",
+    "interface.json": "8842179a113da3e0157ab338c51453a5ffd40d42b32e06473ae03b3e26d7ccb7",
+    "manifest.json": "4f81171d38a44d4caad67b6edfe221c88d1cf0a0261b5143060b5677c2af9c65",
+    "prepared/bridge_sample.csv": "ead8c15e7bfefa589978c855f17cd70141f99446738c78eb4dc939c958f842dd",
+    "prepared/c4_resource_audit.csv": "0001ad0484b5ade2f33f544e238d7695c54c04b39dd79aff17baae80fb7ae468",
+    "prepared/leaderboard_all_versions.csv": "94750204998299d4969e716b025afb7daed11dfde3020b3b82278b7f3035cb12",
+    "prepared/leaderboard_sample.csv": "281044f48cd5fb0a77ea726c17b6b57914fef6e5349ff442384ebe998489f700",
+    "prepared/manifest.json": "85c3353da8d295a6381af3970ed28e3ca0a255898ea1ac665a5053a9cb982221",
+    "prepared/upstream_q3_fixed_policy_grid.csv": "9e1ea053b5754ac903e2167caa9efb5c5b934e2eed96b4bbaf064f5a42c9d388",
+    "prepared/upstream_q3_manifest.json": "a30703ceac1f0179f5c93e03b676b984581c3058c50ccfcdc3eb60dd27112000",
+    "q3_bridge_conclusion_sensitivity.csv": "42d5196760dfd64159f0090a6a3d94f5665c4ad76b82bb2a924c753c8e066347",
+    "q3_policy_ranking_stress.csv": "bb2d9aff77f09c8404aa3da5a7d19b6b612e1e43e9a56090b20538dbe7661eed",
+    "q3_source_coordinate_stress.csv": "53d7017abde035217d6345f5ad829482a70bc17a56f502b2ed75b6e242c8367c",
+    "results.json": "c38e7e1f93ac381fe7262bda502a157451a34c3f10bd994ca788038b3426f54c",
+    "rolling_two_month_frontier.csv": "f6f3556606bf074eef250991d1eedc070ae8e6bc9c14508c130560275e287c31"
+  },
+  "source_manifest_path": "experiments/Q4/source_manifest_v3.json",
+  "source_manifest_sha256": "28600e054690854f909d1354327e796eb4131edcd8b77661327c69cb074937ef",
+  "source_release": "team/zhh-frontier@ee23b200e9de7f78477d945b186233741bd3b8fd"
+}

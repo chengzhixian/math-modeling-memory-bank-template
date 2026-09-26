@@ -13,8 +13,8 @@ from q1_regmix_domainwise import load_pair, metric_name, normalize_composition
 
 
 def quality_ablation(root):
-    grid = pd.read_csv(root / "quality_review_v1/quality_family_weight_grid_v1.csv")
-    primary = pd.read_csv(root / "domain_quality.csv").query("dataset_scope == 'sample'")
+    grid = pd.read_csv(root / "quality_review/quality_family_weight_grid_v1.csv")
+    primary = pd.read_csv(root / "quality/domain_quality.csv").query("dataset_scope == 'sample'")
     primary = primary.set_index("quality_domain")["Q"].rank(ascending=False)
     rows = []
     for removed in ("rps", "dsir", "model"):
@@ -67,12 +67,12 @@ def mixture_ablation(data_root, output_root):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-root", type=Path, default=Path("data/raw/real_attachments/A_data_value/regmix_tables"))
-    parser.add_argument("--output-root", type=Path, default=Path("outputs/chm"))
+    parser.add_argument("--output-root", type=Path, default=Path("data/processed/Q1"))
     args = parser.parse_args()
     out = args.output_root / "ablation_v1"
     out.mkdir(parents=True, exist_ok=True)
     quality_ablation(args.output_root).to_csv(out / "quality_family_ablation.csv", index=False)
-    detail = mixture_ablation(args.data_root, args.output_root / "local_recheck_v1")
+    detail = mixture_ablation(args.data_root, args.output_root / "regmix")
     detail.to_csv(out / "mixture_feature_ablation.csv", index=False)
     summary = detail.groupby("split", sort=False).agg(
         targets=("target", "size"), median_full_rmse=("full_rmse", "median"),
@@ -81,9 +81,9 @@ def main():
         median_full_spearman=("full_spearman", "median"),
     )
     summary.to_csv(out / "mixture_ablation_summary.csv")
-    inputs = [args.output_root / "quality_review_v1/quality_family_weight_grid_v1.csv",
-              args.output_root / "domain_quality.csv",
-              args.output_root / "local_recheck_v1/q1_regmix_ridge_domainwise_metrics.csv"]
+    inputs = [args.output_root / "quality_review/quality_family_weight_grid_v1.csv",
+              args.output_root / "quality/domain_quality.csv",
+              args.output_root / "regmix/q1_regmix_ridge_domainwise_metrics.csv"]
     inputs += [args.data_root / name for name in (
         "train_mixture_1m.csv", "train_pile_loss_1m.csv",
         "test_mixture_1m.csv", "test_pile_loss_1m.csv",
