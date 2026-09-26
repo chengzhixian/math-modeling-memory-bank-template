@@ -1,0 +1,257 @@
+\setcounter{section}{3}
+\section{问题一：数据质量评价、质量冲突消解与领域配比建模}
+\label{sec:q1}
+\setcounter{equation}{0}
+\setcounter{figure}{0}
+\setcounter{table}{0}
+
+\subsection{问题分析}
+
+本问需要从质量信号中给出可比较的文本质量评分\cite{fineweb2024}，处理不同指标之间的评价冲突，并建立训练领域配比与验证集交叉熵损失（Loss）的关系。困难在于：22 项指标的形式、尺度与优劣方向各不相同；质量信号的七个来源域与配比实验的 17 个训练域并非一一对应；17 维配比还受到非负及总和为 1 的约束。因此，本文先在质量信号数据上建立统一的评分与分歧度，再对每个验证域分别拟合配比模型，最后在有可靠质量映射的领域上加入质量约束，比较不同目标下的配比方案。
+
+A1 包含 7 个来源域的 51,230 条质量记录，A2 和 A3 分别补充 arXiv、GitHub 的全部扩展记录。A4 与 A5 按配方编号对应，提供 512 组 17 维训练配比及 13 个验证域的 Loss；A6--A11 用于检验 1M、60M 和 1B 实验组中的模型表现。A12--A15 的 10B、70B Loss 为附件估算值，用于考察较大规模下的排序变化。A16 提供训练域与质量域的参考映射。
+
+\subsection{数据质量评价与质量冲突消解}
+
+\subsubsection{质量指标的统一与综合评分}
+
+记文本 $i$ 的第 $m$ 项质量指标为 $x_{im}$。22 项指标中有 14 项标量指标和 8 项多维列表型指标。对列表型指标，依据分量含义计算评分或概率的期望；可直接取值或求均值的指标采用相应汇总值。对计数指标作对数变换，对 DSIR\cite{dsir2023} 指标作保号对数变换，以减弱长尾数值的影响。随后利用 A1 的中位数 $\mu_m$ 与中位数绝对偏差（MAD）进行稳健标准化\cite{robust2018}：
+\begin{equation}
+ z_{im}=\operatorname{clip}\!\left(\frac{x_{im}-\mu_m}{s_m},-5,5\right),\qquad
+ s_m=1.4826\operatorname{median}_{i}\lvert x_{im}-\mu_m\rvert .
+ \label{eq:q1-standardize}
+\end{equation}
+对离散度为零的指标作尺度修正。为使所有指标具有“越高越好”的共同方向，以 8 项多维列表型指标的汇总结果作为方向参考，按其与其余 14 项指标的 Spearman 秩相关\cite{spearman2018}符号确定方向 $d_m\in\{-1,1\}$；8 项参考指标保留其评分方向。为避免指标数量较多的一组主导总分，先分别计算 11 项文本统计指标、3 项 DSIR 指标及 8 项多维列表型指标的组内均值，再对三组等权汇总。令 $\bar z_{ig}$ 为文本 $i$ 在第 $g$ 组中可用指标 $d_mz_{im}$ 的均值，则综合评分为
+\begin{equation}
+ Q_{A,i}=\frac{\frac{1}{\lvert\mathcal G_i\rvert}
+ \sum_{g\in\mathcal G_i}\bar z_{ig}-\mu_Q}{\sigma_Q},
+ \label{eq:q1-quality}
+\end{equation}
+其中 $\mu_Q,\sigma_Q$ 为 A1 上组间等权汇总值的均值与标准差，$\mathcal G_i$ 表示文本 $i$ 有可用指标的组别。各来源域以文本评分的中位数表示整体质量。A2、A3 沿用 A1 确定的变换参数、指标方向和评分尺度，以便比较样本扩展前后的结果。图\ref{fig:q1-quality}给出七个域的评分及 1000 次 Bootstrap 重抽样\cite{islr2021}所得的 95\% 区间。
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.94\linewidth]{figures/Q1/01_quality.pdf}
+\caption{A1 七个来源域的相对质量评分中位数及抽样区间。}
+ \label{fig:q1-quality}
+\end{figure}
+
+七个来源域的评分中位数见表\ref{tab:q1-quality}。Book 和 arXiv 分别为 2.9183 和 2.6887，明显高于其他来源域。A2、A3 全量评分中，arXiv 与 GitHub 的中位数分别为 2.7253 和 $-0.5055$；剔除与 A1 重叠的记录后分别为 2.7279 和 $-0.5063$，与抽样集结果相近。直接对 22 项指标等权时，Book、arXiv 仍居前，GitHub 仍居后，但 Wikipedia 与 C4 的相邻次序互换。留一来源域分析中还有 5 项指标的方向发生变化。另按来源域将 A1 划为 70\% 的方向拟合样本和 30\% 的检查样本，在拟合部分重复重抽 100 次，考察 14 项标量指标方向改变时的评分表现。图\ref{fig:q1-quality}中的区间反映文本重抽样，而这些比较反映评分规则选择的影响。由此可见，主要质量差异较清楚，相近来源域的排序仍会受赋权和指标方向影响。
+
+\begin{table}[htbp]
+ \centering\small
+ \caption{A1 七个来源域的质量评分中位数}
+ \label{tab:q1-quality}
+ \begin{tabular}{lr@{\qquad}lr}
+ \toprule
+ 来源域 & 质量评分 & 来源域 & 质量评分\\
+ \midrule
+ Book & 2.9183 & arXiv & 2.6887\\
+ CommonCrawl & 0.4367 & StackExchange & 0.2517\\
+ Wikipedia & $-0.2944$ & C4 & $-0.3040$\\
+ GitHub & $-0.4854$ & & \\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\subsubsection{指标分歧与复核规则}
+
+综合评分可能掩盖同一文本上不同指标的分歧。对方向统一后的 22 项指标，计算全部 $\binom{22}{2}=231$ 个指标对的 Spearman 相关，并采用 Benjamini--Hochberg 方法\cite{fdr2019}将错误发现率控制在 0.05。A1 样本中有 66 对指标显著负相关，其中 55 对在去重后的 A2、A3 扩展数据中仍表现出相同的分歧方向，记为冲突指标对集合 $\mathcal E_c$。为衡量一条文本上这些指标给出的评价差异，定义分歧度
+\begin{equation}
+ U_i=\frac{\sum_{(u,v)\in\mathcal E_{c,i}}\lvert\rho_{uv}\rvert
+ \lvert d_uz_{iu}-d_vz_{iv}\rvert}
+ {\sum_{(u,v)\in\mathcal E_{c,i}}\lvert\rho_{uv}\rvert}.
+ \label{eq:q1-disagreement}
+\end{equation}
+其中 $\mathcal E_{c,i}$ 为文本 $i$ 中两项指标均有值的冲突指标对，$\rho_{uv}$ 为相应的秩相关系数。$U_i$ 越大，表示该文本在相互冲突的指标上所得评价差异越大。当文本缺少可用的冲突指标对时，也将其列入复核。以 A1 的评分中位数 0.0273 划分筛选优先级，以分歧度的第 75 百分位 2.0423 作为复核阈值，得到优先保留、优先保留并复核、低优先级、低优先级并复核四类，分别包含 20,384、5,231、18,038 和 7,577 条文本。高分歧文本保留原有质量评分，同时增加复核标记。对原文的检查显示，公式宏、代码片段及较长的结构化文本容易使指标关注不同特征，这解释了部分文本同时获得较高质量评分与较大分歧度的现象。
+
+图\ref{fig:q1-conflict}将评分高低与是否需要复核交叉展示。对 27 条原文案例的逐条查看有助于解释指标分歧产生的文本特征；这些案例没有人工质量标签，因而这里评价的是规则的可解释性，而非分类准确率。分歧阈值用于安排复核，未将高分歧直接等同于低质量。
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.88\linewidth]{figures/Q1/02_conflict.pdf}
+ \caption{综合质量评分与指标分歧度共同形成的文本筛选结果}
+ \label{fig:q1-conflict}
+\end{figure}
+
+\subsection{领域配比建模与验证}
+
+\subsubsection{二阶交互模型}
+
+记 The Pile\cite{pile2022} 的 17 个训练子领域份额为 $\boldsymbol p=(p_1,\ldots,p_{17})^\mathsf T$。对 A4 中因小数舍入而存在微小总和偏差的配比归一化后，满足 $p_j\geqslant0$ 且 $\sum_jp_j=1$；第 $k$ 个验证域的 Loss 记为 $L_k$，其中 $k=1,\ldots,13$。考虑到领域组合可能影响训练效果\cite{regmix2025,mixinglaws2025}，在 17 个份额主项之外，根据训练域配比的样本方差选取变化最大的 5 个领域，构造 10 个两两交互项。对每个验证域分别建立模型：
+\begin{equation}
+ \widehat L_k(\boldsymbol p)=a_k+\sum_{j=1}^{17}b_{kj}p_j
+ +\sum_{(u,v)\in\mathcal E} \gamma_{k,uv}p_up_v,
+ \qquad\lvert\mathcal E\rvert=10.
+ \label{eq:q1-mixture}
+\end{equation}
+入选领域为 FreeLaw、arXiv、PubMed Central、GitHub 和 Pile-CC。模型对非截距系数施加 $L_2$ 正则，并通过五折交叉验证逐验证域选择正则强度；以仅含 17 个主项的岭回归模型和训练均值预测作为对照\cite{islr2021}。拟合结果中，arXiv 与 GitHub、arXiv 与 Pile-CC 的交互项在 13 个验证域上均为负，表明这些领域组合与较低的预测 Loss 相联系。十个领域组合在 13 个验证域上共有 130 个交互系数，其中 110 个在五次分折拟合中始终保持全样本的符号，反映主要组合关系具有一定稳定性。由于各域份额之和恒为 1，增加一个领域的训练比例必然伴随其他领域比例下降，因而对模型系数的分析需结合具体的配比转移方向。
+
+图\ref{fig:q1-pair-contributions}在参考配比处比较十个交互项对不同验证域预测的贡献。同一领域组合的贡献幅度随验证域改变，说明只看某一训练域的单独份额不足以解释全部 Loss 变化。图中的乘积项贡献是给定配比处的模型分解；真正调整配比时，仍须同时计算被减配领域的变化。
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.94\linewidth]{figures/Q1/08_pair_contributions.pdf}
+ \caption{参考配比处十个领域交互项对各验证域预测 Loss 的贡献}
+ \label{fig:q1-pair-contributions}
+\end{figure}
+
+以 A4 的平均配方 $\boldsymbol p_{\mathrm{ref}}$ 为参照，定义第 $k$ 个验证域的相对 Loss 变化：
+\begin{equation}
+ r_k(\boldsymbol p)=
+ \frac{\widehat L_k(\boldsymbol p)-\widehat L_k(\boldsymbol p_{\mathrm{ref}})}
+ {\widehat L_k(\boldsymbol p_{\mathrm{ref}})},
+ \label{eq:q1-relative}
+\end{equation}
+式\eqref{eq:q1-relative}使不同验证域的 Loss 变化具有可比性；$r_k(\boldsymbol p)<0$ 表示相对参考配方的预测 Loss 降低。组合项 $\gamma_{k,uv}p_up_v$ 则刻画所选领域配比之间的非加性关系，其作用随验证域和当前配方而变化。
+
+\subsubsection{模型检验与外推分析}
+
+为同时考察预测误差与相对均值预测的表现，对观测值 $y_i$ 和预测值 $\widehat y_i$ 定义决定系数与平均绝对百分比误差：
+\begin{equation}
+ R^2=1-\frac{\sum_{i=1}^{n}(y_i-\widehat y_i)^2}
+ {\sum_{i=1}^{n}(y_i-\bar y)^2},\qquad
+ \mathrm{MAPE}=\frac{100\%}{n}\sum_{i=1}^{n}
+ \frac{\lvert y_i-\widehat y_i\rvert}{\lvert y_i\rvert}.
+ \label{eq:prediction-metrics}
+\end{equation}
+其中 $\bar y$ 为对应评价集的观测均值；本文计算 MAPE 的观测值均为正。$R^2>0$ 表示平方误差小于事后用评价集均值作常数预测，$R^2<0$ 则表示未达到这一参照。该均值依赖评价集全部观测，不等同于预测时可用的历史常数基线。若观测值方差为零，$R^2$ 不定义。第一问对每个验证域分别计算指标，再报告 13 域中位数，不将不同域的 Loss 混合计算一个总体 $R^2$。后续回测与来源内留出检验沿用相同定义。
+
+采用五折嵌套交叉验证比较模型\cite{hpo2023}，外层留出样本用于计算误差，内层重新选择交互领域和正则强度。交互模型在 13 个验证域上的均方根误差（RMSE）均低于岭回归，中位数由 0.4921 降至 0.4499，对应的折外预测 $R^2$ 中位数由 0.6056 提高至 0.6703，说明交互项在相同验证设计下提供了额外预测信息。在 A6--A11 检验组中，1M、60M 和 1B 分别有 11、13、13 个验证域的 RMSE 低于同组岭回归，见图\ref{fig:q1-validation}。1M 与 60M 组使用相同的 256 个配方，比较的是规模变化下同一组成集合的表现；1B 组有 47/64 个配方位于 A4 配方凸包之外，也考察了对新配比的预测。A6--A11 的比较参与了模型形式的选择，故这里将其用于说明选择交互模型的依据；嵌套交叉验证则用于评价逐折重新选择特征后的预测误差。
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.94\linewidth]{figures/Q1/03_validation.pdf}
+ \caption{交互模型相对岭回归在各验证域上的 RMSE 变化}
+ \label{fig:q1-validation}
+\end{figure}
+
+表\ref{tab:q1-r2-transfer}进一步检验冻结的 1M 模型能否直接预测不同规模组的绝对 Loss。1M 比较组的 $R^2$ 中位数为 0.6710，13 个验证域均为正，MAPE 中位数为 6.95\%，支持该模型在同规模比较组中的配比预测表现。直接用于 60M、1B 时，$R^2$ 中位数分别降至 $-8.3331$ 和 $-506.7317$，且两组的 13 个域均为负，说明绝对 Loss 的直接迁移失效。模型只以配比为输入，未校准规模变化引起的 Loss 水平和幅度变化；例如 Pile-CC 在 60M、1B 中的平均预测偏差分别为 1.0621、2.5206，而观测标准差仅为 0.3138、0.1008。系统偏差相对于组内波动很大，因而产生显著负的 $R^2$。这与下述较高的排序相关并不矛盾：排序只要求相对次序接近，不要求绝对数值吻合。因此，跨规模结果只用于考察排序迁移，后续绝对 Loss 的计算采用第二问的规模主干及明示的连接假设；本表也不能验证跨附件相对配比效应的幅度。
+
+\begin{table}[htbp]
+ \centering\small
+ \caption{冻结 1M 配比模型的绝对 Loss 迁移诊断（各指标为 13 域中位数）}
+ \label{tab:q1-r2-transfer}
+ \begin{tabular}{lrrrr}
+ \toprule
+ 比较规模 & 配方数 & $R^2$ & RMSE & MAPE\\
+ \midrule
+ 1M（同规模） & 256 & 0.6710 & 0.4227 & 6.95\%\\
+ 60M（直接迁移） & 256 & $-8.3331$ & 1.4270 & 37.40\%\\
+ 1B（直接迁移） & 64 & $-506.7317$ & 2.9429 & 147.39\%\\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+进一步比较模型预测与各实验组实测 Loss 对配方的排序。1M、60M、1B 三组在 13 个验证域上的 Spearman 相关中位数分别为 0.851、0.847、0.791，说明模型在给定检验组中较好地保持了配方的相对顺序。对于附件估算的 10B、70B Loss，相关中位数降至 0.492 和 0.394，略低于同组线性岭回归的 0.514 和 0.415，如图\ref{fig:q1-rank}所示。在两张外推表共同包含的 63 个配方中，按 1M 模型等权目标选出的同一配方，在两组估算 Loss 中均排第 61 位。这一反向比较表明，交互模型在较大规模估算表上的排序优势未能延续。后两组 Loss 来自估算，主要用于考察外推趋势；跨规模应用时仍需结合新的实验数据校准。
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.91\linewidth]{figures/Q1/04_rank_stress.pdf}
+ \caption{配比模型在检验组及外推表上的逐验证域排序相关}
+ \label{fig:q1-rank}
+\end{figure}
+
+\subsection{质量约束下的配比候选与边界诊断}
+
+\subsubsection{目标函数与约束}
+
+为在已有配比实验覆盖的范围内调整训练组成，取 A4 中 512 个配方的凸包为搜索区域\cite{wright2022}：
+\begin{equation}
+ \mathcal P_A=\left\{\boldsymbol p=\sum_{i=1}^{512}\omega_i\boldsymbol p^{(i)}:
+ \omega_i\geqslant0,\ \sum_i\omega_i=1\right\}.
+ \label{eq:q1-hull}
+\end{equation}
+
+考虑两种目标偏好。等权平均目标关注 13 个验证域的总体改善，最大相对 Loss 目标关注最不利验证域：
+\begin{equation}
+ \Phi_{\mathrm{avg}}(\boldsymbol p)=\frac1{13}\sum_{k=1}^{13}r_k(\boldsymbol p),
+ \qquad \Phi_{\mathrm{max}}(\boldsymbol p)=\max_k r_k(\boldsymbol p).
+ \label{eq:q1-objectives}
+\end{equation}
+质量信号的七个来源域与 17 个训练域之间没有完整的一一对应关系。参照 A16，分别考察仅采用直接映射、同时采用直接映射与近似直接映射两种质量约束。记 $J$ 为相应可映射训练域的集合，$q_j$ 为对应来源域的质量评分，$M_J(\boldsymbol p)=\sum_{j\in J}p_j$ 为这些领域的总份额。参考配方在该部分的平均质量为
+\begin{equation}
+ \bar q_{J,0}=
+ \frac{\sum_{j\in J}p_{\mathrm{ref},j}q_j}
+ {M_J(\boldsymbol p_{\mathrm{ref}})}.
+ \label{eq:q1-reference-quality}
+\end{equation}
+约束写为
+\begin{equation}
+ M_J(\boldsymbol p)\geqslant M_J(\boldsymbol p_{\mathrm{ref}}),\qquad
+ \sum_{j\in J}p_j(q_j-\bar q_{J,0})\geqslant0.
+ \label{eq:q1-quality-constraint}
+\end{equation}
+式\eqref{eq:q1-quality-constraint}要求可映射领域的总份额和平均质量均不低于参考配方。对仅有推断映射的其余 11 个领域，不直接赋予来源域质量评分。由于式\eqref{eq:q1-mixture}含双线性项，本文采用 McCormick 松弛与空间分支定界求解\cite{global2025}：节点上的线性规划给出目标下界，相应的凸组合生成可行配方和目标上界。以 0.001 的目标上下界差为停止阈值。另在 512 个原始配方中逐一比较，得到当前代理模型下的离散候选；目标值排序本身不构成现实训练中的推荐依据。
+
+\subsubsection{求解结果与配方分析}
+
+四种情景的代理模型求解结果见表\ref{tab:q1-policy}，连续配方求解的目标上下界差均小于 0.001。等权且不设质量约束的连续解给出 $-0.115112$，即相对参考配方约 11.5\% 的数值极值；但该解出现负预测 Loss，仅用于诊断二阶代理模型在边界区域的外推风险，不作为可执行的最优配方或可信训练收益。仅采用直接映射、同时加入近似直接映射时，连续候选的代理目标值分别为 $-0.102992$ 和 $-0.097010$。这些数值只在当前模型、凸包和质量映射假设下成立，不能与无约束数值极值作实际收益比较。仅采用直接映射约束的连续候选中，arXiv、DM Mathematics、GitHub、Pile-CC、Ubuntu IRC 的训练份额约为 16.9\%、21.2\%、15.4\%、13.7\%、11.8\%；若只在 A4 原始配方中比较，模型选出的编号为 301。图\ref{fig:q1-recipes}展示了完整的 17 域份额。相比参考配方的 11.3\%，arXiv 在直接映射约束下升至 16.9\%，同时加入近似直接映射后升至 17.9\%。以最大相对 Loss 为目标时，模型给出的配方在更多领域间分配份额，反映了该目标对各验证域表现的均衡偏好。
+
+\begin{table}[htbp]
+ \centering\small
+ \caption{不同目标与质量约束下的代理模型结果；无质量约束的等权解仅供边界诊断}
+ \label{tab:q1-policy}
+ \resizebox{\linewidth}{!}{%
+ \begin{tabular}{lrrrr}
+ \toprule
+ 目标与质量约束 & 连续代理目标值 & 上下界差 & 原始配方编号 & 原始代理目标值\\
+ \midrule
+ 等权平均，不设质量约束（诊断） & $-0.115112$ & 0.000962 & 136（诊断） & $-0.115065$\\
+ 等权平均，仅采用直接映射 & $-0.102992$ & 0.000441 & 301 & $-0.051923$\\
+ 等权平均，加入近似直接映射 & $-0.097010$ & 0.000750 & 172 & $-0.067371$\\
+ 最小化最大变化，不设质量约束 & $-0.019784$ & 0.000996 & 477 & $+0.039927$\\
+ \bottomrule
+ \end{tabular}
+ }
+\end{table}
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.94\linewidth]{figures/Q1/05_recipes.pdf}
+ \caption{参考配方、条件候选与无质量约束边界诊断解的 17 域训练份额}
+ \label{fig:q1-recipes}
+\end{figure}
+
+表\ref{tab:q1-policy}中的原始配方编号对应 512 个给定配方中的代理目标排序，连续目标值则来自整个凸包；两列只能在各自搜索范围内解释。编号 136 属于无质量约束情景的边界诊断候选，不作为最终推荐依据。保护最不利验证域时，连续候选的最大相对 Loss 约为 $-0.0198$，原始配方中最低代理目标值为 $+0.0399$。这一差异仅说明凸组合在当前模型下可以改变数值目标，不能单独证明现实训练中的均衡收益。
+
+图\ref{fig:q1-policy-diagnostic}给出四种代理模型解对各验证域 Loss 的预测变化。等权且不设质量约束的连续解在 Mathematics 验证域得到 $-0.0901$ 的预测 Loss。交叉熵 Loss 应为非负值，表明二阶代理模型在该边界区域已发生预测失真；这一解仅用于模型边界诊断，不作为实际训练收益或可执行方案的依据。其余三个连续解的逐域预测 Loss 均为正值，但仍只是当前数据与模型下的条件候选。后续应用需加入非负约束或收紧搜索区域，并用新的训练实验检验。
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.94\linewidth]{figures/Q1/06_policy_results.pdf}
+ \caption{四种代理模型解的逐验证域预测变化；斜线格标出负预测 Loss，该列仅供边界诊断}
+ \label{fig:q1-policy-diagnostic}
+\end{figure}
+
+为考察代理模型的配方排序对样本扰动的敏感性，进行 30 次重复子采样，每次抽取 80\% 的 A4、A5 配对样本，重新选择交互领域和正则强度、拟合模型，再从 512 个原始配方中选取目标值最低者。四种情景中原编号再次被选中的次数依次为 29、10、13、7 次，见图\ref{fig:q1-stability}。其中配方 136 的 29/30 次重选只说明当前数值选择对这一重采样方式稳定，不能证明其物理合理性；该配方仅作为边界诊断候选，不作为最终推荐依据。加入质量约束或改用最大相对 Loss 目标后，具体编号对样本扰动更敏感。因此，报告条件候选时还须说明质量条件、目标偏好及模型适用范围。
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.85\linewidth]{figures/Q1/07_stability.pdf}
+ \caption{30 次重复子采样中原始编号再次被选中的频率；频率不代表训练可行性}
+ \label{fig:q1-stability}
+\end{figure}
+
+\subsection{本问结果与后续衔接}
+
+第一问得到的质量评分与配比响应关系来自不同数据：$Q_A$ 描述来源域质量信号的相对水平，$r_k(\boldsymbol p)$ 描述 A4、A5 中第 $k$ 个验证域相对参考配方的代理 Loss 变化。表\ref{tab:q1-output}汇总了进入下一问的主要量及其适用范围。配方搜索只给出当前数据与代理模型下的条件候选；无质量约束等权解及配方 136 仅保留作边界诊断，不作为现实训练中的最优配方。两套数据缺少相同训练实验下的成对观测，因此下一问需要明确建立质量尺度与 Loss 口径之间的连接假设。
+
+\begin{table}[htbp]
+ \centering\small
+ \caption{第一问在附件数据和代理模型支持范围内的输出及后续用途}
+ \label{tab:q1-output}
+ \begin{tabular}{p{0.20\linewidth}p{0.35\linewidth}p{0.35\linewidth}}
+ \toprule
+ 输出 & 本问含义 & 后续使用方式\\
+ \midrule
+ $Q_A$ 及域级中位数 & A1--A3 上统一方向后的相对质量评分 & 经 A16 的直接及近似直接映射，构造训练配比的质量输入\\
+ $r_k(\boldsymbol p)$ & 13 个验证域相对参考配比的代理 Loss 变化 & 按目标域偏好加权后描述条件配比响应\\
+ $\mathcal P_A$ 与映射范围 & 512 个配方的凸包及有质量评分的训练域 & 限定候选搜索范围，并保留未映射领域的质量缺失\\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\subsection{本问小结}
+
+本问建立了 A1--A3 的质量评分和 A4、A5 的配比响应代理模型。后者在 13 个验证域的交叉验证误差低于线性岭回归，嵌套交叉验证 $R^2$ 中位数为 0.6703；1M 同规模比较组为 0.6710，支持同规模预测。60M、1B 的排序相关仍较高，但直接迁移的绝对 Loss 决定系数为负，故不据此主张跨规模绝对预测有效。质量映射给出的配比仅为附件和模型支持范围内的条件候选；出现负 Loss 的无质量约束连续解及配方 136 仅作边界诊断。上述结果为后续标度律与资源配置提供输入，不能视为现实训练的最优配方。
