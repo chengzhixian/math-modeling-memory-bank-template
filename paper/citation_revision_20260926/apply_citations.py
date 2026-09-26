@@ -28,6 +28,10 @@ CHANGES = {
  ],
 }
 
+EXTENDED_CHANGES = {'chapter4.tex': [('（MAD）进行稳健标准化', 'robust2018'), ('Spearman 秩相关', 'spearman2018'), ('Bootstrap 重抽样', 'islr2021'), ('Benjamini--Hochberg 方法', 'fdr2019'), ('记 The Pile', 'pile2022'), ('岭回归模型和训练均值预测作为对照', 'islr2021'), ('采用五折嵌套交叉验证比较模型', 'hpo2023'), ('凸包为搜索区域', 'wright2022'), ('McCormick 松弛与空间分支定界求解', 'global2025')], 'chapter5.tex': [('Huber 损失', 'huber2020')], 'chapter6.tex': [('相应边际成本之比比较', 'wright2022'), ('按 C4、RedPajama 和 RefinedWeb 三种训练语料', 'c42020,redpajama2024,refinedweb2023'), ('同一 Paloma C4 验证集', 'paloma2024')], 'chapter7.tex': [('六项分别为 IFEval', 'ifeval2023'), ('、BBH', 'bbh2023'), ('、MATH Lvl 5', 'math2021'), ('、GPQA', 'gpqa2024'), ('、MUSR', 'musr2024'), ('以开发者为抽样块重复抽取', 'cluster2023'), ('设 $z_i=\\operatorname{logit}(S_i/100)$', 'islr2021'), ('对来源内每条记录依次留出、重拟合并预测', 'islr2021'), ('Qwen2 和 Qwen2.5', 'qwen22024,qwen252024')]}
+for filename, additions in EXTENDED_CHANGES.items():
+ CHANGES[filename].extend(additions)
+
 evidence = {'body_unchanged': {}, 'insertions': [], 'source_pdf': 'example(2).pdf',
             'source_archive': 'Desktop/Huawei_Cup_2026_Mathematical_Modeling_latex-main.rar'}
 for filename, additions in CHANGES.items():
@@ -49,7 +53,7 @@ for filename, additions in CHANGES.items():
 
 # Preserve original bibliography and citation keys; append only new works.
 verified = (ROOT / 'references_verified.bib').read_text(encoding='utf-8')
-new_entries = verified[verified.index('@article{gadre2024,'):]
+new_entries = verified[verified.index('@article{gadre2024,'):] + '\n' + (ROOT / 'extension_verified.bib').read_text(encoding='utf-8')
 original_bib = (ORIGINAL / 'reference.bib').read_bytes()
 (PROJECT / 'reference.bib').write_bytes(original_bib + b'\r\n' + new_entries.encode('utf-8'))
 

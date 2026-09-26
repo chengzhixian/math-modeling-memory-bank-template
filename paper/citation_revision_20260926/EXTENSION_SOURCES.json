@@ -1,0 +1,212 @@
+[
+  {
+    "key": "robust2018",
+    "title": "Anomaly detection by robust statistics",
+    "year": 2018,
+    "authors": "Rousseeuw, Peter J. and Hubert, Mia",
+    "venue": "WIREs Data Mining and Knowledge Discovery",
+    "url": "https://doi.org/10.1002/widm.1236",
+    "support": "MAD稳健尺度、1.4826校正与稳健标准化",
+    "verified_date": "2026-09-26"
+  },
+  {
+    "key": "spearman2018",
+    "title": "Correlation Coefficients: Appropriate Use and Interpretation",
+    "year": 2018,
+    "authors": "Schober, Patrick and Boer, Christa and Schwarte, Lothar A.",
+    "venue": "Anesthesia & Analgesia",
+    "url": "https://doi.org/10.1213/ANE.0000000000002864",
+    "support": "Spearman秩相关的定义与解释",
+    "verified_date": "2026-09-26"
+  },
+  {
+    "key": "fdr2019",
+    "title": "A practical guide to methods controlling false discoveries in computational biology",
+    "year": 2019,
+    "authors": "Korthauer, Keegan and Kimes, Patrick K. and Duvallet, Claire and others",
+    "venue": "Genome Biology",
+    "url": "https://link.springer.com/article/10.1186/s13059-019-1716-1",
+    "support": "Benjamini--Hochberg及错误发现率的方法背景",
+    "verified_date": "2026-09-26"
+  },
+  {
+    "key": "islr2021",
+    "title": "An Introduction to Statistical Learning: with Applications in R",
+    "year": 2021,
+    "authors": "James, Gareth and Witten, Daniela and Hastie, Trevor and Tibshirani, Robert",
+    "venue": "Springer",
+    "url": "https://link.springer.com/book/10.1007/978-1-0716-1418-1",
+    "support": "Bootstrap、岭回归、交叉验证、Logit及留一验证",
+    "verified_date": "2026-09-26"
+  },
+  {
+    "key": "hpo2023",
+    "title": "Hyperparameter optimization: Foundations, algorithms, best practices, and open challenges",
+    "year": 2023,
+    "authors": "Bischl, Bernd and Binder, Martin and Lang, Michel and others",
+    "venue": "WIREs Data Mining and Knowledge Discovery",
+    "url": "https://doi.org/10.1002/widm.1484",
+    "support": "嵌套交叉验证与选参后的外层评估",
+    "verified_date": "2026-09-26"
+  },
+  {
+    "key": "wright2022",
+    "title": "Optimization for Data Analysis",
+    "year": 2022,
+    "authors": "Wright, Stephen J. and Recht, Benjamin",
+    "venue": "Cambridge University Press",
+    "url": "https://doi.org/10.1017/9781009004282",
+    "support": "凸集、凸组合及约束优化的一阶条件",
+    "verified_date": "2026-09-26"
+  },
+  {
+    "key": "global2025",
+    "title": "Global optimization of mixed-integer nonlinear programs with {SCIP} 8",
+    "year": 2025,
+    "authors": "Bestuzheva, Ksenia and Chmiela, Antonia and M{\\\"u}ller, Benjamin and Serrano, Felipe and Vigerske, Stefan and Wegscheider, Fabian",
+    "venue": "Journal of Global Optimization",
+    "url": "https://link.springer.com/article/10.1007/s10898-023-01345-1",
+    "support": "McCormick松弛与空间分支定界的算法原理",
+    "verified_date": "2026-09-26"
+  },
+  {
+    "key": "huber2020",
+    "title": "Adaptive Huber Regression",
+    "year": 2020,
+    "authors": "Sun, Qiang and Zhou, Wen-Xin and Fan, Jianqing",
+    "venue": "Journal of the American Statistical Association",
+    "url": "https://doi.org/10.1080/01621459.2018.1543124",
+    "support": "Huber损失的稳健估计背景；不声称本文采用自适应阈值",
+    "verified_date": "2026-09-26"
+  },
+  {
+    "key": "cluster2023",
+    "title": "Cluster-robust inference: A guide to empirical practice",
+    "year": 2023,
+    "authors": "MacKinnon, James G. and Nielsen, Morten {\\O}rregaard and Webb, Matthew D.",
+    "venue": "Journal of Econometrics",
+    "url": "https://doi.org/10.1016/j.jeconom.2022.04.001",
+    "support": "以开发者为块的重抽样背景；不验证本文百分位范围覆盖率",
+    "verified_date": "2026-09-26"
+  },
+  {
+    "key": "pile2022",
+    "title": "Datasheet for the {Pile}",
+    "year": 2022,
+    "authors": "Biderman, Stella and Bicheno, Kieran and Gao, Leo",
+    "venue": "arXiv preprint arXiv:2201.07311",
+    "url": "https://arxiv.org/abs/2201.07311",
+    "support": "The Pile数据集名称与组成",
+    "verified_date": "2026-09-26"
+  },
+  {
+    "key": "ifeval2023",
+    "title": "Instruction-Following Evaluation for Large Language Models",
+    "year": 2023,
+    "authors": "Zhou, Jeffrey and Lu, Tianjian and Mishra, Swaroop and others",
+    "venue": "arXiv preprint arXiv:2311.07911",
+    "url": "https://arxiv.org/abs/2311.07911",
+    "support": "IFEval评测来源",
+    "verified_date": "2026-09-26"
+  },
+  {
+    "key": "bbh2023",
+    "title": "Challenging {BIG}-Bench Tasks and Whether Chain-of-Thought Can Solve Them",
+    "year": 2023,
+    "authors": "Suzgun, Mirac and Scales, Nathan and Sch{\\\"a}rli, Nathanael and others",
+    "venue": "Findings of the Association for Computational Linguistics: ACL 2023",
+    "url": "https://aclanthology.org/2023.findings-acl.824/",
+    "support": "BBH评测来源；附件24列不等于原论文23任务",
+    "verified_date": "2026-09-26"
+  },
+  {
+    "key": "math2021",
+    "title": "Measuring Mathematical Problem Solving With the {MATH} Dataset",
+    "year": 2021,
+    "authors": "Hendrycks, Dan and Burns, Collin and Kadavath, Saurav and others",
+    "venue": "Proceedings of the Neural Information Processing Systems Track on Datasets and Benchmarks",
+    "url": "https://datasets-benchmarks-proceedings.neurips.cc/paper/2021/hash/be83ab3ecd0db773eb2dc1b0a17836a1-Abstract-round2.html",
+    "support": "MATH数据集与难度等级来源",
+    "verified_date": "2026-09-26"
+  },
+  {
+    "key": "gpqa2024",
+    "title": "{GPQA}: A Graduate-Level Google-Proof {Q\\&A} Benchmark",
+    "year": 2024,
+    "authors": "Rein, David and Hou, Betty Li and Stickland, Asa Cooper and others",
+    "venue": "First Conference on Language Modeling",
+    "url": "https://openreview.net/pdf?id=Ti67584b98",
+    "support": "GPQA评测来源",
+    "verified_date": "2026-09-26"
+  },
+  {
+    "key": "musr2024",
+    "title": "{MuSR}: Testing the Limits of Chain-of-Thought with Multistep Soft Reasoning",
+    "year": 2024,
+    "authors": "Sprague, Zayne and Ye, Xi and Bostrom, Kaj and Chaudhuri, Swarat and Durrett, Greg",
+    "venue": "The Twelfth International Conference on Learning Representations",
+    "url": "https://openreview.net/pdf?id=jenyYQzue1",
+    "support": "MuSR评测来源",
+    "verified_date": "2026-09-26"
+  },
+  {
+    "key": "paloma2024",
+    "title": "{Paloma}: A Benchmark for Evaluating Language Model Fit",
+    "year": 2024,
+    "authors": "Magnusson, Ian and Bhagia, Akshita and Hofmann, Valentin and others",
+    "venue": "Advances in Neural Information Processing Systems",
+    "url": "https://papers.nips.cc/paper_files/paper/2024/hash/760b2d94398aa61468aa3bc11506d9ea-Abstract-Datasets_and_Benchmarks_Track.html",
+    "support": "Paloma统一验证集与分域评测来源",
+    "verified_date": "2026-09-26"
+  },
+  {
+    "key": "qwen22024",
+    "title": "{Qwen2} Technical Report",
+    "year": 2024,
+    "authors": "Yang, An and Yang, Baosong and Hui, Binyuan and others",
+    "venue": "arXiv preprint arXiv:2407.10671",
+    "url": "https://arxiv.org/abs/2407.10671",
+    "support": "Qwen2模型族名称来源；不为附件Loss记录和本文拟合背书",
+    "verified_date": "2026-09-26"
+  },
+  {
+    "key": "qwen252024",
+    "title": "{Qwen2.5} Technical Report",
+    "year": 2024,
+    "authors": "{Qwen Team}",
+    "venue": "arXiv preprint arXiv:2412.15115",
+    "url": "https://arxiv.org/abs/2412.15115",
+    "support": "Qwen2.5模型族名称来源；首次预印本2024，v2修订2025",
+    "verified_date": "2026-09-26"
+  },
+  {
+    "key": "refinedweb2023",
+    "title": "The {RefinedWeb} Dataset for {Falcon LLM}: Outperforming Curated Corpora with Web Data Only",
+    "year": 2023,
+    "authors": "Penedo, Guilherme and Malartic, Quentin and Hesslow, Daniel and others",
+    "venue": "Advances in Neural Information Processing Systems",
+    "url": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/fa3ed726cc5073b9c31e3e49a807789c-Abstract-Datasets_and_Benchmarks.html",
+    "support": "RefinedWeb训练语料来源",
+    "verified_date": "2026-09-26"
+  },
+  {
+    "key": "redpajama2024",
+    "title": "{RedPajama}: an Open Dataset for Training Large Language Models",
+    "year": 2024,
+    "authors": "Weber, Maurice and Fu, Daniel and Anthony, Quentin and others",
+    "venue": "Advances in Neural Information Processing Systems",
+    "url": "https://proceedings.neurips.cc/paper_files/paper/2024/file/d34497330b1fd6530f7afd86d0df9f76-Paper-Datasets_and_Benchmarks_Track.pdf",
+    "support": "RedPajama语料与质量信号背景",
+    "verified_date": "2026-09-26"
+  },
+  {
+    "key": "c42020",
+    "title": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer",
+    "year": 2020,
+    "authors": "Raffel, Colin and Shazeer, Noam and Roberts, Adam and others",
+    "venue": "Journal of Machine Learning Research",
+    "url": "https://jmlr.org/papers/v21/20-074.html",
+    "support": "C4语料来源；不把C4算力附件编号当作语料",
+    "verified_date": "2026-09-26"
+  }
+]

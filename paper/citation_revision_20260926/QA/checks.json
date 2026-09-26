@@ -1,117 +1,81 @@
 {
-  "pages": 46,
-  "bibliography_count": 13,
+  "pages": 47,
+  "bibliography_count": 34,
   "undefined_citations": false,
   "missing_glyphs": false,
   "overfull_boxes": 0,
+  "rerun_requested": false,
   "linked_urls": [
+    "https://aclanthology.org/2023.findings-acl.824/",
     "https://arxiv.org/abs/2001.08361",
+    "https://arxiv.org/abs/2201.07311",
     "https://arxiv.org/abs/2203.15556",
+    "https://arxiv.org/abs/2311.07911",
     "https://arxiv.org/abs/2403.08540v2",
     "https://arxiv.org/abs/2405.10938v3",
+    "https://arxiv.org/abs/2407.10671",
+    "https://arxiv.org/abs/2412.15115",
+    "https://datasets-benchmarks-proceedings.neurips.cc/paper/2021/hash/be83ab3ecd0db773eb2dc1b0a17836a1-Abstract-round2.html",
+    "https://doi.org/10.1002/widm.1236",
+    "https://doi.org/10.1002/widm.1484",
+    "https://doi.org/10.1016/j.jeconom.2022.04.001",
+    "https://doi.org/10.1017/9781009004282",
+    "https://doi.org/10.1080/01621459.2018.1543124",
+    "https://doi.org/10.1213/ANE.0000000000002864",
     "https://github.com/mlfoundations/scaling",
+    "https://jmlr.org/papers/v21/20-074.html",
+    "https://link.springer.com/article/10.1007/s10898-023-01345-1",
+    "https://link.springer.com/article/10.1186/s13059-019-1716-1",
+    "https://link.springer.com/book/10.1007/978-1-0716-1418-1",
     "https://openreview.net/forum?id=5BjQOUXq7i",
     "https://openreview.net/forum?id=jjCB27TMK3",
+    "https://openreview.net/pdf?id=Ti67584b98",
+    "https://openreview.net/pdf?id=jenyYQzue1",
     "https://otexts.com/fpp3/",
     "https://papers.nips.cc/paper_files/paper/2022/hash/67d57c32e20fd0a7a302cb81d36e40d5-Abstract-Conference.html",
     "https://papers.nips.cc/paper_files/paper/2023/hash/6b9aa8f418bde2840d5f4ab7a02f663b-Abstract-Conference.html",
+    "https://papers.nips.cc/paper_files/paper/2024/hash/760b2d94398aa61468aa3bc11506d9ea-Abstract-Datasets_and_Benchmarks_Track.html",
     "https://proceedings.mlr.press/v202/biderman23a.html",
+    "https://proceedings.neurips.cc/paper_files/paper/2023/hash/fa3ed726cc5073b9c31e3e49a807789c-Abstract-Datasets_and_Benchmarks.html",
     "https://proceedings.neurips.cc/paper_files/paper/2024/file/370df50ccfdf8bde18f8f9c2d9151bda-Paper-Datasets_and_Benchmarks_Track.pdf",
+    "https://proceedings.neurips.cc/paper_files/paper/2024/file/d34497330b1fd6530f7afd86d0df9f76-Paper-Datasets_and_Benchmarks_Track.pdf",
     "https://proceedings.neurips.cc/paper_files/paper/2024/hash/ad236edc564f3e3156e1b2feafb99a24-Abstract.html",
     "https://www.annualreviews.org/content/journals/10.1146/annurev-economics-063016-103651"
   ],
-  "locations": {
-    "本问需要从质量信号": [
-      {
-        "pdf_page": 6,
-        "excerpt": "解与领域配比建模4.1问题分析本问需要从质量信号中给出可比较的文本质量评分[1]，处理不同指标之间的评价冲突，并建立训练领域配比与验证集交叉熵损失（Loss）的关系。困难在于：22项指标的形式、尺度与优劣方向各不相同；质量信号的七"
-      }
-    ],
-    "对DSIR": [
-      {
-        "pdf_page": 6,
-        "excerpt": "汇总值。对计数指标作对数变换，对DSIR[2]指标作保号对数变换，以减弱长尾数值的影响。随后利用A1的中位数µm与中位数绝对偏差（MAD）进行稳健标准化：zim=clip\u0012xim−µmsm,−5,5\u0013,sm=1.4826media"
-      }
-    ],
-    "领域组合": [
-      {
-        "pdf_page": 5,
-        "excerpt": "实验，研究数据质量、领域配比及领域组合对训练损失的影响，建立相应的量化关系，并考察其在给定检验数据上的适用性。问题二：根据问题一的数据质量评价与领域配比分析结果，结合附件B中的模型训练记录，建立同时考虑参数规模、训练数据量、数据质"
-      },
-      {
-        "pdf_page": 8,
-        "excerpt": "中k=1,...,13。考虑到领域组合可能影响训练效果[3,4]，在17个份额主项之外，根据训练域配比的样本方差选取变化最大的5个领域，构造10个两两交互项。对每个验证域分别建立模型：bLk(p)=ak+17Xj=1bkjpj+X"
-      },
-      {
-        "pdf_page": 22,
-        "excerpt": "的可行转移和联合效应分析表明，领域组合的作用取决于配比调整方式。上述结果为后续在给定算力和数据处理成本下比较资源投入方向提供了数学依据。21"
-      }
-    ],
-    "1176": [
-      {
-        "pdf_page": 14,
-        "excerpt": "、D以十亿Token计。B1的1176条Pythia[7]训练记录用于估计N–D标度律；B7的450条半合成记录用于估计质量项。B6的实验点包含于B7，B8的质量变化趋势与B7不一致，因此二者不重复用于本次质量拟合。B2、B3检查"
-      },
-      {
-        "pdf_page": 23,
-        "excerpt": "选、质量评分及相对配比效应B11176条真实训练记录提供N,D双幂标度关系B7450条半合成质量记录提供随规模变化的质量项与独立质量情景C745条模型架构元数据选取外生上下文长度，不用于拟合连续注意力成本6.2资源配置模型6.2."
-      }
-    ],
-    "建立经典": [
-      {
-        "pdf_page": 14,
-        "excerpt": "en数和验证Loss为观测量，建立经典双幂律[6]L0(N,D)=E+AN−α+BD−β,E,A,B,α,β>0.(5.1)其中E表示规模继续增大时的渐近项，两个幂律项分别描述参数量与训练量带来的Loss变化。为避免某一参数规模的"
-      }
-    ],
-    "长上下文直接": [
-      {
-        "pdf_page": 28,
-        "excerpt": "2.0809升至2.2179。长上下文直接挤占可分配给规模与训练量的预算[8]；低预算的最长上下文则在共同取值范围内不可行。临界长度描述两项成本相等的位置，131072Token情景在C7中的观测支持较稀疏。6.5.2固定配比下的"
-      }
-    ],
-    "公开的OpenLM": [
-      {
-        "pdf_page": 30,
-        "excerpt": "3外部实验的排序检验进一步利用公开的OpenLM训练记录[9]1检验规模项的排序能力。104个实际训练模型中，42个落在本问N,D的共同范围内；按C4、RedPajama和RefinedWeb三种训练语料1公开模型与评测记录见ht"
-      }
-    ],
-    "来源一致": [
-      {
-        "pdf_page": 34,
-        "excerpt": "rk得分度量能力，因此还需建立来源一致的Loss–能力关系[9,10]，分析前述配置在能力坐标上的含义。令模型i的综合能力为C2六项得分的等权均值Si=166Xk=1sik,0≤Si≤100,(7.1)六项分别为IFEval、BB"
-      }
-    ],
-    "MMLU-PRO": [
-      {
-        "pdf_page": 34,
-        "excerpt": "Lvl5、GPQA、MUSR和MMLU-PRO[11]。仅当六项均有有效得分时计算Si。时间轴采用榜单提交日；模型类型分为基础预训练和后训练两组，后者包含chat与领域微调。开放模型筛选排除明确标注不开放权重的记录，并结合权重及许"
-      }
-    ],
-    "分位资源模型": [
-      {
-        "pdf_page": 38,
-        "excerpt": "模型，以及以τ=0.9为目标的分位资源模型[12]。最后一种模型求解mina,bN,btXiρ0.9[zi−a−bNlog10Ni−btti],ρτ(u)=u{τ−1(u<0)},(7.5)并采用线性规划得到系数。均值资源模型使用"
-      },
-      {
-        "pdf_page": 39,
-        "excerpt": "配置情景与前沿预测后训练组采用分位资源模型作为主情景。设gC为C4的年算力对数增长率，s为未来增长倍率；取s=1,1/2,1/4,0分别表示沿历史速率、增速减半、增速降至四分之一和停止增长。令η=0.5表示新增资源的一半按十进对数"
-      }
-    ],
-    "每一轮仅用": [
-      {
-        "pdf_page": 38,
-        "excerpt": "个完整自然月的Ft为比较目标：每一轮仅用测试窗口开始前的提交版本和当时可见的C4资源记录拟合，再计算测试窗口误差[13]。表7.4与图7.4给出四个滚动窗口的结果。后训练组分位资源模型RMSE为2.199分，略低于均值资源模型的2"
-      }
-    ],
-    "参考文献": [
-      {
-        "pdf_page": 4,
-        "excerpt": ".............45参考文献...........................................453"
-      },
-      {
-        "pdf_page": 46,
-        "excerpt": "问题连接并检验更大规模的配置。参考文献[1]PenedoG,KydlíčekH,BenAllalL,etal.,TheFineWebDatasets:DecantingtheWebfortheFinestTextDataatSca"
-      }
-    ]
+  "final_numbers": {
+    "fineweb2024": 1,
+    "dsir2023": 2,
+    "robust2018": 3,
+    "spearman2018": 4,
+    "islr2021": 5,
+    "fdr2019": 6,
+    "pile2022": 7,
+    "regmix2025": 8,
+    "mixinglaws2025": 9,
+    "hpo2023": 10,
+    "wright2022": 11,
+    "global2025": 12,
+    "kaplan2020scaling": 13,
+    "hoffmann2022training": 14,
+    "pythia2023": 15,
+    "huber2020": 16,
+    "flashattention2022": 17,
+    "gadre2024": 18,
+    "c42020": 19,
+    "redpajama2024": 20,
+    "refinedweb2023": 21,
+    "paloma2024": 22,
+    "observational2024": 23,
+    "ifeval2023": 24,
+    "bbh2023": 25,
+    "math2021": 26,
+    "gpqa2024": 27,
+    "musr2024": 28,
+    "mmlupro2024": 29,
+    "cluster2023": 30,
+    "koenker2017": 31,
+    "forecasting2021": 32,
+    "qwen22024": 33,
+    "qwen252024": 34
   }
 }

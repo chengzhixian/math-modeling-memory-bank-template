@@ -15,73 +15,387 @@
       "file": "chapter4.tex",
       "anchor": "本问需要从质量信号中给出可比较的文本质量评分",
       "keys": "fineweb2024",
-      "line": 10
+      "line": 10,
+      "section": "4.1 问题分析",
+      "pdf_page": 6,
+      "numbers": [
+        1
+      ]
     },
     {
       "file": "chapter4.tex",
       "anchor": "对 DSIR",
       "keys": "dsir2023",
-      "line": 18
+      "line": 18,
+      "section": "4.2.1 质量指标的统一与综合评分",
+      "pdf_page": 6,
+      "numbers": [
+        2
+      ]
     },
     {
       "file": "chapter4.tex",
       "anchor": "考虑到领域组合可能影响训练效果",
       "keys": "regmix2025,mixinglaws2025",
-      "line": 81
+      "line": 81,
+      "section": "4.3.1 二阶交互模型",
+      "pdf_page": 8,
+      "numbers": [
+        8,
+        9
+      ]
+    },
+    {
+      "file": "chapter4.tex",
+      "anchor": "（MAD）进行稳健标准化",
+      "keys": "robust2018",
+      "line": 18,
+      "section": "4.2.1 质量指标的统一与综合评分",
+      "pdf_page": 6,
+      "numbers": [
+        3
+      ]
+    },
+    {
+      "file": "chapter4.tex",
+      "anchor": "Spearman 秩相关",
+      "keys": "spearman2018",
+      "line": 24,
+      "section": "4.2.1 质量指标的统一与综合评分",
+      "pdf_page": 6,
+      "numbers": [
+        4
+      ]
+    },
+    {
+      "file": "chapter4.tex",
+      "anchor": "Bootstrap 重抽样",
+      "keys": "islr2021",
+      "line": 30,
+      "section": "4.2.1 质量指标的统一与综合评分",
+      "pdf_page": 6,
+      "numbers": [
+        5
+      ]
+    },
+    {
+      "file": "chapter4.tex",
+      "anchor": "Benjamini--Hochberg 方法",
+      "keys": "fdr2019",
+      "line": 59,
+      "section": "4.2.2 指标分歧与复核规则",
+      "pdf_page": 6,
+      "numbers": [
+        6
+      ]
+    },
+    {
+      "file": "chapter4.tex",
+      "anchor": "记 The Pile",
+      "keys": "pile2022",
+      "line": 81,
+      "section": "4.3.1 二阶交互模型",
+      "pdf_page": 8,
+      "numbers": [
+        7
+      ]
+    },
+    {
+      "file": "chapter4.tex",
+      "anchor": "岭回归模型和训练均值预测作为对照",
+      "keys": "islr2021",
+      "line": 88,
+      "section": "4.3.1 二阶交互模型",
+      "pdf_page": 8,
+      "numbers": [
+        5
+      ]
+    },
+    {
+      "file": "chapter4.tex",
+      "anchor": "采用五折嵌套交叉验证比较模型",
+      "keys": "hpo2023",
+      "line": 110,
+      "section": "4.3.2 模型检验与外推分析",
+      "pdf_page": 9,
+      "numbers": [
+        10
+      ]
+    },
+    {
+      "file": "chapter4.tex",
+      "anchor": "凸包为搜索区域",
+      "keys": "wright2022",
+      "line": 132,
+      "section": "4.4.1 目标函数与约束",
+      "pdf_page": 9,
+      "numbers": [
+        11
+      ]
+    },
+    {
+      "file": "chapter4.tex",
+      "anchor": "McCormick 松弛与空间分支定界求解",
+      "keys": "global2025",
+      "line": 158,
+      "section": "4.4.1 目标函数与约束",
+      "pdf_page": 11,
+      "numbers": [
+        12
+      ]
     },
     {
       "file": "chapter5.tex",
       "anchor": "B1 的 1176 条 Pythia",
       "keys": "pythia2023",
-      "line": 12
+      "line": 12,
+      "section": "5.1 问题分析",
+      "pdf_page": 14,
+      "numbers": [
+        15
+      ]
     },
     {
       "file": "chapter5.tex",
       "anchor": "建立经典双幂律",
       "keys": "hoffmann2022training",
-      "line": 18
+      "line": 18,
+      "section": "5.2.1 模型形式与参数估计",
+      "pdf_page": 14,
+      "numbers": [
+        14
+      ]
+    },
+    {
+      "file": "chapter5.tex",
+      "anchor": "Huber 损失",
+      "keys": "huber2020",
+      "line": 24,
+      "section": "5.2.1 模型形式与参数估计",
+      "pdf_page": 14,
+      "numbers": [
+        16
+      ]
     },
     {
       "file": "chapter6.tex",
       "anchor": "增加模型参数量、扩大训练数据量和提高数据质量都会改变验证集交叉熵损失（Loss）",
       "keys": "hoffmann2022training,fineweb2024",
-      "line": 12
+      "line": 12,
+      "section": "6.1 问题分析",
+      "pdf_page": 23,
+      "numbers": [
+        14,
+        1
+      ]
     },
     {
       "file": "chapter6.tex",
       "anchor": "长上下文直接挤占可分配给规模与训练量的预算",
       "keys": "flashattention2022",
-      "line": 214
+      "line": 214,
+      "section": "6.5.1 长上下文的临界长度",
+      "pdf_page": 28,
+      "numbers": [
+        17
+      ]
     },
     {
       "file": "chapter6.tex",
       "anchor": "公开的 OpenLM 训练记录",
       "keys": "gadre2024",
-      "line": 285
+      "line": 285,
+      "section": "6.6.3 外部实验的排序检验",
+      "pdf_page": 30,
+      "numbers": [
+        18
+      ]
+    },
+    {
+      "file": "chapter6.tex",
+      "anchor": "相应边际成本之比比较",
+      "keys": "wright2022",
+      "line": 110,
+      "section": "6.3 模型求解与结构转移识别",
+      "pdf_page": 24,
+      "numbers": [
+        11
+      ]
+    },
+    {
+      "file": "chapter6.tex",
+      "anchor": "按 C4、RedPajama 和 RefinedWeb 三种训练语料",
+      "keys": "c42020,redpajama2024,refinedweb2023",
+      "line": 285,
+      "section": "6.6.3 外部实验的排序检验",
+      "pdf_page": [
+        30,
+        31
+      ],
+      "numbers": [
+        19,
+        20,
+        21
+      ]
+    },
+    {
+      "file": "chapter6.tex",
+      "anchor": "同一 Paloma C4 验证集",
+      "keys": "paloma2024",
+      "line": 285,
+      "section": "6.6.3 外部实验的排序检验",
+      "pdf_page": 31,
+      "numbers": [
+        22
+      ]
     },
     {
       "file": "chapter7.tex",
       "anchor": "因此还需建立来源一致的 Loss--能力关系",
       "keys": "gadre2024,observational2024",
-      "line": 12
+      "line": 12,
+      "section": "7.1 问题分析与数据整理",
+      "pdf_page": 34,
+      "numbers": [
+        18,
+        23
+      ]
     },
     {
       "file": "chapter7.tex",
       "anchor": "MUSR 和 MMLU-PRO",
       "keys": "mmlupro2024",
-      "line": 19
+      "line": 19,
+      "section": "7.1 问题分析与数据整理",
+      "pdf_page": 34,
+      "numbers": [
+        29
+      ]
     },
     {
       "file": "chapter7.tex",
       "anchor": "以 $\\tau=0.9$ 为目标的分位资源模型",
       "keys": "koenker2017",
-      "line": 127
+      "line": 127,
+      "section": "7.3.1 预测对象与模型比较",
+      "pdf_page": 38,
+      "numbers": [
+        31
+      ]
     },
     {
       "file": "chapter7.tex",
       "anchor": "每一轮仅用测试窗口开始前的提交版本和当时可见的 C4 资源记录拟合，再计算测试窗口误差",
       "keys": "forecasting2021",
-      "line": 134
+      "line": 134,
+      "section": "7.3.1 预测对象与模型比较",
+      "pdf_page": 38,
+      "numbers": [
+        32
+      ]
+    },
+    {
+      "file": "chapter7.tex",
+      "anchor": "六项分别为 IFEval",
+      "keys": "ifeval2023",
+      "line": 19,
+      "section": "7.1 问题分析与数据整理",
+      "pdf_page": 34,
+      "numbers": [
+        24
+      ]
+    },
+    {
+      "file": "chapter7.tex",
+      "anchor": "、BBH",
+      "keys": "bbh2023",
+      "line": 19,
+      "section": "7.1 问题分析与数据整理",
+      "pdf_page": 34,
+      "numbers": [
+        25
+      ]
+    },
+    {
+      "file": "chapter7.tex",
+      "anchor": "、MATH Lvl 5",
+      "keys": "math2021",
+      "line": 19,
+      "section": "7.1 问题分析与数据整理",
+      "pdf_page": 34,
+      "numbers": [
+        26
+      ]
+    },
+    {
+      "file": "chapter7.tex",
+      "anchor": "、GPQA",
+      "keys": "gpqa2024",
+      "line": 19,
+      "section": "7.1 问题分析与数据整理",
+      "pdf_page": 34,
+      "numbers": [
+        27
+      ]
+    },
+    {
+      "file": "chapter7.tex",
+      "anchor": "、MUSR",
+      "keys": "musr2024",
+      "line": 19,
+      "section": "7.1 问题分析与数据整理",
+      "pdf_page": 34,
+      "numbers": [
+        28
+      ]
+    },
+    {
+      "file": "chapter7.tex",
+      "anchor": "以开发者为抽样块重复抽取",
+      "keys": "cluster2023",
+      "line": 95,
+      "section": "7.2.2 分解结果的敏感性",
+      "pdf_page": [
+        36,
+        37
+      ],
+      "numbers": [
+        30
+      ]
+    },
+    {
+      "file": "chapter7.tex",
+      "anchor": "设 $z_i=\\operatorname{logit}(S_i/100)$",
+      "keys": "islr2021",
+      "line": 127,
+      "section": "7.3.1 预测对象与模型比较",
+      "pdf_page": 38,
+      "numbers": [
+        5
+      ]
+    },
+    {
+      "file": "chapter7.tex",
+      "anchor": "对来源内每条记录依次留出、重拟合并预测",
+      "keys": "islr2021",
+      "line": 267,
+      "section": "7.5.1 来源内单调映射及检验",
+      "pdf_page": 41,
+      "numbers": [
+        5
+      ]
+    },
+    {
+      "file": "chapter7.tex",
+      "anchor": "Qwen2 和 Qwen2.5",
+      "keys": "qwen22024,qwen252024",
+      "line": 267,
+      "section": "7.5.1 来源内单调映射及检验",
+      "pdf_page": 41,
+      "numbers": [
+        33,
+        34
+      ]
     }
   ],
   "source_pdf": "example(2).pdf",
@@ -97,10 +411,11 @@
     "LiSu to KaiTi fallback when missing"
   ],
   "bibliography_style": "clickable titles to verified URL or DOI; retain original numbered style",
-  "citation_insertions": 12,
+  "citation_insertions": 34,
   "figures_unchanged": true,
   "asset_files_verified": 42,
-  "final_pdf_pages": 46,
-  "final_reference_count": 13,
-  "final_pdf_sha256": "8259a41cbf32470d8bf94dc075225f8afc84fd18d8519881ca360e36bc84776f"
+  "final_pdf_pages": 47,
+  "final_reference_count": 34,
+  "additional_references_this_round": 21,
+  "final_pdf_sha256": "cfd11e8ef4e7df168e34d489ab6cb51b2318c4fa4f0f7a473e19db184d61b969"
 }

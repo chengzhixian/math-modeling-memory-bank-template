@@ -2,12 +2,14 @@
 
 用户授权：查找近年权威来源、只增加引用与书目，并修改匹配 LaTeX 源文件生成 PDF。用户随后提供桌面 RAR；此次修订严格以该压缩包源文件为准，不改写原始 PDF 或压缩包。
 
-分支 docs/paper-citations-20260926，从 origin/main c6b36c08b5a85c81a3889d48d50c26ac136a048b 建立。完成 Gadre + 10篇新增文献的官网核验，第四至七章12处 cite，共13篇被引用文献。OpenLM 数据集引用为第6.6.3节第一段“公开的 OpenLM 训练记录”之后，最终编号[9]，原GitHub脚注保留。
+分支 docs/paper-citations-20260926，从 origin/main c6b36c08b5a85c81a3889d48d50c26ac136a048b 建立。完成初轮 Gadre + 10篇文献核验后，按用户后续指示再增加21篇数学方法、评测、语料与模型族文献。第四至七章34处新增cite，共34篇被引用文献。OpenLM 数据集引用为第6.6.3节第一段“公开的 OpenLM 训练记录”之后，最终编号[18]，原GitHub脚注保留。
 
-交付目录 paper/citation_revision_20260926：修订PDF、revised_project完整源文件及图片、INSERTION_GUIDE.md、references_verified.bib、CHANGE_MANIFEST.json、QA/checks.json。source-cited.zip 为本地源文件打包产物，不重复入库；原解压包和可再生渲染图不入库。
+交付目录 paper/citation_revision_20260926：修订PDF、revised_project完整源文件及图片、INSERTION_GUIDE.md、references_verified.bib、CHANGE_MANIFEST.json、QA/checks.json。补充REFERENCES_TABLE.md/CSV/JSON，每一篇均列对应网址和引用小节；编号与PDF一致，34个文献网址均为PDF标题链接。source-cited.zip 为本地源文件打包产物，不重复入库；原解压包和可再生渲染图不入库。
 
-验证：移除新增 cite 后全部章节与原压缩包字节一致；图片字节一致。XeLaTeX/BibTeX通过，无未定义引用、缺字或超宽盒；46页逐页渲染检查，重点页放大核验。此次新PDF46页，用户之前上传PDF47页，分页变化已在清单说明。原模板未闭合条件分支已修复；LiSu缺失时回退KaiTi；书目标题可点击权威来源。
+验证：移除新增 cite 后全部章节与原压缩包字节一致；图片字节一致。XeLaTeX/BibTeX通过，无未定义引用、缺字或超宽盒；47页逐页渲染检查，重点页放大核验。此次新PDF47页，用户之前上传PDF47页；正文分页仍有所变化，以句子锚点定位。原模板未闭合条件分支已修复；LiSu缺失时回退KaiTi；书目标题可点击权威来源。
 
 本任务未采用历史数据说明隐藏文字、未重算或改动模型结论、未修改公共六个记忆文件。原有Kaplan/Hoffmann记录和键保留。引用只支撑方法/背景，不替本文原创映射、题面成本系数或数值结果背书。
 
 下一步：集成人自行验收此分支的论文副本，依据实际提交流程选用。远端状态由push及ls-remote核验后报告，不预写成功。
+
+文献适用条件：MAD校正系数由2018原文核验；嵌套验证来自Bischl2023第4.4节；McCormick松弛和空间分支定界由Bestuzheva2025原文对应公式/章节核验；开发者块抽样只引用成组重抽样背景，不为本文区间覆盖率背书。数学方法优先近年综述和教材，专有名词优先作者/会议原论文。

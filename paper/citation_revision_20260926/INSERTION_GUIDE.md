@@ -1,64 +1,70 @@
-# example(2).pdf 第四至七章引用插入清单
+# 第四至七章引用插入位置清单（34篇版）
 
-核验日期：2026-09-26。依据：用户提供的 47 页 PDF。正文页码 = PDF 查看器页码 − 1。
+以用户最后提供的桌面RAR为修订基准。最终47页、34篇被引用文献；共34处新增cite。去掉新增cite后，源文件正文与原RAR逐字一致，图表文件字节一致。原上传PDF和重新编译PDF分页可能不同，以小节与句子锚点定位。
 
-状态：已按用户最后提供的桌面 RAR 修订匹配的 LaTeX 源文件并生成 46 页 PDF。移除新增引用后，章节正文与压缩包源文件逐字一致；图表文件字节一致。原上传 PDF 为 47 页，重编译分页有所变化。最终以章节、小节和句子锚点定位。
+数据集文献最终为[18]，在6.6.3第一段“公开的 OpenLM 训练记录”之后，修订PDF查看器第30页/正文第29页；原上传PDF查看器第31页/正文第30页。GitHub脚注保留。
 
-操作范围：12 处插入 `\cite{...}`，新增 Gadre 及 10 篇方法/背景文献，保留已引用的 Kaplan、Hoffmann，共 13 篇。文献编号按首次出现顺序编译。模板另修复未闭合条件分支，并在 LiSu 缺失时使用 KaiTi；参考文献标题链接到核验来源。
+|文件/行|小节|原文锚点（引用紧接其后）|最终引用编号|修订PDF页|
+|---|---|---|---|---|
+|chapter4.tex:10|4.1 问题分析|本问需要从质量信号中给出可比较的文本质量评分|[1]|6|
+|chapter4.tex:18|4.2.1 质量指标的统一与综合评分|对 DSIR|[2]|6|
+|chapter4.tex:18|4.2.1 质量指标的统一与综合评分|（MAD）进行稳健标准化|[3]|6|
+|chapter4.tex:24|4.2.1 质量指标的统一与综合评分|Spearman 秩相关|[4]|6|
+|chapter4.tex:30|4.2.1 质量指标的统一与综合评分|Bootstrap 重抽样|[5]|6|
+|chapter4.tex:59|4.2.2 指标分歧与复核规则|Benjamini--Hochberg 方法|[6]|6|
+|chapter4.tex:81|4.3.1 二阶交互模型|考虑到领域组合可能影响训练效果|[8,9]|8|
+|chapter4.tex:81|4.3.1 二阶交互模型|记 The Pile|[7]|8|
+|chapter4.tex:88|4.3.1 二阶交互模型|岭回归模型和训练均值预测作为对照|[5]|8|
+|chapter4.tex:110|4.3.2 模型检验与外推分析|采用五折嵌套交叉验证比较模型|[10]|9|
+|chapter4.tex:132|4.4.1 目标函数与约束|凸包为搜索区域|[11]|9|
+|chapter4.tex:158|4.4.1 目标函数与约束|McCormick 松弛与空间分支定界求解|[12]|11|
+|chapter5.tex:12|5.1 问题分析|B1 的 1176 条 Pythia|[15]|14|
+|chapter5.tex:18|5.2.1 模型形式与参数估计|建立经典双幂律|[14]|14|
+|chapter5.tex:24|5.2.1 模型形式与参数估计|Huber 损失|[16]|14|
+|chapter6.tex:12|6.1 问题分析|增加模型参数量、扩大训练数据量和提高数据质量都会改变验证集交叉熵损失（Loss）|[14,1]|23|
+|chapter6.tex:110|6.3 模型求解与结构转移识别|相应边际成本之比比较|[11]|24|
+|chapter6.tex:214|6.5.1 长上下文的临界长度|长上下文直接挤占可分配给规模与训练量的预算|[17]|28|
+|chapter6.tex:285|6.6.3 外部实验的排序检验|公开的 OpenLM 训练记录|[18]|30|
+|chapter6.tex:285|6.6.3 外部实验的排序检验|按 C4、RedPajama 和 RefinedWeb 三种训练语料|[19,20,21]|30、31|
+|chapter6.tex:285|6.6.3 外部实验的排序检验|同一 Paloma C4 验证集|[22]|31|
+|chapter7.tex:12|7.1 问题分析与数据整理|因此还需建立来源一致的 Loss--能力关系|[18,23]|34|
+|chapter7.tex:19|7.1 问题分析与数据整理|MUSR 和 MMLU-PRO|[29]|34|
+|chapter7.tex:19|7.1 问题分析与数据整理|六项分别为 IFEval|[24]|34|
+|chapter7.tex:19|7.1 问题分析与数据整理|、BBH|[25]|34|
+|chapter7.tex:19|7.1 问题分析与数据整理|、MATH Lvl 5|[26]|34|
+|chapter7.tex:19|7.1 问题分析与数据整理|、GPQA|[27]|34|
+|chapter7.tex:19|7.1 问题分析与数据整理|、MUSR|[28]|34|
+|chapter7.tex:95|7.2.2 分解结果的敏感性|以开发者为抽样块重复抽取|[30]|36、37|
+|chapter7.tex:127|7.3.1 预测对象与模型比较|以 $\tau=0.9$ 为目标的分位资源模型|[31]|38|
+|chapter7.tex:127|7.3.1 预测对象与模型比较|设 $z_i=\operatorname{logit}(S_i/100)$|[5]|38|
+|chapter7.tex:134|7.3.1 预测对象与模型比较|每一轮仅用测试窗口开始前的提交版本和当时可见的 C4 资源记录拟合，再计算测试窗口误差|[32]|38|
+|chapter7.tex:267|7.5.1 来源内单调映射及检验|对来源内每条记录依次留出、重拟合并预测|[5]|41|
+|chapter7.tex:267|7.5.1 来源内单调映射及检验|Qwen2 和 Qwen2.5|[33,34]|41|
 
-## 逐句插入位置
+## 文献适用范围
 
-|原正文页/PDF页|修订正文页/PDF页|位置|原文定位锚点|插入内容|适用范围|
-|---|---|---|---|---|---|
-|5/6|5/6|4.1 第一段|“本问需要从质量信号中给出可比较的文本质量评分”之后|`\cite{fineweb2024}` [1]|质量筛选研究背景；不是式(4.1)—(4.3)的来源|
-|5/6|5/6|4.2.1 第一段|“对 DSIR”中的 DSIR 名称之后|`\cite{dsir2023}` [2]|DSIR 指标/方法来源；不为保号对数和本文赋权背书|
-|7/8|7/8|4.3.1 第一段|“考虑到领域组合可能影响训练效果”之后、逗号之前|`\cite{regmix2025,mixinglaws2025}` [3,4]|配比回归与域组合影响的相关方法依据；二阶十交互项是本文选择|
-|14/15|13/14|5.1 第二段|“B1 的 1176 条 Pythia 训练记录”中的 Pythia 名称之后|`\cite{pythia2023}` [7]|模型族与公开检查点背景；附件1176条及Loss真实性仍按附件来源记录，不由此引用验证|
-|14/15|13/14|5.2.1 第一段|“建立经典双幂律”之后、式(5.1)之前|`\cite{hoffmann2022training}` [6]|经典 N、D 双幂函数形式；本文拟合参数不引用成他人参数|
-|23/24|22/23|6.1 第一段|“增加模型参数量、扩大训练数据量和提高数据质量都会改变验证集交叉熵损失（Loss）”之后|`\cite{hoffmann2022training,fineweb2024}` [6,1]|训练资源和质量的取舍背景|
-|28/29|27/28|6.5.1 第一段|“长上下文直接挤占可分配给规模与训练量的预算”之后|`\cite{flashattention2022}` [8]|长序列注意力的计算与内存开销背景；不是题面成本系数或30000 Token阈值的来源|
-|30/31|29/30|6.6.3 第一段|“公开的 OpenLM 训练记录”之后，保留原仓库网址脚注|`\cite{gadre2024}` [9]|公开实验与评测记录的直接来源|
-|34/35|33/34|7.1 式(7.1)之后的任务列表|“MMLU-PRO”名称之后、句号之前|`\cite{mmlupro2024}` [11]|只支持MMLU-Pro这一评测的来源，不代表六任务等权聚合来自该文献|
-|34/35|33/34|7.1 第一段末|“因此还需建立来源一致的 Loss–能力关系”之后|`\cite{gadre2024,observational2024}` [9,10]|Loss与下游表现、跨模型家族能力映射的研究背景；本文式(7.8)另行拟合|
-|38/39|37/38|7.3.1 第二段|“以 τ = 0.9 为目标的分位资源模型”之后|`\cite{koenker2017}` [12]|分位回归与check loss；本文τ、解释变量与logit选择不由文献给定|
-|38/39|37/38|7.3.1 式(7.5)之后|“每一轮仅用测试窗口开始前的提交版本和当时可见的 C4 资源记录拟合，再计算测试窗口误差”之后|`\cite{forecasting2021}` [13]|滚动预测起点与禁止使用未来信息|
+- [3] MAD稳健尺度、1.4826校正与稳健标准化。
+- [4] Spearman秩相关的定义与解释。
+- [5] Bootstrap、岭回归、交叉验证、Logit及留一验证。
+- [6] Benjamini--Hochberg及错误发现率的方法背景。
+- [7] The Pile数据集名称与组成。
+- [10] 嵌套交叉验证与选参后的外层评估。
+- [11] 凸集、凸组合及约束优化的一阶条件。
+- [12] McCormick松弛与空间分支定界的算法原理。
+- [16] Huber损失的稳健估计背景；不声称本文采用自适应阈值。
+- [19] C4语料来源；不把C4算力附件编号当作语料。
+- [20] RedPajama语料与质量信号背景。
+- [21] RefinedWeb训练语料来源。
+- [22] Paloma统一验证集与分域评测来源。
+- [24] IFEval评测来源。
+- [25] BBH评测来源；附件24列不等于原论文23任务。
+- [26] MATH数据集与难度等级来源。
+- [27] GPQA评测来源。
+- [28] MuSR评测来源。
+- [30] 以开发者为块的重抽样背景；不验证本文百分位范围覆盖率。
+- [33] Qwen2模型族名称来源；不为附件Loss记录和本文拟合背书。
+- [34] Qwen2.5模型族名称来源；首次预印本2024，v2修订2025。
 
-## 文末参考文献（最终编号）
+其余文献沿用上一轮核验范围。引用不改变本文方法、参数、数值或结论，也不把自定义质量评分、质量映射、乘法桥、对称分解和最高能力边界归为他人成果。BH文献提供方法说明，不据此声称相关检验统计量一定满足FDR控制条件；Huber文献只支撑损失背景，不声称本文使用自适应阈值；SCIP文献只支撑McCormick与空间分支定界算法，不声称本文使用SCIP软件。
 
-[1] Penedo G, Kydlíček H, Ben Allal L, et al. The FineWeb Datasets: Decanting the Web for the Finest Text Data at Scale[C]//Advances in Neural Information Processing Systems. 2024, 37. https://arxiv.org/abs/2406.17557v2.
-
-[2] Xie S M, Santurkar S, Ma T, Liang P. Data Selection for Language Models via Importance Resampling[C]//Advances in Neural Information Processing Systems. 2023, 36. https://arxiv.org/abs/2302.03169.
-
-[3] Liu Q, Zheng X, Muennighoff N, et al. RegMix: Data Mixture as Regression for Language Model Pre-training[C]//The Thirteenth International Conference on Learning Representations. 2025. https://openreview.net/forum?id=5BjQOUXq7i.
-
-[4] Ye J, Liu P, Sun T, et al. Data Mixing Laws: Optimizing Data Mixtures by Predicting Language Modeling Performance[C]//The Thirteenth International Conference on Learning Representations. 2025. https://openreview.net/forum?id=jjCB27TMK3.
-
-[5] Kaplan J, McCandlish S, Henighan T, et al. Scaling Laws for Neural Language Models[J]. arXiv preprint arXiv:2001.08361, 2020. https://arxiv.org/abs/2001.08361.
-
-[6] Hoffmann J, Borgeaud S, Mensch A, et al. Training Compute-Optimal Large Language Models[C]//Advances in Neural Information Processing Systems. 2022, 35. https://arxiv.org/abs/2203.15556.
-
-[7] Biderman S, Schoelkopf H, Anthony Q G, et al. Pythia: A Suite for Analyzing Large Language Models Across Training and Scaling[C]//Proceedings of the 40th International Conference on Machine Learning. PMLR, 2023, 202:2397–2430. https://proceedings.mlr.press/v202/biderman23a.html.
-
-[8] Dao T, Fu D Y, Ermon S, et al. FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness[C]//Advances in Neural Information Processing Systems. 2022, 35. https://arxiv.org/abs/2205.14135.
-
-[9] Gadre S Y, Smyrnis G, Shankar V, et al. Language models scale reliably with over-training and on downstream tasks[J]. arXiv preprint arXiv:2403.08540, 2024. https://arxiv.org/abs/2403.08540v2.
-
-[10] Ruan Y, Maddison C J, Hashimoto T. Observational Scaling Laws and the Predictability of Language Model Performance[C]//Advances in Neural Information Processing Systems. 2024, 37. https://arxiv.org/abs/2405.10938v3.
-
-[11] Wang Y, Ma X, Zhang G, et al. MMLU-Pro: A More Robust and Challenging Multi-Task Language Understanding Benchmark[C]//Advances in Neural Information Processing Systems. 2024, 37. https://arxiv.org/abs/2406.01574.
-
-[12] Koenker R. Quantile Regression: 40 Years On[J]. Annual Review of Economics, 2017, 9:155–176. DOI:10.1146/annurev-economics-063016-103651.
-
-[13] Hyndman R J, Athanasopoulos G. Forecasting: Principles and Practice[M]. 3rd ed. Melbourne: OTexts, 2021. https://otexts.com/fpp3/.
-
-## 来源核验与年份
-
-所有链接均为论文作者、会议官方论文集、出版社或作者教材站点；访问日期2026-09-26。FineWeb、DSIR、FlashAttention、Observational Scaling Laws、MMLU-Pro 对照 NeurIPS 官方记录；RegMix、Data Mixing Laws 对照 ICLR 正式论文/作者 camera-ready，按2025会议年著录；Pythia 对照 PMLR；分位回归综述对照 Annual Reviews；时间序列交叉验证对照 OTexts 第5.10节：https://otexts.com/fpp3/tscv.html。
-
-新增11篇中，9篇发表于2022—2025年，教材为2021年，分位回归综述为2017年。保留2017综述是因为其直接支撑经典分位回归方法，符合5—10年范围。本文数值、原创映射和参数仍由论文自己的数据与拟合确定，引用不为本文数值结论背书。
-
-## 编译与验收
-
-执行 XeLaTeX → BibTeX → XeLaTeX → XeLaTeX。最终46页、13个书目条目、12处新增引用；无未定义引用、无缺字、无超宽盒警告。逐页渲染检查46页，并放大核对数据集引用页和参考文献页。文献标题均链接到核验入口，原 GitHub 脚注保留。
-
-`CHANGE_MANIFEST.json` 保存原章节SHA256、插入锚点和行号、正文/图片一致性及最终PDF哈希；`QA/checks.json` 保存编译核查与最终页码。`apply_citations.py` 为插入过程记录，重跑需提供原始压缩包解出的 archive_input 目录；直接编译交付源文件不需要该目录。
+全部参考文献及对应网址见 REFERENCES_TABLE.md/CSV。模板保留编号格式，标题链接到来源；修复原未闭合条件分支，LiSu缺失时相关封面字体回退KaiTi。编译使用XeLaTeX→BibTeX→XeLaTeX→XeLaTeX，无未定义引用、缺字或超宽盒。

@@ -107,7 +107,7 @@ $D\{c(L_{\rm ctx})N+h(q)\}\leq C_{\max}$。
  \frac{\partial C}{\partial q}=10^9Dg'(q).
  \label{eq:q3-marginal-cost}
 \end{equation}
-当预算约束起作用且变量处于内部时，单位算力带来的 Loss 下降可由 $-\partial\widehat L/\partial x$ 与相应边际成本之比比较。主方案中 $q=q(\boldsymbol p)$，改变一个领域占比会同时改变质量项与配比项，因此实际求解仍以完整式\eqref{eq:q3-objective}逐配方比较。对于固定配方、可独立提高 $Q_B$ 的方案，则在式\eqref{eq:q3-reduction}的基础上对 $Q_B$ 区间逐段求界并细化，同时检查活跃约束与成本；这使独立质量方案与主方案采用各自一致的变量关系。
+当预算约束起作用且变量处于内部时，单位算力带来的 Loss 下降可由 $-\partial\widehat L/\partial x$ 与相应边际成本之比比较\cite{wright2022}。主方案中 $q=q(\boldsymbol p)$，改变一个领域占比会同时改变质量项与配比项，因此实际求解仍以完整式\eqref{eq:q3-objective}逐配方比较。对于固定配方、可独立提高 $Q_B$ 的方案，则在式\eqref{eq:q3-reduction}的基础上对 $Q_B$ 区间逐段求界并细化，同时检查活跃约束与成本；这使独立质量方案与主方案采用各自一致的变量关系。
 
 为明确“结构性转移”，定义预算 $C$ 下的配置状态为
 \begin{equation}
@@ -282,7 +282,7 @@ $D\{c(L_{\rm ctx})N+h(q)\}\leq C_{\max}$。
 
 \subsubsection{外部实验的排序检验}
 
-进一步利用公开的 OpenLM 训练记录\cite{gadre2024}\footnote{公开模型与评测记录见 \url{https://github.com/mlfoundations/scaling}。}检验规模项的排序能力。104 个实际训练模型中，42 个落在本问 $N,D$ 的共同范围内；按 C4、RedPajama 和 RefinedWeb 三种训练语料各取 14 个，用同一 Paloma C4 验证集的观测 Loss 比较 B1 规模模型的预测排序。图\ref{fig:q3-external}中，三个语料组的 Spearman 相关系数依次为 0.9736、0.9868 和 0.9736。在使预算真正筛除部分候选的 6 组离散选择中，按规模模型选出的方案有 5 组与最低观测 Loss 一致；RefinedWeb 的 $10^{21}$ FLOPs 组未命中，观测 Loss 差为 0.0705。
+进一步利用公开的 OpenLM 训练记录\cite{gadre2024}\footnote{公开模型与评测记录见 \url{https://github.com/mlfoundations/scaling}。}检验规模项的排序能力。104 个实际训练模型中，42 个落在本问 $N,D$ 的共同范围内；按 C4、RedPajama 和 RefinedWeb 三种训练语料\cite{c42020,redpajama2024,refinedweb2023}各取 14 个，用同一 Paloma C4 验证集\cite{paloma2024}的观测 Loss 比较 B1 规模模型的预测排序。图\ref{fig:q3-external}中，三个语料组的 Spearman 相关系数依次为 0.9736、0.9868 和 0.9736。在使预算真正筛除部分候选的 6 组离散选择中，按规模模型选出的方案有 5 组与最低观测 Loss 一致；RefinedWeb 的 $10^{21}$ FLOPs 组未命中，观测 Loss 差为 0.0705。
 
 \begin{figure}[htbp]
  \centering
