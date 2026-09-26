@@ -13,6 +13,8 @@
 \tikzset{
   flow/.style={-{Stealth[length=2mm,width=1.35mm]},line width=.43pt},
   transfer/.style={-{Stealth[length=2.7mm,width=1.8mm]},line width=1.05pt},
+  conditional/.style={-{Stealth[length=2mm,width=1.35mm]},
+    densely dashed,line width=.72pt},
   module/.style={draw=black,line width=.38pt,fill=white,align=center,
     inner xsep=1.4mm,inner ysep=.65mm,minimum height=7mm,
     font=\fontsize{7.5}{8.7}\selectfont},
@@ -91,7 +93,7 @@
 \node[module,minimum width=72mm] (solve) at (48,52)
   {优化求解\quad 预算/质量成本敏感性};
 \node[result,minimum width=72mm] (q3out) at (48,40)
-  {$N^*,D^*,Q^*,\boldsymbol p^*$\quad（条件情景）};
+  {条件配置 $(N^*,D^*,Q^*,\boldsymbol p^*)$、$\widehat L^*$};
 \node[module,minimum width=72mm] (critical) at (48,28)
   {成本平衡分析\quad $\to$\quad 临界上下文长度};
 \draw[transfer] (48,122) -- (q3in.north);
@@ -114,16 +116,19 @@
   {附件 C 能力数据\quad +\quad 问题二损失/规模};
 \node[module,minimum width=75mm] (q4pre) at (144,97)
   {历史记录整理\quad 指标统一};
-\node[module,minimum width=35mm] (history) at (121,84) {历史能力演进};
-\node[module,minimum width=35mm] (bridge) at (167,84) {损失—能力映射};
-\node[module,minimum width=35mm] (contrib) at (121,71)
-  {规模贡献\quad /\quad 技术贡献};
-\node[module,minimum width=35mm] (bridgeerr) at (167,71) {映射误差分析};
+\node[module,minimum width=35mm] (bridge) at (121,84) {损失—能力映射};
+\node[module,minimum width=35mm] (history) at (167,84) {历史能力演进};
+\node[module,minimum width=35mm] (bridgeerr) at (121,71) {映射误差分析};
+\node[module,minimum width=35mm] (contrib) at (167,71)
+  {规模关联\\非规模综合项};
 \node[core,minimum width=75mm] (frontier) at (144,58) {能力前沿演进模型};
 \node[module,minimum width=75mm] (future) at (144,46) {未来 12 / 24 个月情景预测};
 \node[module,minimum width=75mm] (uncertainty) at (144,34) {预测不确定性与适用边界};
-\node[result,minimum width=75mm] (q4out) at (144,26) {未来能力前沿及预测区间};
+\node[result,minimum width=75mm] (q4out) at (144,26) {条件能力前沿及情景范围};
 \draw[transfer] (144,122) -- (q4in.north);
+% Q4 的历史分析可直接使用 C；Q3 条件 Loss 仅经带误差桥接进入能力解释。
+\draw[conditional] (q3out.east) -- (96,40) -- (96,84) -- (bridge.west);
+\node[smalllabel,rotate=90] at (96,61) {Q3 条件损失};
 \draw[flow] (q4in) -- (q4pre);
 \draw[flow] (q4pre.south) -- ++(0,-1) -| (history.north);
 \draw[flow] (q4pre.south) -- ++(0,-1) -| (bridge.north);
@@ -132,10 +137,10 @@
 \draw[flow] (contrib.south) -- ++(0,-1) -| (frontier.north);
 \draw[flow] (frontier) -- (future);
 \draw[flow] (future) -- (uncertainty);
-\draw[flow] (bridgeerr.south) -- ++(0,-2) -- (185,64) -- (185,34) -- (uncertainty.east);
+\draw[flow] (bridgeerr.south) -- ++(0,-2) -- (103,64) -- (103,34) -- (uncertainty.west);
 \draw[flow] (uncertainty) -- (q4out);
 
-% 两条主线在结论层汇合，问题三不作为问题四的必经输入。
+% 两条主线在结论层汇合；Q3 的条件 Loss 经桥接进入 Q4 的能力解释。
 \node[result,minimum width=132mm,minimum height=10mm,
   font=\bfseries\fontsize{8.7}{10}\selectfont] (final) at (96,8)
   {有限算力下的资源配置与未来能力发展结论};
