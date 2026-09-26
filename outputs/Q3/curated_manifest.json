@@ -10,7 +10,7 @@
   "schema_version": "main.question_integration.v2",
   "scope": "current main answer, production evidence, interface and paper; reproducible process tables excluded",
   "sha256": {
-    "ANSWER.md": "b3bf9b655d74af2ad1a2a641cedca154f318e6823bcc1600a383ff674fa369a4",
+    "ANSWER.md": "81a5a67727f160715a3f802ba6bf3a053dc073bbc04664bfe872d998e05748c7",
     "README.md": "f8a83f7e7b652f26679df49aa79e21eed7a93a46ebf69a1d72b440e07681ec3d",
     "assumption_8192_power_scan.csv": "8166eede7de422f3aa11db92765d8994079d498be94af7f297007885bee1ff95",
     "assumption_8192_power_transitions.csv": "607fe0e0d4201ad89ab6387e1544b052aa4368e3f1c567ed9b4862598eba5771",
