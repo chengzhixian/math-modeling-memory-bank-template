@@ -12,4 +12,3 @@
 6. [已完成] 检查 diff，更新交接和公共记忆，提交 main，推送并核对远端 SHA：`712cb9fb44b49abe1d24b9d0af399518baebeccc`。
 
 限制：团队其他成员的 AI 使用范围尚待本人确认；本机未发现 XeLaTeX，论文已通过静态完整性检查但尚无 PDF 目视检查。原工作区 186 个已暂存改动保存在原 integration 分支的 `stash@{0}`，未纳入本次 main。
-
